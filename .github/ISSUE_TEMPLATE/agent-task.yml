@@ -1,0 +1,37 @@
+name: Agent task (plan first)
+description: A well-scoped task for a coding agent (Copilot cloud agent, Copilot CLI or Claude Code). Planning comes before code.
+labels: ["agent-task"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Agents must follow AGENTS.md. Synthetic data only. Never include customer identifiers, tenant or workspace IDs, or secrets in this issue.
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: The outcome you want, and why.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope and non-goals
+    validations:
+      required: true
+  - type: dropdown
+    id: writes
+    attributes:
+      label: Does this task change cloud resources?
+      options:
+        - "No — repository changes only"
+        - "Yes — produce a change PLAN only (no execution)"
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria and evidence
+      description: Tests, checks and evidence that prove the task is complete.
+    validations:
+      required: true

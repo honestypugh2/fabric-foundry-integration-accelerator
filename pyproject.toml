@@ -1,0 +1,105 @@
+[project]
+name = "fabric-foundry-accelerator"
+version = "0.1.0"
+description = "Fabric + Foundry integration accelerator: reference architecture, pattern catalog, offline-first demos, and Executive-to-L400 education."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.14,<3.15"
+authors = [{ name = "Fabric Foundry Integration Accelerator contributors" }]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.14",
+    "Typing :: Typed",
+]
+# Exact pins only. Each dependency is added in the phase that first uses it
+# (see docs/research/source-validation.md and the Phase 0 dependency plan).
+dependencies = [
+    "pydantic==2.13.5",
+    "pyyaml==6.0.3",
+]
+
+[project.scripts]
+ffia = "fabric_foundry_accelerator.cli:main"
+
+[dependency-groups]
+dev = [
+    "cyclonedx-bom==7.5.0",
+    "pip-audit==2.10.1",
+    "pyright==1.1.414",
+    "pytest==9.1.1",
+    "pytest-cov==7.1.0",
+    "ruff==0.16.10",
+    "types-pyyaml==6.0.12.20260906",
+]
+
+[build-system]
+requires = ["uv_build==0.12.23"]
+build-backend = "uv_build"
+
+[tool.uv]
+required-version = ">=0.12.23"
+
+# ---------------------------------------------------------------- ruff
+[tool.ruff]
+line-length = 100
+target-version = "py314"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E", "W", "F", "I", "B", "UP", "N", "S", "A", "C4", "SIM", "RUF",
+    "PTH", "DTZ", "T20", "RET", "ARG", "PL", "TRY", "BLE", "ERA", "ANN", "D",
+]
+ignore = [
+    "D203",   # conflicts with D211
+    "D213",   # conflicts with D212
+    "TRY003", # long messages in exceptions are acceptable for educational clarity
+    "PLR2004",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101", "D", "ANN", "PLR2004", "ARG"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.format]
+quote-style = "double"
+
+# ---------------------------------------------------------------- pyright
+[tool.pyright]
+include = ["src", "tests"]
+pythonVersion = "3.14"
+typeCheckingMode = "strict"
+venvPath = "."
+venv = ".venv"
+reportMissingTypeStubs = true
+reportUnnecessaryTypeIgnoreComment = true
+
+# ---------------------------------------------------------------- pytest
+[tool.pytest.ini_options]
+minversion = "9.0"
+testpaths = ["tests"]
+addopts = [
+    "-ra",
+    "--strict-markers",
+    "--strict-config",
+    "--import-mode=importlib",
+]
+markers = [
+    "live: opt-in tests that call real cloud services (never run in default CI)",
+    "live_mutation: opt-in tests that change cloud resources (requires FFIA_ALLOW_LIVE_MUTATION=1)",
+    "offline: tests that must pass with no network and no Azure configuration",
+]
+filterwarnings = ["error"]
+
+[tool.coverage.run]
+source = ["fabric_foundry_accelerator"]
+branch = true
+
+[tool.coverage.report]
+fail_under = 85
+show_missing = true
+skip_covered = false
+exclude_also = ["if TYPE_CHECKING:", "raise NotImplementedError"]

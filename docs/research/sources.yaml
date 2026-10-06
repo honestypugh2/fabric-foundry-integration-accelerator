@@ -1,0 +1,472 @@
+# Authoritative source registry. Edit this file, then run `uv run ffia sources render`.
+# Status vocabulary: GA | PREVIEW | DEPRECATED | UNKNOWN/NEEDS VALIDATION | GUIDANCE | OSS
+version: 1
+sources:
+  # ------------------------------------------------------------------ Fabric foundation
+  - id: fabric-overview
+    title: What is Microsoft Fabric?
+    url: https://learn.microsoft.com/fabric/fundamentals/microsoft-fabric-overview
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-05
+    last_updated_date: 2026-03-18
+    technology: Microsoft Fabric
+    associated_patterns: [P06, P10]
+    status: GA
+    key_architecture_statement: SaaS analytics platform for end-to-end data workflows that uses OneLake as a single logical data lake.
+    implementation_relevance: Fabric is the governed-context layer of the reference architecture.
+    security_implications: Tenant, capacity, workspace and item boundaries drive authorization; Entra ID authenticates all access.
+    limitations: Requires a Fabric capacity for most workloads; features vary by region and SKU.
+    fallback: Local Fabric Educational Provider (synthetic, clearly labeled SIMULATED).
+  - id: fabric-medallion
+    title: Implement medallion lakehouse architecture in Microsoft Fabric
+    url: https://learn.microsoft.com/fabric/onelake/onelake-medallion-lakehouse-architecture
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-05
+    last_updated_date: 2026-02-12
+    technology: Microsoft Fabric
+    associated_patterns: [P10]
+    status: GUIDANCE
+    key_architecture_statement: Medallion (bronze, silver, gold) is the recommended design approach for Fabric lakehouses.
+    implementation_relevance: Defines the raw/bronze/silver/gold/semantic layering used by the synthetic dataset and labs.
+    security_implications: Layer separation supports least-privilege access (e.g., analysts read gold only).
+    limitations: Guidance, not an enforced product feature.
+    fallback: Local medallion pipeline over Parquet/DuckDB.
+  - id: fabric-waf
+    title: Azure Well-Architected Framework service guide for Microsoft Fabric
+    url: https://learn.microsoft.com/azure/well-architected/microsoft-fabric/overview
+    publisher: Microsoft Learn (Well-Architected Framework)
+    retrieved_date: 2026-10-05
+    last_updated_date: 2026-05-13
+    technology: Microsoft Fabric
+    associated_patterns: [P06, P14]
+    status: GUIDANCE
+    key_architecture_statement: Pillar guidance (reliability, security, cost, operations, performance) for Fabric workloads.
+    implementation_relevance: Production-readiness notes in every pattern map to these pillars.
+    security_implications: Security pillar guidance on identity, network isolation and data protection.
+    limitations: Guidance only.
+    fallback: Not applicable.
+  - id: fabric-deployment-patterns
+    title: Microsoft Fabric deployment patterns
+    url: https://learn.microsoft.com/azure/architecture/data-guide/technology-choices/fabric-deployment-patterns
+    publisher: Azure Architecture Center
+    retrieved_date: 2026-10-05
+    last_updated_date: 2026-04-20
+    technology: Microsoft Fabric
+    associated_patterns: [P14, P18]
+    status: GUIDANCE
+    key_architecture_statement: Four-level hierarchy (tenant, capacity, workspace, item) determines isolation and governance choices.
+    implementation_relevance: Drives environment separation (dev/test/prod workspaces) and customer overlay design.
+    security_implications: Workspace-level isolation is the primary blast-radius control for agentic changes.
+    limitations: Guidance only.
+    fallback: Not applicable.
+  - id: fabric-direct-lake
+    title: Direct Lake overview
+    url: https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-05
+    last_updated_date: 2026-09-02
+    technology: Microsoft Fabric
+    associated_patterns: [P12]
+    status: GA
+    key_architecture_statement: Direct Lake on OneLake (no DirectQuery fallback, composite-capable) and Direct Lake on SQL analytics endpoint (DirectLakeBehavior controls fallback).
+    implementation_relevance: Semantic model storage-mode comparison and role-playing dimension options in Pattern 12.
+    security_implications: Direct Lake on SQL falls back to DirectQuery when SQL RLS/OLS/DDM is present; identity mode affects shortcut authorization.
+    limitations: Adding multiple tables from the same source table is not supported through the standard UI.
+    fallback: Local semantic YAML and PBIP/TMDL reference model.
+  - id: fabric-open-mirroring-format
+    title: Open mirroring landing zone requirements and format
+    url: https://learn.microsoft.com/fabric/mirroring/open-mirroring-landing-zone-format
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-05
+    last_updated_date: 2025-09-09
+    technology: Microsoft Fabric
+    associated_patterns: [P11]
+    status: GA
+    key_architecture_statement: Landing zone uses _metadata.json keyColumns and a trailing __rowMarker__ column (0 insert, 1 update, 2 delete, 4 upsert); processed files are purged after 7 days.
+    implementation_relevance: Local Open Mirroring simulation reproduces this documented format.
+    security_implications: Mirroring does not propagate source RLS/OLS/dynamic data masking.
+    limitations: Schema changes require recreating the table folder; mirroring is not documented as a backup/DR mechanism.
+    fallback: Local landing-zone simulation and recovery lab.
+  - id: fabric-git-integration
+    title: Fabric Git integration overview
+    url: https://learn.microsoft.com/fabric/cicd/git-integration/intro-to-git-integration
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-05
+    last_updated_date: 2026-09-01
+    technology: Microsoft Fabric
+    associated_patterns: [P11, P20]
+    status: GA
+    key_architecture_statement: Git stores item definitions and metadata, never table data; some item types remain preview.
+    implementation_relevance: Basis for repo-first agentic change (Pattern 20) and the Git-versus-data-backup lesson.
+    security_implications: From 2026-12-01 users without read-write item permission lose Git integration access.
+    limitations: Cloud-hosted Azure DevOps/GitHub only; per-item-type support varies.
+    fallback: Local fabric/workspace definitions and dry-run deployment plans.
+  - id: fabric-rest-identity
+    title: Fabric REST API identity support
+    url: https://learn.microsoft.com/rest/api/fabric/articles/identity-support
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-05
+    technology: Microsoft Fabric
+    associated_patterns: [P06, P09]
+    status: GA
+    key_architecture_statement: Fabric REST APIs accept user, service principal and managed identity tokens, gated by tenant settings and per-API support.
+    implementation_relevance: Live Fabric provider uses a thin typed httpx client over the GA REST API (no GA Python SDK exists).
+    security_implications: Service-principal access requires an admin tenant switch; least-privilege workspace roles apply.
+    limitations: Per-API identity support varies; long-running operations require polling.
+    fallback: Local Fabric provider.
+  - id: fabric-ai-functions
+    title: AI functions in Fabric
+    url: https://learn.microsoft.com/fabric/data-science/ai-functions/overview
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-05
+    last_updated_date: 2026-07-21
+    technology: Microsoft Fabric
+    associated_patterns: [P05]
+    status: GA
+    key_architecture_statement: ai.classify, ai.extract, ai.summarize and related functions run in pandas, PySpark, T-SQL and Dataflow Gen2, optionally using Foundry models.
+    implementation_relevance: Pattern 5 (AI in data engineering rather than interactive agents).
+    security_implications: Requires tenant switches for Copilot/Azure OpenAI; prompts and data are not logged per documentation.
+    limitations: Requires paid capacity (F2 or higher).
+    fallback: Deterministic local enrichment, labeled SIMULATED.
+  # ------------------------------------------------------------------ Fabric AI / IQ
+  - id: fabric-data-agent
+    title: Fabric data agent concepts
+    url: https://learn.microsoft.com/fabric/data-science/concept-data-agent
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-05
+    last_updated_date: 2026-05-11
+    technology: Fabric IQ and Data Agents
+    associated_patterns: [P01, P02]
+    status: GA
+    key_architecture_statement: Conversational Q&A over up to five sources (lakehouse, warehouse, semantic model, KQL, mirrored DB, ontology, Graph) running under the requesting user's identity.
+    implementation_relevance: Fabric owns governed structured context; Foundry orchestrates.
+    security_implications: Least-privilege by user identity; responses may leave Fabric's compliance boundary depending on the consuming client.
+    limitations: Ontology source is preview; Copilot Studio and M365 Copilot consumption are preview.
+    fallback: Local deterministic data agent over semantic YAML with allow-listed queries.
+  - id: fabric-iq-overview
+    title: What is Fabric IQ?
+    url: https://learn.microsoft.com/fabric/iq/overview
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-05
+    last_updated_date: 2026-07-08
+    technology: Fabric IQ and Data Agents
+    associated_patterns: [P02, P03]
+    status: PREVIEW
+    key_architecture_statement: Fabric IQ combines ontology, semantic models, data agents and graph as the business-semantics layer of Microsoft IQ.
+    implementation_relevance: Preview-flagged patterns 2 and 3; simulated offline; never required by the default demo.
+    security_implications: Identity-delegated access; same-tenant requirements for Foundry integration.
+    limitations: Preview; behavior may change.
+    fallback: Local semantic YAML (ontology analog).
+  - id: fabric-iq-ontology
+    title: Ontology overview (Fabric IQ)
+    url: https://learn.microsoft.com/fabric/iq/ontology/overview
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-05
+    last_updated_date: 2026-09-15
+    technology: Fabric IQ and Data Agents
+    associated_patterns: [P03]
+    status: PREVIEW
+    key_architecture_statement: Entities, properties, directional relationships and bindings virtualize business meaning over Fabric data without copying it.
+    implementation_relevance: Teaches data versus semantics versus knowledge versus reasoning.
+    security_implications: Bindings inherit underlying item permissions.
+    limitations: Preview.
+    fallback: Local semantic YAML.
+  # ------------------------------------------------------------------ MCP
+  - id: fabric-mcp-servers-list
+    title: Choose a Microsoft Fabric MCP server
+    url: https://learn.microsoft.com/rest/api/fabric/articles/mcp-servers/fabric-mcp-servers-list
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-05
+    last_updated_date: 2026-09-15
+    technology: Model Context Protocol
+    associated_patterns: [P09, P19]
+    status: GUIDANCE
+    key_architecture_statement: Thirteen distinct Fabric-related MCP servers (remote and local) with different purposes; they must not be conflated.
+    implementation_relevance: MCP topology and per-job server selection (narrowest server and tool set).
+    security_implications: Each server runs with the caller's permissions; several expose write tools.
+    limitations: The directory page carries no per-server status column; status comes from each server's page.
+    fallback: Local FastMCP educational server.
+  - id: fabric-mcp-local
+    title: Fabric MCP Server (local) tools reference
+    url: https://learn.microsoft.com/rest/api/fabric/articles/mcp-servers/pro-dev-local/tools-local-mcp-server
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-05
+    last_updated_date: 2026-09-15
+    technology: Model Context Protocol
+    associated_patterns: [P09, P19]
+    status: GA
+    key_architecture_statement: Local stdio server with offline docs/schema/best-practice tools plus OneLake, core and Data Factory tools; npm @microsoft/fabric-mcp 1.4.0 (2026-08-27).
+    implementation_relevance: Primary developer-time server; docs tools give genuine grounding without a tenant.
+    security_implications: OneLake write/delete and pipeline run tools exist; restrict with tool allow-lists.
+    limitations: Live tools require Azure CLI/Entra credentials; credential selector behavior is version-specific.
+    fallback: Local FastMCP equivalents (SIMULATED).
+  - id: fabric-dw-mcp
+    title: Fabric Data Warehouse MCP server (Preview)
+    url: https://learn.microsoft.com/fabric/data-warehouse/data-warehouse-mcp-server
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-05
+    last_updated_date: 2026-06-16
+    technology: Model Context Protocol
+    associated_patterns: [P09]
+    status: PREVIEW
+    key_architecture_statement: Remote server exposing a single T-SQL execution tool against a warehouse or SQL analytics endpoint.
+    implementation_relevance: Teaching contrast for governed MCP; excluded from default agent configuration.
+    security_implications: Arbitrary T-SQL under the caller's identity; use read-only roles in dev workspaces only.
+    limitations: Preview.
+    fallback: Local allow-listed queries over DuckDB.
+  - id: fabric-iq-mcp
+    title: Get started with Fabric IQ MCP
+    url: https://learn.microsoft.com/fabric/iq/connectors/fabric-iq-mcp
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-05
+    last_updated_date: 2026-09-14
+    technology: Model Context Protocol
+    associated_patterns: [P12, P09]
+    status: GA
+    key_architecture_statement: Remote, read-only MCP for discovering and querying semantic models with RLS/OLS enforced for the delegated user.
+    implementation_relevance: Preferred live semantic-model consumption path.
+    security_implications: Delegated OAuth; caller permissions enforced.
+    limitations: Read-only; the client composes DAX.
+    fallback: Local semantic YAML measures over DuckDB.
+  - id: powerbi-authoring-mcp
+    title: Power BI Authoring (Modeling) MCP server
+    url: https://learn.microsoft.com/power-bi/developer/mcp/power-bi-authoring-mcp
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-05
+    technology: Model Context Protocol
+    associated_patterns: [P12]
+    status: GA
+    key_architecture_statement: Local server (GA, npm @microsoft/powerbi-modeling-mcp 1.0.0) and hosted deployment (preview) for semantic model authoring.
+    implementation_relevance: Semantic model authoring labs on PBIP/TMDL and Guide HC-01.
+    security_implications: Read/write; back up models first; metadata may appear in chat logs.
+    limitations: Hosted deployment is preview; local deployment reaches Power BI Desktop (Windows) and PBIP files.
+    fallback: Reference TMDL and local PBIR validation.
+  - id: mcp-specification
+    title: Model Context Protocol specification versioning
+    url: https://modelcontextprotocol.io/specification/versioning
+    publisher: Model Context Protocol project
+    retrieved_date: 2026-10-05
+    technology: Model Context Protocol
+    associated_patterns: [P09]
+    status: GA
+    key_architecture_statement: Current specification version 2026-07-28; authorization builds on OAuth 2.1 with servers as resource servers.
+    implementation_relevance: FastMCP 4.0.11 (mcp 2.3.0) reports protocol 2026-07-28.
+    security_implications: MCP standardizes capability access; it does not grant authorization.
+    limitations: Some Microsoft servers do not support dynamic client registration.
+    fallback: Not applicable.
+  # ------------------------------------------------------------------ Foundry
+  - id: foundry-overview
+    title: What is Microsoft Foundry?
+    url: https://learn.microsoft.com/azure/foundry/what-is-foundry
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-05
+    technology: Microsoft Foundry
+    associated_patterns: [P06]
+    status: GA
+    key_architecture_statement: A Foundry resource with child projects unifies models, agents and tools under one RBAC, networking and policy boundary.
+    implementation_relevance: Foundry is the reasoning, orchestration, evaluation and action layer.
+    security_implications: Managed identity and Entra RBAC per project; private networking supported.
+    limitations: Hub-based (classic) projects are legacy.
+    fallback: Local deterministic agent runtime, labeled SIMULATED.
+    deprecation_or_replacement: Classic hub-based agents retire 2027-03-31; use Foundry Agent Service on new projects.
+  - id: foundry-agent-service
+    title: Foundry Agent Service overview
+    url: https://learn.microsoft.com/azure/foundry/agents/overview
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-05
+    technology: Microsoft Foundry
+    associated_patterns: [P06, P08]
+    status: GA
+    key_architecture_statement: Managed platform for prompt agents and hosted agents built on the Responses API, with tool catalogs and toolboxes.
+    implementation_relevance: Live agent provider; MCP tool require_approval and allowed_tools support governed tool use.
+    security_implications: Agent identity in Entra; MCP tool output must be treated as untrusted input.
+    limitations: Several tools (Fabric data agent, Fabric IQ, Browser Automation) are preview.
+    fallback: Local Agent Framework runtime with deterministic client.
+  - id: foundry-fabric-tool
+    title: Use the Microsoft Fabric data agent tool in Foundry Agent Service
+    url: https://learn.microsoft.com/azure/foundry/agents/how-to/tools/fabric
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-05
+    last_updated_date: 2026-09-14
+    technology: Microsoft Foundry
+    associated_patterns: [P01, P02]
+    status: PREVIEW
+    key_architecture_statement: Foundry agents call a Fabric data agent using identity passthrough (on-behalf-of) of the end user.
+    implementation_relevance: Pattern 1 live path, preview-flagged.
+    security_implications: User identity only (no service principal); responses may leave the Fabric compliance boundary.
+    limitations: Same tenant; data agent and sources in the same region; one Fabric data agent per Foundry agent.
+    fallback: Local data agent simulation; Fabric data agent MCP endpoint as alternative live path.
+  - id: foundry-iq
+    title: What is Foundry IQ?
+    url: https://learn.microsoft.com/azure/foundry/agents/concepts/what-is-foundry-iq
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-05
+    technology: Microsoft Foundry
+    associated_patterns: [P04]
+    status: PREVIEW
+    key_architecture_statement: Knowledge bases built on Azure AI Search agentic retrieval over sources such as Blob, SharePoint, OneLake and web, with citations.
+    implementation_relevance: Unstructured knowledge retrieval (Pattern 4), contrasted with structured Fabric context.
+    security_implications: OneLake knowledge source indexes with the search service managed identity, not end-user passthrough.
+    limitations: Mixed GA/preview by API version; portal experience preview.
+    fallback: Local retrieval over synthetic documents with citations.
+  - id: agent-framework
+    title: Microsoft Agent Framework overview
+    url: https://learn.microsoft.com/agent-framework/overview/
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-05
+    technology: Microsoft Agent Framework
+    associated_patterns: [P06, P08, P13]
+    status: GA
+    key_architecture_statement: Successor to Semantic Kernel and AutoGen with agents, graph workflows, checkpointing, tool approval, MCP client support and OpenTelemetry.
+    implementation_relevance: Orchestration runtime for live and local agent paths (agent-framework-core 1.20.0).
+    security_implications: Tool approval enables human-in-the-loop for high-impact actions.
+    limitations: agent-framework-azure-ai is a stale release candidate; use agent-framework-foundry.
+    fallback: Same framework with a deterministic local chat client.
+  - id: baseline-foundry-chat
+    title: Baseline Microsoft Foundry chat reference architecture
+    url: https://learn.microsoft.com/azure/architecture/ai-ml/architecture/baseline-microsoft-foundry-chat
+    publisher: Azure Architecture Center
+    retrieved_date: 2026-10-05
+    technology: Microsoft Foundry
+    associated_patterns: [P14]
+    status: GUIDANCE
+    key_architecture_statement: Private endpoints, App Service front end, Agent Service and monitoring form the production baseline.
+    implementation_relevance: Pattern 14 (secure enterprise) and production notes.
+    security_implications: Private networking and identity-based access are primary controls.
+    limitations: Guidance only.
+    fallback: Not applicable.
+  - id: foundry-evaluators
+    title: Built-in evaluators in Microsoft Foundry
+    url: https://learn.microsoft.com/azure/foundry/concepts/built-in-evaluators
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-05
+    technology: Microsoft Foundry
+    associated_patterns: [P16]
+    status: GA
+    key_architecture_statement: Quality, tool-use, agent-behavior and safety evaluators; several agent evaluators are preview.
+    implementation_relevance: Cloud evaluation option complementing deterministic local evaluation gates.
+    security_implications: Safety evaluators support responsible AI release gates.
+    limitations: Intent resolution and task adherence evaluators are preview.
+    fallback: Deterministic local evaluators in CI.
+  - id: apim-mcp
+    title: Overview of MCP servers in Azure API Management
+    url: https://learn.microsoft.com/azure/api-management/mcp-server-overview
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-05
+    technology: Azure API Management
+    associated_patterns: [P15]
+    status: GA
+    key_architecture_statement: APIM can expose REST APIs as governed MCP tools with centralized authentication, rate limiting and logging.
+    implementation_relevance: Pattern 15 governance option and when-not-to-use criteria.
+    security_implications: Central policy enforcement point for tool access.
+    limitations: Tools only (no resources or prompts); not supported in APIM workspaces.
+    fallback: Local policy simulation.
+  # ------------------------------------------------------------------ Developer experience
+  - id: skills-for-fabric
+    title: Skills for Fabric overview
+    url: https://learn.microsoft.com/fabric/fundamentals/skills-for-fabric-overview
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-05
+    last_updated_date: 2026-06-29
+    technology: Developer experience
+    associated_patterns: [P19, P20]
+    status: OSS
+    key_architecture_statement: Skills provide static procedural knowledge; MCP servers provide live execution; persona agents are experimental.
+    implementation_relevance: Fabric Skills (microsoft/skills-for-fabric v0.3.18) power maturity level L3 in the Copilot labs.
+    security_implications: Bundled MCP config grants all tools on write-capable servers; use the hardened profile.
+    limitations: Pre-1.0 open-source project without a product lifecycle label.
+    fallback: Accelerator repo skills derived from public documentation.
+  - id: copilot-cli-ga
+    title: GitHub Copilot CLI is now generally available
+    url: https://github.blog/changelog/2026-02-25-github-copilot-cli-is-now-generally-available/
+    publisher: GitHub
+    retrieved_date: 2026-10-05
+    last_updated_date: 2026-02-25
+    technology: Developer experience
+    associated_patterns: [P19, P23]
+    status: GA
+    key_architecture_statement: Terminal agent with plan mode, tool permissions, skills, plugins, MCP and headless prompt mode.
+    implementation_relevance: Primary harness for Fabric Skills (plugin marketplace install).
+    security_implications: --allow-all-tools grants full local access; use scoped --allow-tool rules.
+    limitations: Local and cloud sandboxes are preview.
+    fallback: Recorded replay transcripts.
+  - id: copilot-instructions-support
+    title: Support for different types of custom instructions
+    url: https://docs.github.com/en/copilot/reference/custom-instructions-support
+    publisher: GitHub Docs
+    retrieved_date: 2026-10-05
+    technology: Developer experience
+    associated_patterns: [P19, P21]
+    status: GA
+    key_architecture_statement: Copilot surfaces read copilot-instructions.md, path-specific instructions and AGENTS.md with surface-specific support.
+    implementation_relevance: AGENTS.md is the single source of truth; client-specific files stay thin.
+    security_implications: Instructions are guidance, not enforcement; enforcement lives in policy and permissions.
+    limitations: github.com web chat does not read AGENTS.md.
+    fallback: Not applicable.
+  - id: vscode-mcp-servers
+    title: Add and manage MCP servers in VS Code
+    url: https://code.visualstudio.com/docs/agent-customization/mcp-servers
+    publisher: Visual Studio Code documentation
+    retrieved_date: 2026-10-05
+    technology: Developer experience
+    associated_patterns: [P09]
+    status: GA
+    key_architecture_statement: Portable workspace .mcp.json (mcpServers) is preferred; .vscode/mcp.json is deprecated for new servers.
+    implementation_relevance: One root .mcp.json serves VS Code, Copilot CLI and Claude Code.
+    security_implications: Local MCP servers can run arbitrary code; add only trusted, pinned servers.
+    limitations: Agent Host does not forward servers requiring interactive input variables.
+    fallback: Not applicable.
+    deprecation_or_replacement: .vscode/mcp.json is deprecated in favor of .mcp.json or ~/.copilot/mcp-config.json.
+  - id: claude-code-memory
+    title: How Claude remembers your project (CLAUDE.md and AGENTS.md)
+    url: https://code.claude.com/docs/en/memory
+    publisher: Anthropic
+    retrieved_date: 2026-10-05
+    technology: Developer experience
+    associated_patterns: [P19, P23]
+    status: GA
+    key_architecture_statement: Claude Code reads AGENTS.md only when no CLAUDE.md or CLAUDE.local.md exists; a CLAUDE.md can import it with @AGENTS.md.
+    implementation_relevance: CLAUDE.md imports AGENTS.md so both tools share one instruction source.
+    security_implications: Instruction files are context, not enforced configuration; use permissions and hooks to enforce.
+    limitations: Direct AGENTS.md reading requires Claude Code 2.1.277 or later.
+    fallback: Not applicable.
+  - id: claude-code-skills
+    title: Extend Claude with skills
+    url: https://code.claude.com/docs/en/skills
+    publisher: Anthropic
+    retrieved_date: 2026-10-05
+    technology: Developer experience
+    associated_patterns: [P19]
+    status: GA
+    key_architecture_statement: Project skills load from .claude/skills/<name>/SKILL.md; custom commands are merged into skills.
+    implementation_relevance: .claude/skills is the single skill folder read by both Copilot and Claude Code.
+    security_implications: Skills folders with plugin manifests require workspace trust.
+    limitations: Claude Code does not load .github/skills or .agents/skills.
+    fallback: Not applicable.
+  # ------------------------------------------------------------------ Toolchain
+  - id: python-lifecycle
+    title: Status of Python versions
+    url: https://devguide.python.org/versions/
+    publisher: Python Software Foundation
+    retrieved_date: 2026-10-05
+    technology: Toolchain
+    associated_patterns: []
+    status: GA
+    key_architecture_statement: Python 3.14 is in bugfix support until 2027-10; 3.13 moved to security-only support on 2026-10-01.
+    implementation_relevance: Project targets Python 3.14 (requires-python >=3.14,<3.15).
+    security_implications: Bugfix-supported runtime receives timely fixes.
+    limitations: Some Fabric tools (fabric-cicd, ms-fabric-cli, fabric-data-agent-sdk) declare Python below 3.14 and run as isolated tools.
+    fallback: Python 3.13 validated as an alternative.
+  - id: node-release-schedule
+    title: Node.js release schedule
+    url: https://github.com/nodejs/Release
+    publisher: Node.js project
+    retrieved_date: 2026-10-05
+    technology: Toolchain
+    associated_patterns: []
+    status: GA
+    key_architecture_statement: Node 24 is Active LTS until maintenance on 2026-10-20; Node 26 becomes LTS on 2026-10-28.
+    implementation_relevance: Frontend and MCP servers target Node 24 now, with Node 26 in the CI matrix.
+    security_implications: LTS lines receive security releases.
+    limitations: Plan the default switch to Node 26 after 2026-10-28.
+    fallback: Not applicable.

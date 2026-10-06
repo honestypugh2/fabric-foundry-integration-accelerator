@@ -1,0 +1,48 @@
+# --- Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# --- Node / frontend
+node_modules/
+frontend/dist/
+frontend/coverage/
+frontend/test-results/
+frontend/playwright-report/
+
+# --- Environment, secrets and tenant-specific values (NEVER commit)
+.env
+.env.*
+!.env.example
+*.local.yaml
+*.local.json
+config/**/local/
+.privacy/
+
+# --- Agent tool local state
+CLAUDE.local.md
+.claude/settings.local.json
+
+# --- Private source material (customer guides are sanitized before entering the repo)
+/*.pdf
+/*.docx
+source-private/
+vendor-skills/
+
+# --- Generated artifacts
+sbom/
+*.log
+
+# --- OS / editor
+.DS_Store
+Thumbs.db
+.idea/

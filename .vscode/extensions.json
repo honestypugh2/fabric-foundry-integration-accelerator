@@ -1,0 +1,15 @@
+{
+  "recommendations": [
+    "ms-python.python",
+    "charliermarsh.ruff",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "ms-toolsai.jupyter",
+    "GitHub.copilot-chat",
+    "anthropic.claude-code",
+    "fabric.vscode-fabric",
+    "SynapseVSCode.synapse",
+    "fabric.vscode-fabric-mcp-server",
+    "analysis-services.powerbi-modeling-mcp"
+  ]
+}
