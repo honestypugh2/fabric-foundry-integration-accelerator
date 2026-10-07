@@ -27,7 +27,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Microsoft Fabric | [Direct Lake overview](#fabric-direct-lake) | GA | 2026-10-05 |
 | Microsoft Fabric | [Fabric Git integration overview](#fabric-git-integration) | GA | 2026-10-05 |
 | Microsoft Fabric | [Implement medallion lakehouse architecture in Microsoft Fabric](#fabric-medallion) | GUIDANCE | 2026-10-05 |
-| Microsoft Fabric | [Open mirroring landing zone requirements and format](#fabric-open-mirroring-format) | GA | 2026-10-05 |
+| Microsoft Fabric | [Open mirroring landing zone requirements and format](#fabric-open-mirroring-format) | GA | 2026-10-07 |
 | Microsoft Fabric | [What is Microsoft Fabric?](#fabric-overview) | GA | 2026-10-05 |
 | Microsoft Fabric | [Fabric REST API identity support](#fabric-rest-identity) | GA | 2026-10-05 |
 | Microsoft Fabric | [Azure Well-Architected Framework service guide for Microsoft Fabric](#fabric-waf) | GUIDANCE | 2026-10-05 |
@@ -368,12 +368,12 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 |---|---|
 | URL | https://learn.microsoft.com/fabric/mirroring/open-mirroring-landing-zone-format |
 | Publisher | Microsoft Learn |
-| Retrieved | 2026-10-05 |
-| Last updated | 2025-09-09 |
+| Retrieved | 2026-10-07 |
+| Last updated | 2026-02-03 |
 | Status | GA |
 | Associated patterns | P11 |
-| Key architecture statement | Landing zone uses _metadata.json keyColumns and a trailing __rowMarker__ column (0 insert, 1 update, 2 delete, 4 upsert); processed files are purged after 7 days. |
-| Implementation relevance | Local Open Mirroring simulation reproduces this documented format. |
+| Key architecture statement | Landing zone uses _metadata.json keyColumns, 20-digit continuous file names and a trailing __rowMarker__ column (0 insert with no duplicate-key check, 1 update, 2 delete, 4 upsert); processed files are purged after 7 days. |
+| Implementation relevance | Local Open Mirroring simulation (ffia recovery run) reproduces this documented format and row-marker semantics. |
 | Security implications | Mirroring does not propagate source RLS/OLS/dynamic data masking. |
 | Limitations | Schema changes require recreating the table folder; mirroring is not documented as a backup/DR mechanism. |
 | Fallback | Local landing-zone simulation and recovery lab. |

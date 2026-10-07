@@ -1,0 +1,1026 @@
+claim_id,patient_id,encounter_id,claim_date,payer,payer_type,claim_amount,paid_amount,denied_amount,patient_responsibility,denial_reason,claim_status,days_to_payment
+SYN-C-000001,SYN-P-00106,SYN-E-000001,2024-01-11,Synthetic Medicare Advantage Plan,Medicare,624.85,447.60,0.00,30.66,,Paid,9
+SYN-C-000002,SYN-P-00006,SYN-E-000002,2024-01-06,Synthetic Commercial Plan A,Commercial,2828.48,1775.16,0.00,83.94,,Paid,36
+SYN-C-000003,SYN-P-00017,SYN-E-000003,2024-01-08,Synthetic Medicare Advantage Plan,Medicare,368.59,228.88,0.00,0.83,,Paid,26
+SYN-C-000004,SYN-P-00021,SYN-E-000004,2024-01-10,Synthetic Commercial Plan B,Commercial,628.72,550.66,0.00,37.66,,Paid,30
+SYN-C-000005,SYN-P-00043,SYN-E-000005,2024-01-17,Synthetic Medicare Advantage Plan,Medicare,2185.18,0.00,0.00,0.00,,Pending,
+SYN-C-000006,SYN-P-00042,SYN-E-000006,2024-01-12,Synthetic Commercial Plan A,Commercial,291.01,199.93,0.00,5.34,,Paid,41
+SYN-C-000007,SYN-P-00087,SYN-E-000007,2024-01-07,Synthetic Commercial Plan A,Commercial,637.47,459.62,0.00,44.19,,Paid,39
+SYN-C-000008,SYN-P-00115,SYN-E-000008,2024-01-17,Synthetic Commercial Plan A,Commercial,228.89,185.37,0.00,10.62,,Paid,43
+SYN-C-000009,SYN-P-00059,SYN-E-000009,2024-01-15,Synthetic Commercial Plan B,Commercial,179.24,128.83,0.00,6.78,,Paid,25
+SYN-C-000010,SYN-P-00094,SYN-E-000010,2024-01-20,Synthetic Medicare Advantage Plan,Medicare,1324.75,977.17,0.00,19.98,,Paid,41
+SYN-C-000011,SYN-P-00131,SYN-E-000011,2024-01-12,Synthetic Commercial Plan B,Commercial,754.63,648.03,0.00,53.08,,Paid,30
+SYN-C-000012,SYN-P-00160,SYN-E-000012,2024-01-19,Synthetic Commercial Plan B,Commercial,846.97,737.47,0.00,34.48,,Paid,18
+SYN-C-000013,SYN-P-00104,SYN-E-000013,2024-01-10,Synthetic Commercial Plan B,Commercial,178.51,58.61,18.31,3.99,Coding mismatch,Partially Paid,32
+SYN-C-000014,SYN-P-00167,SYN-E-000014,2024-01-18,Synthetic Commercial Plan A,Commercial,867.38,687.22,0.00,7.18,Duplicate submission,Paid on Appeal,49
+SYN-C-000015,SYN-P-00054,SYN-E-000015,2024-01-22,Synthetic Medicare Advantage Plan,Medicare,535.89,413.30,0.00,38.37,,Paid,11
+SYN-C-000016,SYN-P-00048,SYN-E-000016,2024-01-14,Synthetic Medicare Advantage Plan,Medicare,1187.79,768.81,0.00,7.78,,Paid,28
+SYN-C-000017,SYN-P-00089,SYN-E-000017,2024-01-16,Synthetic Medicare Advantage Plan,Medicare,3734.47,2912.11,0.00,137.36,,Paid,47
+SYN-C-000018,SYN-P-00026,SYN-E-000018,2024-02-04,Synthetic Commercial Plan A,Commercial,24376.34,21259.47,0.00,1600.95,,Paid,9
+SYN-C-000019,SYN-P-00034,SYN-E-000019,2024-01-21,Self-Pay,Self-Pay,190.47,130.86,0.00,14.40,,Paid,51
+SYN-C-000020,SYN-P-00123,SYN-E-000020,2024-01-22,Self-Pay,Self-Pay,488.11,317.60,0.00,32.12,,Paid,52
+SYN-C-000021,SYN-P-00056,SYN-E-000021,2024-01-20,Synthetic Medicare Advantage Plan,Medicare,2044.97,638.56,463.54,96.99,Eligibility not verified,Partially Paid,67
+SYN-C-000022,SYN-P-00145,SYN-E-000022,2024-02-03,Synthetic Medicaid Managed Care,Medicaid,16260.22,11141.66,0.00,254.69,,Paid,32
+SYN-C-000023,SYN-P-00117,SYN-E-000023,2024-01-24,Self-Pay,Self-Pay,704.66,473.84,0.00,38.48,,Paid,59
+SYN-C-000024,SYN-P-00182,SYN-E-000024,2024-02-08,Synthetic Commercial Plan B,Commercial,20765.51,15964.98,0.00,41.56,Duplicate submission,Paid on Appeal,118
+SYN-C-000025,SYN-P-00098,SYN-E-000025,2024-01-30,Synthetic Commercial Plan A,Commercial,9398.73,7216.45,0.00,484.11,,Paid,41
+SYN-C-000026,SYN-P-00119,SYN-E-000026,2024-02-01,Synthetic Commercial Plan A,Commercial,3639.75,3183.38,0.00,263.60,,Paid,42
+SYN-C-000027,SYN-P-00177,SYN-E-000027,2024-02-03,Synthetic Commercial Plan B,Commercial,3325.16,1455.11,899.78,70.46,Eligibility not verified,Partially Paid,57
+SYN-C-000028,SYN-P-00128,SYN-E-000028,2024-01-29,Synthetic Medicare Advantage Plan,Medicare,630.04,495.57,0.00,41.70,,Paid,16
+SYN-C-000029,SYN-P-00195,SYN-E-000029,2024-02-05,Synthetic Commercial Plan A,Commercial,3031.48,1282.16,755.19,65.26,Duplicate submission,Partially Paid,45
+SYN-C-000030,SYN-P-00068,SYN-E-000030,2024-02-07,Synthetic Medicare Advantage Plan,Medicare,1783.75,0.00,1783.75,0.00,Authorization not on file,Denied,
+SYN-C-000031,SYN-P-00058,SYN-E-000031,2024-02-05,Synthetic Commercial Plan B,Commercial,4933.64,3176.64,0.00,299.29,,Paid,14
+SYN-C-000032,SYN-P-00076,SYN-E-000032,2024-02-14,Synthetic Commercial Plan A,Commercial,638.07,437.46,0.00,16.51,Duplicate submission,Paid on Appeal,61
+SYN-C-000033,SYN-P-00152,SYN-E-000033,2024-02-09,Synthetic Medicare Advantage Plan,Medicare,515.98,332.52,0.00,25.99,,Paid,24
+SYN-C-000034,SYN-P-00003,SYN-E-000034,2024-02-18,Synthetic Medicare Advantage Plan,Medicare,2457.59,2148.58,0.00,71.77,,Paid,18
+SYN-C-000035,SYN-P-00138,SYN-E-000035,2024-02-19,Synthetic Medicare Advantage Plan,Medicare,612.03,528.26,0.00,34.21,,Paid,31
+SYN-C-000036,SYN-P-00111,SYN-E-000036,2024-02-11,Synthetic Commercial Plan B,Commercial,620.52,391.15,0.00,12.65,,Paid,17
+SYN-C-000037,SYN-P-00169,SYN-E-000037,2024-02-10,Synthetic Medicaid Managed Care,Medicaid,606.50,307.21,65.72,3.69,Eligibility not verified,Partially Paid,29
+SYN-C-000038,SYN-P-00042,SYN-E-000038,2024-02-23,Synthetic Commercial Plan A,Commercial,557.69,207.97,58.00,11.60,Authorization not on file,Partially Paid,42
+SYN-C-000039,SYN-P-00139,SYN-E-000039,2024-02-15,Synthetic Commercial Plan B,Commercial,820.42,698.19,0.00,55.87,,Paid,44
+SYN-C-000040,SYN-P-00126,SYN-E-000040,2024-02-18,Synthetic Medicare Advantage Plan,Medicare,15586.70,9828.95,0.00,168.86,,Paid,11
+SYN-C-000041,SYN-P-00052,SYN-E-000041,2024-03-01,Synthetic Medicaid Managed Care,Medicaid,18632.91,0.00,18632.91,0.00,Missing documentation,Denied,
+SYN-C-000042,SYN-P-00119,SYN-E-000042,2024-02-27,Synthetic Commercial Plan A,Commercial,426.13,307.91,0.00,1.79,,Paid,21
+SYN-C-000043,SYN-P-00142,SYN-E-000043,2024-02-28,Synthetic Commercial Plan B,Commercial,30814.94,14718.76,4241.92,695.03,Missing documentation,Partially Paid,33
+SYN-C-000044,SYN-P-00115,SYN-E-000044,2024-02-23,Synthetic Commercial Plan A,Commercial,605.38,364.15,0.00,13.00,Authorization not on file,Paid on Appeal,102
+SYN-C-000045,SYN-P-00114,SYN-E-000045,2024-03-03,Synthetic Commercial Plan B,Commercial,296.80,0.00,296.80,0.00,Missing documentation,Denied,
+SYN-C-000046,SYN-P-00017,SYN-E-000046,2024-03-15,Synthetic Medicare Advantage Plan,Medicare,37139.48,11601.28,8113.30,598.15,Eligibility not verified,Partially Paid,46
+SYN-C-000047,SYN-P-00086,SYN-E-000047,2024-02-29,Self-Pay,Self-Pay,282.49,185.09,0.00,4.96,,Paid,8
+SYN-C-000048,SYN-P-00056,SYN-E-000048,2024-03-05,Synthetic Medicare Advantage Plan,Medicare,20795.98,16243.04,0.00,915.90,Missing documentation,Paid on Appeal,118
+SYN-C-000049,SYN-P-00187,SYN-E-000049,2024-02-27,Synthetic Medicare Advantage Plan,Medicare,3866.30,3314.71,0.00,289.75,,Paid,9
+SYN-C-000050,SYN-P-00021,SYN-E-000050,2024-03-07,Synthetic Commercial Plan B,Commercial,1926.91,1437.01,0.00,95.09,,Paid,29
+SYN-C-000051,SYN-P-00066,SYN-E-000051,2024-02-29,Synthetic Commercial Plan A,Commercial,495.33,338.87,0.00,19.52,,Paid,32
+SYN-C-000052,SYN-P-00132,SYN-E-000052,2024-03-04,Synthetic Medicare Advantage Plan,Medicare,2389.20,1929.33,0.00,123.46,,Paid,55
+SYN-C-000053,SYN-P-00141,SYN-E-000053,2024-03-07,Synthetic Commercial Plan B,Commercial,824.50,537.06,0.00,58.65,,Paid,35
+SYN-C-000054,SYN-P-00003,SYN-E-000054,2024-03-03,Synthetic Medicare Advantage Plan,Medicare,329.25,279.73,0.00,11.32,,Paid,28
+SYN-C-000055,SYN-P-00143,SYN-E-000055,2024-03-13,Synthetic Medicare Advantage Plan,Medicare,14109.07,12648.35,0.00,6.93,,Paid,40
+SYN-C-000056,SYN-P-00198,SYN-E-000056,2024-03-10,Self-Pay,Self-Pay,519.32,247.14,89.45,10.93,Duplicate submission,Partially Paid,28
+SYN-C-000057,SYN-P-00179,SYN-E-000057,2024-03-05,Synthetic Commercial Plan B,Commercial,349.35,284.22,0.00,23.52,,Paid,10
+SYN-C-000058,SYN-P-00168,SYN-E-000058,2024-03-01,Synthetic Commercial Plan A,Commercial,2983.84,1024.68,704.35,113.43,Authorization not on file,Partially Paid,57
+SYN-C-000059,SYN-P-00095,SYN-E-000059,2024-03-15,Synthetic Medicare Advantage Plan,Medicare,880.30,576.19,0.00,33.94,,Paid,34
+SYN-C-000060,SYN-P-00192,SYN-E-000060,2024-03-09,Synthetic Commercial Plan B,Commercial,2777.84,2213.42,0.00,19.35,,Paid,24
+SYN-C-000061,SYN-P-00199,SYN-E-000061,2024-03-12,Synthetic Medicaid Managed Care,Medicaid,14244.44,7291.24,3284.93,151.08,Authorization not on file,Partially Paid,37
+SYN-C-000062,SYN-P-00188,SYN-E-000062,2024-03-17,Synthetic Medicare Advantage Plan,Medicare,769.96,0.00,0.00,0.00,,Pending,
+SYN-C-000063,SYN-P-00164,SYN-E-000063,2024-03-19,Synthetic Medicare Advantage Plan,Medicare,9196.52,7142.80,0.00,140.54,,Paid,7
+SYN-C-000064,SYN-P-00115,SYN-E-000064,2024-03-19,Synthetic Commercial Plan A,Commercial,892.24,588.96,0.00,64.92,,Paid,45
+SYN-C-000065,SYN-P-00094,SYN-E-000065,2024-03-14,Synthetic Medicare Advantage Plan,Medicare,581.62,489.14,0.00,36.88,,Paid,57
+SYN-C-000066,SYN-P-00108,SYN-E-000066,2024-03-21,Synthetic Commercial Plan B,Commercial,620.21,476.45,0.00,21.52,Duplicate submission,Paid on Appeal,116
+SYN-C-000067,SYN-P-00104,SYN-E-000067,2024-03-18,Synthetic Commercial Plan B,Commercial,300.07,255.63,0.00,1.30,,Paid,46
+SYN-C-000068,SYN-P-00086,SYN-E-000068,2024-03-19,Self-Pay,Self-Pay,883.96,805.57,0.00,62.01,,Paid,17
+SYN-C-000069,SYN-P-00167,SYN-E-000069,2024-03-21,Synthetic Commercial Plan A,Commercial,841.32,0.00,841.32,0.00,Duplicate submission,Denied,
+SYN-C-000070,SYN-P-00143,SYN-E-000070,2024-03-17,Synthetic Medicare Advantage Plan,Medicare,12240.43,0.00,12240.43,0.00,Authorization not on file,Denied,
+SYN-C-000071,SYN-P-00130,SYN-E-000071,2024-03-18,Synthetic Medicaid Managed Care,Medicaid,527.35,434.25,0.00,8.13,,Paid,51
+SYN-C-000072,SYN-P-00126,SYN-E-000072,2024-03-26,Synthetic Medicare Advantage Plan,Medicare,19416.26,0.00,19416.26,0.00,Coding mismatch,Denied,
+SYN-C-000073,SYN-P-00080,SYN-E-000073,2024-03-19,Self-Pay,Self-Pay,5128.41,3423.22,0.00,16.23,,Paid,33
+SYN-C-000074,SYN-P-00196,SYN-E-000074,2024-03-23,Synthetic Medicare Advantage Plan,Medicare,16022.87,10639.03,0.00,295.65,,Paid,36
+SYN-C-000075,SYN-P-00182,SYN-E-000075,2024-03-26,Synthetic Commercial Plan B,Commercial,395.81,317.15,0.00,9.50,,Paid,45
+SYN-C-000076,SYN-P-00091,SYN-E-000076,2024-03-17,Synthetic Commercial Plan A,Commercial,3622.45,0.00,0.00,0.00,,Pending,
+SYN-C-000077,SYN-P-00106,SYN-E-000077,2024-03-29,Synthetic Medicare Advantage Plan,Medicare,16285.01,13848.52,0.00,382.64,,Paid,44
+SYN-C-000078,SYN-P-00067,SYN-E-000078,2024-03-30,Synthetic Medicaid Managed Care,Medicaid,20867.82,13389.11,0.00,1576.18,,Paid,9
+SYN-C-000079,SYN-P-00006,SYN-E-000079,2024-03-25,Synthetic Commercial Plan A,Commercial,25467.87,19772.65,0.00,56.89,,Paid,32
+SYN-C-000080,SYN-P-00177,SYN-E-000080,2024-03-27,Synthetic Commercial Plan B,Commercial,234.44,214.70,0.00,11.53,,Paid,12
+SYN-C-000081,SYN-P-00153,SYN-E-000081,2024-03-25,Synthetic Medicare Advantage Plan,Medicare,4068.16,0.00,4068.16,0.00,Missing documentation,Denied,
+SYN-C-000082,SYN-P-00121,SYN-E-000082,2024-03-27,Synthetic Medicare Advantage Plan,Medicare,18321.63,15260.92,0.00,684.99,,Paid,57
+SYN-C-000083,SYN-P-00085,SYN-E-000083,2024-03-28,Synthetic Medicare Advantage Plan,Medicare,811.76,600.40,0.00,6.25,Duplicate submission,Paid on Appeal,98
+SYN-C-000084,SYN-P-00157,SYN-E-000084,2024-04-03,Synthetic Commercial Plan B,Commercial,157.17,123.55,0.00,5.22,,Paid,16
+SYN-C-000085,SYN-P-00113,SYN-E-000085,2024-03-28,Synthetic Medicaid Managed Care,Medicaid,357.81,236.85,0.00,3.43,,Paid,51
+SYN-C-000086,SYN-P-00098,SYN-E-000086,2024-04-04,Synthetic Commercial Plan A,Commercial,669.10,610.33,0.00,2.10,,Paid,26
+SYN-C-000087,SYN-P-00192,SYN-E-000087,2024-03-27,Synthetic Commercial Plan B,Commercial,2873.80,1852.52,0.00,202.96,,Paid,59
+SYN-C-000088,SYN-P-00131,SYN-E-000088,2024-03-30,Synthetic Commercial Plan B,Commercial,923.35,776.80,0.00,73.36,,Paid,48
+SYN-C-000089,SYN-P-00150,SYN-E-000089,2024-03-31,Synthetic Commercial Plan A,Commercial,232.00,150.54,0.00,16.99,,Paid,47
+SYN-C-000090,SYN-P-00199,SYN-E-000090,2024-03-31,Synthetic Medicaid Managed Care,Medicaid,5883.53,0.00,5883.53,0.00,Authorization not on file,Denied,
+SYN-C-000091,SYN-P-00158,SYN-E-000091,2024-04-13,Synthetic Medicaid Managed Care,Medicaid,13948.25,12596.60,0.00,581.63,,Paid,39
+SYN-C-000092,SYN-P-00174,SYN-E-000092,2024-04-05,Synthetic Medicare Advantage Plan,Medicare,871.66,543.06,0.00,28.64,,Paid,37
+SYN-C-000093,SYN-P-00130,SYN-E-000093,2024-04-05,Synthetic Medicaid Managed Care,Medicaid,212.56,170.06,0.00,0.17,,Paid,31
+SYN-C-000094,SYN-P-00138,SYN-E-000094,2024-04-11,Synthetic Medicare Advantage Plan,Medicare,203.20,136.77,0.00,2.76,Authorization not on file,Paid on Appeal,58
+SYN-C-000095,SYN-P-00058,SYN-E-000095,2024-04-15,Synthetic Commercial Plan B,Commercial,17856.50,13649.01,0.00,664.75,,Paid,56
+SYN-C-000096,SYN-P-00116,SYN-E-000096,2024-04-10,Synthetic Commercial Plan B,Commercial,617.44,494.20,0.00,39.07,,Paid,42
+SYN-C-000097,SYN-P-00072,SYN-E-000097,2024-04-12,Synthetic Medicare Advantage Plan,Medicare,3743.61,2809.04,0.00,257.68,,Paid,24
+SYN-C-000098,SYN-P-00110,SYN-E-000098,2024-04-14,Synthetic Commercial Plan B,Commercial,502.68,395.61,0.00,3.20,Coding mismatch,Paid on Appeal,51
+SYN-C-000099,SYN-P-00094,SYN-E-000099,2024-04-15,Synthetic Medicare Advantage Plan,Medicare,3890.08,2328.06,774.55,104.70,Duplicate submission,Partially Paid,55
+SYN-C-000100,SYN-P-00095,SYN-E-000100,2024-04-13,Synthetic Medicare Advantage Plan,Medicare,342.39,275.18,0.00,4.17,,Paid,59
+SYN-C-000101,SYN-P-00065,SYN-E-000101,2024-04-14,Synthetic Commercial Plan A,Commercial,493.08,411.61,0.00,12.39,,Paid,9
+SYN-C-000102,SYN-P-00172,SYN-E-000102,2024-04-23,Synthetic Commercial Plan B,Commercial,15868.64,9897.47,0.00,1094.12,,Paid,47
+SYN-C-000103,SYN-P-00169,SYN-E-000103,2024-04-15,Synthetic Medicaid Managed Care,Medicaid,246.44,174.76,0.00,6.90,,Paid,33
+SYN-C-000104,SYN-P-00032,SYN-E-000104,2024-04-18,Synthetic Medicare Advantage Plan,Medicare,17313.04,9204.58,2522.17,570.26,Eligibility not verified,Partially Paid,34
+SYN-C-000105,SYN-P-00145,SYN-E-000105,2024-04-19,Synthetic Medicaid Managed Care,Medicaid,15956.13,5016.23,4412.37,773.09,Authorization not on file,Partially Paid,51
+SYN-C-000106,SYN-P-00197,SYN-E-000106,2024-04-22,Synthetic Commercial Plan A,Commercial,22995.10,19715.04,0.00,1079.92,,Paid,50
+SYN-C-000107,SYN-P-00128,SYN-E-000107,2024-04-21,Synthetic Medicare Advantage Plan,Medicare,3591.64,2827.85,0.00,141.19,,Paid,34
+SYN-C-000108,SYN-P-00152,SYN-E-000108,2024-04-29,Synthetic Medicare Advantage Plan,Medicare,924.46,715.98,0.00,62.00,,Paid,11
+SYN-C-000109,SYN-P-00195,SYN-E-000109,2024-05-01,Synthetic Commercial Plan A,Commercial,20260.38,0.00,0.00,0.00,,Pending,
+SYN-C-000110,SYN-P-00187,SYN-E-000110,2024-04-23,Synthetic Medicare Advantage Plan,Medicare,159.63,118.50,0.00,11.97,,Paid,26
+SYN-C-000111,SYN-P-00034,SYN-E-000111,2024-04-19,Self-Pay,Self-Pay,1669.64,1414.93,0.00,105.93,,Paid,48
+SYN-C-000112,SYN-P-00175,SYN-E-000112,2024-04-30,Synthetic Medicaid Managed Care,Medicaid,529.00,445.03,0.00,12.91,,Paid,25
+SYN-C-000113,SYN-P-00188,SYN-E-000113,2024-04-30,Synthetic Medicare Advantage Plan,Medicare,756.27,550.37,0.00,44.66,,Paid,22
+SYN-C-000114,SYN-P-00093,SYN-E-000114,2024-04-30,Synthetic Medicare Advantage Plan,Medicare,16036.61,10040.98,0.00,203.25,,Paid,55
+SYN-C-000115,SYN-P-00095,SYN-E-000115,2024-04-22,Synthetic Medicare Advantage Plan,Medicare,570.41,403.03,0.00,3.55,,Paid,16
+SYN-C-000116,SYN-P-00138,SYN-E-000116,2024-04-30,Synthetic Medicare Advantage Plan,Medicare,267.51,209.45,0.00,13.66,,Paid,59
+SYN-C-000117,SYN-P-00026,SYN-E-000117,2024-01-23,Synthetic Commercial Plan A,Commercial,771.07,504.05,0.00,5.05,,Paid,17
+SYN-C-000118,SYN-P-00015,SYN-E-000118,2024-04-28,Synthetic Medicare Advantage Plan,Medicare,494.71,341.54,0.00,29.96,,Paid,57
+SYN-C-000119,SYN-P-00161,SYN-E-000119,2024-05-05,Synthetic Medicare Advantage Plan,Medicare,1759.19,1482.11,0.00,5.79,,Paid,17
+SYN-C-000120,SYN-P-00070,SYN-E-000120,2024-05-07,Synthetic Commercial Plan A,Commercial,731.66,460.55,0.00,56.39,,Paid,7
+SYN-C-000121,SYN-P-00046,SYN-E-000121,2024-05-02,Synthetic Commercial Plan B,Commercial,722.79,511.54,0.00,10.06,,Paid,48
+SYN-C-000122,SYN-P-00179,SYN-E-000122,2024-05-22,Synthetic Commercial Plan B,Commercial,37754.71,24536.81,0.00,755.31,,Paid,46
+SYN-C-000123,SYN-P-00119,SYN-E-000123,2024-05-12,Synthetic Commercial Plan A,Commercial,17280.18,12410.65,0.00,1380.98,,Paid,40
+SYN-C-000124,SYN-P-00048,SYN-E-000124,2024-05-08,Synthetic Medicare Advantage Plan,Medicare,18796.75,14918.04,0.00,1301.31,,Paid,35
+SYN-C-000125,SYN-P-00065,SYN-E-000125,2024-05-04,Synthetic Commercial Plan A,Commercial,3321.19,2874.36,0.00,54.15,,Paid,36
+SYN-C-000126,SYN-P-00126,SYN-E-000126,2024-05-13,Synthetic Medicare Advantage Plan,Medicare,16679.00,11117.25,0.00,998.66,,Paid,16
+SYN-C-000127,SYN-P-00094,SYN-E-000127,2024-05-09,Synthetic Medicare Advantage Plan,Medicare,244.74,184.79,0.00,9.96,,Paid,27
+SYN-C-000128,SYN-P-00053,SYN-E-000128,2024-05-07,Synthetic Commercial Plan B,Commercial,871.77,754.08,0.00,59.92,,Paid,10
+SYN-C-000129,SYN-P-00181,SYN-E-000129,2024-05-17,Self-Pay,Self-Pay,2235.99,1456.46,0.00,162.61,,Paid,38
+SYN-C-000130,SYN-P-00089,SYN-E-000130,2024-05-19,Synthetic Medicare Advantage Plan,Medicare,17773.30,13526.44,0.00,525.16,Duplicate submission,Paid on Appeal,87
+SYN-C-000131,SYN-P-00147,SYN-E-000131,2024-05-12,Synthetic Medicaid Managed Care,Medicaid,601.36,551.58,0.00,8.53,,Paid,33
+SYN-C-000132,SYN-P-00059,SYN-E-000132,2024-05-14,Synthetic Commercial Plan B,Commercial,504.15,460.30,0.00,12.46,,Paid,59
+SYN-C-000133,SYN-P-00042,SYN-E-000133,2024-05-10,Synthetic Commercial Plan A,Commercial,2230.61,0.00,0.00,0.00,,Pending,
+SYN-C-000134,SYN-P-00196,SYN-E-000134,2024-05-15,Synthetic Medicare Advantage Plan,Medicare,200.47,77.20,47.00,0.63,Missing documentation,Partially Paid,43
+SYN-C-000135,SYN-P-00189,SYN-E-000135,2024-05-23,Synthetic Medicare Advantage Plan,Medicare,5793.25,4761.40,0.00,34.90,,Paid,51
+SYN-C-000136,SYN-P-00043,SYN-E-000136,2024-05-13,Synthetic Medicare Advantage Plan,Medicare,3419.17,0.00,0.00,0.00,,Pending,
+SYN-C-000137,SYN-P-00160,SYN-E-000137,2024-05-16,Synthetic Commercial Plan B,Commercial,11065.33,7975.56,0.00,375.35,,Paid,21
+SYN-C-000138,SYN-P-00048,SYN-E-000138,2024-05-22,Synthetic Medicare Advantage Plan,Medicare,23158.18,0.00,0.00,0.00,,Pending,
+SYN-C-000139,SYN-P-00018,SYN-E-000139,2024-05-23,Synthetic Commercial Plan B,Commercial,208.93,0.00,0.00,0.00,,Pending,
+SYN-C-000140,SYN-P-00030,SYN-E-000140,2024-05-21,Synthetic Commercial Plan A,Commercial,25344.82,8388.68,2554.14,951.98,Authorization not on file,Partially Paid,69
+SYN-C-000141,SYN-P-00055,SYN-E-000141,2024-06-01,Synthetic Medicare Advantage Plan,Medicare,22525.63,17057.53,0.00,1037.47,,Paid,31
+SYN-C-000142,SYN-P-00133,SYN-E-000142,2024-05-21,Synthetic Commercial Plan A,Commercial,10060.60,3270.38,2258.50,412.79,Authorization not on file,Partially Paid,42
+SYN-C-000143,SYN-P-00113,SYN-E-000143,2024-05-27,Synthetic Medicaid Managed Care,Medicaid,329.59,286.43,0.00,16.97,,Paid,42
+SYN-C-000144,SYN-P-00167,SYN-E-000144,2024-05-25,Synthetic Commercial Plan A,Commercial,449.37,353.71,0.00,6.84,,Paid,42
+SYN-C-000145,SYN-P-00120,SYN-E-000145,2024-05-31,Synthetic Medicare Advantage Plan,Medicare,602.92,419.24,0.00,10.92,,Paid,53
+SYN-C-000146,SYN-P-00150,SYN-E-000146,2024-05-21,Synthetic Commercial Plan A,Commercial,249.59,180.27,0.00,2.55,,Paid,26
+SYN-C-000147,SYN-P-00153,SYN-E-000147,2024-05-25,Synthetic Medicare Advantage Plan,Medicare,13951.33,11035.04,0.00,522.68,,Paid,28
+SYN-C-000148,SYN-P-00017,SYN-E-000148,2024-05-28,Synthetic Medicare Advantage Plan,Medicare,644.60,423.99,0.00,20.73,,Paid,48
+SYN-C-000149,SYN-P-00118,SYN-E-000149,2024-05-29,Self-Pay,Self-Pay,431.57,375.51,0.00,23.61,,Paid,47
+SYN-C-000150,SYN-P-00068,SYN-E-000150,2024-05-21,Synthetic Medicare Advantage Plan,Medicare,871.24,420.68,168.74,26.55,Duplicate submission,Partially Paid,20
+SYN-C-000151,SYN-P-00177,SYN-E-000151,2024-05-23,Synthetic Commercial Plan B,Commercial,3659.24,2735.54,0.00,199.01,,Paid,8
+SYN-C-000152,SYN-P-00126,SYN-E-000152,2024-05-29,Synthetic Medicare Advantage Plan,Medicare,15006.25,11219.13,0.00,407.46,Coding mismatch,Paid on Appeal,56
+SYN-C-000153,SYN-P-00164,SYN-E-000153,2024-05-30,Synthetic Medicare Advantage Plan,Medicare,15066.81,0.00,0.00,0.00,,Pending,
+SYN-C-000154,SYN-P-00016,SYN-E-000154,2024-05-27,Synthetic Commercial Plan A,Commercial,291.00,122.51,34.24,6.71,Duplicate submission,Partially Paid,33
+SYN-C-000155,SYN-P-00085,SYN-E-000155,2024-05-23,Synthetic Medicare Advantage Plan,Medicare,631.76,512.20,0.00,24.46,,Paid,59
+SYN-C-000156,SYN-P-00087,SYN-E-000156,2024-05-25,Synthetic Commercial Plan A,Commercial,451.64,292.23,0.00,7.43,,Paid,20
+SYN-C-000157,SYN-P-00098,SYN-E-000157,2024-06-02,Synthetic Commercial Plan A,Commercial,431.40,377.31,0.00,1.69,,Paid,7
+SYN-C-000158,SYN-P-00101,SYN-E-000158,2024-06-08,Synthetic Medicare Advantage Plan,Medicare,1639.59,1136.11,0.00,67.91,,Paid,21
+SYN-C-000159,SYN-P-00091,SYN-E-000159,2024-05-30,Synthetic Commercial Plan A,Commercial,770.04,612.54,0.00,0.40,,Paid,32
+SYN-C-000160,SYN-P-00022,SYN-E-000160,2024-06-01,Synthetic Commercial Plan A,Commercial,452.06,334.25,0.00,21.47,,Paid,56
+SYN-C-000161,SYN-P-00166,SYN-E-000161,2024-06-10,Synthetic Commercial Plan A,Commercial,855.04,549.92,0.00,24.36,,Paid,21
+SYN-C-000162,SYN-P-00034,SYN-E-000162,2024-05-29,Self-Pay,Self-Pay,10889.48,9416.58,0.00,444.17,,Paid,13
+SYN-C-000163,SYN-P-00040,SYN-E-000163,2024-05-31,Synthetic Commercial Plan A,Commercial,2771.19,1890.63,0.00,177.48,,Paid,10
+SYN-C-000164,SYN-P-00117,SYN-E-000164,2024-06-02,Self-Pay,Self-Pay,2957.72,2037.09,0.00,47.54,,Paid,21
+SYN-C-000165,SYN-P-00127,SYN-E-000165,2024-06-10,Synthetic Commercial Plan A,Commercial,1918.93,815.40,257.90,4.72,Coding mismatch,Partially Paid,70
+SYN-C-000166,SYN-P-00139,SYN-E-000166,2024-06-05,Synthetic Commercial Plan B,Commercial,867.26,556.31,0.00,6.27,,Paid,39
+SYN-C-000167,SYN-P-00020,SYN-E-000167,2024-06-14,Synthetic Commercial Plan A,Commercial,2063.46,1677.81,0.00,16.41,,Paid,9
+SYN-C-000168,SYN-P-00084,SYN-E-000168,2024-06-05,Synthetic Commercial Plan A,Commercial,3025.58,1912.49,0.00,119.58,,Paid,13
+SYN-C-000169,SYN-P-00100,SYN-E-000169,2024-06-17,Synthetic Commercial Plan A,Commercial,16386.42,12278.20,0.00,584.93,,Paid,45
+SYN-C-000170,SYN-P-00179,SYN-E-000170,2024-06-09,Synthetic Commercial Plan B,Commercial,1233.13,768.97,0.00,73.09,,Paid,28
+SYN-C-000171,SYN-P-00157,SYN-E-000171,2024-06-09,Synthetic Commercial Plan B,Commercial,181.83,81.26,20.89,1.84,Missing documentation,Partially Paid,39
+SYN-C-000172,SYN-P-00067,SYN-E-000172,2024-06-10,Synthetic Medicaid Managed Care,Medicaid,1529.18,1199.20,0.00,29.17,Authorization not on file,Paid on Appeal,67
+SYN-C-000173,SYN-P-00188,SYN-E-000173,2024-06-09,Synthetic Medicare Advantage Plan,Medicare,2714.56,1895.50,0.00,130.30,,Paid,49
+SYN-C-000174,SYN-P-00080,SYN-E-000174,2024-06-16,Self-Pay,Self-Pay,801.75,668.86,0.00,33.95,,Paid,30
+SYN-C-000175,SYN-P-00089,SYN-E-000175,2024-06-09,Synthetic Medicare Advantage Plan,Medicare,2961.61,0.00,2961.61,0.00,Authorization not on file,Denied,
+SYN-C-000176,SYN-P-00180,SYN-E-000176,2024-06-15,Synthetic Commercial Plan A,Commercial,1752.95,1549.38,0.00,124.31,,Paid,27
+SYN-C-000177,SYN-P-00191,SYN-E-000177,2024-06-15,Synthetic Medicare Advantage Plan,Medicare,156.70,109.24,0.00,2.76,,Paid,19
+SYN-C-000178,SYN-P-00133,SYN-E-000178,2024-06-11,Synthetic Commercial Plan A,Commercial,832.23,678.83,0.00,59.55,,Paid,59
+SYN-C-000179,SYN-P-00054,SYN-E-000179,2024-06-21,Synthetic Medicare Advantage Plan,Medicare,415.53,275.29,0.00,29.80,,Paid,28
+SYN-C-000180,SYN-P-00042,SYN-E-000180,2024-06-23,Synthetic Commercial Plan A,Commercial,3244.49,0.00,0.00,0.00,,Pending,
+SYN-C-000181,SYN-P-00083,SYN-E-000181,2024-06-23,Synthetic Medicare Advantage Plan,Medicare,2861.58,2509.10,0.00,187.70,,Paid,59
+SYN-C-000182,SYN-P-00032,SYN-E-000182,2024-06-16,Synthetic Medicare Advantage Plan,Medicare,514.67,426.39,0.00,13.07,,Paid,47
+SYN-C-000183,SYN-P-00111,SYN-E-000183,2024-06-15,Synthetic Commercial Plan B,Commercial,841.52,484.17,0.00,18.39,Authorization not on file,Paid on Appeal,110
+SYN-C-000184,SYN-P-00016,SYN-E-000184,2024-06-20,Synthetic Commercial Plan A,Commercial,3896.22,3542.63,0.00,162.71,,Paid,18
+SYN-C-000185,SYN-P-00104,SYN-E-000185,2024-06-21,Synthetic Commercial Plan B,Commercial,198.80,158.32,0.00,15.03,,Paid,46
+SYN-C-000186,SYN-P-00094,SYN-E-000186,2024-06-21,Synthetic Medicare Advantage Plan,Medicare,885.28,591.57,0.00,16.11,,Paid,40
+SYN-C-000187,SYN-P-00003,SYN-E-000187,2024-06-19,Synthetic Medicare Advantage Plan,Medicare,215.16,0.00,215.16,0.00,Duplicate submission,Denied,
+SYN-C-000188,SYN-P-00006,SYN-E-000188,2024-06-21,Synthetic Commercial Plan A,Commercial,564.94,425.03,0.00,41.32,,Paid,29
+SYN-C-000189,SYN-P-00185,SYN-E-000189,2024-06-27,Synthetic Commercial Plan B,Commercial,1717.71,0.00,1717.71,0.00,Eligibility not verified,Denied,
+SYN-C-000190,SYN-P-00034,SYN-E-000190,2024-06-23,Self-Pay,Self-Pay,13065.48,11477.73,0.00,39.72,,Paid,8
+SYN-C-000191,SYN-P-00052,SYN-E-000191,2024-06-29,Synthetic Medicaid Managed Care,Medicaid,370.50,297.74,0.00,10.36,,Paid,47
+SYN-C-000192,SYN-P-00085,SYN-E-000192,2024-06-27,Synthetic Medicare Advantage Plan,Medicare,3435.76,3146.65,0.00,75.25,,Paid,43
+SYN-C-000193,SYN-P-00010,SYN-E-000193,2024-07-05,Synthetic Medicare Advantage Plan,Medicare,404.46,210.25,112.81,19.37,Duplicate submission,Partially Paid,60
+SYN-C-000194,SYN-P-00050,SYN-E-000194,2024-06-25,Synthetic Commercial Plan A,Commercial,2559.55,1907.06,0.00,33.46,,Paid,14
+SYN-C-000195,SYN-P-00076,SYN-E-000195,2024-07-04,Synthetic Commercial Plan A,Commercial,4624.45,3631.13,0.00,306.62,,Paid,8
+SYN-C-000196,SYN-P-00123,SYN-E-000196,2024-06-30,Self-Pay,Self-Pay,2190.01,1757.65,0.00,97.93,Authorization not on file,Paid on Appeal,77
+SYN-C-000197,SYN-P-00005,SYN-E-000197,2024-06-27,Synthetic Commercial Plan A,Commercial,3230.09,2446.14,0.00,173.11,,Paid,44
+SYN-C-000198,SYN-P-00181,SYN-E-000198,2024-07-11,Self-Pay,Self-Pay,155.71,142.45,0.00,10.74,,Paid,52
+SYN-C-000199,SYN-P-00069,SYN-E-000199,2024-07-04,Synthetic Medicaid Managed Care,Medicaid,794.55,515.81,0.00,52.92,,Paid,32
+SYN-C-000200,SYN-P-00121,SYN-E-000200,2024-07-08,Synthetic Medicare Advantage Plan,Medicare,3567.09,3127.10,0.00,140.63,,Paid,36
+SYN-C-000201,SYN-P-00153,SYN-E-000201,2024-07-07,Synthetic Medicare Advantage Plan,Medicare,517.87,325.79,0.00,4.15,,Paid,12
+SYN-C-000202,SYN-P-00133,SYN-E-000202,2024-07-11,Synthetic Commercial Plan A,Commercial,11238.60,4962.69,3300.12,221.46,Coding mismatch,Partially Paid,24
+SYN-C-000203,SYN-P-00108,SYN-E-000203,2024-07-12,Synthetic Commercial Plan B,Commercial,12457.89,0.00,12457.89,0.00,Eligibility not verified,Denied,
+SYN-C-000204,SYN-P-00058,SYN-E-000204,2024-07-16,Synthetic Commercial Plan B,Commercial,291.16,176.47,0.00,8.86,Coding mismatch,Paid on Appeal,68
+SYN-C-000205,SYN-P-00156,SYN-E-000205,2024-07-11,Synthetic Medicare Advantage Plan,Medicare,2277.37,1882.79,0.00,58.28,,Paid,48
+SYN-C-000206,SYN-P-00147,SYN-E-000206,2024-07-13,Synthetic Medicaid Managed Care,Medicaid,705.26,612.40,0.00,14.17,,Paid,21
+SYN-C-000207,SYN-P-00016,SYN-E-000207,2024-07-18,Synthetic Commercial Plan A,Commercial,178.83,143.52,0.00,13.15,,Paid,31
+SYN-C-000208,SYN-P-00089,SYN-E-000208,2024-07-06,Synthetic Medicare Advantage Plan,Medicare,332.53,285.11,0.00,8.62,,Paid,53
+SYN-C-000209,SYN-P-00131,SYN-E-000209,2024-07-08,Synthetic Commercial Plan B,Commercial,1437.95,910.91,0.00,26.68,,Paid,33
+SYN-C-000210,SYN-P-00161,SYN-E-000210,2024-07-17,Synthetic Medicare Advantage Plan,Medicare,265.82,210.69,0.00,17.05,,Paid,10
+SYN-C-000211,SYN-P-00180,SYN-E-000211,2024-07-15,Synthetic Commercial Plan A,Commercial,8857.85,7451.03,0.00,573.50,,Paid,42
+SYN-C-000212,SYN-P-00112,SYN-E-000212,2024-07-09,Synthetic Commercial Plan B,Commercial,12182.09,9576.19,0.00,333.42,,Paid,24
+SYN-C-000213,SYN-P-00074,SYN-E-000213,2024-07-11,Synthetic Commercial Plan B,Commercial,837.92,745.34,0.00,15.50,,Paid,8
+SYN-C-000214,SYN-P-00092,SYN-E-000214,2024-07-11,Synthetic Commercial Plan A,Commercial,10199.44,9068.20,0.00,344.11,,Paid,14
+SYN-C-000215,SYN-P-00002,SYN-E-000215,2024-07-14,Synthetic Commercial Plan B,Commercial,161.46,112.46,0.00,0.69,,Paid,57
+SYN-C-000216,SYN-P-00117,SYN-E-000216,2024-07-18,Self-Pay,Self-Pay,789.93,0.00,789.93,0.00,Missing documentation,Denied,
+SYN-C-000217,SYN-P-00185,SYN-E-000217,2024-07-18,Synthetic Commercial Plan B,Commercial,313.42,253.59,0.00,15.42,,Paid,24
+SYN-C-000218,SYN-P-00056,SYN-E-000218,2024-07-10,Synthetic Medicare Advantage Plan,Medicare,810.47,526.90,0.00,22.56,,Paid,22
+SYN-C-000219,SYN-P-00174,SYN-E-000219,2024-07-18,Synthetic Medicare Advantage Plan,Medicare,288.74,218.98,0.00,11.70,,Paid,34
+SYN-C-000220,SYN-P-00128,SYN-E-000220,2024-07-26,Synthetic Medicare Advantage Plan,Medicare,4675.40,0.00,4675.40,0.00,Authorization not on file,Denied,
+SYN-C-000221,SYN-P-00179,SYN-E-000221,2024-07-20,Synthetic Commercial Plan B,Commercial,749.59,604.74,0.00,24.14,,Paid,34
+SYN-C-000222,SYN-P-00046,SYN-E-000222,2024-07-18,Synthetic Commercial Plan B,Commercial,505.53,443.55,0.00,29.37,,Paid,47
+SYN-C-000223,SYN-P-00094,SYN-E-000223,2024-08-01,Synthetic Medicare Advantage Plan,Medicare,29431.96,22055.66,0.00,1063.91,,Paid,34
+SYN-C-000224,SYN-P-00107,SYN-E-000224,2024-07-25,Synthetic Medicare Advantage Plan,Medicare,321.03,0.00,321.03,0.00,Missing documentation,Denied,
+SYN-C-000225,SYN-P-00066,SYN-E-000225,2024-07-26,Synthetic Commercial Plan A,Commercial,324.28,227.42,0.00,19.29,,Paid,13
+SYN-C-000226,SYN-P-00022,SYN-E-000226,2024-07-29,Synthetic Commercial Plan A,Commercial,11479.56,9817.64,0.00,898.56,,Paid,37
+SYN-C-000227,SYN-P-00096,SYN-E-000227,2024-07-21,Synthetic Commercial Plan A,Commercial,2218.25,1881.64,0.00,124.69,,Paid,54
+SYN-C-000228,SYN-P-00043,SYN-E-000228,2024-07-27,Synthetic Medicare Advantage Plan,Medicare,3666.52,2521.50,0.00,22.19,,Paid,38
+SYN-C-000229,SYN-P-00169,SYN-E-000229,2024-07-30,Synthetic Medicaid Managed Care,Medicaid,679.06,578.07,0.00,41.13,,Paid,15
+SYN-C-000230,SYN-P-00044,SYN-E-000230,2024-07-29,Synthetic Commercial Plan B,Commercial,701.61,478.72,0.00,28.63,,Paid,19
+SYN-C-000231,SYN-P-00017,SYN-E-000231,2024-07-22,Synthetic Medicare Advantage Plan,Medicare,681.93,491.54,0.00,8.29,,Paid,31
+SYN-C-000232,SYN-P-00026,SYN-E-000232,2024-07-26,Synthetic Commercial Plan A,Commercial,893.57,0.00,893.57,0.00,Coding mismatch,Denied,
+SYN-C-000233,SYN-P-00182,SYN-E-000233,2024-07-27,Synthetic Commercial Plan B,Commercial,1425.55,0.00,0.00,0.00,,Pending,
+SYN-C-000234,SYN-P-00115,SYN-E-000234,2024-07-28,Synthetic Commercial Plan A,Commercial,830.83,757.98,0.00,42.37,,Paid,40
+SYN-C-000235,SYN-P-00106,SYN-E-000235,2024-08-01,Synthetic Medicare Advantage Plan,Medicare,820.72,550.59,0.00,6.02,,Paid,8
+SYN-C-000236,SYN-P-00021,SYN-E-000236,2024-07-29,Synthetic Commercial Plan B,Commercial,3883.45,3279.07,0.00,233.79,,Paid,12
+SYN-C-000237,SYN-P-00175,SYN-E-000237,2024-08-09,Synthetic Medicaid Managed Care,Medicaid,21986.92,18558.02,0.00,637.72,,Paid,11
+SYN-C-000238,SYN-P-00003,SYN-E-000238,2024-07-28,Synthetic Medicare Advantage Plan,Medicare,593.02,435.82,0.00,28.12,,Paid,29
+SYN-C-000239,SYN-P-00089,SYN-E-000239,2024-08-05,Synthetic Medicare Advantage Plan,Medicare,1297.66,809.99,0.00,46.67,,Paid,36
+SYN-C-000240,SYN-P-00080,SYN-E-000240,2024-08-08,Self-Pay,Self-Pay,15720.87,14243.05,0.00,485.98,,Paid,35
+SYN-C-000241,SYN-P-00127,SYN-E-000241,2024-07-28,Synthetic Commercial Plan A,Commercial,397.48,145.47,65.32,14.74,Missing documentation,Partially Paid,43
+SYN-C-000242,SYN-P-00070,SYN-E-000242,2024-08-05,Synthetic Commercial Plan A,Commercial,532.52,452.14,0.00,32.53,,Paid,10
+SYN-C-000243,SYN-P-00151,SYN-E-000243,2024-07-31,Synthetic Medicare Advantage Plan,Medicare,2872.66,0.00,0.00,0.00,,Pending,
+SYN-C-000244,SYN-P-00165,SYN-E-000244,2024-08-07,Synthetic Medicare Advantage Plan,Medicare,22444.55,18851.30,0.00,200.20,,Paid,46
+SYN-C-000245,SYN-P-00042,SYN-E-000245,2024-08-04,Synthetic Commercial Plan A,Commercial,2257.92,1825.96,0.00,73.95,,Paid,17
+SYN-C-000246,SYN-P-00114,SYN-E-000246,2024-08-01,Synthetic Commercial Plan B,Commercial,11378.28,10399.22,0.00,871.65,,Paid,60
+SYN-C-000247,SYN-P-00132,SYN-E-000247,2024-07-29,Synthetic Medicare Advantage Plan,Medicare,3664.01,0.00,3664.01,0.00,Eligibility not verified,Denied,
+SYN-C-000248,SYN-P-00143,SYN-E-000248,2024-08-01,Synthetic Medicare Advantage Plan,Medicare,423.70,0.00,423.70,0.00,Eligibility not verified,Denied,
+SYN-C-000249,SYN-P-00045,SYN-E-000249,2024-07-29,Synthetic Commercial Plan A,Commercial,3177.20,2872.42,0.00,45.08,,Paid,26
+SYN-C-000250,SYN-P-00198,SYN-E-000250,2024-08-11,Self-Pay,Self-Pay,620.28,0.00,0.00,0.00,,Pending,
+SYN-C-000251,SYN-P-00007,SYN-E-000251,2024-08-02,Synthetic Commercial Plan A,Commercial,428.70,380.74,0.00,13.87,,Paid,39
+SYN-C-000252,SYN-P-00105,SYN-E-000252,2024-08-10,Synthetic Medicaid Managed Care,Medicaid,485.48,174.06,139.94,10.42,Coding mismatch,Partially Paid,57
+SYN-C-000253,SYN-P-00157,SYN-E-000253,2024-08-01,Synthetic Commercial Plan B,Commercial,832.13,0.00,832.13,0.00,Eligibility not verified,Denied,
+SYN-C-000254,SYN-P-00160,SYN-E-000254,2024-08-12,Synthetic Commercial Plan B,Commercial,831.58,413.20,87.79,39.50,Authorization not on file,Partially Paid,74
+SYN-C-000255,SYN-P-00159,SYN-E-000255,2024-08-16,Synthetic Medicaid Managed Care,Medicaid,780.13,457.40,118.82,29.46,Authorization not on file,Partially Paid,30
+SYN-C-000256,SYN-P-00059,SYN-E-000256,2024-08-09,Synthetic Commercial Plan B,Commercial,3598.08,2334.34,0.00,5.07,,Paid,18
+SYN-C-000257,SYN-P-00190,SYN-E-000257,2024-08-14,Synthetic Medicaid Managed Care,Medicaid,273.40,144.31,69.81,13.65,Authorization not on file,Partially Paid,37
+SYN-C-000258,SYN-P-00040,SYN-E-000258,2024-08-05,Synthetic Commercial Plan A,Commercial,1648.95,1193.61,0.00,119.03,,Paid,42
+SYN-C-000259,SYN-P-00008,SYN-E-000259,2024-08-22,Synthetic Commercial Plan A,Commercial,18121.05,14648.14,0.00,620.06,,Paid,20
+SYN-C-000260,SYN-P-00067,SYN-E-000260,2024-08-14,Synthetic Medicaid Managed Care,Medicaid,421.90,0.00,421.90,0.00,Coding mismatch,Denied,
+SYN-C-000261,SYN-P-00003,SYN-E-000261,2024-08-11,Synthetic Medicare Advantage Plan,Medicare,3398.83,2542.55,0.00,73.39,,Paid,10
+SYN-C-000262,SYN-P-00173,SYN-E-000262,2024-08-11,Synthetic Commercial Plan B,Commercial,307.90,196.30,0.00,18.82,,Paid,10
+SYN-C-000263,SYN-P-00031,SYN-E-000263,2024-08-21,Synthetic Medicare Advantage Plan,Medicare,309.23,280.07,0.00,4.47,,Paid,40
+SYN-C-000264,SYN-P-00050,SYN-E-000264,2024-08-19,Synthetic Commercial Plan A,Commercial,3805.29,3339.61,0.00,31.96,,Paid,16
+SYN-C-000265,SYN-P-00120,SYN-E-000265,2024-08-11,Synthetic Medicare Advantage Plan,Medicare,776.43,673.53,0.00,10.54,,Paid,39
+SYN-C-000266,SYN-P-00131,SYN-E-000266,2024-08-19,Synthetic Commercial Plan B,Commercial,21114.29,14831.60,0.00,645.65,,Paid,21
+SYN-C-000267,SYN-P-00084,SYN-E-000267,2024-08-22,Synthetic Commercial Plan A,Commercial,699.53,460.94,0.00,21.78,,Paid,17
+SYN-C-000268,SYN-P-00101,SYN-E-000268,2024-08-24,Synthetic Medicare Advantage Plan,Medicare,14161.65,12140.27,0.00,1114.23,,Paid,24
+SYN-C-000269,SYN-P-00192,SYN-E-000269,2024-08-13,Synthetic Commercial Plan B,Commercial,307.54,209.13,0.00,9.37,,Paid,11
+SYN-C-000270,SYN-P-00176,SYN-E-000270,2024-08-25,Synthetic Medicaid Managed Care,Medicaid,20363.20,7741.77,4437.07,408.04,Authorization not on file,Partially Paid,67
+SYN-C-000271,SYN-P-00015,SYN-E-000271,2024-08-19,Synthetic Medicare Advantage Plan,Medicare,3818.54,2998.28,0.00,231.67,,Paid,18
+SYN-C-000272,SYN-P-00178,SYN-E-000272,2024-08-28,Synthetic Commercial Plan A,Commercial,574.81,518.35,0.00,39.40,,Paid,24
+SYN-C-000273,SYN-P-00042,SYN-E-000273,2024-08-22,Synthetic Commercial Plan A,Commercial,4663.70,3911.11,0.00,15.41,,Paid,36
+SYN-C-000274,SYN-P-00063,SYN-E-000274,2024-08-19,Synthetic Commercial Plan A,Commercial,792.42,547.24,0.00,2.82,,Paid,21
+SYN-C-000275,SYN-P-00002,SYN-E-000275,2024-08-23,Synthetic Commercial Plan B,Commercial,575.67,0.00,0.00,0.00,,Pending,
+SYN-C-000276,SYN-P-00034,SYN-E-000276,2024-08-29,Self-Pay,Self-Pay,360.41,304.33,0.00,9.83,,Paid,50
+SYN-C-000277,SYN-P-00045,SYN-E-000277,2024-08-18,Synthetic Commercial Plan A,Commercial,1290.01,921.62,0.00,39.21,,Paid,51
+SYN-C-000278,SYN-P-00106,SYN-E-000278,2024-08-28,Synthetic Medicare Advantage Plan,Medicare,236.25,0.00,0.00,0.00,,Pending,
+SYN-C-000279,SYN-P-00038,SYN-E-000279,2024-08-21,Synthetic Medicare Advantage Plan,Medicare,2171.47,1390.06,0.00,58.38,,Paid,36
+SYN-C-000280,SYN-P-00181,SYN-E-000280,2024-08-24,Self-Pay,Self-Pay,3757.67,3185.09,0.00,70.99,,Paid,26
+SYN-C-000281,SYN-P-00182,SYN-E-000281,2024-08-25,Synthetic Commercial Plan B,Commercial,744.08,509.93,0.00,9.86,,Paid,13
+SYN-C-000282,SYN-P-00100,SYN-E-000282,2024-08-22,Synthetic Commercial Plan A,Commercial,356.27,306.64,0.00,6.52,,Paid,52
+SYN-C-000283,SYN-P-00103,SYN-E-000283,2024-08-24,Synthetic Commercial Plan B,Commercial,796.37,508.48,0.00,37.85,,Paid,46
+SYN-C-000284,SYN-P-00072,SYN-E-000284,2024-09-07,Synthetic Medicare Advantage Plan,Medicare,18386.83,12288.95,0.00,1153.04,,Paid,33
+SYN-C-000285,SYN-P-00091,SYN-E-000285,2024-09-03,Synthetic Commercial Plan A,Commercial,19314.17,14603.97,0.00,1385.95,,Paid,16
+SYN-C-000286,SYN-P-00170,SYN-E-000286,2024-08-24,Synthetic Medicare Advantage Plan,Medicare,447.02,344.42,0.00,13.73,,Paid,57
+SYN-C-000287,SYN-P-00172,SYN-E-000287,2024-08-24,Synthetic Commercial Plan B,Commercial,307.00,0.00,0.00,0.00,,Pending,
+SYN-C-000288,SYN-P-00104,SYN-E-000288,2024-08-27,Synthetic Commercial Plan B,Commercial,3907.23,2313.23,959.76,187.50,Duplicate submission,Partially Paid,27
+SYN-C-000289,SYN-P-00187,SYN-E-000289,2024-09-05,Synthetic Medicare Advantage Plan,Medicare,516.44,404.24,0.00,15.99,,Paid,38
+SYN-C-000290,SYN-P-00083,SYN-E-000290,2024-08-28,Synthetic Medicare Advantage Plan,Medicare,1305.44,0.00,0.00,0.00,,Pending,
+SYN-C-000291,SYN-P-00188,SYN-E-000291,2024-08-31,Synthetic Medicare Advantage Plan,Medicare,1939.27,1374.66,0.00,66.16,,Paid,35
+SYN-C-000292,SYN-P-00058,SYN-E-000292,2024-09-01,Synthetic Commercial Plan B,Commercial,4624.78,0.00,4624.78,0.00,Duplicate submission,Denied,
+SYN-C-000293,SYN-P-00110,SYN-E-000293,2024-09-03,Synthetic Commercial Plan B,Commercial,816.83,743.24,0.00,59.29,,Paid,51
+SYN-C-000294,SYN-P-00167,SYN-E-000294,2024-08-30,Synthetic Commercial Plan A,Commercial,386.64,0.00,386.64,0.00,Missing documentation,Denied,
+SYN-C-000295,SYN-P-00145,SYN-E-000295,2024-09-07,Synthetic Medicaid Managed Care,Medicaid,12446.09,9677.86,0.00,806.27,,Paid,39
+SYN-C-000296,SYN-P-00158,SYN-E-000296,2024-09-08,Synthetic Medicaid Managed Care,Medicaid,616.34,482.31,0.00,1.86,,Paid,39
+SYN-C-000297,SYN-P-00076,SYN-E-000297,2024-09-02,Synthetic Commercial Plan A,Commercial,626.25,0.00,626.25,0.00,Authorization not on file,Denied,
+SYN-C-000298,SYN-P-00130,SYN-E-000298,2024-09-12,Synthetic Medicaid Managed Care,Medicaid,454.71,407.71,0.00,16.61,,Paid,24
+SYN-C-000299,SYN-P-00060,SYN-E-000299,2024-09-03,Synthetic Commercial Plan B,Commercial,841.31,531.27,0.00,14.24,,Paid,46
+SYN-C-000300,SYN-P-00094,SYN-E-000300,2024-09-07,Synthetic Medicare Advantage Plan,Medicare,602.41,373.54,0.00,28.41,,Paid,21
+SYN-C-000301,SYN-P-00057,SYN-E-000301,2024-09-09,Synthetic Commercial Plan A,Commercial,442.12,284.50,0.00,14.78,,Paid,36
+SYN-C-000302,SYN-P-00149,SYN-E-000302,2024-09-04,Synthetic Commercial Plan A,Commercial,437.03,345.71,0.00,13.69,,Paid,56
+SYN-C-000303,SYN-P-00008,SYN-E-000303,2024-09-17,Synthetic Commercial Plan A,Commercial,344.41,233.12,0.00,17.98,,Paid,12
+SYN-C-000304,SYN-P-00017,SYN-E-000304,2024-09-17,Synthetic Medicare Advantage Plan,Medicare,420.07,0.00,0.00,0.00,,Pending,
+SYN-C-000305,SYN-P-00180,SYN-E-000305,2024-09-16,Synthetic Commercial Plan A,Commercial,3004.88,0.00,3004.88,0.00,Eligibility not verified,Denied,
+SYN-C-000306,SYN-P-00133,SYN-E-000306,2024-09-17,Synthetic Commercial Plan A,Commercial,343.23,315.16,0.00,18.57,,Paid,21
+SYN-C-000307,SYN-P-00152,SYN-E-000307,2024-09-14,Synthetic Medicare Advantage Plan,Medicare,3125.04,0.00,3125.04,0.00,Authorization not on file,Denied,
+SYN-C-000308,SYN-P-00119,SYN-E-000308,2024-09-08,Synthetic Commercial Plan A,Commercial,431.63,139.32,119.43,11.39,Coding mismatch,Partially Paid,49
+SYN-C-000309,SYN-P-00138,SYN-E-000309,2024-09-08,Synthetic Medicare Advantage Plan,Medicare,833.14,655.26,0.00,58.75,,Paid,58
+SYN-C-000310,SYN-P-00155,SYN-E-000310,2024-09-19,Synthetic Commercial Plan A,Commercial,646.53,0.00,646.53,0.00,Duplicate submission,Denied,
+SYN-C-000311,SYN-P-00046,SYN-E-000311,2024-09-17,Synthetic Commercial Plan B,Commercial,394.68,352.84,0.00,10.25,,Paid,12
+SYN-C-000312,SYN-P-00027,SYN-E-000312,2024-09-18,Synthetic Commercial Plan B,Commercial,276.26,185.90,0.00,11.82,Duplicate submission,Paid on Appeal,95
+SYN-C-000313,SYN-P-00193,SYN-E-000313,2024-09-12,Synthetic Commercial Plan B,Commercial,3567.84,2994.86,0.00,0.77,,Paid,60
+SYN-C-000314,SYN-P-00179,SYN-E-000314,2024-09-13,Synthetic Commercial Plan B,Commercial,1347.75,991.57,0.00,58.86,,Paid,16
+SYN-C-000315,SYN-P-00093,SYN-E-000315,2024-09-23,Synthetic Medicare Advantage Plan,Medicare,3681.25,3030.37,0.00,24.87,,Paid,49
+SYN-C-000316,SYN-P-00196,SYN-E-000316,2024-09-20,Synthetic Medicare Advantage Plan,Medicare,389.15,317.51,0.00,18.44,,Paid,21
+SYN-C-000317,SYN-P-00085,SYN-E-000317,2024-09-16,Synthetic Medicare Advantage Plan,Medicare,612.06,461.73,0.00,39.16,,Paid,47
+SYN-C-000318,SYN-P-00097,SYN-E-000318,2024-09-20,Synthetic Commercial Plan A,Commercial,0.00,0.00,0.00,0.00,,Paid,44
+SYN-C-000319,SYN-P-00189,SYN-E-000319,2024-09-14,Synthetic Medicare Advantage Plan,Medicare,3247.84,2329.39,0.00,223.17,,Paid,51
+SYN-C-000320,SYN-P-00068,SYN-E-000320,2024-09-29,Synthetic Medicare Advantage Plan,Medicare,19689.80,16722.68,0.00,930.15,,Paid,34
+SYN-C-000321,SYN-P-00140,SYN-E-000321,2024-09-15,Synthetic Commercial Plan A,Commercial,710.71,513.43,0.00,56.67,,Paid,58
+SYN-C-000322,SYN-P-00032,SYN-E-000322,2024-09-26,Synthetic Medicare Advantage Plan,Medicare,509.34,0.00,0.00,0.00,,Pending,
+SYN-C-000323,SYN-P-00115,SYN-E-000323,2024-09-28,Synthetic Commercial Plan A,Commercial,151.67,116.87,0.00,8.51,,Paid,18
+SYN-C-000324,SYN-P-00195,SYN-E-000324,2024-09-20,Synthetic Commercial Plan A,Commercial,1187.84,0.00,1187.84,0.00,Authorization not on file,Denied,
+SYN-C-000325,SYN-P-00072,SYN-E-000325,2024-09-22,Synthetic Medicare Advantage Plan,Medicare,525.15,417.29,0.00,19.00,Authorization not on file,Paid on Appeal,61
+SYN-C-000326,SYN-P-00174,SYN-E-000326,2024-09-25,Synthetic Medicare Advantage Plan,Medicare,156.96,144.14,0.00,9.76,,Paid,8
+SYN-C-000327,SYN-P-00118,SYN-E-000327,2024-09-19,Self-Pay,Self-Pay,308.63,0.00,0.00,0.00,,Pending,
+SYN-C-000328,SYN-P-00183,SYN-E-000328,2024-10-02,Synthetic Commercial Plan A,Commercial,16019.64,12333.72,0.00,673.39,Coding mismatch,Paid on Appeal,59
+SYN-C-000329,SYN-P-00113,SYN-E-000329,2024-09-27,Synthetic Medicaid Managed Care,Medicaid,5008.94,3527.13,0.00,178.94,,Paid,38
+SYN-C-000330,SYN-P-00166,SYN-E-000330,2024-09-26,Synthetic Commercial Plan A,Commercial,379.27,260.30,0.00,14.07,,Paid,37
+SYN-C-000331,SYN-P-00018,SYN-E-000331,2024-09-21,Synthetic Commercial Plan B,Commercial,177.80,154.34,0.00,4.72,,Paid,60
+SYN-C-000332,SYN-P-00007,SYN-E-000332,2024-10-01,Synthetic Commercial Plan A,Commercial,11733.30,8533.01,0.00,584.84,,Paid,32
+SYN-C-000333,SYN-P-00167,SYN-E-000333,2024-09-21,Synthetic Commercial Plan A,Commercial,350.24,238.91,0.00,0.90,Authorization not on file,Paid on Appeal,64
+SYN-C-000334,SYN-P-00055,SYN-E-000334,2024-09-23,Synthetic Medicare Advantage Plan,Medicare,691.50,433.74,0.00,18.13,,Paid,36
+SYN-C-000335,SYN-P-00156,SYN-E-000335,2024-09-26,Synthetic Medicare Advantage Plan,Medicare,199.04,124.05,0.00,0.32,,Paid,55
+SYN-C-000336,SYN-P-00127,SYN-E-000336,2024-09-26,Synthetic Commercial Plan A,Commercial,656.93,560.53,0.00,52.46,,Paid,30
+SYN-C-000337,SYN-P-00177,SYN-E-000337,2024-09-30,Synthetic Commercial Plan B,Commercial,572.74,422.33,0.00,45.71,,Paid,41
+SYN-C-000338,SYN-P-00035,SYN-E-000338,2024-09-30,Synthetic Commercial Plan A,Commercial,702.92,471.20,0.00,15.46,,Paid,28
+SYN-C-000339,SYN-P-00153,SYN-E-000339,2024-09-28,Synthetic Medicare Advantage Plan,Medicare,14176.65,7495.65,2260.62,268.60,Authorization not on file,Partially Paid,39
+SYN-C-000340,SYN-P-00073,SYN-E-000340,2024-10-03,Synthetic Commercial Plan A,Commercial,29338.13,21987.66,0.00,2343.95,,Paid,44
+SYN-C-000341,SYN-P-00139,SYN-E-000341,2024-09-29,Synthetic Commercial Plan B,Commercial,851.92,644.77,0.00,4.81,,Paid,34
+SYN-C-000342,SYN-P-00068,SYN-E-000342,2024-10-12,Synthetic Medicare Advantage Plan,Medicare,22402.28,0.00,0.00,0.00,,Pending,
+SYN-C-000343,SYN-P-00197,SYN-E-000343,2024-10-07,Synthetic Commercial Plan A,Commercial,819.15,594.36,0.00,52.33,,Paid,11
+SYN-C-000344,SYN-P-00052,SYN-E-000344,2024-09-27,Synthetic Medicaid Managed Care,Medicaid,876.03,781.19,0.00,66.42,,Paid,59
+SYN-C-000345,SYN-P-00065,SYN-E-000345,2024-10-07,Synthetic Commercial Plan A,Commercial,5637.67,4649.00,0.00,298.80,,Paid,57
+SYN-C-000346,SYN-P-00059,SYN-E-000346,2024-09-30,Synthetic Commercial Plan B,Commercial,908.08,275.33,155.51,20.78,Missing documentation,Partially Paid,30
+SYN-C-000347,SYN-P-00112,SYN-E-000347,2024-10-02,Synthetic Commercial Plan B,Commercial,1144.80,875.87,0.00,59.13,,Paid,53
+SYN-C-000348,SYN-P-00029,SYN-E-000348,2024-09-27,Synthetic Medicare Advantage Plan,Medicare,761.28,0.00,0.00,0.00,,Pending,
+SYN-C-000349,SYN-P-00005,SYN-E-000349,2024-10-02,Synthetic Commercial Plan A,Commercial,446.74,376.78,0.00,25.37,,Paid,13
+SYN-C-000350,SYN-P-00133,SYN-E-000350,2024-09-27,Synthetic Commercial Plan A,Commercial,569.59,0.00,0.00,0.00,,Pending,
+SYN-C-000351,SYN-P-00048,SYN-E-000351,2024-10-10,Synthetic Medicare Advantage Plan,Medicare,612.01,458.91,0.00,16.43,,Paid,37
+SYN-C-000352,SYN-P-00159,SYN-E-000352,2024-10-04,Synthetic Medicaid Managed Care,Medicaid,3042.38,0.00,3042.38,0.00,Authorization not on file,Denied,
+SYN-C-000353,SYN-P-00095,SYN-E-000353,2024-10-10,Synthetic Medicare Advantage Plan,Medicare,509.56,377.37,0.00,22.98,,Paid,17
+SYN-C-000354,SYN-P-00198,SYN-E-000354,2024-10-08,Self-Pay,Self-Pay,721.73,0.00,721.73,0.00,Duplicate submission,Denied,
+SYN-C-000355,SYN-P-00042,SYN-E-000355,2024-10-09,Synthetic Commercial Plan A,Commercial,263.58,199.66,0.00,7.61,,Paid,32
+SYN-C-000356,SYN-P-00125,SYN-E-000356,2024-10-03,Synthetic Commercial Plan B,Commercial,16604.64,0.00,16604.64,0.00,Duplicate submission,Denied,
+SYN-C-000357,SYN-P-00015,SYN-E-000357,2024-10-11,Synthetic Medicare Advantage Plan,Medicare,536.02,298.11,0.00,2.90,Authorization not on file,Paid on Appeal,54
+SYN-C-000358,SYN-P-00143,SYN-E-000358,2024-10-10,Synthetic Medicare Advantage Plan,Medicare,270.39,185.81,0.00,5.87,,Paid,16
+SYN-C-000359,SYN-P-00069,SYN-E-000359,2024-10-11,Synthetic Medicaid Managed Care,Medicaid,626.22,407.77,0.00,17.90,,Paid,47
+SYN-C-000360,SYN-P-00187,SYN-E-000360,2024-10-11,Synthetic Medicare Advantage Plan,Medicare,274.41,230.42,0.00,2.45,,Paid,19
+SYN-C-000361,SYN-P-00110,SYN-E-000361,2024-10-07,Synthetic Commercial Plan B,Commercial,675.50,576.65,0.00,31.75,,Paid,56
+SYN-C-000362,SYN-P-00045,SYN-E-000362,2024-10-08,Synthetic Commercial Plan A,Commercial,338.88,0.00,338.88,0.00,Authorization not on file,Denied,
+SYN-C-000363,SYN-P-00123,SYN-E-000363,2024-10-10,Self-Pay,Self-Pay,610.00,0.00,0.00,0.00,,Pending,
+SYN-C-000364,SYN-P-00013,SYN-E-000364,2024-10-07,Synthetic Commercial Plan A,Commercial,627.54,489.94,0.00,40.95,,Paid,38
+SYN-C-000365,SYN-P-00033,SYN-E-000365,2024-10-07,Synthetic Commercial Plan A,Commercial,355.29,252.46,0.00,23.77,,Paid,9
+SYN-C-000366,SYN-P-00091,SYN-E-000366,2024-10-12,Synthetic Commercial Plan A,Commercial,11452.33,9248.31,0.00,310.67,,Paid,16
+SYN-C-000367,SYN-P-00196,SYN-E-000367,2024-10-14,Synthetic Medicare Advantage Plan,Medicare,20673.60,18925.16,0.00,668.73,,Paid,36
+SYN-C-000368,SYN-P-00089,SYN-E-000368,2024-10-20,Synthetic Medicare Advantage Plan,Medicare,716.06,237.31,74.66,28.72,Missing documentation,Partially Paid,65
+SYN-C-000369,SYN-P-00053,SYN-E-000369,2024-10-07,Synthetic Commercial Plan B,Commercial,3620.80,3106.89,0.00,117.22,,Paid,21
+SYN-C-000370,SYN-P-00058,SYN-E-000370,2024-10-09,Synthetic Commercial Plan B,Commercial,5443.94,0.00,0.00,0.00,,Pending,
+SYN-C-000371,SYN-P-00092,SYN-E-000371,2024-10-09,Synthetic Commercial Plan A,Commercial,587.15,0.00,587.15,0.00,Authorization not on file,Denied,
+SYN-C-000372,SYN-P-00126,SYN-E-000372,2024-10-12,Synthetic Medicare Advantage Plan,Medicare,3948.15,3068.59,0.00,276.64,,Paid,25
+SYN-C-000373,SYN-P-00032,SYN-E-000373,2024-10-20,Synthetic Medicare Advantage Plan,Medicare,598.84,412.10,0.00,28.77,,Paid,52
+SYN-C-000374,SYN-P-00072,SYN-E-000374,2024-10-11,Synthetic Medicare Advantage Plan,Medicare,2540.05,1685.72,0.00,76.94,,Paid,11
+SYN-C-000375,SYN-P-00120,SYN-E-000375,2024-10-09,Synthetic Medicare Advantage Plan,Medicare,812.13,0.00,0.00,0.00,,Pending,
+SYN-C-000376,SYN-P-00137,SYN-E-000376,2024-10-11,Self-Pay,Self-Pay,3377.86,2478.15,0.00,253.11,,Paid,55
+SYN-C-000377,SYN-P-00010,SYN-E-000377,2024-10-19,Synthetic Medicare Advantage Plan,Medicare,12704.74,5009.76,1828.36,344.43,Coding mismatch,Partially Paid,71
+SYN-C-000378,SYN-P-00162,SYN-E-000378,2024-10-23,Synthetic Commercial Plan B,Commercial,5546.31,2613.22,844.57,176.23,Coding mismatch,Partially Paid,27
+SYN-C-000379,SYN-P-00165,SYN-E-000379,2024-10-20,Synthetic Medicare Advantage Plan,Medicare,1951.46,0.00,0.00,0.00,,Pending,
+SYN-C-000380,SYN-P-00024,SYN-E-000380,2024-10-19,Synthetic Commercial Plan A,Commercial,835.24,675.61,0.00,19.80,,Paid,24
+SYN-C-000381,SYN-P-00087,SYN-E-000381,2024-10-24,Synthetic Commercial Plan A,Commercial,508.07,0.00,508.07,0.00,Missing documentation,Denied,
+SYN-C-000382,SYN-P-00161,SYN-E-000382,2024-10-15,Synthetic Medicare Advantage Plan,Medicare,1185.03,853.08,0.00,41.15,,Paid,57
+SYN-C-000383,SYN-P-00026,SYN-E-000383,2024-10-16,Synthetic Commercial Plan A,Commercial,2108.64,1399.49,0.00,59.19,,Paid,29
+SYN-C-000384,SYN-P-00147,SYN-E-000384,2024-10-23,Synthetic Medicaid Managed Care,Medicaid,2512.73,2101.69,0.00,83.11,,Paid,9
+SYN-C-000385,SYN-P-00020,SYN-E-000385,2024-10-19,Synthetic Commercial Plan A,Commercial,445.28,367.37,0.00,6.16,,Paid,50
+SYN-C-000386,SYN-P-00111,SYN-E-000386,2024-10-18,Synthetic Commercial Plan B,Commercial,455.18,0.00,0.00,0.00,,Pending,
+SYN-C-000387,SYN-P-00185,SYN-E-000387,2024-10-21,Synthetic Commercial Plan B,Commercial,3403.26,3085.75,0.00,225.39,,Paid,11
+SYN-C-000388,SYN-P-00170,SYN-E-000388,2024-10-22,Synthetic Medicare Advantage Plan,Medicare,2375.07,1795.54,0.00,86.69,,Paid,21
+SYN-C-000389,SYN-P-00104,SYN-E-000389,2024-10-31,Synthetic Commercial Plan B,Commercial,3953.46,3345.82,0.00,155.62,,Paid,29
+SYN-C-000390,SYN-P-00030,SYN-E-000390,2024-10-20,Synthetic Commercial Plan A,Commercial,1304.18,1199.81,0.00,91.09,,Paid,15
+SYN-C-000391,SYN-P-00068,SYN-E-000391,2024-11-02,Synthetic Medicare Advantage Plan,Medicare,11792.89,8773.98,0.00,30.61,,Paid,48
+SYN-C-000392,SYN-P-00191,SYN-E-000392,2024-10-29,Synthetic Medicare Advantage Plan,Medicare,1881.10,1223.93,0.00,128.58,,Paid,44
+SYN-C-000393,SYN-P-00098,SYN-E-000393,2024-11-01,Synthetic Commercial Plan A,Commercial,703.27,553.04,0.00,48.40,,Paid,59
+SYN-C-000394,SYN-P-00164,SYN-E-000394,2024-10-28,Synthetic Medicare Advantage Plan,Medicare,244.94,0.00,244.94,0.00,Eligibility not verified,Denied,
+SYN-C-000395,SYN-P-00079,SYN-E-000395,2024-10-27,Synthetic Commercial Plan A,Commercial,629.83,0.00,0.00,0.00,,Pending,
+SYN-C-000396,SYN-P-00174,SYN-E-000396,2024-10-30,Synthetic Medicare Advantage Plan,Medicare,3190.01,2379.06,0.00,74.74,,Paid,7
+SYN-C-000397,SYN-P-00056,SYN-E-000397,2024-10-30,Synthetic Medicare Advantage Plan,Medicare,635.07,565.52,0.00,6.82,,Paid,12
+SYN-C-000398,SYN-P-00001,SYN-E-000398,2024-11-09,Synthetic Commercial Plan A,Commercial,3200.65,2727.70,0.00,82.46,,Paid,32
+SYN-C-000399,SYN-P-00082,SYN-E-000399,2024-10-31,Synthetic Commercial Plan A,Commercial,2418.93,1582.90,0.00,132.24,,Paid,51
+SYN-C-000400,SYN-P-00038,SYN-E-000400,2024-11-05,Synthetic Medicare Advantage Plan,Medicare,501.36,440.02,0.00,16.69,,Paid,42
+SYN-C-000401,SYN-P-00102,SYN-E-000401,2024-11-06,Synthetic Commercial Plan B,Commercial,3623.64,2485.84,0.00,70.18,,Paid,36
+SYN-C-000402,SYN-P-00177,SYN-E-000402,2024-11-11,Synthetic Commercial Plan B,Commercial,1797.27,1461.29,0.00,37.12,,Paid,49
+SYN-C-000403,SYN-P-00169,SYN-E-000403,2024-11-04,Synthetic Medicaid Managed Care,Medicaid,469.38,391.21,0.00,26.10,,Paid,50
+SYN-C-000404,SYN-P-00022,SYN-E-000404,2024-11-11,Synthetic Commercial Plan A,Commercial,719.60,453.56,0.00,22.99,,Paid,31
+SYN-C-000405,SYN-P-00016,SYN-E-000405,2024-11-10,Synthetic Commercial Plan A,Commercial,5481.15,4470.97,0.00,190.16,,Paid,29
+SYN-C-000406,SYN-P-00054,SYN-E-000406,2024-11-16,Synthetic Medicare Advantage Plan,Medicare,215.42,188.87,0.00,11.88,,Paid,37
+SYN-C-000407,SYN-P-00172,SYN-E-000407,2024-11-05,Synthetic Commercial Plan B,Commercial,869.26,620.07,0.00,8.49,,Paid,57
+SYN-C-000408,SYN-P-00182,SYN-E-000408,2024-11-09,Synthetic Commercial Plan B,Commercial,611.78,537.55,0.00,41.95,,Paid,14
+SYN-C-000409,SYN-P-00006,SYN-E-000409,2024-11-09,Synthetic Commercial Plan A,Commercial,354.69,266.11,0.00,21.41,,Paid,31
+SYN-C-000410,SYN-P-00064,SYN-E-000410,2024-11-12,Synthetic Commercial Plan A,Commercial,506.41,325.89,0.00,14.98,,Paid,48
+SYN-C-000411,SYN-P-00128,SYN-E-000411,2024-11-14,Synthetic Medicare Advantage Plan,Medicare,12184.14,10456.06,0.00,314.61,,Paid,42
+SYN-C-000412,SYN-P-00008,SYN-E-000412,2024-11-11,Synthetic Commercial Plan A,Commercial,665.92,462.79,0.00,39.33,,Paid,35
+SYN-C-000413,SYN-P-00134,SYN-E-000413,2024-11-13,Self-Pay,Self-Pay,878.91,674.49,0.00,21.60,,Paid,31
+SYN-C-000414,SYN-P-00167,SYN-E-000414,2024-11-18,Synthetic Commercial Plan A,Commercial,462.53,275.38,101.68,6.26,Duplicate submission,Partially Paid,54
+SYN-C-000415,SYN-P-00004,SYN-E-000415,2024-11-21,Synthetic Commercial Plan B,Commercial,13221.49,0.00,0.00,0.00,,Pending,
+SYN-C-000416,SYN-P-00159,SYN-E-000416,2024-11-18,Synthetic Medicaid Managed Care,Medicaid,305.15,195.73,0.00,6.28,,Paid,34
+SYN-C-000417,SYN-P-00153,SYN-E-000417,2024-11-22,Synthetic Medicare Advantage Plan,Medicare,24949.74,22780.36,0.00,1521.80,,Paid,35
+SYN-C-000418,SYN-P-00115,SYN-E-000418,2024-11-19,Synthetic Commercial Plan A,Commercial,848.89,351.94,173.55,2.73,Missing documentation,Partially Paid,41
+SYN-C-000419,SYN-P-00081,SYN-E-000419,2024-11-12,Synthetic Commercial Plan A,Commercial,3956.05,2692.84,0.00,49.20,,Paid,13
+SYN-C-000420,SYN-P-00039,SYN-E-000420,2024-11-17,Synthetic Commercial Plan B,Commercial,756.59,450.78,218.18,27.45,Duplicate submission,Partially Paid,54
+SYN-C-000421,SYN-P-00117,SYN-E-000421,2024-11-10,Self-Pay,Self-Pay,1397.88,948.25,0.00,28.29,,Paid,8
+SYN-C-000422,SYN-P-00017,SYN-E-000422,2024-11-17,Synthetic Medicare Advantage Plan,Medicare,523.40,466.36,0.00,23.72,,Paid,58
+SYN-C-000423,SYN-P-00094,SYN-E-000423,2024-11-15,Synthetic Medicare Advantage Plan,Medicare,450.84,358.18,0.00,35.83,,Paid,47
+SYN-C-000424,SYN-P-00031,SYN-E-000424,2024-11-18,Synthetic Medicare Advantage Plan,Medicare,2443.47,1567.18,0.00,84.89,,Paid,48
+SYN-C-000425,SYN-P-00052,SYN-E-000425,2024-11-26,Synthetic Medicaid Managed Care,Medicaid,844.57,612.57,0.00,37.03,,Paid,32
+SYN-C-000426,SYN-P-00119,SYN-E-000426,2024-11-16,Synthetic Commercial Plan A,Commercial,288.72,0.00,0.00,0.00,,Pending,
+SYN-C-000427,SYN-P-00158,SYN-E-000427,2024-11-24,Synthetic Medicaid Managed Care,Medicaid,663.20,0.00,0.00,0.00,,Pending,
+SYN-C-000428,SYN-P-00175,SYN-E-000428,2024-11-16,Synthetic Medicaid Managed Care,Medicaid,1543.59,1353.01,0.00,47.18,,Paid,16
+SYN-C-000429,SYN-P-00137,SYN-E-000429,2024-11-18,Self-Pay,Self-Pay,2854.02,2132.03,0.00,129.75,,Paid,37
+SYN-C-000430,SYN-P-00121,SYN-E-000430,2024-11-28,Synthetic Medicare Advantage Plan,Medicare,476.74,323.30,0.00,16.23,,Paid,25
+SYN-C-000431,SYN-P-00097,SYN-E-000431,2024-11-27,Synthetic Commercial Plan A,Commercial,687.09,0.00,687.09,0.00,Coding mismatch,Denied,
+SYN-C-000432,SYN-P-00074,SYN-E-000432,2024-11-24,Synthetic Commercial Plan B,Commercial,14912.66,10893.72,0.00,508.68,,Paid,12
+SYN-C-000433,SYN-P-00035,SYN-E-000433,2024-11-28,Synthetic Commercial Plan A,Commercial,382.85,253.15,0.00,27.80,,Paid,18
+SYN-C-000434,SYN-P-00063,SYN-E-000434,2024-12-01,Synthetic Commercial Plan A,Commercial,196.85,99.28,22.97,9.09,Missing documentation,Partially Paid,69
+SYN-C-000435,SYN-P-00128,SYN-E-000435,2024-12-11,Synthetic Medicare Advantage Plan,Medicare,20315.74,0.00,20315.74,0.00,Duplicate submission,Denied,
+SYN-C-000436,SYN-P-00054,SYN-E-000436,2024-11-27,Synthetic Medicare Advantage Plan,Medicare,623.10,537.42,0.00,24.94,,Paid,58
+SYN-C-000437,SYN-P-00112,SYN-E-000437,2024-11-30,Synthetic Commercial Plan B,Commercial,583.08,0.00,583.08,0.00,Coding mismatch,Denied,
+SYN-C-000438,SYN-P-00151,SYN-E-000438,2024-12-07,Synthetic Medicare Advantage Plan,Medicare,419.44,324.76,0.00,16.29,,Paid,48
+SYN-C-000439,SYN-P-00004,SYN-E-000439,2024-11-26,Synthetic Commercial Plan B,Commercial,406.90,0.00,0.00,0.00,,Pending,
+SYN-C-000440,SYN-P-00036,SYN-E-000440,2024-11-29,Synthetic Commercial Plan A,Commercial,231.60,176.87,0.00,3.33,Coding mismatch,Paid on Appeal,85
+SYN-C-000441,SYN-P-00008,SYN-E-000441,2024-12-05,Synthetic Commercial Plan A,Commercial,298.36,0.00,298.36,0.00,Duplicate submission,Denied,
+SYN-C-000442,SYN-P-00095,SYN-E-000442,2024-12-03,Synthetic Medicare Advantage Plan,Medicare,13989.65,5189.63,2852.11,626.10,Eligibility not verified,Partially Paid,73
+SYN-C-000443,SYN-P-00012,SYN-E-000443,2024-11-29,Synthetic Commercial Plan A,Commercial,479.29,0.00,0.00,0.00,,Pending,
+SYN-C-000444,SYN-P-00114,SYN-E-000444,2024-11-29,Synthetic Commercial Plan B,Commercial,651.20,0.00,0.00,0.00,,Pending,
+SYN-C-000445,SYN-P-00037,SYN-E-000445,2024-12-01,Synthetic Commercial Plan B,Commercial,502.48,426.22,0.00,31.68,,Paid,8
+SYN-C-000446,SYN-P-00047,SYN-E-000446,2024-12-12,Synthetic Commercial Plan A,Commercial,10154.51,7681.16,0.00,498.42,,Paid,14
+SYN-C-000447,SYN-P-00157,SYN-E-000447,2024-12-03,Synthetic Commercial Plan B,Commercial,837.43,649.63,0.00,62.03,,Paid,16
+SYN-C-000448,SYN-P-00087,SYN-E-000448,2024-12-11,Synthetic Commercial Plan A,Commercial,10997.74,8345.77,0.00,804.30,,Paid,19
+SYN-C-000449,SYN-P-00083,SYN-E-000449,2024-12-09,Synthetic Medicare Advantage Plan,Medicare,355.49,308.03,0.00,26.00,,Paid,41
+SYN-C-000450,SYN-P-00067,SYN-E-000450,2024-12-14,Synthetic Medicaid Managed Care,Medicaid,180.74,142.01,0.00,5.21,,Paid,31
+SYN-C-000451,SYN-P-00030,SYN-E-000451,2024-12-13,Synthetic Commercial Plan A,Commercial,705.76,535.62,0.00,34.25,Missing documentation,Paid on Appeal,95
+SYN-C-000452,SYN-P-00038,SYN-E-000452,2024-12-13,Synthetic Medicare Advantage Plan,Medicare,787.36,601.83,0.00,9.73,,Paid,46
+SYN-C-000453,SYN-P-00096,SYN-E-000453,2024-12-12,Synthetic Commercial Plan A,Commercial,202.82,167.09,0.00,6.60,Authorization not on file,Paid on Appeal,81
+SYN-C-000454,SYN-P-00127,SYN-E-000454,2024-12-17,Synthetic Commercial Plan A,Commercial,272.96,180.16,0.00,4.94,Authorization not on file,Paid on Appeal,86
+SYN-C-000455,SYN-P-00009,SYN-E-000455,2024-12-18,Synthetic Commercial Plan A,Commercial,37189.78,24477.55,0.00,2561.97,,Paid,58
+SYN-C-000456,SYN-P-00059,SYN-E-000456,2024-12-14,Synthetic Commercial Plan B,Commercial,1421.09,1099.29,0.00,39.96,,Paid,32
+SYN-C-000457,SYN-P-00079,SYN-E-000457,2024-12-11,Synthetic Commercial Plan A,Commercial,153.84,100.38,0.00,0.08,,Paid,17
+SYN-C-000458,SYN-P-00187,SYN-E-000458,2024-12-13,Synthetic Medicare Advantage Plan,Medicare,1054.65,823.06,0.00,64.64,,Paid,16
+SYN-C-000459,SYN-P-00154,SYN-E-000459,2024-12-08,Synthetic Medicare Advantage Plan,Medicare,3323.50,0.00,3323.50,0.00,Coding mismatch,Denied,
+SYN-C-000460,SYN-P-00170,SYN-E-000460,2024-12-12,Synthetic Medicare Advantage Plan,Medicare,3342.05,2836.94,0.00,240.05,,Paid,36
+SYN-C-000461,SYN-P-00108,SYN-E-000461,2024-12-13,Synthetic Commercial Plan B,Commercial,1600.68,0.00,1600.68,0.00,Authorization not on file,Denied,
+SYN-C-000462,SYN-P-00028,SYN-E-000462,2024-12-21,Synthetic Medicare Advantage Plan,Medicare,726.69,0.00,726.69,0.00,Eligibility not verified,Denied,
+SYN-C-000463,SYN-P-00055,SYN-E-000463,2024-12-23,Synthetic Medicare Advantage Plan,Medicare,1053.36,783.82,0.00,25.99,,Paid,38
+SYN-C-000464,SYN-P-00155,SYN-E-000464,2024-12-18,Synthetic Commercial Plan A,Commercial,544.44,405.44,0.00,29.66,,Paid,17
+SYN-C-000465,SYN-P-00033,SYN-E-000465,2024-12-11,Synthetic Commercial Plan A,Commercial,308.57,251.45,0.00,13.16,,Paid,60
+SYN-C-000466,SYN-P-00085,SYN-E-000466,2024-12-25,Synthetic Medicare Advantage Plan,Medicare,23711.07,17227.69,0.00,432.05,,Paid,28
+SYN-C-000467,SYN-P-00185,SYN-E-000467,2024-12-22,Synthetic Commercial Plan B,Commercial,719.19,609.18,0.00,29.17,,Paid,21
+SYN-C-000468,SYN-P-00101,SYN-E-000468,2025-01-01,Synthetic Medicare Advantage Plan,Medicare,31174.60,21303.04,0.00,497.07,,Paid,37
+SYN-C-000469,SYN-P-00148,SYN-E-000469,2024-12-15,Synthetic Medicare Advantage Plan,Medicare,12539.83,11139.69,0.00,755.33,,Paid,35
+SYN-C-000470,SYN-P-00136,SYN-E-000470,2024-12-19,Synthetic Medicare Advantage Plan,Medicare,2300.05,1760.52,0.00,102.57,,Paid,41
+SYN-C-000471,SYN-P-00102,SYN-E-000471,2024-12-21,Synthetic Commercial Plan B,Commercial,13436.93,11769.54,0.00,78.01,,Paid,52
+SYN-C-000472,SYN-P-00021,SYN-E-000472,2024-12-14,Synthetic Commercial Plan B,Commercial,589.16,435.98,0.00,1.84,,Paid,14
+SYN-C-000473,SYN-P-00005,SYN-E-000473,2024-12-17,Synthetic Commercial Plan A,Commercial,564.13,373.50,0.00,44.87,,Paid,24
+SYN-C-000474,SYN-P-00192,SYN-E-000474,2024-12-23,Synthetic Commercial Plan B,Commercial,14186.09,12268.31,0.00,450.47,,Paid,43
+SYN-C-000475,SYN-P-00034,SYN-E-000475,2024-12-24,Self-Pay,Self-Pay,682.61,462.62,0.00,34.87,,Paid,32
+SYN-C-000476,SYN-P-00070,SYN-E-000476,2024-12-21,Synthetic Commercial Plan A,Commercial,3185.38,2137.78,0.00,53.83,,Paid,55
+SYN-C-000477,SYN-P-00076,SYN-E-000477,2024-12-24,Synthetic Commercial Plan A,Commercial,790.12,641.64,0.00,62.42,,Paid,34
+SYN-C-000478,SYN-P-00019,SYN-E-000478,2024-12-19,Synthetic Medicare Advantage Plan,Medicare,515.36,410.23,0.00,9.32,,Paid,55
+SYN-C-000479,SYN-P-00197,SYN-E-000479,2024-12-23,Synthetic Commercial Plan A,Commercial,180.27,145.25,0.00,13.02,,Paid,53
+SYN-C-000480,SYN-P-00173,SYN-E-000480,2024-12-28,Synthetic Commercial Plan B,Commercial,17044.11,0.00,17044.11,0.00,Authorization not on file,Denied,
+SYN-C-000481,SYN-P-00040,SYN-E-000481,2024-12-27,Synthetic Commercial Plan A,Commercial,17964.45,16455.49,0.00,177.69,,Paid,42
+SYN-C-000482,SYN-P-00111,SYN-E-000482,2024-12-23,Synthetic Commercial Plan B,Commercial,525.11,424.78,0.00,32.22,,Paid,50
+SYN-C-000483,SYN-P-00095,SYN-E-000483,2024-12-24,Synthetic Medicare Advantage Plan,Medicare,264.69,194.19,0.00,1.04,,Paid,42
+SYN-C-000484,SYN-P-00048,SYN-E-000484,2024-12-31,Synthetic Medicare Advantage Plan,Medicare,843.27,664.60,0.00,64.19,,Paid,59
+SYN-C-000485,SYN-P-00044,SYN-E-000485,2024-12-26,Synthetic Commercial Plan B,Commercial,783.46,611.56,0.00,30.04,,Paid,41
+SYN-C-000486,SYN-P-00043,SYN-E-000486,2025-01-05,Synthetic Medicare Advantage Plan,Medicare,26037.05,22616.28,0.00,708.17,,Paid,13
+SYN-C-000487,SYN-P-00002,SYN-E-000487,2024-12-30,Synthetic Commercial Plan B,Commercial,13856.93,9157.96,0.00,693.91,,Paid,58
+SYN-C-000488,SYN-P-00025,SYN-E-000488,2024-12-29,Synthetic Commercial Plan B,Commercial,874.65,743.25,0.00,36.23,,Paid,15
+SYN-C-000489,SYN-P-00029,SYN-E-000489,2025-01-03,Synthetic Medicare Advantage Plan,Medicare,4050.95,2562.73,0.00,196.30,,Paid,27
+SYN-C-000490,SYN-P-00134,SYN-E-000490,2024-12-29,Self-Pay,Self-Pay,3187.53,2826.99,0.00,38.74,,Paid,28
+SYN-C-000491,SYN-P-00139,SYN-E-000491,2025-01-01,Synthetic Commercial Plan B,Commercial,14100.73,0.00,0.00,0.00,,Pending,
+SYN-C-000492,SYN-P-00107,SYN-E-000492,2025-01-03,Synthetic Medicare Advantage Plan,Medicare,414.51,356.18,0.00,24.48,,Paid,25
+SYN-C-000493,SYN-P-00170,SYN-E-000493,2025-01-06,Synthetic Medicare Advantage Plan,Medicare,288.52,206.16,0.00,4.88,,Paid,31
+SYN-C-000494,SYN-P-00114,SYN-E-000494,2024-12-26,Synthetic Commercial Plan B,Commercial,1014.12,659.27,0.00,0.72,,Paid,33
+SYN-C-000495,SYN-P-00145,SYN-E-000495,2025-01-03,Synthetic Medicaid Managed Care,Medicaid,522.29,338.29,0.00,20.38,,Paid,26
+SYN-C-000496,SYN-P-00073,SYN-E-000496,2024-12-31,Synthetic Commercial Plan A,Commercial,1274.69,0.00,1274.69,0.00,Duplicate submission,Denied,
+SYN-C-000497,SYN-P-00190,SYN-E-000497,2024-12-31,Synthetic Medicaid Managed Care,Medicaid,1544.40,1272.35,0.00,84.92,,Paid,25
+SYN-C-000498,SYN-P-00130,SYN-E-000498,2025-01-05,Synthetic Medicaid Managed Care,Medicaid,1725.33,0.00,0.00,0.00,,Pending,
+SYN-C-000499,SYN-P-00081,SYN-E-000499,2024-12-31,Synthetic Commercial Plan A,Commercial,224.49,149.86,0.00,14.65,,Paid,53
+SYN-C-000500,SYN-P-00189,SYN-E-000500,2024-12-31,Synthetic Medicare Advantage Plan,Medicare,16396.49,10490.07,0.00,651.54,,Paid,41
+SYN-C-000501,SYN-P-00105,SYN-E-000501,2024-12-29,Synthetic Medicaid Managed Care,Medicaid,5761.06,4432.95,0.00,16.14,,Paid,18
+SYN-C-000502,SYN-P-00106,SYN-E-000502,2025-01-09,Synthetic Medicare Advantage Plan,Medicare,3754.35,3085.90,0.00,49.62,Authorization not on file,Paid on Appeal,62
+SYN-C-000503,SYN-P-00123,SYN-E-000503,2025-01-02,Self-Pay,Self-Pay,3965.51,1547.81,1065.87,50.29,Coding mismatch,Partially Paid,67
+SYN-C-000504,SYN-P-00132,SYN-E-000504,2025-01-01,Synthetic Medicare Advantage Plan,Medicare,197.09,163.57,0.00,12.04,,Paid,20
+SYN-C-000505,SYN-P-00038,SYN-E-000505,2025-01-05,Synthetic Medicare Advantage Plan,Medicare,3715.25,2869.59,0.00,66.34,Authorization not on file,Paid on Appeal,114
+SYN-C-000506,SYN-P-00047,SYN-E-000506,2025-01-11,Synthetic Commercial Plan A,Commercial,388.59,349.56,0.00,19.32,,Paid,34
+SYN-C-000507,SYN-P-00160,SYN-E-000507,2025-01-12,Synthetic Commercial Plan B,Commercial,1137.76,1013.06,0.00,6.97,,Paid,21
+SYN-C-000508,SYN-P-00059,SYN-E-000508,2025-01-07,Synthetic Commercial Plan B,Commercial,777.25,590.61,0.00,54.78,,Paid,39
+SYN-C-000509,SYN-P-00091,SYN-E-000509,2025-01-01,Synthetic Commercial Plan A,Commercial,535.35,275.22,71.48,9.09,Authorization not on file,Partially Paid,33
+SYN-C-000510,SYN-P-00148,SYN-E-000510,2025-01-12,Synthetic Medicare Advantage Plan,Medicare,886.30,750.97,0.00,59.18,,Paid,24
+SYN-C-000511,SYN-P-00147,SYN-E-000511,2025-01-11,Synthetic Medicaid Managed Care,Medicaid,13601.24,0.00,0.00,0.00,,Pending,
+SYN-C-000512,SYN-P-00063,SYN-E-000512,2025-01-11,Synthetic Commercial Plan A,Commercial,783.59,578.50,0.00,17.06,,Paid,59
+SYN-C-000513,SYN-P-00093,SYN-E-000513,2025-01-06,Synthetic Medicare Advantage Plan,Medicare,608.20,272.95,76.66,17.79,Missing documentation,Partially Paid,32
+SYN-C-000514,SYN-P-00131,SYN-E-000514,2025-01-10,Synthetic Commercial Plan B,Commercial,207.13,151.81,0.00,5.88,,Paid,32
+SYN-C-000515,SYN-P-00096,SYN-E-000515,2025-01-13,Synthetic Commercial Plan A,Commercial,655.17,569.82,0.00,4.79,,Paid,26
+SYN-C-000516,SYN-P-00043,SYN-E-000516,2025-01-19,Synthetic Medicare Advantage Plan,Medicare,18128.22,16327.25,0.00,320.60,,Paid,23
+SYN-C-000517,SYN-P-00016,SYN-E-000517,2025-01-13,Synthetic Commercial Plan A,Commercial,17370.02,13873.91,0.00,318.32,,Paid,37
+SYN-C-000518,SYN-P-00057,SYN-E-000518,2025-01-11,Synthetic Commercial Plan A,Commercial,2916.98,2602.49,0.00,154.71,,Paid,41
+SYN-C-000519,SYN-P-00094,SYN-E-000519,2025-01-17,Synthetic Medicare Advantage Plan,Medicare,203.02,74.87,59.40,5.79,Duplicate submission,Partially Paid,24
+SYN-C-000520,SYN-P-00188,SYN-E-000520,2025-01-09,Synthetic Medicare Advantage Plan,Medicare,607.55,0.00,607.55,0.00,Missing documentation,Denied,
+SYN-C-000521,SYN-P-00143,SYN-E-000521,2025-01-13,Synthetic Medicare Advantage Plan,Medicare,350.17,263.06,0.00,11.05,,Paid,58
+SYN-C-000522,SYN-P-00017,SYN-E-000522,2025-01-11,Synthetic Medicare Advantage Plan,Medicare,353.24,311.46,0.00,4.96,,Paid,10
+SYN-C-000523,SYN-P-00082,SYN-E-000523,2025-01-30,Synthetic Commercial Plan A,Commercial,25074.10,12045.47,3922.10,882.19,Coding mismatch,Partially Paid,62
+SYN-C-000524,SYN-P-00052,SYN-E-000524,2025-01-19,Synthetic Medicaid Managed Care,Medicaid,503.27,317.53,0.00,10.81,,Paid,22
+SYN-C-000525,SYN-P-00092,SYN-E-000525,2025-01-18,Synthetic Commercial Plan A,Commercial,1800.88,989.45,296.06,23.94,Eligibility not verified,Partially Paid,41
+SYN-C-000526,SYN-P-00046,SYN-E-000526,2025-01-18,Synthetic Commercial Plan B,Commercial,750.74,410.54,184.33,9.18,Eligibility not verified,Partially Paid,65
+SYN-C-000527,SYN-P-00097,SYN-E-000527,2025-01-20,Synthetic Commercial Plan A,Commercial,1164.69,0.00,1164.69,0.00,Coding mismatch,Denied,
+SYN-C-000528,SYN-P-00102,SYN-E-000528,2025-01-19,Synthetic Commercial Plan B,Commercial,2936.55,1911.65,0.00,54.75,,Paid,7
+SYN-C-000529,SYN-P-00178,SYN-E-000529,2025-01-26,Synthetic Commercial Plan A,Commercial,2420.73,1592.76,0.00,43.98,,Paid,40
+SYN-C-000530,SYN-P-00027,SYN-E-000530,2025-01-26,Synthetic Commercial Plan B,Commercial,523.62,421.45,0.00,5.78,,Paid,45
+SYN-C-000531,SYN-P-00126,SYN-E-000531,2025-01-26,Synthetic Medicare Advantage Plan,Medicare,454.15,394.44,0.00,19.39,,Paid,33
+SYN-C-000532,SYN-P-00034,SYN-E-000532,2025-01-25,Self-Pay,Self-Pay,2489.68,0.00,0.00,0.00,,Pending,
+SYN-C-000533,SYN-P-00196,SYN-E-000533,2025-01-17,Synthetic Medicare Advantage Plan,Medicare,716.27,0.00,0.00,0.00,,Pending,
+SYN-C-000534,SYN-P-00029,SYN-E-000534,2025-01-24,Synthetic Medicare Advantage Plan,Medicare,758.44,561.43,0.00,60.51,,Paid,29
+SYN-C-000535,SYN-P-00054,SYN-E-000535,2025-01-25,Synthetic Medicare Advantage Plan,Medicare,14755.67,0.00,0.00,0.00,,Pending,
+SYN-C-000536,SYN-P-00149,SYN-E-000536,2025-01-26,Synthetic Commercial Plan A,Commercial,735.80,418.39,0.00,19.70,Authorization not on file,Paid on Appeal,55
+SYN-C-000537,SYN-P-00042,SYN-E-000537,2025-01-21,Synthetic Commercial Plan A,Commercial,580.83,367.69,0.00,12.76,,Paid,51
+SYN-C-000538,SYN-P-00139,SYN-E-000538,2025-01-19,Synthetic Commercial Plan B,Commercial,2299.05,1573.47,0.00,104.17,,Paid,33
+SYN-C-000539,SYN-P-00033,SYN-E-000539,2025-01-18,Synthetic Commercial Plan A,Commercial,161.97,96.20,0.00,4.86,Eligibility not verified,Paid on Appeal,117
+SYN-C-000540,SYN-P-00101,SYN-E-000540,2025-01-27,Synthetic Medicare Advantage Plan,Medicare,597.98,394.14,0.00,44.98,,Paid,40
+SYN-C-000541,SYN-P-00158,SYN-E-000541,2025-01-27,Synthetic Medicaid Managed Care,Medicaid,384.46,242.69,0.00,27.03,,Paid,56
+SYN-C-000542,SYN-P-00176,SYN-E-000542,2025-01-30,Synthetic Medicaid Managed Care,Medicaid,319.61,237.83,0.00,0.31,,Paid,17
+SYN-C-000543,SYN-P-00192,SYN-E-000543,2025-01-25,Synthetic Commercial Plan B,Commercial,728.76,412.68,105.02,28.61,Authorization not on file,Partially Paid,70
+SYN-C-000544,SYN-P-00114,SYN-E-000544,2025-01-19,Synthetic Commercial Plan B,Commercial,206.76,0.00,206.76,0.00,Missing documentation,Denied,
+SYN-C-000545,SYN-P-00068,SYN-E-000545,2025-01-27,Synthetic Medicare Advantage Plan,Medicare,513.81,400.37,0.00,31.06,,Paid,31
+SYN-C-000546,SYN-P-00004,SYN-E-000546,2025-01-23,Synthetic Commercial Plan B,Commercial,831.25,721.75,0.00,26.51,,Paid,19
+SYN-C-000547,SYN-P-00191,SYN-E-000547,2025-01-19,Synthetic Medicare Advantage Plan,Medicare,4616.89,4085.46,0.00,21.97,,Paid,13
+SYN-C-000548,SYN-P-00197,SYN-E-000548,2025-01-24,Synthetic Commercial Plan A,Commercial,379.85,0.00,379.85,0.00,Duplicate submission,Denied,
+SYN-C-000549,SYN-P-00093,SYN-E-000549,2025-01-22,Synthetic Medicare Advantage Plan,Medicare,863.76,792.26,0.00,56.77,,Paid,31
+SYN-C-000550,SYN-P-00138,SYN-E-000550,2025-01-24,Synthetic Medicare Advantage Plan,Medicare,880.14,694.34,0.00,54.48,,Paid,28
+SYN-C-000551,SYN-P-00164,SYN-E-000551,2025-01-30,Synthetic Medicare Advantage Plan,Medicare,2308.54,0.00,0.00,0.00,,Pending,
+SYN-C-000552,SYN-P-00021,SYN-E-000552,2025-01-31,Synthetic Commercial Plan B,Commercial,372.09,276.44,0.00,15.60,,Paid,19
+SYN-C-000553,SYN-P-00106,SYN-E-000553,2025-01-25,Synthetic Medicare Advantage Plan,Medicare,9268.74,0.00,9268.74,0.00,Duplicate submission,Denied,
+SYN-C-000554,SYN-P-00147,SYN-E-000554,2025-01-31,Synthetic Medicaid Managed Care,Medicaid,15981.69,6511.17,1844.28,565.66,Authorization not on file,Partially Paid,75
+SYN-C-000555,SYN-P-00156,SYN-E-000555,2025-01-27,Synthetic Medicare Advantage Plan,Medicare,884.89,0.00,884.89,0.00,Coding mismatch,Denied,
+SYN-C-000556,SYN-P-00103,SYN-E-000556,2025-01-27,Synthetic Commercial Plan B,Commercial,0.00,0.00,0.00,0.00,,Paid,58
+SYN-C-000557,SYN-P-00036,SYN-E-000557,2025-02-02,Synthetic Commercial Plan A,Commercial,323.87,229.61,0.00,23.76,,Paid,51
+SYN-C-000558,SYN-P-00069,SYN-E-000558,2025-01-28,Synthetic Medicaid Managed Care,Medicaid,831.54,481.74,0.00,39.39,Coding mismatch,Paid on Appeal,97
+SYN-C-000559,SYN-P-00037,SYN-E-000559,2025-02-08,Synthetic Commercial Plan B,Commercial,17170.76,11469.74,0.00,573.79,,Paid,32
+SYN-C-000560,SYN-P-00100,SYN-E-000560,2025-01-27,Synthetic Commercial Plan A,Commercial,11678.42,9221.78,0.00,158.50,,Paid,16
+SYN-C-000561,SYN-P-00035,SYN-E-000561,2025-02-09,Synthetic Commercial Plan A,Commercial,17561.52,0.00,17561.52,0.00,Authorization not on file,Denied,
+SYN-C-000562,SYN-P-00152,SYN-E-000562,2025-02-06,Synthetic Medicare Advantage Plan,Medicare,578.74,431.93,0.00,8.49,Authorization not on file,Paid on Appeal,68
+SYN-C-000563,SYN-P-00148,SYN-E-000563,2025-01-30,Synthetic Medicare Advantage Plan,Medicare,2678.51,2350.44,0.00,144.55,,Paid,20
+SYN-C-000564,SYN-P-00121,SYN-E-000564,2025-02-02,Synthetic Medicare Advantage Plan,Medicare,655.18,435.39,0.00,51.38,,Paid,42
+SYN-C-000565,SYN-P-00181,SYN-E-000565,2025-02-01,Self-Pay,Self-Pay,1065.52,799.27,0.00,82.41,,Paid,12
+SYN-C-000566,SYN-P-00173,SYN-E-000566,2025-02-10,Synthetic Commercial Plan B,Commercial,13082.23,9134.82,0.00,1013.20,,Paid,25
+SYN-C-000567,SYN-P-00128,SYN-E-000567,2025-01-31,Synthetic Medicare Advantage Plan,Medicare,0.00,0.00,0.00,0.00,,Paid,15
+SYN-C-000568,SYN-P-00099,SYN-E-000568,2025-01-29,Synthetic Medicare Advantage Plan,Medicare,11276.50,0.00,0.00,0.00,,Pending,
+SYN-C-000569,SYN-P-00162,SYN-E-000569,2025-02-08,Synthetic Commercial Plan B,Commercial,163.57,149.75,0.00,1.00,,Paid,19
+SYN-C-000570,SYN-P-00189,SYN-E-000570,2025-02-10,Synthetic Medicare Advantage Plan,Medicare,16722.37,15058.01,0.00,198.35,,Paid,23
+SYN-C-000571,SYN-P-00174,SYN-E-000571,2025-02-01,Synthetic Medicare Advantage Plan,Medicare,324.74,272.89,0.00,8.51,,Paid,58
+SYN-C-000572,SYN-P-00115,SYN-E-000572,2025-02-01,Synthetic Commercial Plan A,Commercial,11049.92,7922.08,0.00,837.65,,Paid,28
+SYN-C-000573,SYN-P-00165,SYN-E-000573,2025-02-07,Synthetic Medicare Advantage Plan,Medicare,12163.26,8977.49,0.00,877.25,,Paid,26
+SYN-C-000574,SYN-P-00184,SYN-E-000574,2025-02-05,Synthetic Commercial Plan B,Commercial,17434.28,12480.11,0.00,134.96,,Paid,55
+SYN-C-000575,SYN-P-00170,SYN-E-000575,2025-02-05,Synthetic Medicare Advantage Plan,Medicare,361.39,259.59,0.00,6.40,,Paid,56
+SYN-C-000576,SYN-P-00134,SYN-E-000576,2025-02-05,Self-Pay,Self-Pay,747.37,577.15,0.00,53.88,,Paid,56
+SYN-C-000577,SYN-P-00015,SYN-E-000577,2025-02-06,Synthetic Medicare Advantage Plan,Medicare,3969.20,3004.59,0.00,85.14,,Paid,45
+SYN-C-000578,SYN-P-00104,SYN-E-000578,2025-02-05,Synthetic Commercial Plan B,Commercial,2338.65,1492.16,0.00,163.50,,Paid,39
+SYN-C-000579,SYN-P-00117,SYN-E-000579,2025-02-11,Self-Pay,Self-Pay,217.42,145.80,0.00,16.39,,Paid,11
+SYN-C-000580,SYN-P-00140,SYN-E-000580,2025-02-07,Synthetic Commercial Plan A,Commercial,527.50,449.59,0.00,41.72,,Paid,8
+SYN-C-000581,SYN-P-00032,SYN-E-000581,2025-02-18,Synthetic Medicare Advantage Plan,Medicare,31153.03,22356.73,0.00,0.16,,Paid,45
+SYN-C-000582,SYN-P-00102,SYN-E-000582,2025-02-06,Synthetic Commercial Plan B,Commercial,750.71,631.69,0.00,36.28,,Paid,9
+SYN-C-000583,SYN-P-00083,SYN-E-000583,2025-02-12,Synthetic Medicare Advantage Plan,Medicare,169.57,136.99,0.00,3.17,Duplicate submission,Paid on Appeal,96
+SYN-C-000584,SYN-P-00122,SYN-E-000584,2025-02-11,Synthetic Medicare Advantage Plan,Medicare,328.06,278.62,0.00,12.82,,Paid,14
+SYN-C-000585,SYN-P-00180,SYN-E-000585,2025-02-11,Synthetic Commercial Plan A,Commercial,1463.45,1192.36,0.00,24.16,,Paid,24
+SYN-C-000586,SYN-P-00060,SYN-E-000586,2025-02-23,Synthetic Commercial Plan B,Commercial,23096.96,19362.00,0.00,724.27,Coding mismatch,Paid on Appeal,100
+SYN-C-000587,SYN-P-00189,SYN-E-000587,2025-02-08,Synthetic Medicare Advantage Plan,Medicare,15563.59,13177.56,0.00,514.38,,Paid,58
+SYN-C-000588,SYN-P-00075,SYN-E-000588,2025-02-12,Synthetic Commercial Plan A,Commercial,3562.45,2903.33,0.00,238.05,,Paid,26
+SYN-C-000589,SYN-P-00123,SYN-E-000589,2025-02-10,Self-Pay,Self-Pay,356.17,240.58,0.00,3.10,,Paid,23
+SYN-C-000590,SYN-P-00193,SYN-E-000590,2025-02-07,Synthetic Commercial Plan B,Commercial,691.88,491.54,0.00,49.01,,Paid,52
+SYN-C-000591,SYN-P-00064,SYN-E-000591,2025-02-11,Synthetic Commercial Plan A,Commercial,345.15,215.74,0.00,20.11,,Paid,43
+SYN-C-000592,SYN-P-00076,SYN-E-000592,2025-02-10,Synthetic Commercial Plan A,Commercial,688.62,392.36,147.41,4.59,Eligibility not verified,Partially Paid,31
+SYN-C-000593,SYN-P-00153,SYN-E-000593,2025-02-25,Synthetic Medicare Advantage Plan,Medicare,24722.73,0.00,24722.73,0.00,Duplicate submission,Denied,
+SYN-C-000594,SYN-P-00113,SYN-E-000594,2025-02-16,Synthetic Medicaid Managed Care,Medicaid,2890.78,0.00,0.00,0.00,,Pending,
+SYN-C-000595,SYN-P-00108,SYN-E-000595,2025-02-12,Synthetic Commercial Plan B,Commercial,2256.49,2009.76,0.00,117.28,,Paid,39
+SYN-C-000596,SYN-P-00082,SYN-E-000596,2025-01-22,Synthetic Commercial Plan A,Commercial,671.00,0.00,0.00,0.00,,Pending,
+SYN-C-000597,SYN-P-00166,SYN-E-000597,2025-02-19,Synthetic Commercial Plan A,Commercial,3130.62,0.00,0.00,0.00,,Pending,
+SYN-C-000598,SYN-P-00118,SYN-E-000598,2025-02-13,Self-Pay,Self-Pay,2457.74,1893.23,0.00,49.38,,Paid,30
+SYN-C-000599,SYN-P-00200,SYN-E-000599,2025-02-26,Synthetic Commercial Plan A,Commercial,424.47,365.79,0.00,2.89,,Paid,33
+SYN-C-000600,SYN-P-00172,SYN-E-000600,2025-02-18,Synthetic Commercial Plan B,Commercial,3525.84,2890.61,0.00,205.76,,Paid,41
+SYN-C-000601,SYN-P-00065,SYN-E-000601,2025-02-21,Synthetic Commercial Plan A,Commercial,415.36,291.14,0.00,25.31,,Paid,38
+SYN-C-000602,SYN-P-00007,SYN-E-000602,2025-03-01,Synthetic Commercial Plan A,Commercial,3057.57,2169.12,0.00,163.53,,Paid,33
+SYN-C-000603,SYN-P-00109,SYN-E-000603,2025-02-26,Synthetic Commercial Plan A,Commercial,12170.73,0.00,12170.73,0.00,Authorization not on file,Denied,
+SYN-C-000604,SYN-P-00087,SYN-E-000604,2025-02-22,Synthetic Commercial Plan A,Commercial,702.39,439.42,0.00,36.66,,Paid,54
+SYN-C-000605,SYN-P-00176,SYN-E-000605,2025-03-04,Synthetic Medicaid Managed Care,Medicaid,289.98,0.00,289.98,0.00,Coding mismatch,Denied,
+SYN-C-000606,SYN-P-00058,SYN-E-000606,2025-03-02,Synthetic Commercial Plan B,Commercial,15183.59,0.00,15183.59,0.00,Duplicate submission,Denied,
+SYN-C-000607,SYN-P-00184,SYN-E-000607,2025-03-06,Synthetic Commercial Plan B,Commercial,839.64,547.29,0.00,7.06,Coding mismatch,Paid on Appeal,90
+SYN-C-000608,SYN-P-00024,SYN-E-000608,2025-03-16,Synthetic Commercial Plan A,Commercial,23566.63,10334.60,6720.91,668.83,Missing documentation,Partially Paid,69
+SYN-C-000609,SYN-P-00019,SYN-E-000609,2025-03-13,Synthetic Medicare Advantage Plan,Medicare,12370.05,8089.09,0.00,251.05,,Paid,58
+SYN-C-000610,SYN-P-00165,SYN-E-000610,2025-03-15,Synthetic Medicare Advantage Plan,Medicare,15555.09,10753.14,0.00,545.30,,Paid,12
+SYN-C-000611,SYN-P-00129,SYN-E-000611,2025-03-02,Synthetic Commercial Plan A,Commercial,470.94,0.00,470.94,0.00,Missing documentation,Denied,
+SYN-C-000612,SYN-P-00091,SYN-E-000612,2025-03-14,Synthetic Commercial Plan A,Commercial,4525.89,3085.95,0.00,335.60,,Paid,24
+SYN-C-000613,SYN-P-00014,SYN-E-000613,2025-03-09,Synthetic Medicare Advantage Plan,Medicare,329.03,293.85,0.00,9.97,,Paid,17
+SYN-C-000614,SYN-P-00031,SYN-E-000614,2025-03-15,Synthetic Medicare Advantage Plan,Medicare,3369.80,2174.37,0.00,249.07,,Paid,46
+SYN-C-000615,SYN-P-00010,SYN-E-000615,2025-03-05,Synthetic Medicare Advantage Plan,Medicare,3594.83,2553.18,0.00,226.55,,Paid,55
+SYN-C-000616,SYN-P-00125,SYN-E-000616,2025-03-12,Synthetic Commercial Plan B,Commercial,12560.25,9646.10,0.00,802.40,,Paid,39
+SYN-C-000617,SYN-P-00098,SYN-E-000617,2025-03-08,Synthetic Commercial Plan A,Commercial,268.62,121.50,80.29,5.15,Duplicate submission,Partially Paid,29
+SYN-C-000618,SYN-P-00155,SYN-E-000618,2025-03-13,Synthetic Commercial Plan A,Commercial,245.97,102.24,39.81,9.78,Missing documentation,Partially Paid,26
+SYN-C-000619,SYN-P-00025,SYN-E-000619,2025-03-17,Synthetic Commercial Plan B,Commercial,22436.68,14302.44,0.00,70.41,,Paid,59
+SYN-C-000620,SYN-P-00089,SYN-E-000620,2025-03-14,Synthetic Medicare Advantage Plan,Medicare,647.13,0.00,0.00,0.00,,Pending,
+SYN-C-000621,SYN-P-00022,SYN-E-000621,2025-03-06,Synthetic Commercial Plan A,Commercial,184.05,0.00,184.05,0.00,Eligibility not verified,Denied,
+SYN-C-000622,SYN-P-00140,SYN-E-000622,2025-03-14,Synthetic Commercial Plan A,Commercial,2538.34,1178.39,597.64,125.15,Missing documentation,Partially Paid,66
+SYN-C-000623,SYN-P-00165,SYN-E-000623,2025-03-19,Synthetic Medicare Advantage Plan,Medicare,25847.10,18804.60,0.00,1287.92,,Paid,40
+SYN-C-000624,SYN-P-00001,SYN-E-000624,2025-03-21,Synthetic Commercial Plan A,Commercial,3829.39,0.00,3829.39,0.00,Coding mismatch,Denied,
+SYN-C-000625,SYN-P-00170,SYN-E-000625,2025-03-08,Synthetic Medicare Advantage Plan,Medicare,284.52,0.00,284.52,0.00,Authorization not on file,Denied,
+SYN-C-000626,SYN-P-00094,SYN-E-000626,2025-03-16,Synthetic Medicare Advantage Plan,Medicare,685.32,301.53,200.54,15.60,Coding mismatch,Partially Paid,42
+SYN-C-000627,SYN-P-00030,SYN-E-000627,2025-03-15,Synthetic Commercial Plan A,Commercial,848.08,0.00,848.08,0.00,Missing documentation,Denied,
+SYN-C-000628,SYN-P-00090,SYN-E-000628,2025-03-18,Synthetic Medicare Advantage Plan,Medicare,22697.76,18461.35,0.00,830.12,,Paid,44
+SYN-C-000629,SYN-P-00059,SYN-E-000629,2025-03-18,Synthetic Commercial Plan B,Commercial,576.87,488.25,0.00,45.55,,Paid,45
+SYN-C-000630,SYN-P-00152,SYN-E-000630,2025-03-31,Synthetic Medicare Advantage Plan,Medicare,36599.94,0.00,0.00,0.00,,Pending,
+SYN-C-000631,SYN-P-00158,SYN-E-000631,2025-03-11,Synthetic Medicaid Managed Care,Medicaid,386.21,0.00,0.00,0.00,,Pending,
+SYN-C-000632,SYN-P-00056,SYN-E-000632,2025-03-16,Synthetic Medicare Advantage Plan,Medicare,12619.82,10469.79,0.00,155.93,,Paid,15
+SYN-C-000633,SYN-P-00072,SYN-E-000633,2025-03-15,Synthetic Medicare Advantage Plan,Medicare,447.34,303.29,0.00,23.02,,Paid,9
+SYN-C-000634,SYN-P-00176,SYN-E-000634,2025-03-22,Synthetic Medicaid Managed Care,Medicaid,2390.52,1513.56,0.00,117.57,,Paid,34
+SYN-C-000635,SYN-P-00134,SYN-E-000635,2025-03-23,Self-Pay,Self-Pay,710.65,445.96,0.00,2.13,,Paid,45
+SYN-C-000636,SYN-P-00013,SYN-E-000636,2025-03-15,Synthetic Commercial Plan A,Commercial,324.06,229.58,0.00,21.33,,Paid,48
+SYN-C-000637,SYN-P-00026,SYN-E-000637,2025-03-23,Synthetic Commercial Plan A,Commercial,725.59,424.08,195.80,35.38,Authorization not on file,Partially Paid,31
+SYN-C-000638,SYN-P-00012,SYN-E-000638,2025-03-22,Synthetic Commercial Plan A,Commercial,4290.37,3309.94,0.00,138.04,,Paid,12
+SYN-C-000639,SYN-P-00191,SYN-E-000639,2025-03-16,Synthetic Medicare Advantage Plan,Medicare,771.32,507.86,0.00,34.75,,Paid,28
+SYN-C-000640,SYN-P-00058,SYN-E-000640,2025-04-01,Synthetic Commercial Plan B,Commercial,19793.56,0.00,19793.56,0.00,Missing documentation,Denied,
+SYN-C-000641,SYN-P-00037,SYN-E-000641,2025-03-25,Synthetic Commercial Plan B,Commercial,657.56,578.70,0.00,20.61,,Paid,21
+SYN-C-000642,SYN-P-00069,SYN-E-000642,2025-03-20,Synthetic Medicaid Managed Care,Medicaid,4812.14,4209.48,0.00,256.77,,Paid,35
+SYN-C-000643,SYN-P-00025,SYN-E-000643,2025-03-25,Synthetic Commercial Plan B,Commercial,11374.03,0.00,11374.03,0.00,Authorization not on file,Denied,
+SYN-C-000644,SYN-P-00070,SYN-E-000644,2025-03-28,Synthetic Commercial Plan A,Commercial,390.31,331.01,0.00,13.07,,Paid,44
+SYN-C-000645,SYN-P-00097,SYN-E-000645,2025-04-03,Synthetic Commercial Plan A,Commercial,18669.87,16281.37,0.00,1167.08,,Paid,48
+SYN-C-000646,SYN-P-00017,SYN-E-000646,2025-03-26,Synthetic Medicare Advantage Plan,Medicare,3545.50,2340.54,0.00,250.43,,Paid,15
+SYN-C-000647,SYN-P-00004,SYN-E-000647,2025-04-08,Synthetic Commercial Plan B,Commercial,16024.39,14569.54,0.00,852.81,,Paid,39
+SYN-C-000648,SYN-P-00180,SYN-E-000648,2025-03-28,Synthetic Commercial Plan A,Commercial,3106.81,0.00,3106.81,0.00,Authorization not on file,Denied,
+SYN-C-000649,SYN-P-00186,SYN-E-000649,2025-03-30,Synthetic Medicaid Managed Care,Medicaid,464.40,348.78,0.00,36.05,,Paid,35
+SYN-C-000650,SYN-P-00035,SYN-E-000650,2025-03-29,Synthetic Commercial Plan A,Commercial,1093.33,700.76,0.00,45.41,Authorization not on file,Paid on Appeal,113
+SYN-C-000651,SYN-P-00137,SYN-E-000651,2025-04-01,Self-Pay,Self-Pay,310.98,0.00,310.98,0.00,Authorization not on file,Denied,
+SYN-C-000652,SYN-P-00182,SYN-E-000652,2025-04-04,Synthetic Commercial Plan B,Commercial,191.94,141.35,0.00,12.23,,Paid,39
+SYN-C-000653,SYN-P-00059,SYN-E-000653,2025-04-03,Synthetic Commercial Plan B,Commercial,714.49,645.13,0.00,37.82,,Paid,53
+SYN-C-000654,SYN-P-00149,SYN-E-000654,2025-04-01,Synthetic Commercial Plan A,Commercial,438.12,392.60,0.00,15.01,,Paid,21
+SYN-C-000655,SYN-P-00071,SYN-E-000655,2025-04-02,Synthetic Medicaid Managed Care,Medicaid,1419.57,546.51,329.79,32.32,Authorization not on file,Partially Paid,68
+SYN-C-000656,SYN-P-00005,SYN-E-000656,2025-04-04,Synthetic Commercial Plan A,Commercial,18163.31,13348.52,0.00,450.33,Authorization not on file,Paid on Appeal,75
+SYN-C-000657,SYN-P-00039,SYN-E-000657,2025-03-31,Synthetic Commercial Plan B,Commercial,696.59,406.08,0.00,5.90,Authorization not on file,Paid on Appeal,99
+SYN-C-000658,SYN-P-00007,SYN-E-000658,2025-04-02,Synthetic Commercial Plan A,Commercial,855.09,657.62,0.00,10.97,,Paid,33
+SYN-C-000659,SYN-P-00124,SYN-E-000659,2025-04-13,Synthetic Medicaid Managed Care,Medicaid,22056.43,20004.63,0.00,1262.49,,Paid,32
+SYN-C-000660,SYN-P-00175,SYN-E-000660,2025-04-08,Synthetic Medicaid Managed Care,Medicaid,3999.78,2502.72,0.00,297.97,,Paid,54
+SYN-C-000661,SYN-P-00055,SYN-E-000661,2025-04-05,Synthetic Medicare Advantage Plan,Medicare,11852.19,8805.64,0.00,91.20,,Paid,56
+SYN-C-000662,SYN-P-00109,SYN-E-000662,2025-04-09,Synthetic Commercial Plan A,Commercial,9563.20,6407.19,0.00,573.79,,Paid,21
+SYN-C-000663,SYN-P-00108,SYN-E-000663,2025-04-12,Synthetic Commercial Plan B,Commercial,437.21,312.05,0.00,2.94,,Paid,19
+SYN-C-000664,SYN-P-00006,SYN-E-000664,2025-04-09,Synthetic Commercial Plan A,Commercial,645.35,474.22,0.00,11.56,,Paid,38
+SYN-C-000665,SYN-P-00162,SYN-E-000665,2025-04-05,Synthetic Commercial Plan B,Commercial,1562.66,1416.95,0.00,57.33,,Paid,55
+SYN-C-000666,SYN-P-00134,SYN-E-000666,2025-04-14,Self-Pay,Self-Pay,21005.37,0.00,21005.37,0.00,Authorization not on file,Denied,
+SYN-C-000667,SYN-P-00194,SYN-E-000667,2025-04-16,Synthetic Medicaid Managed Care,Medicaid,1524.31,1121.06,0.00,113.87,,Paid,41
+SYN-C-000668,SYN-P-00177,SYN-E-000668,2025-04-12,Synthetic Commercial Plan B,Commercial,2638.09,2270.97,0.00,73.28,,Paid,60
+SYN-C-000669,SYN-P-00187,SYN-E-000669,2025-04-07,Synthetic Medicare Advantage Plan,Medicare,605.20,0.00,605.20,0.00,Missing documentation,Denied,
+SYN-C-000670,SYN-P-00147,SYN-E-000670,2025-04-12,Synthetic Medicaid Managed Care,Medicaid,889.39,688.00,0.00,46.69,,Paid,59
+SYN-C-000671,SYN-P-00090,SYN-E-000671,2025-04-06,Synthetic Medicare Advantage Plan,Medicare,561.84,469.75,0.00,27.01,,Paid,31
+SYN-C-000672,SYN-P-00130,SYN-E-000672,2025-04-18,Synthetic Medicaid Managed Care,Medicaid,1058.33,860.56,0.00,76.66,,Paid,31
+SYN-C-000673,SYN-P-00044,SYN-E-000673,2025-04-12,Synthetic Commercial Plan B,Commercial,11570.95,8367.59,0.00,770.38,,Paid,55
+SYN-C-000674,SYN-P-00151,SYN-E-000674,2025-04-13,Synthetic Medicare Advantage Plan,Medicare,884.54,791.89,0.00,11.66,,Paid,28
+SYN-C-000675,SYN-P-00104,SYN-E-000675,2025-04-11,Synthetic Commercial Plan B,Commercial,680.30,502.21,0.00,3.15,,Paid,29
+SYN-C-000676,SYN-P-00028,SYN-E-000676,2025-04-11,Synthetic Medicare Advantage Plan,Medicare,259.17,174.42,0.00,12.80,,Paid,50
+SYN-C-000677,SYN-P-00099,SYN-E-000677,2025-04-20,Synthetic Medicare Advantage Plan,Medicare,770.26,531.96,0.00,41.28,,Paid,35
+SYN-C-000678,SYN-P-00025,SYN-E-000678,2025-04-24,Synthetic Commercial Plan B,Commercial,16318.78,6273.88,2036.00,107.64,Coding mismatch,Partially Paid,57
+SYN-C-000679,SYN-P-00095,SYN-E-000679,2025-04-27,Synthetic Medicare Advantage Plan,Medicare,18948.48,13314.12,0.00,496.11,,Paid,48
+SYN-C-000680,SYN-P-00021,SYN-E-000680,2025-04-17,Synthetic Commercial Plan B,Commercial,775.27,487.97,0.00,24.28,Eligibility not verified,Paid on Appeal,104
+SYN-C-000681,SYN-P-00078,SYN-E-000681,2025-04-13,Synthetic Commercial Plan A,Commercial,2626.01,2283.28,0.00,190.88,,Paid,8
+SYN-C-000682,SYN-P-00106,SYN-E-000682,2025-04-16,Synthetic Medicare Advantage Plan,Medicare,12981.34,11843.28,0.00,298.05,,Paid,11
+SYN-C-000683,SYN-P-00165,SYN-E-000683,2025-04-18,Synthetic Medicare Advantage Plan,Medicare,16806.56,11255.41,0.00,1224.74,,Paid,23
+SYN-C-000684,SYN-P-00112,SYN-E-000684,2025-04-18,Synthetic Commercial Plan B,Commercial,2320.23,1978.61,0.00,178.84,,Paid,56
+SYN-C-000685,SYN-P-00101,SYN-E-000685,2025-04-26,Synthetic Medicare Advantage Plan,Medicare,668.51,516.46,0.00,3.13,Eligibility not verified,Paid on Appeal,108
+SYN-C-000686,SYN-P-00107,SYN-E-000686,2025-04-23,Synthetic Medicare Advantage Plan,Medicare,1121.45,775.25,0.00,25.57,,Paid,51
+SYN-C-000687,SYN-P-00157,SYN-E-000687,2025-04-20,Synthetic Commercial Plan B,Commercial,896.97,0.00,0.00,0.00,,Pending,
+SYN-C-000688,SYN-P-00061,SYN-E-000688,2025-04-17,Synthetic Medicaid Managed Care,Medicaid,394.59,317.26,0.00,4.17,,Paid,33
+SYN-C-000689,SYN-P-00009,SYN-E-000689,2025-04-23,Synthetic Commercial Plan A,Commercial,3873.04,0.00,0.00,0.00,,Pending,
+SYN-C-000690,SYN-P-00105,SYN-E-000690,2025-04-18,Synthetic Medicaid Managed Care,Medicaid,563.77,372.98,0.00,17.91,,Paid,10
+SYN-C-000691,SYN-P-00085,SYN-E-000691,2025-04-24,Synthetic Medicare Advantage Plan,Medicare,3371.99,3034.46,0.00,169.64,,Paid,59
+SYN-C-000692,SYN-P-00131,SYN-E-000692,2025-04-30,Synthetic Commercial Plan B,Commercial,371.95,236.00,0.00,9.46,,Paid,28
+SYN-C-000693,SYN-P-00152,SYN-E-000693,2025-04-26,Synthetic Medicare Advantage Plan,Medicare,358.57,297.58,0.00,19.22,,Paid,28
+SYN-C-000694,SYN-P-00036,SYN-E-000694,2025-04-21,Synthetic Commercial Plan A,Commercial,1581.24,1431.18,0.00,29.63,,Paid,60
+SYN-C-000695,SYN-P-00139,SYN-E-000695,2025-04-18,Synthetic Commercial Plan B,Commercial,730.62,0.00,0.00,0.00,,Pending,
+SYN-C-000696,SYN-P-00114,SYN-E-000696,2025-04-20,Synthetic Commercial Plan B,Commercial,1359.90,900.61,0.00,58.51,,Paid,7
+SYN-C-000697,SYN-P-00047,SYN-E-000697,2025-04-24,Synthetic Commercial Plan A,Commercial,261.94,222.30,0.00,19.91,,Paid,16
+SYN-C-000698,SYN-P-00062,SYN-E-000698,2025-04-26,Synthetic Medicaid Managed Care,Medicaid,460.61,316.77,0.00,34.09,,Paid,28
+SYN-C-000699,SYN-P-00154,SYN-E-000699,2025-04-26,Synthetic Medicare Advantage Plan,Medicare,12645.63,11177.55,0.00,1010.98,,Paid,43
+SYN-C-000700,SYN-P-00025,SYN-E-000700,2025-05-07,Synthetic Commercial Plan B,Commercial,20416.01,15542.40,0.00,18.77,,Paid,57
+SYN-C-000701,SYN-P-00119,SYN-E-000701,2025-04-28,Synthetic Commercial Plan A,Commercial,181.82,123.99,0.00,0.96,,Paid,41
+SYN-C-000702,SYN-P-00005,SYN-E-000702,2025-05-03,Synthetic Commercial Plan A,Commercial,781.34,581.97,0.00,19.87,,Paid,39
+SYN-C-000703,SYN-P-00004,SYN-E-000703,2025-04-28,Synthetic Commercial Plan B,Commercial,15775.34,10650.44,0.00,1006.56,,Paid,8
+SYN-C-000704,SYN-P-00077,SYN-E-000704,2025-05-05,Synthetic Medicaid Managed Care,Medicaid,463.24,396.86,0.00,25.89,,Paid,32
+SYN-C-000705,SYN-P-00106,SYN-E-000705,2025-04-24,Synthetic Medicare Advantage Plan,Medicare,9601.15,7339.95,0.00,765.05,,Paid,43
+SYN-C-000706,SYN-P-00007,SYN-E-000706,2025-05-06,Synthetic Commercial Plan A,Commercial,2377.62,0.00,2377.62,0.00,Authorization not on file,Denied,
+SYN-C-000707,SYN-P-00002,SYN-E-000707,2025-05-01,Synthetic Commercial Plan B,Commercial,2379.31,726.81,508.60,9.53,Eligibility not verified,Partially Paid,59
+SYN-C-000708,SYN-P-00070,SYN-E-000708,2025-05-06,Synthetic Commercial Plan A,Commercial,1095.47,837.60,0.00,21.56,,Paid,26
+SYN-C-000709,SYN-P-00032,SYN-E-000709,2025-04-27,Synthetic Medicare Advantage Plan,Medicare,889.84,580.16,0.00,59.83,,Paid,47
+SYN-C-000710,SYN-P-00127,SYN-E-000710,2025-04-28,Synthetic Commercial Plan A,Commercial,1629.91,1117.91,0.00,42.74,,Paid,30
+SYN-C-000711,SYN-P-00054,SYN-E-000711,2025-04-28,Synthetic Medicare Advantage Plan,Medicare,445.66,403.13,0.00,11.75,,Paid,50
+SYN-C-000712,SYN-P-00094,SYN-E-000712,2025-05-01,Synthetic Medicare Advantage Plan,Medicare,8840.88,0.00,0.00,0.00,,Pending,
+SYN-C-000713,SYN-P-00173,SYN-E-000713,2025-05-11,Synthetic Commercial Plan B,Commercial,506.24,413.29,0.00,32.05,,Paid,51
+SYN-C-000714,SYN-P-00010,SYN-E-000714,2025-04-29,Synthetic Medicare Advantage Plan,Medicare,2161.48,0.00,2161.48,0.00,Authorization not on file,Denied,
+SYN-C-000715,SYN-P-00024,SYN-E-000715,2025-05-14,Synthetic Commercial Plan A,Commercial,38905.89,32169.33,0.00,1171.24,,Paid,52
+SYN-C-000716,SYN-P-00058,SYN-E-000716,2025-05-03,Synthetic Commercial Plan B,Commercial,13419.05,10431.76,0.00,310.34,,Paid,29
+SYN-C-000717,SYN-P-00143,SYN-E-000717,2025-05-14,Synthetic Medicare Advantage Plan,Medicare,400.04,334.07,0.00,23.15,,Paid,14
+SYN-C-000718,SYN-P-00151,SYN-E-000718,2025-05-18,Synthetic Medicare Advantage Plan,Medicare,28724.56,0.00,28724.56,0.00,Eligibility not verified,Denied,
+SYN-C-000719,SYN-P-00026,SYN-E-000719,2025-05-07,Synthetic Commercial Plan A,Commercial,3306.91,2976.24,0.00,149.29,,Paid,56
+SYN-C-000720,SYN-P-00040,SYN-E-000720,2025-05-05,Synthetic Commercial Plan A,Commercial,396.03,321.81,0.00,27.21,,Paid,13
+SYN-C-000721,SYN-P-00104,SYN-E-000721,2025-05-18,Synthetic Commercial Plan B,Commercial,15308.55,9740.46,0.00,246.71,,Paid,22
+SYN-C-000722,SYN-P-00174,SYN-E-000722,2025-05-17,Synthetic Medicare Advantage Plan,Medicare,15421.36,9053.16,3141.96,248.31,Duplicate submission,Partially Paid,20
+SYN-C-000723,SYN-P-00083,SYN-E-000723,2025-05-12,Synthetic Medicare Advantage Plan,Medicare,1853.78,0.00,1853.78,0.00,Coding mismatch,Denied,
+SYN-C-000724,SYN-P-00189,SYN-E-000724,2025-05-12,Synthetic Medicare Advantage Plan,Medicare,820.02,621.70,0.00,10.06,,Paid,56
+SYN-C-000725,SYN-P-00200,SYN-E-000725,2025-05-14,Synthetic Commercial Plan A,Commercial,5846.10,3722.89,0.00,135.04,Duplicate submission,Paid on Appeal,72
+SYN-C-000726,SYN-P-00077,SYN-E-000726,2025-05-10,Synthetic Medicaid Managed Care,Medicaid,1854.82,1200.34,0.00,147.80,,Paid,24
+SYN-C-000727,SYN-P-00067,SYN-E-000727,2025-05-11,Synthetic Medicaid Managed Care,Medicaid,17897.39,13310.97,0.00,244.24,,Paid,17
+SYN-C-000728,SYN-P-00055,SYN-E-000728,2025-05-19,Synthetic Medicare Advantage Plan,Medicare,695.58,0.00,0.00,0.00,,Pending,
+SYN-C-000729,SYN-P-00091,SYN-E-000729,2025-05-22,Synthetic Commercial Plan A,Commercial,12417.66,0.00,12417.66,0.00,Duplicate submission,Denied,
+SYN-C-000730,SYN-P-00094,SYN-E-000730,2025-05-14,Synthetic Medicare Advantage Plan,Medicare,18482.49,11796.10,0.00,1078.75,,Paid,59
+SYN-C-000731,SYN-P-00156,SYN-E-000731,2025-05-12,Synthetic Medicare Advantage Plan,Medicare,670.48,585.56,0.00,30.88,,Paid,14
+SYN-C-000732,SYN-P-00126,SYN-E-000732,2025-05-18,Synthetic Medicare Advantage Plan,Medicare,2717.41,0.00,2717.41,0.00,Coding mismatch,Denied,
+SYN-C-000733,SYN-P-00075,SYN-E-000733,2025-05-25,Synthetic Commercial Plan A,Commercial,4855.84,4379.32,0.00,274.44,,Paid,38
+SYN-C-000734,SYN-P-00128,SYN-E-000734,2025-05-21,Synthetic Medicare Advantage Plan,Medicare,637.94,552.89,0.00,12.49,,Paid,23
+SYN-C-000735,SYN-P-00149,SYN-E-000735,2025-05-14,Synthetic Commercial Plan A,Commercial,1777.03,1249.35,0.00,74.12,,Paid,53
+SYN-C-000736,SYN-P-00192,SYN-E-000736,2025-05-19,Synthetic Commercial Plan B,Commercial,3158.21,2485.79,0.00,72.91,,Paid,49
+SYN-C-000737,SYN-P-00017,SYN-E-000737,2025-05-16,Synthetic Medicare Advantage Plan,Medicare,3057.98,2002.94,0.00,70.95,,Paid,8
+SYN-C-000738,SYN-P-00042,SYN-E-000738,2025-05-30,Synthetic Commercial Plan A,Commercial,25707.87,21605.94,0.00,249.31,,Paid,19
+SYN-C-000739,SYN-P-00163,SYN-E-000739,2025-05-21,Synthetic Commercial Plan B,Commercial,3794.64,3285.68,0.00,54.89,,Paid,52
+SYN-C-000740,SYN-P-00052,SYN-E-000740,2025-05-28,Synthetic Medicaid Managed Care,Medicaid,798.20,571.24,0.00,16.66,,Paid,60
+SYN-C-000741,SYN-P-00136,SYN-E-000741,2025-05-30,Synthetic Medicare Advantage Plan,Medicare,564.33,515.66,0.00,14.67,,Paid,20
+SYN-C-000742,SYN-P-00063,SYN-E-000742,2025-05-20,Synthetic Commercial Plan A,Commercial,155.74,0.00,155.74,0.00,Missing documentation,Denied,
+SYN-C-000743,SYN-P-00109,SYN-E-000743,2025-05-26,Synthetic Commercial Plan A,Commercial,12375.01,10060.35,0.00,870.98,,Paid,47
+SYN-C-000744,SYN-P-00154,SYN-E-000744,2025-06-01,Synthetic Medicare Advantage Plan,Medicare,208.07,179.08,0.00,10.15,,Paid,48
+SYN-C-000745,SYN-P-00197,SYN-E-000745,2025-05-24,Synthetic Commercial Plan A,Commercial,1820.50,1662.54,0.00,119.02,,Paid,37
+SYN-C-000746,SYN-P-00188,SYN-E-000746,2025-05-24,Synthetic Medicare Advantage Plan,Medicare,2450.71,2216.55,0.00,42.83,,Paid,52
+SYN-C-000747,SYN-P-00057,SYN-E-000747,2025-05-28,Synthetic Commercial Plan A,Commercial,194.55,125.83,0.00,6.89,,Paid,47
+SYN-C-000748,SYN-P-00132,SYN-E-000748,2025-06-01,Synthetic Medicare Advantage Plan,Medicare,453.53,393.37,0.00,4.05,,Paid,46
+SYN-C-000749,SYN-P-00111,SYN-E-000749,2025-05-24,Synthetic Commercial Plan B,Commercial,276.19,175.02,0.00,11.38,,Paid,57
+SYN-C-000750,SYN-P-00064,SYN-E-000750,2025-05-28,Synthetic Commercial Plan A,Commercial,13691.15,9249.67,0.00,694.99,,Paid,57
+SYN-C-000751,SYN-P-00004,SYN-E-000751,2025-06-03,Synthetic Commercial Plan B,Commercial,12863.89,9402.15,0.00,172.97,,Paid,30
+SYN-C-000752,SYN-P-00122,SYN-E-000752,2025-05-25,Synthetic Medicare Advantage Plan,Medicare,12583.50,9586.34,0.00,468.60,Coding mismatch,Paid on Appeal,106
+SYN-C-000753,SYN-P-00144,SYN-E-000753,2025-05-27,Synthetic Medicare Advantage Plan,Medicare,467.65,386.33,0.00,2.64,,Paid,32
+SYN-C-000754,SYN-P-00019,SYN-E-000754,2025-06-06,Synthetic Medicare Advantage Plan,Medicare,371.95,130.36,59.15,2.81,Missing documentation,Partially Paid,31
+SYN-C-000755,SYN-P-00055,SYN-E-000755,2025-06-06,Synthetic Medicare Advantage Plan,Medicare,25979.86,0.00,0.00,0.00,,Pending,
+SYN-C-000756,SYN-P-00028,SYN-E-000756,2025-06-08,Synthetic Medicare Advantage Plan,Medicare,439.34,302.36,0.00,29.87,,Paid,38
+SYN-C-000757,SYN-P-00023,SYN-E-000757,2025-05-28,Synthetic Commercial Plan B,Commercial,321.29,237.10,0.00,16.44,,Paid,44
+SYN-C-000758,SYN-P-00147,SYN-E-000758,2025-06-05,Synthetic Medicaid Managed Care,Medicaid,11156.03,10199.40,0.00,117.67,,Paid,10
+SYN-C-000759,SYN-P-00164,SYN-E-000759,2025-06-10,Synthetic Medicare Advantage Plan,Medicare,886.38,810.02,0.00,44.80,,Paid,58
+SYN-C-000760,SYN-P-00193,SYN-E-000760,2025-06-01,Synthetic Commercial Plan B,Commercial,211.85,104.94,38.08,0.25,Eligibility not verified,Partially Paid,24
+SYN-C-000761,SYN-P-00027,SYN-E-000761,2025-05-28,Synthetic Commercial Plan B,Commercial,746.71,484.17,0.00,56.09,,Paid,34
+SYN-C-000762,SYN-P-00059,SYN-E-000762,2025-06-01,Synthetic Commercial Plan B,Commercial,3346.10,2140.41,0.00,49.82,,Paid,33
+SYN-C-000763,SYN-P-00021,SYN-E-000763,2025-06-14,Synthetic Commercial Plan B,Commercial,16636.01,12056.98,0.00,479.45,,Paid,41
+SYN-C-000764,SYN-P-00113,SYN-E-000764,2025-06-06,Synthetic Medicaid Managed Care,Medicaid,851.80,762.25,0.00,35.01,,Paid,44
+SYN-C-000765,SYN-P-00077,SYN-E-000765,2025-06-08,Synthetic Medicaid Managed Care,Medicaid,403.64,284.96,0.00,23.76,,Paid,36
+SYN-C-000766,SYN-P-00024,SYN-E-000766,2025-06-17,Synthetic Commercial Plan A,Commercial,21871.60,19436.08,0.00,1252.61,,Paid,19
+SYN-C-000767,SYN-P-00041,SYN-E-000767,2025-06-10,Self-Pay,Self-Pay,2753.09,0.00,2753.09,0.00,Eligibility not verified,Denied,
+SYN-C-000768,SYN-P-00011,SYN-E-000768,2025-06-05,Synthetic Medicare Advantage Plan,Medicare,301.75,173.75,0.00,6.76,Authorization not on file,Paid on Appeal,97
+SYN-C-000769,SYN-P-00109,SYN-E-000769,2025-06-18,Synthetic Commercial Plan A,Commercial,22368.03,17883.26,0.00,1198.38,,Paid,50
+SYN-C-000770,SYN-P-00190,SYN-E-000770,2025-06-05,Synthetic Medicaid Managed Care,Medicaid,774.37,0.00,774.37,0.00,Missing documentation,Denied,
+SYN-C-000771,SYN-P-00176,SYN-E-000771,2025-06-11,Synthetic Medicaid Managed Care,Medicaid,2511.09,996.05,385.30,124.10,Authorization not on file,Partially Paid,58
+SYN-C-000772,SYN-P-00047,SYN-E-000772,2025-06-12,Synthetic Commercial Plan A,Commercial,335.07,255.05,0.00,17.82,,Paid,46
+SYN-C-000773,SYN-P-00135,SYN-E-000773,2025-06-07,Synthetic Commercial Plan A,Commercial,2219.87,2034.74,0.00,130.42,,Paid,35
+SYN-C-000774,SYN-P-00100,SYN-E-000774,2025-06-18,Synthetic Commercial Plan A,Commercial,603.08,406.74,0.00,3.99,,Paid,21
+SYN-C-000775,SYN-P-00148,SYN-E-000775,2025-06-11,Synthetic Medicare Advantage Plan,Medicare,16406.89,0.00,0.00,0.00,,Pending,
+SYN-C-000776,SYN-P-00163,SYN-E-000776,2025-06-23,Synthetic Commercial Plan B,Commercial,16835.20,11955.06,0.00,325.33,,Paid,29
+SYN-C-000777,SYN-P-00067,SYN-E-000777,2025-06-18,Synthetic Medicaid Managed Care,Medicaid,16315.32,0.00,0.00,0.00,,Pending,
+SYN-C-000778,SYN-P-00189,SYN-E-000778,2025-06-08,Synthetic Medicare Advantage Plan,Medicare,3182.21,2874.45,0.00,102.12,,Paid,29
+SYN-C-000779,SYN-P-00182,SYN-E-000779,2025-06-14,Synthetic Commercial Plan B,Commercial,1346.70,0.00,0.00,0.00,,Pending,
+SYN-C-000780,SYN-P-00037,SYN-E-000780,2025-06-18,Synthetic Commercial Plan B,Commercial,4906.88,3053.54,0.00,218.96,,Paid,43
+SYN-C-000781,SYN-P-00129,SYN-E-000781,2025-06-14,Synthetic Commercial Plan A,Commercial,401.88,0.00,401.88,0.00,Missing documentation,Denied,
+SYN-C-000782,SYN-P-00068,SYN-E-000782,2025-06-10,Synthetic Medicare Advantage Plan,Medicare,2055.83,1481.48,0.00,157.62,,Paid,51
+SYN-C-000783,SYN-P-00049,SYN-E-000783,2025-06-13,Synthetic Commercial Plan B,Commercial,675.40,600.96,0.00,25.49,,Paid,30
+SYN-C-000784,SYN-P-00025,SYN-E-000784,2025-06-16,Synthetic Commercial Plan B,Commercial,165.35,124.71,0.00,5.79,,Paid,48
+SYN-C-000785,SYN-P-00165,SYN-E-000785,2025-06-23,Synthetic Medicare Advantage Plan,Medicare,18851.24,6378.74,2950.12,202.42,Coding mismatch,Partially Paid,25
+SYN-C-000786,SYN-P-00087,SYN-E-000786,2025-06-15,Synthetic Commercial Plan A,Commercial,525.12,0.00,525.12,0.00,Eligibility not verified,Denied,
+SYN-C-000787,SYN-P-00046,SYN-E-000787,2025-06-15,Synthetic Commercial Plan B,Commercial,385.56,255.15,0.00,24.62,,Paid,57
+SYN-C-000788,SYN-P-00019,SYN-E-000788,2025-06-15,Synthetic Medicare Advantage Plan,Medicare,1767.91,1372.31,0.00,14.83,,Paid,34
+SYN-C-000789,SYN-P-00164,SYN-E-000789,2025-06-16,Synthetic Medicare Advantage Plan,Medicare,412.19,305.62,0.00,19.32,,Paid,45
+SYN-C-000790,SYN-P-00118,SYN-E-000790,2025-06-20,Self-Pay,Self-Pay,304.21,249.11,0.00,8.16,,Paid,31
+SYN-C-000791,SYN-P-00043,SYN-E-000791,2025-06-20,Synthetic Medicare Advantage Plan,Medicare,13328.44,9139.35,0.00,930.03,,Paid,32
+SYN-C-000792,SYN-P-00057,SYN-E-000792,2025-06-26,Synthetic Commercial Plan A,Commercial,642.15,257.26,176.41,8.10,Authorization not on file,Partially Paid,52
+SYN-C-000793,SYN-P-00112,SYN-E-000793,2025-06-26,Synthetic Commercial Plan B,Commercial,320.90,0.00,0.00,0.00,,Pending,
+SYN-C-000794,SYN-P-00076,SYN-E-000794,2025-06-22,Synthetic Commercial Plan A,Commercial,276.02,208.74,0.00,4.19,,Paid,40
+SYN-C-000795,SYN-P-00022,SYN-E-000795,2025-06-30,Synthetic Commercial Plan A,Commercial,793.03,637.70,0.00,23.53,,Paid,25
+SYN-C-000796,SYN-P-00102,SYN-E-000796,2025-06-25,Synthetic Commercial Plan B,Commercial,788.45,514.01,0.00,48.79,,Paid,29
+SYN-C-000797,SYN-P-00063,SYN-E-000797,2025-06-19,Synthetic Commercial Plan A,Commercial,627.63,472.02,0.00,0.35,,Paid,57
+SYN-C-000798,SYN-P-00191,SYN-E-000798,2025-06-20,Synthetic Medicare Advantage Plan,Medicare,199.60,0.00,199.60,0.00,Coding mismatch,Denied,
+SYN-C-000799,SYN-P-00178,SYN-E-000799,2025-07-03,Synthetic Commercial Plan A,Commercial,3036.60,2523.12,0.00,195.27,,Paid,31
+SYN-C-000800,SYN-P-00128,SYN-E-000800,2025-06-24,Synthetic Medicare Advantage Plan,Medicare,654.39,516.28,0.00,30.46,,Paid,42
+SYN-C-000801,SYN-P-00070,SYN-E-000801,2025-07-04,Synthetic Commercial Plan A,Commercial,619.45,474.65,0.00,29.69,,Paid,13
+SYN-C-000802,SYN-P-00152,SYN-E-000802,2025-06-24,Synthetic Medicare Advantage Plan,Medicare,3853.82,2690.01,0.00,254.59,,Paid,39
+SYN-C-000803,SYN-P-00121,SYN-E-000803,2025-07-04,Synthetic Medicare Advantage Plan,Medicare,213.55,147.91,0.00,11.90,,Paid,42
+SYN-C-000804,SYN-P-00044,SYN-E-000804,2025-07-04,Synthetic Commercial Plan B,Commercial,1899.61,1546.27,0.00,103.85,,Paid,39
+SYN-C-000805,SYN-P-00098,SYN-E-000805,2025-06-28,Synthetic Commercial Plan A,Commercial,858.90,742.51,0.00,50.48,,Paid,15
+SYN-C-000806,SYN-P-00138,SYN-E-000806,2025-06-28,Synthetic Medicare Advantage Plan,Medicare,2426.17,1568.39,0.00,17.84,,Paid,56
+SYN-C-000807,SYN-P-00033,SYN-E-000807,2025-07-04,Synthetic Commercial Plan A,Commercial,2062.91,1430.62,0.00,142.27,,Paid,23
+SYN-C-000808,SYN-P-00103,SYN-E-000808,2025-06-27,Synthetic Commercial Plan B,Commercial,626.28,346.63,74.01,8.48,Eligibility not verified,Partially Paid,68
+SYN-C-000809,SYN-P-00104,SYN-E-000809,2025-06-28,Synthetic Commercial Plan B,Commercial,409.83,263.40,0.00,24.30,,Paid,51
+SYN-C-000810,SYN-P-00078,SYN-E-000810,2025-07-02,Synthetic Commercial Plan A,Commercial,2415.47,1667.47,0.00,83.12,,Paid,37
+SYN-C-000811,SYN-P-00065,SYN-E-000811,2025-06-25,Synthetic Commercial Plan A,Commercial,910.48,833.09,0.00,2.73,,Paid,32
+SYN-C-000812,SYN-P-00060,SYN-E-000812,2025-06-28,Synthetic Commercial Plan B,Commercial,3977.57,0.00,3977.57,0.00,Missing documentation,Denied,
+SYN-C-000813,SYN-P-00180,SYN-E-000813,2025-06-29,Synthetic Commercial Plan A,Commercial,3426.24,2925.57,0.00,41.77,,Paid,51
+SYN-C-000814,SYN-P-00094,SYN-E-000814,2025-06-29,Synthetic Medicare Advantage Plan,Medicare,179.09,157.83,0.00,13.15,,Paid,22
+SYN-C-000815,SYN-P-00099,SYN-E-000815,2025-07-03,Synthetic Medicare Advantage Plan,Medicare,14980.93,10853.52,0.00,977.21,,Paid,43
+SYN-C-000816,SYN-P-00064,SYN-E-000816,2025-07-08,Synthetic Commercial Plan A,Commercial,15099.49,11929.16,0.00,276.75,,Paid,10
+SYN-C-000817,SYN-P-00093,SYN-E-000817,2025-07-03,Synthetic Medicare Advantage Plan,Medicare,2373.78,1087.15,554.42,39.57,Eligibility not verified,Partially Paid,42
+SYN-C-000818,SYN-P-00188,SYN-E-000818,2025-07-09,Synthetic Medicare Advantage Plan,Medicare,595.33,0.00,0.00,0.00,,Pending,
+SYN-C-000819,SYN-P-00030,SYN-E-000819,2025-07-12,Synthetic Commercial Plan A,Commercial,162.43,124.10,0.00,10.14,,Paid,28
+SYN-C-000820,SYN-P-00043,SYN-E-000820,2025-07-06,Synthetic Medicare Advantage Plan,Medicare,530.93,356.49,0.00,24.52,,Paid,23
+SYN-C-000821,SYN-P-00009,SYN-E-000821,2025-07-06,Synthetic Commercial Plan A,Commercial,15581.71,0.00,15581.71,0.00,Coding mismatch,Denied,
+SYN-C-000822,SYN-P-00001,SYN-E-000822,2025-07-10,Synthetic Commercial Plan A,Commercial,371.10,112.76,82.49,8.90,Coding mismatch,Partially Paid,28
+SYN-C-000823,SYN-P-00105,SYN-E-000823,2025-07-10,Synthetic Medicaid Managed Care,Medicaid,560.96,462.80,0.00,25.58,,Paid,58
+SYN-C-000824,SYN-P-00061,SYN-E-000824,2025-07-16,Synthetic Medicaid Managed Care,Medicaid,715.25,514.87,0.00,38.46,,Paid,48
+SYN-C-000825,SYN-P-00057,SYN-E-000825,2025-07-14,Synthetic Commercial Plan A,Commercial,24051.42,17058.01,0.00,145.32,,Paid,34
+SYN-C-000826,SYN-P-00089,SYN-E-000826,2025-07-14,Synthetic Medicare Advantage Plan,Medicare,23835.08,15827.95,0.00,1176.29,,Paid,10
+SYN-C-000827,SYN-P-00011,SYN-E-000827,2025-07-09,Synthetic Medicare Advantage Plan,Medicare,1895.59,1294.89,0.00,15.41,Missing documentation,Paid on Appeal,91
+SYN-C-000828,SYN-P-00173,SYN-E-000828,2025-07-18,Synthetic Commercial Plan B,Commercial,633.94,470.97,0.00,5.25,,Paid,35
+SYN-C-000829,SYN-P-00056,SYN-E-000829,2025-07-26,Synthetic Medicare Advantage Plan,Medicare,20614.54,15999.45,0.00,891.76,,Paid,24
+SYN-C-000830,SYN-P-00158,SYN-E-000830,2025-07-21,Synthetic Medicaid Managed Care,Medicaid,492.03,0.00,0.00,0.00,,Pending,
+SYN-C-000831,SYN-P-00015,SYN-E-000831,2025-07-12,Synthetic Medicare Advantage Plan,Medicare,3387.48,2853.52,0.00,132.01,,Paid,36
+SYN-C-000832,SYN-P-00041,SYN-E-000832,2025-07-24,Self-Pay,Self-Pay,418.24,200.73,73.31,12.93,Missing documentation,Partially Paid,61
+SYN-C-000833,SYN-P-00154,SYN-E-000833,2025-07-22,Synthetic Medicare Advantage Plan,Medicare,302.97,0.00,302.97,0.00,Eligibility not verified,Denied,
+SYN-C-000834,SYN-P-00108,SYN-E-000834,2025-07-22,Synthetic Commercial Plan B,Commercial,394.68,0.00,394.68,0.00,Eligibility not verified,Denied,
+SYN-C-000835,SYN-P-00109,SYN-E-000835,2025-07-26,Synthetic Commercial Plan A,Commercial,13882.92,10341.43,0.00,862.24,,Paid,23
+SYN-C-000836,SYN-P-00032,SYN-E-000836,2025-07-20,Synthetic Medicare Advantage Plan,Medicare,3293.16,0.00,3293.16,0.00,Missing documentation,Denied,
+SYN-C-000837,SYN-P-00149,SYN-E-000837,2025-07-27,Synthetic Commercial Plan A,Commercial,349.43,197.08,0.00,3.30,Missing documentation,Paid on Appeal,111
+SYN-C-000838,SYN-P-00031,SYN-E-000838,2025-07-17,Synthetic Medicare Advantage Plan,Medicare,3758.11,3391.32,0.00,298.48,,Paid,34
+SYN-C-000839,SYN-P-00093,SYN-E-000839,2025-07-21,Synthetic Medicare Advantage Plan,Medicare,2071.59,1577.98,0.00,149.73,,Paid,54
+SYN-C-000840,SYN-P-00122,SYN-E-000840,2025-07-19,Synthetic Medicare Advantage Plan,Medicare,420.25,358.09,0.00,25.07,,Paid,43
+SYN-C-000841,SYN-P-00062,SYN-E-000841,2025-07-18,Synthetic Medicaid Managed Care,Medicaid,1150.72,0.00,1150.72,0.00,Duplicate submission,Denied,
+SYN-C-000842,SYN-P-00023,SYN-E-000842,2025-07-23,Synthetic Commercial Plan B,Commercial,150.86,0.00,150.86,0.00,Eligibility not verified,Denied,
+SYN-C-000843,SYN-P-00184,SYN-E-000843,2025-07-27,Synthetic Commercial Plan B,Commercial,500.72,389.29,0.00,20.70,,Paid,25
+SYN-C-000844,SYN-P-00106,SYN-E-000844,2025-07-28,Synthetic Medicare Advantage Plan,Medicare,485.64,373.10,0.00,0.30,,Paid,27
+SYN-C-000845,SYN-P-00111,SYN-E-000845,2025-07-23,Synthetic Commercial Plan B,Commercial,340.23,219.83,0.00,1.34,,Paid,58
+SYN-C-000846,SYN-P-00051,SYN-E-000846,2025-07-30,Synthetic Commercial Plan B,Commercial,749.16,310.43,167.35,23.50,Missing documentation,Partially Paid,37
+SYN-C-000847,SYN-P-00162,SYN-E-000847,2025-07-26,Synthetic Commercial Plan B,Commercial,730.41,585.92,0.00,17.82,Eligibility not verified,Paid on Appeal,109
+SYN-C-000848,SYN-P-00013,SYN-E-000848,2025-07-29,Synthetic Commercial Plan A,Commercial,3861.72,3163.08,0.00,76.34,,Paid,51
+SYN-C-000849,SYN-P-00135,SYN-E-000849,2025-08-08,Synthetic Commercial Plan A,Commercial,4357.68,0.00,0.00,0.00,,Pending,
+SYN-C-000850,SYN-P-00035,SYN-E-000850,2025-08-07,Synthetic Commercial Plan A,Commercial,713.81,487.29,0.00,0.67,,Paid,36
+SYN-C-000851,SYN-P-00037,SYN-E-000851,2025-08-01,Synthetic Commercial Plan B,Commercial,894.46,630.83,0.00,1.08,,Paid,59
+SYN-C-000852,SYN-P-00061,SYN-E-000852,2025-08-01,Synthetic Medicaid Managed Care,Medicaid,13537.78,10709.28,0.00,634.16,,Paid,11
+SYN-C-000853,SYN-P-00089,SYN-E-000853,2025-07-31,Synthetic Medicare Advantage Plan,Medicare,10298.88,6620.95,0.00,348.91,,Paid,31
+SYN-C-000854,SYN-P-00177,SYN-E-000854,2025-08-02,Synthetic Commercial Plan B,Commercial,804.91,0.00,0.00,0.00,,Pending,
+SYN-C-000855,SYN-P-00076,SYN-E-000855,2025-08-05,Synthetic Commercial Plan A,Commercial,392.10,194.45,93.00,9.75,Eligibility not verified,Partially Paid,61
+SYN-C-000856,SYN-P-00154,SYN-E-000856,2025-08-03,Synthetic Medicare Advantage Plan,Medicare,2292.69,1952.58,0.00,118.40,,Paid,34
+SYN-C-000857,SYN-P-00132,SYN-E-000857,2025-08-20,Synthetic Medicare Advantage Plan,Medicare,38232.45,18921.59,6686.65,646.00,Eligibility not verified,Partially Paid,64
+SYN-C-000858,SYN-P-00182,SYN-E-000858,2025-08-06,Synthetic Commercial Plan B,Commercial,197.67,129.60,0.00,5.79,,Paid,28
+SYN-C-000859,SYN-P-00014,SYN-E-000859,2025-08-05,Synthetic Medicare Advantage Plan,Medicare,3089.75,1648.11,396.86,37.42,Duplicate submission,Partially Paid,20
+SYN-C-000860,SYN-P-00095,SYN-E-000860,2025-08-04,Synthetic Medicare Advantage Plan,Medicare,613.55,398.12,0.00,15.79,,Paid,44
+SYN-C-000861,SYN-P-00119,SYN-E-000861,2025-08-13,Synthetic Commercial Plan A,Commercial,9626.87,8835.04,0.00,110.24,,Paid,18
+SYN-C-000862,SYN-P-00040,SYN-E-000862,2025-08-08,Synthetic Commercial Plan A,Commercial,581.41,519.66,0.00,8.39,,Paid,42
+SYN-C-000863,SYN-P-00138,SYN-E-000863,2025-08-12,Synthetic Medicare Advantage Plan,Medicare,3430.71,2367.32,0.00,16.83,Coding mismatch,Paid on Appeal,71
+SYN-C-000864,SYN-P-00124,SYN-E-000864,2025-08-07,Synthetic Medicaid Managed Care,Medicaid,2453.79,2071.72,0.00,147.18,,Paid,46
+SYN-C-000865,SYN-P-00173,SYN-E-000865,2025-08-17,Synthetic Commercial Plan B,Commercial,18635.78,14766.36,0.00,117.54,,Paid,50
+SYN-C-000866,SYN-P-00072,SYN-E-000866,2025-08-14,Synthetic Medicare Advantage Plan,Medicare,26392.27,0.00,26392.27,0.00,Eligibility not verified,Denied,
+SYN-C-000867,SYN-P-00194,SYN-E-000867,2025-08-17,Synthetic Medicaid Managed Care,Medicaid,889.02,773.14,0.00,17.98,,Paid,13
+SYN-C-000868,SYN-P-00017,SYN-E-000868,2025-08-10,Synthetic Medicare Advantage Plan,Medicare,723.71,0.00,723.71,0.00,Coding mismatch,Denied,
+SYN-C-000869,SYN-P-00147,SYN-E-000869,2025-08-12,Synthetic Medicaid Managed Care,Medicaid,13859.61,10141.59,0.00,308.59,,Paid,38
+SYN-C-000870,SYN-P-00143,SYN-E-000870,2025-08-17,Synthetic Medicare Advantage Plan,Medicare,14717.54,6320.35,1747.16,604.41,Coding mismatch,Partially Paid,22
+SYN-C-000871,SYN-P-00054,SYN-E-000871,2025-08-25,Synthetic Medicare Advantage Plan,Medicare,17524.46,12360.12,0.00,733.20,Coding mismatch,Paid on Appeal,88
+SYN-C-000872,SYN-P-00187,SYN-E-000872,2025-08-21,Synthetic Medicare Advantage Plan,Medicare,598.76,0.00,598.76,0.00,Coding mismatch,Denied,
+SYN-C-000873,SYN-P-00013,SYN-E-000873,2025-08-16,Synthetic Commercial Plan A,Commercial,396.88,309.53,0.00,2.53,,Paid,49
+SYN-C-000874,SYN-P-00186,SYN-E-000874,2025-08-24,Synthetic Medicaid Managed Care,Medicaid,630.28,0.00,630.28,0.00,Coding mismatch,Denied,
+SYN-C-000875,SYN-P-00130,SYN-E-000875,2025-08-12,Synthetic Medicaid Managed Care,Medicaid,807.70,327.50,100.55,29.54,Duplicate submission,Partially Paid,49
+SYN-C-000876,SYN-P-00173,SYN-E-000876,2025-08-21,Synthetic Commercial Plan B,Commercial,20160.50,14874.25,0.00,861.93,,Paid,9
+SYN-C-000877,SYN-P-00059,SYN-E-000877,2025-08-13,Synthetic Commercial Plan B,Commercial,3131.87,2161.80,0.00,131.27,,Paid,36
+SYN-C-000878,SYN-P-00175,SYN-E-000878,2025-08-19,Synthetic Medicaid Managed Care,Medicaid,1430.91,892.07,0.00,103.40,,Paid,29
+SYN-C-000879,SYN-P-00039,SYN-E-000879,2025-08-20,Synthetic Commercial Plan B,Commercial,1351.64,1066.23,0.00,35.58,,Paid,17
+SYN-C-000880,SYN-P-00071,SYN-E-000880,2025-08-17,Synthetic Medicaid Managed Care,Medicaid,525.02,381.20,0.00,15.79,,Paid,23
+SYN-C-000881,SYN-P-00126,SYN-E-000881,2025-08-30,Synthetic Medicare Advantage Plan,Medicare,3172.75,0.00,0.00,0.00,,Pending,
+SYN-C-000882,SYN-P-00069,SYN-E-000882,2025-08-29,Synthetic Medicaid Managed Care,Medicaid,16513.08,12954.82,0.00,21.21,,Paid,39
+SYN-C-000883,SYN-P-00112,SYN-E-000883,2025-09-04,Synthetic Commercial Plan B,Commercial,25559.75,21919.89,0.00,942.70,,Paid,55
+SYN-C-000884,SYN-P-00099,SYN-E-000884,2025-08-24,Synthetic Medicare Advantage Plan,Medicare,15188.30,12410.90,0.00,27.24,,Paid,13
+SYN-C-000885,SYN-P-00052,SYN-E-000885,2025-08-20,Synthetic Medicaid Managed Care,Medicaid,584.71,529.10,0.00,43.91,,Paid,43
+SYN-C-000886,SYN-P-00171,SYN-E-000886,2025-09-03,Synthetic Commercial Plan B,Commercial,12817.48,4817.95,3105.20,124.19,Missing documentation,Partially Paid,73
+SYN-C-000887,SYN-P-00025,SYN-E-000887,2025-09-01,Synthetic Commercial Plan B,Commercial,1335.97,1112.23,0.00,52.39,,Paid,38
+SYN-C-000888,SYN-P-00157,SYN-E-000888,2025-08-20,Synthetic Commercial Plan B,Commercial,782.82,675.31,0.00,48.71,,Paid,60
+SYN-C-000889,SYN-P-00200,SYN-E-000889,2025-08-22,Synthetic Commercial Plan A,Commercial,502.68,280.26,101.05,15.41,Eligibility not verified,Partially Paid,29
+SYN-C-000890,SYN-P-00138,SYN-E-000890,2025-08-28,Synthetic Medicare Advantage Plan,Medicare,153.36,0.00,153.36,0.00,Authorization not on file,Denied,
+SYN-C-000891,SYN-P-00088,SYN-E-000891,2025-08-26,Synthetic Medicare Advantage Plan,Medicare,494.99,358.81,0.00,21.80,,Paid,7
+SYN-C-000892,SYN-P-00090,SYN-E-000892,2025-08-27,Synthetic Medicare Advantage Plan,Medicare,2000.85,1735.07,0.00,115.35,,Paid,51
+SYN-C-000893,SYN-P-00101,SYN-E-000893,2025-09-02,Synthetic Medicare Advantage Plan,Medicare,17125.15,0.00,17125.15,0.00,Authorization not on file,Denied,
+SYN-C-000894,SYN-P-00192,SYN-E-000894,2025-08-27,Synthetic Commercial Plan B,Commercial,3891.85,2973.21,0.00,47.30,,Paid,29
+SYN-C-000895,SYN-P-00012,SYN-E-000895,2025-08-23,Synthetic Commercial Plan A,Commercial,757.62,648.67,0.00,3.87,,Paid,12
+SYN-C-000896,SYN-P-00005,SYN-E-000896,2025-08-31,Synthetic Commercial Plan A,Commercial,15885.95,0.00,15885.95,0.00,Eligibility not verified,Denied,
+SYN-C-000897,SYN-P-00103,SYN-E-000897,2025-09-06,Synthetic Commercial Plan B,Commercial,2392.02,1892.63,0.00,163.35,,Paid,45
+SYN-C-000898,SYN-P-00162,SYN-E-000898,2025-09-02,Synthetic Commercial Plan B,Commercial,361.68,0.00,0.00,0.00,,Pending,
+SYN-C-000899,SYN-P-00094,SYN-E-000899,2025-09-04,Synthetic Medicare Advantage Plan,Medicare,765.25,616.33,0.00,26.11,,Paid,26
+SYN-C-000900,SYN-P-00006,SYN-E-000900,2025-09-04,Synthetic Commercial Plan A,Commercial,3557.75,2755.84,0.00,232.27,,Paid,45
+SYN-C-000901,SYN-P-00107,SYN-E-000901,2025-09-12,Synthetic Medicare Advantage Plan,Medicare,22299.11,16708.14,0.00,566.80,,Paid,16
+SYN-C-000902,SYN-P-00113,SYN-E-000902,2025-08-30,Synthetic Medicaid Managed Care,Medicaid,1972.75,0.00,0.00,0.00,,Pending,
+SYN-C-000903,SYN-P-00175,SYN-E-000903,2025-09-07,Synthetic Medicaid Managed Care,Medicaid,2076.46,0.00,0.00,0.00,,Pending,
+SYN-C-000904,SYN-P-00067,SYN-E-000904,2025-06-20,Synthetic Medicaid Managed Care,Medicaid,2276.27,1703.96,0.00,61.62,,Paid,15
+SYN-C-000905,SYN-P-00129,SYN-E-000905,2025-09-13,Synthetic Commercial Plan A,Commercial,13786.86,8864.21,0.00,875.86,,Paid,55
+SYN-C-000906,SYN-P-00131,SYN-E-000906,2025-09-02,Synthetic Commercial Plan B,Commercial,2648.89,0.00,2648.89,0.00,Missing documentation,Denied,
+SYN-C-000907,SYN-P-00177,SYN-E-000907,2025-09-02,Synthetic Commercial Plan B,Commercial,460.56,376.49,0.00,6.71,,Paid,46
+SYN-C-000908,SYN-P-00132,SYN-E-000908,2025-09-07,Synthetic Medicare Advantage Plan,Medicare,22399.23,19989.13,0.00,725.17,,Paid,25
+SYN-C-000909,SYN-P-00143,SYN-E-000909,2025-09-18,Synthetic Medicare Advantage Plan,Medicare,26035.06,16807.19,0.00,819.76,,Paid,17
+SYN-C-000910,SYN-P-00152,SYN-E-000910,2025-09-11,Synthetic Medicare Advantage Plan,Medicare,229.74,162.06,0.00,13.86,,Paid,33
+SYN-C-000911,SYN-P-00148,SYN-E-000911,2025-09-10,Synthetic Medicare Advantage Plan,Medicare,459.48,413.22,0.00,35.90,,Paid,7
+SYN-C-000912,SYN-P-00057,SYN-E-000912,2025-09-07,Synthetic Commercial Plan A,Commercial,308.90,163.06,45.26,6.82,Authorization not on file,Partially Paid,21
+SYN-C-000913,SYN-P-00163,SYN-E-000913,2025-09-19,Synthetic Commercial Plan B,Commercial,477.85,395.76,0.00,17.23,,Paid,43
+SYN-C-000914,SYN-P-00129,SYN-E-000914,2025-09-24,Synthetic Commercial Plan A,Commercial,13365.21,9455.64,0.00,82.96,,Paid,23
+SYN-C-000915,SYN-P-00191,SYN-E-000915,2025-09-10,Synthetic Medicare Advantage Plan,Medicare,380.42,0.00,0.00,0.00,,Pending,
+SYN-C-000916,SYN-P-00104,SYN-E-000916,2025-09-14,Synthetic Commercial Plan B,Commercial,282.30,225.16,0.00,14.33,,Paid,16
+SYN-C-000917,SYN-P-00190,SYN-E-000917,2025-10-01,Synthetic Medicaid Managed Care,Medicaid,23392.28,20853.69,0.00,637.94,,Paid,39
+SYN-C-000918,SYN-P-00103,SYN-E-000918,2025-09-20,Synthetic Commercial Plan B,Commercial,728.98,487.60,0.00,3.69,,Paid,43
+SYN-C-000919,SYN-P-00015,SYN-E-000919,2025-09-20,Synthetic Medicare Advantage Plan,Medicare,842.87,0.00,842.87,0.00,Coding mismatch,Denied,
+SYN-C-000920,SYN-P-00037,SYN-E-000920,2025-09-24,Synthetic Commercial Plan B,Commercial,16416.71,10317.04,0.00,213.99,,Paid,16
+SYN-C-000921,SYN-P-00061,SYN-E-000921,2025-09-21,Synthetic Medicaid Managed Care,Medicaid,3924.19,2738.22,0.00,46.04,Missing documentation,Paid on Appeal,101
+SYN-C-000922,SYN-P-00085,SYN-E-000922,2025-10-04,Synthetic Medicare Advantage Plan,Medicare,2518.41,0.00,0.00,0.00,,Pending,
+SYN-C-000923,SYN-P-00157,SYN-E-000923,2025-09-27,Synthetic Commercial Plan B,Commercial,21605.59,13545.10,0.00,77.71,,Paid,42
+SYN-C-000924,SYN-P-00051,SYN-E-000924,2025-09-24,Synthetic Commercial Plan B,Commercial,713.57,427.10,0.00,25.68,Coding mismatch,Paid on Appeal,52
+SYN-C-000925,SYN-P-00171,SYN-E-000925,2025-10-03,Synthetic Commercial Plan B,Commercial,3302.25,1955.97,696.80,26.04,Eligibility not verified,Partially Paid,68
+SYN-C-000926,SYN-P-00036,SYN-E-000926,2025-09-27,Synthetic Commercial Plan A,Commercial,3911.41,3560.02,0.00,39.72,,Paid,10
+SYN-C-000927,SYN-P-00077,SYN-E-000927,2025-09-25,Synthetic Medicaid Managed Care,Medicaid,2497.98,1655.17,0.00,160.55,,Paid,58
+SYN-C-000928,SYN-P-00109,SYN-E-000928,2025-09-27,Synthetic Commercial Plan A,Commercial,509.72,359.79,0.00,28.87,,Paid,21
+SYN-C-000929,SYN-P-00031,SYN-E-000929,2025-10-07,Synthetic Medicare Advantage Plan,Medicare,237.25,203.59,0.00,10.44,,Paid,52
+SYN-C-000930,SYN-P-00028,SYN-E-000930,2025-10-07,Synthetic Medicare Advantage Plan,Medicare,13025.28,8968.28,0.00,466.66,,Paid,43
+SYN-C-000931,SYN-P-00002,SYN-E-000931,2025-10-08,Synthetic Commercial Plan B,Commercial,3535.01,2625.55,0.00,190.21,,Paid,18
+SYN-C-000932,SYN-P-00180,SYN-E-000932,2025-10-07,Synthetic Commercial Plan A,Commercial,724.53,559.22,0.00,36.22,,Paid,39
+SYN-C-000933,SYN-P-00144,SYN-E-000933,2025-10-04,Synthetic Medicare Advantage Plan,Medicare,9423.83,5929.97,0.00,603.15,,Paid,54
+SYN-C-000934,SYN-P-00174,SYN-E-000934,2025-10-05,Synthetic Medicare Advantage Plan,Medicare,807.00,0.00,807.00,0.00,Eligibility not verified,Denied,
+SYN-C-000935,SYN-P-00186,SYN-E-000935,2025-10-13,Synthetic Medicaid Managed Care,Medicaid,971.34,870.55,0.00,64.12,,Paid,27
+SYN-C-000936,SYN-P-00135,SYN-E-000936,2025-10-12,Synthetic Commercial Plan A,Commercial,285.48,0.00,0.00,0.00,,Pending,
+SYN-C-000937,SYN-P-00024,SYN-E-000937,2025-10-05,Synthetic Commercial Plan A,Commercial,773.13,574.77,0.00,43.17,,Paid,27
+SYN-C-000938,SYN-P-00107,SYN-E-000938,2025-10-06,Synthetic Medicare Advantage Plan,Medicare,2243.71,1753.47,0.00,87.02,,Paid,60
+SYN-C-000939,SYN-P-00163,SYN-E-000939,2025-10-14,Synthetic Commercial Plan B,Commercial,377.93,257.51,0.00,11.94,Authorization not on file,Paid on Appeal,86
+SYN-C-000940,SYN-P-00112,SYN-E-000940,2025-10-14,Synthetic Commercial Plan B,Commercial,319.08,286.87,0.00,6.83,,Paid,48
+SYN-C-000941,SYN-P-00136,SYN-E-000941,2025-10-10,Synthetic Medicare Advantage Plan,Medicare,2554.51,0.00,2554.51,0.00,Authorization not on file,Denied,
+SYN-C-000942,SYN-P-00108,SYN-E-000942,2025-10-12,Synthetic Commercial Plan B,Commercial,11278.44,10292.08,0.00,302.06,,Paid,50
+SYN-C-000943,SYN-P-00041,SYN-E-000943,2025-10-09,Self-Pay,Self-Pay,584.07,530.67,0.00,41.85,,Paid,24
+SYN-C-000944,SYN-P-00072,SYN-E-000944,2025-10-15,Synthetic Medicare Advantage Plan,Medicare,437.22,288.75,0.00,28.97,,Paid,17
+SYN-C-000945,SYN-P-00049,SYN-E-000945,2025-10-18,Synthetic Commercial Plan B,Commercial,416.63,305.98,0.00,8.63,Duplicate submission,Paid on Appeal,91
+SYN-C-000946,SYN-P-00151,SYN-E-000946,2025-10-09,Synthetic Medicare Advantage Plan,Medicare,281.41,182.73,0.00,7.74,Eligibility not verified,Paid on Appeal,98
+SYN-C-000947,SYN-P-00144,SYN-E-000947,2025-10-28,Synthetic Medicare Advantage Plan,Medicare,18939.00,14940.27,0.00,158.08,,Paid,20
+SYN-C-000948,SYN-P-00039,SYN-E-000948,2025-10-23,Synthetic Commercial Plan B,Commercial,780.37,702.88,0.00,45.16,,Paid,50
+SYN-C-000949,SYN-P-00121,SYN-E-000949,2025-10-30,Synthetic Medicare Advantage Plan,Medicare,16224.50,0.00,16224.50,0.00,Missing documentation,Denied,
+SYN-C-000950,SYN-P-00200,SYN-E-000950,2025-10-23,Synthetic Commercial Plan A,Commercial,832.21,314.30,182.58,21.15,Duplicate submission,Partially Paid,51
+SYN-C-000951,SYN-P-00147,SYN-E-000951,2025-10-27,Synthetic Medicaid Managed Care,Medicaid,13099.70,4632.62,1929.29,578.68,Authorization not on file,Partially Paid,34
+SYN-C-000952,SYN-P-00165,SYN-E-000952,2025-11-01,Synthetic Medicare Advantage Plan,Medicare,15858.53,10958.43,0.00,130.76,,Paid,27
+SYN-C-000953,SYN-P-00094,SYN-E-000953,2025-11-06,Synthetic Medicare Advantage Plan,Medicare,14650.66,12344.82,0.00,68.12,Missing documentation,Paid on Appeal,88
+SYN-C-000954,SYN-P-00100,SYN-E-000954,2025-10-27,Synthetic Commercial Plan A,Commercial,381.88,250.12,0.00,21.13,,Paid,55
+SYN-C-000955,SYN-P-00144,SYN-E-000955,2025-11-01,Synthetic Medicare Advantage Plan,Medicare,16027.57,10103.04,0.00,954.79,,Paid,38
+SYN-C-000956,SYN-P-00162,SYN-E-000956,2025-11-05,Synthetic Commercial Plan B,Commercial,21755.25,15359.40,0.00,1685.03,,Paid,56
+SYN-C-000957,SYN-P-00017,SYN-E-000957,2025-11-02,Synthetic Medicare Advantage Plan,Medicare,634.30,0.00,634.30,0.00,Eligibility not verified,Denied,
+SYN-C-000958,SYN-P-00001,SYN-E-000958,2025-10-30,Synthetic Commercial Plan A,Commercial,3170.84,2875.66,0.00,68.19,,Paid,7
+SYN-C-000959,SYN-P-00102,SYN-E-000959,2025-11-01,Synthetic Commercial Plan B,Commercial,549.53,349.07,0.00,33.72,,Paid,51
+SYN-C-000960,SYN-P-00146,SYN-E-000960,2025-10-29,Synthetic Medicaid Managed Care,Medicaid,180.59,0.00,180.59,0.00,Missing documentation,Denied,
+SYN-C-000961,SYN-P-00057,SYN-E-000961,2025-11-01,Synthetic Commercial Plan A,Commercial,3187.58,1986.13,0.00,254.81,,Paid,56
+SYN-C-000962,SYN-P-00103,SYN-E-000962,2025-11-05,Synthetic Commercial Plan B,Commercial,1136.46,907.16,0.00,90.28,,Paid,12
+SYN-C-000963,SYN-P-00054,SYN-E-000963,2025-11-06,Synthetic Medicare Advantage Plan,Medicare,367.68,236.10,0.00,15.65,,Paid,51
+SYN-C-000964,SYN-P-00165,SYN-E-000964,2025-11-06,Synthetic Medicare Advantage Plan,Medicare,16574.28,13160.45,0.00,127.54,,Paid,40
+SYN-C-000965,SYN-P-00101,SYN-E-000965,2025-11-06,Synthetic Medicare Advantage Plan,Medicare,2196.93,0.00,2196.93,0.00,Duplicate submission,Denied,
+SYN-C-000966,SYN-P-00060,SYN-E-000966,2025-11-08,Synthetic Commercial Plan B,Commercial,3998.09,3659.46,0.00,170.46,,Paid,55
+SYN-C-000967,SYN-P-00040,SYN-E-000967,2025-11-06,Synthetic Commercial Plan A,Commercial,3612.94,3178.82,0.00,37.08,,Paid,14
+SYN-C-000968,SYN-P-00187,SYN-E-000968,2025-11-09,Synthetic Medicare Advantage Plan,Medicare,2273.54,2029.39,0.00,117.79,,Paid,49
+SYN-C-000969,SYN-P-00186,SYN-E-000969,2025-11-04,Synthetic Medicaid Managed Care,Medicaid,2519.44,1336.58,434.34,90.59,Missing documentation,Partially Paid,74
+SYN-C-000970,SYN-P-00027,SYN-E-000970,2025-11-09,Synthetic Commercial Plan B,Commercial,882.29,721.68,0.00,41.94,,Paid,37
+SYN-C-000971,SYN-P-00085,SYN-E-000971,2025-11-07,Synthetic Medicare Advantage Plan,Medicare,612.00,548.30,0.00,7.21,,Paid,47
+SYN-C-000972,SYN-P-00055,SYN-E-000972,2025-11-16,Synthetic Medicare Advantage Plan,Medicare,164.69,110.92,0.00,4.99,,Paid,45
+SYN-C-000973,SYN-P-00132,SYN-E-000973,2025-11-11,Synthetic Medicare Advantage Plan,Medicare,162.93,104.21,0.00,5.99,,Paid,13
+SYN-C-000974,SYN-P-00154,SYN-E-000974,2025-11-11,Synthetic Medicare Advantage Plan,Medicare,765.33,583.74,0.00,25.60,,Paid,49
+SYN-C-000975,SYN-P-00028,SYN-E-000975,2025-11-14,Synthetic Medicare Advantage Plan,Medicare,16562.48,0.00,0.00,0.00,,Pending,
+SYN-C-000976,SYN-P-00152,SYN-E-000976,2025-11-19,Synthetic Medicare Advantage Plan,Medicare,749.94,527.31,0.00,37.09,,Paid,48
+SYN-C-000977,SYN-P-00122,SYN-E-000977,2025-11-27,Synthetic Medicare Advantage Plan,Medicare,261.40,0.00,0.00,0.00,,Pending,
+SYN-C-000978,SYN-P-00032,SYN-E-000978,2025-11-25,Synthetic Medicare Advantage Plan,Medicare,1431.89,1074.74,0.00,63.98,Duplicate submission,Paid on Appeal,99
+SYN-C-000979,SYN-P-00014,SYN-E-000979,2025-11-16,Synthetic Medicare Advantage Plan,Medicare,636.74,484.60,0.00,17.49,,Paid,56
+SYN-C-000980,SYN-P-00090,SYN-E-000980,2025-11-26,Synthetic Medicare Advantage Plan,Medicare,12614.68,0.00,12614.68,0.00,Eligibility not verified,Denied,
+SYN-C-000981,SYN-P-00191,SYN-E-000981,2025-11-25,Synthetic Medicare Advantage Plan,Medicare,780.31,643.52,0.00,33.53,,Paid,20
+SYN-C-000982,SYN-P-00087,SYN-E-000982,2025-11-21,Synthetic Commercial Plan A,Commercial,647.74,501.00,0.00,47.02,,Paid,26
+SYN-C-000983,SYN-P-00060,SYN-E-000983,2025-11-26,Synthetic Commercial Plan B,Commercial,31382.73,25573.39,0.00,559.31,,Paid,27
+SYN-C-000984,SYN-P-00019,SYN-E-000984,2025-12-03,Synthetic Medicare Advantage Plan,Medicare,3596.09,3113.45,0.00,269.54,,Paid,35
+SYN-C-000985,SYN-P-00009,SYN-E-000985,2025-11-23,Synthetic Commercial Plan A,Commercial,870.02,768.88,0.00,40.66,,Paid,20
+SYN-C-000986,SYN-P-00182,SYN-E-000986,2025-11-24,Synthetic Commercial Plan B,Commercial,3354.03,1179.86,749.10,140.49,Eligibility not verified,Partially Paid,34
+SYN-C-000987,SYN-P-00162,SYN-E-000987,2025-11-29,Synthetic Commercial Plan B,Commercial,12349.42,5963.09,1548.55,59.18,Duplicate submission,Partially Paid,21
+SYN-C-000988,SYN-P-00135,SYN-E-000988,2025-11-24,Synthetic Commercial Plan A,Commercial,3550.72,3031.85,0.00,46.88,,Paid,22
+SYN-C-000989,SYN-P-00119,SYN-E-000989,2025-12-05,Synthetic Commercial Plan A,Commercial,485.21,0.00,485.21,0.00,Missing documentation,Denied,
+SYN-C-000990,SYN-P-00194,SYN-E-000990,2025-12-07,Synthetic Medicaid Managed Care,Medicaid,691.94,626.74,0.00,4.63,,Paid,42
+SYN-C-000991,SYN-P-00128,SYN-E-000991,2025-12-08,Synthetic Medicare Advantage Plan,Medicare,2508.03,1957.57,0.00,131.15,,Paid,51
+SYN-C-000992,SYN-P-00043,SYN-E-000992,2025-12-09,Synthetic Medicare Advantage Plan,Medicare,726.65,402.32,79.04,21.91,Duplicate submission,Partially Paid,57
+SYN-C-000993,SYN-P-00106,SYN-E-000993,2025-12-06,Synthetic Medicare Advantage Plan,Medicare,2549.78,1931.05,0.00,64.20,Eligibility not verified,Paid on Appeal,113
+SYN-C-000994,SYN-P-00089,SYN-E-000994,2025-12-12,Synthetic Medicare Advantage Plan,Medicare,886.23,732.69,0.00,4.90,,Paid,44
+SYN-C-000995,SYN-P-00109,SYN-E-000995,2025-12-08,Synthetic Commercial Plan A,Commercial,283.96,254.73,0.00,2.26,,Paid,34
+SYN-C-000996,SYN-P-00011,SYN-E-000996,2025-12-04,Synthetic Medicare Advantage Plan,Medicare,173.22,114.21,0.00,8.42,,Paid,54
+SYN-C-000997,SYN-P-00131,SYN-E-000997,2025-12-04,Synthetic Commercial Plan B,Commercial,536.12,369.81,0.00,4.83,,Paid,57
+SYN-C-000998,SYN-P-00192,SYN-E-000998,2025-12-08,Synthetic Commercial Plan B,Commercial,174.10,142.30,0.00,5.93,,Paid,58
+SYN-C-000999,SYN-P-00067,SYN-E-000999,2025-12-05,Synthetic Medicaid Managed Care,Medicaid,511.51,366.83,0.00,19.96,,Paid,37
+SYN-C-001000,SYN-P-00017,SYN-E-001000,2025-12-14,Synthetic Medicare Advantage Plan,Medicare,21744.69,19555.40,0.00,1268.09,,Paid,19
+SYN-C-001001,SYN-P-00188,SYN-E-001001,2025-12-11,Synthetic Medicare Advantage Plan,Medicare,772.64,557.38,0.00,47.53,,Paid,13
+SYN-C-001002,SYN-P-00165,SYN-E-001002,2025-12-21,Synthetic Medicare Advantage Plan,Medicare,16218.37,12038.70,0.00,1036.08,,Paid,35
+SYN-C-001003,SYN-P-00013,SYN-E-001003,2025-12-10,Synthetic Commercial Plan A,Commercial,259.11,0.00,0.00,0.00,,Pending,
+SYN-C-001004,SYN-P-00163,SYN-E-001004,2025-12-10,Synthetic Commercial Plan B,Commercial,5143.35,3640.79,0.00,62.09,,Paid,28
+SYN-C-001005,SYN-P-00093,SYN-E-001005,2025-12-25,Synthetic Medicare Advantage Plan,Medicare,25097.35,22953.93,0.00,1873.81,,Paid,33
+SYN-C-001006,SYN-P-00152,SYN-E-001006,2025-12-22,Synthetic Medicare Advantage Plan,Medicare,13082.80,8677.22,0.00,851.80,,Paid,31
+SYN-C-001007,SYN-P-00054,SYN-E-001007,2025-12-19,Synthetic Medicare Advantage Plan,Medicare,866.21,649.03,0.00,41.13,,Paid,15
+SYN-C-001008,SYN-P-00177,SYN-E-001008,2025-12-23,Synthetic Commercial Plan B,Commercial,18783.01,0.00,18783.01,0.00,Missing documentation,Denied,
+SYN-C-001009,SYN-P-00102,SYN-E-001009,2025-12-23,Synthetic Commercial Plan B,Commercial,878.29,631.64,0.00,55.84,,Paid,43
+SYN-C-001010,SYN-P-00107,SYN-E-001010,2025-12-21,Synthetic Medicare Advantage Plan,Medicare,542.82,398.78,0.00,2.64,,Paid,40
+SYN-C-001011,SYN-P-00072,SYN-E-001011,2025-12-21,Synthetic Medicare Advantage Plan,Medicare,252.55,183.25,0.00,6.00,,Paid,7
+SYN-C-001012,SYN-P-00190,SYN-E-001012,2025-12-24,Synthetic Medicaid Managed Care,Medicaid,658.73,469.14,0.00,37.16,,Paid,23
+SYN-C-001013,SYN-P-00056,SYN-E-001013,2026-01-01,Synthetic Medicare Advantage Plan,Medicare,691.33,594.27,0.00,29.56,,Paid,22
+SYN-C-001014,SYN-P-00191,SYN-E-001014,2025-12-26,Synthetic Medicare Advantage Plan,Medicare,765.55,590.61,0.00,22.34,,Paid,30
+SYN-C-001015,SYN-P-00094,SYN-E-001015,2025-12-30,Synthetic Medicare Advantage Plan,Medicare,281.92,204.78,0.00,21.48,,Paid,55
+SYN-C-001016,SYN-P-00187,SYN-E-001016,2026-01-03,Synthetic Medicare Advantage Plan,Medicare,17781.05,0.00,17781.05,0.00,Duplicate submission,Denied,
+SYN-C-001017,SYN-P-00200,SYN-E-001017,2025-12-31,Synthetic Commercial Plan A,Commercial,2325.79,1605.93,0.00,20.06,,Paid,26
+SYN-C-001018,SYN-P-00052,SYN-E-001018,2025-12-29,Synthetic Medicaid Managed Care,Medicaid,375.56,310.16,0.00,8.87,,Paid,48
+SYN-C-001019,SYN-P-00186,SYN-E-001019,2026-01-02,Synthetic Medicaid Managed Care,Medicaid,486.26,231.75,138.52,5.36,Missing documentation,Partially Paid,21
+SYN-C-001020,SYN-P-00059,SYN-E-001020,2026-01-05,Synthetic Commercial Plan B,Commercial,372.86,245.42,0.00,6.12,Missing documentation,Paid on Appeal,90
+SYN-C-001021,SYN-P-00104,SYN-E-001021,2025-12-31,Synthetic Commercial Plan B,Commercial,777.30,0.00,777.30,0.00,Duplicate submission,Denied,
+SYN-C-001022,SYN-P-00014,SYN-E-001022,2025-12-27,Synthetic Medicare Advantage Plan,Medicare,185.81,0.00,0.00,0.00,,Pending,
+SYN-C-001023,SYN-P-00146,SYN-E-001023,2025-12-29,Synthetic Medicaid Managed Care,Medicaid,859.69,711.28,0.00,5.23,,Paid,50
+SYN-C-001024,SYN-P-00054,SYN-E-001024,2026-01-11,Synthetic Medicare Advantage Plan,Medicare,301.44,269.47,0.00,10.65,,Paid,46
+SYN-C-001025,SYN-P-00087,SYN-E-001025,2026-01-05,Synthetic Commercial Plan A,Commercial,1702.69,1403.66,0.00,108.85,,Paid,18

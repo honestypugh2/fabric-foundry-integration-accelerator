@@ -23,7 +23,7 @@ Customize it · Productionize it — in one project, with **synthetic data only*
 |---|---|---|
 | 0 | Research + architecture | ✅ Complete |
 | 1 | Repository foundation: uv/Python, React/TS/Vite, instructions, docs, quality tooling, CI | ✅ Complete |
-| 2 | Offline-first data foundation (synthetic medallion, recovery fixtures, Local Fabric Provider, dataset profiles) | Planned |
+| 2 | Offline-first data foundation (synthetic medallion, recovery fixtures, Local Fabric Provider, dataset profiles) | ✅ Complete |
 | 3 | Application control plane (FastAPI, FastMCP, providers, router, circuit breaker, approvals, audit) | Planned |
 | 4 | Interactive educational application (explorers, learning paths, labs, guides, demo mode) | Planned |
 | 5 | Fabric integration (validated surfaces, MCP profiles, contract fixtures) | Planned |
@@ -58,6 +58,13 @@ cd frontend && npm ci && cd ..
 
 # Validate everything (lint, types, tests + coverage, privacy scan, build, dependency audit)
 make validate
+```
+
+Try the offline data path (no cloud access needed):
+
+```bash
+make data            # build Bronze/Silver/Gold for every profile and validate against expected baselines
+make recovery-demo   # Open Mirroring snapshot + incremental + restore drill (SIMULATED)
 ```
 
 Run `make help` for every target. Targets for later phases (for example `make demo-offline`)

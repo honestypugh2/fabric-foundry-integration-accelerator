@@ -1,0 +1,951 @@
+medication_id,patient_id,encounter_id,medication_name,medication_class,dosage,frequency,prescriber,start_date,end_date,status
+SYN-M-000001,SYN-P-00170,SYN-E-000001,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-32,2024-01-01,,Active
+SYN-M-000002,SYN-P-00112,SYN-E-000002,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-24,2024-01-01,2024-03-20,Completed
+SYN-M-000003,SYN-P-00195,SYN-E-000004,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-09,2024-01-02,,Active
+SYN-M-000004,SYN-P-00195,SYN-E-000004,insulin glargine,Insulin,10 units,Once daily,Provider SYN-40,2024-01-04,2024-02-16,Completed
+SYN-M-000005,SYN-P-00247,SYN-E-000005,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-04,2024-01-02,,Active
+SYN-M-000006,SYN-P-00216,SYN-E-000006,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-41,2024-01-02,2024-02-19,Discontinued
+SYN-M-000007,SYN-P-00024,SYN-E-000007,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-36,2024-01-02,2024-03-07,Completed
+SYN-M-000008,SYN-P-00084,SYN-E-000008,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-03,2024-01-03,,Active
+SYN-M-000009,SYN-P-00027,SYN-E-000010,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-41,2024-01-03,2024-01-23,Discontinued
+SYN-M-000010,SYN-P-00027,SYN-E-000010,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-31,2024-01-03,,Active
+SYN-M-000011,SYN-P-00264,SYN-E-000011,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-04,2024-01-03,2024-02-28,Completed
+SYN-M-000012,SYN-P-00113,SYN-E-000012,atorvastatin,Statin,20 mg,Once daily,Provider SYN-39,2024-01-03,2024-01-29,Completed
+SYN-M-000013,SYN-P-00214,SYN-E-000015,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-57,2024-01-05,2024-01-23,Discontinued
+SYN-M-000014,SYN-P-00076,SYN-E-000016,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-13,2024-01-04,,Active
+SYN-M-000015,SYN-P-00002,SYN-E-000019,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-27,2024-01-07,2024-03-21,Completed
+SYN-M-000016,SYN-P-00135,SYN-E-000020,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-45,2024-01-08,2024-02-08,Completed
+SYN-M-000017,SYN-P-00135,SYN-E-000020,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-28,2024-01-08,2024-03-16,Completed
+SYN-M-000018,SYN-P-00183,SYN-E-000023,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-36,2024-01-11,2024-03-13,Completed
+SYN-M-000019,SYN-P-00183,SYN-E-000023,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-34,2024-01-11,2024-03-05,Completed
+SYN-M-000020,SYN-P-00125,SYN-E-000025,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-11,2024-01-13,2024-04-05,Completed
+SYN-M-000021,SYN-P-00194,SYN-E-000026,metformin,Biguanide,500 mg,Twice daily,Provider SYN-06,2024-01-12,2024-03-15,Completed
+SYN-M-000022,SYN-P-00072,SYN-E-000029,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-05,2024-01-15,2024-01-29,Completed
+SYN-M-000023,SYN-P-00285,SYN-E-000034,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-31,2024-01-16,2024-03-01,Completed
+SYN-M-000024,SYN-P-00033,SYN-E-000036,atorvastatin,Statin,20 mg,Once daily,Provider SYN-40,2024-01-20,,Active
+SYN-M-000025,SYN-P-00094,SYN-E-000040,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-52,2024-01-22,2024-04-12,Completed
+SYN-M-000026,SYN-P-00056,SYN-E-000044,metformin,Biguanide,500 mg,Twice daily,Provider SYN-01,2024-01-26,,Active
+SYN-M-000027,SYN-P-00074,SYN-E-000045,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-40,2024-01-26,,Active
+SYN-M-000028,SYN-P-00191,SYN-E-000046,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-60,2024-01-28,2024-03-12,Completed
+SYN-M-000029,SYN-P-00161,SYN-E-000047,insulin glargine,Insulin,10 units,Once daily,Provider SYN-58,2024-01-30,2024-03-29,Completed
+SYN-M-000030,SYN-P-00256,SYN-E-000051,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-09,2024-01-30,,Active
+SYN-M-000031,SYN-P-00248,SYN-E-000054,atorvastatin,Statin,20 mg,Once daily,Provider SYN-15,2024-01-31,2024-02-28,Completed
+SYN-M-000032,SYN-P-00248,SYN-E-000054,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-40,2024-02-02,2024-03-05,Completed
+SYN-M-000033,SYN-P-00248,SYN-E-000054,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-28,2024-02-02,2024-02-06,Completed
+SYN-M-000034,SYN-P-00085,SYN-E-000057,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-38,2024-02-02,2024-02-15,Completed
+SYN-M-000035,SYN-P-00192,SYN-E-000060,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-45,2024-02-04,2024-03-05,Completed
+SYN-M-000036,SYN-P-00192,SYN-E-000060,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-42,2024-02-05,2024-04-14,Completed
+SYN-M-000037,SYN-P-00192,SYN-E-000060,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-38,2024-02-06,2024-04-06,Completed
+SYN-M-000038,SYN-P-00267,SYN-E-000061,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-21,2024-02-06,2024-04-30,Completed
+SYN-M-000039,SYN-P-00267,SYN-E-000061,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-32,2024-02-06,2024-04-19,Completed
+SYN-M-000040,SYN-P-00109,SYN-E-000063,insulin glargine,Insulin,10 units,Once daily,Provider SYN-09,2024-02-06,2024-02-22,Completed
+SYN-M-000041,SYN-P-00109,SYN-E-000063,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-10,2024-02-07,2024-04-29,Completed
+SYN-M-000042,SYN-P-00109,SYN-E-000063,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-21,2024-02-08,,Active
+SYN-M-000043,SYN-P-00298,SYN-E-000064,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-27,2024-02-08,2024-02-18,Discontinued
+SYN-M-000044,SYN-P-00082,SYN-E-000066,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-10,2024-02-09,,Active
+SYN-M-000045,SYN-P-00082,SYN-E-000066,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-22,2024-02-09,,Active
+SYN-M-000046,SYN-P-00152,SYN-E-000069,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-37,2024-02-11,,Active
+SYN-M-000047,SYN-P-00129,SYN-E-000070,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-06,2024-02-11,2024-03-30,Discontinued
+SYN-M-000048,SYN-P-00030,SYN-E-000075,atorvastatin,Statin,20 mg,Once daily,Provider SYN-47,2024-02-14,,Active
+SYN-M-000049,SYN-P-00188,SYN-E-000076,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-42,2024-02-15,2024-03-18,Completed
+SYN-M-000050,SYN-P-00188,SYN-E-000076,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-54,2024-02-15,2024-05-04,Completed
+SYN-M-000051,SYN-P-00277,SYN-E-000079,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-12,2024-02-17,2024-05-10,Completed
+SYN-M-000052,SYN-P-00277,SYN-E-000079,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-32,2024-02-18,2024-03-13,Completed
+SYN-M-000053,SYN-P-00021,SYN-E-000080,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-12,2024-02-17,,Active
+SYN-M-000054,SYN-P-00279,SYN-E-000082,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-16,2024-02-18,2024-04-18,Completed
+SYN-M-000055,SYN-P-00106,SYN-E-000083,insulin glargine,Insulin,10 units,Once daily,Provider SYN-46,2024-02-20,2024-03-04,Completed
+SYN-M-000056,SYN-P-00106,SYN-E-000083,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-31,2024-02-20,,Active
+SYN-M-000057,SYN-P-00106,SYN-E-000083,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-40,2024-02-21,,Active
+SYN-M-000058,SYN-P-00108,SYN-E-000084,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-52,2024-02-20,2024-05-16,Completed
+SYN-M-000059,SYN-P-00298,SYN-E-000085,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-46,2024-02-21,2024-05-04,Completed
+SYN-M-000060,SYN-P-00068,SYN-E-000086,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-48,2024-02-22,2024-03-08,Discontinued
+SYN-M-000061,SYN-P-00042,SYN-E-000087,atorvastatin,Statin,20 mg,Once daily,Provider SYN-20,2024-02-22,2024-04-15,Completed
+SYN-M-000062,SYN-P-00038,SYN-E-000088,atorvastatin,Statin,20 mg,Once daily,Provider SYN-36,2024-02-26,,Active
+SYN-M-000063,SYN-P-00038,SYN-E-000088,insulin glargine,Insulin,10 units,Once daily,Provider SYN-07,2024-03-01,,Active
+SYN-M-000064,SYN-P-00129,SYN-E-000091,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-38,2024-02-28,2024-05-21,Completed
+SYN-M-000065,SYN-P-00129,SYN-E-000091,metformin,Biguanide,500 mg,Twice daily,Provider SYN-02,2024-03-02,,Active
+SYN-M-000066,SYN-P-00089,SYN-E-000093,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-13,2024-02-29,2024-04-14,Completed
+SYN-M-000067,SYN-P-00288,SYN-E-000094,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-55,2024-03-04,,Active
+SYN-M-000068,SYN-P-00288,SYN-E-000094,insulin glargine,Insulin,10 units,Once daily,Provider SYN-49,2024-03-04,,Active
+SYN-M-000069,SYN-P-00288,SYN-E-000094,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-29,2024-03-04,,Active
+SYN-M-000070,SYN-P-00282,SYN-E-000099,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-30,2024-03-03,,Active
+SYN-M-000071,SYN-P-00204,SYN-E-000100,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-05,2024-03-03,2024-04-27,Completed
+SYN-M-000072,SYN-P-00185,SYN-E-000101,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-18,2024-03-03,2024-05-28,Completed
+SYN-M-000073,SYN-P-00143,SYN-E-000107,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-31,2024-03-07,2024-05-28,Completed
+SYN-M-000074,SYN-P-00160,SYN-E-000108,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-51,2024-03-07,2024-04-21,Completed
+SYN-M-000075,SYN-P-00264,SYN-E-000111,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-14,2024-03-10,2024-04-14,Completed
+SYN-M-000076,SYN-P-00077,SYN-E-000112,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-05,2024-03-13,2024-04-19,Discontinued
+SYN-M-000077,SYN-P-00077,SYN-E-000112,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-17,2024-03-13,2024-04-07,Completed
+SYN-M-000078,SYN-P-00243,SYN-E-000113,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-38,2024-03-10,2024-05-03,Completed
+SYN-M-000079,SYN-P-00209,SYN-E-000115,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-19,2024-03-12,2024-05-11,Completed
+SYN-M-000080,SYN-P-00209,SYN-E-000115,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-45,2024-03-13,,Active
+SYN-M-000081,SYN-P-00125,SYN-E-000116,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-05,2024-03-13,,Active
+SYN-M-000082,SYN-P-00125,SYN-E-000116,metformin,Biguanide,500 mg,Twice daily,Provider SYN-03,2024-03-14,,Active
+SYN-M-000083,SYN-P-00047,SYN-E-000123,insulin glargine,Insulin,10 units,Once daily,Provider SYN-36,2024-03-16,2024-05-12,Discontinued
+SYN-M-000084,SYN-P-00047,SYN-E-000123,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-56,2024-03-16,,Active
+SYN-M-000085,SYN-P-00043,SYN-E-000126,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-42,2024-03-18,,Active
+SYN-M-000086,SYN-P-00105,SYN-E-000127,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-40,2024-03-18,,Active
+SYN-M-000087,SYN-P-00105,SYN-E-000127,metformin,Biguanide,500 mg,Twice daily,Provider SYN-54,2024-03-18,2024-05-14,Discontinued
+SYN-M-000088,SYN-P-00132,SYN-E-000129,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-28,2024-03-22,,Active
+SYN-M-000089,SYN-P-00132,SYN-E-000129,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-11,2024-03-23,2024-06-02,Discontinued
+SYN-M-000090,SYN-P-00013,SYN-E-000130,insulin glargine,Insulin,10 units,Once daily,Provider SYN-06,2024-03-20,2024-05-06,Completed
+SYN-M-000091,SYN-P-00013,SYN-E-000130,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-40,2024-03-20,2024-04-13,Completed
+SYN-M-000092,SYN-P-00128,SYN-E-000132,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-25,2024-03-21,,Active
+SYN-M-000093,SYN-P-00128,SYN-E-000132,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-15,2024-03-23,,Active
+SYN-M-000094,SYN-P-00128,SYN-E-000132,insulin glargine,Insulin,10 units,Once daily,Provider SYN-22,2024-03-24,2024-05-21,Completed
+SYN-M-000095,SYN-P-00128,SYN-E-000132,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-20,2024-03-25,2024-04-25,Discontinued
+SYN-M-000096,SYN-P-00263,SYN-E-000133,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-03,2024-03-22,2024-04-04,Completed
+SYN-M-000097,SYN-P-00030,SYN-E-000134,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-07,2024-03-22,,Active
+SYN-M-000098,SYN-P-00066,SYN-E-000135,atorvastatin,Statin,20 mg,Once daily,Provider SYN-10,2024-03-22,,Active
+SYN-M-000099,SYN-P-00274,SYN-E-000136,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-25,2024-03-24,2024-05-18,Completed
+SYN-M-000100,SYN-P-00274,SYN-E-000136,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-51,2024-03-24,2024-06-19,Completed
+SYN-M-000101,SYN-P-00274,SYN-E-000136,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-11,2024-03-25,2024-06-03,Completed
+SYN-M-000102,SYN-P-00274,SYN-E-000136,insulin glargine,Insulin,10 units,Once daily,Provider SYN-57,2024-03-26,,Active
+SYN-M-000103,SYN-P-00188,SYN-E-000138,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-56,2024-03-25,2024-06-21,Completed
+SYN-M-000104,SYN-P-00190,SYN-E-000139,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-01,2024-03-27,2024-05-06,Completed
+SYN-M-000105,SYN-P-00190,SYN-E-000139,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-06,2024-03-27,2024-05-03,Completed
+SYN-M-000106,SYN-P-00216,SYN-E-000143,atorvastatin,Statin,20 mg,Once daily,Provider SYN-42,2024-04-04,2024-07-02,Completed
+SYN-M-000107,SYN-P-00216,SYN-E-000143,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-05,2024-04-08,2024-05-24,Discontinued
+SYN-M-000108,SYN-P-00216,SYN-E-000143,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-20,2024-04-09,2024-06-05,Discontinued
+SYN-M-000109,SYN-P-00205,SYN-E-000144,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-38,2024-04-03,2024-05-20,Completed
+SYN-M-000110,SYN-P-00205,SYN-E-000144,metformin,Biguanide,500 mg,Twice daily,Provider SYN-33,2024-04-03,,Active
+SYN-M-000111,SYN-P-00285,SYN-E-000146,atorvastatin,Statin,20 mg,Once daily,Provider SYN-28,2024-04-08,,Active
+SYN-M-000112,SYN-P-00285,SYN-E-000146,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-59,2024-04-09,2024-06-06,Completed
+SYN-M-000113,SYN-P-00031,SYN-E-000149,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-13,2024-04-05,2024-05-11,Discontinued
+SYN-M-000114,SYN-P-00065,SYN-E-000150,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-49,2024-04-05,,Active
+SYN-M-000115,SYN-P-00065,SYN-E-000150,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-31,2024-04-05,2024-06-15,Completed
+SYN-M-000116,SYN-P-00065,SYN-E-000150,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-47,2024-04-06,2024-04-04,Completed
+SYN-M-000117,SYN-P-00259,SYN-E-000153,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-29,2024-04-15,2024-06-27,Discontinued
+SYN-M-000118,SYN-P-00138,SYN-E-000154,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-40,2024-04-09,,Active
+SYN-M-000119,SYN-P-00138,SYN-E-000154,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-58,2024-04-09,2024-04-26,Discontinued
+SYN-M-000120,SYN-P-00223,SYN-E-000157,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-28,2024-04-12,,Active
+SYN-M-000121,SYN-P-00223,SYN-E-000157,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-15,2024-04-12,2024-04-22,Completed
+SYN-M-000122,SYN-P-00174,SYN-E-000159,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-23,2024-04-12,2024-06-06,Completed
+SYN-M-000123,SYN-P-00174,SYN-E-000159,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-07,2024-04-12,,Active
+SYN-M-000124,SYN-P-00174,SYN-E-000159,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-23,2024-04-12,2024-04-25,Completed
+SYN-M-000125,SYN-P-00264,SYN-E-000163,insulin glargine,Insulin,10 units,Once daily,Provider SYN-39,2024-04-15,2024-04-22,Discontinued
+SYN-M-000126,SYN-P-00264,SYN-E-000163,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-01,2024-04-16,,Active
+SYN-M-000127,SYN-P-00264,SYN-E-000163,insulin glargine,Insulin,10 units,Once daily,Provider SYN-45,2024-04-18,2024-07-15,Completed
+SYN-M-000128,SYN-P-00123,SYN-E-000168,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-30,2024-04-16,2024-04-22,Completed
+SYN-M-000129,SYN-P-00213,SYN-E-000170,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-07,2024-04-18,2024-06-01,Completed
+SYN-M-000130,SYN-P-00288,SYN-E-000173,atorvastatin,Statin,20 mg,Once daily,Provider SYN-46,2024-04-21,,Active
+SYN-M-000131,SYN-P-00005,SYN-E-000174,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-38,2024-04-21,,Active
+SYN-M-000132,SYN-P-00108,SYN-E-000180,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-18,2024-04-24,,Active
+SYN-M-000133,SYN-P-00276,SYN-E-000182,atorvastatin,Statin,20 mg,Once daily,Provider SYN-16,2024-04-25,2024-05-08,Completed
+SYN-M-000134,SYN-P-00276,SYN-E-000182,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-33,2024-04-30,,Active
+SYN-M-000135,SYN-P-00089,SYN-E-000188,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-47,2024-04-28,2024-05-12,Discontinued
+SYN-M-000136,SYN-P-00278,SYN-E-000189,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-05,2024-05-01,,Active
+SYN-M-000137,SYN-P-00206,SYN-E-000190,insulin glargine,Insulin,10 units,Once daily,Provider SYN-40,2024-04-29,2024-06-29,Completed
+SYN-M-000138,SYN-P-00225,SYN-E-000192,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-03,2024-04-29,2024-05-04,Completed
+SYN-M-000139,SYN-P-00193,SYN-E-000194,insulin glargine,Insulin,10 units,Once daily,Provider SYN-43,2024-05-01,2024-05-10,Completed
+SYN-M-000140,SYN-P-00042,SYN-E-000195,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-26,2024-05-04,2024-06-30,Completed
+SYN-M-000141,SYN-P-00290,SYN-E-000196,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-16,2024-05-01,2024-06-12,Completed
+SYN-M-000142,SYN-P-00290,SYN-E-000196,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-49,2024-05-02,2024-07-22,Discontinued
+SYN-M-000143,SYN-P-00290,SYN-E-000196,atorvastatin,Statin,20 mg,Once daily,Provider SYN-47,2024-05-03,,Active
+SYN-M-000144,SYN-P-00158,SYN-E-000199,insulin glargine,Insulin,10 units,Once daily,Provider SYN-60,2024-05-03,,Active
+SYN-M-000145,SYN-P-00158,SYN-E-000199,insulin glargine,Insulin,10 units,Once daily,Provider SYN-51,2024-05-05,2024-05-19,Completed
+SYN-M-000146,SYN-P-00158,SYN-E-000199,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-19,2024-05-07,2024-06-19,Completed
+SYN-M-000147,SYN-P-00174,SYN-E-000200,atorvastatin,Statin,20 mg,Once daily,Provider SYN-15,2024-05-03,2024-07-19,Completed
+SYN-M-000148,SYN-P-00202,SYN-E-000201,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-04,2024-05-05,2024-06-16,Completed
+SYN-M-000149,SYN-P-00042,SYN-E-000207,insulin glargine,Insulin,10 units,Once daily,Provider SYN-06,2024-05-06,2024-07-30,Completed
+SYN-M-000150,SYN-P-00069,SYN-E-000208,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-32,2024-05-06,2024-05-22,Completed
+SYN-M-000151,SYN-P-00263,SYN-E-000213,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-46,2024-05-09,2024-06-26,Discontinued
+SYN-M-000152,SYN-P-00183,SYN-E-000219,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-46,2024-05-12,,Active
+SYN-M-000153,SYN-P-00183,SYN-E-000219,metformin,Biguanide,500 mg,Twice daily,Provider SYN-08,2024-05-12,2024-05-23,Completed
+SYN-M-000154,SYN-P-00239,SYN-E-000227,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-48,2024-05-17,2024-08-14,Completed
+SYN-M-000155,SYN-P-00121,SYN-E-000228,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-30,2024-05-17,2024-07-31,Completed
+SYN-M-000156,SYN-P-00258,SYN-E-000229,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-36,2024-05-21,2024-06-17,Completed
+SYN-M-000157,SYN-P-00261,SYN-E-000231,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-44,2024-05-18,2024-07-31,Completed
+SYN-M-000158,SYN-P-00056,SYN-E-000232,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-33,2024-05-18,2024-06-10,Completed
+SYN-M-000159,SYN-P-00056,SYN-E-000232,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-24,2024-05-18,2024-05-24,Completed
+SYN-M-000160,SYN-P-00015,SYN-E-000234,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-53,2024-05-19,2024-08-13,Completed
+SYN-M-000161,SYN-P-00136,SYN-E-000236,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-07,2024-05-23,2024-06-02,Completed
+SYN-M-000162,SYN-P-00136,SYN-E-000236,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-01,2024-05-24,,Active
+SYN-M-000163,SYN-P-00162,SYN-E-000237,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-08,2024-05-29,2024-06-23,Completed
+SYN-M-000164,SYN-P-00045,SYN-E-000242,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-37,2024-05-25,,Active
+SYN-M-000165,SYN-P-00045,SYN-E-000242,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-24,2024-05-25,,Active
+SYN-M-000166,SYN-P-00186,SYN-E-000248,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-45,2024-05-27,,Active
+SYN-M-000167,SYN-P-00185,SYN-E-000250,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-02,2024-05-29,2024-07-21,Completed
+SYN-M-000168,SYN-P-00285,SYN-E-000251,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-13,2024-05-29,,Active
+SYN-M-000169,SYN-P-00279,SYN-E-000252,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-03,2024-05-31,2024-06-22,Completed
+SYN-M-000170,SYN-P-00120,SYN-E-000254,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-22,2024-05-31,2024-08-12,Completed
+SYN-M-000171,SYN-P-00217,SYN-E-000255,insulin glargine,Insulin,10 units,Once daily,Provider SYN-15,2024-05-31,,Active
+SYN-M-000172,SYN-P-00194,SYN-E-000256,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-51,2024-06-03,2024-06-26,Completed
+SYN-M-000173,SYN-P-00194,SYN-E-000256,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-57,2024-06-04,,Active
+SYN-M-000174,SYN-P-00077,SYN-E-000257,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-41,2024-06-01,,Active
+SYN-M-000175,SYN-P-00005,SYN-E-000258,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-24,2024-06-02,,Active
+SYN-M-000176,SYN-P-00005,SYN-E-000258,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-12,2024-06-02,,Active
+SYN-M-000177,SYN-P-00288,SYN-E-000262,metformin,Biguanide,500 mg,Twice daily,Provider SYN-19,2024-06-05,2024-08-03,Completed
+SYN-M-000178,SYN-P-00137,SYN-E-000263,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-29,2024-06-03,,Active
+SYN-M-000179,SYN-P-00137,SYN-E-000263,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-21,2024-06-05,2024-08-01,Completed
+SYN-M-000180,SYN-P-00001,SYN-E-000264,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-34,2024-06-04,2024-06-26,Discontinued
+SYN-M-000181,SYN-P-00021,SYN-E-000268,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-33,2024-06-05,2024-06-12,Discontinued
+SYN-M-000182,SYN-P-00013,SYN-E-000269,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-09,2024-06-06,2024-07-19,Completed
+SYN-M-000183,SYN-P-00111,SYN-E-000270,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-36,2024-06-06,2024-07-16,Completed
+SYN-M-000184,SYN-P-00111,SYN-E-000270,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-23,2024-06-06,,Active
+SYN-M-000185,SYN-P-00094,SYN-E-000274,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-30,2024-06-09,,Active
+SYN-M-000186,SYN-P-00124,SYN-E-000275,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-16,2024-06-09,,Active
+SYN-M-000187,SYN-P-00292,SYN-E-000276,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-30,2024-06-10,2024-08-04,Completed
+SYN-M-000188,SYN-P-00205,SYN-E-000278,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-39,2024-06-11,,Active
+SYN-M-000189,SYN-P-00245,SYN-E-000282,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-12,2024-06-12,,Active
+SYN-M-000190,SYN-P-00158,SYN-E-000283,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-18,2024-06-17,2024-07-22,Discontinued
+SYN-M-000191,SYN-P-00158,SYN-E-000283,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-48,2024-06-18,,Active
+SYN-M-000192,SYN-P-00072,SYN-E-000284,metformin,Biguanide,500 mg,Twice daily,Provider SYN-30,2024-06-16,2024-07-21,Discontinued
+SYN-M-000193,SYN-P-00072,SYN-E-000284,atorvastatin,Statin,20 mg,Once daily,Provider SYN-43,2024-06-17,,Active
+SYN-M-000194,SYN-P-00160,SYN-E-000289,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-46,2024-06-14,2024-07-25,Completed
+SYN-M-000195,SYN-P-00027,SYN-E-000294,atorvastatin,Statin,20 mg,Once daily,Provider SYN-59,2024-06-19,,Active
+SYN-M-000196,SYN-P-00027,SYN-E-000294,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-44,2024-06-20,2024-08-23,Discontinued
+SYN-M-000197,SYN-P-00190,SYN-E-000295,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-27,2024-06-16,2024-07-04,Completed
+SYN-M-000198,SYN-P-00184,SYN-E-000298,insulin glargine,Insulin,10 units,Once daily,Provider SYN-23,2024-06-18,2024-09-09,Completed
+SYN-M-000199,SYN-P-00274,SYN-E-000300,insulin glargine,Insulin,10 units,Once daily,Provider SYN-42,2024-06-18,2024-07-01,Completed
+SYN-M-000200,SYN-P-00191,SYN-E-000301,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-54,2024-06-19,2024-08-15,Completed
+SYN-M-000201,SYN-P-00059,SYN-E-000302,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-55,2024-06-19,2024-06-25,Discontinued
+SYN-M-000202,SYN-P-00277,SYN-E-000304,metformin,Biguanide,500 mg,Twice daily,Provider SYN-48,2024-06-21,,Active
+SYN-M-000203,SYN-P-00036,SYN-E-000310,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-40,2024-06-23,,Active
+SYN-M-000204,SYN-P-00258,SYN-E-000311,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-21,2024-06-23,2024-08-06,Completed
+SYN-M-000205,SYN-P-00025,SYN-E-000313,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-37,2024-06-25,,Active
+SYN-M-000206,SYN-P-00143,SYN-E-000317,atorvastatin,Statin,20 mg,Once daily,Provider SYN-47,2024-06-28,,Active
+SYN-M-000207,SYN-P-00084,SYN-E-000320,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-43,2024-07-01,2024-07-08,Completed
+SYN-M-000208,SYN-P-00245,SYN-E-000322,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-49,2024-07-01,,Active
+SYN-M-000209,SYN-P-00245,SYN-E-000322,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-15,2024-07-01,2024-09-03,Completed
+SYN-M-000210,SYN-P-00233,SYN-E-000323,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-44,2024-07-01,2024-08-19,Discontinued
+SYN-M-000211,SYN-P-00190,SYN-E-000325,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-05,2024-07-02,2024-09-17,Completed
+SYN-M-000212,SYN-P-00128,SYN-E-000326,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-04,2024-07-02,2024-08-03,Discontinued
+SYN-M-000213,SYN-P-00213,SYN-E-000328,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-22,2024-07-09,2024-08-17,Completed
+SYN-M-000214,SYN-P-00133,SYN-E-000331,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-01,2024-07-04,2024-08-04,Discontinued
+SYN-M-000215,SYN-P-00287,SYN-E-000332,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-38,2024-07-05,,Active
+SYN-M-000216,SYN-P-00051,SYN-E-000333,insulin glargine,Insulin,10 units,Once daily,Provider SYN-56,2024-07-06,,Active
+SYN-M-000217,SYN-P-00164,SYN-E-000334,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-44,2024-07-05,2024-07-08,Completed
+SYN-M-000218,SYN-P-00164,SYN-E-000334,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-56,2024-07-05,2024-07-17,Discontinued
+SYN-M-000219,SYN-P-00220,SYN-E-000335,atorvastatin,Statin,20 mg,Once daily,Provider SYN-02,2024-07-06,2024-07-10,Completed
+SYN-M-000220,SYN-P-00180,SYN-E-000336,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-09,2024-07-09,2024-08-08,Completed
+SYN-M-000221,SYN-P-00267,SYN-E-000339,atorvastatin,Statin,20 mg,Once daily,Provider SYN-34,2024-07-07,2024-08-10,Completed
+SYN-M-000222,SYN-P-00029,SYN-E-000340,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-48,2024-07-07,2024-09-01,Discontinued
+SYN-M-000223,SYN-P-00037,SYN-E-000341,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-57,2024-07-13,,Active
+SYN-M-000224,SYN-P-00111,SYN-E-000342,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-38,2024-07-11,2024-08-04,Discontinued
+SYN-M-000225,SYN-P-00111,SYN-E-000342,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-22,2024-07-11,,Active
+SYN-M-000226,SYN-P-00251,SYN-E-000343,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-31,2024-07-09,2024-07-17,Completed
+SYN-M-000227,SYN-P-00251,SYN-E-000343,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-57,2024-07-09,,Active
+SYN-M-000228,SYN-P-00215,SYN-E-000344,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-11,2024-07-08,,Active
+SYN-M-000229,SYN-P-00276,SYN-E-000350,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-37,2024-07-14,2024-08-31,Completed
+SYN-M-000230,SYN-P-00163,SYN-E-000351,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-09,2024-07-12,2024-10-08,Completed
+SYN-M-000231,SYN-P-00149,SYN-E-000353,atorvastatin,Statin,20 mg,Once daily,Provider SYN-04,2024-07-13,2024-08-03,Completed
+SYN-M-000232,SYN-P-00261,SYN-E-000354,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-18,2024-07-13,2024-09-04,Completed
+SYN-M-000233,SYN-P-00038,SYN-E-000355,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-55,2024-07-14,,Active
+SYN-M-000234,SYN-P-00204,SYN-E-000356,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-21,2024-07-14,2024-09-12,Completed
+SYN-M-000235,SYN-P-00203,SYN-E-000357,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-56,2024-07-14,2024-08-28,Completed
+SYN-M-000236,SYN-P-00085,SYN-E-000358,metformin,Biguanide,500 mg,Twice daily,Provider SYN-23,2024-07-16,,Active
+SYN-M-000237,SYN-P-00264,SYN-E-000359,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-13,2024-07-16,2024-09-11,Completed
+SYN-M-000238,SYN-P-00264,SYN-E-000359,atorvastatin,Statin,20 mg,Once daily,Provider SYN-15,2024-07-18,2024-09-25,Completed
+SYN-M-000239,SYN-P-00264,SYN-E-000359,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-47,2024-07-19,2024-09-02,Completed
+SYN-M-000240,SYN-P-00123,SYN-E-000360,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-56,2024-07-16,2024-08-01,Completed
+SYN-M-000241,SYN-P-00112,SYN-E-000362,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-16,2024-07-16,2024-08-20,Completed
+SYN-M-000242,SYN-P-00112,SYN-E-000362,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-45,2024-07-16,2024-08-23,Completed
+SYN-M-000243,SYN-P-00171,SYN-E-000364,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-59,2024-07-17,,Active
+SYN-M-000244,SYN-P-00056,SYN-E-000365,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-31,2024-07-18,2024-08-09,Completed
+SYN-M-000245,SYN-P-00290,SYN-E-000368,metformin,Biguanide,500 mg,Twice daily,Provider SYN-13,2024-07-18,,Active
+SYN-M-000246,SYN-P-00129,SYN-E-000369,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-29,2024-07-20,2024-09-10,Completed
+SYN-M-000247,SYN-P-00176,SYN-E-000372,metformin,Biguanide,500 mg,Twice daily,Provider SYN-41,2024-07-21,2024-08-24,Completed
+SYN-M-000248,SYN-P-00043,SYN-E-000373,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-18,2024-07-22,,Active
+SYN-M-000249,SYN-P-00043,SYN-E-000373,insulin glargine,Insulin,10 units,Once daily,Provider SYN-56,2024-07-22,,Active
+SYN-M-000250,SYN-P-00027,SYN-E-000375,insulin glargine,Insulin,10 units,Once daily,Provider SYN-36,2024-07-24,2024-08-11,Completed
+SYN-M-000251,SYN-P-00217,SYN-E-000379,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-54,2024-07-24,2024-10-02,Completed
+SYN-M-000252,SYN-P-00118,SYN-E-000380,insulin glargine,Insulin,10 units,Once daily,Provider SYN-56,2024-07-25,2024-08-25,Completed
+SYN-M-000253,SYN-P-00132,SYN-E-000382,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-28,2024-07-27,2024-08-09,Completed
+SYN-M-000254,SYN-P-00132,SYN-E-000382,metformin,Biguanide,500 mg,Twice daily,Provider SYN-55,2024-07-27,2024-09-14,Completed
+SYN-M-000255,SYN-P-00132,SYN-E-000382,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-54,2024-07-29,2024-08-03,Discontinued
+SYN-M-000256,SYN-P-00079,SYN-E-000384,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-15,2024-07-27,2024-09-24,Completed
+SYN-M-000257,SYN-P-00280,SYN-E-000388,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-47,2024-08-01,,Active
+SYN-M-000258,SYN-P-00047,SYN-E-000390,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-45,2024-07-30,2024-08-16,Completed
+SYN-M-000259,SYN-P-00170,SYN-E-000391,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-08,2024-07-30,2024-08-15,Discontinued
+SYN-M-000260,SYN-P-00170,SYN-E-000391,metformin,Biguanide,500 mg,Twice daily,Provider SYN-01,2024-07-30,,Active
+SYN-M-000261,SYN-P-00072,SYN-E-000393,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-58,2024-08-01,,Active
+SYN-M-000262,SYN-P-00070,SYN-E-000396,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-13,2024-08-02,2024-09-05,Discontinued
+SYN-M-000263,SYN-P-00002,SYN-E-000399,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-32,2024-08-03,2024-10-07,Completed
+SYN-M-000264,SYN-P-00002,SYN-E-000399,metformin,Biguanide,500 mg,Twice daily,Provider SYN-51,2024-08-05,,Active
+SYN-M-000265,SYN-P-00002,SYN-E-000399,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-06,2024-08-06,,Active
+SYN-M-000266,SYN-P-00002,SYN-E-000399,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-54,2024-08-07,,Active
+SYN-M-000267,SYN-P-00002,SYN-E-000399,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-14,2024-08-07,,Active
+SYN-M-000268,SYN-P-00183,SYN-E-000402,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-07,2024-08-04,,Active
+SYN-M-000269,SYN-P-00281,SYN-E-000403,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-23,2024-08-05,2024-08-13,Completed
+SYN-M-000270,SYN-P-00244,SYN-E-000414,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-24,2024-08-09,2024-09-12,Completed
+SYN-M-000271,SYN-P-00209,SYN-E-000417,insulin glargine,Insulin,10 units,Once daily,Provider SYN-37,2024-08-13,,Active
+SYN-M-000272,SYN-P-00209,SYN-E-000417,metformin,Biguanide,500 mg,Twice daily,Provider SYN-31,2024-08-13,,Active
+SYN-M-000273,SYN-P-00024,SYN-E-000419,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-32,2024-08-11,,Active
+SYN-M-000274,SYN-P-00057,SYN-E-000421,insulin glargine,Insulin,10 units,Once daily,Provider SYN-07,2024-08-14,,Active
+SYN-M-000275,SYN-P-00100,SYN-E-000422,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-50,2024-08-14,,Active
+SYN-M-000276,SYN-P-00131,SYN-E-000423,insulin glargine,Insulin,10 units,Once daily,Provider SYN-06,2024-08-14,,Active
+SYN-M-000277,SYN-P-00232,SYN-E-000424,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-20,2024-08-16,2024-09-23,Completed
+SYN-M-000278,SYN-P-00232,SYN-E-000424,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-56,2024-08-18,,Active
+SYN-M-000279,SYN-P-00038,SYN-E-000425,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-09,2024-08-15,2024-09-01,Completed
+SYN-M-000280,SYN-P-00278,SYN-E-000429,metformin,Biguanide,500 mg,Twice daily,Provider SYN-28,2024-08-16,2024-11-10,Completed
+SYN-M-000281,SYN-P-00090,SYN-E-000430,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-44,2024-08-17,2024-09-21,Discontinued
+SYN-M-000282,SYN-P-00171,SYN-E-000431,atorvastatin,Statin,20 mg,Once daily,Provider SYN-10,2024-08-17,2024-09-20,Completed
+SYN-M-000283,SYN-P-00198,SYN-E-000433,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-44,2024-08-17,2024-08-25,Completed
+SYN-M-000284,SYN-P-00191,SYN-E-000436,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-57,2024-08-22,2024-10-24,Completed
+SYN-M-000285,SYN-P-00191,SYN-E-000436,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-16,2024-08-22,,Active
+SYN-M-000286,SYN-P-00191,SYN-E-000436,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-27,2024-08-26,2024-09-29,Discontinued
+SYN-M-000287,SYN-P-00191,SYN-E-000436,insulin glargine,Insulin,10 units,Once daily,Provider SYN-60,2024-08-26,2024-10-31,Completed
+SYN-M-000288,SYN-P-00027,SYN-E-000437,insulin glargine,Insulin,10 units,Once daily,Provider SYN-42,2024-08-20,2024-09-20,Completed
+SYN-M-000289,SYN-P-00027,SYN-E-000437,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-02,2024-08-21,,Active
+SYN-M-000290,SYN-P-00027,SYN-E-000437,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-34,2024-08-22,2024-10-13,Discontinued
+SYN-M-000291,SYN-P-00011,SYN-E-000438,atorvastatin,Statin,20 mg,Once daily,Provider SYN-37,2024-08-21,2024-11-13,Completed
+SYN-M-000292,SYN-P-00188,SYN-E-000441,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-34,2024-08-23,2024-11-16,Completed
+SYN-M-000293,SYN-P-00282,SYN-E-000442,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-60,2024-08-22,,Active
+SYN-M-000294,SYN-P-00195,SYN-E-000444,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-45,2024-08-23,,Active
+SYN-M-000295,SYN-P-00250,SYN-E-000449,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-20,2024-08-25,2024-10-18,Completed
+SYN-M-000296,SYN-P-00250,SYN-E-000449,atorvastatin,Statin,20 mg,Once daily,Provider SYN-30,2024-08-26,2024-11-16,Completed
+SYN-M-000297,SYN-P-00225,SYN-E-000451,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-15,2024-08-28,2024-11-11,Completed
+SYN-M-000298,SYN-P-00225,SYN-E-000451,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-57,2024-08-29,,Active
+SYN-M-000299,SYN-P-00041,SYN-E-000453,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-06,2024-09-03,,Active
+SYN-M-000300,SYN-P-00300,SYN-E-000454,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-16,2024-08-28,2024-09-18,Completed
+SYN-M-000301,SYN-P-00008,SYN-E-000456,atorvastatin,Statin,20 mg,Once daily,Provider SYN-36,2024-08-30,,Active
+SYN-M-000302,SYN-P-00030,SYN-E-000458,insulin glargine,Insulin,10 units,Once daily,Provider SYN-04,2024-08-30,,Active
+SYN-M-000303,SYN-P-00226,SYN-E-000459,insulin glargine,Insulin,10 units,Once daily,Provider SYN-53,2024-08-31,2024-10-30,Completed
+SYN-M-000304,SYN-P-00283,SYN-E-000461,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-15,2024-08-31,2024-11-04,Completed
+SYN-M-000305,SYN-P-00123,SYN-E-000465,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-03,2024-08-31,2024-10-29,Completed
+SYN-M-000306,SYN-P-00184,SYN-E-000466,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-05,2024-09-01,2024-09-23,Discontinued
+SYN-M-000307,SYN-P-00260,SYN-E-000468,insulin glargine,Insulin,10 units,Once daily,Provider SYN-07,2024-09-05,,Active
+SYN-M-000308,SYN-P-00001,SYN-E-000469,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-42,2024-09-07,2024-10-22,Discontinued
+SYN-M-000309,SYN-P-00001,SYN-E-000469,insulin glargine,Insulin,10 units,Once daily,Provider SYN-34,2024-09-07,,Active
+SYN-M-000310,SYN-P-00271,SYN-E-000473,insulin glargine,Insulin,10 units,Once daily,Provider SYN-37,2024-09-07,,Active
+SYN-M-000311,SYN-P-00048,SYN-E-000474,insulin glargine,Insulin,10 units,Once daily,Provider SYN-56,2024-09-06,,Active
+SYN-M-000312,SYN-P-00196,SYN-E-000477,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-19,2024-09-07,2024-09-14,Completed
+SYN-M-000313,SYN-P-00018,SYN-E-000478,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-20,2024-09-07,2024-11-17,Discontinued
+SYN-M-000314,SYN-P-00250,SYN-E-000485,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-05,2024-09-12,2024-10-25,Discontinued
+SYN-M-000315,SYN-P-00250,SYN-E-000485,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-45,2024-09-12,,Active
+SYN-M-000316,SYN-P-00250,SYN-E-000485,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-13,2024-09-13,,Active
+SYN-M-000317,SYN-P-00134,SYN-E-000489,metformin,Biguanide,500 mg,Twice daily,Provider SYN-10,2024-09-11,2024-10-16,Discontinued
+SYN-M-000318,SYN-P-00124,SYN-E-000491,insulin glargine,Insulin,10 units,Once daily,Provider SYN-08,2024-09-12,2024-11-15,Completed
+SYN-M-000319,SYN-P-00075,SYN-E-000494,atorvastatin,Statin,20 mg,Once daily,Provider SYN-48,2024-09-13,2024-12-03,Discontinued
+SYN-M-000320,SYN-P-00130,SYN-E-000495,atorvastatin,Statin,20 mg,Once daily,Provider SYN-60,2024-09-13,2024-12-04,Completed
+SYN-M-000321,SYN-P-00138,SYN-E-000496,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-59,2024-09-14,,Active
+SYN-M-000322,SYN-P-00225,SYN-E-000501,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-46,2024-09-18,2024-10-20,Completed
+SYN-M-000323,SYN-P-00225,SYN-E-000501,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-47,2024-09-19,2024-11-27,Discontinued
+SYN-M-000324,SYN-P-00225,SYN-E-000501,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-02,2024-09-20,,Active
+SYN-M-000325,SYN-P-00225,SYN-E-000501,metformin,Biguanide,500 mg,Twice daily,Provider SYN-35,2024-09-21,,Active
+SYN-M-000326,SYN-P-00202,SYN-E-000503,atorvastatin,Statin,20 mg,Once daily,Provider SYN-42,2024-09-21,,Active
+SYN-M-000327,SYN-P-00202,SYN-E-000503,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-58,2024-09-23,2024-12-21,Completed
+SYN-M-000328,SYN-P-00221,SYN-E-000504,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-08,2024-09-20,,Active
+SYN-M-000329,SYN-P-00221,SYN-E-000504,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-14,2024-09-21,2024-10-25,Discontinued
+SYN-M-000330,SYN-P-00251,SYN-E-000507,metformin,Biguanide,500 mg,Twice daily,Provider SYN-44,2024-09-20,,Active
+SYN-M-000331,SYN-P-00251,SYN-E-000507,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-30,2024-09-20,2024-12-08,Completed
+SYN-M-000332,SYN-P-00206,SYN-E-000508,insulin glargine,Insulin,10 units,Once daily,Provider SYN-54,2024-09-20,,Active
+SYN-M-000333,SYN-P-00264,SYN-E-000509,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-52,2024-09-20,2024-11-18,Discontinued
+SYN-M-000334,SYN-P-00048,SYN-E-000511,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-27,2024-09-22,2024-11-23,Completed
+SYN-M-000335,SYN-P-00185,SYN-E-000512,atorvastatin,Statin,20 mg,Once daily,Provider SYN-13,2024-09-23,2024-10-18,Completed
+SYN-M-000336,SYN-P-00019,SYN-E-000514,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-16,2024-09-24,2024-10-13,Discontinued
+SYN-M-000337,SYN-P-00213,SYN-E-000516,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-48,2024-09-25,2024-12-20,Completed
+SYN-M-000338,SYN-P-00213,SYN-E-000516,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-34,2024-09-26,,Active
+SYN-M-000339,SYN-P-00107,SYN-E-000519,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-60,2024-09-25,,Active
+SYN-M-000340,SYN-P-00290,SYN-E-000527,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-46,2024-09-29,2024-11-29,Completed
+SYN-M-000341,SYN-P-00290,SYN-E-000527,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-18,2024-09-29,2024-12-11,Completed
+SYN-M-000342,SYN-P-00160,SYN-E-000529,atorvastatin,Statin,20 mg,Once daily,Provider SYN-60,2024-09-30,2024-12-04,Completed
+SYN-M-000343,SYN-P-00163,SYN-E-000538,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-12,2024-10-05,2024-10-15,Completed
+SYN-M-000344,SYN-P-00163,SYN-E-000538,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-09,2024-10-07,2024-10-30,Completed
+SYN-M-000345,SYN-P-00058,SYN-E-000539,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-05,2024-10-04,2024-11-08,Completed
+SYN-M-000346,SYN-P-00241,SYN-E-000540,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-21,2024-10-06,,Active
+SYN-M-000347,SYN-P-00241,SYN-E-000540,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-22,2024-10-06,2024-11-11,Completed
+SYN-M-000348,SYN-P-00021,SYN-E-000541,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-42,2024-10-05,2024-10-14,Discontinued
+SYN-M-000349,SYN-P-00021,SYN-E-000541,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-16,2024-10-08,2024-12-15,Discontinued
+SYN-M-000350,SYN-P-00286,SYN-E-000544,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-51,2024-10-08,2024-11-22,Completed
+SYN-M-000351,SYN-P-00235,SYN-E-000546,metformin,Biguanide,500 mg,Twice daily,Provider SYN-06,2024-10-07,2024-12-10,Discontinued
+SYN-M-000352,SYN-P-00165,SYN-E-000549,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-27,2024-10-07,,Active
+SYN-M-000353,SYN-P-00288,SYN-E-000556,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-28,2024-10-08,,Active
+SYN-M-000354,SYN-P-00211,SYN-E-000561,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-03,2024-10-10,2024-11-19,Completed
+SYN-M-000355,SYN-P-00109,SYN-E-000562,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-51,2024-10-11,2024-10-25,Completed
+SYN-M-000356,SYN-P-00133,SYN-E-000563,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-09,2024-10-12,2024-10-21,Completed
+SYN-M-000357,SYN-P-00129,SYN-E-000568,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-39,2024-10-13,2025-01-03,Completed
+SYN-M-000358,SYN-P-00129,SYN-E-000568,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-35,2024-10-13,,Active
+SYN-M-000359,SYN-P-00004,SYN-E-000569,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-12,2024-10-22,2024-11-02,Completed
+SYN-M-000360,SYN-P-00183,SYN-E-000570,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-31,2024-10-13,2024-12-25,Completed
+SYN-M-000361,SYN-P-00249,SYN-E-000572,metformin,Biguanide,500 mg,Twice daily,Provider SYN-38,2024-10-14,2025-01-05,Discontinued
+SYN-M-000362,SYN-P-00254,SYN-E-000574,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-29,2024-10-15,2024-12-13,Discontinued
+SYN-M-000363,SYN-P-00254,SYN-E-000574,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-40,2024-10-15,2025-01-09,Completed
+SYN-M-000364,SYN-P-00254,SYN-E-000574,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-15,2024-10-16,2024-11-10,Completed
+SYN-M-000365,SYN-P-00254,SYN-E-000574,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-53,2024-10-16,2024-11-11,Completed
+SYN-M-000366,SYN-P-00260,SYN-E-000575,insulin glargine,Insulin,10 units,Once daily,Provider SYN-23,2024-10-18,2024-12-26,Completed
+SYN-M-000367,SYN-P-00260,SYN-E-000575,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-48,2024-10-20,2024-12-03,Discontinued
+SYN-M-000368,SYN-P-00263,SYN-E-000577,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-50,2024-10-15,2024-10-22,Completed
+SYN-M-000369,SYN-P-00041,SYN-E-000578,metformin,Biguanide,500 mg,Twice daily,Provider SYN-32,2024-10-16,2025-01-05,Discontinued
+SYN-M-000370,SYN-P-00041,SYN-E-000578,metformin,Biguanide,500 mg,Twice daily,Provider SYN-09,2024-10-16,2024-10-29,Completed
+SYN-M-000371,SYN-P-00041,SYN-E-000578,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-08,2024-10-17,2024-11-09,Completed
+SYN-M-000372,SYN-P-00028,SYN-E-000579,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-32,2024-10-15,2024-10-24,Completed
+SYN-M-000373,SYN-P-00028,SYN-E-000579,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-21,2024-10-17,2024-10-22,Completed
+SYN-M-000374,SYN-P-00053,SYN-E-000580,metformin,Biguanide,500 mg,Twice daily,Provider SYN-39,2024-10-18,,Active
+SYN-M-000375,SYN-P-00218,SYN-E-000581,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-51,2024-10-23,2024-11-12,Discontinued
+SYN-M-000376,SYN-P-00283,SYN-E-000584,atorvastatin,Statin,20 mg,Once daily,Provider SYN-60,2024-10-17,2024-10-16,Completed
+SYN-M-000377,SYN-P-00060,SYN-E-000586,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-10,2024-10-17,2024-11-21,Completed
+SYN-M-000378,SYN-P-00072,SYN-E-000590,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-38,2024-10-21,2025-01-10,Completed
+SYN-M-000379,SYN-P-00149,SYN-E-000597,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-59,2024-10-21,2025-01-07,Completed
+SYN-M-000380,SYN-P-00149,SYN-E-000597,insulin glargine,Insulin,10 units,Once daily,Provider SYN-26,2024-10-21,,Active
+SYN-M-000381,SYN-P-00213,SYN-E-000602,metformin,Biguanide,500 mg,Twice daily,Provider SYN-02,2024-10-24,,Active
+SYN-M-000382,SYN-P-00213,SYN-E-000602,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-30,2024-10-26,2024-12-18,Completed
+SYN-M-000383,SYN-P-00292,SYN-E-000605,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-25,2024-10-26,2024-12-22,Completed
+SYN-M-000384,SYN-P-00215,SYN-E-000607,metformin,Biguanide,500 mg,Twice daily,Provider SYN-32,2024-10-27,2024-12-13,Completed
+SYN-M-000385,SYN-P-00215,SYN-E-000607,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-29,2024-10-27,,Active
+SYN-M-000386,SYN-P-00270,SYN-E-000609,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-59,2024-10-28,2025-01-21,Completed
+SYN-M-000387,SYN-P-00172,SYN-E-000610,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-01,2024-10-30,2024-12-08,Discontinued
+SYN-M-000388,SYN-P-00195,SYN-E-000611,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-30,2024-10-29,2024-11-26,Completed
+SYN-M-000389,SYN-P-00163,SYN-E-000616,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-12,2024-10-31,2024-11-09,Completed
+SYN-M-000390,SYN-P-00163,SYN-E-000616,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-46,2024-11-01,,Active
+SYN-M-000391,SYN-P-00163,SYN-E-000616,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-05,2024-11-03,2024-12-14,Completed
+SYN-M-000392,SYN-P-00163,SYN-E-000616,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-30,2024-11-03,,Active
+SYN-M-000393,SYN-P-00094,SYN-E-000618,insulin glargine,Insulin,10 units,Once daily,Provider SYN-11,2024-10-31,2025-01-07,Completed
+SYN-M-000394,SYN-P-00064,SYN-E-000621,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-32,2024-11-01,,Active
+SYN-M-000395,SYN-P-00271,SYN-E-000623,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-52,2024-11-03,,Active
+SYN-M-000396,SYN-P-00259,SYN-E-000625,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-33,2024-11-03,2025-01-28,Completed
+SYN-M-000397,SYN-P-00049,SYN-E-000626,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-48,2024-11-09,2024-12-16,Completed
+SYN-M-000398,SYN-P-00049,SYN-E-000626,metformin,Biguanide,500 mg,Twice daily,Provider SYN-31,2024-11-14,,Active
+SYN-M-000399,SYN-P-00049,SYN-E-000626,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-37,2024-11-16,,Active
+SYN-M-000400,SYN-P-00082,SYN-E-000627,atorvastatin,Statin,20 mg,Once daily,Provider SYN-41,2024-11-05,,Active
+SYN-M-000401,SYN-P-00008,SYN-E-000629,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-25,2024-11-05,,Active
+SYN-M-000402,SYN-P-00008,SYN-E-000629,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-45,2024-11-06,,Active
+SYN-M-000403,SYN-P-00008,SYN-E-000629,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-48,2024-11-06,2024-12-11,Completed
+SYN-M-000404,SYN-P-00042,SYN-E-000630,atorvastatin,Statin,20 mg,Once daily,Provider SYN-22,2024-11-07,2024-12-17,Completed
+SYN-M-000405,SYN-P-00248,SYN-E-000631,insulin glargine,Insulin,10 units,Once daily,Provider SYN-57,2024-11-08,2025-01-31,Completed
+SYN-M-000406,SYN-P-00032,SYN-E-000634,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-39,2024-11-07,2025-01-11,Discontinued
+SYN-M-000407,SYN-P-00011,SYN-E-000636,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-14,2024-11-07,2024-12-22,Discontinued
+SYN-M-000408,SYN-P-00035,SYN-E-000637,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-13,2024-11-08,2024-11-15,Completed
+SYN-M-000409,SYN-P-00056,SYN-E-000639,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-48,2024-11-08,2025-01-02,Discontinued
+SYN-M-000410,SYN-P-00056,SYN-E-000639,metformin,Biguanide,500 mg,Twice daily,Provider SYN-36,2024-11-09,2025-01-10,Completed
+SYN-M-000411,SYN-P-00056,SYN-E-000639,atorvastatin,Statin,20 mg,Once daily,Provider SYN-22,2024-11-10,2024-12-16,Completed
+SYN-M-000412,SYN-P-00181,SYN-E-000644,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-21,2024-11-09,,Active
+SYN-M-000413,SYN-P-00242,SYN-E-000646,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-10,2024-11-13,2024-11-11,Completed
+SYN-M-000414,SYN-P-00189,SYN-E-000647,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-02,2024-11-13,2025-01-06,Completed
+SYN-M-000415,SYN-P-00189,SYN-E-000647,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-45,2024-11-18,,Active
+SYN-M-000416,SYN-P-00130,SYN-E-000648,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-29,2024-11-11,2025-01-18,Completed
+SYN-M-000417,SYN-P-00130,SYN-E-000648,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-49,2024-11-11,2025-01-04,Completed
+SYN-M-000418,SYN-P-00130,SYN-E-000648,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-42,2024-11-12,,Active
+SYN-M-000419,SYN-P-00130,SYN-E-000648,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-53,2024-11-13,2024-12-23,Completed
+SYN-M-000420,SYN-P-00130,SYN-E-000648,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-32,2024-11-17,2024-11-30,Completed
+SYN-M-000421,SYN-P-00130,SYN-E-000648,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-29,2024-11-19,,Active
+SYN-M-000422,SYN-P-00130,SYN-E-000648,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-44,2024-11-19,,Active
+SYN-M-000423,SYN-P-00025,SYN-E-000650,insulin glargine,Insulin,10 units,Once daily,Provider SYN-53,2024-11-12,2024-11-21,Completed
+SYN-M-000424,SYN-P-00025,SYN-E-000650,metformin,Biguanide,500 mg,Twice daily,Provider SYN-38,2024-11-14,2025-01-15,Discontinued
+SYN-M-000425,SYN-P-00051,SYN-E-000651,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-44,2024-11-12,2024-11-28,Completed
+SYN-M-000426,SYN-P-00051,SYN-E-000651,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-44,2024-11-12,,Active
+SYN-M-000427,SYN-P-00279,SYN-E-000655,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-60,2024-11-14,2024-12-25,Completed
+SYN-M-000428,SYN-P-00092,SYN-E-000657,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-22,2024-11-16,2025-01-17,Completed
+SYN-M-000429,SYN-P-00092,SYN-E-000657,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-41,2024-11-22,,Active
+SYN-M-000430,SYN-P-00289,SYN-E-000659,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-19,2024-11-16,2025-02-03,Completed
+SYN-M-000431,SYN-P-00289,SYN-E-000659,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-03,2024-11-16,,Active
+SYN-M-000432,SYN-P-00173,SYN-E-000662,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-08,2024-11-17,2024-11-22,Completed
+SYN-M-000433,SYN-P-00173,SYN-E-000662,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-27,2024-11-17,2024-12-30,Discontinued
+SYN-M-000434,SYN-P-00107,SYN-E-000664,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-03,2024-11-17,2024-12-19,Completed
+SYN-M-000435,SYN-P-00107,SYN-E-000664,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-08,2024-11-17,2025-01-26,Completed
+SYN-M-000436,SYN-P-00163,SYN-E-000667,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-40,2024-11-20,2024-12-02,Completed
+SYN-M-000437,SYN-P-00040,SYN-E-000669,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-27,2024-11-19,2025-02-04,Completed
+SYN-M-000438,SYN-P-00161,SYN-E-000673,insulin glargine,Insulin,10 units,Once daily,Provider SYN-03,2024-11-20,,Active
+SYN-M-000439,SYN-P-00067,SYN-E-000677,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-52,2024-11-21,,Active
+SYN-M-000440,SYN-P-00067,SYN-E-000677,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-46,2024-11-21,,Active
+SYN-M-000441,SYN-P-00067,SYN-E-000677,insulin glargine,Insulin,10 units,Once daily,Provider SYN-20,2024-11-21,2025-01-12,Completed
+SYN-M-000442,SYN-P-00295,SYN-E-000680,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-06,2024-11-22,,Active
+SYN-M-000443,SYN-P-00295,SYN-E-000680,atorvastatin,Statin,20 mg,Once daily,Provider SYN-57,2024-11-22,2025-01-17,Completed
+SYN-M-000444,SYN-P-00182,SYN-E-000681,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-30,2024-11-23,2025-01-22,Completed
+SYN-M-000445,SYN-P-00026,SYN-E-000682,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-49,2024-11-23,2024-12-05,Discontinued
+SYN-M-000446,SYN-P-00026,SYN-E-000682,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-02,2024-11-23,,Active
+SYN-M-000447,SYN-P-00001,SYN-E-000683,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-38,2024-11-24,2024-12-31,Completed
+SYN-M-000448,SYN-P-00276,SYN-E-000685,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-43,2024-11-25,,Active
+SYN-M-000449,SYN-P-00078,SYN-E-000690,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-46,2024-11-28,2025-01-01,Discontinued
+SYN-M-000450,SYN-P-00202,SYN-E-000697,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-23,2024-12-02,2024-12-22,Completed
+SYN-M-000451,SYN-P-00098,SYN-E-000698,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-57,2024-12-02,2025-02-01,Completed
+SYN-M-000452,SYN-P-00058,SYN-E-000702,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-11,2024-12-03,2025-01-10,Completed
+SYN-M-000453,SYN-P-00245,SYN-E-000704,insulin glargine,Insulin,10 units,Once daily,Provider SYN-17,2024-12-05,2025-02-18,Completed
+SYN-M-000454,SYN-P-00133,SYN-E-000713,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-36,2024-12-07,2024-12-15,Completed
+SYN-M-000455,SYN-P-00234,SYN-E-000715,metformin,Biguanide,500 mg,Twice daily,Provider SYN-29,2024-12-07,2024-12-16,Completed
+SYN-M-000456,SYN-P-00027,SYN-E-000719,atorvastatin,Statin,20 mg,Once daily,Provider SYN-09,2024-12-10,,Active
+SYN-M-000457,SYN-P-00027,SYN-E-000719,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-24,2024-12-10,2025-01-22,Discontinued
+SYN-M-000458,SYN-P-00027,SYN-E-000719,insulin glargine,Insulin,10 units,Once daily,Provider SYN-44,2024-12-10,,Active
+SYN-M-000459,SYN-P-00027,SYN-E-000719,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-10,2024-12-11,2025-01-02,Completed
+SYN-M-000460,SYN-P-00027,SYN-E-000719,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-49,2024-12-12,2025-03-06,Completed
+SYN-M-000461,SYN-P-00242,SYN-E-000723,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-06,2024-12-13,,Active
+SYN-M-000462,SYN-P-00010,SYN-E-000724,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-37,2024-12-12,2025-01-17,Completed
+SYN-M-000463,SYN-P-00010,SYN-E-000724,metformin,Biguanide,500 mg,Twice daily,Provider SYN-53,2024-12-12,2025-03-11,Discontinued
+SYN-M-000464,SYN-P-00177,SYN-E-000728,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-29,2024-12-12,2025-03-02,Completed
+SYN-M-000465,SYN-P-00090,SYN-E-000729,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-58,2024-12-13,,Active
+SYN-M-000466,SYN-P-00037,SYN-E-000733,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-51,2024-12-13,2024-12-18,Completed
+SYN-M-000467,SYN-P-00070,SYN-E-000734,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-07,2024-12-17,,Active
+SYN-M-000468,SYN-P-00149,SYN-E-000735,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-10,2024-12-14,2025-01-03,Completed
+SYN-M-000469,SYN-P-00149,SYN-E-000735,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-48,2024-12-15,,Active
+SYN-M-000470,SYN-P-00149,SYN-E-000735,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-25,2024-12-16,,Active
+SYN-M-000471,SYN-P-00149,SYN-E-000735,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-45,2024-12-16,2025-01-27,Completed
+SYN-M-000472,SYN-P-00149,SYN-E-000735,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-20,2024-12-16,2025-02-04,Completed
+SYN-M-000473,SYN-P-00076,SYN-E-000736,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-52,2024-12-14,2024-12-25,Completed
+SYN-M-000474,SYN-P-00076,SYN-E-000736,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-11,2024-12-14,2025-01-02,Completed
+SYN-M-000475,SYN-P-00076,SYN-E-000736,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-53,2024-12-15,,Active
+SYN-M-000476,SYN-P-00267,SYN-E-000737,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-46,2024-12-15,2025-02-09,Completed
+SYN-M-000477,SYN-P-00267,SYN-E-000737,insulin glargine,Insulin,10 units,Once daily,Provider SYN-45,2024-12-15,,Active
+SYN-M-000478,SYN-P-00163,SYN-E-000740,metformin,Biguanide,500 mg,Twice daily,Provider SYN-22,2024-12-18,2025-02-18,Completed
+SYN-M-000479,SYN-P-00240,SYN-E-000742,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-57,2024-12-16,2025-03-10,Completed
+SYN-M-000480,SYN-P-00061,SYN-E-000743,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-07,2024-12-18,2025-02-22,Completed
+SYN-M-000481,SYN-P-00061,SYN-E-000743,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-08,2024-12-18,2025-02-25,Completed
+SYN-M-000482,SYN-P-00057,SYN-E-000744,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-08,2024-12-17,,Active
+SYN-M-000483,SYN-P-00106,SYN-E-000746,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-60,2024-12-18,,Active
+SYN-M-000484,SYN-P-00106,SYN-E-000746,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-41,2024-12-21,2025-02-11,Completed
+SYN-M-000485,SYN-P-00144,SYN-E-000747,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-11,2024-12-18,,Active
+SYN-M-000486,SYN-P-00144,SYN-E-000747,metformin,Biguanide,500 mg,Twice daily,Provider SYN-05,2024-12-18,,Active
+SYN-M-000487,SYN-P-00098,SYN-E-000750,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-43,2024-12-22,2025-02-11,Completed
+SYN-M-000488,SYN-P-00098,SYN-E-000750,metformin,Biguanide,500 mg,Twice daily,Provider SYN-14,2024-12-22,2025-02-12,Completed
+SYN-M-000489,SYN-P-00053,SYN-E-000751,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-35,2024-12-27,,Active
+SYN-M-000490,SYN-P-00255,SYN-E-000752,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-33,2024-12-22,,Active
+SYN-M-000491,SYN-P-00130,SYN-E-000755,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-16,2024-12-23,2025-02-06,Completed
+SYN-M-000492,SYN-P-00239,SYN-E-000756,insulin glargine,Insulin,10 units,Once daily,Provider SYN-53,2024-12-22,,Active
+SYN-M-000493,SYN-P-00149,SYN-E-000759,metformin,Biguanide,500 mg,Twice daily,Provider SYN-25,2024-12-23,2025-01-11,Completed
+SYN-M-000494,SYN-P-00193,SYN-E-000765,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-51,2024-12-24,,Active
+SYN-M-000495,SYN-P-00297,SYN-E-000766,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-44,2024-12-24,2025-01-08,Completed
+SYN-M-000496,SYN-P-00121,SYN-E-000767,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-11,2024-12-25,2025-01-20,Completed
+SYN-M-000497,SYN-P-00121,SYN-E-000767,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-19,2024-12-27,2025-03-06,Completed
+SYN-M-000498,SYN-P-00061,SYN-E-000769,metformin,Biguanide,500 mg,Twice daily,Provider SYN-07,2024-12-25,,Active
+SYN-M-000499,SYN-P-00061,SYN-E-000769,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-16,2024-12-26,2025-02-06,Discontinued
+SYN-M-000500,SYN-P-00275,SYN-E-000772,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-39,2024-12-31,,Active
+SYN-M-000501,SYN-P-00204,SYN-E-000776,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-57,2024-12-29,,Active
+SYN-M-000502,SYN-P-00204,SYN-E-000776,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-20,2024-12-31,2025-02-13,Completed
+SYN-M-000503,SYN-P-00070,SYN-E-000778,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-03,2024-12-29,2025-02-21,Discontinued
+SYN-M-000504,SYN-P-00104,SYN-E-000779,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-25,2024-12-27,2025-03-12,Completed
+SYN-M-000505,SYN-P-00207,SYN-E-000780,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-21,2024-12-29,2025-01-27,Completed
+SYN-M-000506,SYN-P-00207,SYN-E-000780,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-47,2024-12-30,2025-02-14,Completed
+SYN-M-000507,SYN-P-00207,SYN-E-000780,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-35,2024-12-30,2025-03-24,Completed
+SYN-M-000508,SYN-P-00207,SYN-E-000780,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-04,2024-12-30,2025-02-14,Completed
+SYN-M-000509,SYN-P-00171,SYN-E-000783,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-13,2024-12-31,2025-01-07,Discontinued
+SYN-M-000510,SYN-P-00221,SYN-E-000785,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-09,2025-01-02,,Active
+SYN-M-000511,SYN-P-00129,SYN-E-000786,atorvastatin,Statin,20 mg,Once daily,Provider SYN-05,2025-01-03,,Active
+SYN-M-000512,SYN-P-00085,SYN-E-000787,insulin glargine,Insulin,10 units,Once daily,Provider SYN-11,2025-01-03,,Active
+SYN-M-000513,SYN-P-00013,SYN-E-000794,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-57,2025-01-07,2025-01-27,Discontinued
+SYN-M-000514,SYN-P-00081,SYN-E-000799,atorvastatin,Statin,20 mg,Once daily,Provider SYN-35,2025-01-10,2025-03-30,Completed
+SYN-M-000515,SYN-P-00081,SYN-E-000799,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-07,2025-01-11,2025-03-06,Completed
+SYN-M-000516,SYN-P-00006,SYN-E-000804,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-60,2025-01-11,,Active
+SYN-M-000517,SYN-P-00056,SYN-E-000811,metformin,Biguanide,500 mg,Twice daily,Provider SYN-59,2025-01-14,2025-03-06,Completed
+SYN-M-000518,SYN-P-00203,SYN-E-000822,atorvastatin,Statin,20 mg,Once daily,Provider SYN-54,2025-01-20,2025-02-14,Completed
+SYN-M-000519,SYN-P-00223,SYN-E-000826,insulin glargine,Insulin,10 units,Once daily,Provider SYN-22,2025-01-23,,Active
+SYN-M-000520,SYN-P-00022,SYN-E-000827,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-44,2025-01-24,,Active
+SYN-M-000521,SYN-P-00220,SYN-E-000828,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-32,2025-01-23,2025-02-11,Completed
+SYN-M-000522,SYN-P-00014,SYN-E-000829,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-56,2025-01-23,2025-03-10,Completed
+SYN-M-000523,SYN-P-00014,SYN-E-000829,atorvastatin,Statin,20 mg,Once daily,Provider SYN-16,2025-01-23,2025-04-08,Discontinued
+SYN-M-000524,SYN-P-00125,SYN-E-000832,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-42,2025-01-25,2025-03-24,Completed
+SYN-M-000525,SYN-P-00285,SYN-E-000833,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-58,2025-01-26,2025-02-27,Discontinued
+SYN-M-000526,SYN-P-00213,SYN-E-000837,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-13,2025-02-02,,Active
+SYN-M-000527,SYN-P-00213,SYN-E-000837,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-10,2025-02-05,,Active
+SYN-M-000528,SYN-P-00213,SYN-E-000837,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-15,2025-02-08,2025-03-06,Completed
+SYN-M-000529,SYN-P-00079,SYN-E-000838,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-27,2025-01-28,,Active
+SYN-M-000530,SYN-P-00239,SYN-E-000840,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-37,2025-01-31,,Active
+SYN-M-000531,SYN-P-00237,SYN-E-000841,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-52,2025-01-29,2025-02-27,Completed
+SYN-M-000532,SYN-P-00039,SYN-E-000846,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-18,2025-01-30,2025-03-15,Discontinued
+SYN-M-000533,SYN-P-00039,SYN-E-000846,insulin glargine,Insulin,10 units,Once daily,Provider SYN-06,2025-01-30,2025-02-25,Completed
+SYN-M-000534,SYN-P-00116,SYN-E-000852,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-51,2025-02-02,,Active
+SYN-M-000535,SYN-P-00212,SYN-E-000854,atorvastatin,Statin,20 mg,Once daily,Provider SYN-56,2025-02-02,2025-04-29,Discontinued
+SYN-M-000536,SYN-P-00197,SYN-E-000855,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-12,2025-02-02,2025-03-31,Completed
+SYN-M-000537,SYN-P-00257,SYN-E-000856,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-48,2025-02-03,,Active
+SYN-M-000538,SYN-P-00257,SYN-E-000856,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-15,2025-02-09,,Active
+SYN-M-000539,SYN-P-00112,SYN-E-000857,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-25,2025-02-03,,Active
+SYN-M-000540,SYN-P-00112,SYN-E-000857,atorvastatin,Statin,20 mg,Once daily,Provider SYN-20,2025-02-03,2025-03-05,Discontinued
+SYN-M-000541,SYN-P-00148,SYN-E-000858,metformin,Biguanide,500 mg,Twice daily,Provider SYN-19,2025-02-03,2025-02-20,Completed
+SYN-M-000542,SYN-P-00252,SYN-E-000860,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-47,2025-02-04,2025-02-11,Completed
+SYN-M-000543,SYN-P-00252,SYN-E-000860,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-33,2025-02-04,,Active
+SYN-M-000544,SYN-P-00223,SYN-E-000863,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-56,2025-02-07,2025-03-30,Completed
+SYN-M-000545,SYN-P-00268,SYN-E-000864,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-53,2025-02-06,,Active
+SYN-M-000546,SYN-P-00268,SYN-E-000864,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-35,2025-02-06,2025-03-22,Completed
+SYN-M-000547,SYN-P-00202,SYN-E-000866,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-42,2025-02-07,,Active
+SYN-M-000548,SYN-P-00073,SYN-E-000867,atorvastatin,Statin,20 mg,Once daily,Provider SYN-07,2025-02-07,2025-03-25,Discontinued
+SYN-M-000549,SYN-P-00005,SYN-E-000868,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-16,2025-02-07,2025-03-16,Discontinued
+SYN-M-000550,SYN-P-00005,SYN-E-000868,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-18,2025-02-07,,Active
+SYN-M-000551,SYN-P-00024,SYN-E-000869,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-04,2025-02-08,,Active
+SYN-M-000552,SYN-P-00024,SYN-E-000869,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-41,2025-02-09,2025-03-08,Completed
+SYN-M-000553,SYN-P-00024,SYN-E-000869,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-50,2025-02-09,,Active
+SYN-M-000554,SYN-P-00179,SYN-E-000870,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-45,2025-02-08,,Active
+SYN-M-000555,SYN-P-00174,SYN-E-000871,metformin,Biguanide,500 mg,Twice daily,Provider SYN-49,2025-02-08,2025-05-04,Discontinued
+SYN-M-000556,SYN-P-00158,SYN-E-000872,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-45,2025-02-08,2025-03-15,Discontinued
+SYN-M-000557,SYN-P-00286,SYN-E-000877,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-12,2025-02-11,2025-05-08,Discontinued
+SYN-M-000558,SYN-P-00289,SYN-E-000879,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-51,2025-02-11,2025-04-14,Completed
+SYN-M-000559,SYN-P-00289,SYN-E-000879,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-50,2025-02-12,2025-05-09,Completed
+SYN-M-000560,SYN-P-00075,SYN-E-000880,metformin,Biguanide,500 mg,Twice daily,Provider SYN-33,2025-02-12,2025-05-05,Completed
+SYN-M-000561,SYN-P-00075,SYN-E-000880,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-43,2025-02-12,2025-03-22,Completed
+SYN-M-000562,SYN-P-00105,SYN-E-000883,metformin,Biguanide,500 mg,Twice daily,Provider SYN-20,2025-02-12,2025-03-12,Completed
+SYN-M-000563,SYN-P-00235,SYN-E-000884,insulin glargine,Insulin,10 units,Once daily,Provider SYN-13,2025-02-12,2025-04-24,Completed
+SYN-M-000564,SYN-P-00144,SYN-E-000886,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-45,2025-02-12,2025-02-19,Discontinued
+SYN-M-000565,SYN-P-00062,SYN-E-000891,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-43,2025-02-14,2025-04-15,Completed
+SYN-M-000566,SYN-P-00062,SYN-E-000891,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-06,2025-02-14,,Active
+SYN-M-000567,SYN-P-00245,SYN-E-000893,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-09,2025-02-17,2025-05-05,Completed
+SYN-M-000568,SYN-P-00159,SYN-E-000896,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-27,2025-02-17,2025-05-08,Discontinued
+SYN-M-000569,SYN-P-00229,SYN-E-000897,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-58,2025-02-18,2025-03-02,Completed
+SYN-M-000570,SYN-P-00229,SYN-E-000897,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-49,2025-02-18,2025-05-12,Completed
+SYN-M-000571,SYN-P-00224,SYN-E-000898,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-07,2025-02-18,,Active
+SYN-M-000572,SYN-P-00156,SYN-E-000903,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-35,2025-02-21,,Active
+SYN-M-000573,SYN-P-00012,SYN-E-000908,insulin glargine,Insulin,10 units,Once daily,Provider SYN-48,2025-02-26,2025-04-21,Completed
+SYN-M-000574,SYN-P-00283,SYN-E-000911,atorvastatin,Statin,20 mg,Once daily,Provider SYN-57,2025-02-26,2025-04-20,Completed
+SYN-M-000575,SYN-P-00194,SYN-E-000912,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-38,2025-02-25,2025-04-29,Discontinued
+SYN-M-000576,SYN-P-00250,SYN-E-000916,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-12,2025-03-03,,Active
+SYN-M-000577,SYN-P-00250,SYN-E-000916,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-26,2025-03-06,2025-05-15,Discontinued
+SYN-M-000578,SYN-P-00178,SYN-E-000924,insulin glargine,Insulin,10 units,Once daily,Provider SYN-05,2025-03-03,,Active
+SYN-M-000579,SYN-P-00178,SYN-E-000924,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-60,2025-03-03,2025-04-18,Completed
+SYN-M-000580,SYN-P-00072,SYN-E-000925,insulin glargine,Insulin,10 units,Once daily,Provider SYN-19,2025-03-04,,Active
+SYN-M-000581,SYN-P-00170,SYN-E-000926,metformin,Biguanide,500 mg,Twice daily,Provider SYN-60,2025-03-06,2025-03-22,Completed
+SYN-M-000582,SYN-P-00162,SYN-E-000927,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-26,2025-03-06,,Active
+SYN-M-000583,SYN-P-00162,SYN-E-000927,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-46,2025-03-06,2025-04-13,Completed
+SYN-M-000584,SYN-P-00162,SYN-E-000927,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-26,2025-03-12,2025-04-09,Discontinued
+SYN-M-000585,SYN-P-00162,SYN-E-000927,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-46,2025-03-12,2025-04-10,Completed
+SYN-M-000586,SYN-P-00273,SYN-E-000929,metformin,Biguanide,500 mg,Twice daily,Provider SYN-26,2025-03-07,2025-04-14,Completed
+SYN-M-000587,SYN-P-00092,SYN-E-000930,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-31,2025-03-08,2025-05-27,Discontinued
+SYN-M-000588,SYN-P-00106,SYN-E-000932,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-29,2025-03-09,2025-05-02,Completed
+SYN-M-000589,SYN-P-00106,SYN-E-000932,insulin glargine,Insulin,10 units,Once daily,Provider SYN-30,2025-03-09,2025-04-15,Completed
+SYN-M-000590,SYN-P-00106,SYN-E-000932,metformin,Biguanide,500 mg,Twice daily,Provider SYN-41,2025-03-09,2025-05-22,Discontinued
+SYN-M-000591,SYN-P-00210,SYN-E-000933,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-42,2025-03-11,,Active
+SYN-M-000592,SYN-P-00210,SYN-E-000933,metformin,Biguanide,500 mg,Twice daily,Provider SYN-23,2025-03-11,2025-03-17,Completed
+SYN-M-000593,SYN-P-00210,SYN-E-000933,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-43,2025-03-12,2025-04-07,Discontinued
+SYN-M-000594,SYN-P-00052,SYN-E-000937,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-22,2025-03-11,2025-04-06,Discontinued
+SYN-M-000595,SYN-P-00076,SYN-E-000938,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-28,2025-03-12,,Active
+SYN-M-000596,SYN-P-00243,SYN-E-000941,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-12,2025-03-12,2025-04-04,Discontinued
+SYN-M-000597,SYN-P-00011,SYN-E-000943,atorvastatin,Statin,20 mg,Once daily,Provider SYN-32,2025-03-14,,Active
+SYN-M-000598,SYN-P-00011,SYN-E-000943,atorvastatin,Statin,20 mg,Once daily,Provider SYN-44,2025-03-14,,Active
+SYN-M-000599,SYN-P-00028,SYN-E-000945,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-50,2025-03-14,,Active
+SYN-M-000600,SYN-P-00021,SYN-E-000947,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-12,2025-03-15,,Active
+SYN-M-000601,SYN-P-00041,SYN-E-000949,metformin,Biguanide,500 mg,Twice daily,Provider SYN-49,2025-03-17,,Active
+SYN-M-000602,SYN-P-00041,SYN-E-000949,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-38,2025-03-19,2025-05-26,Discontinued
+SYN-M-000603,SYN-P-00213,SYN-E-000950,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-21,2025-03-21,2025-04-25,Discontinued
+SYN-M-000604,SYN-P-00213,SYN-E-000950,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-26,2025-03-23,2025-04-01,Discontinued
+SYN-M-000605,SYN-P-00183,SYN-E-000952,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-36,2025-03-17,2025-06-09,Discontinued
+SYN-M-000606,SYN-P-00210,SYN-E-000954,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-58,2025-03-19,,Active
+SYN-M-000607,SYN-P-00210,SYN-E-000954,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-48,2025-03-19,2025-04-25,Completed
+SYN-M-000608,SYN-P-00049,SYN-E-000959,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-27,2025-03-20,,Active
+SYN-M-000609,SYN-P-00056,SYN-E-000968,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-02,2025-03-24,2025-03-28,Completed
+SYN-M-000610,SYN-P-00043,SYN-E-000969,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-40,2025-03-29,2025-04-26,Completed
+SYN-M-000611,SYN-P-00043,SYN-E-000969,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-15,2025-03-30,,Active
+SYN-M-000612,SYN-P-00121,SYN-E-000970,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-18,2025-03-26,,Active
+SYN-M-000613,SYN-P-00121,SYN-E-000970,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-02,2025-03-26,2025-05-18,Completed
+SYN-M-000614,SYN-P-00121,SYN-E-000970,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-17,2025-03-27,2025-04-07,Completed
+SYN-M-000615,SYN-P-00275,SYN-E-000974,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-51,2025-03-26,,Active
+SYN-M-000616,SYN-P-00275,SYN-E-000974,atorvastatin,Statin,20 mg,Once daily,Provider SYN-56,2025-03-26,2025-04-05,Completed
+SYN-M-000617,SYN-P-00292,SYN-E-000982,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-57,2025-03-28,,Active
+SYN-M-000618,SYN-P-00010,SYN-E-000984,insulin glargine,Insulin,10 units,Once daily,Provider SYN-30,2025-03-29,2025-05-08,Completed
+SYN-M-000619,SYN-P-00249,SYN-E-000986,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-40,2025-03-31,,Active
+SYN-M-000620,SYN-P-00249,SYN-E-000986,insulin glargine,Insulin,10 units,Once daily,Provider SYN-10,2025-04-01,,Active
+SYN-M-000621,SYN-P-00127,SYN-E-000987,atorvastatin,Statin,20 mg,Once daily,Provider SYN-05,2025-03-31,2025-06-06,Completed
+SYN-M-000622,SYN-P-00127,SYN-E-000987,atorvastatin,Statin,20 mg,Once daily,Provider SYN-11,2025-04-01,2025-04-24,Completed
+SYN-M-000623,SYN-P-00241,SYN-E-000989,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-47,2025-04-01,2025-04-11,Discontinued
+SYN-M-000624,SYN-P-00107,SYN-E-000990,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-20,2025-04-01,2025-05-15,Completed
+SYN-M-000625,SYN-P-00103,SYN-E-000992,metformin,Biguanide,500 mg,Twice daily,Provider SYN-44,2025-04-01,2025-05-20,Discontinued
+SYN-M-000626,SYN-P-00126,SYN-E-000993,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-12,2025-04-02,,Active
+SYN-M-000627,SYN-P-00064,SYN-E-000997,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-56,2025-04-04,,Active
+SYN-M-000628,SYN-P-00064,SYN-E-000997,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-13,2025-04-06,2025-06-03,Discontinued
+SYN-M-000629,SYN-P-00265,SYN-E-000999,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-28,2025-04-06,2025-04-30,Completed
+SYN-M-000630,SYN-P-00214,SYN-E-001001,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-44,2025-04-05,2025-06-15,Completed
+SYN-M-000631,SYN-P-00214,SYN-E-001001,metformin,Biguanide,500 mg,Twice daily,Provider SYN-11,2025-04-05,2025-05-26,Completed
+SYN-M-000632,SYN-P-00008,SYN-E-001004,insulin glargine,Insulin,10 units,Once daily,Provider SYN-05,2025-04-04,2025-05-12,Completed
+SYN-M-000633,SYN-P-00167,SYN-E-001005,atorvastatin,Statin,20 mg,Once daily,Provider SYN-39,2025-04-09,2025-06-10,Completed
+SYN-M-000634,SYN-P-00178,SYN-E-001006,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-16,2025-04-07,2025-05-04,Completed
+SYN-M-000635,SYN-P-00115,SYN-E-001016,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-51,2025-04-07,,Active
+SYN-M-000636,SYN-P-00296,SYN-E-001018,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-57,2025-04-08,2025-06-08,Completed
+SYN-M-000637,SYN-P-00053,SYN-E-001023,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-35,2025-04-09,2025-06-12,Discontinued
+SYN-M-000638,SYN-P-00283,SYN-E-001026,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-14,2025-04-12,2025-05-19,Completed
+SYN-M-000639,SYN-P-00283,SYN-E-001026,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-31,2025-04-12,,Active
+SYN-M-000640,SYN-P-00283,SYN-E-001026,insulin glargine,Insulin,10 units,Once daily,Provider SYN-36,2025-04-15,2025-05-26,Completed
+SYN-M-000641,SYN-P-00283,SYN-E-001026,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-29,2025-04-17,2025-06-23,Completed
+SYN-M-000642,SYN-P-00221,SYN-E-001028,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-33,2025-04-11,2025-05-14,Discontinued
+SYN-M-000643,SYN-P-00099,SYN-E-001032,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-03,2025-04-15,2025-05-06,Completed
+SYN-M-000644,SYN-P-00065,SYN-E-001035,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-18,2025-04-13,2025-05-03,Discontinued
+SYN-M-000645,SYN-P-00180,SYN-E-001037,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-24,2025-04-21,2025-04-25,Completed
+SYN-M-000646,SYN-P-00035,SYN-E-001038,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-24,2025-04-29,,Active
+SYN-M-000647,SYN-P-00010,SYN-E-001039,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-37,2025-04-17,2025-05-28,Completed
+SYN-M-000648,SYN-P-00162,SYN-E-001042,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-34,2025-04-20,2025-05-09,Completed
+SYN-M-000649,SYN-P-00233,SYN-E-001044,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-41,2025-04-20,2025-06-23,Completed
+SYN-M-000650,SYN-P-00125,SYN-E-001046,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-32,2025-04-19,,Active
+SYN-M-000651,SYN-P-00125,SYN-E-001046,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-46,2025-04-19,,Active
+SYN-M-000652,SYN-P-00125,SYN-E-001046,atorvastatin,Statin,20 mg,Once daily,Provider SYN-24,2025-04-19,2025-06-04,Completed
+SYN-M-000653,SYN-P-00257,SYN-E-001047,atorvastatin,Statin,20 mg,Once daily,Provider SYN-13,2025-04-20,,Active
+SYN-M-000654,SYN-P-00186,SYN-E-001049,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-14,2025-04-21,2025-05-05,Completed
+SYN-M-000655,SYN-P-00228,SYN-E-001056,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-56,2025-04-25,2025-05-30,Completed
+SYN-M-000656,SYN-P-00228,SYN-E-001056,insulin glargine,Insulin,10 units,Once daily,Provider SYN-21,2025-04-25,2025-06-12,Completed
+SYN-M-000657,SYN-P-00064,SYN-E-001060,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-60,2025-04-26,2025-06-01,Completed
+SYN-M-000658,SYN-P-00064,SYN-E-001060,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-09,2025-04-30,2025-06-29,Discontinued
+SYN-M-000659,SYN-P-00224,SYN-E-001062,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-07,2025-04-27,2025-06-25,Discontinued
+SYN-M-000660,SYN-P-00224,SYN-E-001062,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-02,2025-04-29,2025-05-25,Discontinued
+SYN-M-000661,SYN-P-00267,SYN-E-001066,atorvastatin,Statin,20 mg,Once daily,Provider SYN-49,2025-04-30,2025-06-13,Completed
+SYN-M-000662,SYN-P-00201,SYN-E-001071,metformin,Biguanide,500 mg,Twice daily,Provider SYN-38,2025-05-03,2025-07-05,Completed
+SYN-M-000663,SYN-P-00276,SYN-E-001073,insulin glargine,Insulin,10 units,Once daily,Provider SYN-25,2025-05-01,,Active
+SYN-M-000664,SYN-P-00276,SYN-E-001073,insulin glargine,Insulin,10 units,Once daily,Provider SYN-09,2025-05-01,2025-07-28,Completed
+SYN-M-000665,SYN-P-00199,SYN-E-001074,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-36,2025-05-01,2025-05-27,Discontinued
+SYN-M-000666,SYN-P-00019,SYN-E-001079,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-51,2025-05-04,2025-07-09,Completed
+SYN-M-000667,SYN-P-00189,SYN-E-001080,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-13,2025-05-04,2025-06-05,Completed
+SYN-M-000668,SYN-P-00256,SYN-E-001084,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-08,2025-05-07,2025-07-05,Completed
+SYN-M-000669,SYN-P-00256,SYN-E-001084,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-09,2025-05-09,2025-07-04,Completed
+SYN-M-000670,SYN-P-00157,SYN-E-001085,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-30,2025-05-08,2025-07-14,Completed
+SYN-M-000671,SYN-P-00208,SYN-E-001086,metformin,Biguanide,500 mg,Twice daily,Provider SYN-31,2025-05-08,2025-06-14,Completed
+SYN-M-000672,SYN-P-00096,SYN-E-001087,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-59,2025-05-09,2025-06-12,Completed
+SYN-M-000673,SYN-P-00096,SYN-E-001087,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-16,2025-05-09,2025-06-27,Discontinued
+SYN-M-000674,SYN-P-00222,SYN-E-001090,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-19,2025-05-10,2025-06-17,Completed
+SYN-M-000675,SYN-P-00063,SYN-E-001092,insulin glargine,Insulin,10 units,Once daily,Provider SYN-10,2025-05-13,,Active
+SYN-M-000676,SYN-P-00106,SYN-E-001093,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-30,2025-05-11,2025-07-23,Discontinued
+SYN-M-000677,SYN-P-00257,SYN-E-001096,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-07,2025-05-13,2025-06-05,Completed
+SYN-M-000678,SYN-P-00044,SYN-E-001101,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-23,2025-05-14,,Active
+SYN-M-000679,SYN-P-00034,SYN-E-001105,atorvastatin,Statin,20 mg,Once daily,Provider SYN-60,2025-05-18,,Active
+SYN-M-000680,SYN-P-00191,SYN-E-001110,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-57,2025-05-20,2025-06-04,Completed
+SYN-M-000681,SYN-P-00191,SYN-E-001110,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-17,2025-05-20,,Active
+SYN-M-000682,SYN-P-00264,SYN-E-001112,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-14,2025-05-25,2025-06-18,Completed
+SYN-M-000683,SYN-P-00198,SYN-E-001115,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-07,2025-05-24,2025-06-27,Discontinued
+SYN-M-000684,SYN-P-00198,SYN-E-001115,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-10,2025-05-24,2025-07-21,Discontinued
+SYN-M-000685,SYN-P-00141,SYN-E-001116,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-52,2025-05-23,2025-06-29,Discontinued
+SYN-M-000686,SYN-P-00062,SYN-E-001118,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-60,2025-05-25,2025-06-22,Completed
+SYN-M-000687,SYN-P-00093,SYN-E-001122,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-29,2025-05-28,,Active
+SYN-M-000688,SYN-P-00119,SYN-E-001124,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-57,2025-05-27,,Active
+SYN-M-000689,SYN-P-00119,SYN-E-001124,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-55,2025-05-27,,Active
+SYN-M-000690,SYN-P-00261,SYN-E-001125,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-28,2025-05-27,2025-08-21,Completed
+SYN-M-000691,SYN-P-00261,SYN-E-001125,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-13,2025-05-27,2025-06-26,Completed
+SYN-M-000692,SYN-P-00261,SYN-E-001125,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-57,2025-05-28,,Active
+SYN-M-000693,SYN-P-00261,SYN-E-001125,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-53,2025-05-29,2025-08-10,Completed
+SYN-M-000694,SYN-P-00261,SYN-E-001125,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-37,2025-05-30,2025-06-02,Completed
+SYN-M-000695,SYN-P-00261,SYN-E-001125,atorvastatin,Statin,20 mg,Once daily,Provider SYN-44,2025-06-01,,Active
+SYN-M-000696,SYN-P-00261,SYN-E-001125,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-03,2025-06-01,2025-08-06,Completed
+SYN-M-000697,SYN-P-00297,SYN-E-001127,metformin,Biguanide,500 mg,Twice daily,Provider SYN-30,2025-05-28,,Active
+SYN-M-000698,SYN-P-00148,SYN-E-001128,insulin glargine,Insulin,10 units,Once daily,Provider SYN-48,2025-05-28,2025-07-06,Discontinued
+SYN-M-000699,SYN-P-00112,SYN-E-001131,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-50,2025-06-07,2025-07-25,Completed
+SYN-M-000700,SYN-P-00237,SYN-E-001133,metformin,Biguanide,500 mg,Twice daily,Provider SYN-60,2025-06-01,2025-07-04,Completed
+SYN-M-000701,SYN-P-00252,SYN-E-001136,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-48,2025-06-02,2025-07-10,Completed
+SYN-M-000702,SYN-P-00214,SYN-E-001137,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-31,2025-06-04,2025-06-29,Completed
+SYN-M-000703,SYN-P-00212,SYN-E-001139,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-20,2025-06-03,,Active
+SYN-M-000704,SYN-P-00019,SYN-E-001141,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-28,2025-06-03,2025-08-31,Completed
+SYN-M-000705,SYN-P-00019,SYN-E-001141,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-10,2025-06-03,2025-08-09,Completed
+SYN-M-000706,SYN-P-00019,SYN-E-001141,metformin,Biguanide,500 mg,Twice daily,Provider SYN-42,2025-06-03,,Active
+SYN-M-000707,SYN-P-00183,SYN-E-001144,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-20,2025-06-05,,Active
+SYN-M-000708,SYN-P-00114,SYN-E-001147,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-23,2025-06-06,,Active
+SYN-M-000709,SYN-P-00114,SYN-E-001147,metformin,Biguanide,500 mg,Twice daily,Provider SYN-16,2025-06-06,,Active
+SYN-M-000710,SYN-P-00225,SYN-E-001149,metformin,Biguanide,500 mg,Twice daily,Provider SYN-35,2025-06-09,2025-08-01,Completed
+SYN-M-000711,SYN-P-00175,SYN-E-001150,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-13,2025-06-07,2025-07-17,Completed
+SYN-M-000712,SYN-P-00277,SYN-E-001152,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-56,2025-06-09,2025-08-21,Completed
+SYN-M-000713,SYN-P-00277,SYN-E-001152,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-13,2025-06-12,,Active
+SYN-M-000714,SYN-P-00283,SYN-E-001155,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-07,2025-06-10,2025-07-01,Completed
+SYN-M-000715,SYN-P-00283,SYN-E-001155,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-56,2025-06-10,,Active
+SYN-M-000716,SYN-P-00283,SYN-E-001155,atorvastatin,Statin,20 mg,Once daily,Provider SYN-49,2025-06-11,2025-07-05,Discontinued
+SYN-M-000717,SYN-P-00283,SYN-E-001155,insulin glargine,Insulin,10 units,Once daily,Provider SYN-46,2025-06-15,2025-07-10,Discontinued
+SYN-M-000718,SYN-P-00283,SYN-E-001155,metformin,Biguanide,500 mg,Twice daily,Provider SYN-19,2025-06-15,2025-07-14,Completed
+SYN-M-000719,SYN-P-00193,SYN-E-001156,insulin glargine,Insulin,10 units,Once daily,Provider SYN-46,2025-06-10,2025-06-27,Completed
+SYN-M-000720,SYN-P-00050,SYN-E-001160,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-03,2025-06-11,,Active
+SYN-M-000721,SYN-P-00203,SYN-E-001161,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-14,2025-06-11,,Active
+SYN-M-000722,SYN-P-00203,SYN-E-001161,insulin glargine,Insulin,10 units,Once daily,Provider SYN-32,2025-06-11,2025-07-28,Completed
+SYN-M-000723,SYN-P-00203,SYN-E-001161,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-59,2025-06-11,2025-07-05,Completed
+SYN-M-000724,SYN-P-00203,SYN-E-001161,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-37,2025-06-11,,Active
+SYN-M-000725,SYN-P-00056,SYN-E-001162,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-53,2025-06-12,2025-06-15,Completed
+SYN-M-000726,SYN-P-00293,SYN-E-001166,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-44,2025-06-14,,Active
+SYN-M-000727,SYN-P-00169,SYN-E-001167,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-58,2025-06-14,2025-06-25,Discontinued
+SYN-M-000728,SYN-P-00169,SYN-E-001167,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-18,2025-06-14,2025-08-27,Completed
+SYN-M-000729,SYN-P-00291,SYN-E-001168,insulin glargine,Insulin,10 units,Once daily,Provider SYN-26,2025-06-14,,Active
+SYN-M-000730,SYN-P-00291,SYN-E-001168,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-09,2025-06-15,2025-07-28,Completed
+SYN-M-000731,SYN-P-00197,SYN-E-001169,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-35,2025-06-16,2025-07-09,Completed
+SYN-M-000732,SYN-P-00221,SYN-E-001171,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-51,2025-06-19,,Active
+SYN-M-000733,SYN-P-00158,SYN-E-001173,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-48,2025-06-18,,Active
+SYN-M-000734,SYN-P-00158,SYN-E-001173,metformin,Biguanide,500 mg,Twice daily,Provider SYN-08,2025-06-20,2025-08-23,Discontinued
+SYN-M-000735,SYN-P-00082,SYN-E-001175,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-21,2025-06-18,,Active
+SYN-M-000736,SYN-P-00080,SYN-E-001176,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-35,2025-06-18,2025-08-17,Completed
+SYN-M-000737,SYN-P-00225,SYN-E-001177,insulin glargine,Insulin,10 units,Once daily,Provider SYN-59,2025-06-25,2025-08-08,Completed
+SYN-M-000738,SYN-P-00225,SYN-E-001177,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-46,2025-06-25,,Active
+SYN-M-000739,SYN-P-00225,SYN-E-001177,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-32,2025-06-26,,Active
+SYN-M-000740,SYN-P-00154,SYN-E-001180,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-39,2025-06-21,2025-09-14,Completed
+SYN-M-000741,SYN-P-00268,SYN-E-001182,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-40,2025-06-23,2025-07-21,Completed
+SYN-M-000742,SYN-P-00268,SYN-E-001182,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-06,2025-06-24,2025-07-19,Completed
+SYN-M-000743,SYN-P-00268,SYN-E-001182,atorvastatin,Statin,20 mg,Once daily,Provider SYN-59,2025-06-24,2025-09-03,Discontinued
+SYN-M-000744,SYN-P-00268,SYN-E-001182,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-18,2025-06-24,2025-07-18,Completed
+SYN-M-000745,SYN-P-00268,SYN-E-001182,metformin,Biguanide,500 mg,Twice daily,Provider SYN-16,2025-06-25,,Active
+SYN-M-000746,SYN-P-00268,SYN-E-001182,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-31,2025-06-25,,Active
+SYN-M-000747,SYN-P-00017,SYN-E-001183,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-36,2025-06-28,,Active
+SYN-M-000748,SYN-P-00029,SYN-E-001184,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-05,2025-06-24,,Active
+SYN-M-000749,SYN-P-00024,SYN-E-001189,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-35,2025-06-30,,Active
+SYN-M-000750,SYN-P-00234,SYN-E-001190,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-39,2025-06-26,2025-07-26,Completed
+SYN-M-000751,SYN-P-00027,SYN-E-001192,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-30,2025-06-28,,Active
+SYN-M-000752,SYN-P-00027,SYN-E-001192,insulin glargine,Insulin,10 units,Once daily,Provider SYN-38,2025-06-30,2025-09-19,Completed
+SYN-M-000753,SYN-P-00093,SYN-E-001193,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-47,2025-06-28,2025-08-20,Discontinued
+SYN-M-000754,SYN-P-00093,SYN-E-001193,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-07,2025-06-29,2025-08-22,Completed
+SYN-M-000755,SYN-P-00093,SYN-E-001193,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-39,2025-06-29,2025-07-24,Completed
+SYN-M-000756,SYN-P-00220,SYN-E-001195,metformin,Biguanide,500 mg,Twice daily,Provider SYN-42,2025-06-28,,Active
+SYN-M-000757,SYN-P-00220,SYN-E-001195,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-52,2025-06-28,2025-09-24,Discontinued
+SYN-M-000758,SYN-P-00131,SYN-E-001196,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-10,2025-06-29,2025-08-22,Completed
+SYN-M-000759,SYN-P-00088,SYN-E-001197,atorvastatin,Statin,20 mg,Once daily,Provider SYN-47,2025-06-29,2025-07-05,Completed
+SYN-M-000760,SYN-P-00088,SYN-E-001197,atorvastatin,Statin,20 mg,Once daily,Provider SYN-54,2025-06-30,2025-07-09,Completed
+SYN-M-000761,SYN-P-00274,SYN-E-001198,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-42,2025-06-29,,Active
+SYN-M-000762,SYN-P-00105,SYN-E-001203,metformin,Biguanide,500 mg,Twice daily,Provider SYN-29,2025-07-01,,Active
+SYN-M-000763,SYN-P-00255,SYN-E-001205,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-01,2025-07-03,2025-09-07,Discontinued
+SYN-M-000764,SYN-P-00178,SYN-E-001206,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-21,2025-07-02,,Active
+SYN-M-000765,SYN-P-00178,SYN-E-001206,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-36,2025-07-02,2025-08-11,Completed
+SYN-M-000766,SYN-P-00038,SYN-E-001208,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-45,2025-07-04,2025-08-01,Completed
+SYN-M-000767,SYN-P-00038,SYN-E-001208,atorvastatin,Statin,20 mg,Once daily,Provider SYN-41,2025-07-08,2025-09-03,Discontinued
+SYN-M-000768,SYN-P-00134,SYN-E-001215,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-37,2025-07-09,2025-07-17,Completed
+SYN-M-000769,SYN-P-00134,SYN-E-001215,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-04,2025-07-10,2025-08-01,Completed
+SYN-M-000770,SYN-P-00143,SYN-E-001218,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-51,2025-07-08,2025-08-15,Completed
+SYN-M-000771,SYN-P-00245,SYN-E-001219,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-47,2025-07-08,2025-07-26,Discontinued
+SYN-M-000772,SYN-P-00226,SYN-E-001220,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-44,2025-07-08,,Active
+SYN-M-000773,SYN-P-00260,SYN-E-001221,atorvastatin,Statin,20 mg,Once daily,Provider SYN-21,2025-07-12,2025-10-07,Completed
+SYN-M-000774,SYN-P-00151,SYN-E-001226,insulin glargine,Insulin,10 units,Once daily,Provider SYN-12,2025-07-14,,Active
+SYN-M-000775,SYN-P-00180,SYN-E-001231,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-18,2025-07-17,2025-09-14,Completed
+SYN-M-000776,SYN-P-00064,SYN-E-001232,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-14,2025-07-17,,Active
+SYN-M-000777,SYN-P-00126,SYN-E-001238,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-55,2025-07-20,,Active
+SYN-M-000778,SYN-P-00251,SYN-E-001239,insulin glargine,Insulin,10 units,Once daily,Provider SYN-19,2025-07-21,2025-07-25,Completed
+SYN-M-000779,SYN-P-00006,SYN-E-001244,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-34,2025-07-25,,Active
+SYN-M-000780,SYN-P-00277,SYN-E-001248,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-22,2025-07-29,,Active
+SYN-M-000781,SYN-P-00277,SYN-E-001248,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-36,2025-07-29,2025-09-03,Discontinued
+SYN-M-000782,SYN-P-00215,SYN-E-001251,metformin,Biguanide,500 mg,Twice daily,Provider SYN-05,2025-07-28,2025-08-24,Completed
+SYN-M-000783,SYN-P-00276,SYN-E-001252,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-43,2025-07-28,,Active
+SYN-M-000784,SYN-P-00276,SYN-E-001252,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-47,2025-07-29,2025-08-06,Completed
+SYN-M-000785,SYN-P-00198,SYN-E-001253,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-03,2025-07-28,2025-09-27,Completed
+SYN-M-000786,SYN-P-00053,SYN-E-001254,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-10,2025-07-30,,Active
+SYN-M-000787,SYN-P-00010,SYN-E-001256,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-11,2025-07-30,2025-08-28,Completed
+SYN-M-000788,SYN-P-00013,SYN-E-001257,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-24,2025-07-31,2025-09-15,Discontinued
+SYN-M-000789,SYN-P-00129,SYN-E-001260,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-58,2025-08-03,,Active
+SYN-M-000790,SYN-P-00129,SYN-E-001260,insulin glargine,Insulin,10 units,Once daily,Provider SYN-18,2025-08-03,,Active
+SYN-M-000791,SYN-P-00236,SYN-E-001263,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-36,2025-08-03,2025-08-28,Completed
+SYN-M-000792,SYN-P-00213,SYN-E-001264,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-53,2025-08-04,,Active
+SYN-M-000793,SYN-P-00039,SYN-E-001272,metformin,Biguanide,500 mg,Twice daily,Provider SYN-40,2025-08-06,2025-10-28,Completed
+SYN-M-000794,SYN-P-00039,SYN-E-001272,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-51,2025-08-06,2025-10-26,Completed
+SYN-M-000795,SYN-P-00079,SYN-E-001273,metformin,Biguanide,500 mg,Twice daily,Provider SYN-45,2025-08-15,2025-09-29,Completed
+SYN-M-000796,SYN-P-00019,SYN-E-001274,atorvastatin,Statin,20 mg,Once daily,Provider SYN-36,2025-08-07,2025-10-31,Completed
+SYN-M-000797,SYN-P-00125,SYN-E-001289,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-12,2025-08-19,,Active
+SYN-M-000798,SYN-P-00125,SYN-E-001289,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-18,2025-08-19,2025-09-22,Completed
+SYN-M-000799,SYN-P-00125,SYN-E-001289,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-15,2025-08-20,,Active
+SYN-M-000800,SYN-P-00105,SYN-E-001298,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-59,2025-08-24,,Active
+SYN-M-000801,SYN-P-00208,SYN-E-001302,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-08,2025-08-26,2025-10-19,Completed
+SYN-M-000802,SYN-P-00168,SYN-E-001304,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-17,2025-08-27,2025-11-15,Discontinued
+SYN-M-000803,SYN-P-00155,SYN-E-001305,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-05,2025-09-04,2025-11-18,Completed
+SYN-M-000804,SYN-P-00121,SYN-E-001307,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-39,2025-09-04,2025-12-02,Completed
+SYN-M-000805,SYN-P-00121,SYN-E-001307,metformin,Biguanide,500 mg,Twice daily,Provider SYN-35,2025-09-06,,Active
+SYN-M-000806,SYN-P-00121,SYN-E-001307,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-60,2025-09-07,2025-09-22,Completed
+SYN-M-000807,SYN-P-00038,SYN-E-001308,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-47,2025-09-03,2025-12-02,Completed
+SYN-M-000808,SYN-P-00010,SYN-E-001310,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-03,2025-09-04,2025-09-13,Completed
+SYN-M-000809,SYN-P-00167,SYN-E-001311,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-45,2025-09-07,,Active
+SYN-M-000810,SYN-P-00167,SYN-E-001311,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-42,2025-09-10,2025-09-30,Completed
+SYN-M-000811,SYN-P-00020,SYN-E-001312,atorvastatin,Statin,20 mg,Once daily,Provider SYN-24,2025-09-05,2025-09-18,Completed
+SYN-M-000812,SYN-P-00024,SYN-E-001313,atorvastatin,Statin,20 mg,Once daily,Provider SYN-48,2025-09-06,,Active
+SYN-M-000813,SYN-P-00173,SYN-E-001314,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-29,2025-09-07,2025-09-25,Completed
+SYN-M-000814,SYN-P-00143,SYN-E-001317,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-08,2025-09-07,2025-10-31,Completed
+SYN-M-000815,SYN-P-00263,SYN-E-001318,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-35,2025-09-08,2025-12-02,Discontinued
+SYN-M-000816,SYN-P-00263,SYN-E-001318,insulin glargine,Insulin,10 units,Once daily,Provider SYN-20,2025-09-08,2025-12-02,Completed
+SYN-M-000817,SYN-P-00144,SYN-E-001319,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-49,2025-09-08,,Active
+SYN-M-000818,SYN-P-00065,SYN-E-001322,insulin glargine,Insulin,10 units,Once daily,Provider SYN-51,2025-09-11,,Active
+SYN-M-000819,SYN-P-00065,SYN-E-001322,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-38,2025-09-11,,Active
+SYN-M-000820,SYN-P-00198,SYN-E-001323,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-35,2025-09-11,,Active
+SYN-M-000821,SYN-P-00198,SYN-E-001323,metformin,Biguanide,500 mg,Twice daily,Provider SYN-12,2025-09-11,,Active
+SYN-M-000822,SYN-P-00048,SYN-E-001326,atorvastatin,Statin,20 mg,Once daily,Provider SYN-38,2025-09-14,,Active
+SYN-M-000823,SYN-P-00048,SYN-E-001326,metformin,Biguanide,500 mg,Twice daily,Provider SYN-22,2025-09-15,2025-09-19,Completed
+SYN-M-000824,SYN-P-00048,SYN-E-001326,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-19,2025-09-15,2025-12-09,Completed
+SYN-M-000825,SYN-P-00242,SYN-E-001327,metformin,Biguanide,500 mg,Twice daily,Provider SYN-33,2025-09-14,2025-11-05,Completed
+SYN-M-000826,SYN-P-00242,SYN-E-001327,metformin,Biguanide,500 mg,Twice daily,Provider SYN-02,2025-09-15,2025-11-22,Completed
+SYN-M-000827,SYN-P-00242,SYN-E-001327,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-19,2025-09-16,2025-09-19,Discontinued
+SYN-M-000828,SYN-P-00244,SYN-E-001329,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-40,2025-09-21,2025-12-18,Completed
+SYN-M-000829,SYN-P-00088,SYN-E-001331,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-35,2025-09-17,2025-09-21,Discontinued
+SYN-M-000830,SYN-P-00297,SYN-E-001332,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-18,2025-09-17,2025-12-09,Completed
+SYN-M-000831,SYN-P-00297,SYN-E-001332,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-01,2025-09-17,,Active
+SYN-M-000832,SYN-P-00266,SYN-E-001333,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-46,2025-09-18,2025-10-31,Discontinued
+SYN-M-000833,SYN-P-00097,SYN-E-001335,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-18,2025-09-19,2025-12-09,Completed
+SYN-M-000834,SYN-P-00246,SYN-E-001337,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-27,2025-09-23,2025-10-25,Completed
+SYN-M-000835,SYN-P-00224,SYN-E-001342,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-12,2025-09-22,,Active
+SYN-M-000836,SYN-P-00006,SYN-E-001344,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-48,2025-09-22,,Active
+SYN-M-000837,SYN-P-00006,SYN-E-001344,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-19,2025-09-23,2025-12-16,Completed
+SYN-M-000838,SYN-P-00035,SYN-E-001346,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-11,2025-09-29,,Active
+SYN-M-000839,SYN-P-00278,SYN-E-001348,insulin glargine,Insulin,10 units,Once daily,Provider SYN-38,2025-09-23,2025-11-05,Completed
+SYN-M-000840,SYN-P-00234,SYN-E-001349,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-43,2025-09-23,,Active
+SYN-M-000841,SYN-P-00201,SYN-E-001350,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-24,2025-09-24,,Active
+SYN-M-000842,SYN-P-00285,SYN-E-001351,insulin glargine,Insulin,10 units,Once daily,Provider SYN-51,2025-09-25,2025-12-01,Completed
+SYN-M-000843,SYN-P-00229,SYN-E-001353,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-30,2025-09-27,,Active
+SYN-M-000844,SYN-P-00265,SYN-E-001354,atorvastatin,Statin,20 mg,Once daily,Provider SYN-35,2025-09-28,2025-10-02,Completed
+SYN-M-000845,SYN-P-00055,SYN-E-001358,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-28,2025-10-02,,Active
+SYN-M-000846,SYN-P-00154,SYN-E-001359,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-41,2025-10-03,,Active
+SYN-M-000847,SYN-P-00091,SYN-E-001360,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-57,2025-10-04,2025-11-30,Completed
+SYN-M-000848,SYN-P-00063,SYN-E-001362,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-25,2025-10-04,2025-12-02,Discontinued
+SYN-M-000849,SYN-P-00296,SYN-E-001365,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-39,2025-10-07,,Active
+SYN-M-000850,SYN-P-00296,SYN-E-001365,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-04,2025-10-07,,Active
+SYN-M-000851,SYN-P-00064,SYN-E-001367,metformin,Biguanide,500 mg,Twice daily,Provider SYN-16,2025-10-07,2025-12-11,Completed
+SYN-M-000852,SYN-P-00035,SYN-E-001368,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-33,2025-10-16,2026-01-12,Completed
+SYN-M-000853,SYN-P-00228,SYN-E-001370,atorvastatin,Statin,20 mg,Once daily,Provider SYN-48,2025-10-07,,Active
+SYN-M-000854,SYN-P-00021,SYN-E-001371,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-12,2025-10-07,,Active
+SYN-M-000855,SYN-P-00021,SYN-E-001371,metformin,Biguanide,500 mg,Twice daily,Provider SYN-09,2025-10-08,,Active
+SYN-M-000856,SYN-P-00010,SYN-E-001377,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-36,2025-10-10,,Active
+SYN-M-000857,SYN-P-00043,SYN-E-001378,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-47,2025-10-11,2025-12-07,Completed
+SYN-M-000858,SYN-P-00043,SYN-E-001378,atorvastatin,Statin,20 mg,Once daily,Provider SYN-43,2025-10-12,2025-10-29,Completed
+SYN-M-000859,SYN-P-00166,SYN-E-001382,metformin,Biguanide,500 mg,Twice daily,Provider SYN-23,2025-10-15,2025-12-06,Completed
+SYN-M-000860,SYN-P-00166,SYN-E-001382,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-25,2025-10-17,2025-12-30,Completed
+SYN-M-000861,SYN-P-00225,SYN-E-001387,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-49,2025-10-17,,Active
+SYN-M-000862,SYN-P-00225,SYN-E-001387,insulin glargine,Insulin,10 units,Once daily,Provider SYN-38,2025-10-18,2025-12-01,Discontinued
+SYN-M-000863,SYN-P-00131,SYN-E-001388,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-15,2025-10-25,2025-12-09,Completed
+SYN-M-000864,SYN-P-00061,SYN-E-001389,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-21,2025-10-21,2025-11-30,Completed
+SYN-M-000865,SYN-P-00061,SYN-E-001389,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-55,2025-10-21,,Active
+SYN-M-000866,SYN-P-00061,SYN-E-001389,insulin glargine,Insulin,10 units,Once daily,Provider SYN-42,2025-10-21,2025-12-18,Discontinued
+SYN-M-000867,SYN-P-00061,SYN-E-001389,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-53,2025-10-22,2025-12-30,Discontinued
+SYN-M-000868,SYN-P-00277,SYN-E-001390,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-41,2025-10-21,2025-11-05,Discontinued
+SYN-M-000869,SYN-P-00066,SYN-E-001393,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-58,2025-10-23,,Active
+SYN-M-000870,SYN-P-00224,SYN-E-001394,metformin,Biguanide,500 mg,Twice daily,Provider SYN-43,2025-10-24,2025-11-03,Discontinued
+SYN-M-000871,SYN-P-00115,SYN-E-001396,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-08,2025-10-25,2025-11-18,Discontinued
+SYN-M-000872,SYN-P-00115,SYN-E-001396,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-53,2025-10-25,,Active
+SYN-M-000873,SYN-P-00242,SYN-E-001397,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-43,2025-10-27,2025-12-13,Completed
+SYN-M-000874,SYN-P-00242,SYN-E-001397,metformin,Biguanide,500 mg,Twice daily,Provider SYN-28,2025-10-27,2025-12-20,Discontinued
+SYN-M-000875,SYN-P-00260,SYN-E-001399,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-07,2025-10-28,2025-12-18,Completed
+SYN-M-000876,SYN-P-00260,SYN-E-001399,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-60,2025-11-01,,Active
+SYN-M-000877,SYN-P-00055,SYN-E-001400,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-11,2025-10-29,2026-01-15,Completed
+SYN-M-000878,SYN-P-00195,SYN-E-001401,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-25,2025-11-02,2025-11-10,Discontinued
+SYN-M-000879,SYN-P-00195,SYN-E-001401,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-27,2025-11-02,2026-01-03,Discontinued
+SYN-M-000880,SYN-P-00035,SYN-E-001403,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-34,2025-11-06,,Active
+SYN-M-000881,SYN-P-00035,SYN-E-001403,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-48,2025-11-15,2026-01-11,Discontinued
+SYN-M-000882,SYN-P-00076,SYN-E-001408,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-13,2025-11-05,2025-12-13,Completed
+SYN-M-000883,SYN-P-00076,SYN-E-001408,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-35,2025-11-06,,Active
+SYN-M-000884,SYN-P-00151,SYN-E-001410,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-48,2025-11-06,2025-12-17,Completed
+SYN-M-000885,SYN-P-00271,SYN-E-001411,insulin glargine,Insulin,10 units,Once daily,Provider SYN-20,2025-11-07,,Active
+SYN-M-000886,SYN-P-00283,SYN-E-001412,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-01,2025-11-07,,Active
+SYN-M-000887,SYN-P-00172,SYN-E-001414,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-51,2025-11-07,,Active
+SYN-M-000888,SYN-P-00172,SYN-E-001414,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-36,2025-11-07,2026-01-03,Completed
+SYN-M-000889,SYN-P-00172,SYN-E-001414,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-22,2025-11-11,2026-01-05,Completed
+SYN-M-000890,SYN-P-00133,SYN-E-001415,atorvastatin,Statin,20 mg,Once daily,Provider SYN-21,2025-11-07,2026-01-20,Completed
+SYN-M-000891,SYN-P-00170,SYN-E-001416,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-45,2025-11-09,2025-12-21,Completed
+SYN-M-000892,SYN-P-00024,SYN-E-001417,metformin,Biguanide,500 mg,Twice daily,Provider SYN-46,2025-11-08,,Active
+SYN-M-000893,SYN-P-00214,SYN-E-001418,atorvastatin,Statin,20 mg,Once daily,Provider SYN-34,2025-11-08,2026-01-17,Discontinued
+SYN-M-000894,SYN-P-00214,SYN-E-001418,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-04,2025-11-08,,Active
+SYN-M-000895,SYN-P-00208,SYN-E-001419,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-52,2025-11-09,2025-12-25,Completed
+SYN-M-000896,SYN-P-00054,SYN-E-001420,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-21,2025-11-10,,Active
+SYN-M-000897,SYN-P-00048,SYN-E-001421,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-44,2025-11-10,2025-11-22,Completed
+SYN-M-000898,SYN-P-00048,SYN-E-001421,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-06,2025-11-10,,Active
+SYN-M-000899,SYN-P-00180,SYN-E-001423,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-26,2025-11-11,2026-01-03,Discontinued
+SYN-M-000900,SYN-P-00173,SYN-E-001424,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-18,2025-11-11,2026-01-01,Completed
+SYN-M-000901,SYN-P-00196,SYN-E-001430,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-12,2025-11-17,2025-12-03,Completed
+SYN-M-000902,SYN-P-00235,SYN-E-001432,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-01,2025-11-19,,Active
+SYN-M-000903,SYN-P-00235,SYN-E-001432,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-09,2025-11-19,2026-02-13,Completed
+SYN-M-000904,SYN-P-00235,SYN-E-001432,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-35,2025-11-23,,Active
+SYN-M-000905,SYN-P-00042,SYN-E-001433,insulin glargine,Insulin,10 units,Once daily,Provider SYN-32,2025-11-19,2026-01-21,Completed
+SYN-M-000906,SYN-P-00042,SYN-E-001433,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-20,2025-11-20,,Active
+SYN-M-000907,SYN-P-00186,SYN-E-001434,atorvastatin,Statin,20 mg,Once daily,Provider SYN-13,2025-11-29,,Active
+SYN-M-000908,SYN-P-00234,SYN-E-001435,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-44,2025-11-21,,Active
+SYN-M-000909,SYN-P-00242,SYN-E-001436,metformin,Biguanide,500 mg,Twice daily,Provider SYN-38,2025-11-22,2026-01-02,Completed
+SYN-M-000910,SYN-P-00242,SYN-E-001436,metformin,Biguanide,500 mg,Twice daily,Provider SYN-14,2025-11-22,,Active
+SYN-M-000911,SYN-P-00215,SYN-E-001440,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-24,2025-11-24,2026-01-21,Completed
+SYN-M-000912,SYN-P-00242,SYN-E-001441,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-09,2025-11-25,2026-01-24,Completed
+SYN-M-000913,SYN-P-00242,SYN-E-001441,metformin,Biguanide,500 mg,Twice daily,Provider SYN-31,2025-11-25,,Active
+SYN-M-000914,SYN-P-00242,SYN-E-001441,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-48,2025-11-26,,Active
+SYN-M-000915,SYN-P-00221,SYN-E-001442,albuterol,Bronchodilator,2 puffs,As needed,Provider SYN-19,2025-11-26,2025-12-29,Discontinued
+SYN-M-000916,SYN-P-00221,SYN-E-001442,metformin,Biguanide,500 mg,Twice daily,Provider SYN-18,2025-11-26,,Active
+SYN-M-000917,SYN-P-00221,SYN-E-001442,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-06,2025-11-28,2026-02-10,Completed
+SYN-M-000918,SYN-P-00221,SYN-E-001442,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-38,2025-11-28,2026-01-19,Completed
+SYN-M-000919,SYN-P-00221,SYN-E-001442,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-28,2025-11-28,,Active
+SYN-M-000920,SYN-P-00219,SYN-E-001443,insulin glargine,Insulin,10 units,Once daily,Provider SYN-29,2025-11-26,2025-12-30,Completed
+SYN-M-000921,SYN-P-00174,SYN-E-001447,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-28,2025-12-01,2026-02-06,Completed
+SYN-M-000922,SYN-P-00174,SYN-E-001447,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-41,2025-12-01,2026-01-08,Completed
+SYN-M-000923,SYN-P-00174,SYN-E-001447,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-24,2025-12-02,2026-01-20,Completed
+SYN-M-000924,SYN-P-00079,SYN-E-001448,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-33,2025-11-29,2026-01-06,Discontinued
+SYN-M-000925,SYN-P-00079,SYN-E-001448,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-01,2025-11-29,2025-12-06,Completed
+SYN-M-000926,SYN-P-00079,SYN-E-001448,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-57,2025-11-30,2025-12-14,Completed
+SYN-M-000927,SYN-P-00079,SYN-E-001448,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-39,2025-11-30,2025-12-18,Completed
+SYN-M-000928,SYN-P-00043,SYN-E-001456,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-37,2025-12-02,2026-01-06,Discontinued
+SYN-M-000929,SYN-P-00030,SYN-E-001457,apixaban,Anticoagulant,5 mg,Twice daily,Provider SYN-31,2025-12-02,,Active
+SYN-M-000930,SYN-P-00030,SYN-E-001457,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-59,2025-12-03,,Active
+SYN-M-000931,SYN-P-00299,SYN-E-001461,atorvastatin,Statin,20 mg,Once daily,Provider SYN-29,2025-12-04,,Active
+SYN-M-000932,SYN-P-00299,SYN-E-001461,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-23,2025-12-04,2026-01-17,Discontinued
+SYN-M-000933,SYN-P-00299,SYN-E-001461,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-57,2025-12-05,2026-03-03,Completed
+SYN-M-000934,SYN-P-00299,SYN-E-001461,metformin,Biguanide,500 mg,Twice daily,Provider SYN-01,2025-12-06,2026-02-05,Completed
+SYN-M-000935,SYN-P-00299,SYN-E-001461,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-28,2025-12-07,2026-01-22,Completed
+SYN-M-000936,SYN-P-00299,SYN-E-001461,ondansetron,Antiemetic,4 mg,Every 8 hours as needed,Provider SYN-08,2025-12-07,2026-01-26,Completed
+SYN-M-000937,SYN-P-00290,SYN-E-001462,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-21,2025-12-12,2026-01-14,Discontinued
+SYN-M-000938,SYN-P-00143,SYN-E-001463,atorvastatin,Statin,20 mg,Once daily,Provider SYN-15,2025-12-08,,Active
+SYN-M-000939,SYN-P-00143,SYN-E-001463,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-49,2025-12-09,,Active
+SYN-M-000940,SYN-P-00269,SYN-E-001469,ceftriaxone,Antibiotic,1 g,Once daily,Provider SYN-34,2025-12-09,,Active
+SYN-M-000941,SYN-P-00295,SYN-E-001470,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-40,2025-12-10,2026-02-06,Completed
+SYN-M-000942,SYN-P-00251,SYN-E-001472,furosemide,Loop diuretic,40 mg,Once daily,Provider SYN-58,2025-12-10,,Active
+SYN-M-000943,SYN-P-00234,SYN-E-001473,insulin glargine,Insulin,10 units,Once daily,Provider SYN-60,2025-12-10,2025-12-17,Completed
+SYN-M-000944,SYN-P-00289,SYN-E-001475,prednisone,Corticosteroid,20 mg,Once daily,Provider SYN-36,2025-12-13,2026-01-03,Discontinued
+SYN-M-000945,SYN-P-00248,SYN-E-001477,amlodipine,Calcium channel blocker,5 mg,Once daily,Provider SYN-46,2025-12-13,2026-01-30,Discontinued
+SYN-M-000946,SYN-P-00180,SYN-E-001484,insulin glargine,Insulin,10 units,Once daily,Provider SYN-39,2025-12-21,,Active
+SYN-M-000947,SYN-P-00180,SYN-E-001484,lisinopril,ACE inhibitor,10 mg,Once daily,Provider SYN-25,2025-12-22,2026-01-20,Completed
+SYN-M-000948,SYN-P-00225,SYN-E-001494,atorvastatin,Statin,20 mg,Once daily,Provider SYN-12,2025-12-27,2026-03-19,Completed
+SYN-M-000949,SYN-P-00013,SYN-E-001497,acetaminophen,Analgesic,650 mg,Every 6 hours as needed,Provider SYN-43,2025-12-28,2026-03-24,Completed
+SYN-M-000950,SYN-P-00129,SYN-E-001499,atorvastatin,Statin,20 mg,Once daily,Provider SYN-33,2025-12-29,,Active

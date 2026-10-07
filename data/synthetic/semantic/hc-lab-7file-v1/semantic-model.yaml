@@ -1,0 +1,303 @@
+# Semantic model contract for Use-Case Guide HC-01 (synthetic). The same definitions drive:
+#   * local measure evaluation (sql, DuckDB over Gold Parquet),
+#   * the reference DAX for the live Direct Lake model (dax, validate in the tenant),
+#   * AI-readiness descriptions and synonyms.
+id: hc-01-healthcare-analytics
+profile: hc-lab-7file-v1
+name: Healthcare Analytics (synthetic)
+description: >-
+  Direct Lake semantic model over the Gold layer: three facts at encounter, claim and
+  index-inpatient-encounter grain, plus shared date, patient, facility and payer dimensions.
+synthetic_notice: >-
+  SYNTHETIC ANALYTICAL DEMONSTRATION. Fictional data. Metrics illustrate analytics engineering and
+  are not clinical quality measures or clinical decision rules.
+storage_mode: DirectLake
+
+tables:
+  - name: gold_encounter_summary
+    role: fact
+    grain: One row per encounter.
+    key: encounter_id
+    description: Encounter-grain fact with encounter context, length of stay and charges. Child rows are pre-aggregated, so encounters are never multiplied.
+    synonyms: [encounters, visits]
+  - name: gold_financial
+    role: fact
+    grain: One row per claim.
+    key: claim_id
+    description: Claim-grain fact with payer, claim date and monetary fields.
+    synonyms: [claims, billing]
+  - name: gold_readmissions
+    role: fact
+    grain: One row per index inpatient encounter.
+    key: index_encounter_id
+    description: Index inpatient encounters with the next qualifying admission, follow-up eligibility and a 30-day readmission flag (synthetic demonstration rule).
+    synonyms: [readmissions, index stays]
+  - name: dim_date
+    role: dimension
+    grain: One row per calendar date.
+    key: date
+    description: Shared calendar. Each fact relates through exactly one active date role.
+    synonyms: [calendar]
+  - name: dim_patient
+    role: dimension
+    grain: One row per synthetic patient.
+    key: patient_id
+    description: Patient attributes and reviewed population attributes. A snapshot that is not filtered by encounter dates or facility selections.
+    synonyms: [patients, members, population]
+  - name: dim_facility
+    role: dimension
+    grain: One row per facility.
+    key: facility_id
+    description: Fictional facilities.
+    synonyms: [facilities, sites, hospitals]
+  - name: dim_payer
+    role: dimension
+    grain: One row per payer and payer type.
+    key: payer_key
+    description: Fictional payers. Related to the claim fact only.
+    synonyms: [payers, insurers, plans]
+
+excluded_tables:
+  - name: gold_ed_utilization
+    reason: ED metrics come from encounter-grain measures; adding this aggregate would duplicate them and create fact-to-fact filter paths.
+  - name: gold_alos
+    reason: Average length of stay is computed from encounter-grain components; adding this aggregate invites averaging grouped averages.
+  - name: gold_population_health
+    reason: Reviewed population attributes are carried on dim_patient.
+
+relationships:
+  - {from_table: dim_patient, from_column: patient_id, to_table: gold_encounter_summary, to_column: patient_id, description: Patient to encounters.}
+  - {from_table: dim_patient, from_column: patient_id, to_table: gold_financial, to_column: patient_id, description: Patient to claims.}
+  - {from_table: dim_patient, from_column: patient_id, to_table: gold_readmissions, to_column: patient_id, description: Patient to index encounters.}
+  - {from_table: dim_facility, from_column: facility_id, to_table: gold_encounter_summary, to_column: facility_id, description: Facility to encounters.}
+  - {from_table: dim_facility, from_column: facility_id, to_table: gold_financial, to_column: facility_id, description: Facility to claims.}
+  - {from_table: dim_facility, from_column: facility_id, to_table: gold_readmissions, to_column: facility_id, description: Facility to index encounters.}
+  - {from_table: dim_payer, from_column: payer_key, to_table: gold_financial, to_column: payer_key, description: Payer to claims only.}
+  - {from_table: dim_date, from_column: date, to_table: gold_encounter_summary, to_column: encounter_date, role: Encounter date, description: Filters encounters by encounter date.}
+  - {from_table: dim_date, from_column: date, to_table: gold_financial, to_column: claim_date, role: Claim date, description: Filters claims by claim date.}
+  - {from_table: dim_date, from_column: date, to_table: gold_readmissions, to_column: index_discharge_date, role: Index discharge date, description: Filters index encounters by index discharge date.}
+
+measures:
+  - name: total_encounters
+    display_name: Total Encounters
+    home_table: gold_encounter_summary
+    description: Count of encounter-grain rows.
+    definition: Count encounter rows in the current filter context.
+    format: integer
+    sql: SELECT count(*) FROM gold_encounter_summary
+    dax: COUNTROWS ( gold_encounter_summary )
+  - name: ed_visit_count
+    display_name: ED Visit Count
+    home_table: gold_encounter_summary
+    description: Count of emergency department encounters.
+    definition: Encounter rows where encounter_type = "ED".
+    format: integer
+    sql: SELECT count(*) FROM gold_encounter_summary WHERE encounter_type = 'ED'
+    dax: CALCULATE ( COUNTROWS ( gold_encounter_summary ), gold_encounter_summary[encounter_type] = "ED" )
+  - name: inpatient_encounters
+    display_name: Inpatient Encounters
+    home_table: gold_encounter_summary
+    description: Count of inpatient encounters.
+    definition: Encounter rows where is_inpatient is true.
+    format: integer
+    sql: SELECT count(*) FROM gold_encounter_summary WHERE is_inpatient
+    dax: CALCULATE ( COUNTROWS ( gold_encounter_summary ), gold_encounter_summary[is_inpatient] = TRUE () )
+  - name: total_inpatient_los_days
+    display_name: Total Inpatient LOS Days
+    home_table: gold_encounter_summary
+    description: Sum of length_of_stay_days for inpatient encounters.
+    definition: Sum of recorded length_of_stay_days where is_inpatient is true.
+    format: integer
+    sql: SELECT sum(length_of_stay_days) FROM gold_encounter_summary WHERE is_inpatient
+    dax: CALCULATE ( SUM ( gold_encounter_summary[length_of_stay_days] ), gold_encounter_summary[is_inpatient] = TRUE () )
+  - name: average_length_of_stay
+    display_name: Average Length of Stay
+    home_table: gold_encounter_summary
+    description: Total inpatient LOS days divided by inpatient encounter count.
+    definition: Ratio of totals. Never an average of grouped averages.
+    format: decimal
+    sql: SELECT sum(length_of_stay_days) / nullif(count(*), 0) FROM gold_encounter_summary WHERE is_inpatient
+    dax: DIVIDE ( [Total Inpatient LOS Days], [Inpatient Encounters] )
+  - name: eligible_index_encounters
+    display_name: Eligible Index Encounters
+    home_table: gold_readmissions
+    description: Index inpatient encounters with at least 30 days of follow-up before the observation cutoff.
+    definition: gold_readmissions rows where is_followup_eligible is true.
+    format: integer
+    sql: SELECT count(*) FROM gold_readmissions WHERE is_followup_eligible
+    dax: CALCULATE ( COUNTROWS ( gold_readmissions ), gold_readmissions[is_followup_eligible] = TRUE () )
+    synthetic_demonstration: true
+  - name: readmissions_within_30_days
+    display_name: Readmissions Within 30 Days
+    home_table: gold_readmissions
+    description: Eligible index encounters followed by a qualifying admission 1 through 30 days after discharge.
+    definition: Eligible rows where is_readmitted_30d is true.
+    format: integer
+    sql: SELECT count(*) FROM gold_readmissions WHERE is_followup_eligible AND is_readmitted_30d
+    dax: CALCULATE ( COUNTROWS ( gold_readmissions ), gold_readmissions[is_followup_eligible] = TRUE (), gold_readmissions[is_readmitted_30d] = TRUE () )
+    synthetic_demonstration: true
+  - name: readmission_rate_30_day
+    display_name: 30 Day Readmission Rate
+    home_table: gold_readmissions
+    description: Synthetic demonstration rate. The same eligibility filter applies to numerator and denominator.
+    definition: Readmissions Within 30 Days divided by Eligible Index Encounters.
+    format: percent
+    sql: SELECT count(*) FILTER (WHERE is_readmitted_30d) / nullif(count(*), 0) FROM gold_readmissions WHERE is_followup_eligible
+    dax: DIVIDE ( [Readmissions Within 30 Days], [Eligible Index Encounters] )
+    synthetic_demonstration: true
+  - name: total_paid_amount
+    display_name: Total Paid Amount
+    home_table: gold_financial
+    description: Sum of paid_amount at claim grain. Paid claims, not recognized revenue.
+    definition: Sum of gold_financial.paid_amount.
+    format: currency
+    sql: SELECT sum(paid_amount) FROM gold_financial
+    dax: SUM ( gold_financial[paid_amount] )
+  - name: total_denied_claim_amount
+    display_name: Total Denied Claim Amount
+    home_table: gold_financial
+    description: Sum of denied_amount. Distinct from the count of claims currently in Denied status.
+    definition: Sum of gold_financial.denied_amount.
+    format: currency
+    sql: SELECT sum(denied_amount) FROM gold_financial
+    dax: SUM ( gold_financial[denied_amount] )
+  - name: claim_count
+    display_name: Claim Count
+    home_table: gold_financial
+    description: Count of claims.
+    definition: Count claim rows.
+    format: integer
+    sql: SELECT count(*) FROM gold_financial
+    dax: COUNTROWS ( gold_financial )
+  - name: denied_claim_count
+    display_name: Denied Claim Count
+    home_table: gold_financial
+    description: Claims currently in Denied status. Paid on Appeal is a separate status.
+    definition: Claim rows where claim_status = "Denied".
+    format: integer
+    sql: SELECT count(*) FROM gold_financial WHERE claim_status = 'Denied'
+    dax: CALCULATE ( COUNTROWS ( gold_financial ), gold_financial[claim_status] = "Denied" )
+  - name: denial_rate
+    display_name: Denial Rate
+    home_table: gold_financial
+    description: Claims with claim_status = Denied divided by all claims in the current context.
+    definition: Denied Claim Count divided by Claim Count.
+    format: percent
+    sql: SELECT count(*) FILTER (WHERE claim_status = 'Denied') / nullif(count(*), 0) FROM gold_financial
+    dax: DIVIDE ( [Denied Claim Count], [Claim Count] )
+  - name: total_charges
+    display_name: Total Charges
+    home_table: gold_encounter_summary
+    description: Sum of encounter-grain total_charges. Blank charges contribute nothing.
+    definition: Sum of gold_encounter_summary.total_charges.
+    format: currency
+    sql: SELECT sum(total_charges) FROM gold_encounter_summary
+    dax: SUM ( gold_encounter_summary[total_charges] )
+  - name: average_charges_per_encounter
+    display_name: Average Charges per Encounter
+    home_table: gold_encounter_summary
+    description: Encounter-grain total charges divided by encounters with a recorded charge.
+    definition: Agreed blank handling — encounters with blank total_charges are excluded from both numerator and denominator.
+    format: currency
+    sql: SELECT sum(total_charges) / nullif(count(total_charges), 0) FROM gold_encounter_summary
+    dax: DIVIDE ( SUM ( gold_encounter_summary[total_charges] ), COUNT ( gold_encounter_summary[total_charges] ) )
+  - name: patient_count
+    display_name: Patient Count
+    home_table: dim_patient
+    description: Count of unique patients. A snapshot that encounter date and facility slicers do not filter.
+    definition: Count dim_patient rows.
+    format: integer
+    sql: SELECT count(*) FROM dim_patient
+    dax: COUNTROWS ( dim_patient )
+  - name: high_risk_patient_count
+    display_name: High Risk Patient Count
+    home_table: dim_patient
+    description: Patients in the reviewed synthetic High risk category.
+    definition: dim_patient rows where risk_category = "High".
+    format: integer
+    sql: SELECT count(*) FROM dim_patient WHERE risk_category = 'High'
+    dax: CALCULATE ( [Patient Count], dim_patient[risk_category] = "High" )
+    synthetic_demonstration: true
+  - name: high_risk_patient_pct
+    display_name: High Risk Patient %
+    home_table: dim_patient
+    description: High Risk Patient Count divided by Patient Count in the same population context.
+    definition: Ratio of patient counts.
+    format: percent
+    sql: SELECT count(*) FILTER (WHERE risk_category = 'High') / nullif(count(*), 0) FROM dim_patient
+    dax: DIVIDE ( [High Risk Patient Count], [Patient Count] )
+    synthetic_demonstration: true
+  - name: diabetes_prevalence
+    display_name: Diabetes Prevalence
+    home_table: dim_patient
+    description: Patients with an active diabetes condition divided by Patient Count. Zero-condition patients remain in the denominator.
+    definition: Distinct flagged patients divided by Patient Count.
+    format: percent
+    sql: SELECT count(*) FILTER (WHERE has_diabetes) / nullif(count(*), 0) FROM dim_patient
+    dax: DIVIDE ( CALCULATE ( [Patient Count], dim_patient[has_diabetes] = TRUE () ), [Patient Count] )
+    synthetic_demonstration: true
+  - name: hypertension_prevalence
+    display_name: Hypertension Prevalence
+    home_table: dim_patient
+    description: Patients with active hypertension divided by Patient Count.
+    definition: Distinct flagged patients divided by Patient Count.
+    format: percent
+    sql: SELECT count(*) FILTER (WHERE has_hypertension) / nullif(count(*), 0) FROM dim_patient
+    dax: DIVIDE ( CALCULATE ( [Patient Count], dim_patient[has_hypertension] = TRUE () ), [Patient Count] )
+    synthetic_demonstration: true
+  - name: heart_failure_prevalence
+    display_name: Heart Failure Prevalence
+    home_table: dim_patient
+    description: Patients with active heart failure divided by Patient Count.
+    definition: Distinct flagged patients divided by Patient Count.
+    format: percent
+    sql: SELECT count(*) FILTER (WHERE has_heart_failure) / nullif(count(*), 0) FROM dim_patient
+    dax: DIVIDE ( CALCULATE ( [Patient Count], dim_patient[has_heart_failure] = TRUE () ), [Patient Count] )
+    synthetic_demonstration: true
+  - name: copd_prevalence
+    display_name: COPD Prevalence
+    home_table: dim_patient
+    description: Patients with active COPD divided by Patient Count.
+    definition: Distinct flagged patients divided by Patient Count.
+    format: percent
+    sql: SELECT count(*) FILTER (WHERE has_copd) / nullif(count(*), 0) FROM dim_patient
+    dax: DIVIDE ( CALCULATE ( [Patient Count], dim_patient[has_copd] = TRUE () ), [Patient Count] )
+    synthetic_demonstration: true
+  - name: ckd_prevalence
+    display_name: CKD Prevalence
+    home_table: dim_patient
+    description: Patients with active chronic kidney disease divided by Patient Count.
+    definition: Distinct flagged patients divided by Patient Count.
+    format: percent
+    sql: SELECT count(*) FILTER (WHERE has_ckd) / nullif(count(*), 0) FROM dim_patient
+    dax: DIVIDE ( CALCULATE ( [Patient Count], dim_patient[has_ckd] = TRUE () ), [Patient Count] )
+    synthetic_demonstration: true
+
+excluded_measures:
+  - name: bed_occupancy_rate
+    reason: The dataset has no available-bed or staffed-bed denominator, so the measure cannot be defined honestly.
+
+vocabulary:
+  - term: Encounter
+    definition: A single synthetic patient visit (inpatient, ED, observation or outpatient).
+    synonyms: [visit]
+  - term: Index encounter
+    definition: An inpatient encounter evaluated for a subsequent qualifying admission.
+    synonyms: [index stay, index admission]
+  - term: 30-day readmission (synthetic)
+    definition: A next inpatient admission 1 through 30 days after the index discharge date, counted only for follow-up-eligible index encounters. A demonstration rule, not a clinical specification.
+    synonyms: [readmit]
+  - term: Observation cutoff
+    definition: The latest encounter date in the dataset. Index discharges need 30 days of observation before it to be eligible.
+  - term: Denied claim
+    definition: A claim whose current status is Denied. Paid on Appeal is a separate status.
+    synonyms: [denial]
+  - term: Paid amount
+    definition: Amount paid on claims. Not recognized revenue.
+  - term: Length of stay
+    definition: Recorded length_of_stay_days for an encounter.
+    synonyms: [LOS]
+  - term: Multimorbidity group
+    definition: Synthetic grouping by the number of distinct active chronic condition categories.
+  - term: Risk category
+    definition: Synthetic banding of risk_score into Low, Moderate and High.

@@ -1,0 +1,6 @@
+payer_id,payer_name,payer_type
+PYR-01,Synthetic Commercial Plan A,Commercial
+PYR-02,Synthetic Commercial Plan B,Commercial
+PYR-03,Synthetic Medicare Advantage Plan,Medicare
+PYR-04,Synthetic Medicaid Managed Care,Medicaid
+PYR-05,Self-Pay,Self-Pay

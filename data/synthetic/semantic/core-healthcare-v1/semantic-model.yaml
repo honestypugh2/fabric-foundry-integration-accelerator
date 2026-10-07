@@ -1,0 +1,382 @@
+# Semantic model contract for the baseline core-healthcare-v1 profile (synthetic).
+# Measures share their contracts with Guide HC-01; tables and date roles differ (star schema with
+# physical role-playing date dimensions).
+id: core-healthcare-analytics
+profile: core-healthcare-v1
+name: Healthcare Analytics Star Schema (synthetic)
+description: 'Baseline accelerator star schema: encounter, claim and index-encounter facts with patient, facility
+  and payer dimensions and PHYSICAL role-playing date dimensions (admission, discharge, claim) so every relationship
+  stays active.'
+synthetic_notice: SYNTHETIC ANALYTICAL DEMONSTRATION. Fictional data. Metrics illustrate analytics engineering and
+  are not clinical quality measures or clinical decision rules.
+storage_mode: DirectLake
+tables:
+- name: fact_encounter
+  role: fact
+  grain: One row per encounter.
+  key: encounter_id
+  description: Encounter-grain fact. Child rows are pre-aggregated.
+  synonyms:
+  - encounters
+  - visits
+- name: fact_claim
+  role: fact
+  grain: One row per claim.
+  key: claim_id
+  description: Claim-grain fact keyed to the payer master.
+  synonyms:
+  - claims
+  - billing
+- name: gold_readmission_demo
+  role: fact
+  grain: One row per index inpatient encounter.
+  key: index_encounter_id
+  description: Synthetic 30-day readmission demonstration.
+  synonyms:
+  - readmissions
+- name: dim_date_admission
+  role: dimension
+  grain: One row per calendar date (admission role).
+  key: admission_date
+  description: Physical role-playing date table for encounter admission dates.
+  synonyms:
+  - admission calendar
+- name: dim_date_discharge
+  role: dimension
+  grain: One row per calendar date (discharge role).
+  key: discharge_date
+  description: Physical role-playing date table for discharge dates.
+  synonyms:
+  - discharge calendar
+- name: dim_date_claim
+  role: dimension
+  grain: One row per calendar date (claim role).
+  key: claim_date
+  description: Physical role-playing date table for claim dates.
+  synonyms:
+  - claim calendar
+- name: dim_patient
+  role: dimension
+  grain: One row per synthetic patient.
+  key: patient_id
+  description: Patient attributes and reviewed population attributes (snapshot).
+  synonyms:
+  - patients
+  - population
+- name: dim_facility
+  role: dimension
+  grain: One row per facility.
+  key: facility_id
+  description: 'Facility master: type and region.'
+  synonyms:
+  - facilities
+  - sites
+- name: dim_payer
+  role: dimension
+  grain: One row per payer.
+  key: payer_key
+  description: Payer master.
+  synonyms:
+  - payers
+  - plans
+excluded_tables:
+- name: gold_population_health
+  reason: Reviewed population attributes are carried on dim_patient.
+relationships:
+- from_table: dim_patient
+  from_column: patient_id
+  to_table: fact_encounter
+  to_column: patient_id
+  description: Patient to encounters.
+- from_table: dim_patient
+  from_column: patient_id
+  to_table: fact_claim
+  to_column: patient_id
+  description: Patient to claims.
+- from_table: dim_patient
+  from_column: patient_id
+  to_table: gold_readmission_demo
+  to_column: patient_id
+  description: Patient to index encounters.
+- from_table: dim_facility
+  from_column: facility_id
+  to_table: fact_encounter
+  to_column: facility_id
+  description: Facility to encounters.
+- from_table: dim_facility
+  from_column: facility_id
+  to_table: fact_claim
+  to_column: facility_id
+  description: Facility to claims.
+- from_table: dim_facility
+  from_column: facility_id
+  to_table: gold_readmission_demo
+  to_column: facility_id
+  description: Facility to index encounters.
+- from_table: dim_payer
+  from_column: payer_key
+  to_table: fact_claim
+  to_column: payer_key
+  description: Payer to claims.
+- from_table: dim_date_admission
+  from_column: admission_date
+  to_table: fact_encounter
+  to_column: encounter_date
+  role: Admission date
+  description: 'Active: filters encounters by admission date.'
+- from_table: dim_date_discharge
+  from_column: discharge_date
+  to_table: fact_encounter
+  to_column: discharge_date
+  role: Discharge date
+  description: 'Active: filters encounters by discharge date (separate physical table, so no inactive relationship
+    is needed).'
+- from_table: dim_date_discharge
+  from_column: discharge_date
+  to_table: gold_readmission_demo
+  to_column: index_discharge_date
+  role: Index discharge date
+  description: 'Active: filters index encounters by discharge date.'
+- from_table: dim_date_claim
+  from_column: claim_date
+  to_table: fact_claim
+  to_column: claim_date
+  role: Claim date
+  description: 'Active: filters claims by claim date.'
+measures:
+- name: total_encounters
+  display_name: Total Encounters
+  home_table: fact_encounter
+  description: Count of encounter-grain rows.
+  definition: Count encounter rows in the current filter context.
+  format: integer
+  sql: SELECT count(*) FROM fact_encounter
+  dax: COUNTROWS ( fact_encounter )
+- name: ed_visit_count
+  display_name: ED Visit Count
+  home_table: fact_encounter
+  description: Count of emergency department encounters.
+  definition: Encounter rows where encounter_type = "ED".
+  format: integer
+  sql: SELECT count(*) FROM fact_encounter WHERE encounter_type = 'ED'
+  dax: CALCULATE ( COUNTROWS ( fact_encounter ), fact_encounter[encounter_type] = "ED" )
+- name: inpatient_encounters
+  display_name: Inpatient Encounters
+  home_table: fact_encounter
+  description: Count of inpatient encounters.
+  definition: Encounter rows where is_inpatient is true.
+  format: integer
+  sql: SELECT count(*) FROM fact_encounter WHERE is_inpatient
+  dax: CALCULATE ( COUNTROWS ( fact_encounter ), fact_encounter[is_inpatient] = TRUE () )
+- name: total_inpatient_los_days
+  display_name: Total Inpatient LOS Days
+  home_table: fact_encounter
+  description: Sum of length_of_stay_days for inpatient encounters.
+  definition: Sum of recorded length_of_stay_days where is_inpatient is true.
+  format: integer
+  sql: SELECT sum(length_of_stay_days) FROM fact_encounter WHERE is_inpatient
+  dax: CALCULATE ( SUM ( fact_encounter[length_of_stay_days] ), fact_encounter[is_inpatient] = TRUE () )
+- name: average_length_of_stay
+  display_name: Average Length of Stay
+  home_table: fact_encounter
+  description: Total inpatient LOS days divided by inpatient encounter count.
+  definition: Ratio of totals. Never an average of grouped averages.
+  format: decimal
+  sql: SELECT sum(length_of_stay_days) / nullif(count(*), 0) FROM fact_encounter WHERE is_inpatient
+  dax: DIVIDE ( [Total Inpatient LOS Days], [Inpatient Encounters] )
+- name: eligible_index_encounters
+  display_name: Eligible Index Encounters
+  home_table: gold_readmission_demo
+  description: Index inpatient encounters with at least 30 days of follow-up before the observation cutoff.
+  definition: gold_readmission_demo rows where is_followup_eligible is true.
+  format: integer
+  sql: SELECT count(*) FROM gold_readmission_demo WHERE is_followup_eligible
+  dax: CALCULATE ( COUNTROWS ( gold_readmission_demo ), gold_readmission_demo[is_followup_eligible] = TRUE () )
+  synthetic_demonstration: true
+- name: readmissions_within_30_days
+  display_name: Readmissions Within 30 Days
+  home_table: gold_readmission_demo
+  description: Eligible index encounters followed by a qualifying admission 1 through 30 days after discharge.
+  definition: Eligible rows where is_readmitted_30d is true.
+  format: integer
+  sql: SELECT count(*) FROM gold_readmission_demo WHERE is_followup_eligible AND is_readmitted_30d
+  dax: CALCULATE ( COUNTROWS ( gold_readmission_demo ), gold_readmission_demo[is_followup_eligible] = TRUE (), gold_readmission_demo[is_readmitted_30d]
+    = TRUE () )
+  synthetic_demonstration: true
+- name: readmission_rate_30_day
+  display_name: 30 Day Readmission Rate
+  home_table: gold_readmission_demo
+  description: Synthetic demonstration rate. The same eligibility filter applies to numerator and denominator.
+  definition: Readmissions Within 30 Days divided by Eligible Index Encounters.
+  format: percent
+  sql: SELECT count(*) FILTER (WHERE is_readmitted_30d) / nullif(count(*), 0) FROM gold_readmission_demo WHERE is_followup_eligible
+  dax: DIVIDE ( [Readmissions Within 30 Days], [Eligible Index Encounters] )
+  synthetic_demonstration: true
+- name: total_paid_amount
+  display_name: Total Paid Amount
+  home_table: fact_claim
+  description: Sum of paid_amount at claim grain. Paid claims, not recognized revenue.
+  definition: Sum of fact_claim.paid_amount.
+  format: currency
+  sql: SELECT sum(paid_amount) FROM fact_claim
+  dax: SUM ( fact_claim[paid_amount] )
+- name: total_denied_claim_amount
+  display_name: Total Denied Claim Amount
+  home_table: fact_claim
+  description: Sum of denied_amount. Distinct from the count of claims currently in Denied status.
+  definition: Sum of fact_claim.denied_amount.
+  format: currency
+  sql: SELECT sum(denied_amount) FROM fact_claim
+  dax: SUM ( fact_claim[denied_amount] )
+- name: claim_count
+  display_name: Claim Count
+  home_table: fact_claim
+  description: Count of claims.
+  definition: Count claim rows.
+  format: integer
+  sql: SELECT count(*) FROM fact_claim
+  dax: COUNTROWS ( fact_claim )
+- name: denied_claim_count
+  display_name: Denied Claim Count
+  home_table: fact_claim
+  description: Claims currently in Denied status. Paid on Appeal is a separate status.
+  definition: Claim rows where claim_status = "Denied".
+  format: integer
+  sql: SELECT count(*) FROM fact_claim WHERE claim_status = 'Denied'
+  dax: CALCULATE ( COUNTROWS ( fact_claim ), fact_claim[claim_status] = "Denied" )
+- name: denial_rate
+  display_name: Denial Rate
+  home_table: fact_claim
+  description: Claims with claim_status = Denied divided by all claims in the current context.
+  definition: Denied Claim Count divided by Claim Count.
+  format: percent
+  sql: SELECT count(*) FILTER (WHERE claim_status = 'Denied') / nullif(count(*), 0) FROM fact_claim
+  dax: DIVIDE ( [Denied Claim Count], [Claim Count] )
+- name: total_charges
+  display_name: Total Charges
+  home_table: fact_encounter
+  description: Sum of encounter-grain total_charges. Blank charges contribute nothing.
+  definition: Sum of fact_encounter.total_charges.
+  format: currency
+  sql: SELECT sum(total_charges) FROM fact_encounter
+  dax: SUM ( fact_encounter[total_charges] )
+- name: average_charges_per_encounter
+  display_name: Average Charges per Encounter
+  home_table: fact_encounter
+  description: Encounter-grain total charges divided by encounters with a recorded charge.
+  definition: Agreed blank handling — encounters with blank total_charges are excluded from both numerator and denominator.
+  format: currency
+  sql: SELECT sum(total_charges) / nullif(count(total_charges), 0) FROM fact_encounter
+  dax: DIVIDE ( SUM ( fact_encounter[total_charges] ), COUNT ( fact_encounter[total_charges] ) )
+- name: patient_count
+  display_name: Patient Count
+  home_table: dim_patient
+  description: Count of unique patients. A snapshot that encounter date and facility slicers do not filter.
+  definition: Count dim_patient rows.
+  format: integer
+  sql: SELECT count(*) FROM dim_patient
+  dax: COUNTROWS ( dim_patient )
+- name: high_risk_patient_count
+  display_name: High Risk Patient Count
+  home_table: dim_patient
+  description: Patients in the reviewed synthetic High risk category.
+  definition: dim_patient rows where risk_category = "High".
+  format: integer
+  sql: SELECT count(*) FROM dim_patient WHERE risk_category = 'High'
+  dax: CALCULATE ( [Patient Count], dim_patient[risk_category] = "High" )
+  synthetic_demonstration: true
+- name: high_risk_patient_pct
+  display_name: High Risk Patient %
+  home_table: dim_patient
+  description: High Risk Patient Count divided by Patient Count in the same population context.
+  definition: Ratio of patient counts.
+  format: percent
+  sql: SELECT count(*) FILTER (WHERE risk_category = 'High') / nullif(count(*), 0) FROM dim_patient
+  dax: DIVIDE ( [High Risk Patient Count], [Patient Count] )
+  synthetic_demonstration: true
+- name: diabetes_prevalence
+  display_name: Diabetes Prevalence
+  home_table: dim_patient
+  description: Patients with an active diabetes condition divided by Patient Count. Zero-condition patients remain
+    in the denominator.
+  definition: Distinct flagged patients divided by Patient Count.
+  format: percent
+  sql: SELECT count(*) FILTER (WHERE has_diabetes) / nullif(count(*), 0) FROM dim_patient
+  dax: DIVIDE ( CALCULATE ( [Patient Count], dim_patient[has_diabetes] = TRUE () ), [Patient Count] )
+  synthetic_demonstration: true
+- name: hypertension_prevalence
+  display_name: Hypertension Prevalence
+  home_table: dim_patient
+  description: Patients with active hypertension divided by Patient Count.
+  definition: Distinct flagged patients divided by Patient Count.
+  format: percent
+  sql: SELECT count(*) FILTER (WHERE has_hypertension) / nullif(count(*), 0) FROM dim_patient
+  dax: DIVIDE ( CALCULATE ( [Patient Count], dim_patient[has_hypertension] = TRUE () ), [Patient Count] )
+  synthetic_demonstration: true
+- name: heart_failure_prevalence
+  display_name: Heart Failure Prevalence
+  home_table: dim_patient
+  description: Patients with active heart failure divided by Patient Count.
+  definition: Distinct flagged patients divided by Patient Count.
+  format: percent
+  sql: SELECT count(*) FILTER (WHERE has_heart_failure) / nullif(count(*), 0) FROM dim_patient
+  dax: DIVIDE ( CALCULATE ( [Patient Count], dim_patient[has_heart_failure] = TRUE () ), [Patient Count] )
+  synthetic_demonstration: true
+- name: copd_prevalence
+  display_name: COPD Prevalence
+  home_table: dim_patient
+  description: Patients with active COPD divided by Patient Count.
+  definition: Distinct flagged patients divided by Patient Count.
+  format: percent
+  sql: SELECT count(*) FILTER (WHERE has_copd) / nullif(count(*), 0) FROM dim_patient
+  dax: DIVIDE ( CALCULATE ( [Patient Count], dim_patient[has_copd] = TRUE () ), [Patient Count] )
+  synthetic_demonstration: true
+- name: ckd_prevalence
+  display_name: CKD Prevalence
+  home_table: dim_patient
+  description: Patients with active chronic kidney disease divided by Patient Count.
+  definition: Distinct flagged patients divided by Patient Count.
+  format: percent
+  sql: SELECT count(*) FILTER (WHERE has_ckd) / nullif(count(*), 0) FROM dim_patient
+  dax: DIVIDE ( CALCULATE ( [Patient Count], dim_patient[has_ckd] = TRUE () ), [Patient Count] )
+  synthetic_demonstration: true
+excluded_measures:
+- name: bed_occupancy_rate
+  reason: The dataset has no available-bed or staffed-bed denominator, so the measure cannot be defined honestly.
+vocabulary:
+- term: Encounter
+  definition: A single synthetic patient visit (inpatient, ED, observation or outpatient).
+  synonyms:
+  - visit
+- term: Index encounter
+  definition: An inpatient encounter evaluated for a subsequent qualifying admission.
+  synonyms:
+  - index stay
+  - index admission
+- term: 30-day readmission (synthetic)
+  definition: A next inpatient admission 1 through 30 days after the index discharge date, counted only for follow-up-eligible
+    index encounters. A demonstration rule, not a clinical specification.
+  synonyms:
+  - readmit
+- term: Observation cutoff
+  definition: The latest encounter date in the dataset. Index discharges need 30 days of observation before it to
+    be eligible.
+- term: Denied claim
+  definition: A claim whose current status is Denied. Paid on Appeal is a separate status.
+  synonyms:
+  - denial
+- term: Paid amount
+  definition: Amount paid on claims. Not recognized revenue.
+- term: Length of stay
+  definition: Recorded length_of_stay_days for an encounter.
+  synonyms:
+  - LOS
+- term: Multimorbidity group
+  definition: Synthetic grouping by the number of distinct active chronic condition categories.
+- term: Risk category
+  definition: Synthetic banding of risk_score into Low, Moderate and High.
+- term: Role-playing date dimension
+  definition: The same calendar used in several roles (admission, discharge, claim). Here each role is a separate
+    physical table so all relationships remain active.
+  synonyms:
+  - role-playing dimension

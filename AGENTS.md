@@ -57,6 +57,8 @@ uv sync --frozen            # install exactly what uv.lock specifies
 | Frontend | `cd frontend && npm ci && npm run lint && npm run typecheck && npm run test:coverage && npm run build` |
 | Privacy scan | `ffia privacy scan` |
 | Source registry | `ffia sources render` (after editing `sources.yaml`) · `ffia sources check` |
+| Synthetic data | `ffia data generate --check` · `ffia data build` (Bronze → Silver → Gold + baseline) · `ffia data export --profile <id> --dest <dir>` |
+| Recovery drill | `ffia recovery run` (Open Mirroring snapshot + replay, SIMULATED) |
 
 ## 4. Dependency rules
 

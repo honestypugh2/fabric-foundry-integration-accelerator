@@ -1,0 +1,429 @@
+condition_id,patient_id,encounter_id,condition_code,condition_description,condition_type,date_diagnosed,status
+SYN-CN-00001,SYN-P-00003,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2010-04-14,Active
+SYN-CN-00002,SYN-P-00003,,I10,Essential (primary) hypertension,Chronic,2020-01-16,Active
+SYN-CN-00003,SYN-P-00004,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2012-03-21,Active
+SYN-CN-00004,SYN-P-00004,,E78.5,"Hyperlipidemia, unspecified",Chronic,2013-11-05,Active
+SYN-CN-00005,SYN-P-00004,,I10,Essential (primary) hypertension,Chronic,2015-11-23,Active
+SYN-CN-00006,SYN-P-00004,,I50.9,"Heart failure, unspecified",Chronic,2016-12-23,Active
+SYN-CN-00007,SYN-P-00004,,E66.9,"Obesity, unspecified",Chronic,2018-12-12,Resolved
+SYN-CN-00008,SYN-P-00006,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2012-06-02,Active
+SYN-CN-00009,SYN-P-00006,,E66.9,"Obesity, unspecified",Chronic,2016-06-21,Active
+SYN-CN-00010,SYN-P-00006,,I50.9,"Heart failure, unspecified",Chronic,2018-06-21,Active
+SYN-CN-00011,SYN-P-00006,,N39.0,"Urinary tract infection, site not specified",Acute,2025-08-19,Resolved
+SYN-CN-00012,SYN-P-00007,,I50.9,"Heart failure, unspecified",Chronic,2012-11-20,Active
+SYN-CN-00013,SYN-P-00007,,E66.9,"Obesity, unspecified",Chronic,2020-01-13,Active
+SYN-CN-00014,SYN-P-00008,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2023-05-06,Active
+SYN-CN-00015,SYN-P-00010,,I10,Essential (primary) hypertension,Chronic,2010-03-05,Active
+SYN-CN-00016,SYN-P-00010,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2015-11-12,Active
+SYN-CN-00017,SYN-P-00010,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2019-03-05,Active
+SYN-CN-00018,SYN-P-00011,,I50.9,"Heart failure, unspecified",Chronic,2020-04-06,Active
+SYN-CN-00019,SYN-P-00012,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2010-08-24,Active
+SYN-CN-00020,SYN-P-00014,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2023-12-30,Active
+SYN-CN-00021,SYN-P-00015,,E66.9,"Obesity, unspecified",Chronic,2010-09-14,Active
+SYN-CN-00022,SYN-P-00015,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2012-08-11,Active
+SYN-CN-00023,SYN-P-00015,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2023-08-16,Active
+SYN-CN-00024,SYN-P-00016,,E66.9,"Obesity, unspecified",Chronic,2021-08-01,Active
+SYN-CN-00025,SYN-P-00017,,E66.9,"Obesity, unspecified",Chronic,2010-10-01,Active
+SYN-CN-00026,SYN-P-00017,,E78.5,"Hyperlipidemia, unspecified",Chronic,2011-10-12,Active
+SYN-CN-00027,SYN-P-00017,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2011-11-13,Resolved
+SYN-CN-00028,SYN-P-00017,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2013-09-13,Active
+SYN-CN-00029,SYN-P-00017,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2015-02-21,Resolved
+SYN-CN-00030,SYN-P-00017,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2019-03-23,Active
+SYN-CN-00031,SYN-P-00017,,I50.9,"Heart failure, unspecified",Chronic,2024-06-07,Active
+SYN-CN-00032,SYN-P-00020,,N39.0,"Urinary tract infection, site not specified",Acute,2025-01-05,Resolved
+SYN-CN-00033,SYN-P-00021,,I50.9,"Heart failure, unspecified",Chronic,2014-09-06,Active
+SYN-CN-00034,SYN-P-00021,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2016-10-05,Active
+SYN-CN-00035,SYN-P-00021,,E66.9,"Obesity, unspecified",Chronic,2022-02-05,Active
+SYN-CN-00036,SYN-P-00022,,E66.9,"Obesity, unspecified",Chronic,2013-02-12,Active
+SYN-CN-00037,SYN-P-00022,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2014-02-12,Active
+SYN-CN-00038,SYN-P-00024,,I50.9,"Heart failure, unspecified",Chronic,2019-08-11,Active
+SYN-CN-00039,SYN-P-00025,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2011-09-20,Active
+SYN-CN-00040,SYN-P-00025,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2011-10-23,Active
+SYN-CN-00041,SYN-P-00025,,I50.9,"Heart failure, unspecified",Chronic,2014-08-27,Active
+SYN-CN-00042,SYN-P-00025,,E66.9,"Obesity, unspecified",Chronic,2021-12-26,Active
+SYN-CN-00043,SYN-P-00025,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2024-08-11,Resolved
+SYN-CN-00044,SYN-P-00025,,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Acute,2025-07-09,Resolved
+SYN-CN-00045,SYN-P-00026,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2013-03-19,Active
+SYN-CN-00046,SYN-P-00026,,I10,Essential (primary) hypertension,Chronic,2015-09-12,Active
+SYN-CN-00047,SYN-P-00028,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2011-06-03,Active
+SYN-CN-00048,SYN-P-00028,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2016-07-27,Active
+SYN-CN-00049,SYN-P-00028,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2023-11-24,Active
+SYN-CN-00050,SYN-P-00028,,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Acute,2024-04-15,Resolved
+SYN-CN-00051,SYN-P-00028,,E78.5,"Hyperlipidemia, unspecified",Chronic,2025-09-05,Active
+SYN-CN-00052,SYN-P-00029,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2011-02-24,Active
+SYN-CN-00053,SYN-P-00029,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2013-02-14,Active
+SYN-CN-00054,SYN-P-00029,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2020-04-12,Active
+SYN-CN-00055,SYN-P-00030,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2019-09-25,Active
+SYN-CN-00056,SYN-P-00030,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2020-10-11,Active
+SYN-CN-00057,SYN-P-00031,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2011-04-25,Active
+SYN-CN-00058,SYN-P-00031,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2013-10-29,Active
+SYN-CN-00059,SYN-P-00031,,I50.9,"Heart failure, unspecified",Chronic,2017-03-24,Active
+SYN-CN-00060,SYN-P-00032,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2012-02-11,Active
+SYN-CN-00061,SYN-P-00032,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2015-02-22,Active
+SYN-CN-00062,SYN-P-00032,,I10,Essential (primary) hypertension,Chronic,2021-11-03,Active
+SYN-CN-00063,SYN-P-00032,,E66.9,"Obesity, unspecified",Chronic,2022-10-23,Active
+SYN-CN-00064,SYN-P-00033,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2013-06-06,Active
+SYN-CN-00065,SYN-P-00033,,E66.9,"Obesity, unspecified",Chronic,2014-03-30,Active
+SYN-CN-00066,SYN-P-00033,,I50.9,"Heart failure, unspecified",Chronic,2018-02-08,Active
+SYN-CN-00067,SYN-P-00034,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2023-05-19,Active
+SYN-CN-00068,SYN-P-00035,,I10,Essential (primary) hypertension,Chronic,2020-03-07,Active
+SYN-CN-00069,SYN-P-00035,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2020-07-12,Active
+SYN-CN-00070,SYN-P-00035,,E66.9,"Obesity, unspecified",Chronic,2020-12-25,Active
+SYN-CN-00071,SYN-P-00035,,E78.5,"Hyperlipidemia, unspecified",Chronic,2025-11-14,Active
+SYN-CN-00072,SYN-P-00037,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2016-06-15,Active
+SYN-CN-00073,SYN-P-00037,,E78.5,"Hyperlipidemia, unspecified",Chronic,2018-07-06,Active
+SYN-CN-00074,SYN-P-00040,,I10,Essential (primary) hypertension,Chronic,2012-12-12,Active
+SYN-CN-00075,SYN-P-00040,,E78.5,"Hyperlipidemia, unspecified",Chronic,2015-12-26,Active
+SYN-CN-00076,SYN-P-00040,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2020-04-25,Resolved
+SYN-CN-00077,SYN-P-00040,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2021-05-11,Active
+SYN-CN-00078,SYN-P-00041,,N39.0,"Urinary tract infection, site not specified",Acute,2024-05-01,Resolved
+SYN-CN-00079,SYN-P-00042,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2024-01-28,Active
+SYN-CN-00080,SYN-P-00043,,I10,Essential (primary) hypertension,Chronic,2012-03-04,Active
+SYN-CN-00081,SYN-P-00043,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2013-06-07,Active
+SYN-CN-00082,SYN-P-00044,,I10,Essential (primary) hypertension,Chronic,2010-08-03,Active
+SYN-CN-00083,SYN-P-00044,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2012-03-08,Active
+SYN-CN-00084,SYN-P-00044,,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Acute,2024-03-28,Resolved
+SYN-CN-00085,SYN-P-00046,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2023-08-21,Active
+SYN-CN-00086,SYN-P-00047,,I50.9,"Heart failure, unspecified",Chronic,2016-02-26,Active
+SYN-CN-00087,SYN-P-00047,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2019-03-30,Active
+SYN-CN-00088,SYN-P-00047,,I10,Essential (primary) hypertension,Chronic,2022-04-28,Resolved
+SYN-CN-00089,SYN-P-00048,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2015-07-05,Active
+SYN-CN-00090,SYN-P-00048,,I50.9,"Heart failure, unspecified",Chronic,2017-11-08,Active
+SYN-CN-00091,SYN-P-00048,,E78.5,"Hyperlipidemia, unspecified",Chronic,2020-04-18,Active
+SYN-CN-00092,SYN-P-00048,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2022-06-20,Active
+SYN-CN-00093,SYN-P-00048,,E66.9,"Obesity, unspecified",Chronic,2025-05-29,Active
+SYN-CN-00094,SYN-P-00048,,N39.0,"Urinary tract infection, site not specified",Acute,2025-06-12,Active
+SYN-CN-00095,SYN-P-00048,,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Acute,2025-07-25,Resolved
+SYN-CN-00096,SYN-P-00052,,I10,Essential (primary) hypertension,Chronic,2021-02-21,Active
+SYN-CN-00097,SYN-P-00053,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2020-03-11,Active
+SYN-CN-00098,SYN-P-00054,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2012-03-17,Active
+SYN-CN-00099,SYN-P-00054,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2013-09-21,Active
+SYN-CN-00100,SYN-P-00054,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2015-07-20,Active
+SYN-CN-00101,SYN-P-00054,,I50.9,"Heart failure, unspecified",Chronic,2016-04-04,Active
+SYN-CN-00102,SYN-P-00054,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2017-05-26,Active
+SYN-CN-00103,SYN-P-00054,,E66.9,"Obesity, unspecified",Chronic,2020-02-17,Active
+SYN-CN-00104,SYN-P-00055,,I50.9,"Heart failure, unspecified",Chronic,2012-10-09,Active
+SYN-CN-00105,SYN-P-00055,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2017-07-31,Active
+SYN-CN-00106,SYN-P-00055,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2022-03-07,Active
+SYN-CN-00107,SYN-P-00056,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2011-11-23,Active
+SYN-CN-00108,SYN-P-00056,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2012-04-08,Active
+SYN-CN-00109,SYN-P-00056,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2020-03-01,Resolved
+SYN-CN-00110,SYN-P-00057,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2016-12-03,Active
+SYN-CN-00111,SYN-P-00057,,I50.9,"Heart failure, unspecified",Chronic,2020-07-03,Active
+SYN-CN-00112,SYN-P-00057,,E78.5,"Hyperlipidemia, unspecified",Chronic,2022-12-09,Active
+SYN-CN-00113,SYN-P-00057,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2023-03-24,Active
+SYN-CN-00114,SYN-P-00058,,E66.9,"Obesity, unspecified",Chronic,2012-03-21,Active
+SYN-CN-00115,SYN-P-00058,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2013-09-11,Active
+SYN-CN-00116,SYN-P-00058,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2015-10-12,Active
+SYN-CN-00117,SYN-P-00058,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2018-06-07,Active
+SYN-CN-00118,SYN-P-00058,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2022-01-31,Active
+SYN-CN-00119,SYN-P-00058,,I50.9,"Heart failure, unspecified",Chronic,2023-05-16,Active
+SYN-CN-00120,SYN-P-00058,,N39.0,"Urinary tract infection, site not specified",Acute,2025-11-22,Resolved
+SYN-CN-00121,SYN-P-00059,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2010-01-17,Active
+SYN-CN-00122,SYN-P-00059,,E78.5,"Hyperlipidemia, unspecified",Chronic,2012-12-24,Resolved
+SYN-CN-00123,SYN-P-00059,,I50.9,"Heart failure, unspecified",Chronic,2017-09-05,Active
+SYN-CN-00124,SYN-P-00059,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2018-02-02,Active
+SYN-CN-00125,SYN-P-00059,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2020-02-15,Active
+SYN-CN-00126,SYN-P-00060,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2011-07-12,Active
+SYN-CN-00127,SYN-P-00060,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2011-08-31,Active
+SYN-CN-00128,SYN-P-00060,,E66.9,"Obesity, unspecified",Chronic,2012-03-18,Active
+SYN-CN-00129,SYN-P-00060,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2018-06-05,Active
+SYN-CN-00130,SYN-P-00060,,I10,Essential (primary) hypertension,Chronic,2024-04-07,Active
+SYN-CN-00131,SYN-P-00063,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2020-11-06,Active
+SYN-CN-00132,SYN-P-00064,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2012-08-31,Active
+SYN-CN-00133,SYN-P-00064,,E66.9,"Obesity, unspecified",Chronic,2015-10-06,Active
+SYN-CN-00134,SYN-P-00064,,J06.9,"Acute upper respiratory infection, unspecified",Acute,2024-01-30,Resolved
+SYN-CN-00135,SYN-P-00065,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2013-06-27,Active
+SYN-CN-00136,SYN-P-00065,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2020-08-13,Active
+SYN-CN-00137,SYN-P-00065,,N39.0,"Urinary tract infection, site not specified",Acute,2025-07-09,Resolved
+SYN-CN-00138,SYN-P-00067,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2015-06-01,Active
+SYN-CN-00139,SYN-P-00067,,I10,Essential (primary) hypertension,Chronic,2021-11-14,Resolved
+SYN-CN-00140,SYN-P-00068,,I10,Essential (primary) hypertension,Chronic,2025-08-02,Active
+SYN-CN-00141,SYN-P-00069,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2010-04-01,Active
+SYN-CN-00142,SYN-P-00069,,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Acute,2024-12-24,Resolved
+SYN-CN-00143,SYN-P-00069,,J06.9,"Acute upper respiratory infection, unspecified",Acute,2025-09-06,Resolved
+SYN-CN-00144,SYN-P-00071,,E66.9,"Obesity, unspecified",Chronic,2024-02-01,Active
+SYN-CN-00145,SYN-P-00072,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2011-12-07,Active
+SYN-CN-00146,SYN-P-00072,,I50.9,"Heart failure, unspecified",Chronic,2016-09-18,Active
+SYN-CN-00147,SYN-P-00072,,E66.9,"Obesity, unspecified",Chronic,2021-05-29,Active
+SYN-CN-00148,SYN-P-00073,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2017-01-04,Active
+SYN-CN-00149,SYN-P-00076,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2020-05-30,Active
+SYN-CN-00150,SYN-P-00076,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2022-01-11,Active
+SYN-CN-00151,SYN-P-00076,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2025-04-21,Resolved
+SYN-CN-00152,SYN-P-00077,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2013-03-21,Active
+SYN-CN-00153,SYN-P-00077,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2017-05-03,Active
+SYN-CN-00154,SYN-P-00077,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2017-05-19,Active
+SYN-CN-00155,SYN-P-00077,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2018-12-13,Active
+SYN-CN-00156,SYN-P-00077,,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Acute,2024-12-28,Resolved
+SYN-CN-00157,SYN-P-00083,,I50.9,"Heart failure, unspecified",Chronic,2016-02-13,Active
+SYN-CN-00158,SYN-P-00083,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2017-12-22,Active
+SYN-CN-00159,SYN-P-00083,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2018-06-28,Active
+SYN-CN-00160,SYN-P-00083,,E66.9,"Obesity, unspecified",Chronic,2023-05-01,Active
+SYN-CN-00161,SYN-P-00085,,I50.9,"Heart failure, unspecified",Chronic,2011-12-03,Active
+SYN-CN-00162,SYN-P-00085,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2016-01-14,Active
+SYN-CN-00163,SYN-P-00085,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2019-10-26,Active
+SYN-CN-00164,SYN-P-00085,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2024-07-06,Active
+SYN-CN-00165,SYN-P-00086,,N39.0,"Urinary tract infection, site not specified",Acute,2025-10-31,Resolved
+SYN-CN-00166,SYN-P-00087,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2012-05-30,Active
+SYN-CN-00167,SYN-P-00087,,I50.9,"Heart failure, unspecified",Chronic,2013-09-11,Active
+SYN-CN-00168,SYN-P-00087,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2015-02-26,Active
+SYN-CN-00169,SYN-P-00087,,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Acute,2025-07-29,Resolved
+SYN-CN-00170,SYN-P-00088,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2011-08-28,Active
+SYN-CN-00171,SYN-P-00089,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2013-06-11,Active
+SYN-CN-00172,SYN-P-00089,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2016-01-27,Active
+SYN-CN-00173,SYN-P-00089,,I50.9,"Heart failure, unspecified",Chronic,2017-02-16,Active
+SYN-CN-00174,SYN-P-00089,,J06.9,"Acute upper respiratory infection, unspecified",Acute,2024-03-13,Resolved
+SYN-CN-00175,SYN-P-00090,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2016-11-29,Active
+SYN-CN-00176,SYN-P-00090,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2016-12-25,Active
+SYN-CN-00177,SYN-P-00090,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2018-01-24,Active
+SYN-CN-00178,SYN-P-00090,,E66.9,"Obesity, unspecified",Chronic,2018-08-21,Active
+SYN-CN-00179,SYN-P-00090,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2019-01-11,Active
+SYN-CN-00180,SYN-P-00090,,E78.5,"Hyperlipidemia, unspecified",Chronic,2021-11-10,Active
+SYN-CN-00181,SYN-P-00090,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2025-07-17,Active
+SYN-CN-00182,SYN-P-00091,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2010-02-21,Active
+SYN-CN-00183,SYN-P-00091,,E78.5,"Hyperlipidemia, unspecified",Chronic,2020-12-06,Active
+SYN-CN-00184,SYN-P-00093,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2010-04-11,Active
+SYN-CN-00185,SYN-P-00093,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2016-02-17,Active
+SYN-CN-00186,SYN-P-00093,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2020-04-13,Active
+SYN-CN-00187,SYN-P-00093,,I50.9,"Heart failure, unspecified",Chronic,2023-06-19,Active
+SYN-CN-00188,SYN-P-00093,,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Acute,2024-08-30,Resolved
+SYN-CN-00189,SYN-P-00093,,J06.9,"Acute upper respiratory infection, unspecified",Acute,2024-12-29,Resolved
+SYN-CN-00190,SYN-P-00093,,N39.0,"Urinary tract infection, site not specified",Acute,2025-05-24,Active
+SYN-CN-00191,SYN-P-00094,,E78.5,"Hyperlipidemia, unspecified",Chronic,2019-03-22,Active
+SYN-CN-00192,SYN-P-00094,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2021-03-24,Active
+SYN-CN-00193,SYN-P-00094,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2025-05-23,Active
+SYN-CN-00194,SYN-P-00094,,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Acute,2025-10-24,Resolved
+SYN-CN-00195,SYN-P-00095,,I50.9,"Heart failure, unspecified",Chronic,2013-01-15,Active
+SYN-CN-00196,SYN-P-00095,,I10,Essential (primary) hypertension,Chronic,2023-08-18,Active
+SYN-CN-00197,SYN-P-00096,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2015-06-21,Active
+SYN-CN-00198,SYN-P-00096,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2016-07-02,Active
+SYN-CN-00199,SYN-P-00096,,I10,Essential (primary) hypertension,Chronic,2024-07-14,Active
+SYN-CN-00200,SYN-P-00096,,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Acute,2025-02-20,Resolved
+SYN-CN-00201,SYN-P-00097,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2019-02-22,Active
+SYN-CN-00202,SYN-P-00098,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2011-11-19,Active
+SYN-CN-00203,SYN-P-00098,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2024-07-18,Active
+SYN-CN-00204,SYN-P-00099,,I50.9,"Heart failure, unspecified",Chronic,2012-07-07,Active
+SYN-CN-00205,SYN-P-00099,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2024-10-27,Active
+SYN-CN-00206,SYN-P-00099,,J06.9,"Acute upper respiratory infection, unspecified",Acute,2025-04-28,Resolved
+SYN-CN-00207,SYN-P-00100,,E66.9,"Obesity, unspecified",Chronic,2011-06-22,Active
+SYN-CN-00208,SYN-P-00100,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2017-03-18,Resolved
+SYN-CN-00209,SYN-P-00100,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2021-11-22,Active
+SYN-CN-00210,SYN-P-00101,,E78.5,"Hyperlipidemia, unspecified",Chronic,2018-12-26,Active
+SYN-CN-00211,SYN-P-00101,,I50.9,"Heart failure, unspecified",Chronic,2020-12-07,Active
+SYN-CN-00212,SYN-P-00101,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2023-10-19,Active
+SYN-CN-00213,SYN-P-00102,,I10,Essential (primary) hypertension,Chronic,2024-05-17,Active
+SYN-CN-00214,SYN-P-00102,,J06.9,"Acute upper respiratory infection, unspecified",Acute,2025-03-03,Resolved
+SYN-CN-00215,SYN-P-00103,,I10,Essential (primary) hypertension,Chronic,2011-06-15,Active
+SYN-CN-00216,SYN-P-00103,,E66.9,"Obesity, unspecified",Chronic,2015-08-22,Resolved
+SYN-CN-00217,SYN-P-00103,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2019-03-29,Active
+SYN-CN-00218,SYN-P-00103,,N39.0,"Urinary tract infection, site not specified",Acute,2024-02-20,Resolved
+SYN-CN-00219,SYN-P-00103,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2025-09-27,Active
+SYN-CN-00220,SYN-P-00103,,E78.5,"Hyperlipidemia, unspecified",Chronic,2025-12-03,Active
+SYN-CN-00221,SYN-P-00104,,E66.9,"Obesity, unspecified",Chronic,2014-07-02,Active
+SYN-CN-00222,SYN-P-00104,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2015-12-23,Active
+SYN-CN-00223,SYN-P-00104,,I10,Essential (primary) hypertension,Chronic,2016-02-08,Active
+SYN-CN-00224,SYN-P-00104,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2020-01-01,Active
+SYN-CN-00225,SYN-P-00104,,E78.5,"Hyperlipidemia, unspecified",Chronic,2020-09-25,Active
+SYN-CN-00226,SYN-P-00106,,I50.9,"Heart failure, unspecified",Chronic,2010-10-16,Active
+SYN-CN-00227,SYN-P-00106,,E78.5,"Hyperlipidemia, unspecified",Chronic,2011-01-05,Active
+SYN-CN-00228,SYN-P-00106,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2011-01-24,Active
+SYN-CN-00229,SYN-P-00106,,I10,Essential (primary) hypertension,Chronic,2011-08-04,Active
+SYN-CN-00230,SYN-P-00106,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2021-10-30,Active
+SYN-CN-00231,SYN-P-00107,,E78.5,"Hyperlipidemia, unspecified",Chronic,2012-10-12,Active
+SYN-CN-00232,SYN-P-00107,,I50.9,"Heart failure, unspecified",Chronic,2013-07-30,Active
+SYN-CN-00233,SYN-P-00107,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2019-08-31,Resolved
+SYN-CN-00234,SYN-P-00107,,I10,Essential (primary) hypertension,Chronic,2023-12-18,Active
+SYN-CN-00235,SYN-P-00107,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2024-10-14,Active
+SYN-CN-00236,SYN-P-00108,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2011-04-30,Active
+SYN-CN-00237,SYN-P-00108,,E66.9,"Obesity, unspecified",Chronic,2019-08-16,Active
+SYN-CN-00238,SYN-P-00109,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2014-04-04,Active
+SYN-CN-00239,SYN-P-00109,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2015-09-16,Active
+SYN-CN-00240,SYN-P-00109,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2020-04-01,Resolved
+SYN-CN-00241,SYN-P-00109,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2020-04-29,Active
+SYN-CN-00242,SYN-P-00109,,I10,Essential (primary) hypertension,Chronic,2025-03-21,Active
+SYN-CN-00243,SYN-P-00112,,I50.9,"Heart failure, unspecified",Chronic,2010-04-09,Active
+SYN-CN-00244,SYN-P-00112,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2011-02-05,Active
+SYN-CN-00245,SYN-P-00112,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2011-12-20,Active
+SYN-CN-00246,SYN-P-00112,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2015-05-28,Active
+SYN-CN-00247,SYN-P-00113,,E66.9,"Obesity, unspecified",Chronic,2011-04-28,Active
+SYN-CN-00248,SYN-P-00113,,I50.9,"Heart failure, unspecified",Chronic,2012-07-05,Active
+SYN-CN-00249,SYN-P-00113,,I10,Essential (primary) hypertension,Chronic,2025-09-22,Active
+SYN-CN-00250,SYN-P-00114,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2012-09-27,Active
+SYN-CN-00251,SYN-P-00114,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2023-01-09,Active
+SYN-CN-00252,SYN-P-00114,,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Acute,2024-12-23,Resolved
+SYN-CN-00253,SYN-P-00115,,I10,Essential (primary) hypertension,Chronic,2013-02-21,Active
+SYN-CN-00254,SYN-P-00115,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2018-03-18,Active
+SYN-CN-00255,SYN-P-00115,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2020-01-09,Active
+SYN-CN-00256,SYN-P-00117,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2013-03-30,Active
+SYN-CN-00257,SYN-P-00117,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2025-11-28,Active
+SYN-CN-00258,SYN-P-00119,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2019-11-16,Active
+SYN-CN-00259,SYN-P-00121,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2012-09-04,Resolved
+SYN-CN-00260,SYN-P-00121,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2019-11-20,Active
+SYN-CN-00261,SYN-P-00121,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2020-08-31,Resolved
+SYN-CN-00262,SYN-P-00121,,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Acute,2025-07-19,Resolved
+SYN-CN-00263,SYN-P-00122,,E78.5,"Hyperlipidemia, unspecified",Chronic,2010-05-31,Active
+SYN-CN-00264,SYN-P-00123,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2018-12-21,Active
+SYN-CN-00265,SYN-P-00123,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2021-02-18,Active
+SYN-CN-00266,SYN-P-00126,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2010-03-15,Active
+SYN-CN-00267,SYN-P-00126,,I50.9,"Heart failure, unspecified",Chronic,2013-03-19,Active
+SYN-CN-00268,SYN-P-00126,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2014-02-26,Active
+SYN-CN-00269,SYN-P-00126,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2014-07-10,Active
+SYN-CN-00270,SYN-P-00126,,I10,Essential (primary) hypertension,Chronic,2015-09-03,Active
+SYN-CN-00271,SYN-P-00126,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2019-02-23,Active
+SYN-CN-00272,SYN-P-00126,,E78.5,"Hyperlipidemia, unspecified",Chronic,2020-01-07,Active
+SYN-CN-00273,SYN-P-00126,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2021-02-13,Active
+SYN-CN-00274,SYN-P-00126,,N39.0,"Urinary tract infection, site not specified",Acute,2024-01-28,Resolved
+SYN-CN-00275,SYN-P-00127,,E66.9,"Obesity, unspecified",Chronic,2022-06-22,Active
+SYN-CN-00276,SYN-P-00128,,E78.5,"Hyperlipidemia, unspecified",Chronic,2019-08-30,Active
+SYN-CN-00277,SYN-P-00128,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2025-04-30,Active
+SYN-CN-00278,SYN-P-00128,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2025-07-08,Active
+SYN-CN-00279,SYN-P-00129,,E66.9,"Obesity, unspecified",Chronic,2010-06-13,Active
+SYN-CN-00280,SYN-P-00129,,E78.5,"Hyperlipidemia, unspecified",Chronic,2022-11-13,Active
+SYN-CN-00281,SYN-P-00130,,E78.5,"Hyperlipidemia, unspecified",Chronic,2010-02-04,Active
+SYN-CN-00282,SYN-P-00130,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2018-02-05,Active
+SYN-CN-00283,SYN-P-00131,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2011-09-09,Active
+SYN-CN-00284,SYN-P-00131,,I50.9,"Heart failure, unspecified",Chronic,2017-03-17,Active
+SYN-CN-00285,SYN-P-00131,,E66.9,"Obesity, unspecified",Chronic,2023-10-23,Active
+SYN-CN-00286,SYN-P-00132,,E66.9,"Obesity, unspecified",Chronic,2012-02-13,Active
+SYN-CN-00287,SYN-P-00132,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2019-04-23,Active
+SYN-CN-00288,SYN-P-00132,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2022-04-04,Active
+SYN-CN-00289,SYN-P-00135,,E66.9,"Obesity, unspecified",Chronic,2012-03-23,Active
+SYN-CN-00290,SYN-P-00135,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2015-04-29,Active
+SYN-CN-00291,SYN-P-00135,,I50.9,"Heart failure, unspecified",Chronic,2020-12-20,Active
+SYN-CN-00292,SYN-P-00135,,I10,Essential (primary) hypertension,Chronic,2025-06-12,Active
+SYN-CN-00293,SYN-P-00135,,J06.9,"Acute upper respiratory infection, unspecified",Acute,2025-10-05,Resolved
+SYN-CN-00294,SYN-P-00136,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2025-06-21,Active
+SYN-CN-00295,SYN-P-00137,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2020-10-17,Active
+SYN-CN-00296,SYN-P-00138,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2012-04-02,Active
+SYN-CN-00297,SYN-P-00138,,E66.9,"Obesity, unspecified",Chronic,2018-03-22,Resolved
+SYN-CN-00298,SYN-P-00139,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2012-02-02,Active
+SYN-CN-00299,SYN-P-00140,,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Acute,2024-08-16,Resolved
+SYN-CN-00300,SYN-P-00140,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2025-12-28,Active
+SYN-CN-00301,SYN-P-00141,,J06.9,"Acute upper respiratory infection, unspecified",Acute,2025-04-11,Resolved
+SYN-CN-00302,SYN-P-00143,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2016-03-27,Active
+SYN-CN-00303,SYN-P-00143,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2017-04-15,Resolved
+SYN-CN-00304,SYN-P-00143,,E66.9,"Obesity, unspecified",Chronic,2018-02-11,Active
+SYN-CN-00305,SYN-P-00143,,I10,Essential (primary) hypertension,Chronic,2019-06-11,Active
+SYN-CN-00306,SYN-P-00143,,E78.5,"Hyperlipidemia, unspecified",Chronic,2025-02-09,Active
+SYN-CN-00307,SYN-P-00144,,E78.5,"Hyperlipidemia, unspecified",Chronic,2011-02-21,Active
+SYN-CN-00308,SYN-P-00144,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2012-01-24,Active
+SYN-CN-00309,SYN-P-00144,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2013-04-13,Active
+SYN-CN-00310,SYN-P-00144,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2020-05-17,Active
+SYN-CN-00311,SYN-P-00144,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2022-10-12,Active
+SYN-CN-00312,SYN-P-00144,,E66.9,"Obesity, unspecified",Chronic,2024-03-01,Active
+SYN-CN-00313,SYN-P-00146,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2011-02-13,Resolved
+SYN-CN-00314,SYN-P-00146,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2016-01-29,Resolved
+SYN-CN-00315,SYN-P-00147,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2013-01-29,Resolved
+SYN-CN-00316,SYN-P-00147,,I50.9,"Heart failure, unspecified",Chronic,2020-11-08,Active
+SYN-CN-00317,SYN-P-00147,,I10,Essential (primary) hypertension,Chronic,2020-11-10,Resolved
+SYN-CN-00318,SYN-P-00147,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2021-11-12,Active
+SYN-CN-00319,SYN-P-00147,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2023-09-12,Active
+SYN-CN-00320,SYN-P-00148,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2016-01-19,Active
+SYN-CN-00321,SYN-P-00148,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2018-03-13,Active
+SYN-CN-00322,SYN-P-00149,,I50.9,"Heart failure, unspecified",Chronic,2018-03-18,Active
+SYN-CN-00323,SYN-P-00149,,E66.9,"Obesity, unspecified",Chronic,2021-02-12,Active
+SYN-CN-00324,SYN-P-00149,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2025-04-21,Active
+SYN-CN-00325,SYN-P-00150,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2018-06-15,Active
+SYN-CN-00326,SYN-P-00151,,I50.9,"Heart failure, unspecified",Chronic,2011-01-09,Active
+SYN-CN-00327,SYN-P-00151,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2020-11-24,Active
+SYN-CN-00328,SYN-P-00151,,E78.5,"Hyperlipidemia, unspecified",Chronic,2020-12-14,Active
+SYN-CN-00329,SYN-P-00152,,E66.9,"Obesity, unspecified",Chronic,2010-09-09,Active
+SYN-CN-00330,SYN-P-00152,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2013-11-22,Active
+SYN-CN-00331,SYN-P-00152,,I50.9,"Heart failure, unspecified",Chronic,2016-11-09,Active
+SYN-CN-00332,SYN-P-00152,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2017-08-16,Active
+SYN-CN-00333,SYN-P-00152,,I10,Essential (primary) hypertension,Chronic,2022-06-21,Active
+SYN-CN-00334,SYN-P-00152,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2023-06-18,Active
+SYN-CN-00335,SYN-P-00152,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2025-03-04,Resolved
+SYN-CN-00336,SYN-P-00153,,J06.9,"Acute upper respiratory infection, unspecified",Acute,2024-08-30,Resolved
+SYN-CN-00337,SYN-P-00154,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2013-10-05,Active
+SYN-CN-00338,SYN-P-00154,,I50.9,"Heart failure, unspecified",Chronic,2015-07-12,Resolved
+SYN-CN-00339,SYN-P-00154,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2017-06-04,Active
+SYN-CN-00340,SYN-P-00154,,I10,Essential (primary) hypertension,Chronic,2022-12-01,Resolved
+SYN-CN-00341,SYN-P-00156,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2018-04-20,Active
+SYN-CN-00342,SYN-P-00156,,I50.9,"Heart failure, unspecified",Chronic,2018-08-06,Active
+SYN-CN-00343,SYN-P-00156,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2020-08-19,Active
+SYN-CN-00344,SYN-P-00157,,I10,Essential (primary) hypertension,Chronic,2014-03-02,Active
+SYN-CN-00345,SYN-P-00159,,E78.5,"Hyperlipidemia, unspecified",Chronic,2025-12-31,Active
+SYN-CN-00346,SYN-P-00162,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2013-05-18,Active
+SYN-CN-00347,SYN-P-00162,,E78.5,"Hyperlipidemia, unspecified",Chronic,2014-05-26,Active
+SYN-CN-00348,SYN-P-00162,,I50.9,"Heart failure, unspecified",Chronic,2015-11-18,Active
+SYN-CN-00349,SYN-P-00162,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2020-11-27,Active
+SYN-CN-00350,SYN-P-00162,,J06.9,"Acute upper respiratory infection, unspecified",Acute,2024-03-09,Resolved
+SYN-CN-00351,SYN-P-00162,,E66.9,"Obesity, unspecified",Chronic,2025-05-11,Active
+SYN-CN-00352,SYN-P-00163,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2010-09-14,Active
+SYN-CN-00353,SYN-P-00163,,E78.5,"Hyperlipidemia, unspecified",Chronic,2015-07-03,Active
+SYN-CN-00354,SYN-P-00163,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2022-06-08,Active
+SYN-CN-00355,SYN-P-00165,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2013-07-07,Active
+SYN-CN-00356,SYN-P-00165,,E66.9,"Obesity, unspecified",Chronic,2017-06-20,Active
+SYN-CN-00357,SYN-P-00165,,I50.9,"Heart failure, unspecified",Chronic,2018-12-17,Active
+SYN-CN-00358,SYN-P-00165,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2020-06-09,Active
+SYN-CN-00359,SYN-P-00165,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2020-06-13,Active
+SYN-CN-00360,SYN-P-00165,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2020-10-30,Active
+SYN-CN-00361,SYN-P-00165,,E78.5,"Hyperlipidemia, unspecified",Chronic,2022-12-19,Active
+SYN-CN-00362,SYN-P-00165,,I10,Essential (primary) hypertension,Chronic,2024-06-19,Active
+SYN-CN-00363,SYN-P-00165,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2025-03-27,Active
+SYN-CN-00364,SYN-P-00165,,J06.9,"Acute upper respiratory infection, unspecified",Acute,2025-09-16,Resolved
+SYN-CN-00365,SYN-P-00166,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2011-06-10,Resolved
+SYN-CN-00366,SYN-P-00166,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2013-06-04,Active
+SYN-CN-00367,SYN-P-00167,,I50.9,"Heart failure, unspecified",Chronic,2014-08-24,Active
+SYN-CN-00368,SYN-P-00167,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2016-12-05,Active
+SYN-CN-00369,SYN-P-00167,,E78.5,"Hyperlipidemia, unspecified",Chronic,2021-11-27,Active
+SYN-CN-00370,SYN-P-00167,,I10,Essential (primary) hypertension,Chronic,2025-09-19,Active
+SYN-CN-00371,SYN-P-00170,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2010-10-08,Active
+SYN-CN-00372,SYN-P-00170,,I10,Essential (primary) hypertension,Chronic,2021-03-17,Active
+SYN-CN-00373,SYN-P-00170,,E78.5,"Hyperlipidemia, unspecified",Chronic,2022-09-15,Active
+SYN-CN-00374,SYN-P-00170,,E66.9,"Obesity, unspecified",Chronic,2023-09-23,Active
+SYN-CN-00375,SYN-P-00170,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2024-07-23,Active
+SYN-CN-00376,SYN-P-00172,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2023-10-29,Active
+SYN-CN-00377,SYN-P-00173,,E78.5,"Hyperlipidemia, unspecified",Chronic,2010-02-14,Active
+SYN-CN-00378,SYN-P-00173,,E66.9,"Obesity, unspecified",Chronic,2015-01-21,Active
+SYN-CN-00379,SYN-P-00173,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2021-05-11,Active
+SYN-CN-00380,SYN-P-00173,,J06.9,"Acute upper respiratory infection, unspecified",Acute,2025-05-10,Resolved
+SYN-CN-00381,SYN-P-00174,,I50.9,"Heart failure, unspecified",Chronic,2013-02-17,Active
+SYN-CN-00382,SYN-P-00175,,I50.9,"Heart failure, unspecified",Chronic,2016-10-17,Active
+SYN-CN-00383,SYN-P-00175,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2018-12-08,Active
+SYN-CN-00384,SYN-P-00177,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2012-12-19,Active
+SYN-CN-00385,SYN-P-00177,,E78.5,"Hyperlipidemia, unspecified",Chronic,2014-01-22,Active
+SYN-CN-00386,SYN-P-00177,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2020-04-05,Active
+SYN-CN-00387,SYN-P-00177,,I10,Essential (primary) hypertension,Chronic,2020-06-03,Active
+SYN-CN-00388,SYN-P-00177,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2022-10-03,Active
+SYN-CN-00389,SYN-P-00177,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2025-07-13,Active
+SYN-CN-00390,SYN-P-00180,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2013-04-02,Active
+SYN-CN-00391,SYN-P-00180,,E66.9,"Obesity, unspecified",Chronic,2014-04-07,Active
+SYN-CN-00392,SYN-P-00180,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2019-04-25,Active
+SYN-CN-00393,SYN-P-00180,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2022-05-06,Active
+SYN-CN-00394,SYN-P-00181,,E78.5,"Hyperlipidemia, unspecified",Chronic,2024-01-28,Active
+SYN-CN-00395,SYN-P-00182,,E66.9,"Obesity, unspecified",Chronic,2013-10-21,Active
+SYN-CN-00396,SYN-P-00182,,E78.5,"Hyperlipidemia, unspecified",Chronic,2019-09-07,Active
+SYN-CN-00397,SYN-P-00182,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2023-10-28,Active
+SYN-CN-00398,SYN-P-00182,,I50.9,"Heart failure, unspecified",Chronic,2024-07-24,Active
+SYN-CN-00399,SYN-P-00182,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2025-01-07,Active
+SYN-CN-00400,SYN-P-00183,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2013-04-26,Active
+SYN-CN-00401,SYN-P-00184,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2010-05-27,Active
+SYN-CN-00402,SYN-P-00184,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2011-12-26,Active
+SYN-CN-00403,SYN-P-00186,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2024-11-07,Active
+SYN-CN-00404,SYN-P-00187,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2010-07-10,Active
+SYN-CN-00405,SYN-P-00187,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2011-04-01,Resolved
+SYN-CN-00406,SYN-P-00187,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2014-06-29,Active
+SYN-CN-00407,SYN-P-00187,,E66.9,"Obesity, unspecified",Chronic,2022-11-17,Active
+SYN-CN-00408,SYN-P-00187,,I50.9,"Heart failure, unspecified",Chronic,2023-10-29,Active
+SYN-CN-00409,SYN-P-00188,,E78.5,"Hyperlipidemia, unspecified",Chronic,2011-03-04,Active
+SYN-CN-00410,SYN-P-00188,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2011-11-18,Active
+SYN-CN-00411,SYN-P-00188,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2023-05-22,Active
+SYN-CN-00412,SYN-P-00188,,I10,Essential (primary) hypertension,Chronic,2024-02-01,Active
+SYN-CN-00413,SYN-P-00189,,E78.5,"Hyperlipidemia, unspecified",Chronic,2018-07-20,Active
+SYN-CN-00414,SYN-P-00189,,I50.9,"Heart failure, unspecified",Chronic,2021-05-19,Active
+SYN-CN-00415,SYN-P-00190,,E66.9,"Obesity, unspecified",Chronic,2018-06-16,Active
+SYN-CN-00416,SYN-P-00190,,I50.9,"Heart failure, unspecified",Chronic,2024-04-29,Resolved
+SYN-CN-00417,SYN-P-00191,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2013-02-16,Active
+SYN-CN-00418,SYN-P-00191,,J44.9,"Chronic obstructive pulmonary disease, unspecified",Chronic,2023-06-17,Active
+SYN-CN-00419,SYN-P-00192,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2018-06-04,Active
+SYN-CN-00420,SYN-P-00192,,E11.9,Type 2 diabetes mellitus without complications,Chronic,2020-05-18,Active
+SYN-CN-00421,SYN-P-00194,,E66.9,"Obesity, unspecified",Chronic,2022-04-09,Active
+SYN-CN-00422,SYN-P-00197,,J45.909,"Unspecified asthma, uncomplicated",Chronic,2021-05-25,Active
+SYN-CN-00423,SYN-P-00197,,N39.0,"Urinary tract infection, site not specified",Acute,2024-11-13,Resolved
+SYN-CN-00424,SYN-P-00197,,N18.30,"Chronic kidney disease, stage 3 unspecified",Chronic,2025-12-17,Active
+SYN-CN-00425,SYN-P-00199,,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Acute,2025-06-01,Resolved
+SYN-CN-00426,SYN-P-00200,,E78.5,"Hyperlipidemia, unspecified",Chronic,2011-04-14,Resolved
+SYN-CN-00427,SYN-P-00200,,I50.9,"Heart failure, unspecified",Chronic,2015-12-30,Active
+SYN-CN-00428,SYN-P-00200,,M17.9,"Osteoarthritis of knee, unspecified",Chronic,2023-02-24,Active

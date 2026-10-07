@@ -77,13 +77,13 @@ sources:
     title: Open mirroring landing zone requirements and format
     url: https://learn.microsoft.com/fabric/mirroring/open-mirroring-landing-zone-format
     publisher: Microsoft Learn
-    retrieved_date: 2026-10-05
-    last_updated_date: 2025-09-09
+    retrieved_date: 2026-10-07
+    last_updated_date: 2026-02-03
     technology: Microsoft Fabric
     associated_patterns: [P11]
     status: GA
-    key_architecture_statement: Landing zone uses _metadata.json keyColumns and a trailing __rowMarker__ column (0 insert, 1 update, 2 delete, 4 upsert); processed files are purged after 7 days.
-    implementation_relevance: Local Open Mirroring simulation reproduces this documented format.
+    key_architecture_statement: Landing zone uses _metadata.json keyColumns, 20-digit continuous file names and a trailing __rowMarker__ column (0 insert with no duplicate-key check, 1 update, 2 delete, 4 upsert); processed files are purged after 7 days.
+    implementation_relevance: Local Open Mirroring simulation (ffia recovery run) reproduces this documented format and row-marker semantics.
     security_implications: Mirroring does not propagate source RLS/OLS/dynamic data masking.
     limitations: Schema changes require recreating the table folder; mirroring is not documented as a backup/DR mechanism.
     fallback: Local landing-zone simulation and recovery lab.

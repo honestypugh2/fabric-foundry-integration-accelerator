@@ -15,7 +15,7 @@ define pending
 endef
 
 .PHONY: help setup setup-backend setup-frontend format lint typecheck test test-cov \
-	security sbom privacy-scan sources build validate clean \
+	security sbom privacy-scan sources build validate clean data data-check recovery-demo \
 	run-api run-mcp run-frontend run demo-check demo demo-live demo-hybrid demo-offline
 
 help: ## Show available targets
@@ -60,6 +60,15 @@ privacy-scan: ## Scan for customer identifiers, GUIDs, secrets and e-mail addres
 sources: ## Re-render docs/research/source-validation.md from sources.yaml
 	$(ACTIVATE) && ffia sources render
 
+data: ## Build Bronze/Silver/Gold for every profile and validate against expected baselines
+	$(ACTIVATE) && ffia data build
+
+data-check: ## Verify committed synthetic CSVs are byte-identical to the generator
+	$(ACTIVATE) && ffia data generate --check
+
+recovery-demo: ## Run the Open Mirroring snapshot + incremental + restore drill (SIMULATED)
+	$(ACTIVATE) && ffia recovery run
+
 security: privacy-scan ## Dependency vulnerability audit (fails on HIGH/CRITICAL) + privacy scan
 	$(ACTIVATE) && uv export --quiet --frozen --all-groups --no-emit-project --no-hashes -o /tmp/ffia-requirements-audit.txt \
 		&& pip-audit -r /tmp/ffia-requirements-audit.txt --no-deps --disable-pip --progress-spinner off
@@ -74,7 +83,7 @@ build: ## Build Python distribution and frontend bundle
 	$(ACTIVATE) && uv build
 	cd $(FRONTEND) && npm run build
 
-validate: lint typecheck test-cov privacy-scan build security ## Full local validation (CI equivalent)
+validate: lint typecheck test-cov data-check privacy-scan build security ## Full local validation (CI equivalent)
 	$(ACTIVATE) && ffia sources check
 	@echo "validate: all checks passed"
 

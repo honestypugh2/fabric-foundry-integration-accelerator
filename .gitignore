@@ -46,3 +46,9 @@ sbom/
 .DS_Store
 Thumbs.db
 .idea/
+
+# --- Built local lakehouse layers and recovery runs (regenerate with `make data`)
+data/synthetic/bronze/*/
+data/synthetic/silver/*/
+data/synthetic/gold/*/
+data/synthetic/recovery/runs/

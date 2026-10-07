@@ -1,0 +1,93 @@
+{
+  "diagnostics": {
+    "blank_total_charges": 5,
+    "conditions_with_blank_encounter_id": 428,
+    "encounter_chronology_violations": 0,
+    "length_of_stay_mismatches": 4,
+    "medication_chronology_violations": 3,
+    "notes_with_embedded_newline": 0,
+    "notes_with_literal_newline": 56,
+    "out_of_range_vitals": 6,
+    "overlapping_encounters": 3,
+    "zero_claim_amounts": 3
+  },
+  "generator_version": "1",
+  "measures": {
+    "average_charges_per_encounter": 4740.567676,
+    "average_length_of_stay": 3.995392,
+    "ckd_prevalence": 0.21,
+    "claim_count": 1025,
+    "copd_prevalence": 0.195,
+    "denial_rate": 0.101463,
+    "denied_claim_count": 104,
+    "diabetes_prevalence": 0.215,
+    "ed_visit_count": 205,
+    "eligible_index_encounters": 211,
+    "heart_failure_prevalence": 0.235,
+    "high_risk_patient_count": 19,
+    "high_risk_patient_pct": 0.095,
+    "hypertension_prevalence": 0.16,
+    "inpatient_encounters": 217,
+    "patient_count": 200,
+    "readmission_rate_30_day": 0.165877,
+    "readmissions_within_30_days": 35,
+    "total_charges": 4835379.03,
+    "total_denied_claim_amount": 630155.76,
+    "total_encounters": 1025,
+    "total_inpatient_los_days": 867,
+    "total_paid_amount": 2870467.63
+  },
+  "observation_cutoff": "2025-12-29",
+  "profile": "hc-lab-7file-v1",
+  "reconciliation": {
+    "claim_amount_minus_recorded_charges": 2914.3,
+    "gold_claim_amount_total": 4838293.33,
+    "gold_paid_amount_total": 2870467.63,
+    "gold_total_charges": 4835379.03,
+    "silver_claim_amount_total": 4838293.33,
+    "silver_paid_amount_total": 2870467.63,
+    "silver_total_charges": 4835379.03
+  },
+  "row_counts": {
+    "bronze": {
+      "bronze_claims": 1025,
+      "bronze_clinical_notes": 150,
+      "bronze_conditions": 428,
+      "bronze_encounters": 1025,
+      "bronze_medications": 643,
+      "bronze_patients": 200,
+      "bronze_vitals": 4299
+    },
+    "gold": {
+      "dim_date": 742,
+      "dim_facility": 5,
+      "dim_patient": 200,
+      "dim_payer": 5,
+      "gold_alos": 24,
+      "gold_ed_utilization": 151,
+      "gold_encounter_summary": 1025,
+      "gold_financial": 1025,
+      "gold_population_health": 200,
+      "gold_readmissions": 217
+    },
+    "raw": {
+      "claims": 1025,
+      "clinical_notes": 150,
+      "conditions": 428,
+      "encounters": 1025,
+      "medications": 643,
+      "patients": 200,
+      "vitals": 4299
+    },
+    "silver": {
+      "silver_claims": 1025,
+      "silver_clinical_notes": 150,
+      "silver_conditions": 428,
+      "silver_encounters": 1025,
+      "silver_medications": 643,
+      "silver_patients": 200,
+      "silver_vitals": 4299
+    }
+  },
+  "synthetic_notice": "SYNTHETIC DATA. Fictional people, places, providers, facilities and payers generated for analytics education. Not PHI, not PII, and not clinical guidance."
+}

@@ -1,0 +1,171 @@
+{
+  "profile": "core-healthcare-v1",
+  "generator_version": "1",
+  "seed": 20261005,
+  "synthetic_notice": "SYNTHETIC DATA. Fictional people, places, providers, facilities and payers generated for analytics education. Not PHI, not PII, and not clinical guidance.",
+  "observation_cutoff": "2025-12-30",
+  "files": [
+    {
+      "name": "facilities.csv",
+      "rows": 5,
+      "columns": [
+        "facility_id",
+        "facility_name",
+        "facility_type",
+        "region",
+        "city",
+        "state"
+      ],
+      "sha256": "acfbe9367cd694558be93dea5d5d6d906f21f93962e09adf7f19ed743f7c74cd"
+    },
+    {
+      "name": "payers.csv",
+      "rows": 5,
+      "columns": [
+        "payer_id",
+        "payer_name",
+        "payer_type"
+      ],
+      "sha256": "407242daed6a330ecf08d9e149548b67b9c296b9c4311b76dc4cdc17eaa675b5"
+    },
+    {
+      "name": "patients.csv",
+      "rows": 300,
+      "columns": [
+        "patient_id",
+        "first_name",
+        "last_name",
+        "date_of_birth",
+        "age",
+        "gender",
+        "race",
+        "zip_code",
+        "city",
+        "state",
+        "insurance_type",
+        "primary_care_provider",
+        "risk_score"
+      ],
+      "sha256": "728621a6a4ca5706891fcde9bba92ad1b8aab160c3b53b43605f1aca07d7909a"
+    },
+    {
+      "name": "encounters.csv",
+      "rows": 1500,
+      "columns": [
+        "encounter_id",
+        "patient_id",
+        "encounter_date",
+        "encounter_time",
+        "discharge_date",
+        "encounter_type",
+        "facility_id",
+        "facility_name",
+        "department",
+        "primary_diagnosis_code",
+        "primary_diagnosis_description",
+        "attending_provider",
+        "discharge_disposition",
+        "length_of_stay_days",
+        "total_charges"
+      ],
+      "sha256": "d40edc3ab0a80f29bab06d03cdc1cae54911471038eb0765cae34c3f1589d358"
+    },
+    {
+      "name": "conditions.csv",
+      "rows": 640,
+      "columns": [
+        "condition_id",
+        "patient_id",
+        "encounter_id",
+        "condition_code",
+        "condition_description",
+        "condition_type",
+        "date_diagnosed",
+        "status"
+      ],
+      "sha256": "9f8526748271f9078b2ae3b2083ca8b8ba0b5638b3b5c670b3a7edb309928c0d"
+    },
+    {
+      "name": "claims.csv",
+      "rows": 1500,
+      "columns": [
+        "claim_id",
+        "patient_id",
+        "encounter_id",
+        "claim_date",
+        "payer",
+        "payer_type",
+        "claim_amount",
+        "paid_amount",
+        "denied_amount",
+        "patient_responsibility",
+        "denial_reason",
+        "claim_status",
+        "days_to_payment"
+      ],
+      "sha256": "93a1c92237a80d0a0a1ddeda706b064245df9344a3fa8d78aa3d0f080208989f"
+    },
+    {
+      "name": "vitals.csv",
+      "rows": 6000,
+      "columns": [
+        "vital_id",
+        "patient_id",
+        "encounter_id",
+        "facility_name",
+        "department",
+        "timestamp",
+        "heart_rate",
+        "systolic_bp",
+        "diastolic_bp",
+        "temperature_f",
+        "respiratory_rate",
+        "spo2_percent",
+        "pain_level"
+      ],
+      "sha256": "9d58e8d7ac4f878a2e71e8bf7c9ee3f22302df6990255bfc69caf86dfb4b7812"
+    },
+    {
+      "name": "medications.csv",
+      "rows": 950,
+      "columns": [
+        "medication_id",
+        "patient_id",
+        "encounter_id",
+        "medication_name",
+        "medication_class",
+        "dosage",
+        "frequency",
+        "prescriber",
+        "start_date",
+        "end_date",
+        "status"
+      ],
+      "sha256": "6d116cbe6831cee13d7c989cf2f94d36b8f84ed2979c486b04b8d7e262c3567a"
+    },
+    {
+      "name": "clinical_notes.csv",
+      "rows": 220,
+      "columns": [
+        "note_id",
+        "patient_id",
+        "encounter_id",
+        "note_date",
+        "note_type",
+        "provider",
+        "note_text"
+      ],
+      "sha256": "e2e530d5ad2f825b8743703893b5ab589b43b81545c61a868d68f3881cfdfe21"
+    }
+  ],
+  "quirks": {
+    "blank_total_charges": 5,
+    "conditions_with_blank_encounter_id": 640,
+    "length_of_stay_mismatches": 4,
+    "medication_chronology_violations": 3,
+    "notes_with_literal_newline": 80,
+    "out_of_range_vitals": 6,
+    "overlapping_encounters": 3,
+    "zero_claim_amounts": 3
+  }
+}

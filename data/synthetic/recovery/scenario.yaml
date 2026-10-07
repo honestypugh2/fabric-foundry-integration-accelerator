@@ -1,0 +1,26 @@
+# Open Mirroring recovery drill (synthetic). Run: uv run ffia recovery run
+# The mirrored table is the claims source of profile hc-lab-7file-v1 (~1,000 rows) standing in
+# for a conceptually large fact table. Sizes at scale are extrapolated ESTIMATES.
+version: 1
+name: Open Mirroring recovery drill (synthetic claims)
+source_profile: hc-lab-7file-v1
+table: claims
+key_columns: [claim_id]
+seed: 7
+retention_days: 7       # documented cleanup window for processed files
+snapshot_day: 7         # weekly full Parquet snapshot (customer-implemented pattern)
+failure_day: 10         # the mirrored table is lost after day 10 is applied
+conceptual_scale:
+  fact_rows: 100000000
+  note: The local table has about one thousand rows; sizes and daily volumes at 100M rows are extrapolated estimates, not measurements.
+days:
+  - {day: 1, updates: 12, inserts: 4, deletes: 1}
+  - {day: 2, updates: 10, inserts: 3}
+  - {day: 3, updates: 8, inserts: 5, deletes: 1, marker: upsert}
+  - {day: 4, updates: 9, inserts: 2}
+  - {day: 5, updates: 6, inserts: 4, resend_previous_inserts: true}
+  - {day: 6, updates: 7, inserts: 3, remediate_duplicates: true}
+  - {day: 7, updates: 11, inserts: 2, deletes: 1}
+  - {day: 8, updates: 9, inserts: 3}
+  - {day: 9, updates: 8, inserts: 4, marker: upsert}
+  - {day: 10, updates: 10, inserts: 2, deletes: 1}

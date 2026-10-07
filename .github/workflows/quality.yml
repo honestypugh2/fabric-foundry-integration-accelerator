@@ -46,6 +46,8 @@ jobs:
         run: pytest --cov --cov-report=term-missing --cov-report=xml
       - name: Source registry is rendered
         run: ffia sources check
+      - name: Synthetic data matches the generator
+        run: ffia data generate --check
       - name: Build distribution
         run: uv build
 

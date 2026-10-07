@@ -1,0 +1,201 @@
+patient_id,first_name,last_name,date_of_birth,age,gender,race,zip_code,city,state,insurance_type,primary_care_provider,risk_score
+SYN-P-00001,Kendall,Cindervale,1981-05-21,44,Male,White,00091,Stonefield,ZZ,Commercial,Provider SYN-14,0.16
+SYN-P-00002,Jordan,Hollowell,1996-05-06,29,Female,Black or African American,00012,Riverbend Hollow,ZZ,Commercial,Provider SYN-36,0.21
+SYN-P-00003,Blake,Ashgrove,1939-06-08,86,Male,White,00009,Harbor Point,ZZ,Medicare,Provider SYN-22,0.51
+SYN-P-00004,Blake,Cindervale,1966-11-28,59,Male,Hispanic or Latino,00026,Cedar Mesa,ZZ,Commercial,Provider SYN-17,0.70
+SYN-P-00005,Avery,Quarrystone,2001-12-29,24,Female,White,00099,Maple Ridge,ZZ,Commercial,Provider SYN-06,0.12
+SYN-P-00006,Dakota,Fernhollow,1952-12-10,73,Male,White,00039,Northbrook Vale,ZZ,Commercial,Provider SYN-19,0.49
+SYN-P-00007,Riley,Juniperra,1997-06-29,28,Female,White,00032,Northbrook Vale,ZZ,Commercial,Provider SYN-36,0.34
+SYN-P-00008,Jamie,Kestrelton,1983-05-07,42,Male,Black or African American,00077,Cedar Mesa,ZZ,Commercial,Provider SYN-03,0.27
+SYN-P-00009,Avery,Oakhurst,2004-11-29,21,Female,Black or African American,00090,Cedar Mesa,ZZ,Commercial,Provider SYN-10,0.11
+SYN-P-00010,Reese,Elmsworth,1937-09-15,88,Male,White,00066,Stonefield,ZZ,Medicare,Provider SYN-04,0.52
+SYN-P-00011,Parker,Hollowell,1959-02-12,66,Female,Hispanic or Latino,00036,Northbrook Vale,ZZ,Medicare,Provider SYN-19,0.32
+SYN-P-00012,Jordan,Thornfield,2005-03-31,20,Male,Hispanic or Latino,00090,Riverbend Hollow,ZZ,Commercial,Provider SYN-18,0.30
+SYN-P-00013,Riley,Thornfield,1970-09-26,55,Female,Other,00035,Stonefield,ZZ,Commercial,Provider SYN-02,0.28
+SYN-P-00014,Cameron,Stonebridge,1956-05-08,69,Male,Hispanic or Latino,00078,Harbor Point,ZZ,Medicare,Provider SYN-13,0.27
+SYN-P-00015,Bellamy,Elmsworth,1954-02-15,71,Male,White,00093,Riverbend Hollow,ZZ,Medicare,Provider SYN-11,0.52
+SYN-P-00016,Logan,Oakhurst,1978-07-29,47,Male,Hispanic or Latino,00025,Cedar Mesa,ZZ,Commercial,Provider SYN-36,0.27
+SYN-P-00017,Kendall,Ironwood,1940-10-03,85,Female,White,00002,Harbor Point,ZZ,Medicare,Provider SYN-08,0.94
+SYN-P-00018,Hollis,Larchmont,1974-05-16,51,Female,White,00082,Harbor Point,ZZ,Commercial,Provider SYN-21,0.27
+SYN-P-00019,Morgan,Pinecrest,1958-04-03,67,Male,Black or African American,00051,Harbor Point,ZZ,Medicare,Provider SYN-08,0.32
+SYN-P-00020,Skyler,Brookmere,1972-07-20,53,Female,White,00036,Cedar Mesa,ZZ,Commercial,Provider SYN-14,0.22
+SYN-P-00021,Finley,Ashgrove,1962-09-25,63,Female,White,00015,Riverbend Hollow,ZZ,Commercial,Provider SYN-25,0.54
+SYN-P-00022,Devon,Thornfield,1970-07-19,55,Male,White,00009,Northbrook Vale,ZZ,Commercial,Provider SYN-21,0.36
+SYN-P-00023,Riley,Brookmere,1991-10-16,34,Female,White,00049,Stonefield,ZZ,Commercial,Provider SYN-29,0.18
+SYN-P-00024,Dakota,Quarrystone,1982-07-02,43,Female,White,00075,Maple Ridge,ZZ,Commercial,Provider SYN-26,0.32
+SYN-P-00025,Taylor,Ironwood,1961-05-29,64,Female,Hispanic or Latino,00063,Northbrook Vale,ZZ,Commercial,Provider SYN-04,0.65
+SYN-P-00026,Hollis,Fernhollow,1964-09-11,61,Male,Hispanic or Latino,00078,Harbor Point,ZZ,Commercial,Provider SYN-06,0.42
+SYN-P-00027,Skyler,Hollowell,1979-02-02,46,Male,Hispanic or Latino,00086,Maple Ridge,ZZ,Commercial,Provider SYN-37,0.12
+SYN-P-00028,Finley,Dunmore,1960-10-13,65,Female,White,00014,Cedar Mesa,ZZ,Medicare,Provider SYN-20,0.59
+SYN-P-00029,Devon,Oakhurst,1958-05-14,67,Female,Asian,00061,Cedar Mesa,ZZ,Medicare,Provider SYN-21,0.56
+SYN-P-00030,Reese,Brookmere,1999-07-21,26,Male,Black or African American,00030,Northbrook Vale,ZZ,Commercial,Provider SYN-02,0.32
+SYN-P-00031,Bellamy,Maplecrest,1959-03-18,66,Male,Black or African American,00001,Northbrook Vale,ZZ,Medicare,Provider SYN-14,0.53
+SYN-P-00032,Hollis,Ironwood,1946-02-20,79,Male,White,00043,Harbor Point,ZZ,Medicare,Provider SYN-33,0.67
+SYN-P-00033,Rowan,Larchmont,1967-01-23,58,Male,Hispanic or Latino,00049,Stonefield,ZZ,Commercial,Provider SYN-39,0.48
+SYN-P-00034,Emery,Ravensmere,1961-08-19,64,Male,White,00020,Riverbend Hollow,ZZ,Self-Pay,Provider SYN-14,0.31
+SYN-P-00035,Ellis,Northvale,1990-10-15,35,Male,Two or More Races,00017,Maple Ridge,ZZ,Commercial,Provider SYN-16,0.56
+SYN-P-00036,Riley,Ironwood,1969-12-02,56,Female,White,00062,Harbor Point,ZZ,Commercial,Provider SYN-38,0.20
+SYN-P-00037,Jamie,Northvale,1969-11-25,56,Male,Asian,00050,Cedar Mesa,ZZ,Commercial,Provider SYN-05,0.39
+SYN-P-00038,Riley,Elmsworth,1960-03-24,65,Female,Hispanic or Latino,00085,Stonefield,ZZ,Medicare,Provider SYN-15,0.27
+SYN-P-00039,Harper,Kestrelton,1953-10-03,72,Unknown,White,00084,Northbrook Vale,ZZ,Commercial,Provider SYN-10,0.28
+SYN-P-00040,Taylor,Dunmore,1963-06-29,62,Female,White,00029,Stonefield,ZZ,Commercial,Provider SYN-34,0.64
+SYN-P-00041,Cameron,Ironwood,1994-06-24,31,Male,White,00001,Maple Ridge,ZZ,Self-Pay,Provider SYN-18,0.15
+SYN-P-00042,Rowan,Quarrystone,1952-11-16,73,Female,White,00067,Northbrook Vale,ZZ,Commercial,Provider SYN-04,0.31
+SYN-P-00043,Reese,Dunmore,1953-02-14,72,Female,Black or African American,00055,Northbrook Vale,ZZ,Medicare,Provider SYN-35,0.51
+SYN-P-00044,Arden,Brookmere,1971-02-25,54,Male,Black or African American,00075,Harbor Point,ZZ,Commercial,Provider SYN-19,0.43
+SYN-P-00045,Devon,Oakhurst,2001-10-11,24,Male,White,00062,Harbor Point,ZZ,Commercial,Provider SYN-20,0.11
+SYN-P-00046,Logan,Elmsworth,2000-01-15,25,Unknown,Hispanic or Latino,00077,Harbor Point,ZZ,Commercial,Provider SYN-37,0.20
+SYN-P-00047,Parker,Quarrystone,1964-09-21,61,Female,Hispanic or Latino,00022,Northbrook Vale,ZZ,Commercial,Provider SYN-34,0.49
+SYN-P-00048,Jordan,Cindervale,1948-06-14,77,Female,Black or African American,00070,Maple Ridge,ZZ,Medicare,Provider SYN-04,0.73
+SYN-P-00049,Reese,Brookmere,1964-11-28,61,Male,White,00006,Cedar Mesa,ZZ,Commercial,Provider SYN-15,0.23
+SYN-P-00050,Riley,Elmsworth,1977-10-17,48,Male,Black or African American,00080,Riverbend Hollow,ZZ,Commercial,Provider SYN-19,0.15
+SYN-P-00051,Dakota,Glenbrook,1984-04-19,41,Male,Black or African American,00088,Cedar Mesa,ZZ,Commercial,Provider SYN-15,0.12
+SYN-P-00052,Kendall,Fernhollow,2002-02-26,23,Female,Black or African American,00027,Riverbend Hollow,ZZ,Medicaid,Provider SYN-39,0.21
+SYN-P-00053,Parker,Juniperra,1974-07-06,51,Male,Hispanic or Latino,00045,Northbrook Vale,ZZ,Commercial,Provider SYN-35,0.28
+SYN-P-00054,Reese,Ashgrove,1945-07-13,80,Female,Asian,00025,Northbrook Vale,ZZ,Medicare,Provider SYN-27,0.76
+SYN-P-00055,Parker,Glenbrook,1953-12-09,72,Female,Black or African American,00021,Harbor Point,ZZ,Medicare,Provider SYN-32,0.56
+SYN-P-00056,Taylor,Hollowell,1954-09-14,71,Female,Other,00057,Harbor Point,ZZ,Medicare,Provider SYN-18,0.52
+SYN-P-00057,Emery,Ashgrove,1975-07-21,50,Female,White,00084,Cedar Mesa,ZZ,Commercial,Provider SYN-07,0.61
+SYN-P-00058,Blake,Larchmont,1944-06-20,81,Male,Black or African American,00096,Maple Ridge,ZZ,Commercial,Provider SYN-40,0.85
+SYN-P-00059,Sage,Ironwood,1965-10-08,60,Male,White,00054,Maple Ridge,ZZ,Commercial,Provider SYN-36,0.60
+SYN-P-00060,Emery,Fernhollow,1969-05-18,56,Female,Black or African American,00014,Cedar Mesa,ZZ,Commercial,Provider SYN-38,0.64
+SYN-P-00061,Sage,Oakhurst,1965-12-01,60,Female,White,00069,Cedar Mesa,ZZ,Medicaid,Provider SYN-29,0.27
+SYN-P-00062,Avery,Dunmore,1970-05-02,55,Male,White,00070,Cedar Mesa,ZZ,Medicaid,Provider SYN-35,0.14
+SYN-P-00063,Harper,Ironwood,1973-06-20,52,Female,Black or African American,00048,Harbor Point,ZZ,Commercial,Provider SYN-38,0.25
+SYN-P-00064,Dakota,Thornfield,1966-08-18,59,Female,White,00061,Riverbend Hollow,ZZ,Commercial,Provider SYN-17,0.36
+SYN-P-00065,Hollis,Thornfield,1969-11-04,56,Female,White,00054,Harbor Point,ZZ,Commercial,Provider SYN-25,0.41
+SYN-P-00066,Finley,Northvale,1953-01-30,72,Unknown,White,00038,Riverbend Hollow,ZZ,Commercial,Provider SYN-10,0.20
+SYN-P-00067,Parker,Elmsworth,1962-07-21,63,Male,White,00003,Maple Ridge,ZZ,Medicaid,Provider SYN-36,0.49
+SYN-P-00068,Rowan,Brookmere,1949-05-30,76,Male,Hispanic or Latino,00062,Harbor Point,ZZ,Medicare,Provider SYN-21,0.40
+SYN-P-00069,Devon,Hollowell,1962-09-15,63,Male,White,00095,Stonefield,ZZ,Medicaid,Provider SYN-22,0.37
+SYN-P-00070,Blake,Kestrelton,1969-10-28,56,Female,Two or More Races,00028,Cedar Mesa,ZZ,Commercial,Provider SYN-20,0.18
+SYN-P-00071,Quinn,Juniperra,2015-11-26,10,Male,Black or African American,00023,Riverbend Hollow,ZZ,Medicaid,Provider SYN-25,0.12
+SYN-P-00072,Quinn,Juniperra,1946-02-21,79,Male,Asian,00040,Riverbend Hollow,ZZ,Medicare,Provider SYN-25,0.61
+SYN-P-00073,Blake,Pinecrest,1972-12-10,53,Female,Hispanic or Latino,00092,Harbor Point,ZZ,Commercial,Provider SYN-35,0.26
+SYN-P-00074,Avery,Cindervale,2005-01-26,20,Female,White,00015,Maple Ridge,ZZ,Commercial,Provider SYN-08,0.08
+SYN-P-00075,Skyler,Oakhurst,2012-05-15,13,Female,White,00059,Riverbend Hollow,ZZ,Commercial,Provider SYN-25,0.14
+SYN-P-00076,Kendall,Brookmere,1972-08-29,53,Female,White,00092,Maple Ridge,ZZ,Commercial,Provider SYN-12,0.49
+SYN-P-00077,Dakota,Fernhollow,1983-11-16,42,Male,White,00010,Cedar Mesa,ZZ,Medicaid,Provider SYN-05,0.51
+SYN-P-00078,Harper,Larchmont,2000-08-31,25,Male,White,00042,Northbrook Vale,ZZ,Commercial,Provider SYN-34,0.19
+SYN-P-00079,Avery,Quarrystone,2004-06-05,21,Female,White,00063,Cedar Mesa,ZZ,Commercial,Provider SYN-22,0.20
+SYN-P-00080,Avery,Glenbrook,1998-12-23,27,Female,Asian,00004,Northbrook Vale,ZZ,Self-Pay,Provider SYN-26,0.15
+SYN-P-00081,Casey,Cindervale,1998-01-19,27,Female,White,00039,Harbor Point,ZZ,Commercial,Provider SYN-27,0.17
+SYN-P-00082,Kendall,Dunmore,2021-12-02,4,Female,Asian,00097,Stonefield,ZZ,Commercial,Provider SYN-31,0.08
+SYN-P-00083,Hollis,Hollowell,1952-09-19,73,Male,Black or African American,00008,Riverbend Hollow,ZZ,Medicare,Provider SYN-29,0.64
+SYN-P-00084,Dakota,Northvale,2014-06-16,11,Male,Black or African American,00063,Maple Ridge,ZZ,Commercial,Provider SYN-40,0.03
+SYN-P-00085,Parker,Ravensmere,1951-07-25,74,Male,White,00039,Northbrook Vale,ZZ,Medicare,Provider SYN-14,0.57
+SYN-P-00086,Cameron,Cindervale,1978-10-26,47,Male,Black or African American,00023,Cedar Mesa,ZZ,Self-Pay,Provider SYN-30,0.12
+SYN-P-00087,Harper,Elmsworth,1943-01-06,82,Male,Black or African American,00095,Stonefield,ZZ,Commercial,Provider SYN-02,0.58
+SYN-P-00088,Dakota,Kestrelton,1959-02-17,66,Male,Hispanic or Latino,00051,Stonefield,ZZ,Medicare,Provider SYN-38,0.31
+SYN-P-00089,Skyler,Pinecrest,1958-01-21,67,Male,White,00099,Northbrook Vale,ZZ,Medicare,Provider SYN-28,0.57
+SYN-P-00090,Jamie,Juniperra,1950-12-05,75,Male,White,00024,Northbrook Vale,ZZ,Medicare,Provider SYN-08,0.96
+SYN-P-00091,Finley,Quarrystone,1945-04-08,80,Female,Hispanic or Latino,00012,Riverbend Hollow,ZZ,Commercial,Provider SYN-20,0.39
+SYN-P-00092,Kendall,Cindervale,1955-06-05,70,Male,White,00057,Stonefield,ZZ,Commercial,Provider SYN-37,0.18
+SYN-P-00093,Jamie,Hollowell,1933-08-04,92,Female,Black or African American,00022,Stonefield,ZZ,Medicare,Provider SYN-21,0.65
+SYN-P-00094,Ellis,Oakhurst,1950-09-07,75,Female,Black or African American,00099,Harbor Point,ZZ,Medicare,Provider SYN-14,0.60
+SYN-P-00095,Quinn,Fernhollow,1936-04-15,89,Female,Black or African American,00046,Northbrook Vale,ZZ,Medicare,Provider SYN-34,0.53
+SYN-P-00096,Emery,Brookmere,1976-03-21,49,Male,Black or African American,00035,Northbrook Vale,ZZ,Commercial,Provider SYN-17,0.45
+SYN-P-00097,Dakota,Pinecrest,1962-07-01,63,Male,Other,00092,Harbor Point,ZZ,Commercial,Provider SYN-02,0.31
+SYN-P-00098,Blake,Brookmere,2001-05-31,24,Male,White,00033,Riverbend Hollow,ZZ,Commercial,Provider SYN-11,0.24
+SYN-P-00099,Hollis,Larchmont,1951-03-07,74,Male,Hispanic or Latino,00060,Cedar Mesa,ZZ,Medicare,Provider SYN-01,0.48
+SYN-P-00100,Harper,Fernhollow,1961-09-15,64,Male,White,00012,Stonefield,ZZ,Commercial,Provider SYN-35,0.52
+SYN-P-00101,Bellamy,Oakhurst,1948-01-23,77,Male,White,00009,Riverbend Hollow,ZZ,Medicare,Provider SYN-33,0.56
+SYN-P-00102,Finley,Dunmore,1968-04-20,57,Male,Black or African American,00080,Maple Ridge,ZZ,Commercial,Provider SYN-24,0.29
+SYN-P-00103,Kendall,Brookmere,1964-06-10,61,Unknown,White,00003,Cedar Mesa,ZZ,Commercial,Provider SYN-10,0.70
+SYN-P-00104,Harper,Kestrelton,1965-06-03,60,Female,White,00075,Maple Ridge,ZZ,Commercial,Provider SYN-28,0.65
+SYN-P-00105,Logan,Dunmore,1965-07-25,60,Female,White,00065,Northbrook Vale,ZZ,Medicaid,Provider SYN-32,0.18
+SYN-P-00106,Arden,Fernhollow,1945-01-11,80,Female,White,00002,Harbor Point,ZZ,Medicare,Provider SYN-08,0.73
+SYN-P-00107,Quinn,Brookmere,1960-08-07,65,Male,Black or African American,00084,Cedar Mesa,ZZ,Medicare,Provider SYN-38,0.75
+SYN-P-00108,Jamie,Brookmere,1998-11-25,27,Unknown,White,00001,Stonefield,ZZ,Commercial,Provider SYN-01,0.36
+SYN-P-00109,Hollis,Juniperra,1964-05-04,61,Female,White,00013,Riverbend Hollow,ZZ,Commercial,Provider SYN-26,0.75
+SYN-P-00110,Harper,Ironwood,1988-10-02,37,Female,White,00076,Stonefield,ZZ,Commercial,Provider SYN-05,0.10
+SYN-P-00111,Dakota,Fernhollow,1973-01-27,52,Female,Two or More Races,00069,Maple Ridge,ZZ,Commercial,Provider SYN-08,0.20
+SYN-P-00112,Skyler,Northvale,1969-07-28,56,Male,Other,00023,Maple Ridge,ZZ,Commercial,Provider SYN-36,0.66
+SYN-P-00113,Finley,Stonebridge,1977-04-23,48,Male,Hispanic or Latino,00097,Maple Ridge,ZZ,Medicaid,Provider SYN-06,0.48
+SYN-P-00114,Morgan,Ashgrove,1956-03-15,69,Male,White,00003,Cedar Mesa,ZZ,Commercial,Provider SYN-14,0.50
+SYN-P-00115,Blake,Maplecrest,1966-05-06,59,Male,Hispanic or Latino,00055,Stonefield,ZZ,Commercial,Provider SYN-30,0.57
+SYN-P-00116,Casey,Glenbrook,1964-03-07,61,Female,Asian,00095,Stonefield,ZZ,Commercial,Provider SYN-25,0.24
+SYN-P-00117,Bellamy,Quarrystone,1972-07-22,53,Female,Hispanic or Latino,00067,Northbrook Vale,ZZ,Self-Pay,Provider SYN-21,0.33
+SYN-P-00118,Logan,Oakhurst,2010-12-25,15,Female,Hispanic or Latino,00092,Cedar Mesa,ZZ,Self-Pay,Provider SYN-34,0.05
+SYN-P-00119,Jamie,Brookmere,1963-01-15,62,Female,Black or African American,00021,Harbor Point,ZZ,Commercial,Provider SYN-04,0.35
+SYN-P-00120,Emery,Northvale,1951-10-04,74,Female,White,00078,Cedar Mesa,ZZ,Medicare,Provider SYN-25,0.27
+SYN-P-00121,Logan,Ironwood,1957-05-18,68,Female,Black or African American,00011,Harbor Point,ZZ,Medicare,Provider SYN-02,0.59
+SYN-P-00122,Dakota,Thornfield,1946-06-20,79,Female,Asian,00007,Harbor Point,ZZ,Medicare,Provider SYN-03,0.30
+SYN-P-00123,Blake,Dunmore,1974-06-09,51,Female,Black or African American,00002,Stonefield,ZZ,Self-Pay,Provider SYN-15,0.44
+SYN-P-00124,Taylor,Thornfield,1997-12-09,28,Male,White,00008,Harbor Point,ZZ,Medicaid,Provider SYN-32,0.10
+SYN-P-00125,Emery,Glenbrook,1980-12-19,45,Female,Asian,00023,Harbor Point,ZZ,Commercial,Provider SYN-10,0.15
+SYN-P-00126,Casey,Fernhollow,1956-09-11,69,Male,White,00049,Stonefield,ZZ,Medicare,Provider SYN-26,0.93
+SYN-P-00127,Avery,Hollowell,2006-07-01,19,Male,White,00080,Stonefield,ZZ,Commercial,Provider SYN-16,0.15
+SYN-P-00128,Jamie,Oakhurst,1944-08-03,81,Male,White,00093,Cedar Mesa,ZZ,Medicare,Provider SYN-34,0.61
+SYN-P-00129,Reese,Juniperra,1972-05-10,53,Male,White,00061,Harbor Point,ZZ,Commercial,Provider SYN-30,0.40
+SYN-P-00130,Casey,Glenbrook,1971-01-23,54,Male,White,00022,Riverbend Hollow,ZZ,Medicaid,Provider SYN-16,0.34
+SYN-P-00131,Bellamy,Ironwood,1987-06-08,38,Female,Two or More Races,00055,Cedar Mesa,ZZ,Commercial,Provider SYN-26,0.45
+SYN-P-00132,Arden,Hollowell,1953-09-06,72,Female,Black or African American,00026,Cedar Mesa,ZZ,Medicare,Provider SYN-25,0.54
+SYN-P-00133,Devon,Ashgrove,2007-03-19,18,Male,White,00031,Stonefield,ZZ,Commercial,Provider SYN-16,0.10
+SYN-P-00134,Hollis,Maplecrest,2007-03-12,18,Male,Hispanic or Latino,00084,Stonefield,ZZ,Self-Pay,Provider SYN-17,0.05
+SYN-P-00135,Sage,Elmsworth,1962-01-21,63,Male,White,00077,Maple Ridge,ZZ,Commercial,Provider SYN-19,0.63
+SYN-P-00136,Cameron,Ironwood,1951-10-14,74,Female,White,00004,Harbor Point,ZZ,Medicare,Provider SYN-09,0.28
+SYN-P-00137,Ellis,Oakhurst,1998-01-27,27,Female,White,00004,Maple Ridge,ZZ,Self-Pay,Provider SYN-10,0.23
+SYN-P-00138,Reese,Stonebridge,1953-06-27,72,Male,Hispanic or Latino,00059,Northbrook Vale,ZZ,Medicare,Provider SYN-08,0.42
+SYN-P-00139,Jordan,Dunmore,1980-01-21,45,Female,Hispanic or Latino,00010,Stonefield,ZZ,Commercial,Provider SYN-11,0.22
+SYN-P-00140,Blake,Stonebridge,1985-11-09,40,Female,White,00001,Stonefield,ZZ,Commercial,Provider SYN-36,0.27
+SYN-P-00141,Parker,Cindervale,1975-03-27,50,Female,White,00004,Stonefield,ZZ,Commercial,Provider SYN-29,0.13
+SYN-P-00142,Riley,Elmsworth,2015-03-15,10,Female,Hispanic or Latino,00081,Northbrook Vale,ZZ,Commercial,Provider SYN-40,0.10
+SYN-P-00143,Blake,Kestrelton,1944-02-12,81,Female,Hispanic or Latino,00043,Cedar Mesa,ZZ,Medicare,Provider SYN-26,0.68
+SYN-P-00144,Hollis,Northvale,1955-09-01,70,Male,Black or African American,00025,Harbor Point,ZZ,Medicare,Provider SYN-37,0.79
+SYN-P-00145,Morgan,Fernhollow,2004-03-02,21,Female,Hispanic or Latino,00014,Harbor Point,ZZ,Medicaid,Provider SYN-08,0.13
+SYN-P-00146,Morgan,Brookmere,1968-08-25,57,Female,White,00042,Harbor Point,ZZ,Medicaid,Provider SYN-08,0.47
+SYN-P-00147,Quinn,Maplecrest,1961-07-15,64,Female,Other,00015,Riverbend Hollow,ZZ,Medicaid,Provider SYN-01,0.72
+SYN-P-00148,Harper,Glenbrook,1953-10-26,72,Male,Hispanic or Latino,00009,Cedar Mesa,ZZ,Medicare,Provider SYN-28,0.48
+SYN-P-00149,Devon,Elmsworth,1972-05-02,53,Male,Asian,00095,Riverbend Hollow,ZZ,Commercial,Provider SYN-04,0.49
+SYN-P-00150,Jordan,Dunmore,2006-03-15,19,Female,Black or African American,00082,Harbor Point,ZZ,Commercial,Provider SYN-07,0.15
+SYN-P-00151,Harper,Thornfield,1935-04-21,90,Female,Hispanic or Latino,00073,Stonefield,ZZ,Medicare,Provider SYN-22,0.64
+SYN-P-00152,Riley,Hollowell,1934-12-28,91,Male,White,00068,Riverbend Hollow,ZZ,Medicare,Provider SYN-02,0.99
+SYN-P-00153,Ellis,Kestrelton,1959-07-14,66,Unknown,Hispanic or Latino,00035,Northbrook Vale,ZZ,Medicare,Provider SYN-38,0.29
+SYN-P-00154,Blake,Ashgrove,1942-10-02,83,Female,White,00055,Maple Ridge,ZZ,Medicare,Provider SYN-03,0.68
+SYN-P-00155,Arden,Elmsworth,1983-03-13,42,Male,White,00064,Maple Ridge,ZZ,Commercial,Provider SYN-03,0.24
+SYN-P-00156,Ellis,Stonebridge,1957-04-08,68,Female,White,00033,Maple Ridge,ZZ,Medicare,Provider SYN-21,0.50
+SYN-P-00157,Devon,Brookmere,1964-11-26,61,Female,White,00078,Stonefield,ZZ,Commercial,Provider SYN-13,0.31
+SYN-P-00158,Jamie,Kestrelton,1967-06-27,58,Female,Asian,00031,Maple Ridge,ZZ,Medicaid,Provider SYN-23,0.30
+SYN-P-00159,Morgan,Stonebridge,2022-08-22,3,Male,Black or African American,00057,Harbor Point,ZZ,Medicaid,Provider SYN-38,0.10
+SYN-P-00160,Logan,Larchmont,1962-03-19,63,Female,Two or More Races,00090,Maple Ridge,ZZ,Commercial,Provider SYN-33,0.22
+SYN-P-00161,Avery,Larchmont,1945-05-20,80,Male,White,00070,Cedar Mesa,ZZ,Medicare,Provider SYN-10,0.25
+SYN-P-00162,Jordan,Quarrystone,1944-09-19,81,Male,White,00039,Northbrook Vale,ZZ,Commercial,Provider SYN-08,0.79
+SYN-P-00163,Quinn,Stonebridge,1937-12-04,88,Female,White,00095,Riverbend Hollow,ZZ,Commercial,Provider SYN-10,0.55
+SYN-P-00164,Kendall,Kestrelton,1955-04-23,70,Male,White,00078,Stonefield,ZZ,Medicare,Provider SYN-35,0.30
+SYN-P-00165,Cameron,Elmsworth,1948-01-09,77,Female,Hispanic or Latino,00072,Stonefield,ZZ,Medicare,Provider SYN-14,0.99
+SYN-P-00166,Taylor,Glenbrook,1971-02-25,54,Male,White,00060,Cedar Mesa,ZZ,Commercial,Provider SYN-30,0.38
+SYN-P-00167,Jordan,Northvale,1957-05-04,68,Male,White,00052,Northbrook Vale,ZZ,Commercial,Provider SYN-02,0.61
+SYN-P-00168,Jamie,Juniperra,1988-05-29,37,Male,Black or African American,00066,Stonefield,ZZ,Commercial,Provider SYN-04,0.21
+SYN-P-00169,Sage,Ironwood,1970-09-29,55,Female,White,00064,Harbor Point,ZZ,Medicaid,Provider SYN-35,0.17
+SYN-P-00170,Rowan,Cindervale,1943-08-10,82,Female,Asian,00022,Northbrook Vale,ZZ,Medicare,Provider SYN-38,0.75
+SYN-P-00171,Arden,Fernhollow,1977-08-22,48,Female,Hispanic or Latino,00079,Maple Ridge,ZZ,Commercial,Provider SYN-19,0.15
+SYN-P-00172,Bellamy,Hollowell,2012-04-21,13,Male,Hispanic or Latino,00059,Northbrook Vale,ZZ,Commercial,Provider SYN-29,0.28
+SYN-P-00173,Bellamy,Hollowell,1958-06-20,67,Female,Black or African American,00087,Maple Ridge,ZZ,Commercial,Provider SYN-34,0.60
+SYN-P-00174,Devon,Thornfield,1950-09-26,75,Male,Hispanic or Latino,00030,Northbrook Vale,ZZ,Medicare,Provider SYN-27,0.39
+SYN-P-00175,Avery,Elmsworth,1976-06-01,49,Male,Black or African American,00042,Cedar Mesa,ZZ,Medicaid,Provider SYN-02,0.41
+SYN-P-00176,Jamie,Oakhurst,1992-02-27,33,Male,Black or African American,00091,Stonefield,ZZ,Medicaid,Provider SYN-04,0.24
+SYN-P-00177,Quinn,Northvale,1962-02-22,63,Male,Hispanic or Latino,00015,Stonefield,ZZ,Commercial,Provider SYN-13,0.78
+SYN-P-00178,Ellis,Ravensmere,1999-07-28,26,Male,Black or African American,00097,Northbrook Vale,ZZ,Commercial,Provider SYN-26,0.07
+SYN-P-00179,Blake,Hollowell,1982-04-10,43,Female,Hispanic or Latino,00049,Cedar Mesa,ZZ,Commercial,Provider SYN-09,0.14
+SYN-P-00180,Finley,Ironwood,1941-08-30,84,Male,White,00052,Stonefield,ZZ,Commercial,Provider SYN-14,0.61
+SYN-P-00181,Quinn,Cindervale,1975-05-01,50,Female,White,00099,Northbrook Vale,ZZ,Self-Pay,Provider SYN-38,0.31
+SYN-P-00182,Bellamy,Kestrelton,1945-03-19,80,Female,Asian,00085,Cedar Mesa,ZZ,Commercial,Provider SYN-25,0.77
+SYN-P-00183,Cameron,Thornfield,1991-05-17,34,Male,White,00041,Northbrook Vale,ZZ,Commercial,Provider SYN-33,0.25
+SYN-P-00184,Taylor,Ashgrove,1970-10-07,55,Female,Hispanic or Latino,00077,Stonefield,ZZ,Commercial,Provider SYN-13,0.48
+SYN-P-00185,Sage,Hollowell,1962-05-28,63,Female,White,00065,Riverbend Hollow,ZZ,Commercial,Provider SYN-01,0.26
+SYN-P-00186,Hollis,Ashgrove,1961-07-16,64,Female,White,00062,Maple Ridge,ZZ,Medicaid,Provider SYN-21,0.30
+SYN-P-00187,Riley,Cindervale,1936-08-17,89,Male,White,00063,Maple Ridge,ZZ,Medicare,Provider SYN-17,0.68
+SYN-P-00188,Dakota,Ravensmere,1952-02-02,73,Female,Black or African American,00085,Riverbend Hollow,ZZ,Medicare,Provider SYN-13,0.69
+SYN-P-00189,Parker,Northvale,1941-06-20,84,Female,Black or African American,00033,Cedar Mesa,ZZ,Medicare,Provider SYN-07,0.44
+SYN-P-00190,Hollis,Kestrelton,1961-10-02,64,Male,White,00061,Stonefield,ZZ,Medicaid,Provider SYN-15,0.36
+SYN-P-00191,Cameron,Brookmere,1954-07-14,71,Male,Hispanic or Latino,00038,Riverbend Hollow,ZZ,Medicare,Provider SYN-02,0.49
+SYN-P-00192,Arden,Glenbrook,1981-02-09,44,Female,Hispanic or Latino,00024,Stonefield,ZZ,Commercial,Provider SYN-09,0.34
+SYN-P-00193,Sage,Glenbrook,1981-01-31,44,Female,White,00068,Harbor Point,ZZ,Commercial,Provider SYN-36,0.14
+SYN-P-00194,Riley,Hollowell,1997-01-07,28,Male,Black or African American,00019,Stonefield,ZZ,Medicaid,Provider SYN-06,0.31
+SYN-P-00195,Hollis,Cindervale,2015-03-03,10,Male,White,00042,Cedar Mesa,ZZ,Commercial,Provider SYN-37,0.17
+SYN-P-00196,Harper,Ironwood,1956-07-24,69,Male,Black or African American,00022,Cedar Mesa,ZZ,Medicare,Provider SYN-15,0.17
+SYN-P-00197,Reese,Pinecrest,1972-03-16,53,Female,White,00094,Stonefield,ZZ,Commercial,Provider SYN-04,0.45
+SYN-P-00198,Logan,Pinecrest,1980-09-15,45,Male,Black or African American,00080,Riverbend Hollow,ZZ,Self-Pay,Provider SYN-28,0.24
+SYN-P-00199,Dakota,Elmsworth,1962-10-24,63,Female,Black or African American,00065,Stonefield,ZZ,Medicaid,Provider SYN-23,0.30
+SYN-P-00200,Dakota,Stonebridge,1968-01-08,57,Female,Asian,00062,Cedar Mesa,ZZ,Commercial,Provider SYN-26,0.53

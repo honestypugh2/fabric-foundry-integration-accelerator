@@ -1,0 +1,6 @@
+facility_id,facility_name,facility_type,region,city,state
+FAC-01,Synthetic Regional Medical Center,Acute Care Hospital,Central,Northbrook Vale,ZZ
+FAC-02,Synthetic Community Hospital East,Community Hospital,East,Riverbend Hollow,ZZ
+FAC-03,Synthetic Community Hospital West,Community Hospital,West,Cedar Mesa,ZZ
+FAC-04,Synthetic Outpatient Center,Outpatient Center,Central,Harbor Point,ZZ
+FAC-05,Synthetic Specialty Clinic,Specialty Clinic,East,Maple Ridge,ZZ

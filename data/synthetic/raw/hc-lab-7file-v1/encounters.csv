@@ -1,0 +1,1026 @@
+encounter_id,patient_id,encounter_date,encounter_time,discharge_date,encounter_type,facility_id,facility_name,department,primary_diagnosis_code,primary_diagnosis_description,attending_provider,discharge_disposition,length_of_stay_days,total_charges
+SYN-E-000001,SYN-P-00106,2024-01-01,10:15,2024-01-01,Outpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-02,Home,0,624.85
+SYN-E-000002,SYN-P-00006,2024-01-01,14:15,2024-01-02,Observation,FAC-03,Synthetic Community Hospital West,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-03,Home,1,2828.48
+SYN-E-000003,SYN-P-00017,2024-01-02,04:45,2024-01-02,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-04,Home,0,368.59
+SYN-E-000004,SYN-P-00021,2024-01-02,11:00,2024-01-02,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-05,Home,0,628.72
+SYN-E-000005,SYN-P-00043,2024-01-03,01:30,2024-01-03,Observation,FAC-03,Synthetic Community Hospital West,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-06,Home,0,2185.18
+SYN-E-000006,SYN-P-00042,2024-01-04,03:15,2024-01-04,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-07,Home,0,291.01
+SYN-E-000007,SYN-P-00087,2024-01-04,20:15,2024-01-04,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-08,Home,0,637.47
+SYN-E-000008,SYN-P-00115,2024-01-05,08:15,2024-01-05,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-09,Home,0,228.89
+SYN-E-000009,SYN-P-00059,2024-01-06,04:45,2024-01-06,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-10,Home,0,179.24
+SYN-E-000010,SYN-P-00094,2024-01-06,23:30,2024-01-06,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-11,Home,0,1324.75
+SYN-E-000011,SYN-P-00131,2024-01-07,06:00,2024-01-07,Outpatient,FAC-04,Synthetic Outpatient Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-12,Home,0,754.63
+SYN-E-000012,SYN-P-00160,2024-01-08,06:30,2024-01-08,Outpatient,FAC-01,Synthetic Regional Medical Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-13,Home,0,846.97
+SYN-E-000013,SYN-P-00104,2024-01-08,13:15,2024-01-08,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,I10,Essential (primary) hypertension,Provider SYN-14,Home,0,178.51
+SYN-E-000014,SYN-P-00167,2024-01-09,02:45,2024-01-09,ED,FAC-03,Synthetic Community Hospital West,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-15,Home,0,867.38
+SYN-E-000015,SYN-P-00054,2024-01-09,16:15,2024-01-09,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-16,Home,0,535.89
+SYN-E-000016,SYN-P-00048,2024-01-11,11:45,2024-01-11,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-17,Left Before Completion,0,1187.79
+SYN-E-000017,SYN-P-00089,2024-01-14,19:45,2024-01-14,ED,FAC-03,Synthetic Community Hospital West,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-18,Home,0,3734.47
+SYN-E-000018,SYN-P-00026,2024-01-16,22:15,2024-01-23,Inpatient,FAC-02,Synthetic Community Hospital East,Nephrology,N17.9,"Acute kidney failure, unspecified",Provider SYN-19,Home,7,24376.34
+SYN-E-000019,SYN-P-00034,2024-01-17,00:00,2024-01-17,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-20,Home,0,190.47
+SYN-E-000020,SYN-P-00123,2024-01-17,01:45,2024-01-17,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-21,Home,0,488.11
+SYN-E-000021,SYN-P-00056,2024-01-17,16:30,2024-01-18,Observation,FAC-01,Synthetic Regional Medical Center,Internal Medicine,R55,Syncope and collapse,Provider SYN-22,Home,1,2044.97
+SYN-E-000022,SYN-P-00145,2024-01-18,14:30,2024-01-21,Inpatient,FAC-03,Synthetic Community Hospital West,Neurology,I63.9,"Cerebral infarction, unspecified",Provider SYN-23,Home,3,16260.22
+SYN-E-000023,SYN-P-00117,2024-01-19,00:30,2024-01-19,Outpatient,FAC-01,Synthetic Regional Medical Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-24,Home,0,704.66
+SYN-E-000024,SYN-P-00182,2024-01-20,10:30,2024-01-25,Inpatient,FAC-03,Synthetic Community Hospital West,Cardiology,I50.9,"Heart failure, unspecified",Provider SYN-25,Skilled Nursing Facility,5,20765.51
+SYN-E-000025,SYN-P-00098,2024-01-21,01:15,2024-01-22,Inpatient,FAC-01,Synthetic Regional Medical Center,Cardiology,I48.91,Unspecified atrial fibrillation,Provider SYN-26,Skilled Nursing Facility,1,9398.73
+SYN-E-000026,SYN-P-00119,2024-01-21,13:45,2024-01-21,Observation,FAC-01,Synthetic Regional Medical Center,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-27,Home,0,3639.75
+SYN-E-000027,SYN-P-00177,2024-01-23,22:45,2024-01-23,ED,FAC-01,Synthetic Regional Medical Center,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-28,Home,0,3325.16
+SYN-E-000028,SYN-P-00128,2024-01-24,01:00,2024-01-24,Outpatient,FAC-01,Synthetic Regional Medical Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-29,Home,0,630.04
+SYN-E-000029,SYN-P-00195,2024-01-29,05:45,2024-01-29,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-30,Home,0,3031.48
+SYN-E-000030,SYN-P-00068,2024-02-01,02:30,2024-02-01,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-31,Home,0,1783.75
+SYN-E-000031,SYN-P-00058,2024-02-02,12:00,2024-02-02,Observation,FAC-02,Synthetic Community Hospital East,Internal Medicine,R55,Syncope and collapse,Provider SYN-32,Home,0,4933.64
+SYN-E-000032,SYN-P-00076,2024-02-03,12:45,2024-02-03,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-33,Home,0,638.07
+SYN-E-000033,SYN-P-00152,2024-02-03,17:15,2024-02-03,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-34,Home,0,515.98
+SYN-E-000034,SYN-P-00003,2024-02-05,19:45,2024-02-05,ED,FAC-01,Synthetic Regional Medical Center,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-35,Home,0,2457.59
+SYN-E-000035,SYN-P-00138,2024-02-06,12:30,2024-02-06,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-36,Home,0,612.03
+SYN-E-000036,SYN-P-00111,2024-02-07,06:00,2024-02-07,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-37,Home,0,620.52
+SYN-E-000037,SYN-P-00169,2024-02-08,09:00,2024-02-08,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,I10,Essential (primary) hypertension,Provider SYN-38,Home,0,606.50
+SYN-E-000038,SYN-P-00042,2024-02-09,11:30,2024-02-09,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-39,Home,0,557.69
+SYN-E-000039,SYN-P-00139,2024-02-12,01:45,2024-02-12,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-40,Home,0,820.42
+SYN-E-000040,SYN-P-00126,2024-02-12,12:45,2024-02-15,Inpatient,FAC-02,Synthetic Community Hospital East,Cardiology,I50.9,"Heart failure, unspecified",Provider SYN-41,Home,3,15586.70
+SYN-E-000041,SYN-P-00052,2024-02-13,00:00,2024-02-17,Inpatient,FAC-02,Synthetic Community Hospital East,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-42,Home,4,18632.91
+SYN-E-000042,SYN-P-00119,2024-02-13,11:15,2024-02-13,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-43,Home,0,426.13
+SYN-E-000043,SYN-P-00142,2024-02-17,13:00,2024-02-26,Inpatient,FAC-01,Synthetic Regional Medical Center,Internal Medicine,J18.9,"Pneumonia, unspecified organism",Provider SYN-44,Skilled Nursing Facility,9,30814.94
+SYN-E-000044,SYN-P-00115,2024-02-17,19:30,2024-02-17,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-45,Home,0,605.38
+SYN-E-000045,SYN-P-00114,2024-02-18,01:30,2024-02-18,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-46,Home,0,296.80
+SYN-E-000046,SYN-P-00017,2024-02-19,00:30,2024-03-02,Inpatient,FAC-02,Synthetic Community Hospital East,Cardiology,I50.9,"Heart failure, unspecified",Provider SYN-47,Home,12,37139.48
+SYN-E-000047,SYN-P-00086,2024-02-20,21:15,2024-02-20,Outpatient,FAC-03,Synthetic Community Hospital West,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-48,Home,0,282.49
+SYN-E-000048,SYN-P-00056,2024-02-21,07:00,2024-02-26,Inpatient,FAC-01,Synthetic Regional Medical Center,Cardiology,I48.91,Unspecified atrial fibrillation,Provider SYN-49,Skilled Nursing Facility,5,20795.98
+SYN-E-000049,SYN-P-00187,2024-02-22,13:30,2024-02-22,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R51.9,"Headache, unspecified",Provider SYN-50,Home,0,3866.30
+SYN-E-000050,SYN-P-00021,2024-02-22,18:15,2024-02-22,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-51,Left Before Completion,0,1926.91
+SYN-E-000051,SYN-P-00066,2024-02-23,10:30,2024-02-23,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-52,Home,0,495.33
+SYN-E-000052,SYN-P-00132,2024-02-24,14:00,2024-02-24,ED,FAC-02,Synthetic Community Hospital East,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-53,Home,0,2389.20
+SYN-E-000053,SYN-P-00141,2024-02-28,00:00,2024-02-28,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-54,Home,0,824.50
+SYN-E-000054,SYN-P-00003,2024-02-28,04:30,2024-02-28,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,I10,Essential (primary) hypertension,Provider SYN-55,Home,0,329.25
+SYN-E-000055,SYN-P-00143,2024-02-28,15:30,2024-03-02,Inpatient,FAC-01,Synthetic Regional Medical Center,Orthopedics,S72.002A,Fracture of unspecified part of neck of left femur,Provider SYN-56,Home,3,14109.07
+SYN-E-000056,SYN-P-00198,2024-02-28,21:00,2024-02-28,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-57,Home,0,519.32
+SYN-E-000057,SYN-P-00179,2024-02-29,00:45,2024-02-29,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-58,Home,0,349.35
+SYN-E-000058,SYN-P-00168,2024-02-29,15:30,2024-02-29,ED,FAC-03,Synthetic Community Hospital West,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-59,Home,0,2983.84
+SYN-E-000059,SYN-P-00095,2024-03-01,14:45,2024-03-01,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-60,Home,0,880.30
+SYN-E-000060,SYN-P-00192,2024-03-01,17:00,2024-03-01,ED,FAC-03,Synthetic Community Hospital West,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-01,Home,0,2777.84
+SYN-E-000061,SYN-P-00199,2024-03-01,18:00,2024-03-04,Inpatient,FAC-01,Synthetic Regional Medical Center,Neurology,I63.9,"Cerebral infarction, unspecified",Provider SYN-02,Home,3,14244.44
+SYN-E-000062,SYN-P-00188,2024-03-04,16:30,2024-03-04,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-03,Home,0,769.96
+SYN-E-000063,SYN-P-00164,2024-03-05,04:15,2024-03-06,Inpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-04,Home,1,9196.52
+SYN-E-000064,SYN-P-00115,2024-03-05,15:45,2024-03-05,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-05,Home,0,892.24
+SYN-E-000065,SYN-P-00094,2024-03-05,17:45,2024-03-05,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-06,Home,0,581.62
+SYN-E-000066,SYN-P-00108,2024-03-07,12:00,2024-03-07,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-07,Home,0,620.21
+SYN-E-000067,SYN-P-00104,2024-03-09,10:45,2024-03-09,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-08,Home,0,300.07
+SYN-E-000068,SYN-P-00086,2024-03-10,08:30,2024-03-10,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-09,Home,0,883.96
+SYN-E-000069,SYN-P-00167,2024-03-11,20:00,2024-03-11,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-10,Home,0,841.32
+SYN-E-000070,SYN-P-00143,2024-03-12,07:30,2024-03-14,Inpatient,FAC-01,Synthetic Regional Medical Center,Cardiology,I48.91,Unspecified atrial fibrillation,Provider SYN-11,Home with Services,2,12240.43
+SYN-E-000071,SYN-P-00130,2024-03-12,09:45,2024-03-12,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-12,Home,0,527.35
+SYN-E-000072,SYN-P-00126,2024-03-12,13:30,2024-03-17,Inpatient,FAC-02,Synthetic Community Hospital East,Nephrology,N17.9,"Acute kidney failure, unspecified",Provider SYN-13,Home,5,19416.26
+SYN-E-000073,SYN-P-00080,2024-03-13,11:30,2024-03-13,Observation,FAC-03,Synthetic Community Hospital West,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-14,Home,0,5128.41
+SYN-E-000074,SYN-P-00196,2024-03-14,02:00,2024-03-17,Inpatient,FAC-02,Synthetic Community Hospital East,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-15,Skilled Nursing Facility,3,16022.87
+SYN-E-000075,SYN-P-00182,2024-03-14,14:45,2024-03-14,Outpatient,FAC-03,Synthetic Community Hospital West,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-16,Home,0,395.81
+SYN-E-000076,SYN-P-00091,2024-03-15,09:45,2024-03-15,ED,FAC-03,Synthetic Community Hospital West,Emergency,R51.9,"Headache, unspecified",Provider SYN-17,Home,0,3622.45
+SYN-E-000077,SYN-P-00106,2024-03-15,15:45,2024-03-18,Inpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-18,Home,3,16285.01
+SYN-E-000078,SYN-P-00067,2024-03-15,21:15,2024-03-20,Inpatient,FAC-03,Synthetic Community Hospital West,Internal Medicine,J18.9,"Pneumonia, unspecified organism",Provider SYN-19,Home,5,20867.82
+SYN-E-000079,SYN-P-00006,2024-03-16,15:15,2024-03-23,Inpatient,FAC-03,Synthetic Community Hospital West,Neurology,I63.9,"Cerebral infarction, unspecified",Provider SYN-20,Home with Services,7,25467.87
+SYN-E-000080,SYN-P-00177,2024-03-18,03:00,2024-03-18,Outpatient,FAC-05,Synthetic Specialty Clinic,Cardiology,I10,Essential (primary) hypertension,Provider SYN-21,Home,0,234.44
+SYN-E-000081,SYN-P-00153,2024-03-18,17:45,2024-03-18,Observation,FAC-02,Synthetic Community Hospital East,Internal Medicine,R55,Syncope and collapse,Provider SYN-22,Home,0,4068.16
+SYN-E-000082,SYN-P-00121,2024-03-19,14:45,2024-03-23,Inpatient,FAC-02,Synthetic Community Hospital East,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-23,Home,4,18321.63
+SYN-E-000083,SYN-P-00085,2024-03-19,22:45,2024-03-19,Outpatient,FAC-02,Synthetic Community Hospital East,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-24,Home,0,811.76
+SYN-E-000084,SYN-P-00157,2024-03-20,10:45,2024-03-20,Outpatient,FAC-05,Synthetic Specialty Clinic,Cardiology,I10,Essential (primary) hypertension,Provider SYN-25,Home,0,157.17
+SYN-E-000085,SYN-P-00113,2024-03-21,23:45,2024-03-21,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-26,Home,0,357.81
+SYN-E-000086,SYN-P-00098,2024-03-24,08:30,2024-03-24,Outpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-27,Home,0,669.10
+SYN-E-000087,SYN-P-00192,2024-03-24,21:00,2024-03-24,ED,FAC-03,Synthetic Community Hospital West,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-28,Home,0,2873.80
+SYN-E-000088,SYN-P-00131,2024-03-25,03:30,2024-03-25,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-29,Home,0,923.35
+SYN-E-000089,SYN-P-00150,2024-03-26,12:30,2024-03-26,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-30,Home,0,232.00
+SYN-E-000090,SYN-P-00199,2024-03-26,16:30,2024-03-27,Observation,FAC-03,Synthetic Community Hospital West,Internal Medicine,R55,Syncope and collapse,Provider SYN-31,Home,1,5883.53
+SYN-E-000091,SYN-P-00158,2024-03-27,10:15,2024-03-30,Inpatient,FAC-02,Synthetic Community Hospital East,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-32,Home with Services,3,13948.25
+SYN-E-000092,SYN-P-00174,2024-03-30,03:45,2024-03-30,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,I10,Essential (primary) hypertension,Provider SYN-33,Home,0,871.66
+SYN-E-000093,SYN-P-00130,2024-03-30,06:45,2024-03-30,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-34,Home,0,212.56
+SYN-E-000094,SYN-P-00138,2024-03-31,07:15,2024-03-31,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-35,Home,0,203.20
+SYN-E-000095,SYN-P-00058,2024-03-31,20:15,2024-04-04,Inpatient,FAC-02,Synthetic Community Hospital East,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-36,Home with Services,4,17856.50
+SYN-E-000096,SYN-P-00116,2024-03-31,22:00,2024-03-31,Outpatient,FAC-02,Synthetic Community Hospital East,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-37,Home,0,617.44
+SYN-E-000097,SYN-P-00072,2024-04-01,15:30,2024-04-01,ED,FAC-03,Synthetic Community Hospital West,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-38,Transferred,0,3743.61
+SYN-E-000098,SYN-P-00110,2024-04-02,05:30,2024-04-02,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-39,Home,0,502.68
+SYN-E-000099,SYN-P-00094,2024-04-03,15:45,2024-04-03,ED,FAC-01,Synthetic Regional Medical Center,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-40,Home,0,3890.08
+SYN-E-000100,SYN-P-00095,2024-04-03,22:45,2024-04-03,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-41,Home,0,342.39
+SYN-E-000101,SYN-P-00065,2024-04-05,23:45,2024-04-05,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-42,Home,0,493.08
+SYN-E-000102,SYN-P-00172,2024-04-09,17:15,2024-04-12,Inpatient,FAC-01,Synthetic Regional Medical Center,Orthopedics,S72.002A,Fracture of unspecified part of neck of left femur,Provider SYN-43,Home,4,15868.64
+SYN-E-000103,SYN-P-00169,2024-04-11,08:00,2024-04-11,Outpatient,FAC-04,Synthetic Outpatient Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-44,Home,0,246.44
+SYN-E-000104,SYN-P-00032,2024-04-13,09:30,2024-04-17,Inpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-45,Home with Services,4,17313.04
+SYN-E-000105,SYN-P-00145,2024-04-13,11:30,2024-04-16,Inpatient,FAC-03,Synthetic Community Hospital West,Neurology,I63.9,"Cerebral infarction, unspecified",Provider SYN-46,Home,3,15956.13
+SYN-E-000106,SYN-P-00197,2024-04-13,22:45,2024-04-19,Inpatient,FAC-03,Synthetic Community Hospital West,Neurology,I63.9,"Cerebral infarction, unspecified",Provider SYN-47,Home,6,22995.10
+SYN-E-000107,SYN-P-00128,2024-04-14,19:45,2024-04-14,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-48,Home,0,3591.64
+SYN-E-000108,SYN-P-00152,2024-04-15,19:15,2024-04-15,ED,FAC-03,Synthetic Community Hospital West,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-49,Home,0,924.46
+SYN-E-000109,SYN-P-00195,2024-04-16,06:00,2024-04-21,Inpatient,FAC-01,Synthetic Regional Medical Center,Orthopedics,S72.002A,Fracture of unspecified part of neck of left femur,Provider SYN-50,Home with Services,5,20260.38
+SYN-E-000110,SYN-P-00187,2024-04-17,15:00,2024-04-17,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,I10,Essential (primary) hypertension,Provider SYN-51,Home,0,159.63
+SYN-E-000111,SYN-P-00034,2024-04-18,07:45,2024-04-18,ED,FAC-03,Synthetic Community Hospital West,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-52,Home,0,1669.64
+SYN-E-000112,SYN-P-00175,2024-04-18,22:30,2024-04-18,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,I10,Essential (primary) hypertension,Provider SYN-53,Home,0,529.00
+SYN-E-000113,SYN-P-00188,2024-04-19,17:30,2024-04-19,Outpatient,FAC-04,Synthetic Outpatient Center,Cardiology,I10,Essential (primary) hypertension,Provider SYN-54,Home,0,756.27
+SYN-E-000114,SYN-P-00093,2024-04-21,00:30,2024-04-24,Inpatient,FAC-01,Synthetic Regional Medical Center,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-55,Home,3,16036.61
+SYN-E-000115,SYN-P-00095,2024-04-21,05:30,2024-04-21,Outpatient,FAC-03,Synthetic Community Hospital West,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-56,Home,0,570.41
+SYN-E-000116,SYN-P-00138,2024-04-21,09:00,2024-04-21,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-57,Home,0,267.51
+SYN-E-000117,SYN-P-00026,2024-01-22,03:00,2024-01-22,Outpatient,FAC-02,Synthetic Community Hospital East,Primary Care,I10,Essential (primary) hypertension,Provider SYN-58,Home,0,771.07
+SYN-E-000118,SYN-P-00015,2024-04-22,13:00,2024-04-22,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-59,Home,0,494.71
+SYN-E-000119,SYN-P-00161,2024-04-24,03:45,2024-04-24,ED,FAC-03,Synthetic Community Hospital West,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-60,Home,0,1759.19
+SYN-E-000120,SYN-P-00070,2024-04-24,09:00,2024-04-24,Outpatient,FAC-04,Synthetic Outpatient Center,Cardiology,I10,Essential (primary) hypertension,Provider SYN-01,Home,0,731.66
+SYN-E-000121,SYN-P-00046,2024-04-26,00:30,2024-04-26,Outpatient,FAC-04,Synthetic Outpatient Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-02,Home,0,722.79
+SYN-E-000122,SYN-P-00179,2024-04-26,16:00,2024-05-08,Inpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-03,Home,12,37754.71
+SYN-E-000123,SYN-P-00119,2024-04-26,17:30,2024-04-30,Inpatient,FAC-01,Synthetic Regional Medical Center,Neurology,I63.9,"Cerebral infarction, unspecified",Provider SYN-04,Home,4,17280.18
+SYN-E-000124,SYN-P-00048,2024-04-27,11:45,2024-05-01,Inpatient,FAC-01,Synthetic Regional Medical Center,Orthopedics,S72.002A,Fracture of unspecified part of neck of left femur,Provider SYN-05,Home,4,18796.75
+SYN-E-000125,SYN-P-00065,2024-04-27,19:15,2024-04-27,Observation,FAC-03,Synthetic Community Hospital West,Internal Medicine,R55,Syncope and collapse,Provider SYN-06,Home,0,3321.19
+SYN-E-000126,SYN-P-00126,2024-04-28,04:00,2024-05-02,Inpatient,FAC-02,Synthetic Community Hospital East,Orthopedics,S72.002A,Fracture of unspecified part of neck of left femur,Provider SYN-07,Home,4,16679.00
+SYN-E-000127,SYN-P-00094,2024-05-01,23:15,2024-05-01,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-08,Home,0,244.74
+SYN-E-000128,SYN-P-00053,2024-05-02,07:15,2024-05-02,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,I10,Essential (primary) hypertension,Provider SYN-09,Home,0,871.77
+SYN-E-000129,SYN-P-00181,2024-05-03,08:45,2024-05-03,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-10,Home,0,2235.99
+SYN-E-000130,SYN-P-00089,2024-05-04,21:45,2024-05-08,Inpatient,FAC-03,Synthetic Community Hospital West,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-11,Home,4,17773.30
+SYN-E-000131,SYN-P-00147,2024-05-05,09:00,2024-05-05,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-12,Home,0,601.36
+SYN-E-000132,SYN-P-00059,2024-05-05,14:45,2024-05-05,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-13,Home,0,504.15
+SYN-E-000133,SYN-P-00042,2024-05-06,07:15,2024-05-06,Observation,FAC-02,Synthetic Community Hospital East,Internal Medicine,R55,Syncope and collapse,Provider SYN-14,Home,0,2230.61
+SYN-E-000134,SYN-P-00196,2024-05-06,23:15,2024-05-06,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-15,Home,0,200.47
+SYN-E-000135,SYN-P-00189,2024-05-08,17:00,2024-05-09,Observation,FAC-01,Synthetic Regional Medical Center,Internal Medicine,R55,Syncope and collapse,Provider SYN-16,Home,1,5793.25
+SYN-E-000136,SYN-P-00043,2024-05-08,22:00,2024-05-08,ED,FAC-03,Synthetic Community Hospital West,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-17,Home,0,3419.17
+SYN-E-000137,SYN-P-00160,2024-05-09,14:45,2024-05-10,Inpatient,FAC-01,Synthetic Regional Medical Center,Neurology,I63.9,"Cerebral infarction, unspecified",Provider SYN-18,Skilled Nursing Facility,1,11065.33
+SYN-E-000138,SYN-P-00048,2024-05-10,04:00,2024-05-16,Inpatient,FAC-01,Synthetic Regional Medical Center,Nephrology,N17.9,"Acute kidney failure, unspecified",Provider SYN-19,Home,6,23158.18
+SYN-E-000139,SYN-P-00018,2024-05-11,02:30,2024-05-11,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,I10,Essential (primary) hypertension,Provider SYN-20,Home,0,208.93
+SYN-E-000140,SYN-P-00030,2024-05-11,14:30,2024-05-18,Inpatient,FAC-02,Synthetic Community Hospital East,Cardiology,I48.91,Unspecified atrial fibrillation,Provider SYN-21,Home,7,25344.82
+SYN-E-000141,SYN-P-00055,2024-05-12,23:00,2024-05-18,Inpatient,FAC-03,Synthetic Community Hospital West,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-22,Home with Services,6,22525.63
+SYN-E-000142,SYN-P-00133,2024-05-13,15:15,2024-05-14,Inpatient,FAC-03,Synthetic Community Hospital West,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-23,Home,1,10060.60
+SYN-E-000143,SYN-P-00113,2024-05-16,10:15,2024-05-16,Outpatient,FAC-04,Synthetic Outpatient Center,Cardiology,I10,Essential (primary) hypertension,Provider SYN-24,Home,0,329.59
+SYN-E-000144,SYN-P-00167,2024-05-16,23:30,2024-05-16,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,I10,Essential (primary) hypertension,Provider SYN-25,Home,0,449.37
+SYN-E-000145,SYN-P-00120,2024-05-17,11:30,2024-05-17,Outpatient,FAC-05,Synthetic Specialty Clinic,Cardiology,I10,Essential (primary) hypertension,Provider SYN-26,Home,0,602.92
+SYN-E-000146,SYN-P-00150,2024-05-18,20:15,2024-05-18,Outpatient,FAC-05,Synthetic Specialty Clinic,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-27,Home,0,249.59
+SYN-E-000147,SYN-P-00153,2024-05-19,12:45,2024-05-21,Inpatient,FAC-02,Synthetic Community Hospital East,Internal Medicine,J18.9,"Pneumonia, unspecified organism",Provider SYN-28,Home,2,13951.33
+SYN-E-000148,SYN-P-00017,2024-05-20,08:45,2024-05-20,Outpatient,FAC-02,Synthetic Community Hospital East,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-29,Home,0,644.60
+SYN-E-000149,SYN-P-00118,2024-05-20,16:30,2024-05-20,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-30,Home,0,431.57
+SYN-E-000150,SYN-P-00068,2024-05-20,20:45,2024-05-20,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-31,Home,0,871.24
+SYN-E-000151,SYN-P-00177,2024-05-20,21:30,2024-05-20,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R51.9,"Headache, unspecified",Provider SYN-32,Home,0,3659.24
+SYN-E-000152,SYN-P-00126,2024-05-21,07:45,2024-05-24,Inpatient,FAC-02,Synthetic Community Hospital East,Cardiology,I50.9,"Heart failure, unspecified",Provider SYN-33,Home,3,15006.25
+SYN-E-000153,SYN-P-00164,2024-05-21,16:15,2024-05-24,Inpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-34,Home,3,15066.81
+SYN-E-000154,SYN-P-00016,2024-05-21,20:30,2024-05-21,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-35,Home,0,291.00
+SYN-E-000155,SYN-P-00085,2024-05-22,13:00,2024-05-22,Outpatient,FAC-02,Synthetic Community Hospital East,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-36,Home,0,631.76
+SYN-E-000156,SYN-P-00087,2024-05-24,08:30,2024-05-24,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-37,Home,0,451.64
+SYN-E-000157,SYN-P-00098,2024-05-25,05:15,2024-05-25,Outpatient,FAC-01,Synthetic Regional Medical Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-38,Home,0,431.40
+SYN-E-000158,SYN-P-00101,2024-05-25,12:30,2024-05-25,ED,FAC-03,Synthetic Community Hospital West,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-39,Home,0,1639.59
+SYN-E-000159,SYN-P-00091,2024-05-26,04:30,2024-05-26,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-40,Home,0,770.04
+SYN-E-000160,SYN-P-00022,2024-05-26,09:00,2024-05-26,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-41,Home,0,452.06
+SYN-E-000161,SYN-P-00166,2024-05-27,00:45,2024-05-27,ED,FAC-02,Synthetic Community Hospital East,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-42,Home,0,855.04
+SYN-E-000162,SYN-P-00034,2024-05-27,18:00,2024-05-28,Inpatient,FAC-02,Synthetic Community Hospital East,Internal Medicine,J18.9,"Pneumonia, unspecified organism",Provider SYN-43,Home,1,10889.48
+SYN-E-000163,SYN-P-00040,2024-05-27,22:45,2024-05-27,ED,FAC-01,Synthetic Regional Medical Center,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-44,Home,0,2771.19
+SYN-E-000164,SYN-P-00117,2024-05-28,18:15,2024-05-28,ED,FAC-01,Synthetic Regional Medical Center,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-45,Home,0,2957.72
+SYN-E-000165,SYN-P-00127,2024-05-29,12:45,2024-05-29,ED,FAC-03,Synthetic Community Hospital West,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-46,Home,0,1918.93
+SYN-E-000166,SYN-P-00139,2024-05-30,11:00,2024-05-30,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-47,Home,0,867.26
+SYN-E-000167,SYN-P-00020,2024-05-31,22:45,2024-05-31,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R51.9,"Headache, unspecified",Provider SYN-48,Home,0,2063.46
+SYN-E-000168,SYN-P-00084,2024-06-01,05:15,2024-06-01,ED,FAC-03,Synthetic Community Hospital West,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-49,Transferred,0,3025.58
+SYN-E-000169,SYN-P-00100,2024-06-02,03:30,2024-06-06,Inpatient,FAC-03,Synthetic Community Hospital West,Cardiology,I48.91,Unspecified atrial fibrillation,Provider SYN-50,Home,4,16386.42
+SYN-E-000170,SYN-P-00179,2024-06-03,09:30,2024-06-03,ED,FAC-02,Synthetic Community Hospital East,Emergency,R51.9,"Headache, unspecified",Provider SYN-51,Home,0,1233.13
+SYN-E-000171,SYN-P-00157,2024-06-03,13:45,2024-06-03,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-52,Home,0,181.83
+SYN-E-000172,SYN-P-00067,2024-06-04,09:30,2024-06-04,ED,FAC-02,Synthetic Community Hospital East,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-53,Home,0,1529.18
+SYN-E-000173,SYN-P-00188,2024-06-04,22:30,2024-06-04,ED,FAC-03,Synthetic Community Hospital West,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-54,Home,0,2714.56
+SYN-E-000174,SYN-P-00080,2024-06-05,00:15,2024-06-05,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-55,Home,0,801.75
+SYN-E-000175,SYN-P-00089,2024-06-05,05:15,2024-06-06,Observation,FAC-03,Synthetic Community Hospital West,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-56,Home,1,2961.61
+SYN-E-000176,SYN-P-00180,2024-06-05,16:30,2024-06-05,ED,FAC-01,Synthetic Regional Medical Center,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-57,Transferred,0,1752.95
+SYN-E-000177,SYN-P-00191,2024-06-06,01:30,2024-06-06,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-58,Home,0,156.70
+SYN-E-000178,SYN-P-00133,2024-06-07,00:00,2024-06-07,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-59,Home,0,832.23
+SYN-E-000179,SYN-P-00054,2024-06-07,16:15,2024-06-07,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-60,Home,0,415.53
+SYN-E-000180,SYN-P-00042,2024-06-09,22:15,2024-06-09,ED,FAC-03,Synthetic Community Hospital West,Emergency,R51.9,"Headache, unspecified",Provider SYN-01,Home,0,3244.49
+SYN-E-000181,SYN-P-00083,2024-06-10,01:00,2024-06-10,Observation,FAC-03,Synthetic Community Hospital West,Internal Medicine,R55,Syncope and collapse,Provider SYN-02,Home,0,2861.58
+SYN-E-000182,SYN-P-00032,2024-06-10,15:45,2024-06-10,Outpatient,FAC-04,Synthetic Outpatient Center,Cardiology,I10,Essential (primary) hypertension,Provider SYN-03,Home,0,514.67
+SYN-E-000183,SYN-P-00111,2024-06-11,22:00,2024-06-11,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,I10,Essential (primary) hypertension,Provider SYN-04,Home,0,841.52
+SYN-E-000184,SYN-P-00016,2024-06-12,03:15,2024-06-12,Observation,FAC-01,Synthetic Regional Medical Center,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-05,Home,0,3896.22
+SYN-E-000185,SYN-P-00104,2024-06-12,06:00,2024-06-12,Outpatient,FAC-05,Synthetic Specialty Clinic,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-06,Home,0,198.80
+SYN-E-000186,SYN-P-00094,2024-06-13,05:00,2024-06-13,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-07,Home,0,885.28
+SYN-E-000187,SYN-P-00003,2024-06-18,20:30,2024-06-18,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-08,Home,0,215.16
+SYN-E-000188,SYN-P-00006,2024-06-19,15:00,2024-06-19,Outpatient,FAC-03,Synthetic Community Hospital West,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-09,Home,0,564.94
+SYN-E-000189,SYN-P-00185,2024-06-19,20:45,2024-06-19,ED,FAC-02,Synthetic Community Hospital East,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-10,Home,0,1717.71
+SYN-E-000190,SYN-P-00034,2024-06-20,13:30,2024-06-22,Inpatient,FAC-02,Synthetic Community Hospital East,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-11,Home,2,13065.48
+SYN-E-000191,SYN-P-00052,2024-06-21,03:45,2024-06-21,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,I10,Essential (primary) hypertension,Provider SYN-12,Home,0,370.50
+SYN-E-000192,SYN-P-00085,2024-06-22,03:15,2024-06-22,ED,FAC-02,Synthetic Community Hospital East,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-13,Home,0,3435.76
+SYN-E-000193,SYN-P-00010,2024-06-22,19:15,2024-06-22,Outpatient,FAC-02,Synthetic Community Hospital East,Primary Care,I10,Essential (primary) hypertension,Provider SYN-14,Home,0,404.46
+SYN-E-000194,SYN-P-00050,2024-06-23,04:45,2024-06-23,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-15,Home,0,2559.55
+SYN-E-000195,SYN-P-00076,2024-06-23,17:15,2024-06-23,Observation,FAC-01,Synthetic Regional Medical Center,Internal Medicine,R55,Syncope and collapse,Provider SYN-16,Home,0,4624.45
+SYN-E-000196,SYN-P-00123,2024-06-23,18:45,2024-06-23,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R51.9,"Headache, unspecified",Provider SYN-17,Home,0,2190.01
+SYN-E-000197,SYN-P-00005,2024-06-25,20:00,2024-06-25,ED,FAC-03,Synthetic Community Hospital West,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-18,Home,0,3230.09
+SYN-E-000198,SYN-P-00181,2024-06-27,08:00,2024-06-27,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-19,Home,0,155.71
+SYN-E-000199,SYN-P-00069,2024-06-28,10:30,2024-06-28,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-20,Home,0,794.55
+SYN-E-000200,SYN-P-00121,2024-06-28,20:45,2024-06-28,ED,FAC-02,Synthetic Community Hospital East,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-21,Home,0,3567.09
+SYN-E-000201,SYN-P-00153,2024-06-28,22:00,2024-06-28,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-22,Home,0,517.87
+SYN-E-000202,SYN-P-00133,2024-06-29,21:45,2024-06-30,Inpatient,FAC-03,Synthetic Community Hospital West,Cardiology,I50.9,"Heart failure, unspecified",Provider SYN-23,Home,1,11238.60
+SYN-E-000203,SYN-P-00108,2024-07-01,04:45,2024-07-03,Inpatient,FAC-02,Synthetic Community Hospital East,Pulmonology,J18.9,"Pneumonia, unspecified organism",Provider SYN-24,Home,2,12457.89
+SYN-E-000204,SYN-P-00058,2024-07-02,12:30,2024-07-02,Outpatient,FAC-02,Synthetic Community Hospital East,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-25,Home,0,291.16
+SYN-E-000205,SYN-P-00156,2024-07-03,22:15,2024-07-04,Observation,FAC-01,Synthetic Regional Medical Center,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-26,Home,1,2277.37
+SYN-E-000206,SYN-P-00147,2024-07-04,21:30,2024-07-04,Outpatient,FAC-05,Synthetic Specialty Clinic,Cardiology,I10,Essential (primary) hypertension,Provider SYN-27,Home,0,705.26
+SYN-E-000207,SYN-P-00016,2024-07-05,00:45,2024-07-05,Outpatient,FAC-01,Synthetic Regional Medical Center,Primary Care,I10,Essential (primary) hypertension,Provider SYN-28,Home,0,178.83
+SYN-E-000208,SYN-P-00089,2024-07-05,09:15,2024-07-05,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-29,Home,0,332.53
+SYN-E-000209,SYN-P-00131,2024-07-05,15:00,2024-07-05,ED,FAC-03,Synthetic Community Hospital West,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-30,Home,0,1437.95
+SYN-E-000210,SYN-P-00161,2024-07-06,10:30,2024-07-06,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-31,Home,0,265.82
+SYN-E-000211,SYN-P-00180,2024-07-06,13:15,2024-07-07,Inpatient,FAC-01,Synthetic Regional Medical Center,Orthopedics,S72.002A,Fracture of unspecified part of neck of left femur,Provider SYN-32,Home,1,8857.85
+SYN-E-000212,SYN-P-00112,2024-07-06,14:30,2024-07-08,Inpatient,FAC-03,Synthetic Community Hospital West,Cardiology,I48.91,Unspecified atrial fibrillation,Provider SYN-33,Home,2,12182.09
+SYN-E-000213,SYN-P-00074,2024-07-06,17:00,2024-07-06,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-34,Home,0,837.92
+SYN-E-000214,SYN-P-00092,2024-07-08,00:15,2024-07-09,Inpatient,FAC-03,Synthetic Community Hospital West,Neurology,I63.9,"Cerebral infarction, unspecified",Provider SYN-35,Home,1,10199.44
+SYN-E-000215,SYN-P-00002,2024-07-08,20:00,2024-07-08,Outpatient,FAC-03,Synthetic Community Hospital West,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-36,Home,0,161.46
+SYN-E-000216,SYN-P-00117,2024-07-09,03:15,2024-07-09,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-37,Home,0,789.93
+SYN-E-000217,SYN-P-00185,2024-07-09,10:00,2024-07-09,Outpatient,FAC-04,Synthetic Outpatient Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-38,Home,0,313.42
+SYN-E-000218,SYN-P-00056,2024-07-09,11:00,2024-07-09,Outpatient,FAC-05,Synthetic Specialty Clinic,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-39,Home,0,810.47
+SYN-E-000219,SYN-P-00174,2024-07-12,11:30,2024-07-12,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,I10,Essential (primary) hypertension,Provider SYN-40,Home,0,288.74
+SYN-E-000220,SYN-P-00128,2024-07-12,12:30,2024-07-12,Observation,FAC-01,Synthetic Regional Medical Center,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-41,Home,0,4675.40
+SYN-E-000221,SYN-P-00179,2024-07-12,13:00,2024-07-12,Outpatient,FAC-04,Synthetic Outpatient Center,Cardiology,I10,Essential (primary) hypertension,Provider SYN-42,Home,0,749.59
+SYN-E-000222,SYN-P-00046,2024-07-12,16:45,2024-07-12,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-43,Home,0,505.53
+SYN-E-000223,SYN-P-00094,2024-07-15,23:45,2024-07-24,Inpatient,FAC-01,Synthetic Regional Medical Center,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-44,Skilled Nursing Facility,9,29431.96
+SYN-E-000224,SYN-P-00107,2024-07-16,15:00,2024-07-16,Outpatient,FAC-04,Synthetic Outpatient Center,Cardiology,I10,Essential (primary) hypertension,Provider SYN-45,Home,0,321.03
+SYN-E-000225,SYN-P-00066,2024-07-18,06:00,2024-07-18,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,I10,Essential (primary) hypertension,Provider SYN-46,Home,0,324.28
+SYN-E-000226,SYN-P-00022,2024-07-18,18:45,2024-07-19,Inpatient,FAC-01,Synthetic Regional Medical Center,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-47,Home with Services,1,11479.56
+SYN-E-000227,SYN-P-00096,2024-07-18,22:15,2024-07-18,ED,FAC-03,Synthetic Community Hospital West,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-48,Home,0,2218.25
+SYN-E-000228,SYN-P-00043,2024-07-18,22:30,2024-07-18,ED,FAC-03,Synthetic Community Hospital West,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-49,Home,0,3666.52
+SYN-E-000229,SYN-P-00169,2024-07-19,05:15,2024-07-19,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-50,Home,0,679.06
+SYN-E-000230,SYN-P-00044,2024-07-19,11:45,2024-07-19,Outpatient,FAC-03,Synthetic Community Hospital West,Cardiology,I10,Essential (primary) hypertension,Provider SYN-51,Home,0,701.61
+SYN-E-000231,SYN-P-00017,2024-07-19,15:30,2024-07-19,Outpatient,FAC-02,Synthetic Community Hospital East,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-52,Home,0,681.93
+SYN-E-000232,SYN-P-00026,2024-07-20,10:15,2024-07-20,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-53,Home,0,893.57
+SYN-E-000233,SYN-P-00182,2024-07-20,11:30,2024-07-20,ED,FAC-03,Synthetic Community Hospital West,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-54,Transferred,0,1425.55
+SYN-E-000234,SYN-P-00115,2024-07-20,12:15,2024-07-20,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-55,Home,0,830.83
+SYN-E-000235,SYN-P-00106,2024-07-20,13:00,2024-07-20,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-56,Home,0,820.72
+SYN-E-000236,SYN-P-00021,2024-07-21,00:30,2024-07-21,ED,FAC-02,Synthetic Community Hospital East,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-57,Home,0,3883.45
+SYN-E-000237,SYN-P-00175,2024-07-21,11:45,2024-07-27,Inpatient,FAC-03,Synthetic Community Hospital West,Cardiology,I48.91,Unspecified atrial fibrillation,Provider SYN-58,Home,6,21986.92
+SYN-E-000238,SYN-P-00003,2024-07-22,04:30,2024-07-22,Outpatient,FAC-05,Synthetic Specialty Clinic,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-59,Home,0,593.02
+SYN-E-000239,SYN-P-00089,2024-07-23,06:15,2024-07-23,ED,FAC-03,Synthetic Community Hospital West,Emergency,R51.9,"Headache, unspecified",Provider SYN-60,Transferred,0,1297.66
+SYN-E-000240,SYN-P-00080,2024-07-23,20:30,2024-07-26,Inpatient,FAC-03,Synthetic Community Hospital West,Internal Medicine,J18.9,"Pneumonia, unspecified organism",Provider SYN-01,Home with Services,3,15720.87
+SYN-E-000241,SYN-P-00127,2024-07-23,23:45,2024-07-23,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-02,Home,0,397.48
+SYN-E-000242,SYN-P-00070,2024-07-24,21:15,2024-07-24,Outpatient,FAC-04,Synthetic Outpatient Center,Cardiology,I10,Essential (primary) hypertension,Provider SYN-03,Home,0,532.52
+SYN-E-000243,SYN-P-00151,2024-07-25,04:00,2024-07-25,Observation,FAC-01,Synthetic Regional Medical Center,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-04,Home,0,2872.66
+SYN-E-000244,SYN-P-00165,2024-07-25,22:30,2024-07-31,Inpatient,FAC-03,Synthetic Community Hospital West,Cardiology,I50.9,"Heart failure, unspecified",Provider SYN-05,Home,6,22444.55
+SYN-E-000245,SYN-P-00042,2024-07-26,21:30,2024-07-26,ED,FAC-03,Synthetic Community Hospital West,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-06,Home,0,2257.92
+SYN-E-000246,SYN-P-00114,2024-07-26,21:30,2024-07-28,Inpatient,FAC-01,Synthetic Regional Medical Center,Nephrology,N17.9,"Acute kidney failure, unspecified",Provider SYN-07,Home with Services,2,11378.28
+SYN-E-000247,SYN-P-00132,2024-07-27,13:00,2024-07-27,Observation,FAC-02,Synthetic Community Hospital East,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-08,Home with Services,0,3664.01
+SYN-E-000248,SYN-P-00143,2024-07-27,16:45,2024-07-27,Outpatient,FAC-05,Synthetic Specialty Clinic,Cardiology,I10,Essential (primary) hypertension,Provider SYN-09,Home,0,423.70
+SYN-E-000249,SYN-P-00045,2024-07-27,21:30,2024-07-27,ED,FAC-03,Synthetic Community Hospital West,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-10,Home,0,3177.20
+SYN-E-000250,SYN-P-00198,2024-07-28,23:00,2024-07-28,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-11,Home,0,620.28
+SYN-E-000251,SYN-P-00007,2024-07-29,11:45,2024-07-29,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-12,Home,0,428.70
+SYN-E-000252,SYN-P-00105,2024-07-29,15:00,2024-07-29,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-13,Home,0,485.48
+SYN-E-000253,SYN-P-00157,2024-07-30,10:00,2024-07-30,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-14,Home,0,832.13
+SYN-E-000254,SYN-P-00160,2024-08-01,20:00,2024-08-01,Outpatient,FAC-01,Synthetic Regional Medical Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-15,Home,0,831.58
+SYN-E-000255,SYN-P-00159,2024-08-02,04:15,2024-08-02,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,I10,Essential (primary) hypertension,Provider SYN-16,Home,0,780.13
+SYN-E-000256,SYN-P-00059,2024-08-02,20:30,2024-08-02,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-17,Home,0,3598.08
+SYN-E-000257,SYN-P-00190,2024-08-03,18:00,2024-08-03,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-18,Home,0,273.40
+SYN-E-000258,SYN-P-00040,2024-08-04,14:15,2024-08-04,ED,FAC-01,Synthetic Regional Medical Center,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-19,Home,0,1648.95
+SYN-E-000259,SYN-P-00008,2024-08-06,09:45,2024-08-10,Inpatient,FAC-03,Synthetic Community Hospital West,Neurology,I63.9,"Cerebral infarction, unspecified",Provider SYN-20,Skilled Nursing Facility,5,18121.05
+SYN-E-000260,SYN-P-00067,2024-08-06,14:30,2024-08-06,Outpatient,FAC-05,Synthetic Specialty Clinic,Cardiology,I10,Essential (primary) hypertension,Provider SYN-21,Home,0,421.90
+SYN-E-000261,SYN-P-00003,2024-08-06,17:30,2024-08-06,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-22,Home,0,3398.83
+SYN-E-000262,SYN-P-00173,2024-08-06,17:45,2024-08-06,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-23,Home,0,307.90
+SYN-E-000263,SYN-P-00031,2024-08-08,07:30,2024-08-08,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-24,Home,0,309.23
+SYN-E-000264,SYN-P-00050,2024-08-10,01:30,2024-08-10,ED,FAC-01,Synthetic Regional Medical Center,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-25,Home,0,3805.29
+SYN-E-000265,SYN-P-00120,2024-08-10,17:45,2024-08-10,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,I10,Essential (primary) hypertension,Provider SYN-26,Home,0,776.43
+SYN-E-000266,SYN-P-00131,2024-08-11,04:15,2024-08-16,Inpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J18.9,"Pneumonia, unspecified organism",Provider SYN-27,Transferred,5,21114.29
+SYN-E-000267,SYN-P-00084,2024-08-12,06:15,2024-08-12,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-28,Home,0,699.53
+SYN-E-000268,SYN-P-00101,2024-08-12,06:45,2024-08-15,Inpatient,FAC-01,Synthetic Regional Medical Center,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-29,Home,3,14161.65
+SYN-E-000269,SYN-P-00192,2024-08-12,21:00,2024-08-12,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-30,Home,0,307.54
+SYN-E-000270,SYN-P-00176,2024-08-13,08:30,2024-08-18,Inpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-31,Home with Services,5,20363.20
+SYN-E-000271,SYN-P-00015,2024-08-13,21:00,2024-08-14,Observation,FAC-03,Synthetic Community Hospital West,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-32,Home,1,3818.54
+SYN-E-000272,SYN-P-00178,2024-08-15,02:00,2024-08-15,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-33,Home,0,574.81
+SYN-E-000273,SYN-P-00042,2024-08-15,06:15,2024-08-15,Observation,FAC-01,Synthetic Regional Medical Center,Internal Medicine,R55,Syncope and collapse,Provider SYN-34,Home,0,4663.70
+SYN-E-000274,SYN-P-00063,2024-08-15,09:15,2024-08-15,Outpatient,FAC-05,Synthetic Specialty Clinic,Cardiology,I10,Essential (primary) hypertension,Provider SYN-35,Home,0,792.42
+SYN-E-000275,SYN-P-00002,2024-08-16,16:45,2024-08-16,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-36,Home,0,575.67
+SYN-E-000276,SYN-P-00034,2024-08-17,14:15,2024-08-17,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-37,Home,0,360.41
+SYN-E-000277,SYN-P-00045,2024-08-17,21:30,2024-08-17,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-38,Home,0,1290.01
+SYN-E-000278,SYN-P-00106,2024-08-18,14:15,2024-08-18,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-39,Home,0,236.25
+SYN-E-000279,SYN-P-00038,2024-08-19,09:00,2024-08-19,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-40,Home,0,2171.47
+SYN-E-000280,SYN-P-00181,2024-08-19,15:45,2024-08-19,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-41,Home,0,3757.67
+SYN-E-000281,SYN-P-00182,2024-08-19,20:00,2024-08-19,Outpatient,FAC-05,Synthetic Specialty Clinic,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-42,Home,0,744.08
+SYN-E-000282,SYN-P-00100,2024-08-19,21:45,2024-08-19,Outpatient,FAC-04,Synthetic Outpatient Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-43,Home,0,356.27
+SYN-E-000283,SYN-P-00103,2024-08-20,13:15,2024-08-20,Outpatient,FAC-04,Synthetic Outpatient Center,Cardiology,I10,Essential (primary) hypertension,Provider SYN-44,Home,0,796.37
+SYN-E-000284,SYN-P-00072,2024-08-20,15:15,2024-08-24,Inpatient,FAC-03,Synthetic Community Hospital West,Neurology,I63.9,"Cerebral infarction, unspecified",Provider SYN-45,Skilled Nursing Facility,4,18386.83
+SYN-E-000285,SYN-P-00091,2024-08-21,01:45,2024-08-26,Inpatient,FAC-03,Synthetic Community Hospital West,Cardiology,I50.9,"Heart failure, unspecified",Provider SYN-46,Home with Services,5,19314.17
+SYN-E-000286,SYN-P-00170,2024-08-21,04:00,2024-08-21,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-47,Home,0,447.02
+SYN-E-000287,SYN-P-00172,2024-08-22,05:45,2024-08-22,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-48,Home,0,307.00
+SYN-E-000288,SYN-P-00104,2024-08-22,21:15,2024-08-23,Observation,FAC-01,Synthetic Regional Medical Center,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-49,Home,1,3907.23
+SYN-E-000289,SYN-P-00187,2024-08-22,21:45,2024-08-22,Outpatient,FAC-04,Synthetic Outpatient Center,Cardiology,I10,Essential (primary) hypertension,Provider SYN-50,Home,0,516.44
+SYN-E-000290,SYN-P-00083,2024-08-23,04:30,2024-08-23,ED,FAC-03,Synthetic Community Hospital West,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-51,Home,0,1305.44
+SYN-E-000291,SYN-P-00188,2024-08-23,09:45,2024-08-23,ED,FAC-03,Synthetic Community Hospital West,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-52,Transferred,0,1939.27
+SYN-E-000292,SYN-P-00058,2024-08-24,06:30,2024-08-24,Observation,FAC-02,Synthetic Community Hospital East,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-53,Home,0,4624.78
+SYN-E-000293,SYN-P-00110,2024-08-24,15:30,2024-08-24,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-54,Home,0,816.83
+SYN-E-000294,SYN-P-00167,2024-08-24,22:15,2024-08-24,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-55,Home,0,386.64
+SYN-E-000295,SYN-P-00145,2024-08-25,20:45,2024-08-27,Inpatient,FAC-03,Synthetic Community Hospital West,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-56,Skilled Nursing Facility,2,12446.09
+SYN-E-000296,SYN-P-00158,2024-08-28,12:30,2024-08-28,Outpatient,FAC-05,Synthetic Specialty Clinic,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-57,Home,0,616.34
+SYN-E-000297,SYN-P-00076,2024-08-28,16:15,2024-08-28,Outpatient,FAC-01,Synthetic Regional Medical Center,Primary Care,I10,Essential (primary) hypertension,Provider SYN-58,Home,0,626.25
+SYN-E-000298,SYN-P-00130,2024-08-29,07:00,2024-08-29,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-59,Home,0,454.71
+SYN-E-000299,SYN-P-00060,2024-09-01,06:00,2024-09-01,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-60,Home,0,841.31
+SYN-E-000300,SYN-P-00094,2024-09-01,11:00,2024-09-01,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-01,Home,0,602.41
+SYN-E-000301,SYN-P-00057,2024-09-02,07:30,2024-09-02,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-02,Home,0,442.12
+SYN-E-000302,SYN-P-00149,2024-09-02,12:30,2024-09-02,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-03,Home,0,437.03
+SYN-E-000303,SYN-P-00008,2024-09-03,05:15,2024-09-03,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-04,Home,0,344.41
+SYN-E-000304,SYN-P-00017,2024-09-03,19:00,2024-09-03,Outpatient,FAC-04,Synthetic Outpatient Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-05,Home,0,420.07
+SYN-E-000305,SYN-P-00180,2024-09-04,05:00,2024-09-04,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-06,Home,0,3004.88
+SYN-E-000306,SYN-P-00133,2024-09-06,05:00,2024-09-06,Outpatient,FAC-03,Synthetic Community Hospital West,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-07,Home,0,343.23
+SYN-E-000307,SYN-P-00152,2024-09-06,09:15,2024-09-06,ED,FAC-03,Synthetic Community Hospital West,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-08,Home,0,3125.04
+SYN-E-000308,SYN-P-00119,2024-09-06,14:15,2024-09-06,Outpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-09,Home,0,431.63
+SYN-E-000309,SYN-P-00138,2024-09-07,21:00,2024-09-07,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-10,Home,0,833.14
+SYN-E-000310,SYN-P-00155,2024-09-07,23:30,2024-09-07,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-11,Home,0,646.53
+SYN-E-000311,SYN-P-00046,2024-09-08,13:00,2024-09-08,Outpatient,FAC-04,Synthetic Outpatient Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-12,Home,0,394.68
+SYN-E-000312,SYN-P-00027,2024-09-08,20:30,2024-09-08,Outpatient,FAC-02,Synthetic Community Hospital East,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-13,Home,0,276.26
+SYN-E-000313,SYN-P-00193,2024-09-08,20:30,2024-09-08,ED,FAC-03,Synthetic Community Hospital West,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-14,Home,0,3567.84
+SYN-E-000314,SYN-P-00179,2024-09-09,10:45,2024-09-09,ED,FAC-02,Synthetic Community Hospital East,Emergency,R51.9,"Headache, unspecified",Provider SYN-15,Home,0,1347.75
+SYN-E-000315,SYN-P-00093,2024-09-09,17:15,2024-09-09,Observation,FAC-01,Synthetic Regional Medical Center,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-16,Home,0,3681.25
+SYN-E-000316,SYN-P-00196,2024-09-10,13:30,2024-09-10,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-17,Home,0,389.15
+SYN-E-000317,SYN-P-00085,2024-09-11,06:30,2024-09-11,Outpatient,FAC-02,Synthetic Community Hospital East,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-18,Home,0,612.06
+SYN-E-000318,SYN-P-00097,2024-09-11,10:00,2024-09-11,Outpatient,FAC-03,Synthetic Community Hospital West,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-19,Home,0,0.00
+SYN-E-000319,SYN-P-00189,2024-09-13,03:00,2024-09-13,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R51.9,"Headache, unspecified",Provider SYN-20,Left Before Completion,0,3247.84
+SYN-E-000320,SYN-P-00068,2024-09-13,08:15,2024-09-18,Inpatient,FAC-03,Synthetic Community Hospital West,Internal Medicine,J18.9,"Pneumonia, unspecified organism",Provider SYN-21,Home with Services,5,19689.80
+SYN-E-000321,SYN-P-00140,2024-09-13,14:45,2024-09-13,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-22,Home,0,710.71
+SYN-E-000322,SYN-P-00032,2024-09-14,02:45,2024-09-14,Outpatient,FAC-01,Synthetic Regional Medical Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-23,Home,0,509.34
+SYN-E-000323,SYN-P-00115,2024-09-14,17:15,2024-09-14,Outpatient,FAC-04,Synthetic Outpatient Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-24,Home,0,151.67
+SYN-E-000324,SYN-P-00195,2024-09-16,15:30,2024-09-16,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R51.9,"Headache, unspecified",Provider SYN-25,Home,0,1187.84
+SYN-E-000325,SYN-P-00072,2024-09-17,03:00,2024-09-17,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-26,Home,0,525.15
+SYN-E-000326,SYN-P-00174,2024-09-17,08:15,2024-09-17,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-27,Home,0,156.96
+SYN-E-000327,SYN-P-00118,2024-09-17,22:45,2024-09-17,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-28,Home,0,308.63
+SYN-E-000328,SYN-P-00183,2024-09-18,03:30,2024-09-21,Inpatient,FAC-03,Synthetic Community Hospital West,Neurology,I63.9,"Cerebral infarction, unspecified",Provider SYN-29,Home,3,16019.64
+SYN-E-000329,SYN-P-00113,2024-09-18,05:30,2024-09-18,Observation,FAC-02,Synthetic Community Hospital East,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-30,Home,0,5008.94
+SYN-E-000330,SYN-P-00166,2024-09-18,11:15,2024-09-18,Outpatient,FAC-02,Synthetic Community Hospital East,Cardiology,I10,Essential (primary) hypertension,Provider SYN-31,Home,0,379.27
+SYN-E-000331,SYN-P-00018,2024-09-18,13:15,2024-09-18,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-32,Home,0,177.80
+SYN-E-000332,SYN-P-00007,2024-09-19,08:00,2024-09-21,Inpatient,FAC-01,Synthetic Regional Medical Center,Cardiology,I48.91,Unspecified atrial fibrillation,Provider SYN-33,Transferred,2,11733.30
+SYN-E-000333,SYN-P-00167,2024-09-20,00:00,2024-09-20,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-34,Home,0,350.24
+SYN-E-000334,SYN-P-00055,2024-09-20,18:00,2024-09-20,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-35,Home,0,691.50
+SYN-E-000335,SYN-P-00156,2024-09-20,23:30,2024-09-20,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-36,Home,0,199.04
+SYN-E-000336,SYN-P-00127,2024-09-21,11:00,2024-09-21,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-37,Home,0,656.93
+SYN-E-000337,SYN-P-00177,2024-09-21,23:15,2024-09-21,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-38,Home,0,572.74
+SYN-E-000338,SYN-P-00035,2024-09-22,10:30,2024-09-22,Outpatient,FAC-02,Synthetic Community Hospital East,Cardiology,I10,Essential (primary) hypertension,Provider SYN-39,Home,0,702.92
+SYN-E-000339,SYN-P-00153,2024-09-22,12:00,2024-09-25,Inpatient,FAC-02,Synthetic Community Hospital East,Nephrology,N17.9,"Acute kidney failure, unspecified",Provider SYN-40,Home,3,14176.65
+SYN-E-000340,SYN-P-00073,2024-09-22,14:15,2024-10-01,Inpatient,FAC-02,Synthetic Community Hospital East,Cardiology,I48.91,Unspecified atrial fibrillation,Provider SYN-41,Transferred,9,29338.13
+SYN-E-000341,SYN-P-00139,2024-09-22,22:30,2024-09-22,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-42,Home,0,851.92
+SYN-E-000342,SYN-P-00068,2024-09-23,09:15,2024-09-29,Inpatient,FAC-01,Synthetic Regional Medical Center,Cardiology,I48.91,Unspecified atrial fibrillation,Provider SYN-43,Home with Services,6,22402.28
+SYN-E-000343,SYN-P-00197,2024-09-24,09:30,2024-09-24,Outpatient,FAC-03,Synthetic Community Hospital West,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-44,Home,0,819.15
+SYN-E-000344,SYN-P-00052,2024-09-24,09:45,2024-09-24,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,I10,Essential (primary) hypertension,Provider SYN-45,Home,0,876.03
+SYN-E-000345,SYN-P-00065,2024-09-24,16:45,2024-09-24,Observation,FAC-03,Synthetic Community Hospital West,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-46,Home,0,5637.67
+SYN-E-000346,SYN-P-00059,2024-09-24,19:00,2024-09-24,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R51.9,"Headache, unspecified",Provider SYN-47,Transferred,0,908.08
+SYN-E-000347,SYN-P-00112,2024-09-25,00:30,2024-09-25,ED,FAC-03,Synthetic Community Hospital West,Emergency,R51.9,"Headache, unspecified",Provider SYN-48,Left Before Completion,0,1144.80
+SYN-E-000348,SYN-P-00029,2024-09-25,00:45,2024-09-25,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,I10,Essential (primary) hypertension,Provider SYN-49,Home,0,761.28
+SYN-E-000349,SYN-P-00005,2024-09-25,07:30,2024-09-25,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-50,Home,0,446.74
+SYN-E-000350,SYN-P-00133,2024-09-25,23:30,2024-09-25,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-51,Home,0,569.59
+SYN-E-000351,SYN-P-00048,2024-09-26,12:15,2024-09-26,Outpatient,FAC-01,Synthetic Regional Medical Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-52,Home,0,612.01
+SYN-E-000352,SYN-P-00159,2024-09-26,12:45,2024-09-26,Observation,FAC-02,Synthetic Community Hospital East,Internal Medicine,R55,Syncope and collapse,Provider SYN-53,Home,0,3042.38
+SYN-E-000353,SYN-P-00095,2024-09-26,23:00,2024-09-26,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-54,Home,0,509.56
+SYN-E-000354,SYN-P-00198,2024-09-27,07:30,2024-09-27,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-55,Home,0,721.73
+SYN-E-000355,SYN-P-00042,2024-09-27,22:00,2024-09-27,Outpatient,FAC-05,Synthetic Specialty Clinic,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-56,Home,0,263.58
+SYN-E-000356,SYN-P-00125,2024-09-28,19:00,2024-10-02,Inpatient,FAC-03,Synthetic Community Hospital West,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-57,Home,4,16604.64
+SYN-E-000357,SYN-P-00015,2024-09-28,22:15,2024-09-28,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-58,Home,0,536.02
+SYN-E-000358,SYN-P-00143,2024-09-29,22:45,2024-09-29,Outpatient,FAC-04,Synthetic Outpatient Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-59,Home,0,270.39
+SYN-E-000359,SYN-P-00069,2024-09-30,00:30,2024-09-30,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-60,Home,0,626.22
+SYN-E-000360,SYN-P-00187,2024-09-30,03:15,2024-09-30,Outpatient,FAC-05,Synthetic Specialty Clinic,Cardiology,I10,Essential (primary) hypertension,Provider SYN-01,Home,0,274.41
+SYN-E-000361,SYN-P-00110,2024-09-30,18:30,2024-09-30,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-02,Home,0,675.50
+SYN-E-000362,SYN-P-00045,2024-10-01,06:30,2024-10-01,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-03,Home,0,338.88
+SYN-E-000363,SYN-P-00123,2024-10-02,10:15,2024-10-02,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-04,Home,0,610.00
+SYN-E-000364,SYN-P-00013,2024-10-03,14:15,2024-10-03,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,I10,Essential (primary) hypertension,Provider SYN-05,Home,0,627.54
+SYN-E-000365,SYN-P-00033,2024-10-04,00:30,2024-10-04,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-06,Home,0,355.29
+SYN-E-000366,SYN-P-00091,2024-10-04,05:30,2024-10-05,Inpatient,FAC-03,Synthetic Community Hospital West,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-07,Home with Services,1,11452.33
+SYN-E-000367,SYN-P-00196,2024-10-05,08:45,2024-10-10,Inpatient,FAC-03,Synthetic Community Hospital West,Orthopedics,S72.002A,Fracture of unspecified part of neck of left femur,Provider SYN-08,Home,5,20673.60
+SYN-E-000368,SYN-P-00089,2024-10-06,14:00,2024-10-06,Outpatient,FAC-04,Synthetic Outpatient Center,Cardiology,I10,Essential (primary) hypertension,Provider SYN-09,Home,0,716.06
+SYN-E-000369,SYN-P-00053,2024-10-06,15:00,2024-10-06,ED,FAC-02,Synthetic Community Hospital East,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-10,Home,0,3620.80
+SYN-E-000370,SYN-P-00058,2024-10-06,18:30,2024-10-07,Observation,FAC-02,Synthetic Community Hospital East,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-11,Home,1,5443.94
+SYN-E-000371,SYN-P-00092,2024-10-07,12:30,2024-10-07,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-12,Home,0,587.15
+SYN-E-000372,SYN-P-00126,2024-10-07,13:30,2024-10-07,ED,FAC-02,Synthetic Community Hospital East,Emergency,R51.9,"Headache, unspecified",Provider SYN-13,Home,0,3948.15
+SYN-E-000373,SYN-P-00032,2024-10-07,15:30,2024-10-07,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,I10,Essential (primary) hypertension,Provider SYN-14,Home,0,598.84
+SYN-E-000374,SYN-P-00072,2024-10-08,06:15,2024-10-08,ED,FAC-03,Synthetic Community Hospital West,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-15,Home,0,2540.05
+SYN-E-000375,SYN-P-00120,2024-10-08,17:00,2024-10-08,Outpatient,FAC-04,Synthetic Outpatient Center,Cardiology,I10,Essential (primary) hypertension,Provider SYN-16,Home,0,812.13
+SYN-E-000376,SYN-P-00137,2024-10-09,11:15,2024-10-09,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-17,Home,0,3377.86
+SYN-E-000377,SYN-P-00010,2024-10-09,12:15,2024-10-11,Inpatient,FAC-02,Synthetic Community Hospital East,Cardiology,I48.91,Unspecified atrial fibrillation,Provider SYN-18,Home with Services,2,12704.74
+SYN-E-000378,SYN-P-00162,2024-10-09,13:45,2024-10-09,Observation,FAC-02,Synthetic Community Hospital East,Internal Medicine,R55,Syncope and collapse,Provider SYN-19,Home,0,5546.31
+SYN-E-000379,SYN-P-00165,2024-10-11,07:30,2024-10-11,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-20,Home,0,1951.46
+SYN-E-000380,SYN-P-00024,2024-10-12,14:00,2024-10-12,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-21,Home,0,835.24
+SYN-E-000381,SYN-P-00087,2024-10-13,13:45,2024-10-13,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-22,Home,0,508.07
+SYN-E-000382,SYN-P-00161,2024-10-14,04:15,2024-10-14,ED,FAC-03,Synthetic Community Hospital West,Emergency,R51.9,"Headache, unspecified",Provider SYN-23,Home,0,1185.03
+SYN-E-000383,SYN-P-00026,2024-10-14,15:30,2024-10-14,Observation,FAC-02,Synthetic Community Hospital East,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-24,Home,0,2108.64
+SYN-E-000384,SYN-P-00147,2024-10-14,23:00,2024-10-14,Observation,FAC-01,Synthetic Regional Medical Center,Internal Medicine,R55,Syncope and collapse,Provider SYN-25,Home,0,2512.73
+SYN-E-000385,SYN-P-00020,2024-10-16,06:45,2024-10-16,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-26,Home,0,445.28
+SYN-E-000386,SYN-P-00111,2024-10-17,12:00,2024-10-17,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-27,Home,0,455.18
+SYN-E-000387,SYN-P-00185,2024-10-17,12:15,2024-10-17,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-28,Home,0,3403.26
+SYN-E-000388,SYN-P-00170,2024-10-17,16:30,2024-10-17,ED,FAC-02,Synthetic Community Hospital East,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-29,Home,0,2375.07
+SYN-E-000389,SYN-P-00104,2024-10-17,22:00,2024-10-17,ED,FAC-03,Synthetic Community Hospital West,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-30,Transferred,0,3953.46
+SYN-E-000390,SYN-P-00030,2024-10-18,18:45,2024-10-18,ED,FAC-02,Synthetic Community Hospital East,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-31,Home,0,1304.18
+SYN-E-000391,SYN-P-00068,2024-10-22,08:45,2024-10-24,Inpatient,FAC-03,Synthetic Community Hospital West,Internal Medicine,J18.9,"Pneumonia, unspecified organism",Provider SYN-32,Skilled Nursing Facility,2,11792.89
+SYN-E-000392,SYN-P-00191,2024-10-22,22:30,2024-10-22,ED,FAC-02,Synthetic Community Hospital East,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-33,Left Before Completion,0,1881.10
+SYN-E-000393,SYN-P-00098,2024-10-23,22:15,2024-10-23,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-34,Home,0,703.27
+SYN-E-000394,SYN-P-00164,2024-10-24,10:30,2024-10-24,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-35,Home,0,244.94
+SYN-E-000395,SYN-P-00079,2024-10-24,14:30,2024-10-24,Outpatient,FAC-02,Synthetic Community Hospital East,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-36,Home,0,629.83
+SYN-E-000396,SYN-P-00174,2024-10-25,10:00,2024-10-25,ED,FAC-02,Synthetic Community Hospital East,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-37,Home,0,3190.01
+SYN-E-000397,SYN-P-00056,2024-10-25,20:45,2024-10-25,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-38,Home,0,635.07
+SYN-E-000398,SYN-P-00001,2024-10-27,23:00,2024-10-28,Observation,FAC-01,Synthetic Regional Medical Center,Internal Medicine,R55,Syncope and collapse,Provider SYN-39,Home,1,3200.65
+SYN-E-000399,SYN-P-00082,2024-10-28,06:15,2024-10-28,ED,FAC-02,Synthetic Community Hospital East,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-40,Home,0,2418.93
+SYN-E-000400,SYN-P-00038,2024-10-29,14:30,2024-10-29,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-41,Home,0,501.36
+SYN-E-000401,SYN-P-00102,2024-10-30,17:45,2024-10-30,Observation,FAC-01,Synthetic Regional Medical Center,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-42,Home,0,3623.64
+SYN-E-000402,SYN-P-00177,2024-10-31,02:00,2024-10-31,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R51.9,"Headache, unspecified",Provider SYN-43,Home,0,1797.27
+SYN-E-000403,SYN-P-00169,2024-10-31,14:00,2024-10-31,Outpatient,FAC-02,Synthetic Community Hospital East,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-44,Home,0,469.38
+SYN-E-000404,SYN-P-00022,2024-10-31,18:30,2024-10-31,Outpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-45,Home,0,719.60
+SYN-E-000405,SYN-P-00016,2024-11-01,10:00,2024-11-02,Observation,FAC-01,Synthetic Regional Medical Center,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-46,Home,1,5481.15
+SYN-E-000406,SYN-P-00054,2024-11-02,13:45,2024-11-02,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-47,Home,0,215.42
+SYN-E-000407,SYN-P-00172,2024-11-02,20:45,2024-11-02,Outpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-48,Home,0,869.26
+SYN-E-000408,SYN-P-00182,2024-11-03,01:15,2024-11-03,Outpatient,FAC-03,Synthetic Community Hospital West,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-49,Home,0,611.78
+SYN-E-000409,SYN-P-00006,2024-11-04,07:45,2024-11-04,Outpatient,FAC-03,Synthetic Community Hospital West,Cardiology,I10,Essential (primary) hypertension,Provider SYN-50,Home,0,354.69
+SYN-E-000410,SYN-P-00064,2024-11-04,07:45,2024-11-04,Outpatient,FAC-04,Synthetic Outpatient Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-51,Home,0,506.41
+SYN-E-000411,SYN-P-00128,2024-11-04,13:30,2024-11-06,Inpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J18.9,"Pneumonia, unspecified organism",Provider SYN-52,Home with Services,2,12184.14
+SYN-E-000412,SYN-P-00008,2024-11-04,23:15,2024-11-04,Outpatient,FAC-03,Synthetic Community Hospital West,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-53,Home,0,665.92
+SYN-E-000413,SYN-P-00134,2024-11-05,17:00,2024-11-05,Outpatient,FAC-03,Synthetic Community Hospital West,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-54,Home,0,878.91
+SYN-E-000414,SYN-P-00167,2024-11-06,02:30,2024-11-06,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-55,Home,0,462.53
+SYN-E-000415,SYN-P-00004,2024-11-06,04:30,2024-11-08,Inpatient,FAC-02,Synthetic Community Hospital East,Cardiology,I50.9,"Heart failure, unspecified",Provider SYN-56,Home,2,13221.49
+SYN-E-000416,SYN-P-00159,2024-11-06,14:00,2024-11-06,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-57,Home,0,305.15
+SYN-E-000417,SYN-P-00153,2024-11-06,18:15,2024-11-13,Inpatient,FAC-02,Synthetic Community Hospital East,Neurology,I63.9,"Cerebral infarction, unspecified",Provider SYN-58,Home,7,24949.74
+SYN-E-000418,SYN-P-00115,2024-11-06,23:30,2024-11-06,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-59,Home,0,848.89
+SYN-E-000419,SYN-P-00081,2024-11-07,07:45,2024-11-07,Observation,FAC-03,Synthetic Community Hospital West,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-60,Home,0,3956.05
+SYN-E-000420,SYN-P-00039,2024-11-07,13:00,2024-11-07,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,I10,Essential (primary) hypertension,Provider SYN-01,Home,0,756.59
+SYN-E-000421,SYN-P-00117,2024-11-08,01:15,2024-11-08,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-02,Home,0,1397.88
+SYN-E-000422,SYN-P-00017,2024-11-09,17:15,2024-11-09,Outpatient,FAC-02,Synthetic Community Hospital East,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-03,Home,0,523.40
+SYN-E-000423,SYN-P-00094,2024-11-11,13:30,2024-11-11,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-04,Home,0,450.84
+SYN-E-000424,SYN-P-00031,2024-11-12,23:00,2024-11-12,Observation,FAC-01,Synthetic Regional Medical Center,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-05,Home,0,2443.47
+SYN-E-000425,SYN-P-00052,2024-11-13,07:00,2024-11-13,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,I10,Essential (primary) hypertension,Provider SYN-06,Home,0,844.57
+SYN-E-000426,SYN-P-00119,2024-11-13,14:45,2024-11-13,Outpatient,FAC-05,Synthetic Specialty Clinic,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-07,Home,0,288.72
+SYN-E-000427,SYN-P-00158,2024-11-13,21:15,2024-11-13,Outpatient,FAC-04,Synthetic Outpatient Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-08,Home,0,663.20
+SYN-E-000428,SYN-P-00175,2024-11-14,22:45,2024-11-14,ED,FAC-03,Synthetic Community Hospital West,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-09,Home,0,1543.59
+SYN-E-000429,SYN-P-00137,2024-11-17,16:15,2024-11-17,Observation,FAC-01,Synthetic Regional Medical Center,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-10,Home,0,2854.02
+SYN-E-000430,SYN-P-00121,2024-11-18,01:45,2024-11-18,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-11,Home,0,476.74
+SYN-E-000431,SYN-P-00097,2024-11-18,12:30,2024-11-18,Outpatient,FAC-03,Synthetic Community Hospital West,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-12,Home,0,687.09
+SYN-E-000432,SYN-P-00074,2024-11-19,06:00,2024-11-22,Inpatient,FAC-02,Synthetic Community Hospital East,Nephrology,N17.9,"Acute kidney failure, unspecified",Provider SYN-13,Transferred,3,14912.66
+SYN-E-000433,SYN-P-00035,2024-11-19,13:15,2024-11-19,Outpatient,FAC-02,Synthetic Community Hospital East,Cardiology,I10,Essential (primary) hypertension,Provider SYN-14,Home,0,382.85
+SYN-E-000434,SYN-P-00063,2024-11-23,01:15,2024-11-23,Outpatient,FAC-03,Synthetic Community Hospital West,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-15,Home,0,196.85
+SYN-E-000435,SYN-P-00128,2024-11-23,02:00,2024-11-28,Inpatient,FAC-01,Synthetic Regional Medical Center,Cardiology,I50.9,"Heart failure, unspecified",Provider SYN-16,Home,5,20315.74
+SYN-E-000436,SYN-P-00054,2024-11-23,05:00,2024-11-23,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-17,Home,0,623.10
+SYN-E-000437,SYN-P-00112,2024-11-23,21:15,2024-11-23,Outpatient,FAC-03,Synthetic Community Hospital West,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-18,Home,0,583.08
+SYN-E-000438,SYN-P-00151,2024-11-24,11:45,2024-11-24,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-19,Home,0,419.44
+SYN-E-000439,SYN-P-00004,2024-11-24,18:30,2024-11-24,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-20,Home,0,406.90
+SYN-E-000440,SYN-P-00036,2024-11-25,00:00,2024-11-25,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-21,Home,0,231.60
+SYN-E-000441,SYN-P-00008,2024-11-25,13:15,2024-11-25,Outpatient,FAC-03,Synthetic Community Hospital West,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-22,Home,0,298.36
+SYN-E-000442,SYN-P-00095,2024-11-26,14:45,2024-11-29,Inpatient,FAC-03,Synthetic Community Hospital West,Cardiology,I50.9,"Heart failure, unspecified",Provider SYN-23,Home,3,13989.65
+SYN-E-000443,SYN-P-00012,2024-11-26,17:30,2024-11-26,Outpatient,FAC-05,Synthetic Specialty Clinic,Cardiology,I10,Essential (primary) hypertension,Provider SYN-24,Home,0,479.29
+SYN-E-000444,SYN-P-00114,2024-11-26,17:30,2024-11-26,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-25,Home,0,651.20
+SYN-E-000445,SYN-P-00037,2024-11-26,19:30,2024-11-26,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-26,Home,0,502.48
+SYN-E-000446,SYN-P-00047,2024-11-27,03:45,2024-11-28,Inpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-27,Home,1,10154.51
+SYN-E-000447,SYN-P-00157,2024-11-28,03:15,2024-11-28,Outpatient,FAC-05,Synthetic Specialty Clinic,Cardiology,I10,Essential (primary) hypertension,Provider SYN-28,Home,0,837.43
+SYN-E-000448,SYN-P-00087,2024-11-29,16:00,2024-11-30,Inpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-29,Skilled Nursing Facility,1,10997.74
+SYN-E-000449,SYN-P-00083,2024-11-30,22:15,2024-11-30,Outpatient,FAC-03,Synthetic Community Hospital West,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-30,Home,0,355.49
+SYN-E-000450,SYN-P-00067,2024-12-02,16:00,2024-12-02,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-31,Home,0,180.74
+SYN-E-000451,SYN-P-00030,2024-12-03,03:00,2024-12-03,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-32,Home,0,705.76
+SYN-E-000452,SYN-P-00038,2024-12-03,19:30,2024-12-03,Outpatient,FAC-01,Synthetic Regional Medical Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-33,Home,0,787.36
+SYN-E-000453,SYN-P-00096,2024-12-04,02:30,2024-12-04,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,I10,Essential (primary) hypertension,Provider SYN-34,Home,0,202.82
+SYN-E-000454,SYN-P-00127,2024-12-04,23:00,2024-12-04,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-35,Home,0,272.96
+SYN-E-000455,SYN-P-00009,2024-12-05,13:45,2024-12-17,Inpatient,FAC-03,Synthetic Community Hospital West,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-36,Home with Services,12,37189.78
+SYN-E-000456,SYN-P-00059,2024-12-07,13:15,2024-12-07,ED,FAC-01,Synthetic Regional Medical Center,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-37,Home,0,1421.09
+SYN-E-000457,SYN-P-00079,2024-12-07,17:45,2024-12-07,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,I10,Essential (primary) hypertension,Provider SYN-38,Home,0,153.84
+SYN-E-000458,SYN-P-00187,2024-12-07,19:15,2024-12-07,ED,FAC-02,Synthetic Community Hospital East,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-39,Transferred,0,1054.65
+SYN-E-000459,SYN-P-00154,2024-12-07,21:00,2024-12-07,ED,FAC-03,Synthetic Community Hospital West,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-40,Home,0,3323.50
+SYN-E-000460,SYN-P-00170,2024-12-09,00:30,2024-12-09,ED,FAC-02,Synthetic Community Hospital East,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-41,Home,0,3342.05
+SYN-E-000461,SYN-P-00108,2024-12-09,02:15,2024-12-09,ED,FAC-02,Synthetic Community Hospital East,Emergency,R51.9,"Headache, unspecified",Provider SYN-42,Home,0,1600.68
+SYN-E-000462,SYN-P-00028,2024-12-09,03:45,2024-12-09,Outpatient,FAC-05,Synthetic Specialty Clinic,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-43,Home,0,726.69
+SYN-E-000463,SYN-P-00055,2024-12-09,12:15,2024-12-09,ED,FAC-02,Synthetic Community Hospital East,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-44,Home,0,1053.36
+SYN-E-000464,SYN-P-00155,2024-12-09,12:45,2024-12-09,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-45,Home,0,544.44
+SYN-E-000465,SYN-P-00033,2024-12-09,19:00,2024-12-09,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-46,Home,0,308.57
+SYN-E-000466,SYN-P-00085,2024-12-10,09:30,2024-12-16,Inpatient,FAC-02,Synthetic Community Hospital East,Orthopedics,S72.002A,Fracture of unspecified part of neck of left femur,Provider SYN-47,Home with Services,6,23711.07
+SYN-E-000467,SYN-P-00185,2024-12-10,19:30,2024-12-10,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-48,Home,0,719.19
+SYN-E-000468,SYN-P-00101,2024-12-12,03:15,2024-12-21,Inpatient,FAC-01,Synthetic Regional Medical Center,Cardiology,I50.9,"Heart failure, unspecified",Provider SYN-49,Home,9,31174.60
+SYN-E-000469,SYN-P-00148,2024-12-12,11:45,2024-12-14,Inpatient,FAC-02,Synthetic Community Hospital East,Pulmonology,J18.9,"Pneumonia, unspecified organism",Provider SYN-50,Home,2,12539.83
+SYN-E-000470,SYN-P-00136,2024-12-12,19:30,2024-12-13,Observation,FAC-01,Synthetic Regional Medical Center,Internal Medicine,R55,Syncope and collapse,Provider SYN-51,Home,1,2300.05
+SYN-E-000471,SYN-P-00102,2024-12-12,20:15,2024-12-14,Inpatient,FAC-02,Synthetic Community Hospital East,Neurology,I63.9,"Cerebral infarction, unspecified",Provider SYN-52,Home,2,13436.93
+SYN-E-000472,SYN-P-00021,2024-12-13,06:00,2024-12-13,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-53,Home,0,589.16
+SYN-E-000473,SYN-P-00005,2024-12-13,14:15,2024-12-13,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-54,Home,0,564.13
+SYN-E-000474,SYN-P-00192,2024-12-14,00:45,2024-12-17,Inpatient,FAC-03,Synthetic Community Hospital West,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-55,Home with Services,3,14186.09
+SYN-E-000475,SYN-P-00034,2024-12-14,01:15,2024-12-14,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-56,Home,0,682.61
+SYN-E-000476,SYN-P-00070,2024-12-14,07:45,2024-12-14,ED,FAC-02,Synthetic Community Hospital East,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-57,Home,0,3185.38
+SYN-E-000477,SYN-P-00076,2024-12-14,10:30,2024-12-14,Outpatient,FAC-01,Synthetic Regional Medical Center,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-58,Home,0,790.12
+SYN-E-000478,SYN-P-00019,2024-12-14,17:30,2024-12-14,Outpatient,FAC-03,Synthetic Community Hospital West,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-59,Home,0,515.36
+SYN-E-000479,SYN-P-00197,2024-12-14,21:15,2024-12-14,Outpatient,FAC-03,Synthetic Community Hospital West,Primary Care,I10,Essential (primary) hypertension,Provider SYN-60,Home,0,180.27
+SYN-E-000480,SYN-P-00173,2024-12-16,10:45,2024-12-20,Inpatient,FAC-02,Synthetic Community Hospital East,Pulmonology,J18.9,"Pneumonia, unspecified organism",Provider SYN-01,Skilled Nursing Facility,4,17044.11
+SYN-E-000481,SYN-P-00040,2024-12-16,15:00,2024-12-20,Inpatient,FAC-01,Synthetic Regional Medical Center,Neurology,I63.9,"Cerebral infarction, unspecified",Provider SYN-02,Home,4,17964.45
+SYN-E-000482,SYN-P-00111,2024-12-17,12:15,2024-12-17,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-03,Home,0,525.11
+SYN-E-000483,SYN-P-00095,2024-12-18,13:45,2024-12-18,Outpatient,FAC-04,Synthetic Outpatient Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-04,Home,0,264.69
+SYN-E-000484,SYN-P-00048,2024-12-19,10:45,2024-12-19,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,I10,Essential (primary) hypertension,Provider SYN-05,Home,0,843.27
+SYN-E-000485,SYN-P-00044,2024-12-20,18:00,2024-12-20,Outpatient,FAC-03,Synthetic Community Hospital West,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-06,Home,0,783.46
+SYN-E-000486,SYN-P-00043,2024-12-20,21:15,2024-12-27,Inpatient,FAC-03,Synthetic Community Hospital West,Neurology,I63.9,"Cerebral infarction, unspecified",Provider SYN-07,Home,7,26037.05
+SYN-E-000487,SYN-P-00002,2024-12-21,04:15,2024-12-23,Inpatient,FAC-03,Synthetic Community Hospital West,Pulmonology,J18.9,"Pneumonia, unspecified organism",Provider SYN-08,Home,2,13856.93
+SYN-E-000488,SYN-P-00025,2024-12-21,04:30,2024-12-21,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-09,Home,0,874.65
+SYN-E-000489,SYN-P-00029,2024-12-21,08:00,2024-12-22,Observation,FAC-01,Synthetic Regional Medical Center,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-10,Home,1,4050.95
+SYN-E-000490,SYN-P-00134,2024-12-21,08:45,2024-12-21,ED,FAC-03,Synthetic Community Hospital West,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-11,Home,0,3187.53
+SYN-E-000491,SYN-P-00139,2024-12-21,20:45,2024-12-24,Inpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-12,Home,3,14100.73
+SYN-E-000492,SYN-P-00107,2024-12-22,04:15,2024-12-22,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-13,Home,0,414.51
+SYN-E-000493,SYN-P-00170,2024-12-23,03:00,2024-12-23,Outpatient,FAC-02,Synthetic Community Hospital East,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-14,Home,0,288.52
+SYN-E-000494,SYN-P-00114,2024-12-23,17:30,2024-12-23,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-15,Home,0,1014.12
+SYN-E-000495,SYN-P-00145,2024-12-23,21:30,2024-12-23,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-16,Home,0,522.29
+SYN-E-000496,SYN-P-00073,2024-12-24,20:30,2024-12-24,ED,FAC-02,Synthetic Community Hospital East,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-17,Home,0,1274.69
+SYN-E-000497,SYN-P-00190,2024-12-25,07:00,2024-12-25,ED,FAC-02,Synthetic Community Hospital East,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-18,Transferred,0,1544.40
+SYN-E-000498,SYN-P-00130,2024-12-25,13:45,2024-12-25,ED,FAC-02,Synthetic Community Hospital East,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-19,Home,0,1725.33
+SYN-E-000499,SYN-P-00081,2024-12-26,04:15,2024-12-26,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-20,Home,0,224.49
+SYN-E-000500,SYN-P-00189,2024-12-26,23:45,2024-12-29,Inpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-21,Home,3,16396.49
+SYN-E-000501,SYN-P-00105,2024-12-27,07:15,2024-12-28,Observation,FAC-01,Synthetic Regional Medical Center,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-22,Home,1,5761.06
+SYN-E-000502,SYN-P-00106,2024-12-27,12:45,2024-12-27,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-23,Home,0,3754.35
+SYN-E-000503,SYN-P-00123,2024-12-29,03:30,2024-12-29,ED,FAC-03,Synthetic Community Hospital West,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-24,Home,0,3965.51
+SYN-E-000504,SYN-P-00132,2024-12-29,13:15,2024-12-29,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-25,Home,0,197.09
+SYN-E-000505,SYN-P-00038,2024-12-29,14:00,2024-12-30,Observation,FAC-01,Synthetic Regional Medical Center,Internal Medicine,R55,Syncope and collapse,Provider SYN-26,Home,1,3715.25
+SYN-E-000506,SYN-P-00047,2024-12-30,00:30,2024-12-30,Outpatient,FAC-01,Synthetic Regional Medical Center,Primary Care,I10,Essential (primary) hypertension,Provider SYN-27,Home,0,388.59
+SYN-E-000507,SYN-P-00160,2024-12-31,10:00,2024-12-31,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-28,Home,0,1137.76
+SYN-E-000508,SYN-P-00059,2024-12-31,13:00,2024-12-31,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-29,Home,0,777.25
+SYN-E-000509,SYN-P-00091,2024-12-31,13:45,2024-12-31,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-30,Home,0,535.35
+SYN-E-000510,SYN-P-00148,2025-01-01,07:30,2025-01-01,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-31,Home,0,886.30
+SYN-E-000511,SYN-P-00147,2025-01-01,23:00,2025-01-04,Inpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J18.9,"Pneumonia, unspecified organism",Provider SYN-32,Home,3,13601.24
+SYN-E-000512,SYN-P-00063,2025-01-02,00:00,2025-01-02,Outpatient,FAC-03,Synthetic Community Hospital West,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-33,Home,0,783.59
+SYN-E-000513,SYN-P-00093,2025-01-02,19:45,2025-01-02,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-34,Home,0,608.20
+SYN-E-000514,SYN-P-00131,2025-01-03,03:45,2025-01-03,Outpatient,FAC-04,Synthetic Outpatient Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-35,Home,0,207.13
+SYN-E-000515,SYN-P-00096,2025-01-04,01:30,2025-01-04,Outpatient,FAC-05,Synthetic Specialty Clinic,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-36,Home,0,655.17
+SYN-E-000516,SYN-P-00043,2025-01-04,02:15,2025-01-08,Inpatient,FAC-03,Synthetic Community Hospital West,Nephrology,N17.9,"Acute kidney failure, unspecified",Provider SYN-37,Home with Services,4,18128.22
+SYN-E-000517,SYN-P-00016,2025-01-04,19:45,2025-01-08,Inpatient,FAC-01,Synthetic Regional Medical Center,Neurology,I63.9,"Cerebral infarction, unspecified",Provider SYN-38,Home with Services,4,17370.02
+SYN-E-000518,SYN-P-00057,2025-01-05,16:00,2025-01-05,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-39,Home,0,2916.98
+SYN-E-000519,SYN-P-00094,2025-01-06,23:45,2025-01-06,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-40,Home,0,203.02
+SYN-E-000520,SYN-P-00188,2025-01-07,08:15,2025-01-07,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,I10,Essential (primary) hypertension,Provider SYN-41,Home,0,607.55
+SYN-E-000521,SYN-P-00143,2025-01-07,11:30,2025-01-07,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,I10,Essential (primary) hypertension,Provider SYN-42,Home,0,350.17
+SYN-E-000522,SYN-P-00017,2025-01-08,10:00,2025-01-08,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-43,Home,0,353.24
+SYN-E-000523,SYN-P-00082,2025-01-10,06:15,2025-01-17,Inpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-44,Home,7,25074.10
+SYN-E-000524,SYN-P-00052,2025-01-10,06:30,2025-01-10,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-45,Home,0,503.27
+SYN-E-000525,SYN-P-00092,2025-01-10,07:15,2025-01-10,ED,FAC-02,Synthetic Community Hospital East,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-46,Home,0,1800.88
+SYN-E-000526,SYN-P-00046,2025-01-10,09:15,2025-01-10,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-47,Home,0,750.74
+SYN-E-000527,SYN-P-00097,2025-01-10,23:45,2025-01-10,ED,FAC-03,Synthetic Community Hospital West,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-48,Home,0,1164.69
+SYN-E-000528,SYN-P-00102,2025-01-11,12:30,2025-01-11,ED,FAC-02,Synthetic Community Hospital East,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-49,Home,0,2936.55
+SYN-E-000529,SYN-P-00178,2025-01-12,12:00,2025-01-12,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-50,Home,0,2420.73
+SYN-E-000530,SYN-P-00027,2025-01-12,20:15,2025-01-12,Outpatient,FAC-02,Synthetic Community Hospital East,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-51,Home,0,523.62
+SYN-E-000531,SYN-P-00126,2025-01-12,21:15,2025-01-12,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-52,Home,0,454.15
+SYN-E-000532,SYN-P-00034,2025-01-13,05:30,2025-01-13,ED,FAC-01,Synthetic Regional Medical Center,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-53,Home,0,2489.68
+SYN-E-000533,SYN-P-00196,2025-01-13,14:45,2025-01-13,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-54,Home,0,716.27
+SYN-E-000534,SYN-P-00029,2025-01-14,05:45,2025-01-14,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-55,Home,0,758.44
+SYN-E-000535,SYN-P-00054,2025-01-15,00:45,2025-01-18,Inpatient,FAC-01,Synthetic Regional Medical Center,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-56,Skilled Nursing Facility,3,14755.67
+SYN-E-000536,SYN-P-00149,2025-01-15,04:45,2025-01-15,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-57,Home,0,735.80
+SYN-E-000537,SYN-P-00042,2025-01-15,13:00,2025-01-15,Outpatient,FAC-04,Synthetic Outpatient Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-58,Home,0,580.83
+SYN-E-000538,SYN-P-00139,2025-01-15,19:45,2025-01-15,ED,FAC-01,Synthetic Regional Medical Center,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-59,Home,0,2299.05
+SYN-E-000539,SYN-P-00033,2025-01-16,00:30,2025-01-16,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-60,Home,0,161.97
+SYN-E-000540,SYN-P-00101,2025-01-16,00:30,2025-01-16,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-01,Home,0,597.98
+SYN-E-000541,SYN-P-00158,2025-01-16,06:30,2025-01-16,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-02,Home,0,384.46
+SYN-E-000542,SYN-P-00176,2025-01-16,15:30,2025-01-16,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-03,Home,0,319.61
+SYN-E-000543,SYN-P-00192,2025-01-17,07:00,2025-01-17,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-04,Home,0,728.76
+SYN-E-000544,SYN-P-00114,2025-01-17,12:00,2025-01-17,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-05,Home,0,206.76
+SYN-E-000545,SYN-P-00068,2025-01-18,03:30,2025-01-18,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-06,Home,0,
+SYN-E-000546,SYN-P-00004,2025-01-18,13:15,2025-01-18,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-07,Home,0,831.25
+SYN-E-000547,SYN-P-00191,2025-01-18,22:30,2025-01-18,Observation,FAC-02,Synthetic Community Hospital East,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-08,Home,0,4616.89
+SYN-E-000548,SYN-P-00197,2025-01-19,09:30,2025-01-19,Outpatient,FAC-03,Synthetic Community Hospital West,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-09,Home,0,379.85
+SYN-E-000549,SYN-P-00093,2025-01-19,11:30,2025-01-19,Outpatient,FAC-04,Synthetic Outpatient Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-10,Home,0,863.76
+SYN-E-000550,SYN-P-00138,2025-01-20,13:30,2025-01-20,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-11,Home,0,880.14
+SYN-E-000551,SYN-P-00164,2025-01-20,18:15,2025-01-20,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-12,Transferred,0,2308.54
+SYN-E-000552,SYN-P-00021,2025-01-21,00:45,2025-01-21,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-13,Home,0,372.09
+SYN-E-000553,SYN-P-00106,2025-01-21,07:00,2025-01-22,Inpatient,FAC-01,Synthetic Regional Medical Center,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-14,Transferred,1,9268.74
+SYN-E-000554,SYN-P-00147,2025-01-22,20:45,2025-01-25,Inpatient,FAC-01,Synthetic Regional Medical Center,Cardiology,I48.91,Unspecified atrial fibrillation,Provider SYN-15,Home with Services,3,15981.69
+SYN-E-000555,SYN-P-00156,2025-01-22,22:45,2025-01-22,Outpatient,FAC-04,Synthetic Outpatient Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-16,Home,0,884.89
+SYN-E-000556,SYN-P-00103,2025-01-23,02:45,2025-01-23,Outpatient,FAC-05,Synthetic Specialty Clinic,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-17,Home,0,0.00
+SYN-E-000557,SYN-P-00036,2025-01-24,08:30,2025-01-24,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,I10,Essential (primary) hypertension,Provider SYN-18,Home,0,323.87
+SYN-E-000558,SYN-P-00069,2025-01-24,08:30,2025-01-24,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-19,Home,0,
+SYN-E-000559,SYN-P-00037,2025-01-24,13:00,2025-01-28,Inpatient,FAC-01,Synthetic Regional Medical Center,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-20,Home,4,17170.76
+SYN-E-000560,SYN-P-00100,2025-01-24,14:30,2025-01-26,Inpatient,FAC-03,Synthetic Community Hospital West,Cardiology,I48.91,Unspecified atrial fibrillation,Provider SYN-21,Home with Services,2,11678.42
+SYN-E-000561,SYN-P-00035,2025-01-24,22:30,2025-01-28,Inpatient,FAC-02,Synthetic Community Hospital East,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-22,Skilled Nursing Facility,4,17561.52
+SYN-E-000562,SYN-P-00152,2025-01-24,22:45,2025-01-24,Outpatient,FAC-04,Synthetic Outpatient Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-23,Home,0,578.74
+SYN-E-000563,SYN-P-00148,2025-01-25,11:15,2025-01-25,ED,FAC-02,Synthetic Community Hospital East,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-24,Home,0,2678.51
+SYN-E-000564,SYN-P-00121,2025-01-25,21:30,2025-01-25,Outpatient,FAC-02,Synthetic Community Hospital East,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-25,Home,0,655.18
+SYN-E-000565,SYN-P-00181,2025-01-26,04:30,2025-01-26,ED,FAC-01,Synthetic Regional Medical Center,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-26,Home,0,1065.52
+SYN-E-000566,SYN-P-00173,2025-01-26,08:00,2025-01-28,Inpatient,FAC-02,Synthetic Community Hospital East,Nephrology,N17.9,"Acute kidney failure, unspecified",Provider SYN-27,Home,2,13082.23
+SYN-E-000567,SYN-P-00128,2025-01-26,10:00,2025-01-26,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-28,Home,0,0.00
+SYN-E-000568,SYN-P-00099,2025-01-26,11:45,2025-01-28,Inpatient,FAC-03,Synthetic Community Hospital West,Neurology,I63.9,"Cerebral infarction, unspecified",Provider SYN-29,Skilled Nursing Facility,2,11276.50
+SYN-E-000569,SYN-P-00162,2025-01-26,15:45,2025-01-26,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-30,Home,0,163.57
+SYN-E-000570,SYN-P-00189,2025-01-27,14:00,2025-01-31,Inpatient,FAC-01,Synthetic Regional Medical Center,Nephrology,N17.9,"Acute kidney failure, unspecified",Provider SYN-31,Home,4,16722.37
+SYN-E-000571,SYN-P-00174,2025-01-27,18:30,2025-01-27,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-32,Home,0,324.74
+SYN-E-000572,SYN-P-00115,2025-01-27,20:15,2025-01-29,Inpatient,FAC-02,Synthetic Community Hospital East,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-33,Home with Services,2,11049.92
+SYN-E-000573,SYN-P-00165,2025-01-28,00:15,2025-01-30,Inpatient,FAC-01,Synthetic Regional Medical Center,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-34,Home with Services,2,12163.26
+SYN-E-000574,SYN-P-00184,2025-01-28,12:30,2025-02-01,Inpatient,FAC-01,Synthetic Regional Medical Center,Cardiology,I48.91,Unspecified atrial fibrillation,Provider SYN-35,Home,4,17434.28
+SYN-E-000575,SYN-P-00170,2025-01-29,10:15,2025-01-29,Outpatient,FAC-02,Synthetic Community Hospital East,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-36,Home,0,361.39
+SYN-E-000576,SYN-P-00134,2025-01-30,14:15,2025-01-30,Outpatient,FAC-03,Synthetic Community Hospital West,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-37,Home,0,747.37
+SYN-E-000577,SYN-P-00015,2025-01-31,14:00,2025-02-01,Observation,FAC-01,Synthetic Regional Medical Center,Internal Medicine,R55,Syncope and collapse,Provider SYN-38,Home,1,3969.20
+SYN-E-000578,SYN-P-00104,2025-01-31,18:15,2025-01-31,ED,FAC-01,Synthetic Regional Medical Center,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-39,Home,0,2338.65
+SYN-E-000579,SYN-P-00117,2025-01-31,20:15,2025-01-31,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-40,Home,0,217.42
+SYN-E-000580,SYN-P-00140,2025-02-01,06:45,2025-02-01,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-41,Home,0,527.50
+SYN-E-000581,SYN-P-00032,2025-02-01,17:30,2025-02-10,Inpatient,FAC-01,Synthetic Regional Medical Center,Cardiology,I48.91,Unspecified atrial fibrillation,Provider SYN-42,Home,9,31153.03
+SYN-E-000582,SYN-P-00102,2025-02-02,01:45,2025-02-02,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-43,Home,0,750.71
+SYN-E-000583,SYN-P-00083,2025-02-02,15:45,2025-02-02,Outpatient,FAC-03,Synthetic Community Hospital West,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-44,Home,0,169.57
+SYN-E-000584,SYN-P-00122,2025-02-03,20:45,2025-02-03,Outpatient,FAC-03,Synthetic Community Hospital West,Cardiology,I10,Essential (primary) hypertension,Provider SYN-45,Home,0,328.06
+SYN-E-000585,SYN-P-00180,2025-02-04,18:00,2025-02-04,ED,FAC-01,Synthetic Regional Medical Center,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-46,Home,0,1463.45
+SYN-E-000586,SYN-P-00060,2025-02-04,19:30,2025-02-10,Inpatient,FAC-01,Synthetic Regional Medical Center,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-47,Home with Services,6,23096.96
+SYN-E-000587,SYN-P-00189,2025-02-04,20:00,2025-02-07,Inpatient,FAC-01,Synthetic Regional Medical Center,Cardiology,I48.91,Unspecified atrial fibrillation,Provider SYN-48,Skilled Nursing Facility,3,15563.59
+SYN-E-000588,SYN-P-00075,2025-02-04,20:15,2025-02-04,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R51.9,"Headache, unspecified",Provider SYN-49,Home,0,3562.45
+SYN-E-000589,SYN-P-00123,2025-02-04,23:30,2025-02-04,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,I10,Essential (primary) hypertension,Provider SYN-50,Home,0,356.17
+SYN-E-000590,SYN-P-00193,2025-02-06,10:30,2025-02-06,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,I10,Essential (primary) hypertension,Provider SYN-51,Home,0,691.88
+SYN-E-000591,SYN-P-00064,2025-02-06,18:00,2025-02-06,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-52,Home,0,345.15
+SYN-E-000592,SYN-P-00076,2025-02-07,04:45,2025-02-07,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-53,Home,0,688.62
+SYN-E-000593,SYN-P-00153,2025-02-07,18:15,2025-02-14,Inpatient,FAC-02,Synthetic Community Hospital East,Nephrology,N17.9,"Acute kidney failure, unspecified",Provider SYN-54,Home with Services,7,24722.73
+SYN-E-000594,SYN-P-00113,2025-02-08,04:45,2025-02-08,ED,FAC-02,Synthetic Community Hospital East,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-55,Home,0,2890.78
+SYN-E-000595,SYN-P-00108,2025-02-08,13:00,2025-02-08,Observation,FAC-02,Synthetic Community Hospital East,Internal Medicine,R55,Syncope and collapse,Provider SYN-56,Home,0,2256.49
+SYN-E-000596,SYN-P-00082,2025-01-16,06:45,2025-01-16,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,I10,Essential (primary) hypertension,Provider SYN-57,Home,0,671.00
+SYN-E-000597,SYN-P-00166,2025-02-09,17:00,2025-02-09,ED,FAC-02,Synthetic Community Hospital East,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-58,Home,0,3130.62
+SYN-E-000598,SYN-P-00118,2025-02-11,20:00,2025-02-11,ED,FAC-02,Synthetic Community Hospital East,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-59,Home,0,2457.74
+SYN-E-000599,SYN-P-00200,2025-02-14,00:45,2025-02-14,Outpatient,FAC-04,Synthetic Outpatient Center,Cardiology,I10,Essential (primary) hypertension,Provider SYN-60,Home,0,424.47
+SYN-E-000600,SYN-P-00172,2025-02-14,09:15,2025-02-14,ED,FAC-01,Synthetic Regional Medical Center,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-01,Home,0,3525.84
+SYN-E-000601,SYN-P-00065,2025-02-15,11:30,2025-02-15,Outpatient,FAC-03,Synthetic Community Hospital West,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-02,Home,0,415.36
+SYN-E-000602,SYN-P-00007,2025-02-16,13:00,2025-02-16,ED,FAC-01,Synthetic Regional Medical Center,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-03,Home,0,3057.57
+SYN-E-000603,SYN-P-00109,2025-02-17,16:45,2025-02-19,Inpatient,FAC-02,Synthetic Community Hospital East,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-04,Home,2,12170.73
+SYN-E-000604,SYN-P-00087,2025-02-18,19:45,2025-02-18,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-05,Home,0,702.39
+SYN-E-000605,SYN-P-00176,2025-02-21,21:00,2025-02-21,Outpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-06,Home,0,289.98
+SYN-E-000606,SYN-P-00058,2025-02-23,06:30,2025-02-26,Inpatient,FAC-02,Synthetic Community Hospital East,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-07,Skilled Nursing Facility,3,15183.59
+SYN-E-000607,SYN-P-00184,2025-02-23,20:00,2025-02-23,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-08,Home,0,839.64
+SYN-E-000608,SYN-P-00024,2025-02-25,22:15,2025-03-03,Inpatient,FAC-03,Synthetic Community Hospital West,Nephrology,N17.9,"Acute kidney failure, unspecified",Provider SYN-09,Home,6,23566.63
+SYN-E-000609,SYN-P-00019,2025-02-26,10:45,2025-02-28,Inpatient,FAC-03,Synthetic Community Hospital West,Cardiology,I48.91,Unspecified atrial fibrillation,Provider SYN-10,Home,2,12370.05
+SYN-E-000610,SYN-P-00165,2025-02-27,11:45,2025-03-02,Inpatient,FAC-02,Synthetic Community Hospital East,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-11,Home with Services,3,15555.09
+SYN-E-000611,SYN-P-00129,2025-02-27,14:30,2025-02-27,Outpatient,FAC-01,Synthetic Regional Medical Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-12,Home,0,470.94
+SYN-E-000612,SYN-P-00091,2025-02-28,03:15,2025-03-01,Observation,FAC-03,Synthetic Community Hospital West,Internal Medicine,R55,Syncope and collapse,Provider SYN-13,Home,1,4525.89
+SYN-E-000613,SYN-P-00014,2025-03-01,02:00,2025-03-01,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-14,Home,0,329.03
+SYN-E-000614,SYN-P-00031,2025-03-02,04:30,2025-03-02,ED,FAC-02,Synthetic Community Hospital East,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-15,Home,0,3369.80
+SYN-E-000615,SYN-P-00010,2025-03-02,19:30,2025-03-02,Observation,FAC-02,Synthetic Community Hospital East,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-16,Home,0,3594.83
+SYN-E-000616,SYN-P-00125,2025-03-03,22:30,2025-03-05,Inpatient,FAC-03,Synthetic Community Hospital West,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-17,Home,2,12560.25
+SYN-E-000617,SYN-P-00098,2025-03-05,08:00,2025-03-05,Outpatient,FAC-05,Synthetic Specialty Clinic,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-18,Home,0,268.62
+SYN-E-000618,SYN-P-00155,2025-03-05,10:15,2025-03-05,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-19,Home,0,245.97
+SYN-E-000619,SYN-P-00025,2025-03-05,12:00,2025-03-11,Inpatient,FAC-03,Synthetic Community Hospital West,Cardiology,I48.91,Unspecified atrial fibrillation,Provider SYN-20,Home,6,22436.68
+SYN-E-000620,SYN-P-00089,2025-03-05,16:15,2025-03-05,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-21,Home,0,647.13
+SYN-E-000621,SYN-P-00022,2025-03-05,16:45,2025-03-05,Outpatient,FAC-01,Synthetic Regional Medical Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-22,Home,0,184.05
+SYN-E-000622,SYN-P-00140,2025-03-05,17:45,2025-03-05,ED,FAC-02,Synthetic Community Hospital East,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-23,Home,0,2538.34
+SYN-E-000623,SYN-P-00165,2025-03-05,18:00,2025-03-12,Inpatient,FAC-03,Synthetic Community Hospital West,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-24,Skilled Nursing Facility,7,25847.10
+SYN-E-000624,SYN-P-00001,2025-03-07,02:45,2025-03-07,ED,FAC-03,Synthetic Community Hospital West,Emergency,R51.9,"Headache, unspecified",Provider SYN-25,Home,0,3829.39
+SYN-E-000625,SYN-P-00170,2025-03-07,05:30,2025-03-07,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-26,Home,0,284.52
+SYN-E-000626,SYN-P-00094,2025-03-07,21:15,2025-03-07,Outpatient,FAC-05,Synthetic Specialty Clinic,Cardiology,I10,Essential (primary) hypertension,Provider SYN-27,Home,0,685.32
+SYN-E-000627,SYN-P-00030,2025-03-07,22:45,2025-03-07,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-28,Home,0,848.08
+SYN-E-000628,SYN-P-00090,2025-03-08,14:30,2025-03-14,Inpatient,FAC-01,Synthetic Regional Medical Center,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-29,Home,6,22697.76
+SYN-E-000629,SYN-P-00059,2025-03-09,13:30,2025-03-09,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-30,Home,0,576.87
+SYN-E-000630,SYN-P-00152,2025-03-09,21:15,2025-03-21,Inpatient,FAC-03,Synthetic Community Hospital West,Orthopedics,S72.002A,Fracture of unspecified part of neck of left femur,Provider SYN-31,Home,12,36599.94
+SYN-E-000631,SYN-P-00158,2025-03-10,01:45,2025-03-10,Outpatient,FAC-05,Synthetic Specialty Clinic,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-32,Home,0,386.21
+SYN-E-000632,SYN-P-00056,2025-03-10,04:15,2025-03-12,Inpatient,FAC-01,Synthetic Regional Medical Center,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-33,Skilled Nursing Facility,2,12619.82
+SYN-E-000633,SYN-P-00072,2025-03-10,11:30,2025-03-10,Outpatient,FAC-03,Synthetic Community Hospital West,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-34,Home,0,447.34
+SYN-E-000634,SYN-P-00176,2025-03-10,11:45,2025-03-10,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R51.9,"Headache, unspecified",Provider SYN-35,Home,0,2390.52
+SYN-E-000635,SYN-P-00134,2025-03-10,17:45,2025-03-10,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-36,Home,0,710.65
+SYN-E-000636,SYN-P-00013,2025-03-12,23:45,2025-03-12,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-37,Home,0,324.06
+SYN-E-000637,SYN-P-00026,2025-03-14,05:00,2025-03-14,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,I10,Essential (primary) hypertension,Provider SYN-38,Home,0,725.59
+SYN-E-000638,SYN-P-00012,2025-03-14,08:00,2025-03-15,Observation,FAC-03,Synthetic Community Hospital West,Internal Medicine,R55,Syncope and collapse,Provider SYN-39,Home,1,4290.37
+SYN-E-000639,SYN-P-00191,2025-03-14,08:00,2025-03-14,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-40,Home,0,771.32
+SYN-E-000640,SYN-P-00058,2025-03-14,16:45,2025-03-19,Inpatient,FAC-02,Synthetic Community Hospital East,Cardiology,I48.91,Unspecified atrial fibrillation,Provider SYN-41,Transferred,5,19793.56
+SYN-E-000641,SYN-P-00037,2025-03-15,13:45,2025-03-15,Outpatient,FAC-04,Synthetic Outpatient Center,Cardiology,I10,Essential (primary) hypertension,Provider SYN-42,Home,0,657.56
+SYN-E-000642,SYN-P-00069,2025-03-18,00:15,2025-03-19,Observation,FAC-02,Synthetic Community Hospital East,Internal Medicine,R55,Syncope and collapse,Provider SYN-43,Home,1,4812.14
+SYN-E-000643,SYN-P-00025,2025-03-18,05:30,2025-03-19,Inpatient,FAC-03,Synthetic Community Hospital West,Neurology,I63.9,"Cerebral infarction, unspecified",Provider SYN-44,Home,1,11374.03
+SYN-E-000644,SYN-P-00070,2025-03-18,21:30,2025-03-18,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-45,Home,0,390.31
+SYN-E-000645,SYN-P-00097,2025-03-19,17:45,2025-03-23,Inpatient,FAC-03,Synthetic Community Hospital West,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-46,Home with Services,4,18669.87
+SYN-E-000646,SYN-P-00017,2025-03-20,17:30,2025-03-20,ED,FAC-02,Synthetic Community Hospital East,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-47,Home,0,3545.50
+SYN-E-000647,SYN-P-00004,2025-03-21,05:30,2025-03-25,Inpatient,FAC-02,Synthetic Community Hospital East,Pulmonology,J18.9,"Pneumonia, unspecified organism",Provider SYN-48,Home,5,16024.39
+SYN-E-000648,SYN-P-00180,2025-03-21,17:45,2025-03-21,Observation,FAC-01,Synthetic Regional Medical Center,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-49,Home with Services,0,3106.81
+SYN-E-000649,SYN-P-00186,2025-03-21,22:45,2025-03-21,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-50,Home,0,464.40
+SYN-E-000650,SYN-P-00035,2025-03-22,08:45,2025-03-22,ED,FAC-02,Synthetic Community Hospital East,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-51,Home,0,1093.33
+SYN-E-000651,SYN-P-00137,2025-03-24,03:15,2025-03-24,Outpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-52,Home,0,310.98
+SYN-E-000652,SYN-P-00182,2025-03-24,03:15,2025-03-24,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-53,Home,0,191.94
+SYN-E-000653,SYN-P-00059,2025-03-24,14:00,2025-03-24,Outpatient,FAC-01,Synthetic Regional Medical Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-54,Home,0,714.49
+SYN-E-000654,SYN-P-00149,2025-03-24,22:00,2025-03-24,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-55,Home,0,438.12
+SYN-E-000655,SYN-P-00071,2025-03-25,20:00,2025-03-25,ED,FAC-01,Synthetic Regional Medical Center,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-56,Transferred,0,1419.57
+SYN-E-000656,SYN-P-00005,2025-03-27,00:45,2025-03-31,Inpatient,FAC-01,Synthetic Regional Medical Center,Cardiology,I50.9,"Heart failure, unspecified",Provider SYN-57,Home with Services,4,18163.31
+SYN-E-000657,SYN-P-00039,2025-03-27,12:00,2025-03-27,Outpatient,FAC-02,Synthetic Community Hospital East,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-58,Home,0,696.59
+SYN-E-000658,SYN-P-00007,2025-03-27,16:30,2025-03-27,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-59,Home,0,855.09
+SYN-E-000659,SYN-P-00124,2025-03-27,19:45,2025-04-02,Inpatient,FAC-02,Synthetic Community Hospital East,Orthopedics,S72.002A,Fracture of unspecified part of neck of left femur,Provider SYN-60,Home,6,22056.43
+SYN-E-000660,SYN-P-00175,2025-03-30,05:00,2025-03-30,ED,FAC-03,Synthetic Community Hospital West,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-01,Home,0,3999.78
+SYN-E-000661,SYN-P-00055,2025-03-30,08:00,2025-04-01,Inpatient,FAC-01,Synthetic Regional Medical Center,Cardiology,I50.9,"Heart failure, unspecified",Provider SYN-02,Home,2,11852.19
+SYN-E-000662,SYN-P-00109,2025-03-30,17:15,2025-03-31,Inpatient,FAC-02,Synthetic Community Hospital East,Internal Medicine,J18.9,"Pneumonia, unspecified organism",Provider SYN-03,Home,1,9563.20
+SYN-E-000663,SYN-P-00108,2025-03-31,00:45,2025-03-31,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-04,Home,0,437.21
+SYN-E-000664,SYN-P-00006,2025-03-31,18:00,2025-03-31,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-05,Home,0,645.35
+SYN-E-000665,SYN-P-00162,2025-03-31,22:00,2025-03-31,ED,FAC-02,Synthetic Community Hospital East,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-06,Home,0,1562.66
+SYN-E-000666,SYN-P-00134,2025-04-01,16:00,2025-04-07,Inpatient,FAC-03,Synthetic Community Hospital West,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-07,Home,6,21005.37
+SYN-E-000667,SYN-P-00194,2025-04-02,13:45,2025-04-02,ED,FAC-02,Synthetic Community Hospital East,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-08,Home,0,1524.31
+SYN-E-000668,SYN-P-00177,2025-04-02,23:15,2025-04-02,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-09,Home,0,2638.09
+SYN-E-000669,SYN-P-00187,2025-04-03,23:15,2025-04-03,Outpatient,FAC-05,Synthetic Specialty Clinic,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-10,Home,0,605.20
+SYN-E-000670,SYN-P-00147,2025-04-04,10:15,2025-04-04,Outpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-11,Home,0,889.39
+SYN-E-000671,SYN-P-00090,2025-04-04,19:45,2025-04-04,Outpatient,FAC-01,Synthetic Regional Medical Center,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-12,Home,0,561.84
+SYN-E-000672,SYN-P-00130,2025-04-05,06:45,2025-04-05,ED,FAC-02,Synthetic Community Hospital East,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-13,Home,0,1058.33
+SYN-E-000673,SYN-P-00044,2025-04-05,20:15,2025-04-07,Inpatient,FAC-03,Synthetic Community Hospital West,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-14,Home,2,11570.95
+SYN-E-000674,SYN-P-00151,2025-04-06,15:45,2025-04-06,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-15,Home,0,884.54
+SYN-E-000675,SYN-P-00104,2025-04-06,20:00,2025-04-06,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-16,Home,0,680.30
+SYN-E-000676,SYN-P-00028,2025-04-08,05:30,2025-04-08,Outpatient,FAC-05,Synthetic Specialty Clinic,Cardiology,I10,Essential (primary) hypertension,Provider SYN-17,Home,0,259.17
+SYN-E-000677,SYN-P-00099,2025-04-08,07:15,2025-04-08,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-18,Home,0,770.26
+SYN-E-000678,SYN-P-00025,2025-04-08,08:15,2025-04-12,Inpatient,FAC-03,Synthetic Community Hospital West,Cardiology,I50.9,"Heart failure, unspecified",Provider SYN-19,Home with Services,4,16318.78
+SYN-E-000679,SYN-P-00095,2025-04-08,18:30,2025-04-13,Inpatient,FAC-03,Synthetic Community Hospital West,Cardiology,I50.9,"Heart failure, unspecified",Provider SYN-20,Home,5,18948.48
+SYN-E-000680,SYN-P-00021,2025-04-08,20:00,2025-04-08,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-21,Home,0,775.27
+SYN-E-000681,SYN-P-00078,2025-04-09,01:00,2025-04-09,ED,FAC-02,Synthetic Community Hospital East,Emergency,R51.9,"Headache, unspecified",Provider SYN-22,Home,0,2626.01
+SYN-E-000682,SYN-P-00106,2025-04-09,03:15,2025-04-11,Inpatient,FAC-01,Synthetic Regional Medical Center,Cardiology,I50.9,"Heart failure, unspecified",Provider SYN-23,Home,2,12981.34
+SYN-E-000683,SYN-P-00165,2025-04-09,23:00,2025-04-13,Inpatient,FAC-03,Synthetic Community Hospital West,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-24,Home,4,16806.56
+SYN-E-000684,SYN-P-00112,2025-04-10,08:15,2025-04-10,ED,FAC-03,Synthetic Community Hospital West,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-25,Home,0,2320.23
+SYN-E-000685,SYN-P-00101,2025-04-13,15:15,2025-04-13,Outpatient,FAC-05,Synthetic Specialty Clinic,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-26,Home,0,668.51
+SYN-E-000686,SYN-P-00107,2025-04-13,23:15,2025-04-13,ED,FAC-03,Synthetic Community Hospital West,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-27,Home,0,1121.45
+SYN-E-000687,SYN-P-00157,2025-04-14,02:00,2025-04-14,Outpatient,FAC-05,Synthetic Specialty Clinic,Cardiology,I10,Essential (primary) hypertension,Provider SYN-28,Home,0,896.97
+SYN-E-000688,SYN-P-00061,2025-04-14,05:30,2025-04-14,Outpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-29,Home,0,394.59
+SYN-E-000689,SYN-P-00009,2025-04-14,16:00,2025-04-14,ED,FAC-03,Synthetic Community Hospital West,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-30,Home,0,3873.04
+SYN-E-000690,SYN-P-00105,2025-04-15,03:45,2025-04-15,Outpatient,FAC-04,Synthetic Outpatient Center,Cardiology,I10,Essential (primary) hypertension,Provider SYN-31,Home,0,563.77
+SYN-E-000691,SYN-P-00085,2025-04-15,19:15,2025-04-15,ED,FAC-02,Synthetic Community Hospital East,Emergency,R51.9,"Headache, unspecified",Provider SYN-32,Home,0,3371.99
+SYN-E-000692,SYN-P-00131,2025-04-16,13:15,2025-04-16,Outpatient,FAC-04,Synthetic Outpatient Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-33,Home,0,371.95
+SYN-E-000693,SYN-P-00152,2025-04-16,23:30,2025-04-16,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-34,Home,0,358.57
+SYN-E-000694,SYN-P-00036,2025-04-17,04:00,2025-04-17,ED,FAC-02,Synthetic Community Hospital East,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-35,Transferred,0,1581.24
+SYN-E-000695,SYN-P-00139,2025-04-17,04:00,2025-04-17,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-36,Home,0,730.62
+SYN-E-000696,SYN-P-00114,2025-04-17,13:00,2025-04-17,ED,FAC-01,Synthetic Regional Medical Center,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-37,Home,0,1359.90
+SYN-E-000697,SYN-P-00047,2025-04-17,21:45,2025-04-17,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,I10,Essential (primary) hypertension,Provider SYN-38,Home,0,261.94
+SYN-E-000698,SYN-P-00062,2025-04-18,10:15,2025-04-18,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-39,Home,0,460.61
+SYN-E-000699,SYN-P-00154,2025-04-19,04:15,2025-04-21,Inpatient,FAC-01,Synthetic Regional Medical Center,Cardiology,I50.9,"Heart failure, unspecified",Provider SYN-40,Home with Services,2,12645.63
+SYN-E-000700,SYN-P-00025,2025-04-19,09:00,2025-04-24,Inpatient,FAC-03,Synthetic Community Hospital West,Neurology,I63.9,"Cerebral infarction, unspecified",Provider SYN-41,Skilled Nursing Facility,5,20416.01
+SYN-E-000701,SYN-P-00119,2025-04-19,12:45,2025-04-19,Outpatient,FAC-01,Synthetic Regional Medical Center,Cardiology,I10,Essential (primary) hypertension,Provider SYN-42,Home,0,181.82
+SYN-E-000702,SYN-P-00005,2025-04-20,09:15,2025-04-20,Outpatient,FAC-04,Synthetic Outpatient Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-43,Home,0,781.34
+SYN-E-000703,SYN-P-00004,2025-04-20,09:45,2025-04-23,Inpatient,FAC-02,Synthetic Community Hospital East,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-44,Home with Services,3,15775.34
+SYN-E-000704,SYN-P-00077,2025-04-21,18:15,2025-04-21,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,I10,Essential (primary) hypertension,Provider SYN-45,Home,0,463.24
+SYN-E-000705,SYN-P-00106,2025-04-22,01:00,2025-04-23,Inpatient,FAC-01,Synthetic Regional Medical Center,Cardiology,I50.9,"Heart failure, unspecified",Provider SYN-46,Home,1,9601.15
+SYN-E-000706,SYN-P-00007,2025-04-22,07:15,2025-04-22,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-47,Home,0,2377.62
+SYN-E-000707,SYN-P-00002,2025-04-22,11:30,2025-04-22,ED,FAC-03,Synthetic Community Hospital West,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-48,Home,0,2379.31
+SYN-E-000708,SYN-P-00070,2025-04-23,20:45,2025-04-23,ED,FAC-02,Synthetic Community Hospital East,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-49,Home,0,1095.47
+SYN-E-000709,SYN-P-00032,2025-04-24,15:30,2025-04-24,Outpatient,FAC-01,Synthetic Regional Medical Center,Primary Care,I10,Essential (primary) hypertension,Provider SYN-50,Home,0,889.84
+SYN-E-000710,SYN-P-00127,2025-04-26,15:00,2025-04-26,ED,FAC-01,Synthetic Regional Medical Center,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-51,Left Before Completion,0,1629.91
+SYN-E-000711,SYN-P-00054,2025-04-27,14:30,2025-04-27,Outpatient,FAC-04,Synthetic Outpatient Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-52,Home,0,445.66
+SYN-E-000712,SYN-P-00094,2025-04-28,08:45,2025-04-29,Inpatient,FAC-01,Synthetic Regional Medical Center,Orthopedics,S72.002A,Fracture of unspecified part of neck of left femur,Provider SYN-53,Home,1,8840.88
+SYN-E-000713,SYN-P-00173,2025-04-28,18:00,2025-04-28,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-54,Home,0,506.24
+SYN-E-000714,SYN-P-00010,2025-04-28,20:15,2025-04-28,ED,FAC-02,Synthetic Community Hospital East,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-55,Home,0,2161.48
+SYN-E-000715,SYN-P-00024,2025-04-29,11:15,2025-05-11,Inpatient,FAC-03,Synthetic Community Hospital West,Cardiology,I50.9,"Heart failure, unspecified",Provider SYN-56,Skilled Nursing Facility,12,38905.89
+SYN-E-000716,SYN-P-00058,2025-04-30,05:15,2025-05-02,Inpatient,FAC-02,Synthetic Community Hospital East,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-57,Home,2,13419.05
+SYN-E-000717,SYN-P-00143,2025-04-30,11:30,2025-04-30,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,I10,Essential (primary) hypertension,Provider SYN-58,Home,0,400.04
+SYN-E-000718,SYN-P-00151,2025-04-30,22:45,2025-05-09,Inpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-59,Home,9,28724.56
+SYN-E-000719,SYN-P-00026,2025-05-01,02:00,2025-05-01,ED,FAC-02,Synthetic Community Hospital East,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-60,Home,0,3306.91
+SYN-E-000720,SYN-P-00040,2025-05-01,02:15,2025-05-01,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-01,Home,0,396.03
+SYN-E-000721,SYN-P-00104,2025-05-02,00:00,2025-05-05,Inpatient,FAC-02,Synthetic Community Hospital East,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-02,Skilled Nursing Facility,3,15308.55
+SYN-E-000722,SYN-P-00174,2025-05-03,03:00,2025-05-06,Inpatient,FAC-01,Synthetic Regional Medical Center,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-03,Home,3,15421.36
+SYN-E-000723,SYN-P-00083,2025-05-04,01:15,2025-05-04,ED,FAC-03,Synthetic Community Hospital West,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-04,Home,0,1853.78
+SYN-E-000724,SYN-P-00189,2025-05-04,06:15,2025-05-04,Outpatient,FAC-04,Synthetic Outpatient Center,Cardiology,I10,Essential (primary) hypertension,Provider SYN-05,Home,0,820.02
+SYN-E-000725,SYN-P-00200,2025-05-04,07:15,2025-05-05,Observation,FAC-03,Synthetic Community Hospital West,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-06,Home with Services,1,5846.10
+SYN-E-000726,SYN-P-00077,2025-05-05,05:30,2025-05-05,ED,FAC-03,Synthetic Community Hospital West,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-07,Home,0,1854.82
+SYN-E-000727,SYN-P-00067,2025-05-05,20:15,2025-05-09,Inpatient,FAC-02,Synthetic Community Hospital East,Nephrology,N17.9,"Acute kidney failure, unspecified",Provider SYN-08,Home with Services,4,17897.39
+SYN-E-000728,SYN-P-00055,2025-05-06,10:45,2025-05-06,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-09,Home,0,695.58
+SYN-E-000729,SYN-P-00091,2025-05-07,01:00,2025-05-09,Inpatient,FAC-03,Synthetic Community Hospital West,Orthopedics,S72.002A,Fracture of unspecified part of neck of left femur,Provider SYN-10,Home with Services,2,12417.66
+SYN-E-000730,SYN-P-00094,2025-05-07,10:15,2025-05-11,Inpatient,FAC-01,Synthetic Regional Medical Center,Neurology,I63.9,"Cerebral infarction, unspecified",Provider SYN-11,Home,4,18482.49
+SYN-E-000731,SYN-P-00156,2025-05-07,14:15,2025-05-07,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-12,Home,0,670.48
+SYN-E-000732,SYN-P-00126,2025-05-09,20:30,2025-05-09,ED,FAC-02,Synthetic Community Hospital East,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-13,Home,0,2717.41
+SYN-E-000733,SYN-P-00075,2025-05-10,12:45,2025-05-11,Observation,FAC-03,Synthetic Community Hospital West,Internal Medicine,R55,Syncope and collapse,Provider SYN-14,Home,1,4855.84
+SYN-E-000734,SYN-P-00128,2025-05-10,16:30,2025-05-10,Outpatient,FAC-01,Synthetic Regional Medical Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-15,Home,0,637.94
+SYN-E-000735,SYN-P-00149,2025-05-10,21:15,2025-05-10,ED,FAC-01,Synthetic Regional Medical Center,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-16,Home,0,1777.03
+SYN-E-000736,SYN-P-00192,2025-05-11,02:00,2025-05-11,Observation,FAC-01,Synthetic Regional Medical Center,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-17,Home,0,3158.21
+SYN-E-000737,SYN-P-00017,2025-05-11,03:45,2025-05-11,ED,FAC-02,Synthetic Community Hospital East,Emergency,R51.9,"Headache, unspecified",Provider SYN-18,Home,0,3057.98
+SYN-E-000738,SYN-P-00042,2025-05-12,10:00,2025-05-19,Inpatient,FAC-03,Synthetic Community Hospital West,Cardiology,I48.91,Unspecified atrial fibrillation,Provider SYN-19,Home,7,25707.87
+SYN-E-000739,SYN-P-00163,2025-05-14,05:45,2025-05-14,ED,FAC-01,Synthetic Regional Medical Center,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-20,Home,0,3794.64
+SYN-E-000740,SYN-P-00052,2025-05-14,23:30,2025-05-14,Outpatient,FAC-04,Synthetic Outpatient Center,Cardiology,I10,Essential (primary) hypertension,Provider SYN-21,Home,0,798.20
+SYN-E-000741,SYN-P-00136,2025-05-17,04:30,2025-05-17,Outpatient,FAC-01,Synthetic Regional Medical Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-22,Home,0,564.33
+SYN-E-000742,SYN-P-00063,2025-05-17,13:45,2025-05-17,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-23,Home,0,155.74
+SYN-E-000743,SYN-P-00109,2025-05-20,01:45,2025-05-22,Inpatient,FAC-02,Synthetic Community Hospital East,Orthopedics,S72.002A,Fracture of unspecified part of neck of left femur,Provider SYN-24,Skilled Nursing Facility,2,12375.01
+SYN-E-000744,SYN-P-00154,2025-05-20,04:30,2025-05-20,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-25,Home,0,208.07
+SYN-E-000745,SYN-P-00197,2025-05-20,21:15,2025-05-20,ED,FAC-03,Synthetic Community Hospital West,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-26,Home,0,1820.50
+SYN-E-000746,SYN-P-00188,2025-05-21,03:15,2025-05-21,Observation,FAC-03,Synthetic Community Hospital West,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-27,Home,0,2450.71
+SYN-E-000747,SYN-P-00057,2025-05-21,06:30,2025-05-21,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-28,Home,0,194.55
+SYN-E-000748,SYN-P-00132,2025-05-21,08:15,2025-05-21,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-29,Home,0,453.53
+SYN-E-000749,SYN-P-00111,2025-05-21,12:30,2025-05-21,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-30,Home,0,
+SYN-E-000750,SYN-P-00064,2025-05-21,20:30,2025-05-24,Inpatient,FAC-02,Synthetic Community Hospital East,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-31,Home,3,13691.15
+SYN-E-000751,SYN-P-00004,2025-05-22,06:00,2025-05-24,Inpatient,FAC-02,Synthetic Community Hospital East,Cardiology,I50.9,"Heart failure, unspecified",Provider SYN-32,Home,2,12863.89
+SYN-E-000752,SYN-P-00122,2025-05-22,10:00,2025-05-24,Inpatient,FAC-03,Synthetic Community Hospital West,Cardiology,I50.9,"Heart failure, unspecified",Provider SYN-33,Skilled Nursing Facility,2,12583.50
+SYN-E-000753,SYN-P-00144,2025-05-22,18:30,2025-05-22,Outpatient,FAC-04,Synthetic Outpatient Center,Cardiology,I10,Essential (primary) hypertension,Provider SYN-34,Home,0,467.65
+SYN-E-000754,SYN-P-00019,2025-05-23,14:15,2025-05-23,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-35,Home,0,371.95
+SYN-E-000755,SYN-P-00055,2025-05-24,03:00,2025-05-31,Inpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-36,Home with Services,7,25979.86
+SYN-E-000756,SYN-P-00028,2025-05-25,05:00,2025-05-25,Outpatient,FAC-04,Synthetic Outpatient Center,Cardiology,I10,Essential (primary) hypertension,Provider SYN-37,Home,0,439.34
+SYN-E-000757,SYN-P-00023,2025-05-25,05:15,2025-05-25,Outpatient,FAC-02,Synthetic Community Hospital East,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-38,Home,0,321.29
+SYN-E-000758,SYN-P-00147,2025-05-25,16:00,2025-05-27,Inpatient,FAC-01,Synthetic Regional Medical Center,Cardiology,I50.9,"Heart failure, unspecified",Provider SYN-39,Home,3,11156.03
+SYN-E-000759,SYN-P-00164,2025-05-27,06:00,2025-05-27,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-40,Home,0,886.38
+SYN-E-000760,SYN-P-00193,2025-05-27,06:30,2025-05-27,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-41,Home,0,211.85
+SYN-E-000761,SYN-P-00027,2025-05-27,11:00,2025-05-27,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,I10,Essential (primary) hypertension,Provider SYN-42,Home,0,746.71
+SYN-E-000762,SYN-P-00059,2025-05-27,20:00,2025-05-27,ED,FAC-01,Synthetic Regional Medical Center,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-43,Home,0,3346.10
+SYN-E-000763,SYN-P-00021,2025-05-28,07:15,2025-06-01,Inpatient,FAC-01,Synthetic Regional Medical Center,Neurology,I63.9,"Cerebral infarction, unspecified",Provider SYN-44,Home,4,16636.01
+SYN-E-000764,SYN-P-00113,2025-05-28,22:00,2025-05-28,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-45,Home,0,851.80
+SYN-E-000765,SYN-P-00077,2025-05-29,07:30,2025-05-29,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,I10,Essential (primary) hypertension,Provider SYN-46,Home,0,403.64
+SYN-E-000766,SYN-P-00024,2025-05-29,16:15,2025-06-04,Inpatient,FAC-03,Synthetic Community Hospital West,Neurology,I63.9,"Cerebral infarction, unspecified",Provider SYN-47,Skilled Nursing Facility,6,21871.60
+SYN-E-000767,SYN-P-00041,2025-05-30,09:30,2025-05-30,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-48,Home,0,2753.09
+SYN-E-000768,SYN-P-00011,2025-05-31,00:15,2025-05-31,Outpatient,FAC-02,Synthetic Community Hospital East,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-49,Home,0,301.75
+SYN-E-000769,SYN-P-00109,2025-05-31,14:30,2025-06-06,Inpatient,FAC-02,Synthetic Community Hospital East,Nephrology,N17.9,"Acute kidney failure, unspecified",Provider SYN-50,Home,6,22368.03
+SYN-E-000770,SYN-P-00190,2025-05-31,22:30,2025-05-31,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-51,Home,0,774.37
+SYN-E-000771,SYN-P-00176,2025-06-02,21:00,2025-06-02,ED,FAC-01,Synthetic Regional Medical Center,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-52,Home,0,2511.09
+SYN-E-000772,SYN-P-00047,2025-06-03,11:30,2025-06-03,Outpatient,FAC-01,Synthetic Regional Medical Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-53,Home,0,335.07
+SYN-E-000773,SYN-P-00135,2025-06-03,18:30,2025-06-03,ED,FAC-02,Synthetic Community Hospital East,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-54,Home,0,2219.87
+SYN-E-000774,SYN-P-00100,2025-06-04,20:15,2025-06-04,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-55,Home,0,603.08
+SYN-E-000775,SYN-P-00148,2025-06-05,19:30,2025-06-09,Inpatient,FAC-02,Synthetic Community Hospital East,Neurology,I63.9,"Cerebral infarction, unspecified",Provider SYN-56,Transferred,4,16406.89
+SYN-E-000776,SYN-P-00163,2025-06-07,03:15,2025-06-11,Inpatient,FAC-01,Synthetic Regional Medical Center,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-57,Transferred,4,16835.20
+SYN-E-000777,SYN-P-00067,2025-06-07,09:00,2025-06-10,Inpatient,FAC-01,Synthetic Regional Medical Center,Neurology,I63.9,"Cerebral infarction, unspecified",Provider SYN-58,Skilled Nursing Facility,3,16315.32
+SYN-E-000778,SYN-P-00189,2025-06-07,12:15,2025-06-07,ED,FAC-01,Synthetic Regional Medical Center,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-59,Transferred,0,3182.21
+SYN-E-000779,SYN-P-00182,2025-06-07,18:30,2025-06-07,ED,FAC-03,Synthetic Community Hospital West,Emergency,R51.9,"Headache, unspecified",Provider SYN-60,Left Before Completion,0,1346.70
+SYN-E-000780,SYN-P-00037,2025-06-08,12:15,2025-06-09,Observation,FAC-01,Synthetic Regional Medical Center,Internal Medicine,R55,Syncope and collapse,Provider SYN-01,Home with Services,1,4906.88
+SYN-E-000781,SYN-P-00129,2025-06-08,17:15,2025-06-08,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,I10,Essential (primary) hypertension,Provider SYN-02,Home,0,401.88
+SYN-E-000782,SYN-P-00068,2025-06-08,21:30,2025-06-08,Observation,FAC-02,Synthetic Community Hospital East,Internal Medicine,R55,Syncope and collapse,Provider SYN-03,Home,0,2055.83
+SYN-E-000783,SYN-P-00049,2025-06-09,00:45,2025-06-09,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-04,Home,0,675.40
+SYN-E-000784,SYN-P-00025,2025-06-09,02:45,2025-06-09,Outpatient,FAC-03,Synthetic Community Hospital West,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-05,Home,0,165.35
+SYN-E-000785,SYN-P-00165,2025-06-09,06:00,2025-06-13,Inpatient,FAC-02,Synthetic Community Hospital East,Cardiology,I50.9,"Heart failure, unspecified",Provider SYN-06,Home with Services,4,18851.24
+SYN-E-000786,SYN-P-00087,2025-06-09,06:45,2025-06-09,Outpatient,FAC-05,Synthetic Specialty Clinic,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-07,Home,0,525.12
+SYN-E-000787,SYN-P-00046,2025-06-09,07:45,2025-06-09,Outpatient,FAC-03,Synthetic Community Hospital West,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-08,Home,0,385.56
+SYN-E-000788,SYN-P-00019,2025-06-12,01:15,2025-06-12,ED,FAC-03,Synthetic Community Hospital West,Emergency,R51.9,"Headache, unspecified",Provider SYN-09,Transferred,0,1767.91
+SYN-E-000789,SYN-P-00164,2025-06-12,07:00,2025-06-12,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-10,Home,0,412.19
+SYN-E-000790,SYN-P-00118,2025-06-12,17:30,2025-06-12,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-11,Home,0,304.21
+SYN-E-000791,SYN-P-00043,2025-06-14,00:45,2025-06-16,Inpatient,FAC-03,Synthetic Community Hospital West,Cardiology,I48.91,Unspecified atrial fibrillation,Provider SYN-12,Home,2,13328.44
+SYN-E-000792,SYN-P-00057,2025-06-14,20:00,2025-06-14,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-13,Home,0,642.15
+SYN-E-000793,SYN-P-00112,2025-06-15,14:15,2025-06-15,Outpatient,FAC-03,Synthetic Community Hospital West,Cardiology,I10,Essential (primary) hypertension,Provider SYN-14,Home,0,320.90
+SYN-E-000794,SYN-P-00076,2025-06-17,03:45,2025-06-17,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-15,Home,0,276.02
+SYN-E-000795,SYN-P-00022,2025-06-17,07:15,2025-06-17,Outpatient,FAC-04,Synthetic Outpatient Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-16,Home,0,793.03
+SYN-E-000796,SYN-P-00102,2025-06-17,07:15,2025-06-17,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-17,Home,0,788.45
+SYN-E-000797,SYN-P-00063,2025-06-18,01:15,2025-06-18,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-18,Home,0,627.63
+SYN-E-000798,SYN-P-00191,2025-06-18,21:45,2025-06-18,Outpatient,FAC-02,Synthetic Community Hospital East,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-19,Home,0,199.60
+SYN-E-000799,SYN-P-00178,2025-06-20,11:30,2025-06-20,ED,FAC-03,Synthetic Community Hospital West,Emergency,R51.9,"Headache, unspecified",Provider SYN-20,Home,0,3036.60
+SYN-E-000800,SYN-P-00128,2025-06-20,17:00,2025-06-20,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-21,Home,0,654.39
+SYN-E-000801,SYN-P-00070,2025-06-21,16:00,2025-06-21,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-22,Home,0,619.45
+SYN-E-000802,SYN-P-00152,2025-06-22,01:30,2025-06-22,ED,FAC-03,Synthetic Community Hospital West,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-23,Home,0,3853.82
+SYN-E-000803,SYN-P-00121,2025-06-22,07:15,2025-06-22,Outpatient,FAC-05,Synthetic Specialty Clinic,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-24,Home,0,213.55
+SYN-E-000804,SYN-P-00044,2025-06-22,15:45,2025-06-22,ED,FAC-03,Synthetic Community Hospital West,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-25,Home,0,1899.61
+SYN-E-000805,SYN-P-00098,2025-06-22,19:30,2025-06-22,Outpatient,FAC-04,Synthetic Outpatient Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-26,Home,0,858.90
+SYN-E-000806,SYN-P-00138,2025-06-23,04:45,2025-06-23,ED,FAC-02,Synthetic Community Hospital East,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-27,Home,0,2426.17
+SYN-E-000807,SYN-P-00033,2025-06-23,08:00,2025-06-23,Observation,FAC-01,Synthetic Regional Medical Center,Internal Medicine,R55,Syncope and collapse,Provider SYN-28,Home,0,2062.91
+SYN-E-000808,SYN-P-00103,2025-06-23,22:15,2025-06-23,Outpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-29,Home,0,626.28
+SYN-E-000809,SYN-P-00104,2025-06-24,00:45,2025-06-24,Outpatient,FAC-05,Synthetic Specialty Clinic,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-30,Home,0,409.83
+SYN-E-000810,SYN-P-00078,2025-06-24,04:45,2025-06-24,ED,FAC-03,Synthetic Community Hospital West,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-31,Home,0,2415.47
+SYN-E-000811,SYN-P-00065,2025-06-24,18:15,2025-06-24,ED,FAC-03,Synthetic Community Hospital West,Emergency,R51.9,"Headache, unspecified",Provider SYN-32,Home,0,910.48
+SYN-E-000812,SYN-P-00060,2025-06-24,18:45,2025-06-24,ED,FAC-02,Synthetic Community Hospital East,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-33,Home,0,3977.57
+SYN-E-000813,SYN-P-00180,2025-06-24,23:15,2025-06-24,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-34,Home,0,3426.24
+SYN-E-000814,SYN-P-00094,2025-06-25,21:00,2025-06-25,Outpatient,FAC-01,Synthetic Regional Medical Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-35,Home,0,179.09
+SYN-E-000815,SYN-P-00099,2025-06-27,06:15,2025-06-30,Inpatient,FAC-03,Synthetic Community Hospital West,Cardiology,I48.91,Unspecified atrial fibrillation,Provider SYN-36,Home,3,14980.93
+SYN-E-000816,SYN-P-00064,2025-06-28,06:30,2025-07-01,Inpatient,FAC-03,Synthetic Community Hospital West,Pulmonology,J18.9,"Pneumonia, unspecified organism",Provider SYN-37,Home,3,15099.49
+SYN-E-000817,SYN-P-00093,2025-06-28,16:15,2025-06-28,ED,FAC-01,Synthetic Regional Medical Center,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-38,Home,0,2373.78
+SYN-E-000818,SYN-P-00188,2025-06-30,13:15,2025-06-30,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-39,Home,0,595.33
+SYN-E-000819,SYN-P-00030,2025-06-30,16:15,2025-06-30,Outpatient,FAC-02,Synthetic Community Hospital East,Cardiology,I10,Essential (primary) hypertension,Provider SYN-40,Home,0,162.43
+SYN-E-000820,SYN-P-00043,2025-06-30,18:45,2025-06-30,Outpatient,FAC-03,Synthetic Community Hospital West,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-41,Home,0,530.93
+SYN-E-000821,SYN-P-00009,2025-07-01,04:30,2025-07-04,Inpatient,FAC-03,Synthetic Community Hospital West,Orthopedics,S72.002A,Fracture of unspecified part of neck of left femur,Provider SYN-42,Home with Services,3,15581.71
+SYN-E-000822,SYN-P-00001,2025-07-01,09:30,2025-07-01,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,I10,Essential (primary) hypertension,Provider SYN-43,Home,0,371.10
+SYN-E-000823,SYN-P-00105,2025-07-02,07:45,2025-07-02,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-44,Home,0,560.96
+SYN-E-000824,SYN-P-00061,2025-07-03,12:45,2025-07-03,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-45,Home,0,715.25
+SYN-E-000825,SYN-P-00057,2025-07-03,23:00,2025-07-10,Inpatient,FAC-01,Synthetic Regional Medical Center,Cardiology,I48.91,Unspecified atrial fibrillation,Provider SYN-46,Transferred,7,24051.42
+SYN-E-000826,SYN-P-00089,2025-07-05,07:30,2025-07-11,Inpatient,FAC-03,Synthetic Community Hospital West,Cardiology,I50.9,"Heart failure, unspecified",Provider SYN-47,Home,6,23835.08
+SYN-E-000827,SYN-P-00011,2025-07-06,07:45,2025-07-06,ED,FAC-02,Synthetic Community Hospital East,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-48,Home,0,1895.59
+SYN-E-000828,SYN-P-00173,2025-07-07,11:15,2025-07-07,Outpatient,FAC-02,Synthetic Community Hospital East,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-49,Home,0,633.94
+SYN-E-000829,SYN-P-00056,2025-07-09,02:45,2025-07-14,Inpatient,FAC-03,Synthetic Community Hospital West,Orthopedics,S72.002A,Fracture of unspecified part of neck of left femur,Provider SYN-50,Home,5,20614.54
+SYN-E-000830,SYN-P-00158,2025-07-09,17:00,2025-07-09,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-51,Home,0,492.03
+SYN-E-000831,SYN-P-00015,2025-07-10,23:45,2025-07-10,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R51.9,"Headache, unspecified",Provider SYN-52,Home,0,3387.48
+SYN-E-000832,SYN-P-00041,2025-07-11,14:45,2025-07-11,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-53,Home,0,418.24
+SYN-E-000833,SYN-P-00154,2025-07-11,16:45,2025-07-11,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-54,Home,0,302.97
+SYN-E-000834,SYN-P-00108,2025-07-12,07:30,2025-07-12,Outpatient,FAC-02,Synthetic Community Hospital East,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-55,Home,0,394.68
+SYN-E-000835,SYN-P-00109,2025-07-12,11:30,2025-07-15,Inpatient,FAC-02,Synthetic Community Hospital East,Cardiology,I48.91,Unspecified atrial fibrillation,Provider SYN-56,Home,3,13882.92
+SYN-E-000836,SYN-P-00032,2025-07-13,09:45,2025-07-13,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-57,Home,0,3293.16
+SYN-E-000837,SYN-P-00149,2025-07-13,11:15,2025-07-13,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-58,Home,0,349.43
+SYN-E-000838,SYN-P-00031,2025-07-13,13:15,2025-07-13,ED,FAC-03,Synthetic Community Hospital West,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-59,Transferred,0,3758.11
+SYN-E-000839,SYN-P-00093,2025-07-13,14:00,2025-07-14,Observation,FAC-01,Synthetic Regional Medical Center,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-60,Home,1,2071.59
+SYN-E-000840,SYN-P-00122,2025-07-13,15:30,2025-07-13,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-01,Home,0,420.25
+SYN-E-000841,SYN-P-00062,2025-07-14,09:45,2025-07-14,ED,FAC-02,Synthetic Community Hospital East,Emergency,R51.9,"Headache, unspecified",Provider SYN-02,Home,0,1150.72
+SYN-E-000842,SYN-P-00023,2025-07-15,20:30,2025-07-15,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-03,Home,0,150.86
+SYN-E-000843,SYN-P-00184,2025-07-17,05:15,2025-07-17,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-04,Home,0,500.72
+SYN-E-000844,SYN-P-00106,2025-07-18,18:15,2025-07-18,Outpatient,FAC-01,Synthetic Regional Medical Center,Primary Care,I10,Essential (primary) hypertension,Provider SYN-05,Home,0,485.64
+SYN-E-000845,SYN-P-00111,2025-07-18,22:00,2025-07-18,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-06,Home,0,340.23
+SYN-E-000846,SYN-P-00051,2025-07-19,18:00,2025-07-19,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-07,Home,0,749.16
+SYN-E-000847,SYN-P-00162,2025-07-19,22:45,2025-07-19,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-08,Home,0,730.41
+SYN-E-000848,SYN-P-00013,2025-07-21,08:00,2025-07-21,ED,FAC-02,Synthetic Community Hospital East,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-09,Transferred,0,3861.72
+SYN-E-000849,SYN-P-00135,2025-07-25,05:45,2025-07-25,Observation,FAC-02,Synthetic Community Hospital East,Internal Medicine,R55,Syncope and collapse,Provider SYN-10,Home,0,4357.68
+SYN-E-000850,SYN-P-00035,2025-07-25,13:15,2025-07-25,Outpatient,FAC-02,Synthetic Community Hospital East,Primary Care,I10,Essential (primary) hypertension,Provider SYN-11,Home,0,713.81
+SYN-E-000851,SYN-P-00037,2025-07-26,02:15,2025-07-26,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-12,Home,0,894.46
+SYN-E-000852,SYN-P-00061,2025-07-27,13:15,2025-07-30,Inpatient,FAC-01,Synthetic Regional Medical Center,Neurology,I63.9,"Cerebral infarction, unspecified",Provider SYN-13,Home with Services,3,13537.78
+SYN-E-000853,SYN-P-00089,2025-07-27,20:00,2025-07-28,Inpatient,FAC-03,Synthetic Community Hospital West,Nephrology,N17.9,"Acute kidney failure, unspecified",Provider SYN-14,Skilled Nursing Facility,1,10298.88
+SYN-E-000854,SYN-P-00177,2025-07-29,06:15,2025-07-29,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-15,Home,0,804.91
+SYN-E-000855,SYN-P-00076,2025-07-29,10:00,2025-07-29,Outpatient,FAC-01,Synthetic Regional Medical Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-16,Home,0,392.10
+SYN-E-000856,SYN-P-00154,2025-07-30,19:45,2025-07-30,ED,FAC-02,Synthetic Community Hospital East,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-17,Home,0,2292.69
+SYN-E-000857,SYN-P-00132,2025-07-30,20:30,2025-08-11,Inpatient,FAC-02,Synthetic Community Hospital East,Orthopedics,S72.002A,Fracture of unspecified part of neck of left femur,Provider SYN-18,Home with Services,12,38232.45
+SYN-E-000858,SYN-P-00182,2025-07-31,17:30,2025-07-31,Outpatient,FAC-03,Synthetic Community Hospital West,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-19,Home,0,197.67
+SYN-E-000859,SYN-P-00014,2025-08-02,16:15,2025-08-02,ED,FAC-02,Synthetic Community Hospital East,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-20,Home,0,3089.75
+SYN-E-000860,SYN-P-00095,2025-08-03,03:45,2025-08-03,Outpatient,FAC-03,Synthetic Community Hospital West,Primary Care,I10,Essential (primary) hypertension,Provider SYN-21,Home,0,613.55
+SYN-E-000861,SYN-P-00119,2025-08-03,07:15,2025-08-04,Inpatient,FAC-01,Synthetic Regional Medical Center,Orthopedics,S72.002A,Fracture of unspecified part of neck of left femur,Provider SYN-22,Home with Services,1,9626.87
+SYN-E-000862,SYN-P-00040,2025-08-04,01:45,2025-08-04,Outpatient,FAC-05,Synthetic Specialty Clinic,Cardiology,I10,Essential (primary) hypertension,Provider SYN-23,Home,0,581.41
+SYN-E-000863,SYN-P-00138,2025-08-04,04:30,2025-08-04,ED,FAC-02,Synthetic Community Hospital East,Emergency,R51.9,"Headache, unspecified",Provider SYN-24,Home,0,3430.71
+SYN-E-000864,SYN-P-00124,2025-08-04,10:30,2025-08-05,Observation,FAC-03,Synthetic Community Hospital West,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-25,Home,1,2453.79
+SYN-E-000865,SYN-P-00173,2025-08-04,15:00,2025-08-08,Inpatient,FAC-02,Synthetic Community Hospital East,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-26,Home,4,18635.78
+SYN-E-000866,SYN-P-00072,2025-08-04,17:30,2025-08-11,Inpatient,FAC-03,Synthetic Community Hospital West,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-27,Home,7,26392.27
+SYN-E-000867,SYN-P-00194,2025-08-05,11:30,2025-08-05,ED,FAC-02,Synthetic Community Hospital East,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-28,Home,0,889.02
+SYN-E-000868,SYN-P-00017,2025-08-06,04:00,2025-08-06,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-29,Home,0,723.71
+SYN-E-000869,SYN-P-00147,2025-08-08,01:45,2025-08-11,Inpatient,FAC-01,Synthetic Regional Medical Center,Cardiology,I48.91,Unspecified atrial fibrillation,Provider SYN-30,Skilled Nursing Facility,3,13859.61
+SYN-E-000870,SYN-P-00143,2025-08-08,08:00,2025-08-11,Inpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J18.9,"Pneumonia, unspecified organism",Provider SYN-31,Home with Services,3,14717.54
+SYN-E-000871,SYN-P-00054,2025-08-08,20:45,2025-08-12,Inpatient,FAC-01,Synthetic Regional Medical Center,Nephrology,N17.9,"Acute kidney failure, unspecified",Provider SYN-32,Home with Services,4,17524.46
+SYN-E-000872,SYN-P-00187,2025-08-09,06:15,2025-08-09,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-33,Home,0,598.76
+SYN-E-000873,SYN-P-00013,2025-08-09,08:15,2025-08-09,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-34,Home,0,396.88
+SYN-E-000874,SYN-P-00186,2025-08-10,16:15,2025-08-10,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-35,Home,0,630.28
+SYN-E-000875,SYN-P-00130,2025-08-11,03:15,2025-08-11,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-36,Home,0,807.70
+SYN-E-000876,SYN-P-00173,2025-08-11,20:15,2025-08-16,Inpatient,FAC-02,Synthetic Community Hospital East,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-37,Skilled Nursing Facility,5,20160.50
+SYN-E-000877,SYN-P-00059,2025-08-12,01:45,2025-08-12,ED,FAC-01,Synthetic Regional Medical Center,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-38,Home,0,3131.87
+SYN-E-000878,SYN-P-00175,2025-08-12,13:15,2025-08-12,ED,FAC-03,Synthetic Community Hospital West,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-39,Home,0,1430.91
+SYN-E-000879,SYN-P-00039,2025-08-14,02:45,2025-08-14,ED,FAC-02,Synthetic Community Hospital East,Emergency,R51.9,"Headache, unspecified",Provider SYN-40,Home,0,1351.64
+SYN-E-000880,SYN-P-00071,2025-08-15,01:15,2025-08-15,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-41,Home,0,525.02
+SYN-E-000881,SYN-P-00126,2025-08-16,07:45,2025-08-16,ED,FAC-02,Synthetic Community Hospital East,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-42,Home,0,3172.75
+SYN-E-000882,SYN-P-00069,2025-08-17,02:45,2025-08-21,Inpatient,FAC-02,Synthetic Community Hospital East,Pulmonology,J18.9,"Pneumonia, unspecified organism",Provider SYN-43,Skilled Nursing Facility,4,16513.08
+SYN-E-000883,SYN-P-00112,2025-08-17,09:30,2025-08-24,Inpatient,FAC-03,Synthetic Community Hospital West,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-44,Home,7,25559.75
+SYN-E-000884,SYN-P-00099,2025-08-18,06:15,2025-08-21,Inpatient,FAC-03,Synthetic Community Hospital West,Cardiology,I48.91,Unspecified atrial fibrillation,Provider SYN-45,Home,3,15188.30
+SYN-E-000885,SYN-P-00052,2025-08-18,20:00,2025-08-18,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-46,Home,0,584.71
+SYN-E-000886,SYN-P-00171,2025-08-19,09:00,2025-08-21,Inpatient,FAC-02,Synthetic Community Hospital East,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-47,Skilled Nursing Facility,2,12817.48
+SYN-E-000887,SYN-P-00025,2025-08-19,09:15,2025-08-19,ED,FAC-03,Synthetic Community Hospital West,Emergency,R51.9,"Headache, unspecified",Provider SYN-48,Transferred,0,1335.97
+SYN-E-000888,SYN-P-00157,2025-08-19,16:45,2025-08-19,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-49,Home,0,782.82
+SYN-E-000889,SYN-P-00200,2025-08-19,18:00,2025-08-19,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-50,Home,0,502.68
+SYN-E-000890,SYN-P-00138,2025-08-19,21:30,2025-08-19,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-51,Home,0,153.36
+SYN-E-000891,SYN-P-00088,2025-08-20,02:15,2025-08-20,Outpatient,FAC-02,Synthetic Community Hospital East,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-52,Home,0,494.99
+SYN-E-000892,SYN-P-00090,2025-08-20,22:15,2025-08-21,Observation,FAC-01,Synthetic Regional Medical Center,Internal Medicine,R55,Syncope and collapse,Provider SYN-53,Home,1,2000.85
+SYN-E-000893,SYN-P-00101,2025-08-21,12:00,2025-08-25,Inpatient,FAC-01,Synthetic Regional Medical Center,Orthopedics,S72.002A,Fracture of unspecified part of neck of left femur,Provider SYN-54,Home with Services,4,17125.15
+SYN-E-000894,SYN-P-00192,2025-08-22,07:00,2025-08-22,Observation,FAC-01,Synthetic Regional Medical Center,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-55,Home,0,3891.85
+SYN-E-000895,SYN-P-00012,2025-08-22,11:15,2025-08-22,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-56,Home,0,757.62
+SYN-E-000896,SYN-P-00005,2025-08-22,17:30,2025-08-25,Inpatient,FAC-02,Synthetic Community Hospital East,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-57,Home with Services,3,15885.95
+SYN-E-000897,SYN-P-00103,2025-08-23,04:30,2025-08-23,Observation,FAC-01,Synthetic Regional Medical Center,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-58,Home,0,2392.02
+SYN-E-000898,SYN-P-00162,2025-08-24,09:15,2025-08-24,Outpatient,FAC-02,Synthetic Community Hospital East,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-59,Home,0,361.68
+SYN-E-000899,SYN-P-00094,2025-08-24,10:00,2025-08-24,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-60,Home,0,765.25
+SYN-E-000900,SYN-P-00006,2025-08-25,05:00,2025-08-25,ED,FAC-03,Synthetic Community Hospital West,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-01,Transferred,0,3557.75
+SYN-E-000901,SYN-P-00107,2025-08-25,19:30,2025-08-31,Inpatient,FAC-01,Synthetic Regional Medical Center,Internal Medicine,J18.9,"Pneumonia, unspecified organism",Provider SYN-02,Transferred,6,22299.11
+SYN-E-000902,SYN-P-00113,2025-08-26,17:00,2025-08-26,ED,FAC-02,Synthetic Community Hospital East,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-03,Home,0,1972.75
+SYN-E-000903,SYN-P-00175,2025-08-27,01:00,2025-08-27,ED,FAC-03,Synthetic Community Hospital West,Emergency,R51.9,"Headache, unspecified",Provider SYN-04,Home,0,2076.46
+SYN-E-000904,SYN-P-00067,2025-06-09,04:45,2025-06-09,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R51.9,"Headache, unspecified",Provider SYN-05,Home,0,2276.27
+SYN-E-000905,SYN-P-00129,2025-08-27,20:30,2025-08-30,Inpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-06,Home,3,13786.86
+SYN-E-000906,SYN-P-00131,2025-08-27,22:00,2025-08-28,Observation,FAC-01,Synthetic Regional Medical Center,Internal Medicine,R55,Syncope and collapse,Provider SYN-07,Home,1,2648.89
+SYN-E-000907,SYN-P-00177,2025-08-28,04:45,2025-08-28,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-08,Home,0,460.56
+SYN-E-000908,SYN-P-00132,2025-08-28,11:30,2025-09-03,Inpatient,FAC-02,Synthetic Community Hospital East,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-09,Home,6,22399.23
+SYN-E-000909,SYN-P-00143,2025-09-02,00:00,2025-09-09,Inpatient,FAC-01,Synthetic Regional Medical Center,Internal Medicine,J18.9,"Pneumonia, unspecified organism",Provider SYN-10,Home with Services,7,26035.06
+SYN-E-000910,SYN-P-00152,2025-09-02,11:00,2025-09-02,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-11,Home,0,229.74
+SYN-E-000911,SYN-P-00148,2025-09-03,11:45,2025-09-03,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-12,Home,0,459.48
+SYN-E-000912,SYN-P-00057,2025-09-05,12:30,2025-09-05,Outpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-13,Home,0,308.90
+SYN-E-000913,SYN-P-00163,2025-09-09,00:30,2025-09-09,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-14,Home,0,477.85
+SYN-E-000914,SYN-P-00129,2025-09-09,09:45,2025-09-11,Inpatient,FAC-01,Synthetic Regional Medical Center,Cardiology,I50.9,"Heart failure, unspecified",Provider SYN-15,Home with Services,2,13365.21
+SYN-E-000915,SYN-P-00191,2025-09-09,10:30,2025-09-09,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-16,Home,0,380.42
+SYN-E-000916,SYN-P-00104,2025-09-11,08:15,2025-09-11,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-17,Home,0,282.30
+SYN-E-000917,SYN-P-00190,2025-09-12,08:30,2025-09-18,Inpatient,FAC-02,Synthetic Community Hospital East,Cardiology,I50.9,"Heart failure, unspecified",Provider SYN-18,Home,6,23392.28
+SYN-E-000918,SYN-P-00103,2025-09-14,04:30,2025-09-14,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-19,Home,0,728.98
+SYN-E-000919,SYN-P-00015,2025-09-16,05:00,2025-09-16,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-20,Home,0,842.87
+SYN-E-000920,SYN-P-00037,2025-09-18,17:00,2025-09-21,Inpatient,FAC-01,Synthetic Regional Medical Center,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-21,Home,3,16416.71
+SYN-E-000921,SYN-P-00061,2025-09-18,17:45,2025-09-18,ED,FAC-01,Synthetic Regional Medical Center,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-22,Home,0,3924.19
+SYN-E-000922,SYN-P-00085,2025-09-19,12:45,2025-09-20,Observation,FAC-02,Synthetic Community Hospital East,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-23,Home,1,2518.41
+SYN-E-000923,SYN-P-00157,2025-09-20,06:15,2025-09-26,Inpatient,FAC-03,Synthetic Community Hospital West,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-24,Transferred,6,21605.59
+SYN-E-000924,SYN-P-00051,2025-09-20,13:00,2025-09-20,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-25,Home,0,713.57
+SYN-E-000925,SYN-P-00171,2025-09-22,13:00,2025-09-22,Observation,FAC-02,Synthetic Community Hospital East,Internal Medicine,R55,Syncope and collapse,Provider SYN-26,Home,0,3302.25
+SYN-E-000926,SYN-P-00036,2025-09-22,19:15,2025-09-22,Observation,FAC-02,Synthetic Community Hospital East,Internal Medicine,R55,Syncope and collapse,Provider SYN-27,Home with Services,0,3911.41
+SYN-E-000927,SYN-P-00077,2025-09-24,11:45,2025-09-24,ED,FAC-03,Synthetic Community Hospital West,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-28,Transferred,0,2497.98
+SYN-E-000928,SYN-P-00109,2025-09-24,13:30,2025-09-24,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-29,Home,0,509.72
+SYN-E-000929,SYN-P-00031,2025-09-25,14:45,2025-09-25,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-30,Home,0,237.25
+SYN-E-000930,SYN-P-00028,2025-09-26,11:45,2025-09-28,Inpatient,FAC-03,Synthetic Community Hospital West,Cardiology,I50.9,"Heart failure, unspecified",Provider SYN-31,Home,2,13025.28
+SYN-E-000931,SYN-P-00002,2025-09-28,19:45,2025-09-28,ED,FAC-03,Synthetic Community Hospital West,Emergency,R51.9,"Headache, unspecified",Provider SYN-32,Home,0,3535.01
+SYN-E-000932,SYN-P-00180,2025-09-29,14:00,2025-09-29,Outpatient,FAC-01,Synthetic Regional Medical Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-33,Home,0,724.53
+SYN-E-000933,SYN-P-00144,2025-09-29,22:30,2025-09-30,Inpatient,FAC-03,Synthetic Community Hospital West,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-34,Skilled Nursing Facility,1,9423.83
+SYN-E-000934,SYN-P-00174,2025-09-30,09:45,2025-09-30,Outpatient,FAC-04,Synthetic Outpatient Center,Cardiology,I10,Essential (primary) hypertension,Provider SYN-35,Home,0,807.00
+SYN-E-000935,SYN-P-00186,2025-10-01,08:15,2025-10-01,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R51.9,"Headache, unspecified",Provider SYN-36,Home,0,971.34
+SYN-E-000936,SYN-P-00135,2025-10-01,12:45,2025-10-01,Outpatient,FAC-05,Synthetic Specialty Clinic,Cardiology,I10,Essential (primary) hypertension,Provider SYN-37,Home,0,285.48
+SYN-E-000937,SYN-P-00024,2025-10-02,03:15,2025-10-02,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-38,Home,0,773.13
+SYN-E-000938,SYN-P-00107,2025-10-02,12:45,2025-10-02,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R51.9,"Headache, unspecified",Provider SYN-39,Transferred,0,2243.71
+SYN-E-000939,SYN-P-00163,2025-10-02,19:00,2025-10-02,Outpatient,FAC-04,Synthetic Outpatient Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-40,Home,0,377.93
+SYN-E-000940,SYN-P-00112,2025-10-03,02:15,2025-10-03,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-41,Home,0,319.08
+SYN-E-000941,SYN-P-00136,2025-10-03,02:30,2025-10-03,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-42,Home,0,2554.51
+SYN-E-000942,SYN-P-00108,2025-10-03,22:00,2025-10-04,Inpatient,FAC-02,Synthetic Community Hospital East,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-43,Skilled Nursing Facility,1,11278.44
+SYN-E-000943,SYN-P-00041,2025-10-06,12:30,2025-10-06,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-44,Home,0,584.07
+SYN-E-000944,SYN-P-00072,2025-10-07,07:45,2025-10-07,Outpatient,FAC-03,Synthetic Community Hospital West,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-45,Home,0,437.22
+SYN-E-000945,SYN-P-00049,2025-10-07,09:15,2025-10-07,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-46,Home,0,416.63
+SYN-E-000946,SYN-P-00151,2025-10-08,16:15,2025-10-08,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-47,Home,0,281.41
+SYN-E-000947,SYN-P-00144,2025-10-11,03:30,2025-10-16,Inpatient,FAC-03,Synthetic Community Hospital West,Orthopedics,S72.002A,Fracture of unspecified part of neck of left femur,Provider SYN-48,Home,5,18939.00
+SYN-E-000948,SYN-P-00039,2025-10-11,19:00,2025-10-11,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-49,Home,0,780.37
+SYN-E-000949,SYN-P-00121,2025-10-13,13:15,2025-10-16,Inpatient,FAC-02,Synthetic Community Hospital East,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-50,Home,3,16224.50
+SYN-E-000950,SYN-P-00200,2025-10-18,07:00,2025-10-18,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-51,Home,0,832.21
+SYN-E-000951,SYN-P-00147,2025-10-18,15:00,2025-10-20,Inpatient,FAC-01,Synthetic Regional Medical Center,Neurology,I63.9,"Cerebral infarction, unspecified",Provider SYN-52,Home,2,13099.70
+SYN-E-000952,SYN-P-00165,2025-10-20,11:15,2025-10-23,Inpatient,FAC-01,Synthetic Regional Medical Center,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-53,Home,3,15858.53
+SYN-E-000953,SYN-P-00094,2025-10-20,16:45,2025-10-23,Inpatient,FAC-01,Synthetic Regional Medical Center,Nephrology,N17.9,"Acute kidney failure, unspecified",Provider SYN-54,Skilled Nursing Facility,3,14650.66
+SYN-E-000954,SYN-P-00100,2025-10-20,21:30,2025-10-20,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-55,Home,0,381.88
+SYN-E-000955,SYN-P-00144,2025-10-21,19:30,2025-10-24,Inpatient,FAC-03,Synthetic Community Hospital West,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-56,Home,3,16027.57
+SYN-E-000956,SYN-P-00162,2025-10-22,01:30,2025-10-28,Inpatient,FAC-02,Synthetic Community Hospital East,Nephrology,N17.9,"Acute kidney failure, unspecified",Provider SYN-57,Home,6,21755.25
+SYN-E-000957,SYN-P-00017,2025-10-23,05:45,2025-10-23,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-58,Home,0,634.30
+SYN-E-000958,SYN-P-00001,2025-10-26,02:15,2025-10-26,ED,FAC-02,Synthetic Community Hospital East,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-59,Home,0,3170.84
+SYN-E-000959,SYN-P-00102,2025-10-26,05:45,2025-10-26,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-60,Home,0,549.53
+SYN-E-000960,SYN-P-00146,2025-10-26,23:45,2025-10-26,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-01,Home,0,180.59
+SYN-E-000961,SYN-P-00057,2025-10-28,05:45,2025-10-28,ED,FAC-01,Synthetic Regional Medical Center,Emergency,S93.401A,"Sprain of unspecified ligament of ankle, initial encounter",Provider SYN-02,Home,0,3187.58
+SYN-E-000962,SYN-P-00103,2025-10-28,16:45,2025-10-28,ED,FAC-01,Synthetic Regional Medical Center,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-03,Home,0,1136.46
+SYN-E-000963,SYN-P-00054,2025-10-29,09:15,2025-10-29,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-04,Home,0,367.68
+SYN-E-000964,SYN-P-00165,2025-10-29,17:00,2025-11-02,Inpatient,FAC-01,Synthetic Regional Medical Center,Cardiology,I48.91,Unspecified atrial fibrillation,Provider SYN-05,Skilled Nursing Facility,4,16574.28
+SYN-E-000965,SYN-P-00101,2025-10-29,21:30,2025-10-29,ED,FAC-03,Synthetic Community Hospital West,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-06,Left Before Completion,0,2196.93
+SYN-E-000966,SYN-P-00060,2025-11-01,14:00,2025-11-01,ED,FAC-02,Synthetic Community Hospital East,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-07,Transferred,0,3998.09
+SYN-E-000967,SYN-P-00040,2025-11-01,21:00,2025-11-01,ED,FAC-01,Synthetic Regional Medical Center,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-08,Transferred,0,3612.94
+SYN-E-000968,SYN-P-00187,2025-11-02,15:15,2025-11-02,Observation,FAC-03,Synthetic Community Hospital West,Internal Medicine,R55,Syncope and collapse,Provider SYN-09,Home with Services,0,2273.54
+SYN-E-000969,SYN-P-00186,2025-11-03,17:30,2025-11-03,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R10.9,Unspecified abdominal pain,Provider SYN-10,Home,0,2519.44
+SYN-E-000970,SYN-P-00027,2025-11-03,20:30,2025-11-03,Outpatient,FAC-02,Synthetic Community Hospital East,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-11,Home,0,882.29
+SYN-E-000971,SYN-P-00085,2025-11-06,18:45,2025-11-06,Outpatient,FAC-02,Synthetic Community Hospital East,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-12,Home,0,612.00
+SYN-E-000972,SYN-P-00055,2025-11-06,21:00,2025-11-06,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-13,Home,0,164.69
+SYN-E-000973,SYN-P-00132,2025-11-06,23:30,2025-11-06,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-14,Home,0,162.93
+SYN-E-000974,SYN-P-00154,2025-11-07,14:45,2025-11-07,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,I10,Essential (primary) hypertension,Provider SYN-15,Home,0,765.33
+SYN-E-000975,SYN-P-00028,2025-11-07,22:30,2025-11-11,Inpatient,FAC-03,Synthetic Community Hospital West,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-16,Home,4,16562.48
+SYN-E-000976,SYN-P-00152,2025-11-08,10:30,2025-11-08,Outpatient,FAC-03,Synthetic Community Hospital West,Cardiology,I10,Essential (primary) hypertension,Provider SYN-17,Home,0,
+SYN-E-000977,SYN-P-00122,2025-11-13,01:30,2025-11-13,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-18,Home,0,261.40
+SYN-E-000978,SYN-P-00032,2025-11-13,04:15,2025-11-13,ED,FAC-01,Synthetic Regional Medical Center,Emergency,J45.901,Unspecified asthma with (acute) exacerbation,Provider SYN-19,Transferred,0,1431.89
+SYN-E-000979,SYN-P-00014,2025-11-14,06:30,2025-11-14,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-20,Home,0,636.74
+SYN-E-000980,SYN-P-00090,2025-11-15,00:00,2025-11-17,Inpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J18.9,"Pneumonia, unspecified organism",Provider SYN-21,Home,2,12614.68
+SYN-E-000981,SYN-P-00191,2025-11-15,01:00,2025-11-15,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-22,Home,0,780.31
+SYN-E-000982,SYN-P-00087,2025-11-15,16:45,2025-11-15,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-23,Home,0,647.74
+SYN-E-000983,SYN-P-00060,2025-11-16,23:00,2025-11-25,Inpatient,FAC-02,Synthetic Community Hospital East,Internal Medicine,E11.65,Type 2 diabetes mellitus with hyperglycemia,Provider SYN-24,Skilled Nursing Facility,9,31382.73
+SYN-E-000984,SYN-P-00019,2025-11-19,02:30,2025-11-19,ED,FAC-03,Synthetic Community Hospital West,Emergency,R07.9,"Chest pain, unspecified",Provider SYN-25,Left Before Completion,0,3596.09
+SYN-E-000985,SYN-P-00009,2025-11-19,10:45,2025-11-19,Outpatient,FAC-03,Synthetic Community Hospital West,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-26,Home,0,870.02
+SYN-E-000986,SYN-P-00182,2025-11-20,19:15,2025-11-20,ED,FAC-03,Synthetic Community Hospital West,Emergency,R51.9,"Headache, unspecified",Provider SYN-27,Home,0,3354.03
+SYN-E-000987,SYN-P-00162,2025-11-21,06:45,2025-11-23,Inpatient,FAC-02,Synthetic Community Hospital East,Cardiology,I50.9,"Heart failure, unspecified",Provider SYN-28,Home,2,12349.42
+SYN-E-000988,SYN-P-00135,2025-11-22,09:00,2025-11-22,ED,FAC-03,Synthetic Community Hospital West,Emergency,R51.9,"Headache, unspecified",Provider SYN-29,Transferred,0,3550.72
+SYN-E-000989,SYN-P-00119,2025-11-24,13:30,2025-11-24,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-30,Home,0,485.21
+SYN-E-000990,SYN-P-00194,2025-11-25,17:45,2025-11-25,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-31,Home,0,691.94
+SYN-E-000991,SYN-P-00128,2025-11-26,03:00,2025-11-26,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R51.9,"Headache, unspecified",Provider SYN-32,Home,0,2508.03
+SYN-E-000992,SYN-P-00043,2025-11-26,12:15,2025-11-26,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,I10,Essential (primary) hypertension,Provider SYN-33,Home,0,726.65
+SYN-E-000993,SYN-P-00106,2025-11-27,20:15,2025-11-28,Observation,FAC-01,Synthetic Regional Medical Center,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-34,Home,1,2549.78
+SYN-E-000994,SYN-P-00089,2025-11-28,08:15,2025-11-28,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-35,Home,0,886.23
+SYN-E-000995,SYN-P-00109,2025-12-01,06:45,2025-12-01,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,I10,Essential (primary) hypertension,Provider SYN-36,Home,0,283.96
+SYN-E-000996,SYN-P-00011,2025-12-02,04:00,2025-12-02,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-37,Home,0,173.22
+SYN-E-000997,SYN-P-00131,2025-12-02,05:30,2025-12-02,Outpatient,FAC-04,Synthetic Outpatient Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-38,Home,0,536.12
+SYN-E-000998,SYN-P-00192,2025-12-03,02:45,2025-12-03,Outpatient,FAC-04,Synthetic Outpatient Center,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-39,Home,0,174.10
+SYN-E-000999,SYN-P-00067,2025-12-03,12:00,2025-12-03,Outpatient,FAC-04,Synthetic Outpatient Center,Cardiology,I10,Essential (primary) hypertension,Provider SYN-40,Home,0,511.51
+SYN-E-001000,SYN-P-00017,2025-12-03,23:00,2025-12-09,Inpatient,FAC-02,Synthetic Community Hospital East,Orthopedics,S72.002A,Fracture of unspecified part of neck of left femur,Provider SYN-41,Home with Services,6,21744.69
+SYN-E-001001,SYN-P-00188,2025-12-04,18:15,2025-12-04,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-42,Home,0,772.64
+SYN-E-001002,SYN-P-00165,2025-12-05,06:00,2025-12-09,Inpatient,FAC-01,Synthetic Regional Medical Center,Nephrology,N17.9,"Acute kidney failure, unspecified",Provider SYN-43,Home,4,16218.37
+SYN-E-001003,SYN-P-00013,2025-12-08,00:30,2025-12-08,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-44,Home,0,259.11
+SYN-E-001004,SYN-P-00163,2025-12-09,05:00,2025-12-09,Observation,FAC-01,Synthetic Regional Medical Center,Cardiology,R07.9,"Chest pain, unspecified",Provider SYN-45,Home,0,5143.35
+SYN-E-001005,SYN-P-00093,2025-12-12,05:15,2025-12-19,Inpatient,FAC-01,Synthetic Regional Medical Center,Nephrology,N17.9,"Acute kidney failure, unspecified",Provider SYN-46,Home with Services,7,25097.35
+SYN-E-001006,SYN-P-00152,2025-12-12,22:00,2025-12-14,Inpatient,FAC-03,Synthetic Community Hospital West,Cardiology,I48.91,Unspecified atrial fibrillation,Provider SYN-47,Home with Services,2,13082.80
+SYN-E-001007,SYN-P-00054,2025-12-13,05:00,2025-12-13,Outpatient,FAC-01,Synthetic Regional Medical Center,Primary Care,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-48,Home,0,866.21
+SYN-E-001008,SYN-P-00177,2025-12-15,02:30,2025-12-19,Inpatient,FAC-01,Synthetic Regional Medical Center,Pulmonology,J44.1,Chronic obstructive pulmonary disease with acute exacerbation,Provider SYN-49,Home with Services,4,18783.01
+SYN-E-001009,SYN-P-00102,2025-12-17,05:30,2025-12-17,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,I10,Essential (primary) hypertension,Provider SYN-50,Home,0,878.29
+SYN-E-001010,SYN-P-00107,2025-12-18,19:45,2025-12-18,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,I10,Essential (primary) hypertension,Provider SYN-51,Home,0,
+SYN-E-001011,SYN-P-00072,2025-12-19,04:15,2025-12-19,Outpatient,FAC-04,Synthetic Outpatient Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-52,Home,0,252.55
+SYN-E-001012,SYN-P-00190,2025-12-19,07:30,2025-12-19,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-53,Home,0,658.73
+SYN-E-001013,SYN-P-00056,2025-12-20,07:45,2025-12-20,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-54,Home,0,691.33
+SYN-E-001014,SYN-P-00191,2025-12-21,10:00,2025-12-21,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-55,Home,0,765.55
+SYN-E-001015,SYN-P-00094,2025-12-23,00:30,2025-12-23,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,I10,Essential (primary) hypertension,Provider SYN-56,Home,0,281.92
+SYN-E-001016,SYN-P-00187,2025-12-23,15:30,2025-12-27,Inpatient,FAC-01,Synthetic Regional Medical Center,Orthopedics,S72.002A,Fracture of unspecified part of neck of left femur,Provider SYN-57,Home,4,17781.05
+SYN-E-001017,SYN-P-00200,2025-12-23,18:15,2025-12-23,ED,FAC-03,Synthetic Community Hospital West,Emergency,R51.9,"Headache, unspecified",Provider SYN-58,Home,0,2325.79
+SYN-E-001018,SYN-P-00052,2025-12-24,18:30,2025-12-24,Outpatient,FAC-05,Synthetic Specialty Clinic,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-59,Home,0,375.56
+SYN-E-001019,SYN-P-00186,2025-12-25,02:30,2025-12-25,Outpatient,FAC-05,Synthetic Specialty Clinic,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-60,Home,0,486.26
+SYN-E-001020,SYN-P-00059,2025-12-25,07:30,2025-12-25,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-01,Home,0,372.86
+SYN-E-001021,SYN-P-00104,2025-12-26,01:00,2025-12-26,Outpatient,FAC-04,Synthetic Outpatient Center,Orthopedics,M17.9,"Osteoarthritis of knee, unspecified",Provider SYN-02,Home,0,777.30
+SYN-E-001022,SYN-P-00014,2025-12-26,01:45,2025-12-26,Outpatient,FAC-05,Synthetic Specialty Clinic,Pulmonology,J44.9,"Chronic obstructive pulmonary disease, unspecified",Provider SYN-03,Home,0,185.81
+SYN-E-001023,SYN-P-00146,2025-12-26,20:30,2025-12-26,Outpatient,FAC-04,Synthetic Outpatient Center,Primary Care,Z00.00,Encounter for general adult medical examination,Provider SYN-04,Home,0,859.69
+SYN-E-001024,SYN-P-00054,2025-12-28,18:00,2025-12-28,Outpatient,FAC-04,Synthetic Outpatient Center,Endocrinology,E11.9,Type 2 diabetes mellitus without complications,Provider SYN-05,Home,0,301.44
+SYN-E-001025,SYN-P-00087,2025-12-29,11:00,2025-12-29,ED,FAC-01,Synthetic Regional Medical Center,Emergency,R51.9,"Headache, unspecified",Provider SYN-06,Home,0,1702.69

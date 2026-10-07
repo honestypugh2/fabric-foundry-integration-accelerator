@@ -1,0 +1,148 @@
+{
+  "profile": "hc-lab-7file-v1",
+  "generator_version": "1",
+  "seed": 20261008,
+  "synthetic_notice": "SYNTHETIC DATA. Fictional people, places, providers, facilities and payers generated for analytics education. Not PHI, not PII, and not clinical guidance.",
+  "observation_cutoff": "2025-12-29",
+  "files": [
+    {
+      "name": "patients.csv",
+      "rows": 200,
+      "columns": [
+        "patient_id",
+        "first_name",
+        "last_name",
+        "date_of_birth",
+        "age",
+        "gender",
+        "race",
+        "zip_code",
+        "city",
+        "state",
+        "insurance_type",
+        "primary_care_provider",
+        "risk_score"
+      ],
+      "sha256": "598af8f3c2426fcf06abbc19f42194e3a6c45a9f815783defe5909566513de09"
+    },
+    {
+      "name": "encounters.csv",
+      "rows": 1025,
+      "columns": [
+        "encounter_id",
+        "patient_id",
+        "encounter_date",
+        "encounter_time",
+        "discharge_date",
+        "encounter_type",
+        "facility_id",
+        "facility_name",
+        "department",
+        "primary_diagnosis_code",
+        "primary_diagnosis_description",
+        "attending_provider",
+        "discharge_disposition",
+        "length_of_stay_days",
+        "total_charges"
+      ],
+      "sha256": "c3d2d81727e083d46729411b9c983475c2687ab5de2531535c963f44543515e7"
+    },
+    {
+      "name": "conditions.csv",
+      "rows": 428,
+      "columns": [
+        "condition_id",
+        "patient_id",
+        "encounter_id",
+        "condition_code",
+        "condition_description",
+        "condition_type",
+        "date_diagnosed",
+        "status"
+      ],
+      "sha256": "bc969912710a4525680684be51e22649c2821b761b675ad70c245425ee5e4645"
+    },
+    {
+      "name": "claims.csv",
+      "rows": 1025,
+      "columns": [
+        "claim_id",
+        "patient_id",
+        "encounter_id",
+        "claim_date",
+        "payer",
+        "payer_type",
+        "claim_amount",
+        "paid_amount",
+        "denied_amount",
+        "patient_responsibility",
+        "denial_reason",
+        "claim_status",
+        "days_to_payment"
+      ],
+      "sha256": "62dc7d7432e606bbfbe7a3bc295ab9d78047ea0acb50f8b0cc9f6d8d2b1d142b"
+    },
+    {
+      "name": "vitals.csv",
+      "rows": 4299,
+      "columns": [
+        "vital_id",
+        "patient_id",
+        "encounter_id",
+        "facility_name",
+        "department",
+        "timestamp",
+        "heart_rate",
+        "systolic_bp",
+        "diastolic_bp",
+        "temperature_f",
+        "respiratory_rate",
+        "spo2_percent",
+        "pain_level"
+      ],
+      "sha256": "e4aa707e1ca471a0121ed8a2d9bc6a2b62e8917b440314b43bce2cd89e870685"
+    },
+    {
+      "name": "medications.csv",
+      "rows": 643,
+      "columns": [
+        "medication_id",
+        "patient_id",
+        "encounter_id",
+        "medication_name",
+        "medication_class",
+        "dosage",
+        "frequency",
+        "prescriber",
+        "start_date",
+        "end_date",
+        "status"
+      ],
+      "sha256": "dbb8549967cf96e4323886fb6c2fd9222f61debfe97f42fe940ece4b33a5213d"
+    },
+    {
+      "name": "clinical_notes.csv",
+      "rows": 150,
+      "columns": [
+        "note_id",
+        "patient_id",
+        "encounter_id",
+        "note_date",
+        "note_type",
+        "provider",
+        "note_text"
+      ],
+      "sha256": "5801498695ae10453802aa8e521df1f2e7248ef673de1d16cb12bcca5163ff62"
+    }
+  ],
+  "quirks": {
+    "blank_total_charges": 5,
+    "conditions_with_blank_encounter_id": 428,
+    "length_of_stay_mismatches": 4,
+    "medication_chronology_violations": 3,
+    "notes_with_literal_newline": 56,
+    "out_of_range_vitals": 6,
+    "overlapping_encounters": 3,
+    "zero_claim_amounts": 3
+  }
+}

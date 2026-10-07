@@ -18,12 +18,14 @@ from fabric_foundry_accelerator.privacy.leak_scan import (
     list_repository_files,
     scan_paths,
 )
+from fabric_foundry_accelerator.recovery import commands as recovery_commands
 from fabric_foundry_accelerator.research.sources import (
     DEFAULT_REGISTRY_PATH,
     DEFAULT_RENDERED_PATH,
     load_registry,
     render_markdown,
 )
+from fabric_foundry_accelerator.synthetic import commands as data_commands
 
 
 def _out(message: str) -> None:
@@ -107,6 +109,9 @@ def build_parser() -> argparse.ArgumentParser:
         cmd.add_argument("--registry", default=str(DEFAULT_REGISTRY_PATH))
         cmd.add_argument("--output", default=str(DEFAULT_RENDERED_PATH))
         cmd.set_defaults(func=func)
+
+    data_commands.register(sub)
+    recovery_commands.register(sub)
     return parser
 
 
