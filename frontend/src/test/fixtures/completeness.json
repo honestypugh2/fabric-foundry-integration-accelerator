@@ -1,0 +1,270 @@
+{
+  "answered": 24,
+  "coverage": 0.8,
+  "items": [
+    {
+      "answered": true,
+      "answered_by": [
+        "fabric-foundry-boundaries"
+      ],
+      "id": "Q01",
+      "planned_phase": null,
+      "question": "What does Fabric own and what does Foundry own?"
+    },
+    {
+      "answered": true,
+      "answered_by": [
+        "fabric-foundry-boundaries",
+        "p10-medallion-ai"
+      ],
+      "id": "Q02",
+      "planned_phase": null,
+      "question": "Where does governed business context live?"
+    },
+    {
+      "answered": true,
+      "answered_by": [
+        "fabric-mcp-landscape",
+        "p09-governed-mcp"
+      ],
+      "id": "Q03",
+      "planned_phase": null,
+      "question": "What does MCP provide and what does it not provide?"
+    },
+    {
+      "answered": true,
+      "answered_by": [
+        "fabric-mcp-landscape"
+      ],
+      "id": "Q04",
+      "planned_phase": null,
+      "question": "Which Fabric MCP server fits which job?"
+    },
+    {
+      "answered": true,
+      "answered_by": [
+        "fabric-foundry-boundaries",
+        "p08-human-in-the-loop"
+      ],
+      "id": "Q05",
+      "planned_phase": null,
+      "question": "Who decides whether an action is allowed?"
+    },
+    {
+      "answered": true,
+      "answered_by": [
+        "p08-human-in-the-loop"
+      ],
+      "id": "Q06",
+      "planned_phase": null,
+      "question": "How is a write proposed, validated, approved, executed and verified?"
+    },
+    {
+      "answered": true,
+      "answered_by": [
+        "p08-human-in-the-loop"
+      ],
+      "id": "Q07",
+      "planned_phase": null,
+      "question": "What stops an agent or requester from approving its own change?"
+    },
+    {
+      "answered": true,
+      "answered_by": [
+        "p17-resilience"
+      ],
+      "id": "Q08",
+      "planned_phase": null,
+      "question": "What happens when Fabric or Foundry is unavailable?"
+    },
+    {
+      "answered": true,
+      "answered_by": [
+        "p17-resilience",
+        "p08-human-in-the-loop"
+      ],
+      "id": "Q09",
+      "planned_phase": null,
+      "question": "Can an approved LIVE write fall back to a local simulation?"
+    },
+    {
+      "answered": true,
+      "answered_by": [
+        "p17-resilience",
+        "p16-evaluation-observability"
+      ],
+      "id": "Q10",
+      "planned_phase": null,
+      "question": "How are results labeled so simulation is never mistaken for production?"
+    },
+    {
+      "answered": true,
+      "answered_by": [
+        "p10-medallion-ai"
+      ],
+      "id": "Q11",
+      "planned_phase": null,
+      "question": "How is data refined from raw to business-ready?"
+    },
+    {
+      "answered": true,
+      "answered_by": [
+        "p10-medallion-ai"
+      ],
+      "id": "Q12",
+      "planned_phase": null,
+      "question": "Where should AI help in data engineering and where must deterministic logic decide?"
+    },
+    {
+      "answered": true,
+      "answered_by": [
+        "p11-mirroring-ai"
+      ],
+      "id": "Q13",
+      "planned_phase": null,
+      "question": "How does Open Mirroring land data and how is it recovered?"
+    },
+    {
+      "answered": true,
+      "answered_by": [
+        "p16-evaluation-observability"
+      ],
+      "id": "Q14",
+      "planned_phase": null,
+      "question": "How is the quality of data and answers evaluated?"
+    },
+    {
+      "answered": true,
+      "answered_by": [
+        "p16-evaluation-observability"
+      ],
+      "id": "Q15",
+      "planned_phase": null,
+      "question": "How do we trace what happened end to end?"
+    },
+    {
+      "answered": true,
+      "answered_by": [
+        "copilot-maturity-ladder"
+      ],
+      "id": "Q16",
+      "planned_phase": null,
+      "question": "What does GitHub Copilot do in Fabric data engineering?"
+    },
+    {
+      "answered": true,
+      "answered_by": [
+        "copilot-maturity-ladder"
+      ],
+      "id": "Q17",
+      "planned_phase": null,
+      "question": "How does a team level up with GitHub Copilot safely?"
+    },
+    {
+      "answered": true,
+      "answered_by": [
+        "fabric-skills"
+      ],
+      "id": "Q18",
+      "planned_phase": null,
+      "question": "What are Fabric Skills and what risks do they carry?"
+    },
+    {
+      "answered": true,
+      "answered_by": [
+        "copilot-surfaces"
+      ],
+      "id": "Q19",
+      "planned_phase": null,
+      "question": "Which GitHub Copilot surface fits which data-engineering task?"
+    },
+    {
+      "answered": true,
+      "answered_by": [
+        "copilot-vs-claude-code"
+      ],
+      "id": "Q20",
+      "planned_phase": null,
+      "question": "How does Claude Code compare with GitHub Copilot for this work?"
+    },
+    {
+      "answered": true,
+      "answered_by": [
+        "power-bi-agentic-tooling"
+      ],
+      "id": "Q21",
+      "planned_phase": null,
+      "question": "How do Power BI semantic models and reports fit agentic workflows?"
+    },
+    {
+      "answered": true,
+      "answered_by": [
+        "p06-enterprise-agent"
+      ],
+      "id": "Q22",
+      "planned_phase": null,
+      "question": "What is the end-to-end Fabric + Foundry enterprise agent pattern?"
+    },
+    {
+      "answered": true,
+      "answered_by": [
+        "p06-enterprise-agent"
+      ],
+      "id": "Q23",
+      "planned_phase": null,
+      "question": "How does a Foundry agent use Fabric data under the user's identity?"
+    },
+    {
+      "answered": false,
+      "answered_by": [],
+      "id": "Q24",
+      "planned_phase": 5,
+      "question": "How are preview features isolated from the default experience?"
+    },
+    {
+      "answered": false,
+      "answered_by": [],
+      "id": "Q25",
+      "planned_phase": 7,
+      "question": "How is the accelerator customized for another customer or industry?"
+    },
+    {
+      "answered": false,
+      "answered_by": [],
+      "id": "Q26",
+      "planned_phase": 8,
+      "question": "What is the threat model for agents with tool access?"
+    },
+    {
+      "answered": false,
+      "answered_by": [],
+      "id": "Q27",
+      "planned_phase": 8,
+      "question": "How are secrets and environment identifiers kept out of the repository?"
+    },
+    {
+      "answered": false,
+      "answered_by": [],
+      "id": "Q28",
+      "planned_phase": 7,
+      "question": "How do changes move from development to production through Git and CI/CD?"
+    },
+    {
+      "answered": false,
+      "answered_by": [],
+      "id": "Q29",
+      "planned_phase": 8,
+      "question": "How are cost and usage of models and tools controlled?"
+    },
+    {
+      "answered": true,
+      "answered_by": [
+        "p17-resilience"
+      ],
+      "id": "Q30",
+      "planned_phase": null,
+      "question": "How is the architecture demonstrated when no cloud service is available?"
+    }
+  ],
+  "total": 30
+}

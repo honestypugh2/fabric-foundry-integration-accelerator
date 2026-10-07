@@ -1,0 +1,28 @@
+{
+  "cloud_operation_performed": false,
+  "correlation_id": "56cca8ff1f5248a18d77301b7aaeb6ad",
+  "data": [
+    {
+      "description": "Local educational workspace: one lakehouse per built dataset profile.",
+      "display_name": "Synthetic Demo Workspace (LOCAL)",
+      "id": "local-ws-synthetic"
+    }
+  ],
+  "equivalent_fabric_service": "Microsoft Fabric workspace",
+  "evidence": [
+    {
+      "category": "SIMULATED LOCALLY",
+      "reference": null,
+      "statement": "Listed the local synthetic workspace."
+    }
+  ],
+  "execution_label": "LOCAL",
+  "fallback_reason": null,
+  "fallback_used": false,
+  "operating_mode": "OFFLINE",
+  "requested_provider": "Local Fabric Educational Provider",
+  "selected_provider": "Local Fabric Educational Provider",
+  "simulation_notice": "LOCAL educational analog over synthetic Parquet data. No Microsoft Fabric, OneLake or Power BI operation was performed.",
+  "teaching_objective": "Discover where governed data lives before reading it.",
+  "timestamp": "2026-10-07T21:42:09.918339Z"
+}

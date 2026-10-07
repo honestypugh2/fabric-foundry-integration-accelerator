@@ -1,0 +1,95 @@
+id: fabric-mcp-landscape
+area: mcp
+title: "The Fabric MCP landscape: which server for which job"
+summary: >-
+  "Fabric MCP" is not one server. The local Fabric MCP server, Fabric IQ MCP, Data Warehouse MCP,
+  Power BI Authoring MCP, Ontology MCP, the data agent MCP endpoint and the Real-Time
+  Intelligence servers each have a different host, identity path, read/write surface and
+  release status. Pick the narrowest server for the job, never conflate them, and remember that
+  the accelerator's ffia-local server is not a Fabric MCP server at all.
+status: MIXED
+pattern_ids: [P09, P19]
+learning_objectives:
+  - Map common data-engineering jobs to the narrowest Fabric MCP server and tool set.
+  - Distinguish GA, PREVIEW and needs-validation Fabric MCP servers as of October 2026.
+  - Identify which servers are read-only and which can write or run arbitrary T-SQL.
+  - Apply the rule - local docs tools for "how", read-only remote tools for "what is", Git/PR or the approved change flow for "change it".
+  - Explain why a call to ffia-local is never evidence of a Fabric operation.
+concepts:
+  - term: Local Fabric MCP server
+    definition: Microsoft's open-source, stdio Fabric MCP server (1.4.0 as of October 2026). Its docs tools work without a tenant; its OneLake, core and Data Factory tools act with your credentials and include writes.
+  - term: Remote (hosted) MCP server
+    definition: A Microsoft-hosted endpoint reached over Streamable HTTP with an Entra token. It acts with the caller's own Fabric permissions.
+  - term: Narrowest server rule
+    definition: Choose the server and tool subset with the smallest read/write surface that still does the job.
+  - term: Tool allow-list
+    definition: The explicit list of tools a client may call on a server, instead of every tool the server advertises.
+  - term: ffia-local
+    definition: This repository's LOCAL educational MCP server. Read-only and proposal-only tools over synthetic data; it never calls Fabric.
+evidence:
+  - statement: Microsoft documents a family of Fabric MCP servers and guidance for choosing between them.
+    category: DOCUMENTED FABRIC BEHAVIOR
+    sources: [fabric-mcp-servers-list]
+  - statement: The local Fabric MCP server is GA; its docs, item-definition and best-practice tools run without a live tenant, while OneLake and item tools need credentials and include write operations.
+    category: DOCUMENTED FABRIC BEHAVIOR
+    sources: [fabric-mcp-local]
+  - statement: Fabric IQ MCP is GA, read-only, and enforces the caller's Fabric permissions including row- and object-level security; the client composes DAX queries itself.
+    category: DOCUMENTED FABRIC BEHAVIOR
+    sources: [fabric-iq-mcp]
+  - statement: The Data Warehouse MCP server is in preview and exposes a T-SQL execution tool, so its read/write surface is whatever the caller's SQL permissions allow.
+    category: PREVIEW LIMITATION
+    sources: [fabric-dw-mcp]
+  - statement: Power BI Authoring (Modeling) MCP is GA as a local server and preview as a hosted server; both can modify semantic models.
+    category: DOCUMENTED FABRIC BEHAVIOR
+    sources: [powerbi-authoring-mcp]
+  - statement: Ontology MCP is in preview and documents limitations, including service-principal authentication.
+    category: PREVIEW LIMITATION
+    sources: [fabric-iq-ontology]
+  - statement: The release status of the Fabric Core MCP server, the data agent MCP endpoint and the Real-Time Intelligence MCP servers is not clearly labeled and must be re-validated before use.
+    category: REQUIRES TENANT VALIDATION
+    sources: [fabric-mcp-servers-list, fabric-data-agent]
+  - statement: ffia-local exposes only allow-listed, read-only and proposal-only tools and labels every result LOCAL or SIMULATED with cloud_operation_performed false.
+    category: SIMULATED LOCALLY
+  - statement: Pin external server versions, keep write-capable servers in a separate opt-in profile, and allow-list tools per profile.
+    category: PRODUCTION RECOMMENDATION
+    sources: [vscode-mcp-servers, apim-mcp]
+try_it:
+  - label: Start the LOCAL educational MCP server (not a Fabric MCP server)
+    command: ffia serve mcp
+    result_label: LOCAL
+  - label: Run the offline demo; act 3 is a real MCP protocol call to ffia-local
+    command: ffia demo offline
+    result_label: SIMULATED
+  - label: Read the allow-list that defines every ffia-local tool
+    command: cat config/policies/tools.yaml
+    result_label: LOCAL
+copilot_prompt: >-
+  Without calling any cloud tool, list the MCP servers configured for this workspace and the
+  tools each exposes. For each of these jobs, recommend the narrowest Fabric MCP server and tool,
+  its status (GA, PREVIEW or needs validation) and whether it can write - look up a Lakehouse
+  item definition, query a semantic model with DAX, run T-SQL on a warehouse, edit a measure in
+  a PBIP project. Say explicitly that ffia-local is not a Fabric MCP server.
+claude_code_prompt: >-
+  Run `claude mcp list` and read config/policies/tools.yaml. Explain which configured servers
+  are Fabric MCP servers (none today) and which are local educational or documentation servers.
+  Then propose, as a table, a read-only Fabric MCP profile and a separate opt-in authoring
+  profile with pinned versions and explicit tool allow-lists. Do not edit any file.
+production_notes:
+  - Default profile = local docs tools plus read-only remote tools; authoring and T-SQL servers live in a separate, opt-in profile against a dev workspace.
+  - Pin every external server version and review release notes before upgrading; re-validate status labels before each release.
+  - Replace wildcard tool lists with explicit allow-lists, and keep preview servers behind feature flags.
+  - Choose the identity deliberately; remote Fabric servers act with the caller's permissions, so a broad identity means a broad blast radius.
+  - Consider a gateway (for example API Management) for central authentication, rate limiting and logging of MCP traffic.
+sources:
+  - fabric-mcp-servers-list
+  - fabric-mcp-local
+  - fabric-iq-mcp
+  - fabric-dw-mcp
+  - powerbi-authoring-mcp
+  - fabric-iq-ontology
+  - fabric-data-agent
+  - mcp-specification
+  - vscode-mcp-servers
+  - apim-mcp
+related_labs: [lab-mcp-allow-list]
+related_guides: [hc-01-fabric-mcp-powerbi-medallion-lab]

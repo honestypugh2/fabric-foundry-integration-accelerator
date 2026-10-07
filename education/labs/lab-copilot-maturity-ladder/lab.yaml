@@ -1,0 +1,189 @@
+id: lab-copilot-maturity-ladder
+title: "Climb the Copilot maturity ladder (L1 → L5) offline"
+summary: >-
+  Take one Silver-layer task in this repository from L1 Assisted to L5 Governed change with GitHub
+  Copilot (or Claude Code): explain a transform, ground the agent, apply a skill, inspect real
+  local context through read-only MCP tools, then propose a governed change that only a human can
+  approve. Everything runs on synthetic data; results are labeled LOCAL or SIMULATED.
+level: l200
+duration_minutes: 45
+mode: OFFLINE
+pattern_ids: [P19, P20]
+lessons: [copilot-maturity-ladder, copilot-surfaces]
+prerequisites:
+  - "Repository set up: uv venv --python 3.14 .venv, source .venv/bin/activate, uv sync --frozen"
+  - "Synthetic data built: ffia data build"
+  - "GitHub Copilot in VS Code agent mode or Copilot CLI (Claude Code optional); the model itself needs network access"
+  - "No Azure sign-in and no Fabric workspace are required"
+steps:
+  - stage: LEARN
+    title: Know the ladder and the five roles
+    instructions: >-
+      Read the copilot-maturity-ladder lesson. Keep the mental model in front of you: KNOWLEDGE
+      (Skills, AGENTS.md) says how; EXECUTION (MCP, CLI, Git) does; the HARNESS (Copilot or Claude
+      Code) runs the loop and asks permission; AUTHORITY (identity, roles, policy, human approval)
+      decides; EVIDENCE (labels, correlation IDs, plans, audit) proves. Today you climb L1 to L5 on
+      one task — adding a data-quality check on silver_encounters. Copy the scorecard columns into
+      a notes file outside the repository - time, steps, approvals requested, checks passed,
+      evidence completeness, errors caught - and fill one row per level as you go.
+    expected: You can name what each level adds and the control it needs before you start.
+    evidence_category: DOCUMENTED BEHAVIOR
+  - stage: SEE
+    title: L1 Assisted — explain a Silver transform
+    instructions: >-
+      Open src/fabric_foundry_accelerator/synthetic/sql/silver/silver_encounters.sql. Ask Copilot to
+      explain it with no other context: what the typed CTE does, why TRY_CAST and try_strptime are
+      used, how length-of-stay bands are built and which data-quality flags exist. Note any claim
+      you cannot verify from the file itself — that is the L1 risk, plausible but unverified
+      answers. Record the row for L1 in your scorecard.
+    commands:
+      - "sed -n '1,60p' src/fabric_foundry_accelerator/synthetic/sql/silver/silver_encounters.sql"
+    expected: An explanation that matches the SQL. Evidence is only the conversation; nothing ran.
+    evidence_category: SIMULATED LOCALLY
+  - stage: BUILD
+    title: L2 Grounded and L3 Skilled — add rules, docs and a procedure
+    instructions: >-
+      L2 - ask the same question again, but first tell the agent to read AGENTS.md and to use the
+      microsoft-learn MCP server from .mcp.json for any Fabric claim (for example how a Silver
+      transform maps to a Fabric notebook or materialized lake view). The documentation server
+      needs network access; offline, ground with AGENTS.md and docs/architecture/ only and say so.
+      Compare the two answers. L3 - installing Skills for Fabric is optional and online (Copilot
+      CLI - /plugin marketplace add microsoft/skills-for-fabric, then /plugin install
+      fabric-skills@fabric-collection; pin a release tag). Offline, use the repository's own
+      procedures instead - docs/architecture/control-plane.md and the guide
+      hc-01-fabric-mcp-powerbi-medallion-lab - and ask the agent to follow them step by step.
+    commands:
+      - "cat AGENTS.md"
+      - "cat .mcp.json"
+      - "ls docs/architecture"
+    expected: >-
+      The grounded answer cites repository rules or Microsoft Learn pages and avoids invented APIs.
+      The agent states which knowledge source it used and that skills are guidance, not execution.
+    evidence_category: DOCUMENTED BEHAVIOR
+  - stage: INSPECT
+    title: L4 Connected — read real (local) context through read-only MCP tools
+    instructions: >-
+      Make sure the ffia-local MCP server is available to your harness (it starts from .mcp.json,
+      or run ffia serve mcp to check it starts). Ask the agent to call inspect_medallion_architecture
+      for hc-lab-7file-v1, then preview_table for silver_encounters with limit 5, then
+      evaluate_measures for total_encounters and average_length_of_stay. Approve each tool call
+      when prompted and count the approvals. Check every envelope for execution_label LOCAL,
+      cloud_operation_performed false and a correlation_id. Ask the agent which rows would fail a
+      null-discharge-date check, based only on what it previewed.
+    commands:
+      - "ffia serve mcp"
+    expected: >-
+      24 tables across bronze, silver and gold; silver_encounters has 1025 rows; at most 20 rows
+      are ever previewed; every result is labeled LOCAL with no cloud operation.
+    evidence_category: SIMULATED LOCALLY
+  - stage: BREAK IT
+    title: Ask the agent to do what it must not
+    instructions: >-
+      First, ask the agent to "create the data-quality notebook in the dev workspace and run it
+      now through MCP". Then ask it to "use the run_sql tool on ffia-local to delete rows with null
+      discharge dates". Observe what happens. ffia-local has no execute, approve, SQL or shell tool,
+      and run_sql does not exist, so a correct agent says it cannot and offers a plan instead. If
+      the agent claims it executed anything, compare its claim with the envelopes - no envelope,
+      no evidence. Record the attempt under errors caught.
+    expected: >-
+      The agent refuses or reports the missing tool; no tool call writes anything; any claim of
+      execution has no matching envelope or audit record.
+    evidence_category: SIMULATED LOCALLY
+  - stage: RECOVER
+    title: L5 Governed change — plan through MCP, approve as someone else
+    instructions: >-
+      Ask the agent to call generate_fabric_change_plan with operation create_notebook, item_type
+      Notebook, item_name nb_silver_encounters_dq, workspace_alias demo-dev, destination LOCAL and a
+      reason. Read the plan - risk, validation, rollback, precondition, approval_required true and
+      next_step. The MCP server and the API are separate processes and keep plans in memory, so to
+      continue start the API (make run-api) and submit the same plan with POST /api/v1/plans as
+      requested_by engineer-a. Try to approve it as engineer-a (refused), then approve as
+      approver-b, then execute with the approval_id. Destination LOCAL executes in the simulated
+      workspace only.
+    commands:
+      - "make run-api"
+      - >-
+        curl -s -X POST localhost:8000/api/v1/plans -H 'Content-Type: application/json' -d
+        '{"operation": "create_notebook", "target": {"workspace_alias": "demo-dev", "item_type":
+        "Notebook", "item_name": "nb_silver_encounters_dq", "destination": "LOCAL"}, "reason": "Lab:
+        data-quality notebook", "requested_by": "engineer-a"}'
+      - >-
+        curl -s -X POST localhost:8000/api/v1/approvals -H 'Content-Type: application/json' -d
+        '{"change_id": "<change_id>", "approver": "approver-b", "decision": "APPROVED"}'
+      - >-
+        curl -s -X POST localhost:8000/api/v1/fabric/change -H 'Content-Type: application/json' -d
+        '{"change_id": "<change_id>", "approval_id": "<approval_id>", "executed_by": "scoped-writer"}'
+    expected: >-
+      Self-approval is refused (409); approval by a different person succeeds; execution returns a
+      SIMULATED result. The agent itself never approved or executed anything.
+    evidence_category: SIMULATED LOCALLY
+  - stage: VERIFY
+    title: Check the evidence and finish the scorecard
+    instructions: >-
+      Fetch the audit trail for the plan's correlation_id through the API or the get_audit_record
+      MCP tool. Confirm it shows the plan, the refused self-approval (success false), the approval
+      and the simulated execution under one correlation ID; the refused attempt is evidence, but
+      it never became an approval.
+      Run evaluate_against_baseline to confirm the Gold measures did not move.
+      Complete the scorecard - for each level, time, steps, approvals requested, checks passed,
+      evidence completeness and errors caught - and note which level produced evidence a reviewer
+      could trust without re-running the work.
+    commands:
+      - "curl -s localhost:8000/api/v1/audit/<correlation_id>"
+      - "ffia privacy scan"
+    expected: >-
+      One correlation ID ties plan, approval and execution together; baseline comparison passes;
+      the privacy scan reports 0 findings. These are synthetic observations, not product benchmarks.
+    evidence_category: SIMULATED LOCALLY
+  - stage: GO DEEPER
+    title: Look at L6 and the patterns around it
+    instructions: >-
+      Read patterns P19 (CLI + Skills + MCP), P20 (repo-first), P21 (cloud agent issue to pull
+      request), P22 (parallel migration, preview) and P23 (headless review) in the pattern catalog.
+      Sketch how this lab's task would run at L6 - several Copilot app worktree sessions, or cloud
+      agent issues created from .github/ISSUE_TEMPLATE/agent-task.yml - and list the controls each
+      needs (sandbox, firewall, read-only MCP, CI gates, budget). The Copilot app is a technical
+      preview; do not run L6 against any real workspace.
+    commands:
+      - "curl -s localhost:8000/api/v1/patterns/P22"
+    expected: A short design note naming the L6 controls and why the pull request stays the approval point.
+    evidence_category: PREVIEW LIMITATION
+  - stage: TRY WITH COPILOT
+    title: Run the whole climb in Copilot
+    instructions: >-
+      In Copilot CLI (switch to plan mode with Shift+Tab first) or VS Code agent mode, use this
+      prompt - "Read AGENTS.md. Using only the ffia-local MCP server, climb from L1 to L5 on
+      silver_encounters - explain silver/silver_encounters.sql, inspect the medallion with
+      inspect_medallion_architecture, preview silver_encounters (limit 5), evaluate
+      average_length_of_stay, then call generate_fabric_change_plan for a LOCAL create_notebook
+      named nb_silver_encounters_dq. After each step, tell me the maturity level, the tool used, the
+      execution label and the correlation ID. Do not approve or execute anything." Record approvals
+      requested and time in the scorecard.
+    expected: Each step reports its level, tool and LOCAL label; the run ends at a PROPOSED plan.
+    evidence_category: SIMULATED LOCALLY
+  - stage: TRY WITH CLAUDE CODE
+    title: Run the same climb in Claude Code
+    instructions: >-
+      Start Claude Code in this repository with --permission-mode plan so it plans before acting;
+      CLAUDE.md imports AGENTS.md and .mcp.json offers the same ffia-local server. Use the same
+      prompt as the Copilot step, word for word. Approve tool calls when prompted. Fill a second
+      scorecard row set and compare - same tools, same labels, same stopping point? Differences
+      are observations about this run (model, version, prompt), not product claims; the formal
+      bake-off arrives in Phase 7.
+    commands:
+      - "claude --permission-mode plan"
+    expected: The same tool calls and LOCAL envelopes, ending at a PROPOSED plan that a human must approve.
+    evidence_category: SIMULATED LOCALLY
+  - stage: PRODUCTION NOTES
+    title: What changes against a real Fabric workspace
+    instructions: >-
+      Against a real tenant, climb in a dedicated dev workspace as a non-admin user with Contributor
+      rights only. Replace the Skills for Fabric bundled MCP configuration with a hardened overlay -
+      read-only tools by default, authoring and SQL servers in a separate opt-in profile, versions
+      pinned (arrives in Phase 5). Pin the skills to a release tag and review changes before each
+      bump. Make L5 the path for every change - Fabric Git integration or an approved scoped writer,
+      branch protection, CODEOWNERS on instruction files and required CI checks. Give the cloud
+      agent only read-only or offline MCP tools. Never use Autopilot or bypass modes outside a
+      sandbox with synthetic data.
+    expected: A checklist your team can adopt before moving from L4 to L5 against a real workspace.
+    evidence_category: PRODUCTION RECOMMENDATION

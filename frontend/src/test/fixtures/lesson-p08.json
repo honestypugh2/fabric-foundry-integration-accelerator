@@ -1,0 +1,170 @@
+{
+  "area": "patterns",
+  "checks": [
+    {
+      "choices": [
+        "Which model to use",
+        "Which changes need a human and who is accountable for approving them",
+        "Which MCP servers to install"
+      ],
+      "id": "exec-accountable",
+      "level": "executive",
+      "question": "What is the main decision leaders make for this pattern?"
+    },
+    {
+      "choices": [
+        "APPROVE \u2192 PLAN \u2192 EXECUTE \u2192 AUDIT",
+        "PLAN \u2192 VALIDATE \u2192 APPROVE \u2192 EXECUTE \u2192 VERIFY \u2192 AUDIT",
+        "EXECUTE \u2192 VERIFY \u2192 APPROVE"
+      ],
+      "id": "l100-order",
+      "level": "l100",
+      "question": "Which order is correct?"
+    },
+    {
+      "choices": [
+        "It executes immediately",
+        "It is refused because of separation of duties",
+        "It is redirected to the simulated workspace"
+      ],
+      "id": "l200-self-approval",
+      "level": "l200",
+      "question": "An engineer requests a change and then approves it. What happens?"
+    },
+    {
+      "choices": [
+        "generate_fabric_change_plan",
+        "validate_change_plan",
+        "None of them"
+      ],
+      "id": "l300-mcp",
+      "level": "l300",
+      "question": "Which ffia-local MCP tool can execute a change?"
+    },
+    {
+      "choices": [
+        "Execute it in the LOCAL simulation and label it LIVE",
+        "Execute it in the LOCAL simulation and label it SIMULATED",
+        "Return UNAVAILABLE and leave the simulation untouched"
+      ],
+      "id": "l400-live",
+      "level": "l400",
+      "question": "An approved LIVE change has no authorized writer available. What is the correct result?"
+    }
+  ],
+  "claude_code_prompt": "Use the ffia-local MCP server to propose (not execute) a LOCAL create_lakehouse change for bronze_lab in demo-dev. Explain each field of the plan and why the MCP server cannot approve it.",
+  "concepts": [
+    {
+      "definition": "A plan with target, operation, risk, expected impact, validation, rollback and policy reasons. Nothing has run.",
+      "term": "Proposed change"
+    },
+    {
+      "definition": "The person (or agent) that requests a change cannot approve it.",
+      "term": "Separation of duties"
+    },
+    {
+      "definition": "An approval is tied to a hash of the exact target and destination, so it cannot be reused for a different item.",
+      "term": "Destination binding"
+    },
+    {
+      "definition": "The only identity allowed to perform the write, limited to the operations and targets it needs.",
+      "term": "Scoped writer"
+    }
+  ],
+  "copilot_prompt": "Using the ffia-local MCP server, call generate_fabric_change_plan to propose creating a Lakehouse named bronze_lab in the demo-dev workspace with destination LOCAL. Show the risk, validation, rollback and policy reasons. Do not try to approve or execute it; tell me what a human must do next.",
+  "evidence": [
+    {
+      "category": "SIMULATED LOCALLY",
+      "sources": [],
+      "statement": "Plans, self-approval refusal, duplicate blocking, approval expiry and destination binding are enforced in code and covered by tests."
+    },
+    {
+      "category": "SIMULATED LOCALLY",
+      "sources": [],
+      "statement": "An approved LIVE change returns UNAVAILABLE when no authorized live writer exists, and is never redirected to LOCAL."
+    },
+    {
+      "category": "DOCUMENTED BEHAVIOR",
+      "sources": [
+        "foundry-agent-service",
+        "agent-framework"
+      ],
+      "statement": "Foundry agents can call tools and request human approval before a tool runs."
+    },
+    {
+      "category": "PRODUCTION RECOMMENDATION",
+      "sources": [],
+      "statement": "A live Fabric writer must re-check existence and use exact item IDs immediately before writing."
+    }
+  ],
+  "id": "p08-human-in-the-loop",
+  "learning_objectives": [
+    "Explain why model intent is not proof of user authorization.",
+    "Walk a change through PLAN, VALIDATE, APPROVE, EXECUTE, VERIFY and AUDIT.",
+    "Identify which checks are deterministic and which need a human.",
+    "Explain why an approved LIVE write must never be redirected to a local simulation."
+  ],
+  "levels": [
+    {
+      "label": "Executive",
+      "level": "executive",
+      "markdown": "## Why it matters\n\nAI agents are now good at *proposing* changes: create a lakehouse, update a semantic model, publish\na report. The risk is not that the proposal is wrong \u2014 it is that a plausible proposal gets\n**executed without anyone accountable deciding it should be**.\n\nPattern P08 keeps the speed of AI and the accountability of your operating model:\n\n| Step | Who | Outcome |\n|---|---|---|\n| Propose | The agent | A written plan: what, where, risk, rollback |\n| Validate | Deterministic rules | Policy, duplicates and permissions checked the same way every time |\n| Approve | An accountable person | Recorded decision, never the requester |\n| Execute | A narrowly scoped service | Only the approved change, only on the approved target |\n| Verify and audit | The platform | Evidence that the change happened as approved |\n\n**Decision for leaders:** which changes need a human, and who is accountable for approving them.\nEverything else in this pattern is engineering.\n\n> Status: the pattern uses GA building blocks. In this accelerator the flow runs **SIMULATED\n> LOCALLY**; live Fabric writes need an authorized writer that is added later.\n"
+    },
+    {
+      "label": "L100",
+      "level": "l100",
+      "markdown": "## What it is\n\nA **governed action** is any change an agent wants to make to a business system or a Fabric item.\nInstead of letting the agent call a \"create\" tool directly, the change goes through six steps:\n\n```text\nPLAN \u2192 VALIDATE \u2192 APPROVE \u2192 EXECUTE \u2192 VERIFY \u2192 AUDIT\n```\n\n- **Plan:** the agent describes the change. Nothing runs.\n- **Validate:** rules check it \u2014 is the operation allowed, is the workspace known, does the item already exist?\n- **Approve:** a different person says yes or no.\n- **Execute:** a dedicated service performs exactly the approved change.\n- **Verify:** the system checks the result.\n- **Audit:** every step is recorded with a correlation ID.\n\n## Key ideas\n\n- **The model proposes; it never authorizes.** An agent asking to do something is not proof that\n  the user is allowed to do it.\n- **MCP is access, not authority.** A tool being available does not mean it may be used.\n- **Simulation is labeled.** In offline mode, execution happens in a simulated workspace and the\n  result says `SIMULATED`.\n"
+    },
+    {
+      "label": "L200",
+      "level": "l200",
+      "markdown": "## Components and boundaries\n\n| Component | Responsibility | Must not |\n|---|---|---|\n| Agent (Foundry, Copilot, Claude Code) | Gather context, draft the plan | Approve or execute |\n| Change service | Plan, validate, store, enforce approval rules | Trust the agent's claims |\n| Policy (`config/policies/writes.yaml`) | Operations, risk, rollback, destinations | Be bypassed by an overlay |\n| Customer overlay | Narrow allowed writes and workspace aliases | Remove the approval step |\n| Approver (human) | Accept the risk | Approve their own request |\n| Scoped writer | Perform the write on the bound target | Hold broad permissions |\n| Audit store | Append redacted records | Store tokens or secrets |\n\n## Identity paths\n\n- The **requester** identity is recorded on the plan.\n- The **approver** identity must differ (separation of duties).\n- The **writer** identity is separate again and least-privileged.\n\n## Trade-offs\n\n- More steps than a direct tool call \u2014 that friction is intentional for high-impact changes.\n- Low-risk, reversible reads do not need this flow; the pattern applies to writes.\n\n## Online and offline\n\n| Destination | OFFLINE / LOCAL | LIVE |\n|---|---|---|\n| Execution | Simulated workspace, labeled `SIMULATED` | Needs `FFIA_ALLOW_LIVE_MUTATION=1`, approval and an authorized writer |\n| If the writer is unavailable | \u2014 | `UNAVAILABLE`; **never** redirected to LOCAL |\n"
+    },
+    {
+      "label": "L300",
+      "level": "l300",
+      "markdown": "## Running the flow\n\nStart the control plane (`make run-api`) and walk the flow with the REST API:\n\n```bash\n# 1. PLAN (nothing runs)\ncurl -s -X POST localhost:8000/api/v1/plans -H 'Content-Type: application/json' -d '{\n  \"operation\": \"create_lakehouse\",\n  \"target\": {\"workspace_alias\": \"demo-dev\", \"item_type\": \"Lakehouse\",\n             \"item_name\": \"bronze_lab\", \"destination\": \"LOCAL\"},\n  \"reason\": \"Lab: governed change\", \"requested_by\": \"engineer-a\"}'\n\n# 2. APPROVE as a different person (self-approval returns 409)\ncurl -s -X POST localhost:8000/api/v1/approvals -H 'Content-Type: application/json' \\\n  -d '{\"change_id\": \"<change_id>\", \"approver\": \"approver-b\", \"decision\": \"APPROVED\"}'\n\n# 3. EXECUTE with the approval (LOCAL \u2192 SIMULATED, then VERIFIED)\ncurl -s -X POST localhost:8000/api/v1/fabric/change -H 'Content-Type: application/json' \\\n  -d '{\"change_id\": \"<change_id>\", \"approval_id\": \"<approval_id>\", \"executed_by\": \"scoped-writer\"}'\n\n# 4. AUDIT\ncurl -s localhost:8000/api/v1/audit/<correlation_id>\n```\n\n## Through MCP\n\nThe `ffia-local` server exposes `generate_fabric_change_plan` and `validate_change_plan` only.\nThere is no approve or execute tool, so a coding agent can draft a plan but cannot apply it.\n\n## What the tests prove\n\n`tests/unit/test_config_policy_changes.py` covers self-approval refusal, approval expiry,\nrejected approvals, duplicate blocking, destination tampering and LIVE refusal without redirect.\n"
+    },
+    {
+      "label": "L400",
+      "level": "l400",
+      "markdown": "## Enforcement details\n\n- **Policy evaluation is deterministic.** `evaluate_write` returns `allowed`, `risk` and reasons\n  from the policy file and overlay; `approval_required` is always true for writes.\n- **Preconditions.** For create operations the plan records whether the item already exists; a\n  duplicate makes the plan `BLOCKED`. For LIVE targets the precondition is recorded as\n  `REQUIRES TENANT VALIDATION` because no live provider has checked it.\n- **Destination binding.** The plan stores `destination_hash` (target + destination). Execution\n  recomputes it and refuses a mismatch, which defeats \"approve one thing, execute another\".\n- **Approval lifecycle.** Approvals expire after `approval_ttl_minutes`; rejected approvals mark\n  the plan `REJECTED`; an executed plan cannot be executed again (409).\n- **No silent redirect.** `LiveWriteUnavailableError` is raised for approved LIVE plans until an\n  authorized writer exists; the simulated workspace is untouched, and the offline demo asserts it.\n\n## Threats this addresses\n\n| Threat | Control |\n|---|---|\n| Prompt injection asks the agent to write | No write tool over MCP; approval is out-of-band |\n| Agent approves its own plan | Separation of duties |\n| Approval reused for another target | Destination hash |\n| Race between approval and execution | Precondition re-check at execution |\n| Fake success from a simulation | Labels + LIVE never redirected |\n| Missing evidence | Audit record per step under one correlation ID |\n\n## Production gaps to close\n\nA real writer needs an Entra identity scoped to the target workspace, exact item IDs (not names),\na post-write read from the system of record, and an append-only audit sink outside the app.\n"
+    }
+  ],
+  "pattern_ids": [
+    "P08"
+  ],
+  "prerequisites": [],
+  "production_notes": [
+    "Approvals belong to an identity with the authority to accept the risk, recorded with who, when and why.",
+    "Expire approvals and bind them to the exact target; re-check preconditions at execution time.",
+    "The writer identity is a separate, least-privilege identity (for example a managed identity scoped to one workspace).",
+    "Verify against the system of record after the write and keep the audit trail append-only."
+  ],
+  "related_guides": [
+    "hc-01-fabric-mcp-powerbi-medallion-lab"
+  ],
+  "related_labs": [
+    "lab-governed-change"
+  ],
+  "sources": [
+    "foundry-agent-service",
+    "agent-framework",
+    "fabric-rest-identity"
+  ],
+  "status": "GA",
+  "summary": "Models propose, deterministic logic validates, policy constrains, a human approves and only a narrowly scoped writer changes anything. Every step leaves evidence.",
+  "title": "P08: Human-in-the-loop governed action",
+  "try_it": [
+    {
+      "command": "ffia demo offline",
+      "label": "Run the governed-change act of the offline demo",
+      "result_label": "SIMULATED"
+    },
+    {
+      "command": "curl -s -X POST localhost:8000/api/v1/plans -H 'Content-Type: application/json' -d @plan.json",
+      "label": "Propose a plan through the API (then approve as a different person)",
+      "result_label": "SIMULATED"
+    }
+  ]
+}

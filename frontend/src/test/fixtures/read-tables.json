@@ -1,0 +1,1351 @@
+{
+  "cloud_operation_performed": false,
+  "correlation_id": "5b0ef392e9a04b48aeaf76320d91b3e5",
+  "data": [
+    {
+      "columns": [
+        {
+          "data_type": "VARCHAR",
+          "name": "claim_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "patient_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "encounter_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "claim_date"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "payer"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "payer_type"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "claim_amount"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "paid_amount"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "denied_amount"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "patient_responsibility"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "denial_reason"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "claim_status"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "days_to_payment"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "_source_file"
+        },
+        {
+          "data_type": "TIMESTAMP WITH TIME ZONE",
+          "name": "_ingested_at"
+        }
+      ],
+      "layer": "bronze",
+      "name": "bronze_claims",
+      "row_count": 1025
+    },
+    {
+      "columns": [
+        {
+          "data_type": "VARCHAR",
+          "name": "note_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "patient_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "encounter_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "note_date"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "note_type"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "provider"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "note_text"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "_source_file"
+        },
+        {
+          "data_type": "TIMESTAMP WITH TIME ZONE",
+          "name": "_ingested_at"
+        }
+      ],
+      "layer": "bronze",
+      "name": "bronze_clinical_notes",
+      "row_count": 150
+    },
+    {
+      "columns": [
+        {
+          "data_type": "VARCHAR",
+          "name": "condition_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "patient_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "encounter_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "condition_code"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "condition_description"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "condition_type"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "date_diagnosed"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "status"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "_source_file"
+        },
+        {
+          "data_type": "TIMESTAMP WITH TIME ZONE",
+          "name": "_ingested_at"
+        }
+      ],
+      "layer": "bronze",
+      "name": "bronze_conditions",
+      "row_count": 428
+    },
+    {
+      "columns": [
+        {
+          "data_type": "VARCHAR",
+          "name": "encounter_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "patient_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "encounter_date"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "encounter_time"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "discharge_date"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "encounter_type"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "facility_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "facility_name"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "department"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "primary_diagnosis_code"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "primary_diagnosis_description"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "attending_provider"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "discharge_disposition"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "length_of_stay_days"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "total_charges"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "_source_file"
+        },
+        {
+          "data_type": "TIMESTAMP WITH TIME ZONE",
+          "name": "_ingested_at"
+        }
+      ],
+      "layer": "bronze",
+      "name": "bronze_encounters",
+      "row_count": 1025
+    },
+    {
+      "columns": [
+        {
+          "data_type": "VARCHAR",
+          "name": "medication_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "patient_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "encounter_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "medication_name"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "medication_class"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "dosage"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "frequency"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "prescriber"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "start_date"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "end_date"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "status"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "_source_file"
+        },
+        {
+          "data_type": "TIMESTAMP WITH TIME ZONE",
+          "name": "_ingested_at"
+        }
+      ],
+      "layer": "bronze",
+      "name": "bronze_medications",
+      "row_count": 643
+    },
+    {
+      "columns": [
+        {
+          "data_type": "VARCHAR",
+          "name": "patient_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "first_name"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "last_name"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "date_of_birth"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "age"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "gender"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "race"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "zip_code"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "city"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "state"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "insurance_type"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "primary_care_provider"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "risk_score"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "_source_file"
+        },
+        {
+          "data_type": "TIMESTAMP WITH TIME ZONE",
+          "name": "_ingested_at"
+        }
+      ],
+      "layer": "bronze",
+      "name": "bronze_patients",
+      "row_count": 200
+    },
+    {
+      "columns": [
+        {
+          "data_type": "VARCHAR",
+          "name": "vital_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "patient_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "encounter_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "facility_name"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "department"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "timestamp"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "heart_rate"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "systolic_bp"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "diastolic_bp"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "temperature_f"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "respiratory_rate"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "spo2_percent"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "pain_level"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "_source_file"
+        },
+        {
+          "data_type": "TIMESTAMP WITH TIME ZONE",
+          "name": "_ingested_at"
+        }
+      ],
+      "layer": "bronze",
+      "name": "bronze_vitals",
+      "row_count": 4299
+    },
+    {
+      "columns": [
+        {
+          "data_type": "VARCHAR",
+          "name": "claim_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "patient_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "encounter_id"
+        },
+        {
+          "data_type": "DATE",
+          "name": "claim_date"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "payer"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "payer_type"
+        },
+        {
+          "data_type": "DECIMAL(12,2)",
+          "name": "claim_amount"
+        },
+        {
+          "data_type": "DECIMAL(12,2)",
+          "name": "paid_amount"
+        },
+        {
+          "data_type": "DECIMAL(12,2)",
+          "name": "denied_amount"
+        },
+        {
+          "data_type": "DECIMAL(12,2)",
+          "name": "patient_responsibility"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "denial_reason"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "claim_status"
+        },
+        {
+          "data_type": "INTEGER",
+          "name": "days_to_payment"
+        },
+        {
+          "data_type": "BOOLEAN",
+          "name": "is_denied"
+        },
+        {
+          "data_type": "DOUBLE",
+          "name": "payment_ratio"
+        }
+      ],
+      "layer": "silver",
+      "name": "silver_claims",
+      "row_count": 1025
+    },
+    {
+      "columns": [
+        {
+          "data_type": "VARCHAR",
+          "name": "note_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "patient_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "encounter_id"
+        },
+        {
+          "data_type": "DATE",
+          "name": "note_date"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "note_type"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "provider"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "note_text"
+        },
+        {
+          "data_type": "BOOLEAN",
+          "name": "has_literal_newline_sequence"
+        },
+        {
+          "data_type": "BOOLEAN",
+          "name": "has_embedded_newline"
+        }
+      ],
+      "layer": "silver",
+      "name": "silver_clinical_notes",
+      "row_count": 150
+    },
+    {
+      "columns": [
+        {
+          "data_type": "VARCHAR",
+          "name": "condition_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "patient_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "encounter_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "condition_code"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "condition_description"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "condition_type"
+        },
+        {
+          "data_type": "DATE",
+          "name": "date_diagnosed"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "status"
+        },
+        {
+          "data_type": "BOOLEAN",
+          "name": "is_chronic"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "condition_category"
+        }
+      ],
+      "layer": "silver",
+      "name": "silver_conditions",
+      "row_count": 428
+    },
+    {
+      "columns": [
+        {
+          "data_type": "VARCHAR",
+          "name": "encounter_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "patient_id"
+        },
+        {
+          "data_type": "DATE",
+          "name": "encounter_date"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "encounter_time"
+        },
+        {
+          "data_type": "DATE",
+          "name": "discharge_date"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "encounter_type"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "facility_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "facility_name"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "department"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "primary_diagnosis_code"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "primary_diagnosis_description"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "attending_provider"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "discharge_disposition"
+        },
+        {
+          "data_type": "INTEGER",
+          "name": "length_of_stay_days"
+        },
+        {
+          "data_type": "DECIMAL(12,2)",
+          "name": "total_charges"
+        },
+        {
+          "data_type": "BIGINT",
+          "name": "encounter_year"
+        },
+        {
+          "data_type": "BIGINT",
+          "name": "encounter_quarter"
+        },
+        {
+          "data_type": "BIGINT",
+          "name": "encounter_month"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "los_band"
+        },
+        {
+          "data_type": "BOOLEAN",
+          "name": "is_inpatient"
+        },
+        {
+          "data_type": "BOOLEAN",
+          "name": "is_ed"
+        },
+        {
+          "data_type": "BOOLEAN",
+          "name": "is_chronology_valid"
+        },
+        {
+          "data_type": "BOOLEAN",
+          "name": "is_los_consistent"
+        },
+        {
+          "data_type": "BOOLEAN",
+          "name": "overlaps_prior_encounter"
+        }
+      ],
+      "layer": "silver",
+      "name": "silver_encounters",
+      "row_count": 1025
+    },
+    {
+      "columns": [
+        {
+          "data_type": "VARCHAR",
+          "name": "medication_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "patient_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "encounter_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "medication_name"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "medication_class"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "dosage"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "frequency"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "prescriber"
+        },
+        {
+          "data_type": "DATE",
+          "name": "start_date"
+        },
+        {
+          "data_type": "DATE",
+          "name": "end_date"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "status"
+        },
+        {
+          "data_type": "BOOLEAN",
+          "name": "is_chronology_valid"
+        }
+      ],
+      "layer": "silver",
+      "name": "silver_medications",
+      "row_count": 643
+    },
+    {
+      "columns": [
+        {
+          "data_type": "VARCHAR",
+          "name": "patient_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "first_name"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "last_name"
+        },
+        {
+          "data_type": "DATE",
+          "name": "date_of_birth"
+        },
+        {
+          "data_type": "INTEGER",
+          "name": "age"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "gender"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "race"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "zip_code"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "city"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "state"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "insurance_type"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "primary_care_provider"
+        },
+        {
+          "data_type": "DECIMAL(4,2)",
+          "name": "risk_score"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "age_band"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "risk_category"
+        }
+      ],
+      "layer": "silver",
+      "name": "silver_patients",
+      "row_count": 200
+    },
+    {
+      "columns": [
+        {
+          "data_type": "VARCHAR",
+          "name": "vital_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "patient_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "encounter_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "facility_name"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "department"
+        },
+        {
+          "data_type": "TIMESTAMP",
+          "name": "vital_timestamp"
+        },
+        {
+          "data_type": "INTEGER",
+          "name": "heart_rate"
+        },
+        {
+          "data_type": "INTEGER",
+          "name": "systolic_bp"
+        },
+        {
+          "data_type": "INTEGER",
+          "name": "diastolic_bp"
+        },
+        {
+          "data_type": "DECIMAL(4,1)",
+          "name": "temperature_f"
+        },
+        {
+          "data_type": "INTEGER",
+          "name": "respiratory_rate"
+        },
+        {
+          "data_type": "INTEGER",
+          "name": "spo2_percent"
+        },
+        {
+          "data_type": "INTEGER",
+          "name": "pain_level"
+        },
+        {
+          "data_type": "BOOLEAN",
+          "name": "is_out_of_range"
+        }
+      ],
+      "layer": "silver",
+      "name": "silver_vitals",
+      "row_count": 4299
+    },
+    {
+      "columns": [
+        {
+          "data_type": "DATE",
+          "name": "date"
+        },
+        {
+          "data_type": "BIGINT",
+          "name": "year"
+        },
+        {
+          "data_type": "BIGINT",
+          "name": "quarter"
+        },
+        {
+          "data_type": "BIGINT",
+          "name": "month"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "month_name"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "year_month"
+        },
+        {
+          "data_type": "BIGINT",
+          "name": "day_of_week"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "day_name"
+        },
+        {
+          "data_type": "BOOLEAN",
+          "name": "is_weekend"
+        }
+      ],
+      "layer": "gold",
+      "name": "dim_date",
+      "row_count": 742
+    },
+    {
+      "columns": [
+        {
+          "data_type": "VARCHAR",
+          "name": "facility_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "facility_name"
+        }
+      ],
+      "layer": "gold",
+      "name": "dim_facility",
+      "row_count": 5
+    },
+    {
+      "columns": [
+        {
+          "data_type": "VARCHAR",
+          "name": "patient_id"
+        },
+        {
+          "data_type": "INTEGER",
+          "name": "age"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "age_band"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "gender"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "race"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "city"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "state"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "insurance_type"
+        },
+        {
+          "data_type": "DECIMAL(4,2)",
+          "name": "risk_score"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "risk_category"
+        },
+        {
+          "data_type": "BIGINT",
+          "name": "condition_count"
+        },
+        {
+          "data_type": "BIGINT",
+          "name": "chronic_condition_count"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "multimorbidity_group"
+        },
+        {
+          "data_type": "BOOLEAN",
+          "name": "has_diabetes"
+        },
+        {
+          "data_type": "BOOLEAN",
+          "name": "has_hypertension"
+        },
+        {
+          "data_type": "BOOLEAN",
+          "name": "has_heart_failure"
+        },
+        {
+          "data_type": "BOOLEAN",
+          "name": "has_copd"
+        },
+        {
+          "data_type": "BOOLEAN",
+          "name": "has_ckd"
+        }
+      ],
+      "layer": "gold",
+      "name": "dim_patient",
+      "row_count": 200
+    },
+    {
+      "columns": [
+        {
+          "data_type": "VARCHAR",
+          "name": "payer_key"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "payer"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "payer_type"
+        }
+      ],
+      "layer": "gold",
+      "name": "dim_payer",
+      "row_count": 5
+    },
+    {
+      "columns": [
+        {
+          "data_type": "VARCHAR",
+          "name": "primary_diagnosis_code"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "primary_diagnosis_description"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "facility_id"
+        },
+        {
+          "data_type": "BIGINT",
+          "name": "inpatient_count"
+        },
+        {
+          "data_type": "DOUBLE",
+          "name": "total_los_days"
+        },
+        {
+          "data_type": "DOUBLE",
+          "name": "average_los_days"
+        }
+      ],
+      "layer": "gold",
+      "name": "gold_alos",
+      "row_count": 24
+    },
+    {
+      "columns": [
+        {
+          "data_type": "VARCHAR",
+          "name": "patient_id"
+        },
+        {
+          "data_type": "BIGINT",
+          "name": "year"
+        },
+        {
+          "data_type": "BIGINT",
+          "name": "ed_visit_count"
+        },
+        {
+          "data_type": "BOOLEAN",
+          "name": "is_frequent_ed_user"
+        }
+      ],
+      "layer": "gold",
+      "name": "gold_ed_utilization",
+      "row_count": 151
+    },
+    {
+      "columns": [
+        {
+          "data_type": "VARCHAR",
+          "name": "encounter_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "patient_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "facility_id"
+        },
+        {
+          "data_type": "DATE",
+          "name": "encounter_date"
+        },
+        {
+          "data_type": "DATE",
+          "name": "discharge_date"
+        },
+        {
+          "data_type": "BIGINT",
+          "name": "encounter_year"
+        },
+        {
+          "data_type": "BIGINT",
+          "name": "encounter_month"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "encounter_type"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "department"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "primary_diagnosis_code"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "primary_diagnosis_description"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "discharge_disposition"
+        },
+        {
+          "data_type": "INTEGER",
+          "name": "length_of_stay_days"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "los_band"
+        },
+        {
+          "data_type": "DECIMAL(12,2)",
+          "name": "total_charges"
+        },
+        {
+          "data_type": "BOOLEAN",
+          "name": "is_inpatient"
+        },
+        {
+          "data_type": "BOOLEAN",
+          "name": "is_ed"
+        },
+        {
+          "data_type": "BIGINT",
+          "name": "vital_sign_count"
+        },
+        {
+          "data_type": "BIGINT",
+          "name": "medication_order_count"
+        }
+      ],
+      "layer": "gold",
+      "name": "gold_encounter_summary",
+      "row_count": 1025
+    },
+    {
+      "columns": [
+        {
+          "data_type": "VARCHAR",
+          "name": "claim_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "encounter_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "patient_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "facility_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "payer_key"
+        },
+        {
+          "data_type": "DATE",
+          "name": "claim_date"
+        },
+        {
+          "data_type": "DECIMAL(12,2)",
+          "name": "claim_amount"
+        },
+        {
+          "data_type": "DECIMAL(12,2)",
+          "name": "paid_amount"
+        },
+        {
+          "data_type": "DECIMAL(12,2)",
+          "name": "denied_amount"
+        },
+        {
+          "data_type": "DECIMAL(12,2)",
+          "name": "patient_responsibility"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "claim_status"
+        },
+        {
+          "data_type": "BOOLEAN",
+          "name": "is_denied"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "denial_reason"
+        },
+        {
+          "data_type": "INTEGER",
+          "name": "days_to_payment"
+        },
+        {
+          "data_type": "DOUBLE",
+          "name": "payment_ratio"
+        }
+      ],
+      "layer": "gold",
+      "name": "gold_financial",
+      "row_count": 1025
+    },
+    {
+      "columns": [
+        {
+          "data_type": "VARCHAR",
+          "name": "patient_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "age_band"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "risk_category"
+        },
+        {
+          "data_type": "BIGINT",
+          "name": "condition_count"
+        },
+        {
+          "data_type": "BIGINT",
+          "name": "chronic_condition_count"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "multimorbidity_group"
+        },
+        {
+          "data_type": "BOOLEAN",
+          "name": "has_diabetes"
+        },
+        {
+          "data_type": "BOOLEAN",
+          "name": "has_hypertension"
+        },
+        {
+          "data_type": "BOOLEAN",
+          "name": "has_heart_failure"
+        },
+        {
+          "data_type": "BOOLEAN",
+          "name": "has_copd"
+        },
+        {
+          "data_type": "BOOLEAN",
+          "name": "has_ckd"
+        }
+      ],
+      "layer": "gold",
+      "name": "gold_population_health",
+      "row_count": 200
+    },
+    {
+      "columns": [
+        {
+          "data_type": "VARCHAR",
+          "name": "index_encounter_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "patient_id"
+        },
+        {
+          "data_type": "VARCHAR",
+          "name": "facility_id"
+        },
+        {
+          "data_type": "DATE",
+          "name": "index_admission_date"
+        },
+        {
+          "data_type": "DATE",
+          "name": "index_discharge_date"
+        },
+        {
+          "data_type": "DATE",
+          "name": "next_admission_date"
+        },
+        {
+          "data_type": "BIGINT",
+          "name": "days_to_next_admission"
+        },
+        {
+          "data_type": "BOOLEAN",
+          "name": "is_readmitted_30d"
+        },
+        {
+          "data_type": "BOOLEAN",
+          "name": "is_followup_eligible"
+        },
+        {
+          "data_type": "DATE",
+          "name": "observation_cutoff"
+        }
+      ],
+      "layer": "gold",
+      "name": "gold_readmissions",
+      "row_count": 217
+    }
+  ],
+  "equivalent_fabric_service": "Fabric Lakehouse Delta tables (OneLake)",
+  "evidence": [
+    {
+      "category": "SIMULATED LOCALLY",
+      "reference": null,
+      "statement": "Described 24 local Parquet tables."
+    }
+  ],
+  "execution_label": "LOCAL",
+  "fallback_reason": null,
+  "fallback_used": false,
+  "operating_mode": "OFFLINE",
+  "requested_provider": "Local Fabric Educational Provider",
+  "selected_provider": "Local Fabric Educational Provider",
+  "simulation_notice": "LOCAL educational analog over synthetic Parquet data. No Microsoft Fabric, OneLake or Power BI operation was performed.",
+  "teaching_objective": "See the medallion layers: Bronze preserves, Silver conforms, Gold serves.",
+  "timestamp": "2026-10-07T21:42:09.976663Z"
+}

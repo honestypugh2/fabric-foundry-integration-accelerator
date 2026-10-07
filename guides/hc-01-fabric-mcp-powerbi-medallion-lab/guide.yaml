@@ -126,6 +126,7 @@ steps:
     tool_path: {provider: Fabric MCP Server (local), server: fabric-mcp, tools: [onelake_list-items, core_create-item]}
     writes: true
     approval_required: true
+    rehearsal: {operation: create_lakehouse, item_type: Lakehouse, item_name: healthcare_lakehouse, note: "Rehearse twice to see the duplicate check block the second plan."}
     checkpoint: Exactly one healthcare_lakehouse exists and its ID is recorded locally.
     evidence_required:
       - The create call response and a follow-up listing that shows one matching lakehouse.
@@ -149,6 +150,7 @@ steps:
     tool_path: {provider: Fabric MCP Server (local), server: fabric-mcp, tools: [onelake_upload-file, onelake_list-files]}
     writes: true
     approval_required: true
+    rehearsal: {operation: upload_files, item_type: Lakehouse, item_name: healthcare_lakehouse, note: "Needs the step 04 rehearsal first: the target lakehouse must exist."}
     checkpoint: Files/raw contains exactly the seven CSVs and every remote size matches its local file.
     evidence_required:
       - onelake_list-files output with seven files and sizes equal to the local files.
@@ -218,6 +220,7 @@ steps:
     tool_path: {provider: Fabric Data Engineering extension, tools: [fabricWorkspaceInfo, Microsoft Fabric Runtime kernel]}
     writes: true
     approval_required: true
+    rehearsal: {operation: create_notebook, item_type: Notebook, item_name: MCP_01_Bronze, note: "Covers publishing the notebook item. Running it is a separate action on Fabric Spark."}
     checkpoint: Seven Bronze Delta tables exist with persisted counts equal to the baseline.
     evidence_required:
       - Printed input and persisted counts for all seven tables, and a cloud notebook ID with the correct binding.
@@ -241,6 +244,7 @@ steps:
     tool_path: {provider: Fabric Data Engineering extension, tools: [Microsoft Fabric Runtime kernel]}
     writes: true
     approval_required: true
+    rehearsal: {operation: create_notebook, item_type: Notebook, item_name: MCP_02_Silver, note: "Covers publishing the notebook item. Running it is a separate action on Fabric Spark."}
     checkpoint: Seven typed Silver tables preserve the baseline counts, and parsing and range issues are explained.
     evidence_required:
       - Persisted counts and diagnostics for overlapping encounters, length-of-stay mismatches, blank charges and out-of-range vitals.
@@ -262,6 +266,7 @@ steps:
     tool_path: {provider: Fabric Data Engineering extension, tools: [Microsoft Fabric Runtime kernel]}
     writes: true
     approval_required: true
+    rehearsal: {operation: create_notebook, item_type: Notebook, item_name: MCP_03_Gold, note: "Covers publishing the notebook item. Running it is a separate action on Fabric Spark."}
     checkpoint: Twenty-four lab tables exist (7 Bronze, 7 Silver, 6 Gold, 4 dimensions) and reconciliation totals are captured.
     evidence_required:
       - Grain and key assertions pass; financial totals reconcile; readmission numerator and denominator printed.
@@ -281,8 +286,9 @@ steps:
       Connect to <MODEL_ID> with the Power BI Authoring MCP server and report tables, storage modes and
       relationships. Read-only.
     tool_path: {provider: Power BI Authoring MCP (local), server: powerbi-modeling-mcp, tools: [connection, model inspection]}
-    writes: false
-    approval_required: false
+    writes: true
+    approval_required: true
+    rehearsal: {operation: create_semantic_model, item_type: SemanticModel, item_name: healthcare_semantic_model, note: "The live step creates the model in the portal; connecting the tools afterwards is read-only."}
     checkpoint: The exact model is connected and its seven tables use Direct Lake.
     evidence_required:
       - The connected model identity and the table list returned by the server.
@@ -304,6 +310,7 @@ steps:
     tool_path: {provider: Power BI Authoring MCP (local), server: powerbi-modeling-mcp, tools: [relationships, measures, DAX query]}
     writes: true
     approval_required: true
+    rehearsal: {operation: update_semantic_model, item_type: SemanticModel, item_name: healthcare_semantic_model, note: "Needs the step 11 rehearsal first: the model must exist."}
     checkpoint: Relationships are verified and every DAX check equals the expected baseline.
     evidence_required:
       - DAX query results compared value by value with the expected baseline (POST /api/v1/evaluations/run).
@@ -339,6 +346,7 @@ steps:
     tool_path: {provider: Power BI authoring skills, tools: [report planner, report authoring]}
     writes: true
     approval_required: true
+    rehearsal: {operation: publish_report, item_type: Report, item_name: healthcare_report, note: "Publication is the write. A local PBIR file is not publication."}
     checkpoint: The report renders in preview, cards reconcile with DAX checks, and it is published as a separate step.
     evidence_required:
       - Rendered pages reviewed, then the published report ID, workspace ID and model binding.

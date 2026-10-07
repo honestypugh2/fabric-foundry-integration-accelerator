@@ -1,0 +1,89 @@
+id: power-bi-agentic-tooling
+area: fabric
+title: "Power BI agentic tooling for data engineers"
+summary: >-
+  How coding agents work with Power BI the governed way - semantic models and reports as
+  PBIP/PBIR/TMDL files in Git, the Power BI Authoring (Modeling) MCP server for model edits,
+  semantic-model and report skills for procedure, Fabric IQ MCP for read-only DAX checks, and
+  Direct Lake over the Gold layer. Numbers are proven by reconciling DAX with the Gold baseline,
+  and a local PBIR file is never mistaken for publication.
+status: MIXED
+pattern_ids: [P12, P19]
+learning_objectives:
+  - Explain the roles of PBIP, PBIR and TMDL files, the Power BI Authoring MCP server, the authoring skills and Fabric IQ MCP.
+  - Distinguish the local (GA) and hosted (PREVIEW) deployments of Power BI Authoring MCP.
+  - Walk the HC-01 flow - relationships, measures, DAX reconciliation against the Gold baseline, review, then a two-page report.
+  - Use the repository's semantic model contract and evaluate_measures to reconcile measures offline.
+  - Explain why a valid local PBIR file is not evidence of publication.
+prerequisites: [fabric-mcp-landscape]
+concepts:
+  - term: PBIP
+    definition: Power BI Project - a folder format that saves a report and semantic model as text files that work with Git.
+  - term: TMDL
+    definition: Tabular Model Definition Language - the text format for semantic model objects (tables, relationships, measures) inside a PBIP.
+  - term: PBIR
+    definition: The enhanced, file-per-visual report definition format inside a PBIP project.
+  - term: Direct Lake
+    definition: A semantic model storage mode that reads Delta tables in OneLake directly, without importing a copy.
+  - term: Measure contract
+    definition: A declared measure with a definition, format, reference DAX and an expected value, used to prove the model computes the right numbers.
+  - term: Reconciliation
+    definition: Comparing DAX results with the independently computed Gold baseline, value by value, within a tolerance.
+evidence:
+  - statement: Power BI Authoring MCP is GA as a local server (stdio, reaches Power BI Desktop and PBIP files) and PREVIEW as a hosted server (semantic models only); both can modify models.
+    category: DOCUMENTED FABRIC BEHAVIOR
+    sources: [powerbi-authoring-mcp]
+  - statement: Fabric IQ MCP is GA and read-only; it discovers semantic models and runs DAX queries under the caller's permissions.
+    category: DOCUMENTED FABRIC BEHAVIOR
+    sources: [fabric-iq-mcp]
+  - statement: Direct Lake models read Delta tables in OneLake directly.
+    category: DOCUMENTED FABRIC BEHAVIOR
+    sources: [fabric-direct-lake]
+  - statement: Fabric Git integration stores item definitions such as semantic models and reports as files; it does not store table data.
+    category: DOCUMENTED FABRIC BEHAVIOR
+    sources: [fabric-git-integration]
+  - statement: Semantic-model and report authoring skills are published in the open-source skills-for-fabric project, which is pre-1.0 as of October 2026.
+    category: DOCUMENTED FABRIC BEHAVIOR
+    sources: [skills-for-fabric]
+  - statement: The repository's semantic model contract is evaluated locally with DuckDB over Gold Parquet and compared with the committed baseline; results are labeled LOCAL.
+    category: SIMULATED LOCALLY
+  - statement: Whether the live Direct Lake model's DAX results equal the Gold baseline must be checked in the tenant for each build.
+    category: REQUIRES TENANT VALIDATION
+  - statement: Edit models through Power BI Authoring MCP only on a sandbox PBIP copy or a dev model, after a reviewed proposal, and publish as a separate approved step.
+    category: PRODUCTION RECOMMENDATION
+try_it:
+  - label: Build the medallion and the expected baseline for the HC-01 profile
+    command: ffia data build --profile hc-lab-7file-v1
+    result_label: LOCAL
+  - label: Read the semantic model contract (tables, relationships, measures, vocabulary)
+    command: "curl -s -X POST localhost:8000/api/v1/fabric/read -H 'content-type: application/json' -d '{\"operation\":\"get_semantic_model\",\"semantic_model_id\":\"local-sm-hc-lab-7file-v1\"}'"
+    result_label: LOCAL
+  - label: Reconcile every measure with the expected baseline
+    command: "curl -s -X POST localhost:8000/api/v1/evaluations/run -H 'content-type: application/json' -d '{\"profile\":\"hc-lab-7file-v1\"}'"
+    result_label: LOCAL
+copilot_prompt: >-
+  Using the ffia-local MCP server, call evaluate_measures for profile hc-lab-7file-v1 and then
+  evaluate_against_baseline with observed_label LOCAL. Read
+  data/synthetic/semantic/hc-lab-7file-v1/semantic-model.yaml and explain, for three measures,
+  how the DAX definition relates to the SQL definition and why the bed occupancy measure is
+  excluded. Do not call any Power BI or Fabric server.
+claude_code_prompt: >-
+  Read data/synthetic/semantic/hc-lab-7file-v1/semantic-model.yaml and the HC-01 guide steps
+  11 to 14. Propose (do not apply) the relationships and measure changes you would make through
+  Power BI Authoring MCP, list the DAX checks you would run with Fabric IQ MCP, and use the
+  ffia-local evaluate_measures tool to show the expected values. Make no changes.
+production_notes:
+  - Keep PBIP/TMDL/PBIR in Git and review model changes as pull requests; the diff is the review surface.
+  - Use the local Power BI Authoring MCP server against a sandbox copy or a dev model; keep the hosted preview server behind a feature flag.
+  - Reconcile every measure with an independently computed baseline before a report is reviewed; appearance is not correctness.
+  - Publishing is a separate, approved step; record the published report, workspace and model binding as evidence.
+  - Label demonstration metrics as synthetic and never present them as clinical quality measures.
+sources:
+  - powerbi-authoring-mcp
+  - fabric-iq-mcp
+  - fabric-direct-lake
+  - fabric-git-integration
+  - skills-for-fabric
+  - fabric-medallion
+related_labs: [lab-copilot-maturity-ladder]
+related_guides: [hc-01-fabric-mcp-powerbi-medallion-lab]

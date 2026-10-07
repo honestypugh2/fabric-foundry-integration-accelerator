@@ -1,0 +1,159 @@
+id: lab-resilience-break-it
+title: "Break it: simulated Fabric outage, labeled fallback and the circuit breaker"
+summary: >-
+  Run the readiness check and the offline release gate, then inject a simulated Fabric outage in
+  HYBRID mode. Watch reads fall back to the local provider with a visible reason, watch the circuit
+  breaker open, recover, and verify that every result is honestly labeled. No cloud service is
+  contacted at any point.
+level: l300
+duration_minutes: 25
+mode: OFFLINE
+pattern_ids: [P17]
+lessons: [p17-resilience, p16-evaluation-observability]
+prerequisites: []
+steps:
+  - stage: LEARN
+    title: Understand the three modes and the router policy
+    instructions: >-
+      Read the P17 lesson and the resilience architecture note. In HYBRID, reads for fabric_data
+      prefer live, may fall back to local, time out after 5 seconds and retry once; the breaker opens
+      after 3 consecutive failed requests and allows one trial call after 60 seconds. Writes and
+      client errors never fall back. Activate the virtual environment in every terminal you use.
+    commands:
+      - source .venv/bin/activate
+      - cat docs/architecture/resilience.md
+      - cat config/environments/hybrid.yaml config/policies/fallback.yaml
+    expected: You can state which capabilities may fall back in HYBRID and what the breaker thresholds are.
+    evidence_category: SIMULATED LOCALLY
+  - stage: SEE
+    title: Check readiness and run the offline release gate
+    instructions: >-
+      Probe every component and read the recommended mode, then run the ten-act offline demo. Find
+      act 7 in the output - it builds a HYBRID router with a simulated outage, shows four reads
+      falling back, the breaker opening after three failures and the last read skipping the live call.
+    commands:
+      - ffia demo check --no-azure-cli
+      - ffia demo offline
+    expected: >-
+      demo check lists each component with a status and recommends a mode (OFFLINE on a laptop with no
+      live provider). demo offline ends with "Release gate: PASSED"; act 7 reports the breaker OPEN
+      after 3 failures and no act reports a LIVE or cloud operation.
+    evidence_category: SIMULATED LOCALLY
+  - stage: BUILD
+    title: Start the control plane in OFFLINE mode and take a baseline read
+    instructions: >-
+      In terminal A start the API with the default (offline) environment. In terminal B list the
+      providers and read three rows of gold_alos, supplying your own correlation ID so you can find
+      the audit record later. Keep terminal A running.
+    commands:
+      - "ffia serve api   # terminal A"
+      - curl -s localhost:8000/api/v1/runtime/providers | python -m json.tool
+      - "curl -s -X POST localhost:8000/api/v1/fabric/read -H 'Content-Type: application/json' -H 'X-Correlation-ID: 0123456789abcdef0123456789abcdef' -d '{\"operation\": \"read_table\", \"lakehouse_id\": \"local-lh-hc-lab-7file-v1\", \"table\": \"gold_alos\", \"limit\": 3}' | python -m json.tool"
+    expected: >-
+      The Local Fabric Educational Provider is ready; the live Fabric provider is NOT AVAILABLE. The
+      read returns operating_mode OFFLINE, execution_label LOCAL, fallback_used false and
+      cloud_operation_performed false.
+    evidence_category: SIMULATED LOCALLY
+  - stage: INSPECT
+    title: Inspect route decisions and the audit trail
+    instructions: >-
+      Look at runtime status: there are no breakers yet because OFFLINE prefers local and never calls
+      a live provider. Then read the audit record for your correlation ID and note which fields an
+      auditor would use to tell a fallback from a live read.
+    commands:
+      - curl -s localhost:8000/api/v1/runtime/status | python -m json.tool
+      - curl -s localhost:8000/api/v1/audit/0123456789abcdef0123456789abcdef | python -m json.tool
+    expected: >-
+      breakers is an empty list and recent_route_decisions shows outcome LOCAL with 0 attempts. The
+      audit record shows action read:read_table, requested and selected provider, operating_mode,
+      execution_label LOCAL, cloud_operation_performed false and fallback_used false.
+    evidence_category: SIMULATED LOCALLY
+  - stage: BREAK IT
+    title: Inject a simulated Fabric outage in HYBRID mode
+    instructions: >-
+      Stop the API in terminal A (Ctrl+C) and restart it in HYBRID mode with the training fault
+      injector. In terminal B list the providers, then send four identical reads and finally read the
+      runtime status. The injector never contacts any service; it fails every call so you can watch the
+      router work.
+    commands:
+      - "FFIA_ENVIRONMENT=hybrid FFIA_SIMULATE_FABRIC_OUTAGE=1 ffia serve api   # terminal A"
+      - curl -s localhost:8000/api/v1/runtime/providers | python -m json.tool
+      - "for i in 1 2 3 4; do curl -s -X POST localhost:8000/api/v1/fabric/read -H 'Content-Type: application/json' -d '{\"operation\": \"read_table\", \"lakehouse_id\": \"local-lh-hc-lab-7file-v1\", \"table\": \"gold_alos\", \"limit\": 3}' | python -m json.tool | grep -E '\"(operating_mode|execution_label|fallback_used|fallback_reason)\"'; done"
+      - curl -s localhost:8000/api/v1/runtime/status | python -m json.tool
+    expected: >-
+      The providers list includes "Fabric REST API (simulated outage)" with kind FAULT-INJECTION and
+      ready false. Every read still returns data with operating_mode HYBRID, execution_label LOCAL,
+      fallback_used true and a fallback_reason naming the simulated outage; the fourth reason says
+      "circuit breaker OPEN after repeated failures". Runtime status shows the fabric_data breaker OPEN
+      with consecutive_failures 3, and route decisions with outcome FALLBACK and attempts 2.
+    evidence_category: SIMULATED LOCALLY
+  - stage: RECOVER
+    title: Remove the outage and restart
+    instructions: >-
+      The outage was injected only through environment variables on the command line, so stop the API
+      (Ctrl+C) and start it again without them. Breaker state lives in memory, so a restart resets it.
+      In a real outage you would not restart; you would wait for the 60-second reset, when the breaker
+      moves to HALF_OPEN and one trial call either closes it or opens it again.
+    commands:
+      - "ffia serve api   # terminal A, no FFIA_ENVIRONMENT or FFIA_SIMULATE_FABRIC_OUTAGE"
+      - curl -s localhost:8000/api/v1/runtime/status | python -m json.tool
+    expected: Runtime status reports operating_mode OFFLINE and an empty breakers list; the simulated-outage provider is gone.
+    evidence_category: SIMULATED LOCALLY
+  - stage: VERIFY
+    title: Verify honest labels, client errors and the evaluation gate
+    instructions: >-
+      Repeat the baseline read and confirm there is no fallback. Ask for a table that does not exist
+      and confirm it is a client error, not an outage. Finally run the baseline evaluation to confirm
+      the numbers the agent would use are still correct.
+    commands:
+      - "curl -s -X POST localhost:8000/api/v1/fabric/read -H 'Content-Type: application/json' -d '{\"operation\": \"read_table\", \"lakehouse_id\": \"local-lh-hc-lab-7file-v1\", \"table\": \"gold_alos\", \"limit\": 3}' | python -m json.tool | grep -E '\"(operating_mode|execution_label|fallback_used)\"'"
+      - "curl -s -o /dev/null -w '%{http_code}\\n' -X POST localhost:8000/api/v1/fabric/read -H 'Content-Type: application/json' -d '{\"operation\": \"read_table\", \"lakehouse_id\": \"local-lh-hc-lab-7file-v1\", \"table\": \"no_such_table\"}'"
+      - "curl -s -X POST localhost:8000/api/v1/evaluations/run -H 'Content-Type: application/json' -d '{\"profile\": \"hc-lab-7file-v1\"}' | python -m json.tool | grep -E '\"(execution_label|compared|passed|gate_passed)\"'"
+    expected: >-
+      The read returns operating_mode OFFLINE, execution_label LOCAL and fallback_used false. The
+      unknown table returns 404 with no fallback. The evaluation reports execution_label LOCAL, 23
+      measures compared, 23 passed and gate_passed true.
+    evidence_category: SIMULATED LOCALLY
+  - stage: GO DEEPER
+    title: See LIVE mode refuse to fall back, and read the tests
+    instructions: >-
+      Restart the API with FFIA_ENVIRONMENT=live. No live provider is configured in this build, and
+      LIVE has no fallback, so the same read is refused with 503 (UNAVAILABLE) instead of being served
+      from synthetic data. Then run the router tests and the offline demo with the outage injected.
+      Stop the API afterwards.
+    commands:
+      - "FFIA_ENVIRONMENT=live ffia serve api   # terminal A"
+      - "curl -s -o /dev/null -w '%{http_code}\\n' -X POST localhost:8000/api/v1/fabric/read -H 'Content-Type: application/json' -d '{\"operation\": \"list_workspaces\"}'"
+      - pytest tests/unit/test_router.py -q
+      - FFIA_ENVIRONMENT=hybrid FFIA_SIMULATE_FABRIC_OUTAGE=1 ffia demo offline
+    expected: >-
+      The LIVE read returns 503. The router tests pass, covering breaker transitions, fallback with a
+      reason, client errors without fallback, timeouts and UNAVAILABLE. Live Fabric throttling and
+      failure behavior still requires tenant validation in Phase 5.
+    evidence_category: REQUIRES TENANT VALIDATION
+  - stage: TRY WITH COPILOT
+    title: Ask GitHub Copilot to explain the route decisions
+    instructions: >-
+      In VS Code or Copilot CLI, ask - "Read config/environments/hybrid.yaml and
+      src/fabric_foundry_accelerator/fallback/router.py. For four consecutive read_table requests with
+      FFIA_SIMULATE_FABRIC_OUTAGE=1 in hybrid mode, list the attempts per request, the breaker state
+      after each and the fallback_reason of the fourth. Then explain why POST /api/v1/fabric/change is
+      never routed through this fallback." Compare the answer with what you observed in BREAK IT.
+    evidence_category: SIMULATED LOCALLY
+  - stage: TRY WITH CLAUDE CODE
+    title: Ask Claude Code to design a HALF_OPEN test
+    instructions: >-
+      Ask Claude Code - "Using tests/unit/test_router.py as a guide, propose (do not apply) a test in
+      which the breaker reaches HALF_OPEN with an injected clock, the trial call fails and the breaker
+      re-opens. List the assertions on RouteDecision, the envelope labels and the audit record."
+      Check that the proposal uses an injectable clock rather than real sleeps.
+    evidence_category: SIMULATED LOCALLY
+  - stage: PRODUCTION NOTES
+    title: Take the pattern to production
+    instructions: >-
+      Tune timeouts, retries and breaker thresholds per API from observed latency and throttling, not
+      from these demo defaults. Decide per environment which reads may fall back; production analytics
+      usually should not fall back to synthetic data. Keep writes and approvals out of any fallback.
+      Show fallback_used, the reason and breaker state to users and auditors, share breaker state when
+      scaling out (or accept per-instance breakers knowingly), and keep the offline release gate in CI.
+    evidence_category: PRODUCTION RECOMMENDATION

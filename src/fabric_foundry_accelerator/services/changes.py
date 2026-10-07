@@ -40,7 +40,9 @@ from fabric_foundry_accelerator.models.execution import (
 from fabric_foundry_accelerator.policies.engine import WritePolicy, evaluate_write
 from fabric_foundry_accelerator.providers.errors import ProviderError, UnknownResourceError
 
-CREATE_OPERATIONS = frozenset({"create_lakehouse", "create_notebook", "publish_report"})
+CREATE_OPERATIONS = frozenset(
+    {"create_lakehouse", "create_notebook", "create_semantic_model", "publish_report"}
+)
 SIMULATED_PROVIDER = "Simulated Workspace (LOCAL)"
 SIMULATION_NOTICE = (
     "SIMULATED change against a local simulated workspace. No Microsoft Fabric item was created, "
@@ -231,17 +233,26 @@ class ChangeService:
     def approve(self, request: ApprovalRequest) -> Approval:
         """Record a human approval or rejection."""
         plan = self.get_plan(request.change_id)
+        refusal: str | None = None
         if plan.status is not ChangeStatus.PROPOSED:
-            raise ApprovalError(
+            refusal = (
                 f"change {plan.change_id} is {plan.status}; only PROPOSED changes can be approved"
             )
-        if (
+        elif (
             self._policy.separation_of_duties
             and request.approver.casefold() == plan.requested_by.casefold()
         ):
-            raise ApprovalError(
-                "separation of duties: the requester cannot approve their own change"
+            refusal = "separation of duties: the requester cannot approve their own change"
+        if refusal is not None:
+            # Refused approval attempts are evidence too (for example, attempted self-approval).
+            self._record(
+                plan,
+                actor=request.approver,
+                action=f"approve:{request.decision}",
+                success=False,
+                details={"refusal": refusal},
             )
+            raise ApprovalError(refusal)
         now = self._clock()
         approval = Approval(
             change_id=plan.change_id,

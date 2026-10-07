@@ -1,0 +1,186 @@
+id: lab-open-mirroring-recovery
+title: "Lab: recover a mirrored table from a snapshot plus retained changes"
+summary: >-
+  Run the Open Mirroring recovery drill offline: land an initial load and ten days of change
+  files, watch a source-query defect create duplicate keys, lose the mirrored table, then restore
+  the weekly snapshot and replay retained change files exactly once. Prove the recovery with row
+  counts, key uniqueness, sequence contiguity and a content hash - and see why recovery is
+  impossible without the snapshot. Everything is SIMULATED LOCALLY on synthetic data.
+level: l300
+duration_minutes: 30
+mode: OFFLINE
+pattern_ids: [P11]
+lessons: [p11-mirroring-ai]
+steps:
+  - stage: LEARN
+    title: The landing-zone contract and why mirroring is not a backup
+    instructions: >-
+      Read docs/operations/open-mirroring-recovery.md. The documented Open Mirroring landing-zone
+      contract is: each table folder has a `_metadata.json` with `keyColumns`; data files are
+      named with 20 digits in continuous sequence (`00000000000000000001.parquet`); the initial
+      load may omit `__rowMarker__` and is then treated as INSERT; otherwise `__rowMarker__` is the
+      last column with 0 = INSERT (no duplicate-key check), 1 = UPDATE (inserts if the key is
+      missing), 2 = DELETE and 4 = UPSERT; rows apply in file order; processed files move to
+      `_ProcessedFiles` and are removed after seven days. Two consequences drive this lab: Fabric
+      Git integration stores item definitions, never table data, and mirroring is not documented
+      as a backup or disaster-recovery mechanism. Recovering table contents therefore needs your
+      own snapshots plus change files you retained yourself.
+    evidence_category: DOCUMENTED FABRIC BEHAVIOR
+  - stage: SEE
+    title: Run the drill end to end
+    instructions: >-
+      Activate the environment and run the drill. It reads the claims source of the
+      hc-lab-7file-v1 profile (about 1,000 rows standing in for a conceptual 100-million-row fact
+      table), writes landing-zone files, applies ten days of changes, takes a weekly snapshot on
+      day 7, simulates the loss of the mirrored table on day 10 and recovers it. Every line is
+      tagged with an evidence category. Note the header - SIMULATED, cloud operation performed NO.
+    commands:
+      - source .venv/bin/activate
+      - ffia recovery run
+      - make recovery-demo
+    expected: >-
+      "Recovered from weekly snapshot: YES" and "Recoverable without the weekly snapshot: NO".
+      The restore step replays sequences 9, 10 and 11 after watermark sequence 8, and every
+      recovery check passes. Artifacts are written to data/synthetic/recovery/runs/latest
+      (git-ignored).
+    evidence_category: SIMULATED LOCALLY
+  - stage: BUILD
+    title: Run the same drill through the API and MCP
+    instructions: >-
+      The drill is one service reached three ways. Read data/synthetic/recovery/scenario.yaml to
+      see the inputs (key column claim_id, retention_days 7, snapshot_day 7, failure_day 10, and
+      per-day update, insert and delete volumes). Get the full envelope as JSON from the CLI, then
+      start the control plane and call POST /api/v1/recovery/drill. Finally, ask your coding agent
+      to call the `simulate_recovery_drill` tool on the ffia-local MCP server. API and MCP runs
+      write to their own folders (`runs/api-` or `runs/mcp-` followed by a correlation ID), so
+      runs never overwrite each other.
+    commands:
+      - ffia recovery run --json
+      - make run-api
+      - curl -s -X POST localhost:8000/api/v1/recovery/drill
+    expected: >-
+      Each envelope has execution_label SIMULATED, operating_mode OFFLINE,
+      cloud_operation_performed false, equivalent_fabric_service "Fabric Open Mirroring landing
+      zone and mirrored database" and a simulation_notice. data.recovered is true and
+      data.counterfactual_recoverable is false.
+    evidence_category: SIMULATED LOCALLY
+  - stage: INSPECT
+    title: Inspect the landing zone, row markers and snapshot manifest
+    instructions: >-
+      List the processed files and confirm the 20-digit names. Sequences 1 to 4 are gone - the
+      seven-day retention purged them on days 7 to 10 - and 5 to 11 remain. Read `_metadata.json`
+      (keyColumns claim_id). Use DuckDB to confirm that `__rowMarker__` is the last column and to
+      count markers in sequence 6, the day-5 file. Read the weekly snapshot manifest - snapshot ID,
+      watermark sequence, row count and content hash. `_simulation_state.json` is the simulator's
+      own bookkeeping (it models the service's sequence counter); it is not part of the Fabric
+      contract.
+    commands:
+      - ls data/synthetic/recovery/runs/latest/landing/LandingZone/claims/_ProcessedFiles
+      - cat data/synthetic/recovery/runs/latest/landing/LandingZone/claims/_metadata.json
+      - "python -c \"import duckdb; f='data/synthetic/recovery/runs/latest/landing/LandingZone/claims/_ProcessedFiles/00000000000000000006.parquet'; print(duckdb.sql(f\\\"DESCRIBE SELECT * FROM '{f}'\\\").fetchall()[-1]); print(duckdb.sql(f\\\"SELECT __rowMarker__, count(*) FROM '{f}' GROUP BY 1 ORDER BY 1\\\").fetchall())\""
+      - cat data/synthetic/recovery/runs/latest/snapshots/claims-day007-seq00008.json
+    expected: >-
+      Files 00000000000000000005.parquet to 00000000000000000011.parquet; `__rowMarker__` is the
+      last column; sequence 6 contains only INSERT (0) and UPDATE (1) markers; the snapshot
+      manifest reports watermark_sequence 8 and 1045 rows with a SHA-256 content hash.
+    evidence_category: SIMULATED LOCALLY
+  - stage: BREAK IT
+    title: Understand the injected failures, then make recovery fail
+    instructions: >-
+      The drill injects four failures. (1) Day 5 - a source-query defect re-sends the previous
+      day's inserts with INSERT markers. INSERT does not check for duplicate keys, so the mirror
+      ends day 5 with 2 duplicated claim_id keys; day 6 remediates them with DELETE followed by
+      UPSERT. (2) Day 10 - the mirrored table is lost after the day-10 file is applied (1053
+      rows). (3) Counterfactual - without the weekly snapshot only the day-0 snapshot exists, and
+      retention has already purged sequences 2 to 4, so the change chain has a gap. (4) Replay
+      idempotency - replaying a file twice is checked; files with INSERT markers add extra rows, and
+      of the replayed files only sequence 10 (the all-UPSERT day-9 file) is idempotent. Now break it yourself - copy the
+      scenario into the git-ignored runs folder, move the snapshot to day 2, and rerun. The
+      snapshot is now older than the retention window can cover.
+    commands:
+      - mkdir -p data/synthetic/recovery/runs/lab
+      - "sed 's/^snapshot_day: 7 /snapshot_day: 2 /' data/synthetic/recovery/scenario.yaml > data/synthetic/recovery/runs/lab/scenario.yaml"
+      - ffia recovery run --scenario data/synthetic/recovery/runs/lab/scenario.yaml --work-dir data/synthetic/recovery/runs/lab/late
+    expected: >-
+      "Recovered from weekly snapshot: NO" (exit code 1). The restore step fails "Change files
+      after watermark 3 are contiguous" with missing sequence 4, and recommends re-seeding the
+      mirror from the source because the recovery point objective is not met.
+    evidence_category: SIMULATED LOCALLY
+  - stage: RECOVER
+    title: Restore the weekly snapshot and replay each sequence exactly once
+    instructions: >-
+      Rerun the default scenario. Recovery restores snapshot claims-day007-seq00008 (watermark
+      sequence 8), checks that the retained change files after the watermark are contiguous, then
+      replays sequences 9, 10 and 11 in order, exactly once. Replaying from the watermark - not
+      from the beginning - is what keeps INSERT-marker files from creating duplicates. If the
+      chain had a gap, the only correct recovery would be a full re-seed from the source system.
+    commands:
+      - ffia recovery run
+    expected: >-
+      "Restored claims-day007-seq00008 and replayed 3 retained change files (sequences [9, 10,
+      11])" and "Recovered from weekly snapshot: YES".
+    evidence_category: SIMULATED LOCALLY
+  - stage: VERIFY
+    title: Prove the recovery with counts, keys, ordering, hash and duplicates
+    instructions: >-
+      Recovery is complete only when every check passes - sequence contiguity after the
+      watermark, recovered row count equal to the pre-failure count, keys populated and unique,
+      and a recovered content hash equal to the pre-failure hash (matching byte size is not a
+      content hash). Then use the ffia-local MCP tool `detect_duplicate_records` with profile
+      hc-lab-7file-v1 and table silver_claims to confirm the conformed claims table in the local
+      lakehouse has no duplicated keys. That tool checks catalogued lakehouse tables, not the
+      drill's landing zone, so it complements rather than replaces the drill's own key check.
+    commands:
+      - ffia recovery run | grep -E "PASS|FAIL|Recovered"
+    expected: >-
+      For the weekly-snapshot restore - PASS contiguity (no gaps), PASS row count (actual 1053,
+      expected 1053), PASS keys (0 missing, 0 duplicated), PASS content hash. detect_duplicate_records
+      returns duplicated_keys 0 for silver_claims, labeled LOCAL.
+    evidence_category: SIMULATED LOCALLY
+  - stage: GO DEEPER
+    title: Read the code and the assumptions
+    instructions: >-
+      Read src/fabric_foundry_accelerator/recovery/open_mirroring.py (landing-zone writer, row
+      markers, retention purge, content hash), snapshots.py (snapshot, restore, replay and the
+      validators) and scenario.py (the narrated drill and its evidence categories). Run the
+      recovery tests. Then read the ASSUMPTION lines in the drill output - values stored as text,
+      the sequence counter, how duplicates are replaced or deleted, and the scale estimate (about
+      4 GiB per snapshot and about 1.2 million changed rows per day at 100 million rows), which is
+      extrapolated, not measured.
+    commands:
+      - pytest tests/unit/test_recovery.py -q
+    expected: All recovery tests pass, including the 20-digit naming, INSERT-without-dedupe and snapshot round-trip tests.
+    evidence_category: ASSUMPTION
+  - stage: TRY WITH COPILOT
+    title: Run and explain the drill with GitHub Copilot
+    instructions: >-
+      In VS Code agent mode or Copilot CLI, with the ffia-local server from .mcp.json, ask -
+      "Call simulate_recovery_drill on the ffia-local MCP server. Summarize each step with its
+      evidence category, explain why the day-5 file created duplicate keys, and why the drill is
+      not recoverable without the weekly snapshot. Then call detect_duplicate_records for
+      hc-lab-7file-v1 silver_claims. State that no Fabric operation was performed." Check that the
+      answer quotes the SIMULATED label and does not claim a real mirrored database was used.
+    evidence_category: SIMULATED LOCALLY
+  - stage: TRY WITH CLAUDE CODE
+    title: Run and explain the drill with Claude Code
+    instructions: >-
+      In Claude Code, ask - "Use the ffia-local MCP server's simulate_recovery_drill tool, then
+      read docs/operations/open-mirroring-recovery.md. Produce a table that separates what was
+      SIMULATED LOCALLY, what is DOCUMENTED FABRIC BEHAVIOR, what REQUIRES TENANT VALIDATION and
+      what is a PRODUCTION RECOMMENDATION. Propose a snapshot interval and change-file retention
+      period that would survive a ten-day outage. Do not edit any file." Compare its answer with
+      the Copilot answer.
+    evidence_category: SIMULATED LOCALLY
+  - stage: PRODUCTION NOTES
+    title: What to do in a real tenant
+    instructions: >-
+      Take periodic full snapshots of mirrored tables with a watermark sequence and a content
+      hash. Retain change files on the publisher side for longer than the snapshot interval plus a
+      safety margin; the seven-day service cleanup alone cannot cover a longer gap. Replay each
+      sequence exactly once after the watermark and prefer UPSERT markers for keyed tables. Treat
+      duplicates as a source-query defect - fix the publisher, then remediate with DELETE followed
+      by UPSERT. After any restore, validate row counts, key uniqueness, sequence contiguity and
+      the content hash. Validate in the tenant whether processed files remain readable, actual
+      cleanup timing, and restore throughput and snapshot cost at production volume. Never present
+      mirroring as a backup or disaster-recovery mechanism.
+    evidence_category: PRODUCTION RECOMMENDATION

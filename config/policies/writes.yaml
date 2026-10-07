@@ -24,6 +24,13 @@ operations:
     expected_impact: Lands files under Files/ in the lakehouse.
     validation: [Source checksums recorded before upload, Destination folder confirmed]
     rollback: Delete the uploaded files.
+  - name: create_semantic_model
+    item_types: [SemanticModel]
+    risk: medium
+    reversible: true
+    expected_impact: Adds a semantic model over existing lakehouse tables. Reports and agents can bind to it.
+    validation: [Model name is unique in the workspace, Source lakehouse and tables are confirmed]
+    rollback: Delete the semantic model after confirming no report is bound to it.
   - name: update_semantic_model
     item_types: [SemanticModel]
     risk: high

@@ -46,6 +46,17 @@ class ToolPath(BaseModel):
     substitution_allowed: bool = False
 
 
+class Rehearsal(BaseModel):
+    """The governed change a write step can rehearse against the simulated workspace."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    operation: str = Field(pattern=r"^[a-z][a-z_]*$")
+    item_type: Literal["Lakehouse", "Notebook", "SemanticModel", "Report"]
+    item_name: str = Field(min_length=1, max_length=120)
+    note: str = ""
+
+
 class GuideStep(BaseModel):
     """One step with prompts, checkpoint and the evidence that proves it."""
 
@@ -66,11 +77,14 @@ class GuideStep(BaseModel):
     offline_command: str | None = None
     failure_modes: tuple[str, ...] = ()
     requires_windows: bool = False
+    rehearsal: Rehearsal | None = None
 
     @model_validator(mode="after")
     def _writes_need_approval(self) -> Self:
         if self.writes and not self.approval_required:
             raise ValueError(f"step {self.id}: steps that write must require approval")
+        if self.rehearsal is not None and not self.writes:
+            raise ValueError(f"step {self.id}: only write steps can rehearse a change")
         return self
 
 

@@ -1,0 +1,90 @@
+id: fabric-foundry-boundaries
+area: architecture
+title: "Fabric + Foundry: who owns what"
+summary: >-
+  The central lesson of the accelerator. Fabric provides governed business context, Foundry turns
+  that context into reasoning, orchestration, evaluation and action, MCP standardizes capability
+  access without granting authority, Entra identity and policy decide authority, and business
+  systems stay the authority for transactional writes. Evidence and offline resilience keep the
+  whole story honest and teachable.
+status: MIXED
+pattern_ids: [P06, P08, P09, P17]
+learning_objectives:
+  - State the responsibility of Fabric, Foundry, MCP, Entra identity and business systems in one sentence each.
+  - Explain why an MCP tool being available is not proof that a caller is authorized to use it.
+  - Place observability and evaluation in the architecture as the source of evidence, not decoration.
+  - Explain how LIVE, HYBRID and OFFLINE modes keep the architecture demonstrable without hiding what ran.
+  - Use the responsibility boundary table to reject a design that puts authority in the wrong layer.
+concepts:
+  - term: Governed business context
+    definition: Curated, permissioned data and definitions (lakehouse tables, semantic models, data agents, ontology) that Fabric serves under its own access controls.
+  - term: Reasoning and orchestration
+    definition: What Foundry and Agent Framework do with context - plan, call tools, combine results, ask for approval and act.
+  - term: Capability access
+    definition: A standard way (MCP) for a client to discover and call tools. It says what can be called, not who may call it.
+  - term: Authority
+    definition: The decision that an identity may perform an operation on a target, made by Entra identity, role assignments, policy and human approval.
+  - term: System of record
+    definition: The business system that owns a transaction (for example a claim or an order). Agents ask it to change; they never become it.
+  - term: Execution label
+    definition: LIVE, HYBRID, LOCAL, SIMULATED, MOCKED, PREVIEW or UNAVAILABLE on every result, so a simulation is never mistaken for a cloud operation.
+evidence:
+  - statement: Fabric is a unified analytics platform whose workloads share OneLake and workspace-level access control.
+    category: DOCUMENTED FABRIC BEHAVIOR
+    sources: [fabric-overview]
+  - statement: Fabric REST APIs act under the calling Entra identity (user, service principal or managed identity), with support varying by API.
+    category: DOCUMENTED FABRIC BEHAVIOR
+    sources: [fabric-rest-identity]
+  - statement: Foundry Agent Service hosts agents that call tools (including MCP and OpenAPI tools) and can require approval before a tool call runs.
+    category: DOCUMENTED BEHAVIOR
+    sources: [foundry-overview, foundry-agent-service, agent-framework]
+  - statement: Foundry provides built-in evaluators for quality and safety, which supply evidence about agent behavior.
+    category: DOCUMENTED BEHAVIOR
+    sources: [foundry-evaluators]
+  - statement: The MCP specification defines discovery and invocation of tools; authorization relies on OAuth and the resource server, not on the tool list.
+    category: DOCUMENTED BEHAVIOR
+    sources: [mcp-specification]
+  - statement: In this repository the boundary is enforced in code - ffia-local has no approve or execute tool, writes need a separate human approval, and every result carries an execution label.
+    category: SIMULATED LOCALLY
+  - statement: Foundry providers are not implemented yet; the offline demo reports the Foundry act as UNAVAILABLE rather than simulating it. They arrive in Phase 6.
+    category: SIMULATED LOCALLY
+  - statement: Whether a specific tenant's identities, role assignments and data agent permissions produce the same boundaries must be checked in that tenant.
+    category: REQUIRES TENANT VALIDATION
+  - statement: Keep authoritative writes in the business system behind a narrowly scoped writer identity, and treat agent output as a proposal.
+    category: PRODUCTION RECOMMENDATION
+    sources: [baseline-foundry-chat]
+try_it:
+  - label: Run the ten-act offline release gate and read the label of each act
+    command: ffia demo offline
+    result_label: SIMULATED
+  - label: See which providers are configured and which are unavailable
+    command: curl -s localhost:8000/api/v1/runtime/providers
+    result_label: LOCAL
+  - label: Ask for patterns that combine structured analytics, a business write and offline resilience
+    command: "curl -s -X POST localhost:8000/api/v1/patterns/recommend -H 'Content-Type: application/json' -d '{\"needs\": [\"conversational-structured-analytics\", \"business-system-write\", \"resilience-offline\"]}'"
+    result_label: LOCAL
+copilot_prompt: >-
+  Using the ffia-local MCP server, call get_architecture_pattern for P06 and P09, then
+  get_runtime_status. Build a table with one row each for Fabric, Foundry, MCP, Entra identity and
+  policy, and the business system, with the columns "owns", "does not own" and "evidence in this
+  repo". Label every row with the execution label you actually observed. Do not call any cloud tool.
+claude_code_prompt: >-
+  Read AGENTS.md section 1 and docs/architecture/control-plane.md, then call the ffia-local MCP
+  server's get_runtime_status tool. Explain, layer by layer, where authority lives in this
+  accelerator and point to the file or test that enforces each boundary. Make no changes.
+production_notes:
+  - Draw the responsibility boundary before choosing tools; a design that lets one agent identity both decide and write has failed review.
+  - Give every agent and every writer its own Entra identity with the least privilege it needs; never reuse a human admin identity for automation.
+  - Keep Fabric permissions (workspace roles, item permissions, row-level security) as the data boundary; do not re-implement them inside prompts.
+  - Treat traces, evaluations and audit records as release artifacts, and keep an offline path so failures can be rehearsed without a tenant.
+sources:
+  - fabric-overview
+  - foundry-overview
+  - foundry-agent-service
+  - agent-framework
+  - mcp-specification
+  - fabric-rest-identity
+  - foundry-evaluators
+  - baseline-foundry-chat
+related_labs: [lab-governed-change, lab-mcp-allow-list, lab-resilience-break-it]
+related_guides: [hc-01-fabric-mcp-powerbi-medallion-lab]

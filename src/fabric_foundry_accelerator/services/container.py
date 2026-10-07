@@ -11,6 +11,7 @@ from fabric_foundry_accelerator.config.environment import EnvironmentConfigurati
 from fabric_foundry_accelerator.config.overlay import CustomerOverlay, load_overlay
 from fabric_foundry_accelerator.config.settings import Settings
 from fabric_foundry_accelerator.education.guides import UseCaseGuide, load_guides
+from fabric_foundry_accelerator.education.lessons import EducationReferences, load_education
 from fabric_foundry_accelerator.fallback.router import ProviderRouter
 from fabric_foundry_accelerator.models.execution import OperatingMode, utc_now
 from fabric_foundry_accelerator.models.semantic import load_semantic_model
@@ -25,7 +26,9 @@ from fabric_foundry_accelerator.providers.fabric.local import LocalFabricProvide
 from fabric_foundry_accelerator.providers.fabric.outage import SimulatedOutageFabricProvider
 from fabric_foundry_accelerator.providers.fabric.port import FabricProvider
 from fabric_foundry_accelerator.providers.fabric.routed import RoutedFabricProvider
+from fabric_foundry_accelerator.research.sources import load_registry
 from fabric_foundry_accelerator.services.changes import ChangeService
+from fabric_foundry_accelerator.services.education import EducationService
 from fabric_foundry_accelerator.services.evaluation import EvaluationService
 from fabric_foundry_accelerator.synthetic.medallion import build_profile, lakehouse_tables
 from fabric_foundry_accelerator.synthetic.paths import raw_dir, semantic_model_path
@@ -49,6 +52,7 @@ class Container:
     evaluation: EvaluationService
     catalog: PatternCatalog
     guides: dict[str, UseCaseGuide]
+    education: EducationService
     built_profiles: list[str] = field(default_factory=list[str])
 
     @property
@@ -113,6 +117,15 @@ def build_container(
         clock=wall_clock,
     )
     catalog = load_catalog(settings.education_root)
+    guides = load_guides(settings.guides_root, catalog)
+    library = load_education(
+        settings.education_root,
+        EducationReferences(
+            pattern_ids=frozenset(p.id for p in catalog.patterns),
+            source_ids=frozenset(s.id for s in load_registry(settings.sources_path).sources),
+            guide_ids=frozenset(guides),
+        ),
+    )
     return Container(
         settings=settings,
         environment=environment,
@@ -131,6 +144,7 @@ def build_container(
             mode=environment.mode,
         ),
         catalog=catalog,
-        guides=load_guides(settings.guides_root, catalog),
+        guides=guides,
+        education=EducationService(library),
         built_profiles=built,
     )

@@ -1,0 +1,67 @@
+checks:
+  - id: exec-target-level
+    level: executive
+    question: Which maturity level is the recommended production default for Fabric data-engineering changes?
+    choices:
+      - L3 Skilled — the agent follows Microsoft-authored procedures
+      - L4 Connected — the agent reads the real workspace
+      - L5 Governed change — the agent proposes, a human approves and a pipeline applies
+      - L6 Parallel — many autonomous sessions
+    answer: 2
+    explanation: L5 keeps the speed of the agent and adds approval, review and audit. L6 depends on preview features and belongs in controlled experiments.
+  - id: l100-mental-model
+    level: l100
+    question: In the KNOWLEDGE / EXECUTION / HARNESS / AUTHORITY / EVIDENCE model, where do Fabric Skills belong?
+    choices:
+      - KNOWLEDGE — they teach the agent how to do the task correctly
+      - EXECUTION — they run Fabric operations by themselves
+      - AUTHORITY — they decide who may make a change
+    answer: 0
+    explanation: Skills are Markdown procedures. The harness executes the calls they describe, under the signed-in identity; authority comes from identity, roles, policy and approval.
+  - id: l200-l4-control
+    level: l200
+    question: What control must be in place before an agent reaches L4 Connected?
+    choices:
+      - Branch protection on the main branch
+      - A read-only allow-list and a pinned target workspace
+      - A Copilot app subscription
+      - A larger model
+    answer: 1
+    explanation: L4 is where real data becomes visible. Read-only tools and a pinned dev workspace limit exposure and stop wrong-tenant mistakes.
+  - id: l300-l4-tools
+    level: l300
+    question: Which set of ffia-local tools lets you practice L4 offline?
+    choices:
+      - generate_fabric_change_plan and validate_change_plan
+      - inspect_medallion_architecture, preview_table and evaluate_measures
+      - simulate_recovery_drill and get_audit_record
+    answer: 1
+    explanation: These are read-only inspection tools over the synthetic medallion data; their results are labeled LOCAL. The plan tools belong to L5.
+  - id: l300-scorecard
+    level: l300
+    question: Which item is part of the maturity-ladder scorecard?
+    choices:
+      - Number of lines of code generated
+      - Evidence completeness — correlation IDs, labels, plan, approval and audit present
+      - The model's self-reported confidence
+    answer: 1
+    explanation: The scorecard measures outcomes and governance (time, steps, approvals, checks, evidence, errors caught), not output volume or self-assessment.
+  - id: l400-enforcement
+    level: l400
+    question: An instruction file says "never execute changes". What actually prevents an agent from executing a change through ffia-local?
+    choices:
+      - The instruction file itself
+      - The model's alignment
+      - The server exposes no approve or execute tool, and approval happens outside MCP
+      - The circuit breaker
+    answer: 2
+    explanation: Instructions are context, not enforcement. Tool absence, harness permissions, identity and deterministic policy are what stop actions.
+  - id: l400-cloud-agent
+    level: l400
+    question: Why should the Copilot cloud agent get only read-only or offline MCP tools?
+    choices:
+      - Because it cannot use MCP at all
+      - Because tools run without per-call approval and its firewall does not restrict MCP server processes
+      - Because it only supports Claude models
+    answer: 1
+    explanation: Once MCP is configured for the cloud agent, its tools run autonomously; the pull request is the approval point, so write-capable tools must not be there.

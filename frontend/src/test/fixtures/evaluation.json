@@ -1,0 +1,197 @@
+{
+  "cloud_operation_performed": false,
+  "correlation_id": "5f5bcd66bd3b44809a318c172a011c8d",
+  "data": {
+    "compared": 23,
+    "comparisons": [
+      {
+        "absolute_difference": 0.0,
+        "expected": 4740.567676,
+        "name": "average_charges_per_encounter",
+        "observed": 4740.567676,
+        "passed": true
+      },
+      {
+        "absolute_difference": 0.0,
+        "expected": 3.995392,
+        "name": "average_length_of_stay",
+        "observed": 3.995392,
+        "passed": true
+      },
+      {
+        "absolute_difference": 0.0,
+        "expected": 0.21,
+        "name": "ckd_prevalence",
+        "observed": 0.21,
+        "passed": true
+      },
+      {
+        "absolute_difference": 0.0,
+        "expected": 1025,
+        "name": "claim_count",
+        "observed": 1025,
+        "passed": true
+      },
+      {
+        "absolute_difference": 0.0,
+        "expected": 0.195,
+        "name": "copd_prevalence",
+        "observed": 0.195,
+        "passed": true
+      },
+      {
+        "absolute_difference": 0.0,
+        "expected": 0.101463,
+        "name": "denial_rate",
+        "observed": 0.101463,
+        "passed": true
+      },
+      {
+        "absolute_difference": 0.0,
+        "expected": 104,
+        "name": "denied_claim_count",
+        "observed": 104,
+        "passed": true
+      },
+      {
+        "absolute_difference": 0.0,
+        "expected": 0.215,
+        "name": "diabetes_prevalence",
+        "observed": 0.215,
+        "passed": true
+      },
+      {
+        "absolute_difference": 0.0,
+        "expected": 205,
+        "name": "ed_visit_count",
+        "observed": 205,
+        "passed": true
+      },
+      {
+        "absolute_difference": 0.0,
+        "expected": 211,
+        "name": "eligible_index_encounters",
+        "observed": 211,
+        "passed": true
+      },
+      {
+        "absolute_difference": 0.0,
+        "expected": 0.235,
+        "name": "heart_failure_prevalence",
+        "observed": 0.235,
+        "passed": true
+      },
+      {
+        "absolute_difference": 0.0,
+        "expected": 19,
+        "name": "high_risk_patient_count",
+        "observed": 19,
+        "passed": true
+      },
+      {
+        "absolute_difference": 0.0,
+        "expected": 0.095,
+        "name": "high_risk_patient_pct",
+        "observed": 0.095,
+        "passed": true
+      },
+      {
+        "absolute_difference": 0.0,
+        "expected": 0.16,
+        "name": "hypertension_prevalence",
+        "observed": 0.16,
+        "passed": true
+      },
+      {
+        "absolute_difference": 0.0,
+        "expected": 217,
+        "name": "inpatient_encounters",
+        "observed": 217,
+        "passed": true
+      },
+      {
+        "absolute_difference": 0.0,
+        "expected": 200,
+        "name": "patient_count",
+        "observed": 200,
+        "passed": true
+      },
+      {
+        "absolute_difference": 0.0,
+        "expected": 0.165877,
+        "name": "readmission_rate_30_day",
+        "observed": 0.165877,
+        "passed": true
+      },
+      {
+        "absolute_difference": 0.0,
+        "expected": 35,
+        "name": "readmissions_within_30_days",
+        "observed": 35,
+        "passed": true
+      },
+      {
+        "absolute_difference": 0.0,
+        "expected": 4835379.03,
+        "name": "total_charges",
+        "observed": 4835379.03,
+        "passed": true
+      },
+      {
+        "absolute_difference": 0.0,
+        "expected": 630155.76,
+        "name": "total_denied_claim_amount",
+        "observed": 630155.76,
+        "passed": true
+      },
+      {
+        "absolute_difference": 0.0,
+        "expected": 1025,
+        "name": "total_encounters",
+        "observed": 1025,
+        "passed": true
+      },
+      {
+        "absolute_difference": 0.0,
+        "expected": 867,
+        "name": "total_inpatient_los_days",
+        "observed": 867,
+        "passed": true
+      },
+      {
+        "absolute_difference": 0.0,
+        "expected": 2870467.63,
+        "name": "total_paid_amount",
+        "observed": 2870467.63,
+        "passed": true
+      }
+    ],
+    "evaluation_id": "c7a2a4ed860948afa3aad42f1b2d8c8e",
+    "gate_passed": true,
+    "missing_measures": [],
+    "observed_label": "LOCAL",
+    "observed_values_source": "local-provider",
+    "pass_rate": 1.0,
+    "passed": 23,
+    "profile": "hc-lab-7file-v1",
+    "tolerance": 1e-06,
+    "unexpected_measures": []
+  },
+  "equivalent_fabric_service": "Measure validation against expected results (Foundry evaluation / CI quality gate)",
+  "evidence": [
+    {
+      "category": "SIMULATED LOCALLY",
+      "reference": null,
+      "statement": "Observed values came from the Local Fabric Provider."
+    }
+  ],
+  "execution_label": "LOCAL",
+  "fallback_reason": null,
+  "fallback_used": false,
+  "operating_mode": "OFFLINE",
+  "requested_provider": "Baseline Evaluator",
+  "selected_provider": "Baseline Evaluator",
+  "simulation_notice": "Evaluation computed locally from committed expected results.",
+  "teaching_objective": "Prove numbers, not appearance: compare every measure with the expected baseline.",
+  "timestamp": "2026-10-07T21:42:10.082833Z"
+}

@@ -1,0 +1,65 @@
+checks:
+  - id: exec-not-winner
+    level: executive
+    question: What is the recommended way to choose between GitHub Copilot and Claude Code for Fabric data engineering?
+    choices:
+      - Pick the one with the best published benchmark
+      - Choose a default for your operating model, keep assets portable and decide changes with measured results
+      - Use both everywhere with no default
+    answer: 1
+    explanation: Fit depends on where governance and review live. Portable assets keep switching cheap, and the bake-off provides observations on your own tasks.
+  - id: l100-shared
+    level: l100
+    question: How does Claude Code load the same rules as GitHub Copilot in this repository?
+    choices:
+      - It reads .github/copilot-instructions.md
+      - CLAUDE.md imports AGENTS.md with @AGENTS.md
+      - The rules are duplicated by hand in CLAUDE.md
+    answer: 1
+    explanation: Claude Code reads AGENTS.md only when no CLAUDE.md exists, so CLAUDE.md imports it to keep one source of truth.
+  - id: l200-skills-folder
+    level: l200
+    question: Which skill folder do both harnesses read?
+    choices:
+      - .github/skills/
+      - .agents/skills/
+      - .claude/skills/
+    answer: 2
+    explanation: Claude Code loads project skills only from .claude/skills/, and Copilot also reads that folder, so it is the portable location.
+  - id: l200-model-harness
+    level: l200
+    question: Why must a bake-off record the model as well as the harness?
+    choices:
+      - Copilot can run Claude models, so differences could come from the model rather than the harness
+      - Because models are free
+      - Because Claude Code cannot use MCP
+    answer: 0
+    explanation: Without separating model from harness, a comparison may attribute a model's behavior to the tool around it.
+  - id: l300-bakeoff
+    level: l300
+    question: Which practice keeps bake-off results honest?
+    choices:
+      - Report only the best run per task
+      - Let each harness use different prompts tuned for it
+      - Use the same task wording, commit and profile, run several times and record failures
+      - Skip the privacy scan for transcripts
+    answer: 2
+    explanation: Identical inputs and repeated runs make results comparable; recording failures avoids survivorship bias. Transcripts are privacy-scanned before storage.
+  - id: l400-enforcement
+    level: l400
+    question: Which of these is enforcement rather than guidance?
+    choices:
+      - A rule written in AGENTS.md
+      - A Claude Code hook that blocks a tool call, or a Copilot deny rule
+      - A skill description
+    answer: 1
+    explanation: Instructions and skills shape the model's behavior; hooks and deny rules are enforced by the harness regardless of what the model wants.
+  - id: l400-cloud-agent
+    level: l400
+    question: What is the main risk of configuring a write-capable MCP server for the Copilot cloud agent?
+    choices:
+      - Its tools run without per-call approval and the firewall does not restrict MCP processes
+      - The cloud agent cannot open pull requests
+      - It will switch to Claude Code
+    answer: 0
+    explanation: The pull request is the only approval point for the cloud agent, so its MCP tools must be read-only or offline.

@@ -1,0 +1,77 @@
+[
+  {
+    "duration_minutes": 45,
+    "id": "lab-copilot-maturity-ladder",
+    "lessons": [
+      "copilot-maturity-ladder",
+      "copilot-surfaces"
+    ],
+    "level": "l200",
+    "mode": "OFFLINE",
+    "pattern_ids": [
+      "P19",
+      "P20"
+    ],
+    "summary": "Take one Silver-layer task in this repository from L1 Assisted to L5 Governed change with GitHub Copilot (or Claude Code): explain a transform, ground the agent, apply a skill, inspect real local context through read-only MCP tools, then propose a governed change that only a human can approve. Everything runs on synthetic data; results are labeled LOCAL or SIMULATED.",
+    "title": "Climb the Copilot maturity ladder (L1 \u2192 L5) offline"
+  },
+  {
+    "duration_minutes": 30,
+    "id": "lab-governed-change",
+    "lessons": [
+      "p08-human-in-the-loop",
+      "p09-governed-mcp"
+    ],
+    "level": "l300",
+    "mode": "OFFLINE",
+    "pattern_ids": [
+      "P08"
+    ],
+    "summary": "Propose a Fabric change through the API and MCP, watch self-approval get refused, approve as a second person, execute against the simulated workspace, verify, follow the audit trail by correlation ID, see a duplicate blocked, and prove that an approved LIVE change is refused without being redirected to LOCAL. Fully offline.",
+    "title": "Lab: Governed change with a human in the loop (P08)"
+  },
+  {
+    "duration_minutes": 35,
+    "id": "lab-mcp-allow-list",
+    "lessons": [
+      "p09-governed-mcp",
+      "fabric-mcp-landscape"
+    ],
+    "level": "l300",
+    "mode": "OFFLINE",
+    "pattern_ids": [
+      "P09"
+    ],
+    "summary": "Connect to the local ffia-local MCP server, discover its allow-listed tools, call read-only tools, look for a tool that could execute a change (there is none), break the allow-list in a scratch copy of the configuration, recover, and verify every call in the audit log. Fully offline; every result is labeled LOCAL.",
+    "title": "Lab: Governed MCP allow-list (P09)"
+  },
+  {
+    "duration_minutes": 30,
+    "id": "lab-open-mirroring-recovery",
+    "lessons": [
+      "p11-mirroring-ai"
+    ],
+    "level": "l300",
+    "mode": "OFFLINE",
+    "pattern_ids": [
+      "P11"
+    ],
+    "summary": "Run the Open Mirroring recovery drill offline: land an initial load and ten days of change files, watch a source-query defect create duplicate keys, lose the mirrored table, then restore the weekly snapshot and replay retained change files exactly once. Prove the recovery with row counts, key uniqueness, sequence contiguity and a content hash - and see why recovery is impossible without the snapshot. Everything is SIMULATED LOCALLY on synthetic data.",
+    "title": "Lab: recover a mirrored table from a snapshot plus retained changes"
+  },
+  {
+    "duration_minutes": 25,
+    "id": "lab-resilience-break-it",
+    "lessons": [
+      "p17-resilience",
+      "p16-evaluation-observability"
+    ],
+    "level": "l300",
+    "mode": "OFFLINE",
+    "pattern_ids": [
+      "P17"
+    ],
+    "summary": "Run the readiness check and the offline release gate, then inject a simulated Fabric outage in HYBRID mode. Watch reads fall back to the local provider with a visible reason, watch the circuit breaker open, recover, and verify that every result is honestly labeled. No cloud service is contacted at any point.",
+    "title": "Break it: simulated Fabric outage, labeled fallback and the circuit breaker"
+  }
+]

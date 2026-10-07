@@ -1,0 +1,4693 @@
+{
+  "components": {
+    "schemas": {
+      "Approval": {
+        "additionalProperties": false,
+        "description": "A recorded approval, bound to the target's destination hash and time-limited.",
+        "properties": {
+          "approval_id": {
+            "title": "Approval Id",
+            "type": "string"
+          },
+          "approver": {
+            "title": "Approver",
+            "type": "string"
+          },
+          "change_id": {
+            "title": "Change Id",
+            "type": "string"
+          },
+          "comment": {
+            "title": "Comment",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "decision": {
+            "$ref": "#/components/schemas/ApprovalDecision"
+          },
+          "destination_hash": {
+            "title": "Destination Hash",
+            "type": "string"
+          },
+          "expires_at": {
+            "format": "date-time",
+            "title": "Expires At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "change_id",
+          "approver",
+          "decision",
+          "comment",
+          "destination_hash",
+          "expires_at"
+        ],
+        "title": "Approval",
+        "type": "object"
+      },
+      "ApprovalDecision": {
+        "description": "A human decision.",
+        "enum": [
+          "APPROVED",
+          "REJECTED"
+        ],
+        "title": "ApprovalDecision",
+        "type": "string"
+      },
+      "ApprovalRequest": {
+        "additionalProperties": false,
+        "description": "A human approval or rejection of a plan.",
+        "properties": {
+          "approver": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Approver",
+            "type": "string"
+          },
+          "change_id": {
+            "title": "Change Id",
+            "type": "string"
+          },
+          "comment": {
+            "default": "",
+            "maxLength": 500,
+            "title": "Comment",
+            "type": "string"
+          },
+          "decision": {
+            "$ref": "#/components/schemas/ApprovalDecision"
+          }
+        },
+        "required": [
+          "change_id",
+          "approver",
+          "decision"
+        ],
+        "title": "ApprovalRequest",
+        "type": "object"
+      },
+      "ArchitectureComponent": {
+        "additionalProperties": false,
+        "description": "A component of the reference architecture.",
+        "properties": {
+          "description": {
+            "$ref": "#/components/schemas/LevelText"
+          },
+          "does_not_own": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Does Not Own",
+            "type": "array"
+          },
+          "id": {
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "title": "Id",
+            "type": "string"
+          },
+          "layer": {
+            "title": "Layer",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "offline_equivalent": {
+            "title": "Offline Equivalent",
+            "type": "string"
+          },
+          "owns": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Owns",
+            "type": "array"
+          },
+          "pattern_ids": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Pattern Ids",
+            "type": "array"
+          },
+          "sources": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Sources",
+            "type": "array"
+          },
+          "status": {
+            "enum": [
+              "GA",
+              "PREVIEW",
+              "MIXED",
+              "DEPRECATED",
+              "UNKNOWN/NEEDS VALIDATION",
+              "LOCAL"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "layer",
+          "status",
+          "description",
+          "owns",
+          "offline_equivalent"
+        ],
+        "title": "ArchitectureComponent",
+        "type": "object"
+      },
+      "ArchitectureFlow": {
+        "additionalProperties": false,
+        "description": "A directed interaction between two components.",
+        "properties": {
+          "id": {
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "context",
+              "reasoning",
+              "access",
+              "authority",
+              "evidence",
+              "fallback",
+              "change"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "source": {
+            "title": "Source",
+            "type": "string"
+          },
+          "target": {
+            "title": "Target",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "source",
+          "target",
+          "label",
+          "kind"
+        ],
+        "title": "ArchitectureFlow",
+        "type": "object"
+      },
+      "ArchitectureLayer": {
+        "additionalProperties": false,
+        "description": "A layer of the reference architecture and the question it answers.",
+        "properties": {
+          "id": {
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "title": "Id",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "question": {
+            "title": "Question",
+            "type": "string"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "question",
+          "summary"
+        ],
+        "title": "ArchitectureLayer",
+        "type": "object"
+      },
+      "ArchitectureMap": {
+        "additionalProperties": false,
+        "description": "``education/architecture/explorer.yaml``.",
+        "properties": {
+          "components": {
+            "items": {
+              "$ref": "#/components/schemas/ArchitectureComponent"
+            },
+            "minItems": 1,
+            "title": "Components",
+            "type": "array"
+          },
+          "flows": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/ArchitectureFlow"
+            },
+            "title": "Flows",
+            "type": "array"
+          },
+          "layers": {
+            "items": {
+              "$ref": "#/components/schemas/ArchitectureLayer"
+            },
+            "minItems": 1,
+            "title": "Layers",
+            "type": "array"
+          },
+          "version": {
+            "const": 1,
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "version",
+          "layers",
+          "components"
+        ],
+        "title": "ArchitectureMap",
+        "type": "object"
+      },
+      "ArchitecturePattern": {
+        "additionalProperties": false,
+        "description": "One catalog pattern (summary level).",
+        "properties": {
+          "authority": {
+            "title": "Authority",
+            "type": "string"
+          },
+          "default_demo_path": {
+            "enum": [
+              "LOCAL",
+              "HYBRID",
+              "DOCUMENTATION"
+            ],
+            "title": "Default Demo Path",
+            "type": "string"
+          },
+          "fabric_role": {
+            "title": "Fabric Role",
+            "type": "string"
+          },
+          "foundry_role": {
+            "title": "Foundry Role",
+            "type": "string"
+          },
+          "id": {
+            "pattern": "^P\\d{2}$",
+            "title": "Id",
+            "type": "string"
+          },
+          "mcp_role": {
+            "title": "Mcp Role",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "offline_equivalent": {
+            "title": "Offline Equivalent",
+            "type": "string"
+          },
+          "preview_dependencies": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Preview Dependencies",
+            "type": "array"
+          },
+          "selection_signals": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Selection Signals",
+            "type": "array"
+          },
+          "sources": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Sources",
+            "type": "array"
+          },
+          "status": {
+            "enum": [
+              "GA",
+              "PREVIEW",
+              "MIXED"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "when_not_to_use": {
+            "title": "When Not To Use",
+            "type": "string"
+          },
+          "when_to_use": {
+            "title": "When To Use",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "summary",
+          "status",
+          "preview_dependencies",
+          "default_demo_path",
+          "when_to_use",
+          "when_not_to_use",
+          "fabric_role",
+          "foundry_role",
+          "mcp_role",
+          "authority",
+          "offline_equivalent",
+          "selection_signals",
+          "sources"
+        ],
+        "title": "ArchitecturePattern",
+        "type": "object"
+      },
+      "AuditRecord": {
+        "additionalProperties": false,
+        "description": "One audit entry.",
+        "properties": {
+          "action": {
+            "title": "Action",
+            "type": "string"
+          },
+          "actor": {
+            "title": "Actor",
+            "type": "string"
+          },
+          "approval_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Approval Id"
+          },
+          "audit_id": {
+            "title": "Audit Id",
+            "type": "string"
+          },
+          "capability": {
+            "title": "Capability",
+            "type": "string"
+          },
+          "change_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Change Id"
+          },
+          "cloud_operation_performed": {
+            "title": "Cloud Operation Performed",
+            "type": "boolean"
+          },
+          "correlation_id": {
+            "title": "Correlation Id",
+            "type": "string"
+          },
+          "details": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "title": "Details",
+            "type": "object"
+          },
+          "duration_ms": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Duration Ms"
+          },
+          "execution_label": {
+            "$ref": "#/components/schemas/ExecutionLabel"
+          },
+          "fallback_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fallback Reason"
+          },
+          "fallback_used": {
+            "default": false,
+            "title": "Fallback Used",
+            "type": "boolean"
+          },
+          "operating_mode": {
+            "$ref": "#/components/schemas/OperatingMode"
+          },
+          "requested_provider": {
+            "title": "Requested Provider",
+            "type": "string"
+          },
+          "selected_provider": {
+            "title": "Selected Provider",
+            "type": "string"
+          },
+          "success": {
+            "title": "Success",
+            "type": "boolean"
+          },
+          "timestamp": {
+            "format": "date-time",
+            "title": "Timestamp",
+            "type": "string"
+          },
+          "tool": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tool"
+          }
+        },
+        "required": [
+          "correlation_id",
+          "actor",
+          "action",
+          "capability",
+          "requested_provider",
+          "selected_provider",
+          "operating_mode",
+          "execution_label",
+          "cloud_operation_performed",
+          "success"
+        ],
+        "title": "AuditRecord",
+        "type": "object"
+      },
+      "BreakerState": {
+        "description": "Circuit breaker state.",
+        "enum": [
+          "CLOSED",
+          "OPEN",
+          "HALF_OPEN"
+        ],
+        "title": "BreakerState",
+        "type": "string"
+      },
+      "BreakerStatus": {
+        "additionalProperties": false,
+        "description": "A point-in-time view of a breaker.",
+        "properties": {
+          "consecutive_failures": {
+            "title": "Consecutive Failures",
+            "type": "integer"
+          },
+          "failure_threshold": {
+            "title": "Failure Threshold",
+            "type": "integer"
+          },
+          "last_failure_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Failure Reason"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "state": {
+            "$ref": "#/components/schemas/BreakerState"
+          }
+        },
+        "required": [
+          "name",
+          "state",
+          "consecutive_failures",
+          "failure_threshold",
+          "last_failure_reason"
+        ],
+        "title": "BreakerStatus",
+        "type": "object"
+      },
+      "Capability": {
+        "description": "A capability and how it is currently served.",
+        "properties": {
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "served_by": {
+            "title": "Served By",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "description",
+          "served_by"
+        ],
+        "title": "Capability",
+        "type": "object"
+      },
+      "ChangeRequest": {
+        "additionalProperties": false,
+        "description": "A request to plan a change (from a person, an agent or an MCP tool).",
+        "properties": {
+          "operation": {
+            "pattern": "^[a-z][a-z_]*$",
+            "title": "Operation",
+            "type": "string"
+          },
+          "reason": {
+            "maxLength": 500,
+            "minLength": 5,
+            "title": "Reason",
+            "type": "string"
+          },
+          "requested_by": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Requested By",
+            "type": "string"
+          },
+          "target": {
+            "$ref": "#/components/schemas/FabricTarget"
+          }
+        },
+        "required": [
+          "operation",
+          "target",
+          "reason",
+          "requested_by"
+        ],
+        "title": "ChangeRequest",
+        "type": "object"
+      },
+      "ChangeStatus": {
+        "description": "Lifecycle of a change.",
+        "enum": [
+          "PROPOSED",
+          "BLOCKED",
+          "APPROVED",
+          "REJECTED",
+          "EXECUTED",
+          "VERIFIED",
+          "FAILED"
+        ],
+        "title": "ChangeStatus",
+        "type": "string"
+      },
+      "CheckAnswer": {
+        "additionalProperties": false,
+        "description": "A learner's answer to one knowledge check.",
+        "properties": {
+          "choice": {
+            "maximum": 9.0,
+            "minimum": 0.0,
+            "title": "Choice",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "choice"
+        ],
+        "title": "CheckAnswer",
+        "type": "object"
+      },
+      "CheckGrade": {
+        "additionalProperties": false,
+        "description": "Whether the answer was correct, with the explanation.",
+        "properties": {
+          "check_id": {
+            "title": "Check Id",
+            "type": "string"
+          },
+          "correct": {
+            "title": "Correct",
+            "type": "boolean"
+          },
+          "correct_choice": {
+            "title": "Correct Choice",
+            "type": "integer"
+          },
+          "explanation": {
+            "title": "Explanation",
+            "type": "string"
+          }
+        },
+        "required": [
+          "check_id",
+          "correct",
+          "correct_choice",
+          "explanation"
+        ],
+        "title": "CheckGrade",
+        "type": "object"
+      },
+      "CheckLine": {
+        "additionalProperties": false,
+        "description": "One readiness line.",
+        "properties": {
+          "component": {
+            "title": "Component",
+            "type": "string"
+          },
+          "detail": {
+            "title": "Detail",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "component",
+          "status",
+          "detail"
+        ],
+        "title": "CheckLine",
+        "type": "object"
+      },
+      "CheckResult": {
+        "additionalProperties": false,
+        "description": "The outcome of one deterministic validation check.",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/EvidenceCategory",
+            "default": "SIMULATED LOCALLY"
+          },
+          "detail": {
+            "title": "Detail",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "passed": {
+            "title": "Passed",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "name",
+          "passed",
+          "detail"
+        ],
+        "title": "CheckResult",
+        "type": "object"
+      },
+      "ColumnInfo": {
+        "additionalProperties": false,
+        "description": "A column name and type.",
+        "properties": {
+          "data_type": {
+            "title": "Data Type",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "data_type"
+        ],
+        "title": "ColumnInfo",
+        "type": "object"
+      },
+      "CompletenessItem": {
+        "additionalProperties": false,
+        "description": "The coverage of one question.",
+        "properties": {
+          "answered": {
+            "title": "Answered",
+            "type": "boolean"
+          },
+          "answered_by": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Answered By",
+            "type": "array"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "planned_phase": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Planned Phase"
+          },
+          "question": {
+            "title": "Question",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "question",
+          "answered",
+          "answered_by",
+          "planned_phase"
+        ],
+        "title": "CompletenessItem",
+        "type": "object"
+      },
+      "CompletenessReport": {
+        "additionalProperties": false,
+        "description": "Coverage of the completeness gate.",
+        "properties": {
+          "answered": {
+            "title": "Answered",
+            "type": "integer"
+          },
+          "coverage": {
+            "title": "Coverage",
+            "type": "number"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CompletenessItem"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "total",
+          "answered",
+          "coverage",
+          "items"
+        ],
+        "title": "CompletenessReport",
+        "type": "object"
+      },
+      "Concept": {
+        "additionalProperties": false,
+        "description": "A glossary term taught by a lesson.",
+        "properties": {
+          "definition": {
+            "title": "Definition",
+            "type": "string"
+          },
+          "term": {
+            "title": "Term",
+            "type": "string"
+          }
+        },
+        "required": [
+          "term",
+          "definition"
+        ],
+        "title": "Concept",
+        "type": "object"
+      },
+      "DemoCheckReport": {
+        "additionalProperties": false,
+        "description": "Readiness of every demo component and the recommended mode.",
+        "properties": {
+          "lines": {
+            "items": {
+              "$ref": "#/components/schemas/CheckLine"
+            },
+            "title": "Lines",
+            "type": "array"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "recommended_mode": {
+            "$ref": "#/components/schemas/OperatingMode"
+          }
+        },
+        "required": [
+          "lines",
+          "recommended_mode",
+          "reason"
+        ],
+        "title": "DemoCheckReport",
+        "type": "object"
+      },
+      "DemoStep": {
+        "additionalProperties": false,
+        "description": "One act of the scripted demo.",
+        "properties": {
+          "act": {
+            "title": "Act",
+            "type": "integer"
+          },
+          "evidence": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Evidence",
+            "type": "array"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "passed": {
+            "title": "Passed",
+            "type": "boolean"
+          },
+          "required": {
+            "title": "Required",
+            "type": "boolean"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "act",
+          "title",
+          "required",
+          "passed",
+          "label",
+          "summary"
+        ],
+        "title": "DemoStep",
+        "type": "object"
+      },
+      "EvaluateMeasures": {
+        "additionalProperties": false,
+        "description": "Evaluate declared measures.",
+        "properties": {
+          "measures": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Measures"
+          },
+          "operation": {
+            "const": "evaluate_measures",
+            "title": "Operation",
+            "type": "string"
+          },
+          "semantic_model_id": {
+            "title": "Semantic Model Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operation",
+          "semantic_model_id"
+        ],
+        "title": "EvaluateMeasures",
+        "type": "object"
+      },
+      "EvaluationRequest": {
+        "additionalProperties": false,
+        "description": "Evaluate observed measure values (or the local provider's values) against the baseline.",
+        "properties": {
+          "observed": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Observed"
+          },
+          "observed_label": {
+            "default": "LIVE",
+            "enum": [
+              "LIVE",
+              "HYBRID",
+              "LOCAL",
+              "MOCKED"
+            ],
+            "title": "Observed Label",
+            "type": "string"
+          },
+          "profile": {
+            "title": "Profile",
+            "type": "string"
+          }
+        },
+        "required": [
+          "profile"
+        ],
+        "title": "EvaluationRequest",
+        "type": "object"
+      },
+      "EvaluationResult": {
+        "additionalProperties": false,
+        "description": "Outcome of an evaluation run.",
+        "properties": {
+          "compared": {
+            "title": "Compared",
+            "type": "integer"
+          },
+          "comparisons": {
+            "items": {
+              "$ref": "#/components/schemas/MeasureComparison"
+            },
+            "title": "Comparisons",
+            "type": "array"
+          },
+          "evaluation_id": {
+            "title": "Evaluation Id",
+            "type": "string"
+          },
+          "gate_passed": {
+            "title": "Gate Passed",
+            "type": "boolean"
+          },
+          "missing_measures": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Missing Measures",
+            "type": "array"
+          },
+          "observed_label": {
+            "title": "Observed Label",
+            "type": "string"
+          },
+          "observed_values_source": {
+            "enum": [
+              "local-provider",
+              "caller-supplied"
+            ],
+            "title": "Observed Values Source",
+            "type": "string"
+          },
+          "pass_rate": {
+            "title": "Pass Rate",
+            "type": "number"
+          },
+          "passed": {
+            "title": "Passed",
+            "type": "integer"
+          },
+          "profile": {
+            "title": "Profile",
+            "type": "string"
+          },
+          "tolerance": {
+            "title": "Tolerance",
+            "type": "number"
+          },
+          "unexpected_measures": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Unexpected Measures",
+            "type": "array"
+          }
+        },
+        "required": [
+          "profile",
+          "observed_values_source",
+          "observed_label",
+          "tolerance",
+          "compared",
+          "passed",
+          "pass_rate",
+          "gate_passed",
+          "comparisons",
+          "missing_measures",
+          "unexpected_measures"
+        ],
+        "title": "EvaluationResult",
+        "type": "object"
+      },
+      "Evidence": {
+        "additionalProperties": false,
+        "description": "A single piece of evidence attached to a result.",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/EvidenceCategory"
+          },
+          "reference": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference"
+          },
+          "statement": {
+            "title": "Statement",
+            "type": "string"
+          }
+        },
+        "required": [
+          "category",
+          "statement"
+        ],
+        "title": "Evidence",
+        "type": "object"
+      },
+      "EvidenceCategory": {
+        "description": "How strongly a statement is supported. Used to keep teaching claims honest.",
+        "enum": [
+          "SIMULATED LOCALLY",
+          "DOCUMENTED FABRIC BEHAVIOR",
+          "DOCUMENTED BEHAVIOR",
+          "REQUIRES TENANT VALIDATION",
+          "ASSUMPTION",
+          "PRODUCTION RECOMMENDATION",
+          "PREVIEW LIMITATION"
+        ],
+        "title": "EvidenceCategory",
+        "type": "string"
+      },
+      "EvidenceClaim": {
+        "additionalProperties": false,
+        "description": "A claim with how strongly it is supported (keeps teaching honest).",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/EvidenceCategory"
+          },
+          "sources": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Sources",
+            "type": "array"
+          },
+          "statement": {
+            "title": "Statement",
+            "type": "string"
+          }
+        },
+        "required": [
+          "statement",
+          "category"
+        ],
+        "title": "EvidenceClaim",
+        "type": "object"
+      },
+      "ExecuteRequest": {
+        "additionalProperties": false,
+        "description": "A request to execute an approved plan.",
+        "properties": {
+          "approval_id": {
+            "title": "Approval Id",
+            "type": "string"
+          },
+          "change_id": {
+            "title": "Change Id",
+            "type": "string"
+          },
+          "executed_by": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Executed By",
+            "type": "string"
+          }
+        },
+        "required": [
+          "change_id",
+          "approval_id",
+          "executed_by"
+        ],
+        "title": "ExecuteRequest",
+        "type": "object"
+      },
+      "ExecutionEnvelope_object_": {
+        "additionalProperties": false,
+        "properties": {
+          "cloud_operation_performed": {
+            "title": "Cloud Operation Performed",
+            "type": "boolean"
+          },
+          "correlation_id": {
+            "pattern": "^[0-9a-f]{32}$",
+            "title": "Correlation Id",
+            "type": "string"
+          },
+          "data": {
+            "title": "Data"
+          },
+          "equivalent_fabric_service": {
+            "title": "Equivalent Fabric Service",
+            "type": "string"
+          },
+          "evidence": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/Evidence"
+            },
+            "title": "Evidence",
+            "type": "array"
+          },
+          "execution_label": {
+            "$ref": "#/components/schemas/ExecutionLabel"
+          },
+          "fallback_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fallback Reason"
+          },
+          "fallback_used": {
+            "default": false,
+            "title": "Fallback Used",
+            "type": "boolean"
+          },
+          "operating_mode": {
+            "$ref": "#/components/schemas/OperatingMode"
+          },
+          "requested_provider": {
+            "title": "Requested Provider",
+            "type": "string"
+          },
+          "selected_provider": {
+            "title": "Selected Provider",
+            "type": "string"
+          },
+          "simulation_notice": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Simulation Notice"
+          },
+          "teaching_objective": {
+            "title": "Teaching Objective",
+            "type": "string"
+          },
+          "timestamp": {
+            "format": "date-time",
+            "title": "Timestamp",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operating_mode",
+          "execution_label",
+          "requested_provider",
+          "selected_provider",
+          "cloud_operation_performed",
+          "equivalent_fabric_service",
+          "teaching_objective",
+          "data"
+        ],
+        "title": "ExecutionEnvelope[object]",
+        "type": "object"
+      },
+      "ExecutionLabel": {
+        "description": "How a single result was produced.",
+        "enum": [
+          "LIVE",
+          "HYBRID",
+          "LOCAL",
+          "SIMULATED",
+          "MOCKED",
+          "PREVIEW",
+          "UNAVAILABLE"
+        ],
+        "title": "ExecutionLabel",
+        "type": "string"
+      },
+      "ExecutionResult": {
+        "additionalProperties": false,
+        "description": "What happened when an approved change was executed and verified.",
+        "properties": {
+          "approval_id": {
+            "title": "Approval Id",
+            "type": "string"
+          },
+          "change_id": {
+            "title": "Change Id",
+            "type": "string"
+          },
+          "execution_label": {
+            "$ref": "#/components/schemas/ExecutionLabel"
+          },
+          "rollback": {
+            "title": "Rollback",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ChangeStatus"
+          },
+          "verification": {
+            "$ref": "#/components/schemas/CheckResult"
+          }
+        },
+        "required": [
+          "change_id",
+          "approval_id",
+          "status",
+          "execution_label",
+          "verification",
+          "rollback"
+        ],
+        "title": "ExecutionResult",
+        "type": "object"
+      },
+      "FabricTarget": {
+        "additionalProperties": false,
+        "description": "What a change applies to. Workspaces are referenced by overlay alias, never by ID.",
+        "properties": {
+          "destination": {
+            "enum": [
+              "LOCAL",
+              "LIVE"
+            ],
+            "title": "Destination",
+            "type": "string"
+          },
+          "item_name": {
+            "maxLength": 120,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9 _.-]*$",
+            "title": "Item Name",
+            "type": "string"
+          },
+          "item_type": {
+            "enum": [
+              "Lakehouse",
+              "Notebook",
+              "SemanticModel",
+              "Report"
+            ],
+            "title": "Item Type",
+            "type": "string"
+          },
+          "workspace_alias": {
+            "pattern": "^[a-z][a-z0-9-]*$",
+            "title": "Workspace Alias",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspace_alias",
+          "item_type",
+          "item_name",
+          "destination"
+        ],
+        "title": "FabricTarget",
+        "type": "object"
+      },
+      "GetSemanticModel": {
+        "additionalProperties": false,
+        "description": "Return a semantic model.",
+        "properties": {
+          "operation": {
+            "const": "get_semantic_model",
+            "title": "Operation",
+            "type": "string"
+          },
+          "semantic_model_id": {
+            "title": "Semantic Model Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operation",
+          "semantic_model_id"
+        ],
+        "title": "GetSemanticModel",
+        "type": "object"
+      },
+      "GuideProvenance": {
+        "additionalProperties": false,
+        "description": "Sanitized provenance. Never names, titles, authors, identifiers or URLs.",
+        "properties": {
+          "denylist_ref": {
+            "title": "Denylist Ref",
+            "type": "string"
+          },
+          "derived_from": {
+            "enum": [
+              "customer engagement guide (sanitized)",
+              "original"
+            ],
+            "title": "Derived From",
+            "type": "string"
+          },
+          "sanitized_on": {
+            "format": "date",
+            "title": "Sanitized On",
+            "type": "string"
+          }
+        },
+        "required": [
+          "derived_from",
+          "sanitized_on",
+          "denylist_ref"
+        ],
+        "title": "GuideProvenance",
+        "type": "object"
+      },
+      "GuideStep": {
+        "additionalProperties": false,
+        "description": "One step with prompts, checkpoint and the evidence that proves it.",
+        "properties": {
+          "approval_required": {
+            "title": "Approval Required",
+            "type": "boolean"
+          },
+          "checkpoint": {
+            "title": "Checkpoint",
+            "type": "string"
+          },
+          "claude_code_prompt": {
+            "title": "Claude Code Prompt",
+            "type": "string"
+          },
+          "copilot_prompt": {
+            "title": "Copilot Prompt",
+            "type": "string"
+          },
+          "evidence_required": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Evidence Required",
+            "type": "array"
+          },
+          "failure_modes": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Failure Modes",
+            "type": "array"
+          },
+          "id": {
+            "pattern": "^\\d{2}-[a-z0-9-]+$",
+            "title": "Id",
+            "type": "string"
+          },
+          "not_evidence": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Not Evidence",
+            "type": "array"
+          },
+          "objective": {
+            "title": "Objective",
+            "type": "string"
+          },
+          "offline_command": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Offline Command"
+          },
+          "offline_equivalent": {
+            "title": "Offline Equivalent",
+            "type": "string"
+          },
+          "rehearsal": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Rehearsal"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "requires_windows": {
+            "default": false,
+            "title": "Requires Windows",
+            "type": "boolean"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "tool_path": {
+            "$ref": "#/components/schemas/ToolPath"
+          },
+          "writes": {
+            "title": "Writes",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "objective",
+          "copilot_prompt",
+          "claude_code_prompt",
+          "tool_path",
+          "writes",
+          "approval_required",
+          "checkpoint",
+          "evidence_required",
+          "offline_equivalent"
+        ],
+        "title": "GuideStep",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "Health": {
+        "description": "Liveness.",
+        "properties": {
+          "status": {
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "title": "Health",
+        "type": "object"
+      },
+      "ItemInfo": {
+        "additionalProperties": false,
+        "description": "An item in a workspace.",
+        "properties": {
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "display_name": {
+            "title": "Display Name",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "Lakehouse",
+              "SemanticModel"
+            ],
+            "title": "Type",
+            "type": "string"
+          },
+          "workspace_id": {
+            "title": "Workspace Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "display_name",
+          "type",
+          "workspace_id",
+          "description"
+        ],
+        "title": "ItemInfo",
+        "type": "object"
+      },
+      "Lab": {
+        "additionalProperties": false,
+        "description": "``education/labs/<id>/lab.yaml``.",
+        "properties": {
+          "duration_minutes": {
+            "maximum": 240.0,
+            "minimum": 5.0,
+            "title": "Duration Minutes",
+            "type": "integer"
+          },
+          "id": {
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "title": "Id",
+            "type": "string"
+          },
+          "lessons": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Lessons",
+            "type": "array"
+          },
+          "level": {
+            "enum": [
+              "executive",
+              "l100",
+              "l200",
+              "l300",
+              "l400"
+            ],
+            "title": "Level",
+            "type": "string"
+          },
+          "mode": {
+            "enum": [
+              "OFFLINE",
+              "HYBRID",
+              "LIVE"
+            ],
+            "title": "Mode",
+            "type": "string"
+          },
+          "pattern_ids": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Pattern Ids",
+            "type": "array"
+          },
+          "prerequisites": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Prerequisites",
+            "type": "array"
+          },
+          "steps": {
+            "items": {
+              "$ref": "#/components/schemas/LabStep"
+            },
+            "title": "Steps",
+            "type": "array"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "summary",
+          "level",
+          "duration_minutes",
+          "mode",
+          "steps"
+        ],
+        "title": "Lab",
+        "type": "object"
+      },
+      "LabStep": {
+        "additionalProperties": false,
+        "description": "One stage of a lab.",
+        "properties": {
+          "commands": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Commands",
+            "type": "array"
+          },
+          "evidence_category": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EvidenceCategory"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "expected": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expected"
+          },
+          "instructions": {
+            "title": "Instructions",
+            "type": "string"
+          },
+          "stage": {
+            "enum": [
+              "LEARN",
+              "SEE",
+              "BUILD",
+              "INSPECT",
+              "BREAK IT",
+              "RECOVER",
+              "VERIFY",
+              "GO DEEPER",
+              "TRY WITH COPILOT",
+              "TRY WITH CLAUDE CODE",
+              "PRODUCTION NOTES"
+            ],
+            "title": "Stage",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "stage",
+          "title",
+          "instructions"
+        ],
+        "title": "LabStep",
+        "type": "object"
+      },
+      "LabSummary": {
+        "additionalProperties": false,
+        "description": "A lab in a list.",
+        "properties": {
+          "duration_minutes": {
+            "title": "Duration Minutes",
+            "type": "integer"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "lessons": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Lessons",
+            "type": "array"
+          },
+          "level": {
+            "enum": [
+              "executive",
+              "l100",
+              "l200",
+              "l300",
+              "l400"
+            ],
+            "title": "Level",
+            "type": "string"
+          },
+          "mode": {
+            "enum": [
+              "OFFLINE",
+              "HYBRID",
+              "LIVE"
+            ],
+            "title": "Mode",
+            "type": "string"
+          },
+          "pattern_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Pattern Ids",
+            "type": "array"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "summary",
+          "level",
+          "duration_minutes",
+          "mode",
+          "pattern_ids",
+          "lessons"
+        ],
+        "title": "LabSummary",
+        "type": "object"
+      },
+      "LessonSummary": {
+        "additionalProperties": false,
+        "description": "A lesson in a list.",
+        "properties": {
+          "area": {
+            "title": "Area",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "pattern_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Pattern Ids",
+            "type": "array"
+          },
+          "related_guides": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Related Guides",
+            "type": "array"
+          },
+          "related_labs": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Related Labs",
+            "type": "array"
+          },
+          "status": {
+            "enum": [
+              "GA",
+              "PREVIEW",
+              "MIXED",
+              "DEPRECATED",
+              "UNKNOWN/NEEDS VALIDATION",
+              "LOCAL"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "area",
+          "title",
+          "summary",
+          "status",
+          "pattern_ids",
+          "related_labs",
+          "related_guides"
+        ],
+        "title": "LessonSummary",
+        "type": "object"
+      },
+      "LessonView": {
+        "additionalProperties": false,
+        "description": "A full lesson for the reader, with checks but no answers.",
+        "properties": {
+          "area": {
+            "title": "Area",
+            "type": "string"
+          },
+          "checks": {
+            "items": {
+              "$ref": "#/components/schemas/PublicCheck"
+            },
+            "title": "Checks",
+            "type": "array"
+          },
+          "claude_code_prompt": {
+            "title": "Claude Code Prompt",
+            "type": "string"
+          },
+          "concepts": {
+            "items": {
+              "$ref": "#/components/schemas/Concept"
+            },
+            "title": "Concepts",
+            "type": "array"
+          },
+          "copilot_prompt": {
+            "title": "Copilot Prompt",
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/EvidenceClaim"
+            },
+            "title": "Evidence",
+            "type": "array"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "learning_objectives": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Learning Objectives",
+            "type": "array"
+          },
+          "levels": {
+            "items": {
+              "$ref": "#/components/schemas/LevelBody"
+            },
+            "title": "Levels",
+            "type": "array"
+          },
+          "pattern_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Pattern Ids",
+            "type": "array"
+          },
+          "prerequisites": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Prerequisites",
+            "type": "array"
+          },
+          "production_notes": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Production Notes",
+            "type": "array"
+          },
+          "related_guides": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Related Guides",
+            "type": "array"
+          },
+          "related_labs": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Related Labs",
+            "type": "array"
+          },
+          "sources": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Sources",
+            "type": "array"
+          },
+          "status": {
+            "enum": [
+              "GA",
+              "PREVIEW",
+              "MIXED",
+              "DEPRECATED",
+              "UNKNOWN/NEEDS VALIDATION",
+              "LOCAL"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "try_it": {
+            "items": {
+              "$ref": "#/components/schemas/TryIt"
+            },
+            "title": "Try It",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "area",
+          "title",
+          "summary",
+          "status",
+          "pattern_ids",
+          "related_labs",
+          "related_guides",
+          "learning_objectives",
+          "prerequisites",
+          "concepts",
+          "evidence",
+          "try_it",
+          "copilot_prompt",
+          "claude_code_prompt",
+          "production_notes",
+          "sources",
+          "levels",
+          "checks"
+        ],
+        "title": "LessonView",
+        "type": "object"
+      },
+      "LevelBody": {
+        "additionalProperties": false,
+        "description": "The Markdown body of one level.",
+        "properties": {
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "level": {
+            "enum": [
+              "executive",
+              "l100",
+              "l200",
+              "l300",
+              "l400"
+            ],
+            "title": "Level",
+            "type": "string"
+          },
+          "markdown": {
+            "title": "Markdown",
+            "type": "string"
+          }
+        },
+        "required": [
+          "level",
+          "label",
+          "markdown"
+        ],
+        "title": "LevelBody",
+        "type": "object"
+      },
+      "LevelText": {
+        "additionalProperties": false,
+        "description": "A short description per level.",
+        "properties": {
+          "executive": {
+            "title": "Executive",
+            "type": "string"
+          },
+          "l100": {
+            "title": "L100",
+            "type": "string"
+          },
+          "l200": {
+            "title": "L200",
+            "type": "string"
+          },
+          "l300": {
+            "title": "L300",
+            "type": "string"
+          },
+          "l400": {
+            "title": "L400",
+            "type": "string"
+          }
+        },
+        "required": [
+          "executive",
+          "l100",
+          "l200",
+          "l300",
+          "l400"
+        ],
+        "title": "LevelText",
+        "type": "object"
+      },
+      "ListItems": {
+        "additionalProperties": false,
+        "description": "List items in a workspace.",
+        "properties": {
+          "operation": {
+            "const": "list_items",
+            "title": "Operation",
+            "type": "string"
+          },
+          "workspace_id": {
+            "title": "Workspace Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operation",
+          "workspace_id"
+        ],
+        "title": "ListItems",
+        "type": "object"
+      },
+      "ListTables": {
+        "additionalProperties": false,
+        "description": "List tables in a lakehouse.",
+        "properties": {
+          "lakehouse_id": {
+            "title": "Lakehouse Id",
+            "type": "string"
+          },
+          "operation": {
+            "const": "list_tables",
+            "title": "Operation",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operation",
+          "lakehouse_id"
+        ],
+        "title": "ListTables",
+        "type": "object"
+      },
+      "ListWorkspaces": {
+        "additionalProperties": false,
+        "description": "List workspaces.",
+        "properties": {
+          "operation": {
+            "const": "list_workspaces",
+            "title": "Operation",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operation"
+        ],
+        "title": "ListWorkspaces",
+        "type": "object"
+      },
+      "MeasureComparison": {
+        "additionalProperties": false,
+        "description": "One measure compared with its expected value.",
+        "properties": {
+          "absolute_difference": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Absolute Difference"
+          },
+          "expected": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expected"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "observed": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Observed"
+          },
+          "passed": {
+            "title": "Passed",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "name",
+          "expected",
+          "observed",
+          "absolute_difference",
+          "passed"
+        ],
+        "title": "MeasureComparison",
+        "type": "object"
+      },
+      "MeasureValue": {
+        "additionalProperties": false,
+        "description": "The value of one semantic-model measure.",
+        "properties": {
+          "display_name": {
+            "title": "Display Name",
+            "type": "string"
+          },
+          "format": {
+            "title": "Format",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "synthetic_demonstration": {
+            "title": "Synthetic Demonstration",
+            "type": "boolean"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          }
+        },
+        "required": [
+          "name",
+          "display_name",
+          "value",
+          "format",
+          "synthetic_demonstration"
+        ],
+        "title": "MeasureValue",
+        "type": "object"
+      },
+      "OfflineDemoReport": {
+        "additionalProperties": false,
+        "description": "Outcome of the offline demo (a release gate).",
+        "properties": {
+          "cloud_operations": {
+            "title": "Cloud Operations",
+            "type": "integer"
+          },
+          "label_counts": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "Label Counts",
+            "type": "object"
+          },
+          "live_operations": {
+            "title": "Live Operations",
+            "type": "integer"
+          },
+          "operating_mode": {
+            "$ref": "#/components/schemas/OperatingMode"
+          },
+          "passed": {
+            "title": "Passed",
+            "type": "boolean"
+          },
+          "steps": {
+            "items": {
+              "$ref": "#/components/schemas/DemoStep"
+            },
+            "title": "Steps",
+            "type": "array"
+          }
+        },
+        "required": [
+          "passed",
+          "operating_mode",
+          "steps",
+          "label_counts",
+          "live_operations",
+          "cloud_operations"
+        ],
+        "title": "OfflineDemoReport",
+        "type": "object"
+      },
+      "OperatingMode": {
+        "description": "How the system as a whole is running.",
+        "enum": [
+          "LIVE",
+          "HYBRID",
+          "OFFLINE"
+        ],
+        "title": "OperatingMode",
+        "type": "string"
+      },
+      "ProposedChange": {
+        "additionalProperties": false,
+        "description": "A validated change plan. Nothing has executed.",
+        "properties": {
+          "approval_required": {
+            "title": "Approval Required",
+            "type": "boolean"
+          },
+          "change_id": {
+            "title": "Change Id",
+            "type": "string"
+          },
+          "correlation_id": {
+            "title": "Correlation Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "destination_hash": {
+            "title": "Destination Hash",
+            "type": "string"
+          },
+          "expected_impact": {
+            "title": "Expected Impact",
+            "type": "string"
+          },
+          "operation": {
+            "title": "Operation",
+            "type": "string"
+          },
+          "policy_allowed": {
+            "title": "Policy Allowed",
+            "type": "boolean"
+          },
+          "policy_reasons": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Policy Reasons",
+            "type": "array"
+          },
+          "precondition": {
+            "$ref": "#/components/schemas/CheckResult"
+          },
+          "provider": {
+            "title": "Provider",
+            "type": "string"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "requested_by": {
+            "title": "Requested By",
+            "type": "string"
+          },
+          "reversible": {
+            "title": "Reversible",
+            "type": "boolean"
+          },
+          "risk": {
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ],
+            "title": "Risk",
+            "type": "string"
+          },
+          "rollback": {
+            "title": "Rollback",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ChangeStatus"
+          },
+          "target": {
+            "$ref": "#/components/schemas/FabricTarget"
+          },
+          "validation": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Validation",
+            "type": "array"
+          }
+        },
+        "required": [
+          "correlation_id",
+          "operation",
+          "target",
+          "provider",
+          "reason",
+          "requested_by",
+          "risk",
+          "reversible",
+          "expected_impact",
+          "validation",
+          "rollback",
+          "approval_required",
+          "policy_allowed",
+          "policy_reasons",
+          "precondition",
+          "destination_hash",
+          "status"
+        ],
+        "title": "ProposedChange",
+        "type": "object"
+      },
+      "ProviderStatus": {
+        "additionalProperties": false,
+        "description": "One provider and its readiness.",
+        "properties": {
+          "capability": {
+            "title": "Capability",
+            "type": "string"
+          },
+          "configured": {
+            "title": "Configured",
+            "type": "boolean"
+          },
+          "kind": {
+            "enum": [
+              "LIVE",
+              "LOCAL",
+              "FAULT-INJECTION",
+              "NOT AVAILABLE"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "note": {
+            "title": "Note",
+            "type": "string"
+          },
+          "ready": {
+            "title": "Ready",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "capability",
+          "name",
+          "kind",
+          "configured",
+          "ready",
+          "note"
+        ],
+        "title": "ProviderStatus",
+        "type": "object"
+      },
+      "PublicCheck": {
+        "additionalProperties": false,
+        "description": "A knowledge check without its answer.",
+        "properties": {
+          "choices": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Choices",
+            "type": "array"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "level": {
+            "enum": [
+              "executive",
+              "l100",
+              "l200",
+              "l300",
+              "l400"
+            ],
+            "title": "Level",
+            "type": "string"
+          },
+          "question": {
+            "title": "Question",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "level",
+          "question",
+          "choices"
+        ],
+        "title": "PublicCheck",
+        "type": "object"
+      },
+      "ReadTable": {
+        "additionalProperties": false,
+        "description": "Preview a table (bounded).",
+        "properties": {
+          "lakehouse_id": {
+            "title": "Lakehouse Id",
+            "type": "string"
+          },
+          "limit": {
+            "default": 20,
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Limit",
+            "type": "integer"
+          },
+          "operation": {
+            "const": "read_table",
+            "title": "Operation",
+            "type": "string"
+          },
+          "table": {
+            "title": "Table",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operation",
+          "lakehouse_id",
+          "table"
+        ],
+        "title": "ReadTable",
+        "type": "object"
+      },
+      "Readiness": {
+        "description": "Readiness with the checks behind it.",
+        "properties": {
+          "checks": {
+            "additionalProperties": {
+              "type": "boolean"
+            },
+            "title": "Checks",
+            "type": "object"
+          },
+          "ready": {
+            "title": "Ready",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "ready",
+          "checks"
+        ],
+        "title": "Readiness",
+        "type": "object"
+      },
+      "RecommendRequest": {
+        "additionalProperties": false,
+        "description": "Needs from the selection vocabulary.",
+        "properties": {
+          "include_preview": {
+            "default": true,
+            "title": "Include Preview",
+            "type": "boolean"
+          },
+          "needs": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Needs",
+            "type": "array"
+          }
+        },
+        "required": [
+          "needs"
+        ],
+        "title": "RecommendRequest",
+        "type": "object"
+      },
+      "Recommendation": {
+        "additionalProperties": false,
+        "description": "A ranked pattern recommendation with its reasons.",
+        "properties": {
+          "default_demo_path": {
+            "title": "Default Demo Path",
+            "type": "string"
+          },
+          "matched_needs": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Matched Needs",
+            "type": "array"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "pattern_id": {
+            "title": "Pattern Id",
+            "type": "string"
+          },
+          "preview_dependencies": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Preview Dependencies",
+            "type": "array"
+          },
+          "score": {
+            "title": "Score",
+            "type": "integer"
+          },
+          "status": {
+            "enum": [
+              "GA",
+              "PREVIEW",
+              "MIXED"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "why": {
+            "title": "Why",
+            "type": "string"
+          }
+        },
+        "required": [
+          "pattern_id",
+          "name",
+          "score",
+          "matched_needs",
+          "status",
+          "preview_dependencies",
+          "default_demo_path",
+          "why"
+        ],
+        "title": "Recommendation",
+        "type": "object"
+      },
+      "RecoveryReport": {
+        "additionalProperties": false,
+        "description": "Outcome of the recovery drill.",
+        "properties": {
+          "counterfactual_recoverable": {
+            "title": "Counterfactual Recoverable",
+            "type": "boolean"
+          },
+          "duplicates_detected": {
+            "title": "Duplicates Detected",
+            "type": "integer"
+          },
+          "recovered": {
+            "title": "Recovered",
+            "type": "boolean"
+          },
+          "scale": {
+            "$ref": "#/components/schemas/ScaleEstimate"
+          },
+          "scenario": {
+            "title": "Scenario",
+            "type": "string"
+          },
+          "snapshot": {
+            "$ref": "#/components/schemas/SnapshotManifest"
+          },
+          "steps": {
+            "items": {
+              "$ref": "#/components/schemas/RecoveryStep"
+            },
+            "title": "Steps",
+            "type": "array"
+          },
+          "table": {
+            "title": "Table",
+            "type": "string"
+          }
+        },
+        "required": [
+          "scenario",
+          "table",
+          "steps",
+          "recovered",
+          "counterfactual_recoverable",
+          "duplicates_detected",
+          "snapshot",
+          "scale"
+        ],
+        "title": "RecoveryReport",
+        "type": "object"
+      },
+      "RecoveryStep": {
+        "additionalProperties": false,
+        "description": "One narrated step of the drill.",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/EvidenceCategory"
+          },
+          "checks": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/CheckResult"
+            },
+            "title": "Checks",
+            "type": "array"
+          },
+          "day": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Day"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "day",
+          "summary",
+          "category"
+        ],
+        "title": "RecoveryStep",
+        "type": "object"
+      },
+      "Rehearsal": {
+        "additionalProperties": false,
+        "description": "The governed change a write step can rehearse against the simulated workspace.",
+        "properties": {
+          "item_name": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Item Name",
+            "type": "string"
+          },
+          "item_type": {
+            "enum": [
+              "Lakehouse",
+              "Notebook",
+              "SemanticModel",
+              "Report"
+            ],
+            "title": "Item Type",
+            "type": "string"
+          },
+          "note": {
+            "default": "",
+            "title": "Note",
+            "type": "string"
+          },
+          "operation": {
+            "pattern": "^[a-z][a-z_]*$",
+            "title": "Operation",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operation",
+          "item_type",
+          "item_name"
+        ],
+        "title": "Rehearsal",
+        "type": "object"
+      },
+      "RouteDecision": {
+        "additionalProperties": false,
+        "description": "Why a request went where it went.",
+        "properties": {
+          "attempts": {
+            "title": "Attempts",
+            "type": "integer"
+          },
+          "breaker_state": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BreakerState"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "capability": {
+            "title": "Capability",
+            "type": "string"
+          },
+          "correlation_id": {
+            "title": "Correlation Id",
+            "type": "string"
+          },
+          "failure_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Failure Reason"
+          },
+          "fallback_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fallback Reason"
+          },
+          "operating_mode": {
+            "$ref": "#/components/schemas/OperatingMode"
+          },
+          "operation": {
+            "title": "Operation",
+            "type": "string"
+          },
+          "outcome": {
+            "enum": [
+              "LIVE",
+              "LOCAL",
+              "FALLBACK",
+              "UNAVAILABLE"
+            ],
+            "title": "Outcome",
+            "type": "string"
+          },
+          "requested_provider": {
+            "title": "Requested Provider",
+            "type": "string"
+          },
+          "selected_provider": {
+            "title": "Selected Provider",
+            "type": "string"
+          },
+          "timestamp": {
+            "format": "date-time",
+            "title": "Timestamp",
+            "type": "string"
+          }
+        },
+        "required": [
+          "capability",
+          "operation",
+          "correlation_id",
+          "requested_provider",
+          "selected_provider",
+          "operating_mode",
+          "outcome",
+          "attempts"
+        ],
+        "title": "RouteDecision",
+        "type": "object"
+      },
+      "RuntimeStatus": {
+        "additionalProperties": false,
+        "description": "Execution state shown everywhere (never implies a live connection that does not exist).",
+        "properties": {
+          "agent_provider": {
+            "title": "Agent Provider",
+            "type": "string"
+          },
+          "breakers": {
+            "items": {
+              "$ref": "#/components/schemas/BreakerStatus"
+            },
+            "title": "Breakers",
+            "type": "array"
+          },
+          "built_profiles": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Built Profiles",
+            "type": "array"
+          },
+          "data_provider": {
+            "title": "Data Provider",
+            "type": "string"
+          },
+          "environment": {
+            "title": "Environment",
+            "type": "string"
+          },
+          "identity": {
+            "title": "Identity",
+            "type": "string"
+          },
+          "mcp": {
+            "title": "Mcp",
+            "type": "string"
+          },
+          "operating_mode": {
+            "$ref": "#/components/schemas/OperatingMode"
+          },
+          "overlay": {
+            "title": "Overlay",
+            "type": "string"
+          },
+          "preview_features": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Preview Features",
+            "type": "array"
+          },
+          "providers": {
+            "items": {
+              "$ref": "#/components/schemas/ProviderStatus"
+            },
+            "title": "Providers",
+            "type": "array"
+          },
+          "recent_route_decisions": {
+            "items": {
+              "$ref": "#/components/schemas/RouteDecision"
+            },
+            "title": "Recent Route Decisions",
+            "type": "array"
+          },
+          "write_mode": {
+            "title": "Write Mode",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operating_mode",
+          "environment",
+          "overlay",
+          "data_provider",
+          "agent_provider",
+          "mcp",
+          "identity",
+          "write_mode",
+          "preview_features",
+          "providers",
+          "breakers",
+          "recent_route_decisions",
+          "built_profiles"
+        ],
+        "title": "RuntimeStatus",
+        "type": "object"
+      },
+      "ScaleEstimate": {
+        "additionalProperties": false,
+        "description": "Extrapolated sizes for the conceptual table. Estimates, not measurements.",
+        "properties": {
+          "conceptual_rows": {
+            "title": "Conceptual Rows",
+            "type": "integer"
+          },
+          "estimated_daily_change_rows": {
+            "title": "Estimated Daily Change Rows",
+            "type": "integer"
+          },
+          "estimated_snapshot_gib": {
+            "title": "Estimated Snapshot Gib",
+            "type": "number"
+          },
+          "local_rows": {
+            "title": "Local Rows",
+            "type": "integer"
+          },
+          "local_snapshot_bytes": {
+            "title": "Local Snapshot Bytes",
+            "type": "integer"
+          },
+          "note": {
+            "title": "Note",
+            "type": "string"
+          }
+        },
+        "required": [
+          "local_rows",
+          "local_snapshot_bytes",
+          "conceptual_rows",
+          "estimated_snapshot_gib",
+          "estimated_daily_change_rows",
+          "note"
+        ],
+        "title": "ScaleEstimate",
+        "type": "object"
+      },
+      "SelectionSignal": {
+        "description": "One need from the pattern-selection vocabulary.",
+        "properties": {
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "description"
+        ],
+        "title": "SelectionSignal",
+        "type": "object"
+      },
+      "SnapshotManifest": {
+        "additionalProperties": false,
+        "description": "Metadata describing one full snapshot.",
+        "properties": {
+          "columns": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Columns",
+            "type": "array"
+          },
+          "content_hash": {
+            "title": "Content Hash",
+            "type": "string"
+          },
+          "created_day": {
+            "title": "Created Day",
+            "type": "integer"
+          },
+          "file": {
+            "title": "File",
+            "type": "string"
+          },
+          "key_columns": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Key Columns",
+            "type": "array"
+          },
+          "row_count": {
+            "title": "Row Count",
+            "type": "integer"
+          },
+          "size_bytes": {
+            "title": "Size Bytes",
+            "type": "integer"
+          },
+          "snapshot_id": {
+            "title": "Snapshot Id",
+            "type": "string"
+          },
+          "table": {
+            "title": "Table",
+            "type": "string"
+          },
+          "watermark_sequence": {
+            "title": "Watermark Sequence",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "snapshot_id",
+          "table",
+          "created_day",
+          "watermark_sequence",
+          "row_count",
+          "content_hash",
+          "key_columns",
+          "columns",
+          "file",
+          "size_bytes"
+        ],
+        "title": "SnapshotManifest",
+        "type": "object"
+      },
+      "TableInfo": {
+        "additionalProperties": false,
+        "description": "A lakehouse table.",
+        "properties": {
+          "columns": {
+            "items": {
+              "$ref": "#/components/schemas/ColumnInfo"
+            },
+            "title": "Columns",
+            "type": "array"
+          },
+          "layer": {
+            "title": "Layer",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "row_count": {
+            "title": "Row Count",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "name",
+          "layer",
+          "row_count",
+          "columns"
+        ],
+        "title": "TableInfo",
+        "type": "object"
+      },
+      "TablePreview": {
+        "additionalProperties": false,
+        "description": "A bounded preview of table rows.",
+        "properties": {
+          "columns": {
+            "items": {
+              "$ref": "#/components/schemas/ColumnInfo"
+            },
+            "title": "Columns",
+            "type": "array"
+          },
+          "layer": {
+            "title": "Layer",
+            "type": "string"
+          },
+          "rows": {
+            "items": {
+              "additionalProperties": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "type": "object"
+            },
+            "title": "Rows",
+            "type": "array"
+          },
+          "table": {
+            "title": "Table",
+            "type": "string"
+          },
+          "total_rows": {
+            "title": "Total Rows",
+            "type": "integer"
+          },
+          "truncated": {
+            "title": "Truncated",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "table",
+          "layer",
+          "columns",
+          "rows",
+          "total_rows",
+          "truncated"
+        ],
+        "title": "TablePreview",
+        "type": "object"
+      },
+      "ToolPath": {
+        "additionalProperties": false,
+        "description": "The provider, server and tool a step must use. Substitution is not allowed.",
+        "properties": {
+          "provider": {
+            "title": "Provider",
+            "type": "string"
+          },
+          "server": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Server"
+          },
+          "substitution_allowed": {
+            "default": false,
+            "title": "Substitution Allowed",
+            "type": "boolean"
+          },
+          "tools": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Tools",
+            "type": "array"
+          }
+        },
+        "required": [
+          "provider"
+        ],
+        "title": "ToolPath",
+        "type": "object"
+      },
+      "ToolRequirement": {
+        "additionalProperties": false,
+        "description": "A tool, server, extension or service the guide needs.",
+        "properties": {
+          "install": {
+            "title": "Install",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "purpose": {
+            "title": "Purpose",
+            "type": "string"
+          },
+          "required": {
+            "default": true,
+            "title": "Required",
+            "type": "boolean"
+          },
+          "status": {
+            "enum": [
+              "GA",
+              "PREVIEW",
+              "OSS",
+              "UNKNOWN/NEEDS VALIDATION"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          }
+        },
+        "required": [
+          "name",
+          "purpose",
+          "status",
+          "install"
+        ],
+        "title": "ToolRequirement",
+        "type": "object"
+      },
+      "TryIt": {
+        "additionalProperties": false,
+        "description": "An offline command the learner can run, and the label its result carries.",
+        "properties": {
+          "command": {
+            "title": "Command",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "result_label": {
+            "enum": [
+              "LOCAL",
+              "SIMULATED",
+              "HYBRID",
+              "PREVIEW",
+              "UNAVAILABLE"
+            ],
+            "title": "Result Label",
+            "type": "string"
+          }
+        },
+        "required": [
+          "label",
+          "command",
+          "result_label"
+        ],
+        "title": "TryIt",
+        "type": "object"
+      },
+      "UseCaseGuide": {
+        "additionalProperties": false,
+        "description": "A Use-Case Guide (``guides/<id>/guide.yaml``).",
+        "properties": {
+          "dataset_profile": {
+            "title": "Dataset Profile",
+            "type": "string"
+          },
+          "expected_baseline": {
+            "title": "Expected Baseline",
+            "type": "string"
+          },
+          "harnesses": {
+            "items": {
+              "enum": [
+                "copilot-vscode",
+                "copilot-cli",
+                "copilot-app",
+                "copilot-cloud-agent",
+                "claude-code"
+              ],
+              "type": "string"
+            },
+            "title": "Harnesses",
+            "type": "array"
+          },
+          "id": {
+            "pattern": "^[a-z]+-\\d{2}-[a-z0-9-]+$",
+            "title": "Id",
+            "type": "string"
+          },
+          "industry": {
+            "title": "Industry",
+            "type": "string"
+          },
+          "maturity_levels": {
+            "items": {
+              "enum": [
+                "L0",
+                "L1",
+                "L2",
+                "L3",
+                "L4",
+                "L5",
+                "L6"
+              ],
+              "type": "string"
+            },
+            "title": "Maturity Levels",
+            "type": "array"
+          },
+          "operating_rules": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Operating Rules",
+            "type": "array"
+          },
+          "os_constraints": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Os Constraints",
+            "type": "array"
+          },
+          "patterns": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Patterns",
+            "type": "array"
+          },
+          "provenance": {
+            "$ref": "#/components/schemas/GuideProvenance"
+          },
+          "scenario": {
+            "title": "Scenario",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "draft",
+              "validated-offline",
+              "validated-live"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "steps": {
+            "items": {
+              "$ref": "#/components/schemas/GuideStep"
+            },
+            "minItems": 1,
+            "title": "Steps",
+            "type": "array"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "tenant_settings": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Tenant Settings",
+            "type": "array"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "tools": {
+            "items": {
+              "$ref": "#/components/schemas/ToolRequirement"
+            },
+            "title": "Tools",
+            "type": "array"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "industry",
+          "scenario",
+          "summary",
+          "version",
+          "status",
+          "provenance",
+          "patterns",
+          "maturity_levels",
+          "harnesses",
+          "operating_rules",
+          "tools",
+          "dataset_profile",
+          "expected_baseline",
+          "steps"
+        ],
+        "title": "UseCaseGuide",
+        "type": "object"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
+      },
+      "WorkspaceInfo": {
+        "additionalProperties": false,
+        "description": "A workspace visible to the provider.",
+        "properties": {
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "display_name": {
+            "title": "Display Name",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "display_name",
+          "description"
+        ],
+        "title": "WorkspaceInfo",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "description": "Control plane for the offline-first Fabric + Foundry reference implementation.",
+    "title": "Fabric Foundry Integration Accelerator API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/api/v1/approvals": {
+      "post": {
+        "description": "Record a human approval or rejection.",
+        "operationId": "approve_api_v1_approvals_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApprovalRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Approval"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Approve",
+        "tags": [
+          "changes"
+        ]
+      }
+    },
+    "/api/v1/audit/{correlation_id}": {
+      "get": {
+        "description": "Redacted audit records for a correlation ID.",
+        "operationId": "get_audit_api_v1_audit__correlation_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "correlation_id",
+            "required": true,
+            "schema": {
+              "title": "Correlation Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/AuditRecord"
+                  },
+                  "title": "Response Get Audit Api V1 Audit  Correlation Id  Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Audit",
+        "tags": [
+          "audit"
+        ]
+      }
+    },
+    "/api/v1/capabilities": {
+      "get": {
+        "description": "What the control plane can do and what serves each capability.",
+        "operationId": "get_capabilities_api_v1_capabilities_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Capability"
+                  },
+                  "title": "Response Get Capabilities Api V1 Capabilities Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Get Capabilities",
+        "tags": [
+          "runtime"
+        ]
+      }
+    },
+    "/api/v1/demo/run": {
+      "post": {
+        "description": "Run the ten-act offline demo against this process's services (labeled results only).",
+        "operationId": "run_demo_api_v1_demo_run_post",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OfflineDemoReport"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Run Demo",
+        "tags": [
+          "demo"
+        ]
+      }
+    },
+    "/api/v1/demo/status": {
+      "get": {
+        "description": "Readiness of every demo component and the recommended mode.",
+        "operationId": "demo_status_api_v1_demo_status_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DemoCheckReport"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Demo Status",
+        "tags": [
+          "demo"
+        ]
+      }
+    },
+    "/api/v1/education/architecture": {
+      "get": {
+        "description": "The architecture explorer map.",
+        "operationId": "get_architecture_api_v1_education_architecture_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArchitectureMap"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Get Architecture",
+        "tags": [
+          "education"
+        ]
+      }
+    },
+    "/api/v1/education/completeness": {
+      "get": {
+        "description": "Coverage of the 30-question architecture completeness gate.",
+        "operationId": "get_completeness_api_v1_education_completeness_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompletenessReport"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Get Completeness",
+        "tags": [
+          "education"
+        ]
+      }
+    },
+    "/api/v1/education/labs": {
+      "get": {
+        "description": "Lab summaries.",
+        "operationId": "list_labs_api_v1_education_labs_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/LabSummary"
+                  },
+                  "title": "Response List Labs Api V1 Education Labs Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "List Labs",
+        "tags": [
+          "education"
+        ]
+      }
+    },
+    "/api/v1/education/labs/{lab_id}": {
+      "get": {
+        "description": "One lab with its eleven stages.",
+        "operationId": "get_lab_api_v1_education_labs__lab_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "lab_id",
+            "required": true,
+            "schema": {
+              "title": "Lab Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Lab"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Lab",
+        "tags": [
+          "education"
+        ]
+      }
+    },
+    "/api/v1/education/lessons": {
+      "get": {
+        "description": "Lesson summaries, optionally filtered by area or pattern.",
+        "operationId": "list_lessons_api_v1_education_lessons_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "area",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Area"
+            }
+          },
+          {
+            "in": "query",
+            "name": "pattern_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Pattern Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/LessonSummary"
+                  },
+                  "title": "Response List Lessons Api V1 Education Lessons Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Lessons",
+        "tags": [
+          "education"
+        ]
+      }
+    },
+    "/api/v1/education/lessons/{lesson_id}": {
+      "get": {
+        "description": "One lesson with all five levels and its knowledge checks (answers withheld).",
+        "operationId": "get_lesson_api_v1_education_lessons__lesson_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "lesson_id",
+            "required": true,
+            "schema": {
+              "title": "Lesson Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LessonView"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Lesson",
+        "tags": [
+          "education"
+        ]
+      }
+    },
+    "/api/v1/education/lessons/{lesson_id}/checks/{check_id}": {
+      "post": {
+        "description": "Grade one knowledge-check answer.",
+        "operationId": "answer_check_api_v1_education_lessons__lesson_id__checks__check_id__post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "lesson_id",
+            "required": true,
+            "schema": {
+              "title": "Lesson Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "check_id",
+            "required": true,
+            "schema": {
+              "title": "Check Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CheckAnswer"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CheckGrade"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Answer Check",
+        "tags": [
+          "education"
+        ]
+      }
+    },
+    "/api/v1/evaluations/run": {
+      "post": {
+        "description": "Compare observed (or local) measure values with the expected baseline.",
+        "operationId": "run_evaluation_api_v1_evaluations_run_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExecutionEnvelope_object_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Run Evaluation",
+        "tags": [
+          "evaluation"
+        ]
+      }
+    },
+    "/api/v1/fabric/change": {
+      "post": {
+        "description": "Execute an approved change. LIVE changes are never redirected to LOCAL.",
+        "operationId": "execute_change_api_v1_fabric_change_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExecuteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExecutionEnvelope_object_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Execute Change",
+        "tags": [
+          "changes"
+        ]
+      }
+    },
+    "/api/v1/fabric/read": {
+      "post": {
+        "description": "Typed, read-only Fabric operations through the provider router.",
+        "operationId": "fabric_read_api_v1_fabric_read_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/ListWorkspaces"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ListItems"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ListTables"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ReadTable"
+                  },
+                  {
+                    "$ref": "#/components/schemas/GetSemanticModel"
+                  },
+                  {
+                    "$ref": "#/components/schemas/EvaluateMeasures"
+                  }
+                ],
+                "title": "Body"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExecutionEnvelope_object_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Fabric Read",
+        "tags": [
+          "fabric"
+        ]
+      }
+    },
+    "/api/v1/guides": {
+      "get": {
+        "description": "All Use-Case Guides.",
+        "operationId": "list_guides_api_v1_guides_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/UseCaseGuide"
+                  },
+                  "title": "Response List Guides Api V1 Guides Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "List Guides",
+        "tags": [
+          "guides"
+        ]
+      }
+    },
+    "/api/v1/guides/{guide_id}": {
+      "get": {
+        "description": "One Use-Case Guide.",
+        "operationId": "get_guide_api_v1_guides__guide_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "guide_id",
+            "required": true,
+            "schema": {
+              "title": "Guide Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UseCaseGuide"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Guide",
+        "tags": [
+          "guides"
+        ]
+      }
+    },
+    "/api/v1/guides/{guide_id}/steps/{step_id}": {
+      "get": {
+        "description": "One guide step.",
+        "operationId": "get_guide_step_api_v1_guides__guide_id__steps__step_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "guide_id",
+            "required": true,
+            "schema": {
+              "title": "Guide Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "step_id",
+            "required": true,
+            "schema": {
+              "title": "Step Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuideStep"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Guide Step",
+        "tags": [
+          "guides"
+        ]
+      }
+    },
+    "/api/v1/patterns": {
+      "get": {
+        "description": "All architecture patterns.",
+        "operationId": "list_patterns_api_v1_patterns_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ArchitecturePattern"
+                  },
+                  "title": "Response List Patterns Api V1 Patterns Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "List Patterns",
+        "tags": [
+          "patterns"
+        ]
+      }
+    },
+    "/api/v1/patterns/recommend": {
+      "post": {
+        "description": "Rank patterns for declared needs.",
+        "operationId": "recommend_patterns_api_v1_patterns_recommend_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecommendRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Recommendation"
+                  },
+                  "title": "Response Recommend Patterns Api V1 Patterns Recommend Post",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Recommend Patterns",
+        "tags": [
+          "patterns"
+        ]
+      }
+    },
+    "/api/v1/patterns/signals": {
+      "get": {
+        "description": "The needs vocabulary accepted by the pattern recommender.",
+        "operationId": "list_selection_signals_api_v1_patterns_signals_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/SelectionSignal"
+                  },
+                  "title": "Response List Selection Signals Api V1 Patterns Signals Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "List Selection Signals",
+        "tags": [
+          "patterns"
+        ]
+      }
+    },
+    "/api/v1/patterns/{pattern_id}": {
+      "get": {
+        "description": "One architecture pattern.",
+        "operationId": "get_pattern_api_v1_patterns__pattern_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "pattern_id",
+            "required": true,
+            "schema": {
+              "title": "Pattern Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArchitecturePattern"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Pattern",
+        "tags": [
+          "patterns"
+        ]
+      }
+    },
+    "/api/v1/plans": {
+      "get": {
+        "description": "All plans in this process.",
+        "operationId": "list_plans_api_v1_plans_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ProposedChange"
+                  },
+                  "title": "Response List Plans Api V1 Plans Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "List Plans",
+        "tags": [
+          "changes"
+        ]
+      },
+      "post": {
+        "description": "Plan and validate a change. Nothing executes.",
+        "operationId": "create_plan_api_v1_plans_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProposedChange"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Plan",
+        "tags": [
+          "changes"
+        ]
+      }
+    },
+    "/api/v1/plans/{change_id}": {
+      "get": {
+        "description": "One plan.",
+        "operationId": "get_plan_api_v1_plans__change_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "change_id",
+            "required": true,
+            "schema": {
+              "title": "Change Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProposedChange"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Plan",
+        "tags": [
+          "changes"
+        ]
+      }
+    },
+    "/api/v1/profiles": {
+      "get": {
+        "description": "Dataset profiles.",
+        "operationId": "list_profiles_api_v1_profiles_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "title": "Response List Profiles Api V1 Profiles Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "List Profiles",
+        "tags": [
+          "data"
+        ]
+      }
+    },
+    "/api/v1/recovery/drill": {
+      "post": {
+        "description": "Run the Open Mirroring snapshot + incremental + restore drill (SIMULATED).",
+        "operationId": "recovery_drill_api_v1_recovery_drill_post",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExecutionEnvelope_object_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Recovery Drill",
+        "tags": [
+          "recovery"
+        ]
+      }
+    },
+    "/api/v1/runtime/providers": {
+      "get": {
+        "description": "Provider readiness per capability.",
+        "operationId": "get_providers_api_v1_runtime_providers_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ProviderStatus"
+                  },
+                  "title": "Response Get Providers Api V1 Runtime Providers Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Get Providers",
+        "tags": [
+          "runtime"
+        ]
+      }
+    },
+    "/api/v1/runtime/status": {
+      "get": {
+        "description": "Execution state for the status bar.",
+        "operationId": "get_runtime_status_api_v1_runtime_status_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RuntimeStatus"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Get Runtime Status",
+        "tags": [
+          "runtime"
+        ]
+      }
+    },
+    "/health": {
+      "get": {
+        "description": "Liveness probe.",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Health"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Health",
+        "tags": [
+          "health"
+        ]
+      }
+    },
+    "/ready": {
+      "get": {
+        "description": "Readiness probe: local data built, guides and MCP manifest loaded.",
+        "operationId": "ready_ready_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Readiness"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Ready",
+        "tags": [
+          "health"
+        ]
+      }
+    }
+  }
+}

@@ -8,6 +8,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from fabric_foundry_accelerator.audit.store import AuditRecord
 from fabric_foundry_accelerator.education.guides import GuideStep, UseCaseGuide
+from fabric_foundry_accelerator.education.lessons import ArchitectureMap, CompletenessReport, Lab
 from fabric_foundry_accelerator.models.changes import (
     Approval,
     ApprovalRequest,
@@ -17,6 +18,7 @@ from fabric_foundry_accelerator.models.changes import (
 )
 from fabric_foundry_accelerator.models.execution import ExecutionEnvelope, new_correlation_id
 from fabric_foundry_accelerator.patterns.catalog import (
+    SELECTION_SIGNALS,
     ArchitecturePattern,
     Recommendation,
     recommend,
@@ -27,7 +29,19 @@ from fabric_foundry_accelerator.recovery.scenario import (
     run_recovery_drill,
 )
 from fabric_foundry_accelerator.services.container import Container
-from fabric_foundry_accelerator.services.demo import DemoCheckReport, demo_check
+from fabric_foundry_accelerator.services.demo import (
+    DemoCheckReport,
+    OfflineDemoReport,
+    demo_check,
+    run_offline_demo,
+)
+from fabric_foundry_accelerator.services.education import (
+    CheckAnswer,
+    CheckGrade,
+    LabSummary,
+    LessonSummary,
+    LessonView,
+)
 from fabric_foundry_accelerator.services.evaluation import EvaluationRequest
 from fabric_foundry_accelerator.services.fabric_reads import FabricReadRequest, execute_read
 from fabric_foundry_accelerator.services.runtime import (
@@ -167,6 +181,21 @@ def list_patterns(container: ContainerDep) -> list[ArchitecturePattern]:
     return list(container.catalog.patterns)
 
 
+class SelectionSignal(BaseModel):
+    """One need from the pattern-selection vocabulary."""
+
+    model_config = ConfigDict(frozen=True)
+
+    id: str
+    description: str
+
+
+@router.get("/api/v1/patterns/signals", tags=["patterns"])
+def list_selection_signals() -> list[SelectionSignal]:
+    """The needs vocabulary accepted by the pattern recommender."""
+    return [SelectionSignal(id=key, description=text) for key, text in SELECTION_SIGNALS.items()]
+
+
 @router.get("/api/v1/patterns/{pattern_id}", tags=["patterns"])
 def get_pattern(pattern_id: str, container: ContainerDep) -> ArchitecturePattern:
     """One architecture pattern."""
@@ -283,3 +312,57 @@ async def demo_status(container: ContainerDep) -> DemoCheckReport:
 def list_profiles() -> list[str]:
     """Dataset profiles."""
     return sorted(PROFILES)
+
+
+@router.post("/api/v1/demo/run", tags=["demo"])
+async def run_demo(container: ContainerDep, correlation_id: CorrelationDep) -> OfflineDemoReport:
+    """Run the ten-act offline demo against this process's services (labeled results only)."""
+    work_dir = container.settings.runtime_root / "demo" / correlation_id
+    return await run_offline_demo(container, work_dir=work_dir)
+
+
+# ------------------------------------------------------------------ education
+@router.get("/api/v1/education/lessons", tags=["education"])
+def list_lessons(
+    container: ContainerDep, area: str | None = None, pattern_id: str | None = None
+) -> list[LessonSummary]:
+    """Lesson summaries, optionally filtered by area or pattern."""
+    return container.education.lessons(area=area, pattern_id=pattern_id)
+
+
+@router.get("/api/v1/education/lessons/{lesson_id}", tags=["education"])
+def get_lesson(lesson_id: str, container: ContainerDep) -> LessonView:
+    """One lesson with all five levels and its knowledge checks (answers withheld)."""
+    return container.education.lesson(lesson_id)
+
+
+@router.post("/api/v1/education/lessons/{lesson_id}/checks/{check_id}", tags=["education"])
+def answer_check(
+    lesson_id: str, check_id: str, body: CheckAnswer, container: ContainerDep
+) -> CheckGrade:
+    """Grade one knowledge-check answer."""
+    return container.education.grade(lesson_id, check_id, body)
+
+
+@router.get("/api/v1/education/labs", tags=["education"])
+def list_labs(container: ContainerDep) -> list[LabSummary]:
+    """Lab summaries."""
+    return container.education.labs()
+
+
+@router.get("/api/v1/education/labs/{lab_id}", tags=["education"])
+def get_lab(lab_id: str, container: ContainerDep) -> Lab:
+    """One lab with its eleven stages."""
+    return container.education.lab(lab_id)
+
+
+@router.get("/api/v1/education/architecture", tags=["education"])
+def get_architecture(container: ContainerDep) -> ArchitectureMap:
+    """The architecture explorer map."""
+    return container.education.library.architecture
+
+
+@router.get("/api/v1/education/completeness", tags=["education"])
+def get_completeness(container: ContainerDep) -> CompletenessReport:
+    """Coverage of the 30-question architecture completeness gate."""
+    return container.education.library.completeness_report()

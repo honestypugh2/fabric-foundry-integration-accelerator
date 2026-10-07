@@ -1,0 +1,88 @@
+id: fabric-skills
+area: fabric
+title: "Fabric Skills: knowledge packs for coding agents"
+summary: >-
+  Fabric Skills (the open-source microsoft/skills-for-fabric repository) are Markdown knowledge
+  packs that teach coding agents the correct Fabric REST, SQL, KQL and PySpark procedures. They
+  make an agent competent, not authorized. Skills drive commands under your own identity, and
+  the bundled MCP configuration includes write-capable and arbitrary T-SQL servers, so the
+  accelerator teaches a hardened overlay and a five-part mental model - knowledge, execution,
+  harness, authority, evidence.
+status: MIXED
+pattern_ids: [P19]
+learning_objectives:
+  - Explain what a skill is (a SKILL.md knowledge pack) and what it is not (code that runs by itself, or a permission).
+  - Describe how Fabric Skills are installed in Copilot CLI, Claude Code, VS Code and through APM.
+  - Explain that skills drive az rest, SQL, KQL and PySpark under the signed-in user's identity.
+  - Identify the risks in the bundled .mcp.json and describe the hardened overlay.
+  - Use the KNOWLEDGE / EXECUTION / HARNESS / AUTHORITY / EVIDENCE model to review an agentic Fabric workflow.
+prerequisites: [fabric-mcp-landscape]
+concepts:
+  - term: Skill
+    definition: A folder with a SKILL.md file (and optional references) that an agent loads when a task matches its description. It contains instructions, not an executable service.
+  - term: Persona agent
+    definition: An experimental agent definition in the Fabric Skills repository (for example FabricDataEngineer) that routes requests to the right skills.
+  - term: Plugin marketplace
+    definition: A repository registered with a harness (Copilot CLI, Claude Code) from which skill bundles such as fabric-skills are installed.
+  - term: Hardened overlay
+    definition: The accelerator's replacement for the bundled MCP configuration - dev workspace only, read-only allow-lists by default, authoring in a separate opt-in profile, approvals on.
+  - term: Harness
+    definition: The agent loop and permission system that runs the skill - GitHub Copilot CLI, VS Code agent mode, the Copilot cloud agent or Claude Code.
+evidence:
+  - statement: Skills for Fabric is an official Microsoft open-source project that packages Fabric knowledge as skills for coding agents, with MCP servers for live execution.
+    category: DOCUMENTED FABRIC BEHAVIOR
+    sources: [skills-for-fabric]
+  - statement: As of October 2026 the repository is pre-1.0 (v0.3.18) with 25 skills, its persona agents are marked experimental, and it carries no GA label; treat its lifecycle as needs validation before each release.
+    category: ASSUMPTION
+    sources: [skills-for-fabric]
+  - statement: GitHub Copilot CLI is GA and supports skills, plugins and MCP servers; Claude Code supports skills loaded from SKILL.md folders.
+    category: DOCUMENTED BEHAVIOR
+    sources: [copilot-cli-ga, claude-code-skills]
+  - statement: The bundled MCP configuration registers Fabric IQ MCP and a hosted Power BI authoring server with every tool allowed, and a Data Warehouse SQL endpoint server whose tool runs arbitrary T-SQL.
+    category: PREVIEW LIMITATION
+    sources: [skills-for-fabric, powerbi-authoring-mcp, fabric-dw-mcp]
+  - statement: Fabric REST calls made by skills through the Azure CLI run under the signed-in identity and are limited by that identity's permissions.
+    category: DOCUMENTED FABRIC BEHAVIOR
+    sources: [fabric-rest-identity]
+  - statement: The accelerator does not install Fabric Skills; the hardened MCP profile arrives in Phase 5 and the offline lessons show only the decision model.
+    category: SIMULATED LOCALLY
+  - statement: Whether a given skill behaves correctly against your workspace, capacity and item types must be validated in a dev workspace.
+    category: REQUIRES TENANT VALIDATION
+  - statement: Pin the skills release, review skill changes like code, and run skills only against a dev workspace with a least-privilege identity.
+    category: PRODUCTION RECOMMENDATION
+try_it:
+  - label: See the accelerator's own MCP configuration (no Fabric Skills servers are installed)
+    command: cat .mcp.json
+    result_label: LOCAL
+  - label: Run the offline demo to see how an agent's proposal becomes a plan, not a write
+    command: ffia demo offline
+    result_label: SIMULATED
+copilot_prompt: >-
+  Do not install anything. Explain how the fabric-skills plugin from microsoft/skills-for-fabric
+  would be installed in Copilot CLI, which MCP servers its bundled configuration registers, and
+  which of them can write. Then draft, as a table, a hardened overlay for a dev workspace that
+  keeps only read-only tools by default and moves authoring and T-SQL to an opt-in profile.
+  Classify each row as KNOWLEDGE, EXECUTION, HARNESS, AUTHORITY or EVIDENCE.
+claude_code_prompt: >-
+  Do not install plugins or edit files. Describe how Claude Code would load Fabric Skills from
+  the microsoft/skills-for-fabric marketplace, how a skill such as spark-cli reaches Fabric
+  (az rest under my identity), and what Claude Code permission settings and MCP allow-lists you
+  would use so that the skill can read a dev workspace but cannot write without approval.
+production_notes:
+  - Pin the skills release (for example v0.3.18) and review its changelog before upgrading; pre-1.0 projects can change behavior between minor versions.
+  - Never adopt the bundled .mcp.json as-is; replace wildcard tool lists with explicit allow-lists and keep write-capable servers in an opt-in profile.
+  - Sign in with a least-privilege identity pinned to the intended tenant and a dev workspace; skills inherit everything that identity can do.
+  - Route production changes through Git and pull requests or the approved change flow, not through an interactive skill session.
+  - Keep evidence - the skill used, the tool called, Fabric request identifiers and the PR - for every change.
+sources:
+  - skills-for-fabric
+  - copilot-cli-ga
+  - claude-code-skills
+  - vscode-mcp-servers
+  - copilot-instructions-support
+  - fabric-rest-identity
+  - fabric-dw-mcp
+  - powerbi-authoring-mcp
+  - fabric-iq-mcp
+related_labs: [lab-mcp-allow-list, lab-copilot-maturity-ladder]
+related_guides: [hc-01-fabric-mcp-powerbi-medallion-lab]

@@ -1,0 +1,51 @@
+{
+  "cloud_operation_performed": false,
+  "correlation_id": "4983dce42b0743a290a3f4d1f7753f47",
+  "data": [
+    {
+      "description": "Baseline accelerator profile: nine entities (seven sources plus facility and payer masters) feeding a star schema with physical role-playing date dimensions.",
+      "display_name": "core-healthcare-v1 lakehouse (LOCAL)",
+      "id": "local-lh-core-healthcare-v1",
+      "type": "Lakehouse",
+      "workspace_id": "local-ws-synthetic"
+    },
+    {
+      "description": "Semantic model contract evaluated locally with DuckDB.",
+      "display_name": "core-healthcare-v1 semantic model (LOCAL)",
+      "id": "local-sm-core-healthcare-v1",
+      "type": "SemanticModel",
+      "workspace_id": "local-ws-synthetic"
+    },
+    {
+      "description": "Use-Case Guide HC-01 profile: seven CSV sources whose row counts and structural quirks match the guide's documented baseline.",
+      "display_name": "hc-lab-7file-v1 lakehouse (LOCAL)",
+      "id": "local-lh-hc-lab-7file-v1",
+      "type": "Lakehouse",
+      "workspace_id": "local-ws-synthetic"
+    },
+    {
+      "description": "Semantic model contract evaluated locally with DuckDB.",
+      "display_name": "hc-lab-7file-v1 semantic model (LOCAL)",
+      "id": "local-sm-hc-lab-7file-v1",
+      "type": "SemanticModel",
+      "workspace_id": "local-ws-synthetic"
+    }
+  ],
+  "equivalent_fabric_service": "Microsoft Fabric workspace items (Lakehouse, Semantic model)",
+  "evidence": [
+    {
+      "category": "SIMULATED LOCALLY",
+      "reference": null,
+      "statement": "Listed 4 local items."
+    }
+  ],
+  "execution_label": "LOCAL",
+  "fallback_reason": null,
+  "fallback_used": false,
+  "operating_mode": "OFFLINE",
+  "requested_provider": "Local Fabric Educational Provider",
+  "selected_provider": "Local Fabric Educational Provider",
+  "simulation_notice": "LOCAL educational analog over synthetic Parquet data. No Microsoft Fabric, OneLake or Power BI operation was performed.",
+  "teaching_objective": "Inventory items before choosing which governed context to use.",
+  "timestamp": "2026-10-07T21:42:09.920791Z"
+}

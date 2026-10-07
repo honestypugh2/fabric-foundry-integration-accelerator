@@ -25,8 +25,10 @@ class Settings(BaseSettings):
     output_root: Path | None = None
     guides_root: Path = Path("guides")
     education_root: Path = Path("education")
+    sources_path: Path = Path("docs/research/sources.yaml")
     frontend_root: Path = Path("frontend")
     audit_path: Path | None = Path("data/runtime/audit.jsonl")
+    runtime_root: Path = Path("data/runtime")
     auto_build_data: bool = True
     demo_check_azure_cli: bool = True
     allow_live_mutation: bool = False

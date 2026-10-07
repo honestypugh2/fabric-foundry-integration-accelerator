@@ -1,0 +1,56 @@
+checks:
+  - id: exec-writes
+    level: executive
+    question: During a live demo the Fabric endpoint fails right after a change was approved. What should happen to the approved write?
+    choices:
+      - It runs against the local simulation so the demo continues
+      - It fails as UNAVAILABLE and a new plan is required
+      - It is retried until it succeeds, without telling anyone
+    answer: 1
+    explanation: Only reads may fall back. An approved LIVE write is never redirected to a simulation, because that would be false evidence.
+  - id: l100-breaker
+    level: l100
+    question: What does an OPEN circuit breaker do?
+    choices:
+      - It retries the live service faster
+      - It stops calling the failing live service until a trial call is allowed
+      - It deletes cached data
+    answer: 1
+    explanation: Opening the breaker protects both the caller and the failing service; after the reset timeout one trial call tests recovery.
+  - id: l200-client-error
+    level: l200
+    question: In HYBRID mode a request asks for a table that does not exist. What happens?
+    choices:
+      - The router falls back to LOCAL and returns synthetic data
+      - The breaker counts a failure
+      - The error is returned as-is with no retry, no fallback and no breaker change
+      - The API returns 503
+    answer: 2
+    explanation: Unknown resources and invalid requests are client errors; treating them as outages would hide mistakes.
+  - id: l300-labels
+    level: l300
+    question: With FFIA_ENVIRONMENT=hybrid and FFIA_SIMULATE_FABRIC_OUTAGE=1, what does POST /api/v1/fabric/read return for a valid read_table?
+    choices:
+      - execution_label LIVE and cloud_operation_performed true
+      - HTTP 503 UNAVAILABLE
+      - operating_mode HYBRID, fallback_used true and a fallback_reason, with data from the local provider
+    answer: 2
+    explanation: HYBRID allows a labeled read fallback; the envelope keeps the label of what served the data and explains why.
+  - id: l300-breaker-where
+    level: l300
+    question: Where do you see that the fabric_data breaker is OPEN?
+    choices:
+      - GET /api/v1/runtime/status (breakers and recent_route_decisions)
+      - GET /api/v1/patterns
+      - The MCP tool list
+    answer: 0
+    explanation: Runtime status reports breaker state, consecutive failures and recent route decisions.
+  - id: l400-attempts
+    level: l400
+    question: In HYBRID (max_retries 1) the outage injector fails every call. How many live calls are made before the breaker opens?
+    choices:
+      - "3"
+      - "6"
+      - "4"
+    answer: 1
+    explanation: Each request makes 2 attempts (1 + 1 retry) but counts as one breaker failure; 3 failed requests open the breaker, so 6 live calls are made.

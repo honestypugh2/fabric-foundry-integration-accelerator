@@ -1,0 +1,65 @@
+checks:
+  - id: exec-principle
+    level: executive
+    question: Which statement best describes the role of MCP in this architecture?
+    choices:
+      - MCP decides which users may change Fabric items
+      - MCP standardizes access to capabilities; identity and policy determine authority
+      - MCP replaces the need for human approval
+    answer: 1
+    explanation: MCP is a standard way to reach tools. Whether a call is allowed is decided by Entra identity, the server's own checks and policy, with humans approving high-impact actions.
+  - id: l100-unsafe-tool
+    level: l100
+    question: Which tool shape does governed MCP reject?
+    choices:
+      - A tool that returns at most 20 rows of a catalogued table
+      - A tool that evaluates declared measures by name
+      - A tool that runs any SQL statement the model writes
+      - A tool that proposes a change plan without executing it
+    answer: 2
+    explanation: Free-form SQL, shell, URL fetch and REST proxies let prompt injection reach anything; typed, bounded tools limit what a model can do.
+  - id: l200-narrowest
+    level: l200
+    question: An engineer wants to learn the JSON definition format of a Fabric item. Which server is the narrowest fit?
+    choices:
+      - Local Fabric MCP documentation tools
+      - A write-capable remote server with item create tools
+      - The Data Warehouse SQL server
+    answer: 0
+    explanation: Use docs tools for how, read-only tools for what is, and the approval flow for change it.
+  - id: l300-fail-fast
+    level: l300
+    question: You enable a manifest entry named run_sql that has no implementation. What does ffia-local do?
+    choices:
+      - Registers it as a no-op tool
+      - Skips it silently
+      - Refuses to start with "manifest enables tools without an implementation"
+    answer: 2
+    explanation: build_mcp_server compares enabled manifest entries with implementations and raises ValueError, so configuration mistakes are visible immediately.
+  - id: l300-revoke
+    level: l300
+    question: How do you revoke preview_table on ffia-local?
+    choices:
+      - "Set enabled: false for it in the manifest and restart the server"
+      - Ask the model not to call it
+      - Change its description to say it is deprecated
+    answer: 0
+    explanation: Disabled tools are never registered, so clients cannot discover or call them. Instructions to a model are not a control.
+  - id: l400-annotations
+    level: l400
+    question: A third-party server marks a delete tool with readOnlyHint true. What should a client conclude?
+    choices:
+      - The tool is safe because annotations are enforced by the protocol
+      - Nothing reliable; annotations are hints and enforcement must come from the server and backend
+      - The tool will be blocked automatically by the client
+    answer: 1
+    explanation: Annotations help clients decide when to confirm; from an untrusted server they are not a security guarantee.
+  - id: l400-wildcard
+    level: l400
+    question: A bundled skill configuration grants tools ["*"] on a write-capable authoring server. What is the governed response?
+    choices:
+      - Accept it; the skill author reviewed it
+      - Replace it with a hardened, read-only overlay and a separate opt-in authoring profile with approvals
+      - Remove MCP entirely from the project
+    answer: 1
+    explanation: Wildcard grants expose every current and future tool under your identity; a pinned, read-only default with an explicit authoring profile keeps changes deliberate.

@@ -1,0 +1,66 @@
+checks:
+  - id: exec-baseline-owner
+    level: executive
+    question: Which governance decision most protects AI-assisted data pipelines?
+    choices:
+      - Letting the AI assistant approve its own notebooks
+      - Naming an owner for each measure's expected baseline and refusing changes that do not reproduce it
+      - Giving agents direct access to Bronze so answers are faster
+      - Turning off data-quality checks to reduce failed builds
+    answer: 1
+    explanation: AI can draft pipelines quickly; an owned baseline plus a release rule is what keeps the numbers right.
+  - id: l100-layer
+    level: l100
+    question: Which layer should a business agent read to answer "what is the average length of stay"?
+    choices:
+      - Raw files
+      - Bronze
+      - Gold through the semantic model
+    answer: 2
+    explanation: Gold and the semantic model hold typed, conformed data and the governed measure definition; Bronze keeps raw data for replay only.
+  - id: l100-ai-role
+    level: l100
+    question: Which task should AI NOT decide on its own in this pattern?
+    choices:
+      - Drafting a Silver transformation
+      - Whether a measure value is correct
+      - Explaining why a quality check failed
+    answer: 1
+    explanation: Correctness is decided by deterministic tests and the expected baseline, not by a model's judgment.
+  - id: l200-direct-lake
+    level: l200
+    question: What is a documented difference of Direct Lake on OneLake compared with Direct Lake on the SQL analytics endpoint?
+    choices:
+      - Direct Lake on OneLake has no DirectQuery fallback
+      - Direct Lake on OneLake always imports a copy of the data
+      - Direct Lake on OneLake cannot read Gold tables
+    answer: 0
+    explanation: Direct Lake on OneLake runs in Direct Lake only; fallback to DirectQuery applies to the SQL analytics endpoint variant.
+  - id: l300-build
+    level: l300
+    question: You changed a Gold SQL file. Which command proves the change still reproduces the committed numbers?
+    choices:
+      - ffia data generate --check
+      - ffia sources render
+      - ffia data build
+      - ffia recovery run
+    answer: 2
+    explanation: ffia data build rebuilds Bronze, Silver and Gold, runs every check and compares with data/synthetic/expected; generate --check only verifies the raw CSVs.
+  - id: l300-mcp
+    level: l300
+    question: How does a coding agent read Silver rows through the ffia-local MCP server?
+    choices:
+      - With preview_table, which returns at most 20 labeled rows
+      - With a SQL tool that runs any query
+      - It cannot read any table
+    answer: 0
+    explanation: Reads are typed and bounded; there is deliberately no free-form SQL tool.
+  - id: l400-cleanup
+    level: l400
+    question: An AI-drafted Silver change removes rows with blank charges and the build fails. Why is failing correct?
+    choices:
+      - Because blank charges are clinical errors
+      - Because the exact-count diagnostic for blank charges no longer matches the injected quirk, showing source facts were silently dropped
+      - Because DuckDB does not support NULL values
+    answer: 1
+    explanation: Silver flags quality issues and preserves facts; exact diagnostics catch over-correction as well as under-detection.

@@ -1,0 +1,90 @@
+id: copilot-maturity-ladder
+area: agentic-data-engineering
+title: "Leveling up Fabric data engineering with GitHub Copilot"
+summary: >-
+  GitHub Copilot is an agent harness that turns data-engineering intent into correct, reviewable
+  Fabric artifacts and operations. It is grounded by Skills, executed through MCP, CLI and Git,
+  constrained by permissions and policy, and evidenced by pull requests and audit records. The
+  L0–L6 maturity ladder shows what each level adds, what it is worth, what can go wrong and how
+  to measure it.
+status: MIXED
+pattern_ids: [P19, P20, P21, P22, P23, P24]
+learning_objectives:
+  - Describe the role of GitHub Copilot in Fabric data engineering as a harness, not an authority.
+  - Place a team on the L0–L6 maturity ladder and name the control and evidence each level needs.
+  - Separate KNOWLEDGE, EXECUTION, HARNESS, AUTHORITY and EVIDENCE when designing an agentic workflow.
+  - Identify the human skills and access a learner needs before climbing to L4 and L5.
+  - Measure a level change with a scorecard instead of anecdotes.
+prerequisites: [fabric-skills, fabric-mcp-landscape]
+concepts:
+  - term: Agent harness
+    definition: The agent loop around a model (planning, tool calls, permissions, sessions). Copilot CLI, VS Code agent mode, the Copilot app, the Copilot cloud agent and Claude Code are harnesses.
+  - term: Grounding
+    definition: Giving the agent authoritative context (repository instructions, documentation tools, schemas) so it stops guessing Fabric APIs and item formats.
+  - term: Skill
+    definition: A versioned Markdown procedure (SKILL.md plus references) that teaches an agent how to do a task correctly. Knowledge, not code that runs by itself.
+  - term: Governed change
+    definition: A change that goes PLAN, VALIDATE, APPROVE, EXECUTE, VERIFY, AUDIT, usually as a pull request deployed by Fabric Git integration or an approved scoped writer.
+  - term: Maturity level
+    definition: One rung of the L0–L6 ladder; each rung adds a capability, a risk, a control and a piece of evidence.
+  - term: Scorecard
+    definition: Time, steps, approvals requested, checks passed, evidence completeness and errors caught, recorded per task and per level.
+evidence:
+  - statement: GitHub Copilot CLI is generally available (since 2026-02-25) and supports plan mode, per-tool approval, skills, plugins and MCP servers.
+    category: DOCUMENTED BEHAVIOR
+    sources: [copilot-cli-ga]
+  - statement: Skills for Fabric is an official open-source collection of Fabric skills and an MCP configuration that targets Copilot CLI, VS Code and Claude Code; it is pre-1.0 (v0.3.18 as of October 2026) and its persona agents are experimental.
+    category: DOCUMENTED FABRIC BEHAVIOR
+    sources: [skills-for-fabric]
+  - statement: The Fabric MCP Server (local) documentation tools return API specifications, item schemas and best practices without a Fabric tenant.
+    category: DOCUMENTED FABRIC BEHAVIOR
+    sources: [fabric-mcp-local, fabric-mcp-servers-list]
+  - statement: Fabric Git integration lets notebooks, semantic models and other items be reviewed as files in pull requests before they reach a workspace.
+    category: DOCUMENTED FABRIC BEHAVIOR
+    sources: [fabric-git-integration]
+  - statement: Levels L1–L5 can be climbed offline in this repository with the ffia-local MCP server; every result is labeled LOCAL or SIMULATED.
+    category: SIMULATED LOCALLY
+  - statement: The bundled Skills for Fabric MCP configuration enables write-capable servers with all tools allowed; it should be replaced by a hardened, read-only-by-default overlay before use against a real workspace.
+    category: PRODUCTION RECOMMENDATION
+    sources: [skills-for-fabric]
+  - statement: L6 parallel and autonomous work relies on the Copilot app, which is a technical preview as of October 2026.
+    category: PREVIEW LIMITATION
+  - statement: Scorecard results depend on the model, prompt and task; they are observations for this repository, not product benchmarks.
+    category: ASSUMPTION
+try_it:
+  - label: See the real (local) context an L4 agent would inspect
+    command: ffia demo offline
+    result_label: LOCAL
+  - label: Start the local MCP server that L4 and L5 exercises use
+    command: ffia serve mcp
+    result_label: LOCAL
+  - label: Propose an L5 change plan through the API (approval is a separate human step)
+    command: "curl -s -X POST localhost:8000/api/v1/plans -H 'Content-Type: application/json' -d @plan.json"
+    result_label: SIMULATED
+copilot_prompt: >-
+  Read AGENTS.md. Then, without changing any files, explain
+  src/fabric_foundry_accelerator/synthetic/sql/silver/silver_encounters.sql (L1). Use the ffia-local
+  MCP server to call inspect_medallion_architecture and preview_table for silver_encounters in
+  hc-lab-7file-v1 (L4), and tell me which maturity level each step represents, which tool you used
+  and which execution label each result carried.
+claude_code_prompt: >-
+  Using the instructions imported from AGENTS.md and the ffia-local MCP server, walk me from L1 to L5
+  on the silver_encounters table: explain the SQL, inspect the table with read-only tools, then call
+  generate_fabric_change_plan for a LOCAL create_notebook change. Stop at the plan and tell me what a
+  human must do next and what evidence each level produced.
+production_notes:
+  - Climb the ladder in a dedicated dev workspace; L4 and above should never start in production.
+  - Pin Skills for Fabric to a release tag and review its changelog before every bump; skills are executable trust decisions.
+  - Replace the bundled skills MCP configuration with a hardened read-only overlay; keep authoring and SQL servers in a separate, opt-in profile.
+  - Make L5 the default for anything that reaches a workspace — pull request, CI checks, branch protection, CODEOWNERS and a human approver.
+  - Treat L6 as an experiment behind sandboxes, firewall allow-lists, an MCP allow-list and a budget.
+  - Record a scorecard per level so leaders see measured change, not anecdotes.
+sources:
+  - copilot-cli-ga
+  - skills-for-fabric
+  - fabric-mcp-local
+  - fabric-mcp-servers-list
+  - fabric-git-integration
+  - copilot-instructions-support
+related_labs: [lab-copilot-maturity-ladder]
+related_guides: [hc-01-fabric-mcp-powerbi-medallion-lab]

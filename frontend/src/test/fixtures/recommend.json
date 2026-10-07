@@ -1,0 +1,14 @@
+[
+  {
+    "default_demo_path": "LOCAL",
+    "matched_needs": [
+      "business-system-write"
+    ],
+    "name": "Human-in-the-loop governed action",
+    "pattern_id": "P08",
+    "preview_dependencies": [],
+    "score": 1,
+    "status": "GA",
+    "why": "Addresses: Writes to a business system or Fabric item. Use when: Any write to a business system or Fabric item."
+  }
+]

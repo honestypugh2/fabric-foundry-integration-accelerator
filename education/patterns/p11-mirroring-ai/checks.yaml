@@ -1,0 +1,65 @@
+checks:
+  - id: exec-not-backup
+    level: executive
+    question: Which statement about Fabric Mirroring is accurate for planning recovery?
+    choices:
+      - Mirroring is a documented backup, so no other recovery plan is needed
+      - Mirroring keeps a copy current but is not documented as a backup; snapshots and retained change files must be planned
+      - Fabric Git integration stores mirrored table data, so it covers recovery
+    answer: 1
+    explanation: Freshness is not durability. Git stores item definitions only, and processed change files are cleaned up after seven days.
+  - id: l100-insert
+    level: l100
+    question: A publisher re-sends yesterday's rows with __rowMarker__ 0. What happens?
+    choices:
+      - Fabric ignores rows whose keys already exist
+      - The rows are inserted again, creating duplicate keys
+      - The whole file is rejected
+    answer: 1
+    explanation: INSERT performs no duplicate-key check, which is exactly what day 5 of the drill demonstrates.
+  - id: l100-file-names
+    level: l100
+    question: Which landing-zone file name follows the documented format?
+    choices:
+      - claims_2026-10-07.parquet
+      - 1.parquet
+      - 00000000000000000001.parquet
+    answer: 2
+    explanation: Files are named with 20 digits in continuous sequence so they apply in order.
+  - id: l200-counterfactual
+    level: l200
+    question: Why can the drill not recover from the day-0 snapshot on day 10?
+    choices:
+      - The day-0 snapshot has no content hash
+      - Sequences 2 to 4 were already purged by the seven-day cleanup, leaving a gap in the change files
+      - Day-0 files have no __rowMarker__ column
+    answer: 1
+    explanation: Restore needs the snapshot plus every change file after its watermark; a gap means the table cannot be brought current.
+  - id: l300-entry
+    level: l300
+    question: Which of these runs the Open Mirroring recovery drill in this repository?
+    choices:
+      - ffia data build
+      - ffia demo check
+      - POST /api/v1/fabric/change
+      - ffia recovery run
+    answer: 3
+    explanation: ffia recovery run (also POST /api/v1/recovery/drill and the simulate_recovery_drill MCP tool) runs the SIMULATED drill.
+  - id: l400-idempotent
+    level: l400
+    question: Replaying sequence 10 twice changes nothing, but replaying sequence 11 twice adds rows. Why?
+    choices:
+      - Sequence 10 uses UPSERT markers and sequence 11 contains INSERT markers
+      - Sequence 11 is older than the snapshot watermark
+      - Sequence 10 has no key columns
+    answer: 0
+    explanation: UPSERT is idempotent; INSERT is not. Replay each sequence exactly once, or publish UPSERT markers for keyed tables.
+  - id: l400-proof
+    level: l400
+    question: Which evidence proves a restored table equals the pre-failure table?
+    choices:
+      - The restored Parquet file has the same byte size
+      - Matching row count, unique keys, contiguous sequences and an equal content hash
+      - The mirrored database item still exists in the workspace
+    answer: 1
+    explanation: Size and item existence are not evidence; the drill validates counts, keys, ordering and the content hash.

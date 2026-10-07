@@ -1,0 +1,90 @@
+id: copilot-vs-claude-code
+area: agentic-data-engineering
+title: "GitHub Copilot and Claude Code for Fabric data engineering"
+summary: >-
+  An honest, evidence-labeled comparison of two generally available agent harnesses for Fabric data
+  engineering. Both read the same repository instructions, skills and MCP configuration in this
+  accelerator; they differ in permission models, enforcement hooks, parallelism, GitHub integration
+  and admin planes. A same-task bake-off (arriving in Phase 7) records observations, not product
+  claims.
+status: GA
+pattern_ids: [P19, P20, P23]
+learning_objectives:
+  - List the shared foundations that make one repository work with both harnesses.
+  - Compare permission models, plan modes, subagents, hooks and headless execution.
+  - Choose a harness for a data-engineering task based on governance and workflow, not reputation.
+  - Explain the bake-off method and why its results are observations, not product claims.
+prerequisites: [copilot-maturity-ladder]
+concepts:
+  - term: Shared foundation
+    definition: Files both harnesses read — AGENTS.md (via a CLAUDE.md import for Claude Code), the portable .mcp.json and the .claude/skills/ folder.
+  - term: Permission mode
+    definition: How much a harness may do without asking. Copilot uses per-tool approval with allow and deny rules; Claude Code offers named modes from default through plan to bypass.
+  - term: Hook
+    definition: A Claude Code mechanism that runs at defined points (for example before a tool call) and can block an action — enforcement rather than instruction.
+  - term: Headless run
+    definition: A non-interactive invocation (copilot -p or claude -p) used in scripts and CI.
+  - term: Agent HQ
+    definition: GitHub capability that lets third-party coding agents such as Claude work on issues and pull requests inside GitHub under a Copilot subscription.
+  - term: Bake-off
+    definition: The same five data-engineering tasks run in both harnesses and scored on the same scorecard.
+evidence:
+  - statement: GitHub Copilot reads repository instructions, path-specific instructions and AGENTS.md; the cloud agent and code review also recognize CLAUDE.md.
+    category: DOCUMENTED BEHAVIOR
+    sources: [copilot-instructions-support]
+  - statement: Claude Code reads CLAUDE.md and falls back to AGENTS.md only when no CLAUDE.md exists, so this repository's CLAUDE.md imports AGENTS.md explicitly.
+    category: DOCUMENTED BEHAVIOR
+    sources: [claude-code-memory]
+  - statement: Claude Code loads project skills from .claude/skills/.
+    category: DOCUMENTED BEHAVIOR
+    sources: [claude-code-skills]
+  - statement: Copilot CLI and VS Code also read project skills from .claude/skills/ (alongside .github/skills/), which makes it the portable skill location.
+    category: DOCUMENTED BEHAVIOR
+  - statement: VS Code and Claude Code both read the portable .mcp.json format with an mcpServers object.
+    category: DOCUMENTED BEHAVIOR
+    sources: [vscode-mcp-servers]
+  - statement: Copilot CLI is generally available and supports plan mode, per-tool allow and deny rules and headless prompts.
+    category: DOCUMENTED BEHAVIOR
+    sources: [copilot-cli-ga]
+  - statement: Skills for Fabric targets Copilot CLI first and also ships a Claude Code plugin marketplace definition.
+    category: DOCUMENTED FABRIC BEHAVIOR
+    sources: [skills-for-fabric]
+  - statement: The Copilot app (parallel worktree sessions, Autopilot) is a technical preview as of October 2026.
+    category: PREVIEW LIMITATION
+  - statement: Bake-off scores will vary with model, prompt and task; they describe this repository's synthetic tasks, not the products in general.
+    category: ASSUMPTION
+  - statement: Organizations that use both harnesses must configure two separate admin planes (GitHub enterprise policies and Claude managed settings).
+    category: PRODUCTION RECOMMENDATION
+try_it:
+  - label: Confirm the shared MCP servers both harnesses will start
+    command: cat .mcp.json
+    result_label: LOCAL
+  - label: Run the same offline demo both harnesses can inspect
+    command: ffia demo offline
+    result_label: SIMULATED
+copilot_prompt: >-
+  In Copilot CLI, switch to plan mode and ask: "Using AGENTS.md and the ffia-local MCP server, plan
+  how you would add a data-quality check for null discharge dates in silver_encounters. List every
+  tool you would call, which ones need my approval and what evidence each produces. Do not edit
+  files yet." Record the steps and approvals for the bake-off scorecard.
+claude_code_prompt: >-
+  Start Claude Code with --permission-mode plan and ask: "Using the rules imported from AGENTS.md
+  and the ffia-local MCP server, plan how you would add a data-quality check for null discharge
+  dates in silver_encounters. List every tool you would call, which ones need my approval and what
+  evidence each produces. Do not edit files yet." Compare the plan with the Copilot run.
+production_notes:
+  - Keep one source of truth — AGENTS.md — and import it from CLAUDE.md; do not fork rules per tool.
+  - Put repository skills in .claude/skills/ so both harnesses load them.
+  - Configure the GitHub MCP allow-list and Claude managed settings separately; they do not share policy.
+  - Never use Autopilot or bypassPermissions outside a sandbox with synthetic data.
+  - Use headless runs in CI as an additional reviewer, never the only reviewer of high-risk changes.
+  - Publish bake-off results as dated observations with the model, versions and prompts used.
+sources:
+  - copilot-cli-ga
+  - copilot-instructions-support
+  - claude-code-memory
+  - claude-code-skills
+  - vscode-mcp-servers
+  - skills-for-fabric
+related_labs: [lab-copilot-maturity-ladder]
+related_guides: [hc-01-fabric-mcp-powerbi-medallion-lab]

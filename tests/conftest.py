@@ -46,8 +46,10 @@ def make_settings(built: tuple[Path, dict[str, ValidationReport]]) -> Callable[.
             "output_root": built[0],
             "guides_root": REPO_ROOT / "guides",
             "education_root": REPO_ROOT / "education",
+            "sources_path": REPO_ROOT / "docs" / "research" / "sources.yaml",
             "frontend_root": REPO_ROOT / "frontend",
             "audit_path": None,
+            "runtime_root": built[0] / "runtime",
             "demo_check_azure_cli": False,
         }
         values.update(overrides)

@@ -1,0 +1,98 @@
+[
+  {
+    "description": "Conversational questions over structured Fabric data",
+    "id": "conversational-structured-analytics"
+  },
+  {
+    "description": "Several governed business domains with different owners",
+    "id": "multiple-governed-domains"
+  },
+  {
+    "description": "A shared business vocabulary and entity model",
+    "id": "shared-business-vocabulary"
+  },
+  {
+    "description": "Retrieval over documents stored in OneLake",
+    "id": "document-knowledge-retrieval"
+  },
+  {
+    "description": "AI enrichment inside pipelines and notebooks",
+    "id": "ai-in-data-engineering"
+  },
+  {
+    "description": "An application agent over governed enterprise context",
+    "id": "enterprise-agent"
+  },
+  {
+    "description": "Real-time operational signals",
+    "id": "real-time-context"
+  },
+  {
+    "description": "Writes to a business system or Fabric item",
+    "id": "business-system-write"
+  },
+  {
+    "description": "Sharing tools with many agents under governance",
+    "id": "governed-tool-access"
+  },
+  {
+    "description": "A medallion analytics foundation",
+    "id": "medallion-foundation"
+  },
+  {
+    "description": "Mirroring operational data and recovering it",
+    "id": "operational-replication-recovery"
+  },
+  {
+    "description": "Governed measures for reports and agents",
+    "id": "semantic-model-reporting"
+  },
+  {
+    "description": "Production security and networking",
+    "id": "secure-production-deployment"
+  },
+  {
+    "description": "Central quotas, routing and tool registry",
+    "id": "centralized-api-governance"
+  },
+  {
+    "description": "Evaluation and tracing as quality gates",
+    "id": "evaluation-and-observability"
+  },
+  {
+    "description": "Fabric or Foundry may be unavailable",
+    "id": "resilience-offline"
+  },
+  {
+    "description": "Reuse for another customer or industry",
+    "id": "multi-customer-reuse"
+  },
+  {
+    "description": "Developer automation with Copilot or Claude Code",
+    "id": "developer-automation-cli"
+  },
+  {
+    "description": "Reviewable, repeatable changes through Git and CI",
+    "id": "reviewable-change-ci-cd"
+  },
+  {
+    "description": "Turning well-scoped issues into pull requests",
+    "id": "backlog-automation"
+  },
+  {
+    "description": "Bulk migration of legacy notebooks or pipelines",
+    "id": "bulk-migration"
+  },
+  {
+    "description": "Automated review in CI",
+    "id": "automated-review"
+  },
+  {
+    "description": "An embedded assistant inside an internal product",
+    "id": "embedded-assistant"
+  },
+  {
+    "description": "Production enterprise AI end to end",
+    "id": "production-enterprise-ai"
+  }
+]

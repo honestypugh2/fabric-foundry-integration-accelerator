@@ -25,7 +25,7 @@ Customize it · Productionize it — in one project, with **synthetic data only*
 | 1 | Repository foundation: uv/Python, React/TS/Vite, instructions, docs, quality tooling, CI | ✅ Complete |
 | 2 | Offline-first data foundation (synthetic medallion, recovery fixtures, Local Fabric Provider, dataset profiles) | ✅ Complete |
 | 3 | Application control plane (FastAPI, FastMCP, providers, router, circuit breaker, approvals, audit) | ✅ Complete |
-| 4 | Interactive educational application (explorers, learning paths, labs, guides, demo mode) | Planned |
+| 4 | Interactive educational application (explorers, learning paths, labs, guides, demo mode) | ✅ Complete |
 | 5 | Fabric integration (validated surfaces, MCP profiles, contract fixtures) | Planned |
 | 6 | Foundry integration (Agent Service, Agent Framework, Data Agent, Fabric IQ/Foundry IQ, evaluation) | Planned |
 | 7 | GitHub Copilot + Claude Code (skills, prompt packs, bake-off) | Planned |
@@ -74,10 +74,12 @@ make demo-check      # probe Fabric, Foundry, MCP, dataset, API and frontend; re
 make demo-offline    # ten-act release gate (must print "Release gate: PASSED")
 make run-api         # FastAPI control plane on http://127.0.0.1:8000 (OpenAPI at /docs)
 make run-mcp         # local educational MCP server (stdio), also registered in .mcp.json as ffia-local
+make run             # API + educational app on http://localhost:5173 (Guide HC-01 runner at /guides)
 ```
 
-See [control plane](docs/architecture/control-plane.md), [resilience](docs/architecture/resilience.md)
-and [demo continuity](docs/operations/demo-continuity.md).
+See [control plane](docs/architecture/control-plane.md), [frontend](docs/architecture/frontend.md),
+[resilience](docs/architecture/resilience.md), [demo continuity](docs/operations/demo-continuity.md)
+and [learning paths](docs/education/learning-paths.md).
 
 Run `make help` for every target. Targets for later phases print the phase in which they become
 available.

@@ -33,3 +33,7 @@ steps:
     checkpoint: What must be true before continuing.
     evidence_required: [The concrete evidence that proves the checkpoint.]
     offline_equivalent: How to practice this step offline.
+    # Write steps set writes: true and approval_required: true, and may add a rehearsal of the
+    # governed change against the simulated workspace (operation must exist in
+    # config/policies/writes.yaml and the overlay's allowed_writes):
+    # rehearsal: {operation: create_lakehouse, item_type: Lakehouse, item_name: example_lakehouse, note: ""}

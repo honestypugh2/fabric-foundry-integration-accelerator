@@ -173,11 +173,13 @@ def test_change_flow_over_http(client: TestClient) -> None:
     )
     assert again.status_code == 409
     audit = client.get(f"/api/v1/audit/{plan['correlation_id']}").json()
-    assert [r["action"] for r in audit] == [
-        "change:plan",
-        "change:approve:APPROVED",
-        "change:execute",
+    assert [(r["action"], r["success"]) for r in audit] == [
+        ("change:plan", True),
+        ("change:approve:APPROVED", False),
+        ("change:approve:APPROVED", True),
+        ("change:execute", True),
     ]
+    assert audit[1]["details"]["refusal"].startswith("separation of duties")
     assert client.get("/api/v1/plans/missing").status_code == 404
 
 
@@ -244,3 +246,45 @@ def test_recovery_evaluation_and_demo_status(client: TestClient) -> None:
         "Local Dataset",
         "MCP Server",
     }
+
+
+def test_education_endpoints(client: TestClient) -> None:
+    lessons = client.get("/api/v1/education/lessons").json()
+    assert {lesson["id"] for lesson in lessons} >= {"p08-human-in-the-loop"}
+    by_pattern = client.get("/api/v1/education/lessons", params={"pattern_id": "P08"}).json()
+    assert all("P08" in lesson["pattern_ids"] for lesson in by_pattern)
+    lesson = client.get("/api/v1/education/lessons/p08-human-in-the-loop").json()
+    assert [level["level"] for level in lesson["levels"]] == [
+        "executive",
+        "l100",
+        "l200",
+        "l300",
+        "l400",
+    ]
+    assert all("answer" not in check for check in lesson["checks"])
+    check_id = lesson["checks"][0]["id"]
+    graded = client.post(
+        f"/api/v1/education/lessons/p08-human-in-the-loop/checks/{check_id}", json={"choice": 0}
+    ).json()
+    assert set(graded) == {"check_id", "correct", "correct_choice", "explanation"}
+    assert (
+        client.post(
+            "/api/v1/education/lessons/p08-human-in-the-loop/checks/nope", json={"choice": 0}
+        ).status_code
+        == 404
+    )
+    assert client.get("/api/v1/education/lessons/nope").status_code == 404
+    labs = client.get("/api/v1/education/labs").json()
+    assert labs and client.get(f"/api/v1/education/labs/{labs[0]['id']}").json()["steps"]
+    assert client.get("/api/v1/education/labs/nope").status_code == 404
+    architecture = client.get("/api/v1/education/architecture").json()
+    assert architecture["layers"] and architecture["components"]
+    completeness = client.get("/api/v1/education/completeness").json()
+    assert completeness["total"] == 30
+
+
+def test_selection_signals_and_demo_run(client: TestClient) -> None:
+    signals = client.get("/api/v1/patterns/signals").json()
+    assert any(signal["id"] == "business-system-write" for signal in signals)
+    report = client.post("/api/v1/demo/run").json()
+    assert report["passed"] is True and report["cloud_operations"] == 0

@@ -1,0 +1,379 @@
+# Architecture Explorer data. Rendered by the frontend; the same map re-renders per level.
+# Status: GA | PREVIEW | MIXED | LOCAL (repo-provided) | UNKNOWN/NEEDS VALIDATION.
+version: 1
+layers:
+  - id: experience
+    name: Experience and harnesses
+    question: Who is asking, and which agent loop runs?
+    summary: People, apps and coding agents (GitHub Copilot, Claude Code) plus the knowledge that makes them competent.
+  - id: reasoning
+    name: Reasoning and orchestration
+    question: Who thinks, plans and orchestrates?
+    summary: Foundry agents and Agent Framework turn governed context into reasoning, plans and proposals.
+  - id: access
+    name: Capability access
+    question: How are capabilities reached?
+    summary: MCP servers and gateways standardize access. Access is not authority.
+  - id: context
+    name: Governed context
+    question: Where does trusted business context live?
+    summary: Fabric owns governed data, semantics and data agents.
+  - id: authority
+    name: Authority
+    question: Who may do it?
+    summary: Entra identity, deterministic policy, human approval and a scoped writer decide what may change.
+  - id: evidence
+    name: Evidence
+    question: How do we know what happened?
+    summary: Audit records, evaluation and tracing turn claims into proof.
+  - id: resilience
+    name: Resilience
+    question: What happens when a service is down?
+    summary: A router with timeouts, retries and a circuit breaker falls back to labeled local equivalents for reads only.
+components:
+  - id: learner-app
+    name: Educational app and control plane
+    layer: experience
+    status: LOCAL
+    description:
+      executive: The place where teams see the architecture working, with every result labeled so nothing is overstated.
+      l100: A web app and API that show patterns, lessons, labs and an offline demo.
+      l200: React frontend over a FastAPI control plane; routes stay thin and call services; no credentials in the browser.
+      l300: "make run-api and make run-frontend; typed API contracts are generated from the backend OpenAPI document."
+      l400: Correlation IDs on every response, problem-shaped errors (404/409/422/503) and labels validated by the envelope model.
+    owns: [Presentation, Learning journeys, Demo mode]
+    does_not_own: [Business rules, Authorization decisions]
+    pattern_ids: [P17, P18]
+    offline_equivalent: Runs fully offline.
+  - id: coding-agents
+    name: GitHub Copilot and Claude Code
+    layer: experience
+    status: MIXED
+    description:
+      executive: AI coding agents that speed up data engineering while every change stays reviewable.
+      l100: Copilot (VS Code, CLI, App, cloud agent) and Claude Code read repo instructions and call MCP tools.
+      l200: Harnesses provide the agent loop and permissions; AGENTS.md, .mcp.json and .claude/skills are shared by both.
+      l300: Copilot CLI and Claude Code both load the root .mcp.json (Microsoft Learn + ffia-local) and AGENTS.md.
+      l400: Harness permissions are not authorization; writes still go through plan, approval and a scoped writer.
+    owns: [Agent loop, Tool permissions, Developer workflow]
+    does_not_own: [Approval of production changes]
+    pattern_ids: [P19, P20, P21, P22, P23]
+    offline_equivalent: Agents work against this repo and the ffia-local MCP server with no tenant.
+    sources: [copilot-cli-ga, copilot-instructions-support, claude-code-memory]
+  - id: fabric-skills
+    name: Fabric Skills
+    layer: experience
+    status: MIXED
+    description:
+      executive: Microsoft-authored know-how packaged for agents, so they follow correct Fabric procedures.
+      l100: SKILL.md knowledge packs that teach an agent how to do Fabric tasks correctly.
+      l200: Skills are knowledge, not execution; they drive REST, SQL, KQL or PySpark under the user's identity.
+      l300: Installed through the Copilot CLI or Claude Code plugin marketplace; repo skills live in .claude/skills.
+      l400: The bundled MCP configuration allows broad tools; teach a hardened, read-only overlay for dev workspaces.
+    owns: [Procedures, Routing rules, Gotchas]
+    does_not_own: [Permissions, Execution]
+    pattern_ids: [P19]
+    offline_equivalent: Skill procedures rehearsed against the Local Fabric Educational Provider.
+    sources: [skills-for-fabric, claude-code-skills]
+  - id: foundry-agent
+    name: Foundry Agent Service
+    layer: reasoning
+    status: GA
+    description:
+      executive: Where business reasoning, orchestration and evaluation of AI agents is run and governed.
+      l100: Hosts agents that use tools and knowledge to answer questions and propose actions.
+      l200: Owns reasoning and orchestration; consumes Fabric context; never performs authoritative writes directly.
+      l300: Arrives in Phase 6 through the Foundry project SDK and Agent Framework adapters.
+      l400: Tool calls can require approval; the Fabric data agent tool is preview and uses on-behalf-of identity.
+    owns: [Reasoning, Orchestration, Conversation]
+    does_not_own: [Data permissions, Transactional writes]
+    pattern_ids: [P01, P06, P08]
+    offline_equivalent: Shown as UNAVAILABLE in the offline demo until Phase 6 adds a labeled local equivalent.
+    sources: [foundry-agent-service, foundry-overview]
+  - id: agent-framework
+    name: Microsoft Agent Framework
+    layer: reasoning
+    status: GA
+    description:
+      executive: The open-source framework teams use to build and test agents consistently.
+      l100: A library for building agents and multi-agent workflows in Python and .NET.
+      l200: Runs locally or against Foundry; supports workflows, tools and human-in-the-loop steps.
+      l300: Arrives in Phase 6 with a deterministic local client for offline tests.
+      l400: Approval-required functions pause execution until a human decision is recorded.
+    owns: [Agent runtime, Workflows]
+    does_not_own: [Authority]
+    pattern_ids: [P06, P08]
+    offline_equivalent: Deterministic local client (Phase 6).
+    sources: [agent-framework]
+  - id: fabric-mcp
+    name: Fabric MCP servers
+    layer: access
+    status: MIXED
+    description:
+      executive: A standard way for agents to reach Fabric capabilities; it does not decide who may do what.
+      l100: Several MCP servers expose Fabric docs, OneLake, items, SQL, DAX and authoring tools to agents.
+      l200: Pick the narrowest server; they run with the caller's Fabric permissions; status differs by server.
+      l300: Fabric MCP profiles arrive in Phase 5; today the local docs server and Microsoft Learn are the safe defaults.
+      l400: Do not conflate servers; pin versions; read-only allow-lists by default; writes go through the change flow.
+    owns: [Tool discovery, Tool invocation]
+    does_not_own: [Authorization]
+    pattern_ids: [P09, P19]
+    offline_equivalent: ffia-local exposes allow-listed educational tools over synthetic data.
+    sources: [fabric-mcp-servers-list, fabric-mcp-local, fabric-iq-mcp, fabric-dw-mcp, powerbi-authoring-mcp]
+  - id: ffia-local-mcp
+    name: ffia-local MCP server
+    layer: access
+    status: LOCAL
+    description:
+      executive: A safe teaching server that shows the protocol without touching any real system.
+      l100: A local MCP server with read-only and plan-only tools over synthetic data.
+      l200: Allow-listed from config/policies/tools.yaml; no approve, execute, shell or SQL tools.
+      l300: make run-mcp, or let Copilot or Claude Code start it from .mcp.json.
+      l400: Unknown manifest tools fail fast at startup; every call is rate-limited and audited; logs go to stderr.
+    owns: [Educational tools]
+    does_not_own: [Approval, Execution]
+    pattern_ids: [P09]
+    offline_equivalent: It is the offline equivalent.
+    sources: [mcp-specification]
+  - id: apim-gateway
+    name: API Management as AI and MCP gateway
+    layer: access
+    status: GA
+    description:
+      executive: One governed front door for AI models and tools, with cost and usage control.
+      l100: A gateway that sits in front of models and MCP servers.
+      l200: Adds authentication, rate limits, logging and policies in front of MCP servers and model endpoints.
+      l300: Documented reference only in this repo; no gateway is deployed.
+      l400: A gateway enforces transport policy; it does not replace per-operation authorization and approval.
+    owns: [Traffic policy, Usage limits, Logging]
+    does_not_own: [Business approval]
+    pattern_ids: [P15]
+    offline_equivalent: Local rate limiter and audit in ffia-local.
+    sources: [apim-mcp]
+  - id: onelake-medallion
+    name: OneLake medallion lakehouse
+    layer: context
+    status: GA
+    description:
+      executive: One governed copy of business data, refined in stages so everyone trusts the same numbers.
+      l100: Raw data becomes Bronze, then cleaned Silver, then business-ready Gold.
+      l200: Lakehouses in OneLake hold each layer; notebooks transform; tests check row counts and baselines.
+      l300: Offline, ffia data build creates Bronze, Silver and Gold Parquet for each synthetic profile.
+      l400: Idempotent writes, grain checks and reconciliation against expected baselines prove correctness.
+    owns: [Governed data, Data quality]
+    does_not_own: [Reasoning]
+    pattern_ids: [P10]
+    offline_equivalent: DuckDB over Parquet in the Local Fabric Educational Provider.
+    sources: [fabric-medallion, fabric-overview]
+  - id: semantic-model
+    name: Semantic model (Direct Lake)
+    layer: context
+    status: GA
+    description:
+      executive: The agreed business definitions, so reports and agents give the same answer.
+      l100: Tables, relationships and measures that define business meaning.
+      l200: Direct Lake reads Gold Delta tables; measures are the governed definitions agents should reuse.
+      l300: The synthetic contract lives in data/synthetic/semantic/<profile>/semantic-model.yaml.
+      l400: Measures are evaluated by name against baselines; free-form DAX is not exposed offline.
+    owns: [Business definitions, Measures]
+    does_not_own: [Raw data]
+    pattern_ids: [P12]
+    offline_equivalent: Local semantic YAML with measure evaluation.
+    sources: [fabric-direct-lake]
+  - id: fabric-data-agent
+    name: Fabric data agent
+    layer: context
+    status: MIXED
+    description:
+      executive: Lets people ask questions of governed data in plain language, within their permissions.
+      l100: A curated agent that answers questions over selected Fabric data.
+      l200: Uses the end user's identity; Fabric permissions decide what is visible.
+      l300: Called from Foundry through a preview tool or MCP endpoint (Phase 6).
+      l400: On-behalf-of only; one data agent per Foundry agent; same-region constraints apply.
+    owns: [Curated question answering]
+    does_not_own: [Writes]
+    pattern_ids: [P01, P02]
+    offline_equivalent: Local deterministic answers over the semantic model.
+    sources: [fabric-data-agent, foundry-fabric-tool]
+  - id: fabric-iq
+    name: Fabric IQ and ontology
+    layer: context
+    status: PREVIEW
+    description:
+      executive: A shared business vocabulary across domains, still in preview.
+      l100: Business entities and relationships bound to Fabric data.
+      l200: Gives many consumers one model of the business without copying data.
+      l300: Behind preview feature flags; never required for the default demo.
+      l400: Bindings inherit item permissions; preview behavior can change.
+    owns: [Business vocabulary]
+    does_not_own: [Data storage]
+    pattern_ids: [P02, P03]
+    offline_equivalent: Local semantic YAML.
+    sources: [fabric-iq-overview, fabric-iq-ontology]
+  - id: open-mirroring
+    name: Open Mirroring
+    layer: context
+    status: GA
+    description:
+      executive: Keeps operational data flowing into Fabric and recoverable when something goes wrong.
+      l100: Systems drop change files into a landing zone and Fabric replicates them.
+      l200: Snapshot plus incremental files; processed files are cleaned up after seven days.
+      l300: ffia recovery run simulates snapshot, incrementals, failure, restore and replay.
+      l400: INSERT rows are not de-duplicated; upserts and deletes need keys; file names are 20-digit sequences.
+    owns: [Replication]
+    does_not_own: [Source system authority]
+    pattern_ids: [P11]
+    offline_equivalent: Landing-zone simulation and recovery drill.
+    sources: [fabric-open-mirroring-format]
+  - id: entra-identity
+    name: Entra identity
+    layer: authority
+    status: GA
+    description:
+      executive: Identity decides authority, for people and for agents.
+      l100: Who you are decides what you can see and change.
+      l200: User, approver and writer are different identities; agents act on behalf of users or as scoped identities.
+      l300: Live work uses az login in a demo tenant; identifiers stay in git-ignored files.
+      l400: Least privilege, on-behalf-of for user data, managed identity for writers.
+    owns: [Authentication, Authorization]
+    does_not_own: [Business approval]
+    pattern_ids: [P14]
+    offline_equivalent: Named actors in the simulated change flow.
+    sources: [fabric-rest-identity]
+  - id: policy-engine
+    name: Policy engine
+    layer: authority
+    status: LOCAL
+    description:
+      executive: The same rules applied every time, before any human is asked.
+      l100: Rules that decide whether a change is allowed and how risky it is.
+      l200: Policy files define operations, risk and rollback; overlays can narrow but not remove approval.
+      l300: config/policies/writes.yaml and tools.yaml, evaluated by policies/engine.py.
+      l400: Deterministic evaluation; unknown operations are high risk and blocked.
+    owns: [Deterministic validation]
+    does_not_own: [Final approval]
+    pattern_ids: [P08]
+    offline_equivalent: It runs offline.
+  - id: human-approval
+    name: Human approval
+    layer: authority
+    status: LOCAL
+    description:
+      executive: An accountable person decides on high-impact changes.
+      l100: A different person approves or rejects each proposed change.
+      l200: Separation of duties, expiry and destination binding protect the decision.
+      l300: POST /api/v1/approvals; MCP has no approve tool.
+      l400: Approvals expire and are bound to a destination hash; re-execution is refused.
+    owns: [Risk acceptance]
+    does_not_own: [Execution]
+    pattern_ids: [P08]
+    offline_equivalent: Same flow, simulated execution.
+  - id: scoped-writer
+    name: Scoped writer
+    layer: authority
+    status: LOCAL
+    description:
+      executive: Only one narrow, accountable service can actually change things.
+      l100: The service that performs an approved change and nothing else.
+      l200: Least-privilege identity bound to specific targets; LIVE writes are never redirected to LOCAL.
+      l300: Offline it writes to a simulated workspace (SIMULATED); the live writer arrives later.
+      l400: Re-checks preconditions and destination hash at execution; verifies against the system of record.
+    owns: [Authoritative writes]
+    does_not_own: [Deciding what to write]
+    pattern_ids: [P08]
+    offline_equivalent: Simulated workspace with verification.
+  - id: audit-store
+    name: Audit store
+    layer: evidence
+    status: LOCAL
+    description:
+      executive: A record of who asked, who approved and what happened.
+      l100: Every step writes an audit record you can look up.
+      l200: Records share a correlation ID across plan, approval, execution and tool calls.
+      l300: GET /api/v1/audit/<correlation_id> or the get_audit_record MCP tool.
+      l400: Redacted at write time; append-only JSONL locally; production needs an external sink.
+    owns: [Audit trail]
+    does_not_own: [Decisions]
+    pattern_ids: [P16]
+    offline_equivalent: JSONL file under data/runtime.
+  - id: evaluation
+    name: Evaluation
+    layer: evidence
+    status: MIXED
+    description:
+      executive: Measured quality instead of impressions.
+      l100: Checks answers and numbers against expected results.
+      l200: Deterministic baselines for data; model-graded evaluators for language quality.
+      l300: POST /api/v1/evaluations/run compares measures with data/synthetic/expected.
+      l400: Thresholds come from the overlay; evaluation gates the offline demo.
+    owns: [Quality evidence]
+    does_not_own: [Fixing quality]
+    pattern_ids: [P16]
+    offline_equivalent: Deterministic baseline comparison.
+    sources: [foundry-evaluators]
+  - id: observability
+    name: Observability and tracing
+    layer: evidence
+    status: GA
+    description:
+      executive: Visibility into what agents did, how long it took and what it cost.
+      l100: Logs and traces that show each step.
+      l200: Structured logs with correlation IDs locally; traces in a monitoring service in production.
+      l300: Structured, redacted logs today; OpenTelemetry tracing arrives in Phase 6.
+      l400: Never log tokens; correlate spans with audit records.
+    owns: [Telemetry]
+    does_not_own: [Audit authority]
+    pattern_ids: [P16]
+    offline_equivalent: Console and JSONL logs.
+    sources: [baseline-foundry-chat]
+  - id: provider-router
+    name: Provider router and circuit breaker
+    layer: resilience
+    status: LOCAL
+    description:
+      executive: The demo and the platform degrade gracefully and say so.
+      l100: When a live service fails, reads use a labeled local copy.
+      l200: Timeouts, retries and a circuit breaker per capability; writes never fall back.
+      l300: FFIA_ENVIRONMENT=hybrid FFIA_SIMULATE_FABRIC_OUTAGE=1 shows the fallback.
+      l400: Client errors never trigger fallback; breaker states CLOSED, OPEN, HALF_OPEN.
+    owns: [Fallback policy]
+    does_not_own: [Write decisions]
+    pattern_ids: [P17]
+    offline_equivalent: It is the resilience mechanism.
+  - id: local-fabric-provider
+    name: Local Fabric Educational Provider
+    layer: resilience
+    status: LOCAL
+    description:
+      executive: Lets the architecture be taught anywhere, honestly labeled as local.
+      l100: A local copy of the medallion data that works without the cloud.
+      l200: Read-only, allow-listed operations over synthetic Parquet; never presented as Fabric.
+      l300: DuckDB over Parquet built by ffia data build.
+      l400: Envelopes reject non-cloud labels that claim a cloud operation.
+    owns: [Offline reads]
+    does_not_own: [Cloud claims]
+    pattern_ids: [P10, P17]
+    offline_equivalent: It is the offline equivalent.
+    sources: [fabric-medallion]
+flows:
+  - {id: skills-to-agents, source: fabric-skills, target: coding-agents, label: How to do it correctly, kind: context}
+  - {id: agents-to-fabric-mcp, source: coding-agents, target: fabric-mcp, label: Discover and call tools, kind: access}
+  - {id: agents-to-local-mcp, source: coding-agents, target: ffia-local-mcp, label: Read synthetic context and propose plans, kind: access}
+  - {id: framework-to-foundry, source: agent-framework, target: foundry-agent, label: Build and orchestrate agents, kind: reasoning}
+  - {id: foundry-to-data-agent, source: foundry-agent, target: fabric-data-agent, label: Ask governed questions on behalf of the user, kind: access}
+  - {id: data-agent-to-model, source: fabric-data-agent, target: semantic-model, label: Query governed definitions, kind: context}
+  - {id: model-to-lakehouse, source: semantic-model, target: onelake-medallion, label: Direct Lake over Gold, kind: context}
+  - {id: mirroring-to-lakehouse, source: open-mirroring, target: onelake-medallion, label: Replicate source changes, kind: context}
+  - {id: gateway-to-fabric-mcp, source: apim-gateway, target: fabric-mcp, label: "Govern, limit and log tool traffic", kind: access}
+  - {id: identity-to-fabric-mcp, source: entra-identity, target: fabric-mcp, label: Caller permissions decide what is allowed, kind: authority}
+  - {id: foundry-proposes, source: foundry-agent, target: policy-engine, label: Propose a change, kind: change}
+  - {id: local-mcp-proposes, source: ffia-local-mcp, target: policy-engine, label: Plan and validate only, kind: change}
+  - {id: policy-to-approval, source: policy-engine, target: human-approval, label: Validated plan, kind: authority}
+  - {id: approval-to-writer, source: human-approval, target: scoped-writer, label: Approved and destination-bound, kind: authority}
+  - {id: identity-to-writer, source: entra-identity, target: scoped-writer, label: Least-privilege writer identity, kind: authority}
+  - {id: writer-to-lakehouse, source: scoped-writer, target: onelake-medallion, label: Perform only the approved write, kind: change}
+  - {id: writer-to-audit, source: scoped-writer, target: audit-store, label: Record every step, kind: evidence}
+  - {id: foundry-to-evaluation, source: foundry-agent, target: evaluation, label: Evaluate answers, kind: evidence}
+  - {id: foundry-to-observability, source: foundry-agent, target: observability, label: Emit traces, kind: evidence}
+  - {id: app-to-router, source: learner-app, target: provider-router, label: Reads go through the router, kind: access}
+  - {id: router-to-local, source: provider-router, target: local-fabric-provider, label: Approved read fallback (HYBRID), kind: fallback}

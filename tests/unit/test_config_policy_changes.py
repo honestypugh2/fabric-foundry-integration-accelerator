@@ -208,10 +208,16 @@ def test_full_local_flow_is_simulated_verified_and_audited() -> None:
 
 
 def test_separation_of_duties_and_rejection() -> None:
-    service, _ = _service()
+    service, audit = _service()
     plan = service.plan(_request())
     with pytest.raises(ApprovalError, match="separation of duties"):
         _approve(service, plan.change_id, approver="ALICE")
+    refused = audit.for_correlation(plan.correlation_id)[-1]
+    assert (refused.action, refused.success, refused.actor) == (
+        "change:approve:APPROVED",
+        False,
+        "ALICE",
+    )
     rejection = service.approve(
         ApprovalRequest(
             change_id=plan.change_id, approver="bob", decision=ApprovalDecision.REJECTED

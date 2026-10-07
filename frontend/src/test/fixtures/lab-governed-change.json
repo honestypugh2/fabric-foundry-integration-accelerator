@@ -1,0 +1,138 @@
+{
+  "duration_minutes": 30,
+  "id": "lab-governed-change",
+  "lessons": [
+    "p08-human-in-the-loop",
+    "p09-governed-mcp"
+  ],
+  "level": "l300",
+  "mode": "OFFLINE",
+  "pattern_ids": [
+    "P08"
+  ],
+  "prerequisites": [
+    "Repository set up: uv venv --python 3.14 .venv, source .venv/bin/activate, uv sync --frozen",
+    "Synthetic data built (make data), or let the API build it on first start",
+    "Read the L100-L300 levels of p08-human-in-the-loop"
+  ],
+  "steps": [
+    {
+      "commands": [
+        "cat config/policies/writes.yaml",
+        "cat config/customers/example-healthcare.yaml"
+      ],
+      "evidence_category": "SIMULATED LOCALLY",
+      "expected": "You can name who may approve (anyone except the requester) and what LIVE requires.",
+      "instructions": "Open `config/policies/writes.yaml`. Note `separation_of_duties: true`, the 30-minute `approval_ttl_minutes`, the risk, validation and rollback for `create_lakehouse`, and the LIVE destination note: LIVE needs `FFIA_ALLOW_LIVE_MUTATION=1`, approval and an authorized writer, and is never redirected to LOCAL. Then read the `demo-dev` workspace alias and `allowed_writes` in the customer overlay. The flow you will run is PLAN \u2192 VALIDATE \u2192 APPROVE \u2192 EXECUTE \u2192 VERIFY \u2192 AUDIT. Models propose; people approve; a scoped writer executes.",
+      "stage": "LEARN",
+      "title": "Read the policy that governs every write"
+    },
+    {
+      "commands": [
+        "ffia demo offline"
+      ],
+      "evidence_category": "SIMULATED LOCALLY",
+      "expected": "Act 5 passes with label SIMULATED and all four evidence lines true or BLOCKED.",
+      "instructions": "Run the offline demo and read act 5. Its evidence lines show self-approval refused, the verification result, the duplicate plan status and \"LIVE write refused without redirect\". Everything in the act is labeled SIMULATED or LOCAL; no Fabric item was touched.",
+      "stage": "SEE",
+      "title": "Watch the whole flow in act 5 of the offline demo"
+    },
+    {
+      "commands": [
+        "make run-api",
+        "curl -s -X POST localhost:8000/api/v1/plans -H 'Content-Type: application/json' -d '{\"operation\": \"create_lakehouse\", \"target\": {\"workspace_alias\": \"demo-dev\", \"item_type\": \"Lakehouse\", \"item_name\": \"bronze_lab\", \"destination\": \"LOCAL\"}, \"reason\": \"Lab: governed change\", \"requested_by\": \"engineer-a\"}'"
+      ],
+      "evidence_category": "SIMULATED LOCALLY",
+      "expected": "HTTP 200 with status PROPOSED, risk medium, approval_required true and a change_id and correlation_id.",
+      "instructions": "Start the control plane in a second terminal with `make run-api`. Post a plan as `engineer-a` to create a Lakehouse named `bronze_lab` in `demo-dev` with destination LOCAL. Copy `change_id` and `correlation_id` from the response. Nothing has run yet. Optionally ask an MCP client to call `generate_fabric_change_plan` with the same arguments: it returns a plan and a `next_step` saying a human must approve through `POST /api/v1/approvals`. Plans live in the memory of the process that created them, so continue this lab with the API plan.",
+      "stage": "BUILD",
+      "title": "Propose a change through the API (and through MCP)"
+    },
+    {
+      "commands": [
+        "curl -s localhost:8000/api/v1/plans/<change_id>",
+        "curl -s localhost:8000/api/v1/plans"
+      ],
+      "evidence_category": "SIMULATED LOCALLY",
+      "expected": "One PROPOSED plan whose precondition passed in the simulated workspace.",
+      "instructions": "Fetch the plan and read every field: `policy_allowed` and `policy_reasons` (deterministic policy evaluation), `precondition` (\"No duplicate item exists\", category SIMULATED LOCALLY), `validation`, `rollback`, `reversible`, `provider` (the simulated workspace) and `destination_hash`, which binds any approval to this exact target and destination. Ask yourself what you would need to see before accepting the risk.",
+      "stage": "INSPECT",
+      "title": "Read the plan before anyone approves it"
+    },
+    {
+      "commands": [
+        "curl -s -X POST localhost:8000/api/v1/approvals -H 'Content-Type: application/json' -d '{\"change_id\": \"<change_id>\", \"approver\": \"engineer-a\", \"decision\": \"APPROVED\"}'",
+        "curl -s -X POST localhost:8000/api/v1/fabric/change -H 'Content-Type: application/json' -d '{\"change_id\": \"<change_id>\", \"approval_id\": \"not-a-real-approval\", \"executed_by\": \"scoped-writer\"}'"
+      ],
+      "evidence_category": "SIMULATED LOCALLY",
+      "expected": "Two HTTP 409 ApprovalError responses; the plan remains PROPOSED.",
+      "instructions": "Approve the plan as `engineer-a`, the requester. The API refuses with HTTP 409 and \"separation of duties: the requester cannot approve their own change\". Then try to execute with a made-up approval ID; it is refused with \"approval not found for this change\". Neither attempt changed the plan, which is still PROPOSED. The refused self-approval is still recorded in the audit log with success false, because refused attempts are evidence too. Note that no MCP tool could have done either: ffia-local has no approve or execute tool.",
+      "stage": "BREAK IT",
+      "title": "Try to approve your own change, and to execute without approval"
+    },
+    {
+      "commands": [
+        "curl -s -X POST localhost:8000/api/v1/approvals -H 'Content-Type: application/json' -d '{\"change_id\": \"<change_id>\", \"approver\": \"approver-b\", \"decision\": \"APPROVED\", \"comment\": \"Reviewed plan\"}'",
+        "curl -s -X POST localhost:8000/api/v1/fabric/change -H 'Content-Type: application/json' -d '{\"change_id\": \"<change_id>\", \"approval_id\": \"<approval_id>\", \"executed_by\": \"scoped-writer\"}'"
+      ],
+      "evidence_category": "SIMULATED LOCALLY",
+      "expected": "execution_label SIMULATED, status VERIFIED, verification \"revision 0 -> 1\"; a repeat execution returns HTTP 409.",
+      "instructions": "Approve as `approver-b`, copy the `approval_id` (note `expires_at`, 30 minutes later), and execute as `scoped-writer`. The result is labeled SIMULATED with a notice that no Fabric item was created, and the status is VERIFIED because the simulated workspace revision moved from 0 to 1. Execute the same plan again: it is refused because a verified change cannot run twice.",
+      "stage": "RECOVER",
+      "title": "Approve as a second person and execute with the scoped writer"
+    },
+    {
+      "commands": [
+        "curl -s localhost:8000/api/v1/audit/<correlation_id>",
+        "curl -s -X POST localhost:8000/api/v1/plans -H 'Content-Type: application/json' -d '{\"operation\": \"create_lakehouse\", \"target\": {\"workspace_alias\": \"demo-dev\", \"item_type\": \"Lakehouse\", \"item_name\": \"bronze_lab\", \"destination\": \"LOCAL\"}, \"reason\": \"Lab: duplicate attempt\", \"requested_by\": \"engineer-a\"}'",
+        "curl -s -X POST localhost:8000/api/v1/approvals -H 'Content-Type: application/json' -d '{\"change_id\": \"<duplicate_change_id>\", \"approver\": \"approver-b\", \"decision\": \"APPROVED\"}'"
+      ],
+      "evidence_category": "SIMULATED LOCALLY",
+      "expected": "Four audit records (change:plan, the refused change:approve:APPROVED with success false, change:approve:APPROVED, change:execute); the duplicate plan is BLOCKED and its approval returns HTTP 409.",
+      "instructions": "Read the audit records for the plan's `correlation_id`: plan (engineer-a), the refused self-approval (engineer-a, success false), approval (approver-b) and execute (scoped-writer, labeled SIMULATED). You can read the same records through MCP with `get_audit_record`. Then post the identical plan again: the precondition now fails (\"already exists in demo-dev (simulated workspace)\") and the plan is BLOCKED. Try to approve the blocked plan; it is refused because only PROPOSED changes can be approved.",
+      "stage": "VERIFY",
+      "title": "Follow the audit trail and watch the duplicate get blocked"
+    },
+    {
+      "commands": [
+        "curl -s -X POST localhost:8000/api/v1/plans -H 'Content-Type: application/json' -d '{\"operation\": \"create_lakehouse\", \"target\": {\"workspace_alias\": \"demo-dev\", \"item_type\": \"Lakehouse\", \"item_name\": \"bronze_lab\", \"destination\": \"LIVE\"}, \"reason\": \"Lab: LIVE attempt\", \"requested_by\": \"engineer-a\"}'",
+        "FFIA_ALLOW_LIVE_MUTATION=1 make run-api",
+        "curl -s -X POST localhost:8000/api/v1/approvals -H 'Content-Type: application/json' -d '{\"change_id\": \"<live_change_id>\", \"approver\": \"approver-b\", \"decision\": \"APPROVED\"}'",
+        "curl -s -X POST localhost:8000/api/v1/fabric/change -H 'Content-Type: application/json' -d '{\"change_id\": \"<live_change_id>\", \"approval_id\": \"<live_approval_id>\", \"executed_by\": \"scoped-writer\"}'",
+        "curl -s localhost:8000/api/v1/audit/<live_correlation_id>",
+        "pytest tests/unit/test_config_policy_changes.py -q"
+      ],
+      "evidence_category": "SIMULATED LOCALLY",
+      "expected": "The LIVE execution returns HTTP 409 with redirected_to_local false; the audit shows change:execute labeled UNAVAILABLE with success false; tests pass.",
+      "instructions": "First, with the API as it is, post the same plan with destination LIVE: it is BLOCKED with \"Live mutation is disabled (FFIA_ALLOW_LIVE_MUTATION is not set)\". Then stop the API and restart it with `FFIA_ALLOW_LIVE_MUTATION=1` (plans are in memory, so earlier plans are gone; this is still fully offline). Post the LIVE plan again: it is PROPOSED, and its precondition is REQUIRES TENANT VALIDATION because no live provider checked the workspace. Approve it as `approver-b` and execute it. The API returns HTTP 409 `LiveWriteUnavailableError` with `redirected_to_local: false`, and the audit record for the execute step is labeled UNAVAILABLE. Finally read the tests that pin this behavior and the destination-hash check.",
+      "stage": "GO DEEPER",
+      "title": "An approved LIVE change is refused, never redirected"
+    },
+    {
+      "commands": [],
+      "evidence_category": "SIMULATED LOCALLY",
+      "expected": "A PROPOSED plan labeled LOCAL and a next step pointing to a human approval through the API.",
+      "instructions": "With the `ffia-local` server approved in VS Code agent mode or Copilot CLI, use this prompt: \"Using the ffia-local MCP server, call generate_fabric_change_plan to propose creating a Lakehouse named bronze_lab_copilot in demo-dev with destination LOCAL. Show the risk, validation, rollback and policy reasons. Do not try to approve or execute it; tell me what a human must do next.\" Check that Copilot names the tool it used and does not claim the item exists.",
+      "stage": "TRY WITH COPILOT",
+      "title": "Let Copilot propose, and only propose"
+    },
+    {
+      "commands": [],
+      "evidence_category": "SIMULATED LOCALLY",
+      "expected": "Each rule mapped to code and tests, with no file changes.",
+      "instructions": "In Claude Code plan mode, use this prompt: \"Read src/fabric_foundry_accelerator/services/changes.py and config/policies/writes.yaml. Explain where separation of duties, approval expiry, destination binding, duplicate blocking and the LIVE no-redirect rule are enforced, and which tests prove each one. Do not edit any files.\" Compare its answer with what you saw in BREAK IT and GO DEEPER.",
+      "stage": "TRY WITH CLAUDE CODE",
+      "title": "Ask Claude Code to explain the enforcement"
+    },
+    {
+      "commands": [],
+      "evidence_category": "PRODUCTION RECOMMENDATION",
+      "expected": null,
+      "instructions": "The approver must be an Entra identity with the authority to accept the risk, recorded with who, when and why. The writer must be a separate least-privilege identity (for example a managed identity scoped to one dev workspace) that uses exact item IDs, re-checks existence immediately before writing, and reads the result back from the system of record. Approvals must expire and stay bound to the exact target. Audit records belong in an append-only sink outside the application. Never let an MCP tool approve or execute, and never redirect an approved LIVE change to a simulation.",
+      "stage": "PRODUCTION NOTES",
+      "title": "What a real governed write needs"
+    }
+  ],
+  "summary": "Propose a Fabric change through the API and MCP, watch self-approval get refused, approve as a second person, execute against the simulated workspace, verify, follow the audit trail by correlation ID, see a duplicate blocked, and prove that an approved LIVE change is refused without being redirected to LOCAL. Fully offline.",
+  "title": "Lab: Governed change with a human in the loop (P08)"
+}

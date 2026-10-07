@@ -13,6 +13,13 @@ from fabric_foundry_accelerator.config.environment import EnvironmentConfigurati
 from fabric_foundry_accelerator.config.overlay import CustomerOverlay
 from fabric_foundry_accelerator.config.settings import Settings
 from fabric_foundry_accelerator.education.guides import UseCaseGuide
+from fabric_foundry_accelerator.education.lessons import (
+    ArchitectureMap,
+    ChecksFile,
+    Completeness,
+    Lab,
+    LessonMeta,
+)
 from fabric_foundry_accelerator.models.changes import ChangeRequest, ProposedChange
 from fabric_foundry_accelerator.models.semantic import SemanticModel
 from fabric_foundry_accelerator.observability.logging import configure_logging
@@ -32,8 +39,14 @@ SCHEMA_MODELS: dict[str, type[BaseModel]] = {
     "change-request": ChangeRequest,
     "proposed-change": ProposedChange,
     "audit-record": AuditRecord,
+    "lesson": LessonMeta,
+    "knowledge-checks": ChecksFile,
+    "lab": Lab,
+    "architecture-map": ArchitectureMap,
+    "completeness": Completeness,
 }
 DEFAULT_SCHEMA_DIR = Path("schemas")
+DEFAULT_TYPESCRIPT_PATH = Path("frontend/src/api/generated.ts")
 
 
 def _out(message: str) -> None:
@@ -114,27 +127,40 @@ def render_schemas() -> dict[str, str]:
     }
 
 
+def render_artifacts(schema_dir: Path, typescript_path: Path) -> dict[Path, str]:
+    """Render JSON Schemas, the OpenAPI document and the frontend's generated TypeScript types."""
+    from fabric_foundry_accelerator.api.app import openapi_document  # noqa: PLC0415
+    from fabric_foundry_accelerator.api.typescript import render_typescript  # noqa: PLC0415
+
+    artifacts = {
+        schema_dir / f"{name}.schema.json": text for name, text in render_schemas().items()
+    }
+    document = openapi_document()
+    artifacts[schema_dir / "openapi.json"] = json.dumps(document, indent=2, sort_keys=True) + "\n"
+    artifacts[typescript_path] = render_typescript(document)
+    return artifacts
+
+
 def _cmd_schemas_export(args: argparse.Namespace) -> int:
-    directory = Path(args.dir)
-    directory.mkdir(parents=True, exist_ok=True)
-    for name, text in render_schemas().items():
-        (directory / f"{name}.schema.json").write_text(text, encoding="utf-8")
-    _out(f"exported {len(SCHEMA_MODELS)} schemas to {directory}")
+    artifacts = render_artifacts(Path(args.dir), Path(args.typescript))
+    for path, text in artifacts.items():
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(text, encoding="utf-8")
+    _out(f"exported {len(artifacts)} artifacts (JSON Schemas, OpenAPI, TypeScript types)")
     return 0
 
 
 def _cmd_schemas_check(args: argparse.Namespace) -> int:
-    directory = Path(args.dir)
+    artifacts = render_artifacts(Path(args.dir), Path(args.typescript))
     stale = [
-        name
-        for name, text in render_schemas().items()
-        if not (directory / f"{name}.schema.json").is_file()
-        or (directory / f"{name}.schema.json").read_text(encoding="utf-8") != text
+        path
+        for path, text in artifacts.items()
+        if not path.is_file() or path.read_text(encoding="utf-8") != text
     ]
-    for name in stale:
-        _err(f"{name}.schema.json is stale; run `ffia schemas export`")
+    for path in stale:
+        _err(f"{path} is stale; run `ffia schemas export`")
     if not stale:
-        _out(f"{len(SCHEMA_MODELS)} schemas are up to date")
+        _out(f"{len(artifacts)} artifacts are up to date")
     return 1 if stale else 0
 
 
@@ -168,9 +194,10 @@ def register(subparsers: argparse._SubParsersAction[argparse.ArgumentParser]) ->
     schemas = subparsers.add_parser("schemas", help="JSON Schemas for public models")
     schemas_sub = schemas.add_subparsers(dest="schemas_command", required=True)
     for name, func, text in (
-        ("export", _cmd_schemas_export, "write schemas/"),
-        ("check", _cmd_schemas_check, "fail if schemas/ is stale"),
+        ("export", _cmd_schemas_export, "write schemas/ and the frontend API types"),
+        ("check", _cmd_schemas_check, "fail if schemas/ or the frontend API types are stale"),
     ):
         command = schemas_sub.add_parser(name, help=text)
         command.add_argument("--dir", default=str(DEFAULT_SCHEMA_DIR))
+        command.add_argument("--typescript", default=str(DEFAULT_TYPESCRIPT_PATH))
         command.set_defaults(func=func)

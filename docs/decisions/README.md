@@ -14,5 +14,7 @@ Authoritative references.
 | [0006](ADR-0006-human-approval-and-scoped-writer.md) | Human approval, scoped writer, and no silent LIVE → LOCAL redirect |
 | [0007](ADR-0007-mcp-access-is-not-authority.md) | MCP access is not authority; local educational MCP server |
 | [0008](ADR-0008-offline-demo-release-gate.md) | The offline demo is a release gate |
+| [0009](ADR-0009-frontend-architecture.md) | Frontend architecture and typed API contracts |
+| [0010](ADR-0010-education-content-as-data.md) | Education content as validated data, with a completeness gate |
 
 More ADRs are added in Phases 4–8.

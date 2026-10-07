@@ -1,0 +1,200 @@
+id: lab-mcp-allow-list
+title: "Lab: Governed MCP allow-list (P09)"
+summary: >-
+  Connect to the local ffia-local MCP server, discover its allow-listed tools, call read-only
+  tools, look for a tool that could execute a change (there is none), break the allow-list in a
+  scratch copy of the configuration, recover, and verify every call in the audit log. Fully
+  offline; every result is labeled LOCAL.
+level: l300
+duration_minutes: 35
+mode: OFFLINE
+pattern_ids: [P09]
+lessons: [p09-governed-mcp, fabric-mcp-landscape]
+prerequisites:
+  - "Repository set up: uv venv --python 3.14 .venv, source .venv/bin/activate, uv sync --frozen"
+  - "Synthetic data built (make data), or let the server build it on first start"
+  - Read the L100-L300 levels of p09-governed-mcp
+steps:
+  - stage: LEARN
+    title: Read the allow-list before touching the server
+    instructions: >-
+      Open `config/policies/tools.yaml`. Every tool has an owner, version, classification,
+      `allowed_operations` (only `read` or `propose` are valid), `read_only`, a rate limit, a
+      timeout, `audit`, `enabled` and a revocation note. Then skim `build_mcp_server` in
+      `src/fabric_foundry_accelerator/mcp/server.py`: only enabled manifest entries become tools,
+      and each is wrapped with rate limiting and auditing. Remember the rule for the whole lab:
+      MCP standardizes access; it does not grant authority. This lab never edits committed
+      configuration; all experiments use a git-ignored scratch copy.
+    commands:
+      - cat config/policies/tools.yaml
+      - grep -n "def build_mcp_server" -A 40 src/fabric_foundry_accelerator/mcp/server.py
+    expected: Fifteen tool entries, all enabled, thirteen read-only and two propose-only (generate_fabric_change_plan, validate_change_plan).
+    evidence_category: SIMULATED LOCALLY
+  - stage: SEE
+    title: Watch a real MCP call in the offline demo
+    instructions: >-
+      Run the offline demo and find act 3. It starts `ffia-local` in-process and makes a real MCP
+      `tools/call` to `inspect_medallion_architecture`. Note the label and the sentence saying no
+      Fabric MCP server was called. Then start the server the way an editor would with
+      `make run-mcp`: it speaks MCP over stdio and waits silently for a client (logs go to stderr).
+      Stop it with Ctrl+C. `.mcp.json` registers the same command for VS Code, Copilot CLI and
+      Claude Code.
+    commands:
+      - ffia demo offline
+      - make run-mcp
+      - cat .mcp.json
+    expected: Act 3 passes with label LOCAL; the stdio server starts and waits for a client.
+    evidence_category: SIMULATED LOCALLY
+  - stage: BUILD
+    title: Connect a client and list the tools
+    instructions: >-
+      Create a small client script in the git-ignored `data/runtime/` folder. It launches
+      `ffia serve mcp` over stdio exactly like an editor does. MCP stdio clients start servers
+      with a minimal environment, so the script forwards your `FFIA_*` variables explicitly in
+      the server's `env` block. List the tools and their read-only hints. Alternatively, open the
+      repository in VS Code, Copilot CLI or Claude Code, approve the `ffia-local` project server
+      after reviewing `.mcp.json`, and ask the agent to list its tools.
+    commands:
+      - |-
+        cat > data/runtime/mcp_probe.py <<'PY'
+        """Lab helper: talk to ffia-local over stdio. Usage: list | call TOOL [JSON_ARGS]."""
+        import asyncio
+        import json
+        import os
+        import sys
+
+        from fastmcp import Client
+
+        ENV = {k: v for k, v in os.environ.items() if k.startswith("FFIA_")}
+        CONFIG = {"mcpServers": {"ffia-local": {"command": "ffia", "args": ["serve", "mcp"], "env": ENV}}}
+
+
+        async def main() -> None:
+            async with Client(CONFIG) as client:
+                if sys.argv[1] == "list":
+                    for tool in sorted(await client.list_tools(), key=lambda t: t.name):
+                        print(f"{tool.name:32} read_only={tool.annotations.read_only_hint}")
+                    return
+                args = json.loads(sys.argv[3]) if len(sys.argv) > 3 else {}
+                result = await client.call_tool(sys.argv[2], args, raise_on_error=False)
+                print(json.dumps(result.structured_content or str(result.content), indent=2)[:3000])
+
+
+        asyncio.run(main())
+        PY
+      - python data/runtime/mcp_probe.py list 2>/dev/null
+    expected: Fifteen tools; read_only=True for all except generate_fabric_change_plan and validate_change_plan.
+    evidence_category: SIMULATED LOCALLY
+  - stage: INSPECT
+    title: Call read-only tools and hunt for an execute tool
+    instructions: >-
+      Call `get_demo_capabilities` and read its `cannot_do` list. Call
+      `inspect_medallion_architecture` and `preview_table`, and note that every result is an
+      envelope with `execution_label: LOCAL`, `cloud_operation_performed: false` and a
+      `correlation_id` (copy one for the VERIFY stage). Ask `preview_table` for 50 rows and see the
+      bound enforced. Finally search the tool list for anything that approves, executes, deletes,
+      runs SQL or a shell, or fetches a URL. There is none: the propose tools create a plan, and
+      approval stays a human action through the API (pattern P08).
+    commands:
+      - python data/runtime/mcp_probe.py call get_demo_capabilities 2>/dev/null
+      - "python data/runtime/mcp_probe.py call inspect_medallion_architecture '{\"profile\": \"hc-lab-7file-v1\"}' 2>/dev/null"
+      - "python data/runtime/mcp_probe.py call preview_table '{\"profile\": \"hc-lab-7file-v1\", \"table\": \"silver_patients\", \"limit\": 5}' 2>/dev/null"
+      - "python data/runtime/mcp_probe.py call preview_table '{\"profile\": \"hc-lab-7file-v1\", \"table\": \"silver_patients\", \"limit\": 50}' 2>/dev/null"
+      - python data/runtime/mcp_probe.py list 2>/dev/null | grep -i -E "approve|execute|delete|sql|shell|fetch" || echo "no such tool"
+    expected: LOCAL envelopes with correlation IDs; the 50-row request fails with "limit must be between 1 and 20"; the search prints "no such tool".
+    evidence_category: SIMULATED LOCALLY
+  - stage: BREAK IT
+    title: Revoke a tool and smuggle in an unimplemented one (scratch copy only)
+    instructions: >-
+      Copy the whole `config/` folder to the git-ignored `data/runtime/lab-config/` and point the
+      server at it with `FFIA_CONFIG_ROOT`. Never edit the committed `config/policies/tools.yaml`.
+      First, in the copy, set `enabled: false` on `preview_table` and list the tools again: the
+      tool is gone and calling it returns "Unknown tool". Second, in the copy, append an enabled
+      entry named `run_sql` that has no implementation and try to start the server: it refuses to
+      start with "manifest enables tools without an implementation". A manifest entry can only
+      narrow the surface; it cannot invent a capability.
+    commands:
+      - rm -rf data/runtime/lab-config && cp -r config data/runtime/lab-config
+      - "python -c \"import yaml; p='data/runtime/lab-config/policies/tools.yaml'; d=yaml.safe_load(open(p)); [t.update(enabled=False) for t in d['tools'] if t['name']=='preview_table']; yaml.safe_dump(d, open(p, 'w'), sort_keys=False)\""
+      - FFIA_CONFIG_ROOT=data/runtime/lab-config python data/runtime/mcp_probe.py list 2>/dev/null
+      - "FFIA_CONFIG_ROOT=data/runtime/lab-config python data/runtime/mcp_probe.py call preview_table '{\"profile\": \"hc-lab-7file-v1\", \"table\": \"silver_patients\", \"limit\": 5}' 2>/dev/null"
+      - "python -c \"import yaml; p='data/runtime/lab-config/policies/tools.yaml'; d=yaml.safe_load(open(p)); d['tools'].append({**d['tools'][0], 'name': 'run_sql', 'description': 'Run any SQL statement.'}); yaml.safe_dump(d, open(p, 'w'), sort_keys=False)\""
+      - FFIA_CONFIG_ROOT=data/runtime/lab-config python data/runtime/mcp_probe.py list 2>&1 | grep -E "ValueError"
+    expected: Fourteen tools after revocation and "Unknown tool" for preview_table; with run_sql enabled the server fails fast with ValueError and lists ['run_sql'].
+    evidence_category: SIMULATED LOCALLY
+  - stage: RECOVER
+    title: Return to the committed allow-list
+    instructions: >-
+      Delete the scratch copy and stop setting `FFIA_CONFIG_ROOT`, so the server reads the
+      committed manifest again. List the tools to confirm all fifteen are back. Revocation and
+      recovery were configuration changes plus a restart; no code changed and nothing outside the
+      scratch folder was touched.
+    commands:
+      - rm -rf data/runtime/lab-config
+      - python data/runtime/mcp_probe.py list 2>/dev/null
+      - git status --short config/
+    expected: Fifteen tools listed; git status shows no changes under config/.
+    evidence_category: SIMULATED LOCALLY
+  - stage: VERIFY
+    title: Find your calls in the audit log
+    instructions: >-
+      Every governed call is audited to the local JSON Lines store (`data/runtime/audit.jsonl`).
+      Call `get_runtime_status`, copy its `correlation_id`, then call `get_audit_record` with it.
+      The record shows `actor: mcp-client`, `action: mcp:get_runtime_status`, `execution_label:
+      LOCAL` and `cloud_operation_performed: false`. The same record is visible through the API at
+      `/api/v1/audit/<correlation_id>` when `make run-api` is running, because both processes
+      share the store. Failed calls (such as the 50-row preview) are audited with `success: false`.
+    commands:
+      - python data/runtime/mcp_probe.py call get_runtime_status 2>/dev/null | grep correlation_id
+      - "python data/runtime/mcp_probe.py call get_audit_record '{\"correlation_id\": \"<correlation_id>\"}' 2>/dev/null"
+      - curl -s localhost:8000/api/v1/audit/<correlation_id>
+    expected: One audit record per call, labeled LOCAL, with the tool name and success flag.
+    evidence_category: SIMULATED LOCALLY
+  - stage: GO DEEPER
+    title: Rate limits, annotations and the tests that pin the behavior
+    instructions: >-
+      Read `RateLimiter` and `_governed` in `server.py` (sliding one-minute window per tool) and the
+      `ToolAnnotations` set at registration (`readOnlyHint` from the manifest, `destructiveHint`
+      false, `openWorldHint` false). Annotations are hints for clients, not enforcement. Run the
+      MCP unit tests, which prove: only manifest tools are exposed and none can authorize, disabled
+      tools are not registered, unimplemented entries fail fast, rate limits are enforced and
+      errors are audited. Then compare with the real Fabric MCP servers in the
+      fabric-mcp-landscape lesson: pinned profiles and a hardened, read-only overlay for bundled
+      skill configurations arrive in Phase 5.
+    commands:
+      - pytest tests/unit/test_mcp_server.py -q
+      - cat config/mcp/README.md
+    expected: All MCP server tests pass offline.
+    evidence_category: SIMULATED LOCALLY
+  - stage: TRY WITH COPILOT
+    title: Ask Copilot to explore the allow-list
+    instructions: >-
+      In VS Code agent mode or Copilot CLI, with the `ffia-local` server approved, use this prompt:
+      "Using the ffia-local MCP server, list every tool and its read-only hint. Try to find a tool
+      that approves or executes a change or runs SQL and explain why none exists. Call
+      get_runtime_status and then get_audit_record with its correlation_id." Check that Copilot
+      names the server and tools it actually called and does not claim any Fabric operation ran.
+    expected: Copilot reports LOCAL results, finds no execute tool and shows the audit record.
+    evidence_category: SIMULATED LOCALLY
+  - stage: TRY WITH CLAUDE CODE
+    title: Ask Claude Code to review the governance code
+    instructions: >-
+      In Claude Code (which reads the shared `.mcp.json`), use plan mode and this prompt: "Read
+      config/policies/tools.yaml and src/fabric_foundry_accelerator/mcp/server.py. Explain how a
+      tool becomes callable, what happens when a manifest entry has no implementation, and how
+      rate limiting and auditing wrap each call. Propose one additional safeguard but do not edit
+      any files." Compare its answer with what you observed in BREAK IT.
+    expected: An explanation consistent with the lab, and a proposal only, with no file changes.
+    evidence_category: SIMULATED LOCALLY
+  - stage: PRODUCTION NOTES
+    title: Taking governed MCP to production
+    instructions: >-
+      Inventory every MCP server, its owner, version and identity, and pin versions. Default each
+      profile to read-only tools and keep write-capable or authoring servers in a separate opt-in
+      profile against a dev workspace with approvals on. Replace any tools ["*"] grant from a
+      bundled skill configuration with a hardened overlay. Remote Fabric MCP servers act with the
+      caller's own permissions, so review those permissions too. Put shared remote tools behind a
+      gateway such as Azure API Management (pattern P15) for authentication, quotas and telemetry,
+      while the backend keeps its own authorization. Record the real caller identity (the local
+      server records mcp-client) and send audit records to an append-only sink outside the app.
+    evidence_category: PRODUCTION RECOMMENDATION

@@ -5,6 +5,7 @@ import yaml
 from pydantic import ValidationError
 from tests.conftest import REPO_ROOT
 
+from fabric_foundry_accelerator.config.overlay import load_overlay
 from fabric_foundry_accelerator.education.guides import (
     GuideStep,
     UseCaseGuide,
@@ -19,6 +20,7 @@ from fabric_foundry_accelerator.patterns.catalog import (
     load_catalog,
     recommend,
 )
+from fabric_foundry_accelerator.policies.engine import load_write_policy
 from fabric_foundry_accelerator.research.sources import load_registry
 
 HC_01 = "hc-01-fabric-mcp-powerbi-medallion-lab"
@@ -74,6 +76,19 @@ def test_hc01_guide_loads_with_safe_step_rules(catalog: PatternCatalog) -> None:
     assert (REPO_ROOT / guide.expected_baseline).is_file()
 
 
+def test_hc01_rehearsals_are_allowed_by_policy_and_overlay() -> None:
+    guide = load_guide(REPO_ROOT / "guides" / HC_01 / "guide.yaml")
+    policy = load_write_policy(REPO_ROOT / "config")
+    overlay = load_overlay(REPO_ROOT / "config", "example-healthcare")
+    rehearsals = [s.rehearsal for s in guide.steps if s.rehearsal is not None]
+    assert len(rehearsals) == 8
+    for rehearsal in rehearsals:
+        definition = policy.operation(rehearsal.operation)
+        assert definition is not None and rehearsal.item_type in definition.item_types
+        assert rehearsal.operation in overlay.allowed_writes
+        assert overlay.approval_rule(rehearsal.operation) is not None
+
+
 def test_template_is_valid_but_not_published() -> None:
     assert load_guide(REPO_ROOT / "guides" / "_template" / "guide.yaml").status == "draft"
 
@@ -114,6 +129,9 @@ def test_guide_model_rules() -> None:
     step = template["steps"][0]
     with pytest.raises(ValidationError, match="must require approval"):
         GuideStep.model_validate({**step, "writes": True, "approval_required": False})
+    rehearsal = {"operation": "create_lakehouse", "item_type": "Lakehouse", "item_name": "x"}
+    with pytest.raises(ValidationError, match="only write steps can rehearse"):
+        GuideStep.model_validate({**step, "writes": False, "rehearsal": rehearsal})
     with pytest.raises(ValidationError, match="unknown dataset_profile"):
         UseCaseGuide.model_validate({**template, "dataset_profile": "nope"})
     with pytest.raises(ValidationError, match="duplicate step ids"):

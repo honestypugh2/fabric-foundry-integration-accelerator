@@ -1,0 +1,126 @@
+{
+  "cloud_operations": 0,
+  "label_counts": {
+    "LOCAL": 6,
+    "SIMULATED": 2
+  },
+  "live_operations": 0,
+  "operating_mode": "OFFLINE",
+  "passed": true,
+  "steps": [
+    {
+      "act": 1,
+      "evidence": [
+        "write mode: Approval required; LOCAL executions are SIMULATED; LIVE writes disabled",
+        "preview features enabled: none"
+      ],
+      "label": "LOCAL",
+      "passed": true,
+      "required": true,
+      "summary": "Mode OFFLINE; data provider: Local Fabric Educational Provider (LOCAL).",
+      "title": "Why: Fabric is context, Foundry is reasoning, MCP is access, identity is authority"
+    },
+    {
+      "act": 2,
+      "evidence": [
+        "LOCAL educational analog over synthetic Parquet data. No Microsoft Fabric, OneLake or Power BI operation was performed.",
+        "evaluation gate passed: True"
+      ],
+      "label": "LOCAL",
+      "passed": true,
+      "required": true,
+      "summary": "24 tables ({'bronze': 7, 'silver': 7, 'gold': 10}); 23/23 measures match the baseline.",
+      "title": "Data: raw to bronze, silver, gold and semantics"
+    },
+    {
+      "act": 3,
+      "evidence": [
+        "MCP standardizes access; it did not authorize anything."
+      ],
+      "label": "LOCAL",
+      "passed": true,
+      "required": true,
+      "summary": "Called inspect_medallion_architecture over MCP. No Fabric MCP server was called.",
+      "title": "MCP: a real protocol call to the LOCAL educational server"
+    },
+    {
+      "act": 4,
+      "evidence": [
+        "Addresses: Conversational questions over structured Fabric data. Use when: Conversational questions over curated lakehouse, warehouse or semantic-model data. Requires preview: Foundry Agent Service Microsoft Fabric tool.",
+        "Addresses: Writes to a business system or Fabric item. Use when: Any write to a business system or Fabric item.",
+        "Addresses: Fabric or Foundry may be unavailable. Use when: Demos, workshops and degraded operations."
+      ],
+      "label": "LOCAL",
+      "passed": true,
+      "required": true,
+      "summary": "Top patterns: P01 Fabric Data Agent + Foundry, P08 Human-in-the-loop governed action, P17 LIVE / HYBRID / OFFLINE resilience",
+      "title": "Architecture patterns"
+    },
+    {
+      "act": 5,
+      "evidence": [
+        "self-approval refused: True",
+        "verification: revision 0 -> 1",
+        "duplicate plan status: BLOCKED",
+        "LIVE write refused without redirect: True"
+      ],
+      "label": "SIMULATED",
+      "passed": true,
+      "required": true,
+      "summary": "LOCAL plan approved by a second person, executed in the simulated workspace and verified; the duplicate was blocked; the approved LIVE change was refused and NOT redirected to LOCAL.",
+      "title": "Agentic change: plan, validate, approve, execute, verify, audit"
+    },
+    {
+      "act": 6,
+      "evidence": [],
+      "label": "UNAVAILABLE",
+      "passed": false,
+      "required": false,
+      "summary": "Foundry and Agent Framework providers arrive in Phase 6. Nothing was simulated as Foundry here.",
+      "title": "Foundry: an agent consuming governed context"
+    },
+    {
+      "act": 7,
+      "evidence": [
+        "Live provider unavailable (circuit breaker OPEN after repeated failures (ProviderUnavailableError: simulated outage injected for training: the live Fabric endpoint is unreachable)); served by the approved LOCAL fallback.",
+        "last route decision: FALLBACK (circuit breaker OPEN after repeated failures (ProviderUnavailableError: simulated outage injected for training: the live Fabric endpoint is unreachable))"
+      ],
+      "label": "LOCAL",
+      "passed": true,
+      "required": true,
+      "summary": "4 reads fell back to LOCAL data in HYBRID mode (fallback_used, with a reason); breaker OPEN after 3 failures; the last read skipped the live call.",
+      "title": "Failure: simulated Fabric outage, circuit breaker and approved fallback"
+    },
+    {
+      "act": 8,
+      "evidence": [
+        "SIMULATED LOCALLY. Landing-zone files, mirroring and recovery ran on local files only. No Fabric mirrored database, OneLake or landing-zone operation was performed."
+      ],
+      "label": "SIMULATED",
+      "passed": true,
+      "required": true,
+      "summary": "Recovered from the weekly snapshot: True; recoverable without it: False.",
+      "title": "Recovery: snapshot, incrementals, failure, restore, replay"
+    },
+    {
+      "act": 9,
+      "evidence": [],
+      "label": "LOCAL",
+      "passed": true,
+      "required": true,
+      "summary": "24 patterns and 1 guide(s) loaded; level content arrives in Phase 4.",
+      "title": "Education: patterns and Use-Case Guides"
+    },
+    {
+      "act": 10,
+      "evidence": [
+        "Every result above carries its label, provider, correlation ID and simulation notice."
+      ],
+      "label": "LOCAL",
+      "passed": true,
+      "required": true,
+      "summary": "Envelopes by label: {'LOCAL': 6, 'SIMULATED': 2}. LIVE operations: 0. Cloud operations performed: 0.",
+      "title": "Proof: what ran LIVE and what was simulated"
+    }
+  ]
+}

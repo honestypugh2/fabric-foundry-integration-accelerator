@@ -8,7 +8,7 @@ is unavailable. It must do that **without hiding** what actually ran.
 | Mode | Fabric data | Writes | Typical use |
 |---|---|---|---|
 | `OFFLINE` | Local Fabric Educational Provider (DuckDB over synthetic Parquet) | LOCAL simulated workspace only | Laptops, workshops, CI and the release gate |
-| `HYBRID` | LIVE when healthy; reads fall back to LOCAL, labeled `HYBRID` with a reason | Never fall back | Live demos with a safety net |
+| `HYBRID` | LIVE when healthy; reads fall back to LOCAL data in `HYBRID` mode, with `fallback_used` and a reason | Never fall back | Live demos with a safety net |
 | `LIVE` | LIVE only. Failures surface as `UNAVAILABLE`. | Need `FFIA_ALLOW_LIVE_MUTATION=1`, approval and an authorized writer | Tenant validation |
 
 Select a mode with `FFIA_ENVIRONMENT=offline|hybrid|live`. Each capability is configured
@@ -25,8 +25,9 @@ separately in `config/environments/*.yaml`, and the rules live in
      and never retried or redirected, because a missing table is not an outage.
    - Timeouts and `ProviderUnavailableError` count against the breaker.
 4. **Fallback (reads only).** Use the approved LOCAL equivalent if the environment allows it.
-   The envelope is relabeled `HYBRID` and records `fallback_used=true`, the
-   `fallback_reason`, and the requested and selected providers.
+   The envelope keeps `execution_label=LOCAL` (the data really is local) and records
+   `operating_mode=HYBRID`, `fallback_used=true`, the `fallback_reason`, and the requested and
+   selected providers.
 5. **No fallback allowed.** Raise `CapabilityUnavailableError`, which the API returns as
    **503** and the UI shows as `UNAVAILABLE`.
 6. **Circuit breaker.**

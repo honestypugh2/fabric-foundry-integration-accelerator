@@ -1,0 +1,65 @@
+checks:
+  - id: exec-gate
+    level: executive
+    question: What turns evaluation from a report into a control?
+    choices:
+      - Publishing evaluation scores on a dashboard
+      - Agreed thresholds that block a release, with owners for each baseline
+      - Running a model-graded evaluator once before launch
+    answer: 1
+    explanation: An evaluation only governs when it can stop a release; owners decide thresholds and baseline changes.
+  - id: l100-which-eval
+    level: l100
+    question: You need to know whether "Claim Count" is exactly right. Which evaluation fits?
+    choices:
+      - Deterministic comparison with the expected baseline
+      - A model-graded relevance evaluator
+      - Asking the agent whether it is confident
+    answer: 0
+    explanation: Numbers you can compute are checked deterministically; model-graded evaluators are for language quality and tool behavior.
+  - id: l200-caller-supplied
+    level: l200
+    question: A user submits measure values labeled LIVE to the evaluation endpoint. How is the result's evidence categorized?
+    choices:
+      - LIVE, because the caller said so
+      - SIMULATED LOCALLY
+      - REQUIRES TENANT VALIDATION, because the accelerator did not retrieve the values
+    answer: 2
+    explanation: The evaluator records provenance honestly; caller-supplied values are not evidence that the accelerator observed a live run.
+  - id: l300-audit
+    level: l300
+    question: Which endpoint reconstructs what happened for one request?
+    choices:
+      - GET /api/v1/runtime/status
+      - GET /api/v1/audit/{correlation_id}
+      - POST /api/v1/evaluations/run
+      - GET /api/v1/patterns
+    answer: 1
+    explanation: Audit records are keyed by correlation ID and include providers, labels and fallback details.
+  - id: l300-threshold
+    level: l300
+    question: Where is the minimum pass rate for the evaluation gate configured?
+    choices:
+      - In the overlay's evaluation_thresholds
+      - In the expected baseline JSON
+      - In the MCP tool manifest
+    answer: 0
+    explanation: Overlays set measure_absolute_tolerance and minimum_pass_rate; the example overlay requires 1.0.
+  - id: l400-vacuous
+    level: l400
+    question: A request supplies only measures that are not in the baseline. What is gate_passed?
+    choices:
+      - True, because no comparison failed
+      - False, because nothing was compared
+      - The request is rejected with 404
+    answer: 1
+    explanation: The gate requires at least one comparison and a pass rate at or above the threshold, so an empty comparison cannot pass.
+  - id: l400-envelope
+    level: l400
+    question: Which result does the execution envelope validator reject?
+    choices:
+      - A LOCAL result with a simulation notice
+      - A HYBRID read with fallback_used true and a fallback_reason
+      - A LIVE result reporting cloud_operation_performed false
+    answer: 2
+    explanation: LIVE must report a real cloud operation; the validator also rejects fallbacks without reasons and non-cloud labels claiming cloud work.

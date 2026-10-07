@@ -1,0 +1,172 @@
+{
+  "$defs": {
+    "EvidenceCategory": {
+      "description": "How strongly a statement is supported. Used to keep teaching claims honest.",
+      "enum": [
+        "SIMULATED LOCALLY",
+        "DOCUMENTED FABRIC BEHAVIOR",
+        "DOCUMENTED BEHAVIOR",
+        "REQUIRES TENANT VALIDATION",
+        "ASSUMPTION",
+        "PRODUCTION RECOMMENDATION",
+        "PREVIEW LIMITATION"
+      ],
+      "title": "EvidenceCategory",
+      "type": "string"
+    },
+    "LabStep": {
+      "additionalProperties": false,
+      "description": "One stage of a lab.",
+      "properties": {
+        "commands": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Commands",
+          "type": "array"
+        },
+        "evidence_category": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EvidenceCategory"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "expected": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expected"
+        },
+        "instructions": {
+          "title": "Instructions",
+          "type": "string"
+        },
+        "stage": {
+          "enum": [
+            "LEARN",
+            "SEE",
+            "BUILD",
+            "INSPECT",
+            "BREAK IT",
+            "RECOVER",
+            "VERIFY",
+            "GO DEEPER",
+            "TRY WITH COPILOT",
+            "TRY WITH CLAUDE CODE",
+            "PRODUCTION NOTES"
+          ],
+          "title": "Stage",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "stage",
+        "title",
+        "instructions"
+      ],
+      "title": "LabStep",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "``education/labs/<id>/lab.yaml``.",
+  "properties": {
+    "duration_minutes": {
+      "maximum": 240,
+      "minimum": 5,
+      "title": "Duration Minutes",
+      "type": "integer"
+    },
+    "id": {
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "title": "Id",
+      "type": "string"
+    },
+    "lessons": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Lessons",
+      "type": "array"
+    },
+    "level": {
+      "enum": [
+        "executive",
+        "l100",
+        "l200",
+        "l300",
+        "l400"
+      ],
+      "title": "Level",
+      "type": "string"
+    },
+    "mode": {
+      "enum": [
+        "OFFLINE",
+        "HYBRID",
+        "LIVE"
+      ],
+      "title": "Mode",
+      "type": "string"
+    },
+    "pattern_ids": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Pattern Ids",
+      "type": "array"
+    },
+    "prerequisites": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Prerequisites",
+      "type": "array"
+    },
+    "steps": {
+      "items": {
+        "$ref": "#/$defs/LabStep"
+      },
+      "title": "Steps",
+      "type": "array"
+    },
+    "summary": {
+      "title": "Summary",
+      "type": "string"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "summary",
+    "level",
+    "duration_minutes",
+    "mode",
+    "steps"
+  ],
+  "title": "Lab",
+  "type": "object"
+}

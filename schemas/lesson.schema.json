@@ -1,0 +1,249 @@
+{
+  "$defs": {
+    "Concept": {
+      "additionalProperties": false,
+      "description": "A glossary term taught by a lesson.",
+      "properties": {
+        "definition": {
+          "title": "Definition",
+          "type": "string"
+        },
+        "term": {
+          "title": "Term",
+          "type": "string"
+        }
+      },
+      "required": [
+        "term",
+        "definition"
+      ],
+      "title": "Concept",
+      "type": "object"
+    },
+    "EvidenceCategory": {
+      "description": "How strongly a statement is supported. Used to keep teaching claims honest.",
+      "enum": [
+        "SIMULATED LOCALLY",
+        "DOCUMENTED FABRIC BEHAVIOR",
+        "DOCUMENTED BEHAVIOR",
+        "REQUIRES TENANT VALIDATION",
+        "ASSUMPTION",
+        "PRODUCTION RECOMMENDATION",
+        "PREVIEW LIMITATION"
+      ],
+      "title": "EvidenceCategory",
+      "type": "string"
+    },
+    "EvidenceClaim": {
+      "additionalProperties": false,
+      "description": "A claim with how strongly it is supported (keeps teaching honest).",
+      "properties": {
+        "category": {
+          "$ref": "#/$defs/EvidenceCategory"
+        },
+        "sources": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Sources",
+          "type": "array"
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        }
+      },
+      "required": [
+        "statement",
+        "category"
+      ],
+      "title": "EvidenceClaim",
+      "type": "object"
+    },
+    "TryIt": {
+      "additionalProperties": false,
+      "description": "An offline command the learner can run, and the label its result carries.",
+      "properties": {
+        "command": {
+          "title": "Command",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "result_label": {
+          "enum": [
+            "LOCAL",
+            "SIMULATED",
+            "HYBRID",
+            "PREVIEW",
+            "UNAVAILABLE"
+          ],
+          "title": "Result Label",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "command",
+        "result_label"
+      ],
+      "title": "TryIt",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "``lesson.yaml``.",
+  "properties": {
+    "area": {
+      "enum": [
+        "architecture",
+        "patterns",
+        "fabric",
+        "foundry",
+        "fabric-iq",
+        "data-agents",
+        "mcp",
+        "copilot",
+        "claude",
+        "agentic-data-engineering",
+        "recovery",
+        "security",
+        "evaluation"
+      ],
+      "title": "Area",
+      "type": "string"
+    },
+    "claude_code_prompt": {
+      "title": "Claude Code Prompt",
+      "type": "string"
+    },
+    "concepts": {
+      "items": {
+        "$ref": "#/$defs/Concept"
+      },
+      "minItems": 1,
+      "title": "Concepts",
+      "type": "array"
+    },
+    "copilot_prompt": {
+      "title": "Copilot Prompt",
+      "type": "string"
+    },
+    "evidence": {
+      "items": {
+        "$ref": "#/$defs/EvidenceClaim"
+      },
+      "minItems": 1,
+      "title": "Evidence",
+      "type": "array"
+    },
+    "id": {
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "title": "Id",
+      "type": "string"
+    },
+    "learning_objectives": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 2,
+      "title": "Learning Objectives",
+      "type": "array"
+    },
+    "pattern_ids": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Pattern Ids",
+      "type": "array"
+    },
+    "prerequisites": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Prerequisites",
+      "type": "array"
+    },
+    "production_notes": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Production Notes",
+      "type": "array"
+    },
+    "related_guides": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Guides",
+      "type": "array"
+    },
+    "related_labs": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Labs",
+      "type": "array"
+    },
+    "sources": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Sources",
+      "type": "array"
+    },
+    "status": {
+      "enum": [
+        "GA",
+        "PREVIEW",
+        "MIXED",
+        "DEPRECATED",
+        "UNKNOWN/NEEDS VALIDATION",
+        "LOCAL"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "summary": {
+      "title": "Summary",
+      "type": "string"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    },
+    "try_it": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/TryIt"
+      },
+      "title": "Try It",
+      "type": "array"
+    }
+  },
+  "required": [
+    "id",
+    "area",
+    "title",
+    "summary",
+    "status",
+    "learning_objectives",
+    "concepts",
+    "evidence",
+    "copilot_prompt",
+    "claude_code_prompt",
+    "production_notes",
+    "sources"
+  ],
+  "title": "LessonMeta",
+  "type": "object"
+}

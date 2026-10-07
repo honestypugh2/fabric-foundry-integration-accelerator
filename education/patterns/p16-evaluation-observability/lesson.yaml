@@ -1,0 +1,76 @@
+id: p16-evaluation-observability
+area: patterns
+title: "P16: Evaluation + observability"
+summary: >-
+  Prove numbers with deterministic baselines, judge language with model-graded evaluators, and
+  trace every request end to end with correlation IDs, audit records and honest execution labels.
+  Evaluations become release gates, not reports nobody reads.
+status: MIXED
+pattern_ids: [P16]
+learning_objectives:
+  - Distinguish deterministic baseline evaluation from model-graded (Foundry) evaluators and choose the right one.
+  - Explain how correlation IDs, audit records and execution labels form an evidence trail.
+  - Run the baseline evaluation and read its gate result through REST and MCP.
+  - Configure an evaluation gate with overlay evaluation_thresholds.
+  - Identify what tracing adds in Phase 6 and what remains a production gap.
+prerequisites: [p10-medallion-ai]
+concepts:
+  - term: Deterministic evaluation
+    definition: Comparing an observed value with a committed expected value within a fixed tolerance. Same input, same verdict, every time.
+  - term: Model-graded evaluator
+    definition: A model scores an output (for example groundedness, relevance or tool-call accuracy). Useful for language quality; probabilistic by nature.
+  - term: Correlation ID
+    definition: A 32-character hexadecimal ID that follows one request through the API, the router, providers and audit records.
+  - term: Audit record
+    definition: A redacted, append-only entry stating who asked, which provider was requested and selected, the execution label, whether a cloud operation ran and whether a fallback happened.
+  - term: Execution label
+    definition: LIVE, HYBRID, LOCAL, SIMULATED, MOCKED, PREVIEW or UNAVAILABLE. It states what actually ran and is part of the evidence.
+  - term: Evaluation gate
+    definition: A pass or fail decision from thresholds (tolerance and minimum pass rate) that blocks a release or a demo claim.
+evidence:
+  - statement: The baseline evaluator compares every measure with the committed expected baseline using the overlay tolerance and minimum pass rate, and returns a LOCAL envelope with gate_passed.
+    category: SIMULATED LOCALLY
+  - statement: Audit records are keyed by correlation ID, redacted, and record requested and selected providers, the execution label, cloud_operation_performed and fallback details.
+    category: SIMULATED LOCALLY
+  - statement: Foundry provides built-in evaluators for quality, safety, tool usage and agent behavior; several agent evaluators are in preview.
+    category: DOCUMENTED BEHAVIOR
+    sources: [foundry-evaluators]
+  - statement: Agent Framework emits OpenTelemetry traces, and Foundry tracing builds on Application Insights.
+    category: DOCUMENTED BEHAVIOR
+    sources: [agent-framework, foundry-overview]
+  - statement: Values copied from a live DAX query and submitted for evaluation are labeled caller-supplied with REQUIRES TENANT VALIDATION evidence, because the accelerator did not retrieve them.
+    category: REQUIRES TENANT VALIDATION
+  - statement: Preview agent evaluators should inform, not solely gate, a production release until they are GA and calibrated on your own data.
+    category: PREVIEW LIMITATION
+    sources: [foundry-evaluators]
+  - statement: Gate releases on deterministic data evaluations first, then on model-graded agent evaluations with agreed thresholds.
+    category: PRODUCTION RECOMMENDATION
+try_it:
+  - label: Evaluate the local measures against the expected baseline
+    command: "curl -s -X POST localhost:8000/api/v1/evaluations/run -H 'Content-Type: application/json' -d '{\"profile\": \"hc-lab-7file-v1\"}'"
+    result_label: LOCAL
+  - label: Read the audit trail for a correlation ID
+    command: curl -s localhost:8000/api/v1/audit/<correlation_id>
+    result_label: LOCAL
+  - label: Run the ten-act release gate (act 10 shows evaluation and audit evidence)
+    command: ffia demo offline
+    result_label: LOCAL
+copilot_prompt: >-
+  Using the ffia-local MCP server, call evaluate_against_baseline for profile hc-lab-7file-v1 with no
+  observed values, then again with observed set to {"claim_count": 1} and observed_label LIVE. Compare
+  the two results: observed_values_source, the evidence category, compared, passed and gate_passed.
+  Explain why the second run is not proof that anything ran in Fabric.
+claude_code_prompt: >-
+  Read src/fabric_foundry_accelerator/services/evaluation.py and src/fabric_foundry_accelerator/audit/store.py.
+  Explain how gate_passed is computed, which overlay setting controls it, and which fields of an
+  AuditRecord let an auditor tell a HYBRID fallback from a LIVE read. Propose (do not apply) one test
+  that would catch a dishonest label.
+production_notes:
+  - Keep expected baselines under version control with an owner; a baseline change is a reviewed decision, not a fix for a failing build.
+  - Use model-graded evaluators for language and tool behavior, with thresholds calibrated on a representative dataset; keep deterministic checks for numbers.
+  - Propagate one correlation ID across API, agent, MCP and provider calls and into traces so a single answer can be reconstructed.
+  - Send audit records to an append-only store outside the application and never log tokens or secrets.
+  - Treat execution labels as evidence; reject any result whose label disagrees with what actually ran.
+sources: [foundry-evaluators, agent-framework, foundry-overview]
+related_labs: [lab-resilience-break-it]
+related_guides: [hc-01-fabric-mcp-powerbi-medallion-lab]

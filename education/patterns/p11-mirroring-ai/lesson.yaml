@@ -1,0 +1,72 @@
+id: p11-mirroring-ai
+area: patterns
+title: "P11: Mirroring / Open Mirroring + AI"
+summary: >-
+  Mirroring replicates operational data into OneLake so analytics and agents work on fresh context.
+  Open Mirroring lets any publisher land change files in a documented format. Recovery is your
+  responsibility: plan snapshots, retain change files and rehearse a restore.
+status: GA
+pattern_ids: [P11]
+learning_objectives:
+  - Explain what Mirroring and Open Mirroring provide and what they do not (backup, security propagation).
+  - Describe the landing-zone contract — _metadata.json, 20-digit sequential file names and __rowMarker__ values.
+  - Explain why INSERT markers create duplicates on re-send and why UPDATE, DELETE and UPSERT need key columns.
+  - Explain how the 7-day cleanup of processed files limits recovery and how a snapshot plus incremental replay closes the gap.
+  - Run the offline recovery drill and interpret its PASS and FAIL checks and evidence labels.
+prerequisites: [p10-medallion-ai]
+concepts:
+  - term: Mirrored database
+    definition: A Fabric item that replicates a source into Delta tables in OneLake with a read-only SQL analytics endpoint.
+  - term: Landing zone
+    definition: The OneLake folder where an Open Mirroring publisher writes one folder per table with a _metadata.json and sequentially numbered data files.
+  - term: __rowMarker__
+    definition: The last column of an incremental file; 0 INSERT, 1 UPDATE, 2 DELETE, 4 UPSERT. Omitted on the initial load, which is treated as INSERT.
+  - term: Watermark sequence
+    definition: The last landing-file sequence included in a snapshot; replay starts at the next sequence.
+  - term: Content hash
+    definition: A hash of the table's rows used to prove that a restored table equals the pre-failure table. Matching size is not a content hash.
+evidence:
+  - statement: Landing-zone files, the mirroring engine, retention purging, snapshot, restore and replay run on local files with DuckDB and Parquet and are labeled SIMULATED.
+    category: SIMULATED LOCALLY
+  - statement: Each table folder needs _metadata.json with keyColumns; files use 20-digit continuous sequence names; __rowMarker__ is the last column with 0 insert, 1 update, 2 delete and 4 upsert; INSERT performs no duplicate-key check.
+    category: DOCUMENTED FABRIC BEHAVIOR
+    sources: [fabric-open-mirroring-format]
+  - statement: Processed files move to _ProcessedFiles or _FilesReadyToDelete and are removed after seven days.
+    category: DOCUMENTED FABRIC BEHAVIOR
+    sources: [fabric-open-mirroring-format]
+  - statement: Fabric Git integration tracks item definitions and metadata, never table data.
+    category: DOCUMENTED FABRIC BEHAVIOR
+    sources: [fabric-git-integration]
+  - statement: Whether processed files remain readable for replay, the exact cleanup timing and restore throughput at production volume.
+    category: REQUIRES TENANT VALIDATION
+  - statement: Mirroring is not documented as a backup or disaster-recovery mechanism; the drill's snapshot and retention design is a customer-implemented pattern.
+    category: PRODUCTION RECOMMENDATION
+  - statement: Values are stored as text and duplicate-key handling during UPDATE, UPSERT and DELETE is modeled to affect every matching row.
+    category: ASSUMPTION
+try_it:
+  - label: Run the snapshot, incremental, failure and restore drill
+    command: ffia recovery run
+    result_label: SIMULATED
+  - label: Run the same drill through the API
+    command: curl -s -X POST localhost:8000/api/v1/recovery/drill
+    result_label: SIMULATED
+copilot_prompt: >-
+  Using the ffia-local MCP server, call simulate_recovery_drill. Summarize which day introduced
+  duplicate keys and why, how they were remediated, which snapshot the restore used, and why the
+  counterfactual without the weekly snapshot fails. Keep every statement tagged with its evidence
+  category and say clearly that no Fabric mirrored database was touched.
+claude_code_prompt: >-
+  Read docs/operations/open-mirroring-recovery.md and src/fabric_foundry_accelerator/recovery/open_mirroring.py.
+  Explain how apply_changes treats each __rowMarker__ value, then inspect
+  data/synthetic/recovery/runs/latest after ffia recovery run and describe the landing-zone files
+  you find. Do not modify the scenario.
+production_notes:
+  - Take periodic full snapshots of mirrored tables with a watermark sequence and a content hash.
+  - Retain change files on the publisher side for longer than the snapshot interval plus a safety margin; the 7-day service cleanup alone cannot cover a longer gap.
+  - Publish UPSERT (4) markers for keyed tables so a replay is idempotent; replay INSERT files exactly once after the watermark.
+  - Treat duplicate keys as a publisher or source-query defect; fix the source, then remediate with DELETE followed by UPSERT.
+  - After any restore, validate row count, key uniqueness, sequence contiguity and the content hash before declaring recovery complete.
+  - Row-level and object-level security from the source is not propagated; secure the mirrored data in Fabric before agents use it.
+sources: [fabric-open-mirroring-format, fabric-git-integration, fabric-overview]
+related_labs: [lab-open-mirroring-recovery]
+related_guides: []

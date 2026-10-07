@@ -15,7 +15,7 @@ define pending
 endef
 
 .PHONY: help setup setup-backend setup-frontend format lint typecheck test test-cov \
-	security sbom privacy-scan sources schemas build validate clean data data-check recovery-demo \
+	security sbom privacy-scan sources schemas education-check fixtures build validate clean data data-check recovery-demo \
 	run-api run-mcp run-frontend run demo-check demo demo-live demo-hybrid demo-offline
 
 help: ## Show available targets
@@ -60,8 +60,14 @@ privacy-scan: ## Scan for customer identifiers, GUIDs, secrets and e-mail addres
 sources: ## Re-render docs/research/source-validation.md from sources.yaml
 	$(ACTIVATE) && ffia sources render
 
-schemas: ## Re-export JSON Schemas for public models into schemas/
+schemas: ## Re-export JSON Schemas, OpenAPI and the frontend API types
 	$(ACTIVATE) && ffia schemas export
+
+education-check: ## Validate lessons, labs, the architecture map and the completeness gate
+	$(ACTIVATE) && ffia education check
+
+fixtures: ## Re-export frontend test fixtures from the real API (after model or content changes)
+	$(ACTIVATE) && python -m tests.contract.export_frontend_fixtures
 
 data: ## Build Bronze/Silver/Gold for every profile and validate against expected baselines
 	$(ACTIVATE) && ffia data build
@@ -87,7 +93,7 @@ build: ## Build Python distribution and frontend bundle
 	cd $(FRONTEND) && npm run build
 
 validate: lint typecheck test-cov data-check privacy-scan build security ## Full local validation (CI equivalent)
-	$(ACTIVATE) && ffia sources check && ffia schemas check && ffia demo offline >/dev/null && echo "offline demo: PASSED"
+	$(ACTIVATE) && ffia sources check && ffia schemas check && ffia education check && ffia demo offline >/dev/null && echo "offline demo: PASSED"
 	@echo "validate: all checks passed"
 
 clean: ## Remove build, cache and coverage artifacts (keeps .venv and node_modules)
@@ -105,15 +111,18 @@ run-mcp: ## Run the local FastMCP educational server (stdio)
 run-frontend: ## Run the frontend dev server
 	cd $(FRONTEND) && npm run dev
 
-run: ## Run API, MCP server and frontend together
-	$(call pending,4)
+run: ## Run the API and the frontend together (agents start the stdio MCP server from .mcp.json)
+	@trap 'kill 0' INT TERM EXIT; \
+	($(ACTIVATE) && ffia serve api) & \
+	(cd $(FRONTEND) && npm run dev) & \
+	wait
 
 # ---------------------------------------------------------------- demo (later phases)
 demo-check: ## Probe Fabric, Foundry, MCP, local dataset, API and frontend; recommend a mode
 	$(ACTIVATE) && ffia demo check
 
-demo: ## Run the recommended demo mode
-	$(call pending,4)
+demo: ## Check readiness, then run the offline demo (LIVE and HYBRID demos arrive in Phase 6)
+	$(ACTIVATE) && ffia demo check && ffia demo offline
 
 demo-live: ## Run the demo against configured live services (read-only by default)
 	$(call pending,6)

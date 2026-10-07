@@ -1,0 +1,70 @@
+id: p17-resilience
+area: patterns
+title: "P17: LIVE / HYBRID / OFFLINE resilience"
+summary: >-
+  A provider router with per-capability timeouts, bounded retries with jitter and circuit breakers
+  keeps demos and operations alive. Reads may fall back to an approved local equivalent, visibly
+  labeled HYBRID with a reason. Writes and client errors never fall back.
+status: GA
+pattern_ids: [P17]
+learning_objectives:
+  - Choose between LIVE, HYBRID and OFFLINE operating modes and explain what each guarantees.
+  - Trace a read through the router - probe, timeout, retry, classify, fall back or fail.
+  - Explain why writes and client errors never fall back, and why an approved LIVE write is never redirected to LOCAL.
+  - Read breaker state and route decisions from the runtime status API.
+  - Use the offline demo as a release gate and the simulated outage to practice failure.
+prerequisites: [p08-human-in-the-loop]
+concepts:
+  - term: Operating mode
+    definition: OFFLINE (local equivalents only), HYBRID (live when healthy, labeled read fallback) or LIVE (live only; failures surface as UNAVAILABLE). Selected with FFIA_ENVIRONMENT.
+  - term: Provider router
+    definition: The component that sends each read to the live provider or the approved fallback according to the environment's per-capability policy, and records a route decision.
+  - term: Circuit breaker
+    definition: Stops calling a failing provider. CLOSED until 3 consecutive failures, then OPEN; after 60 seconds HALF_OPEN allows one trial call that closes or re-opens it.
+  - term: Labeled fallback
+    definition: A read served by the approved LOCAL equivalent with operating_mode HYBRID, fallback_used true and a fallback_reason.
+  - term: Client error
+    definition: An unknown resource or invalid request. Returned as-is, never retried and never redirected, because a missing table is not an outage.
+  - term: Release gate
+    definition: The ten-act offline demo, which must pass with no cloud configuration and fails on any dishonest label.
+evidence:
+  - statement: Router timeouts, bounded retries with jitter, client-error classification, labeled read fallback, the circuit breaker and LIVE write refusal are implemented and covered by tests and offline demo act 7.
+    category: SIMULATED LOCALLY
+  - statement: The simulated Fabric outage is a training fault injector that never contacts any service and is reported as FAULT-INJECTION, not as a live provider.
+    category: SIMULATED LOCALLY
+  - statement: Live Fabric REST and Fabric MCP failure modes, throttling responses and latency under load are validated when live read-only providers arrive in Phase 5.
+    category: REQUIRES TENANT VALIDATION
+  - statement: The Azure Well-Architected service guide for Microsoft Fabric includes reliability recommendations for designing Fabric workloads.
+    category: DOCUMENTED FABRIC BEHAVIOR
+    sources: [fabric-waf]
+  - statement: Tune timeouts and retry budgets per API from observed throttling responses, and never retry non-idempotent writes automatically.
+    category: PRODUCTION RECOMMENDATION
+try_it:
+  - label: Probe every component and get a recommended mode
+    command: ffia demo check --no-azure-cli
+    result_label: LOCAL
+  - label: Run the ten-act offline release gate
+    command: ffia demo offline
+    result_label: SIMULATED
+  - label: Practice failure with a simulated Fabric outage in HYBRID mode
+    command: FFIA_ENVIRONMENT=hybrid FFIA_SIMULATE_FABRIC_OUTAGE=1 ffia demo offline
+    result_label: HYBRID
+copilot_prompt: >-
+  Read docs/architecture/resilience.md, config/environments/hybrid.yaml and
+  src/fabric_foundry_accelerator/fallback/router.py. Explain, step by step, what happens to four
+  consecutive read_table requests when FFIA_SIMULATE_FABRIC_OUTAGE=1 in hybrid mode: attempts per
+  request, breaker state after each, and the fallback_reason on the fourth. Then explain why
+  POST /api/v1/fabric/change is never routed through this fallback.
+claude_code_prompt: >-
+  Using tests/unit/test_router.py as a guide, explain how the router distinguishes a client error
+  from an outage and why that matters for the circuit breaker. Propose (do not apply) one additional
+  test for a HALF_OPEN trial call that fails, and describe its expected assertions.
+production_notes:
+  - Set timeouts, retries and breaker thresholds per capability from measured latency and throttling, not defaults.
+  - Fallback is a policy decision per environment; document which reads may fall back and keep writes out of it.
+  - Surface fallback_used, the reason and breaker state in the UI and audit so audiences and auditors see degradation.
+  - Keep an offline release gate in CI so the demo and the teaching story survive any tenant outage.
+  - Share breaker state across instances (or accept per-instance breakers knowingly) when scaling out.
+sources: [fabric-waf]
+related_labs: [lab-resilience-break-it]
+related_guides: []

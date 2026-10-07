@@ -1,0 +1,83 @@
+id: copilot-surfaces
+area: copilot
+title: "GitHub Copilot surfaces for data engineers"
+summary: >-
+  GitHub Copilot reaches data engineers through several surfaces that share one agent runtime —
+  VS Code agent mode, Copilot CLI, the Copilot app (technical preview), the Copilot cloud agent and
+  the Copilot SDK. Each fits different steps of the Fabric data-engineering lifecycle, and all of
+  them are steered by the same repository instruction files, skills and MCP configuration.
+status: MIXED
+pattern_ids: [P19, P20, P21, P22]
+learning_objectives:
+  - Name each Copilot surface, its status and where it runs.
+  - Pick a surface for each data-engineering lifecycle step and say whether that step needs approval.
+  - Explain which repository files steer which surface.
+  - Identify the approval point and identity for local, cloud and embedded surfaces.
+prerequisites: [fabric-foundry-boundaries]
+concepts:
+  - term: Surface
+    definition: A place where you work with Copilot — editor, terminal, desktop app, GitHub.com or your own application — sharing one agent runtime.
+  - term: Agent mode
+    definition: The VS Code chat mode in which Copilot plans, edits files, runs terminal commands and calls MCP tools with approvals.
+  - term: Cloud agent
+    definition: Copilot working on an assigned issue in a GitHub Actions-backed sandbox and opening a pull request. Configured MCP tools run without per-call approval.
+  - term: Worktree session
+    definition: A Copilot app session isolated in its own git worktree, run locally or in a cloud sandbox, in Interactive, Plan or Autopilot mode.
+  - term: Repository instruction files
+    definition: AGENTS.md, .github/copilot-instructions.md and .github/instructions/*.instructions.md, which steer agents working in the repository.
+  - term: Copilot SDK
+    definition: A library that embeds the Copilot agent runtime — tools, MCP, hooks, tracing — in your own application.
+evidence:
+  - statement: Copilot CLI became generally available on 2026-02-25.
+    category: DOCUMENTED BEHAVIOR
+    sources: [copilot-cli-ga]
+  - statement: Copilot surfaces differ in which instruction files they read; the cloud agent and code review read AGENTS.md, CLAUDE.md and GEMINI.md, while Copilot Chat on GitHub.com does not read AGENTS.md.
+    category: DOCUMENTED BEHAVIOR
+    sources: [copilot-instructions-support]
+  - statement: VS Code reads the portable .mcp.json file; the older .vscode/mcp.json location is deprecated for agent-host sessions.
+    category: DOCUMENTED BEHAVIOR
+    sources: [vscode-mcp-servers]
+  - statement: The Copilot app is a technical preview, and Copilot CLI local and cloud sandboxes are public preview, as of October 2026.
+    category: PREVIEW LIMITATION
+  - statement: The Copilot cloud agent runs configured MCP tools without per-call approval, and its firewall does not restrict MCP server processes.
+    category: DOCUMENTED BEHAVIOR
+  - statement: Fabric Git integration makes notebooks, semantic models and pipelines reviewable as files, which is what lets editor and cloud-agent surfaces change Fabric through pull requests.
+    category: DOCUMENTED FABRIC BEHAVIOR
+    sources: [fabric-git-integration]
+  - statement: All surfaces in this repository load the same .mcp.json servers (microsoft-learn and ffia-local); ffia-local results are labeled LOCAL or SIMULATED.
+    category: SIMULATED LOCALLY
+  - statement: Give the cloud agent only read-only or offline MCP tools and route every Fabric change through a reviewed pull request.
+    category: PRODUCTION RECOMMENDATION
+try_it:
+  - label: Start the MCP server every surface uses in this repository
+    command: ffia serve mcp
+    result_label: LOCAL
+  - label: Check what the accelerator can demonstrate before choosing a surface
+    command: ffia demo check --no-azure-cli
+    result_label: LOCAL
+copilot_prompt: >-
+  Using AGENTS.md and the ffia-local MCP server, tell me which Copilot surface (VS Code agent mode,
+  Copilot CLI, Copilot app, cloud agent or SDK) you would use for each step of adding a new Silver
+  table in hc-lab-7file-v1: discover, design, transform, validate, serve and promote. For each step
+  say whether approval is needed and which ffia-local tool gives the offline counterpart.
+claude_code_prompt: >-
+  Read CLAUDE.md (which imports AGENTS.md) and .mcp.json. Explain which of this repository's
+  instruction files GitHub Copilot surfaces would read, which ones Claude Code reads, and which
+  Copilot surface's role you are closest to when run headless with claude -p. Use the ffia-local
+  inspect_medallion_architecture tool to ground your answer in the synthetic data.
+production_notes:
+  - Default to VS Code agent mode and Copilot CLI for interactive work under the developer's identity in a dev workspace.
+  - Use the cloud agent only for well-scoped issues with a plan-first template and read-only or offline MCP tools.
+  - Keep Copilot app Autopilot and cloud sandboxes in experiments until they are generally available.
+  - Embed the Copilot SDK only when a product experience is needed; it then needs app identity or on-behalf-of flows plus approvals.
+  - Use the portable .mcp.json and AGENTS.md so every surface — and Claude Code — sees the same rules and tools.
+  - Enforce an organization MCP allow-list so a surface cannot add an unapproved server.
+sources:
+  - copilot-cli-ga
+  - copilot-instructions-support
+  - vscode-mcp-servers
+  - skills-for-fabric
+  - fabric-git-integration
+  - fabric-mcp-local
+related_labs: [lab-copilot-maturity-ladder]
+related_guides: [hc-01-fabric-mcp-powerbi-medallion-lab]

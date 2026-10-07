@@ -1,0 +1,76 @@
+id: p10-medallion-ai
+area: patterns
+title: "P10: Medallion + AI"
+summary: >-
+  Raw lands, Bronze preserves, Silver conforms, Gold serves and the semantic model defines the
+  business language. AI accelerates profiling, notebook drafting and explanation; deterministic SQL,
+  tests and baselines decide what is correct.
+status: GA
+pattern_ids: [P10]
+learning_objectives:
+  - Describe what each layer (raw, Bronze, Silver, Gold, semantic model) is responsible for.
+  - Explain why agents answer business questions from Gold and the semantic model, never from Bronze.
+  - Separate the tasks where AI helps from the decisions that deterministic SQL, tests and baselines must make.
+  - Build the local medallion and prove every measure against the committed expected baseline.
+  - Explain what Direct Lake changes for a Gold-backed semantic model.
+prerequisites: [fabric-foundry-boundaries]
+concepts:
+  - term: Bronze
+    definition: Source data landed as-is with load metadata. Preserved for replay and audit; never used for business answers.
+  - term: Silver
+    definition: Typed, conformed and de-duplicated data with data-quality flags and diagnostics.
+  - term: Gold
+    definition: Business-ready facts and dimensions at a declared grain, built for semantic models and agents.
+  - term: Semantic model
+    definition: The governed business vocabulary (tables, relationships, measures, synonyms) that reports and agents query.
+  - term: Expected baseline
+    definition: Committed row counts, diagnostics, reconciliation totals and measure values that a build must reproduce exactly.
+  - term: Direct Lake
+    definition: A semantic model storage mode that reads Delta tables in OneLake directly instead of importing a copy.
+evidence:
+  - statement: The local medallion builds raw to Bronze to Silver to Gold with DuckDB SQL over synthetic data, runs every check and compares the result with the committed expected baseline.
+    category: SIMULATED LOCALLY
+  - statement: Fabric recommends the medallion lakehouse pattern of Bronze, Silver and Gold layers in OneLake.
+    category: DOCUMENTED FABRIC BEHAVIOR
+    sources: [fabric-medallion]
+  - statement: Direct Lake semantic models read Delta tables from OneLake; Direct Lake on OneLake has no DirectQuery fallback, while Direct Lake on the SQL analytics endpoint can fall back depending on its configuration.
+    category: DOCUMENTED FABRIC BEHAVIOR
+    sources: [fabric-direct-lake]
+  - statement: Fabric AI functions (for example classify, extract and summarize) can enrich DataFrames and require a paid capacity and the tenant setting for Copilot and Azure OpenAI.
+    category: DOCUMENTED FABRIC BEHAVIOR
+    sources: [fabric-ai-functions]
+  - statement: The reference DAX in the semantic model contract matches the local SQL measures only after it is evaluated in a tenant (Phase 5).
+    category: REQUIRES TENANT VALIDATION
+  - statement: AI may draft transformations, but a change to Silver or Gold logic should merge only when the build checks and the expected baseline pass.
+    category: PRODUCTION RECOMMENDATION
+try_it:
+  - label: Build Bronze, Silver and Gold for both profiles and compare with the baselines
+    command: ffia data build
+    result_label: LOCAL
+  - label: Prove the committed CSVs still equal the generator output
+    command: ffia data generate --check
+    result_label: LOCAL
+  - label: Evaluate every measure against the expected baseline through the API
+    command: "curl -s -X POST localhost:8000/api/v1/evaluations/run -H 'Content-Type: application/json' -d '{\"profile\": \"hc-lab-7file-v1\"}'"
+    result_label: LOCAL
+copilot_prompt: >-
+  Using the ffia-local MCP server, call inspect_medallion_architecture for profile hc-lab-7file-v1,
+  then preview_table for silver_encounters and gold_encounter_summary (limit 5). Explain what changed
+  between the layers and which data-quality flags Silver adds. Then call evaluate_measures and
+  evaluate_against_baseline. Label every result with its execution label and do not claim any Fabric
+  operation ran.
+claude_code_prompt: >-
+  Read src/fabric_foundry_accelerator/synthetic/sql/silver/silver_encounters.sql and
+  data/synthetic/semantic/hc-lab-7file-v1/semantic-model.yaml. Explain how average_length_of_stay is
+  computed and how Silver flags recorded length-of-stay values that disagree with the actual
+  discharge date. Propose (do not apply) a new Gold measure and
+  list the expected-baseline and test changes that must pass before it could merge.
+production_notes:
+  - Keep Bronze append-only with load metadata so Silver and Gold can be rebuilt and audited.
+  - Give agents and reports Gold and the semantic model only; restrict Bronze and Silver with layer-level workspace or item permissions.
+  - Treat AI-generated notebooks and SQL as drafts; gate merges on deterministic checks and an expected baseline.
+  - Prefer Direct Lake for Gold-backed models and decide explicitly how the model behaves when Direct Lake cannot serve a query.
+  - AI functions call a model per row; budget capacity, label enriched columns as model output and never let them overwrite source facts.
+sources: [fabric-medallion, fabric-direct-lake, fabric-ai-functions, fabric-overview]
+related_labs: []
+related_guides: [hc-01-fabric-mcp-powerbi-medallion-lab]

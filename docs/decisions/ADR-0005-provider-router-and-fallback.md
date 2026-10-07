@@ -24,8 +24,9 @@ decisions.
   - a timeout for each capability;
   - bounded retries with exponential backoff and jitter (`tenacity` 9.2.1);
   - a circuit breaker for each capability (CLOSED → OPEN → HALF_OPEN).
-- Only **reads** may fall back to the approved LOCAL equivalent. A fallback result is labeled
-  `HYBRID` with `fallback_used` and `fallback_reason`.
+- Only **reads** may fall back to the approved LOCAL equivalent. A fallback result keeps the
+  `LOCAL` execution label and carries `operating_mode=HYBRID`, `fallback_used` and
+  `fallback_reason`.
 - Client errors, such as an unknown resource or an invalid request, never trigger a fallback.
 - When fallback is not allowed, the result is `UNAVAILABLE` (HTTP 503).
 

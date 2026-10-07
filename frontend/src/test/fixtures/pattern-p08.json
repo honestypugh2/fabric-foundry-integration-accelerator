@@ -1,0 +1,22 @@
+{
+  "authority": "Human approver plus a narrowly scoped writer identity.",
+  "default_demo_path": "LOCAL",
+  "fabric_role": "Target of approved changes; source of context.",
+  "foundry_role": "Proposes; never performs authoritative writes directly.",
+  "id": "P08",
+  "mcp_role": "May expose a plan tool; approval stays outside MCP.",
+  "name": "Human-in-the-loop governed action",
+  "offline_equivalent": "Full plan, approve, simulated execute, verify and audit flow.",
+  "preview_dependencies": [],
+  "selection_signals": [
+    "business-system-write"
+  ],
+  "sources": [
+    "agent-framework",
+    "foundry-agent-service"
+  ],
+  "status": "GA",
+  "summary": "Retrieve, cite, reason, propose, validate, apply policy, approve, scoped write, verify, audit.",
+  "when_not_to_use": "Never skip it for high-impact, destructive, regulated or financially material actions.",
+  "when_to_use": "Any write to a business system or Fabric item."
+}

@@ -1,0 +1,43 @@
+{
+  "agent_provider": "Not available (Phase 6)",
+  "breakers": [],
+  "built_profiles": [
+    "core-healthcare-v1",
+    "hc-lab-7file-v1"
+  ],
+  "data_provider": "Local Fabric Educational Provider (LOCAL)",
+  "environment": "offline",
+  "identity": "Local process (no cloud identity in use)",
+  "mcp": "Local server ready: 15 allow-listed tools",
+  "operating_mode": "OFFLINE",
+  "overlay": "example-healthcare",
+  "preview_features": [],
+  "providers": [
+    {
+      "capability": "fabric_data",
+      "configured": true,
+      "kind": "LOCAL",
+      "name": "Local Fabric Educational Provider",
+      "note": "Synthetic lakehouses built: core-healthcare-v1, hc-lab-7file-v1",
+      "ready": true
+    },
+    {
+      "capability": "fabric_data",
+      "configured": false,
+      "kind": "NOT AVAILABLE",
+      "name": "Fabric REST / Fabric MCP (live)",
+      "note": "No live Fabric provider is configured in this build (added in Phase 5).",
+      "ready": false
+    },
+    {
+      "capability": "foundry_agent",
+      "configured": false,
+      "kind": "NOT AVAILABLE",
+      "name": "Foundry Agent Service / Agent Framework",
+      "note": "Agent providers are added in Phase 6.",
+      "ready": false
+    }
+  ],
+  "recent_route_decisions": [],
+  "write_mode": "Approval required; LOCAL executions are SIMULATED; LIVE writes disabled"
+}

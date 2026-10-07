@@ -55,6 +55,8 @@ Guides live in `guides/<industry-code>-<nn>-<slug>/` and are validated by `UseCa
      levels.
    - For each step, declare whether it writes, its tool, its approval and its
      `offline_equivalent`.
+   - For write steps, add a `rehearsal` (operation, item type, item name) when the policy has a
+     matching operation. The guide runner rehearses it against the simulated workspace.
 4. **Scaffold.** Copy `guides/_template/guide.yaml`. Add guide-scoped `AGENTS.md`,
    `CLAUDE.md` and `.mcp.json` when the guide needs different tools.
 5. **Validate.** The loader rejects:

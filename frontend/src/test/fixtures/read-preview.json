@@ -1,0 +1,142 @@
+{
+  "cloud_operation_performed": false,
+  "correlation_id": "e52e8e280b4d4c8db9a45dd961fc1ef0",
+  "data": {
+    "columns": [
+      {
+        "data_type": "VARCHAR",
+        "name": "patient_id"
+      },
+      {
+        "data_type": "VARCHAR",
+        "name": "first_name"
+      },
+      {
+        "data_type": "VARCHAR",
+        "name": "last_name"
+      },
+      {
+        "data_type": "DATE",
+        "name": "date_of_birth"
+      },
+      {
+        "data_type": "INTEGER",
+        "name": "age"
+      },
+      {
+        "data_type": "VARCHAR",
+        "name": "gender"
+      },
+      {
+        "data_type": "VARCHAR",
+        "name": "race"
+      },
+      {
+        "data_type": "VARCHAR",
+        "name": "zip_code"
+      },
+      {
+        "data_type": "VARCHAR",
+        "name": "city"
+      },
+      {
+        "data_type": "VARCHAR",
+        "name": "state"
+      },
+      {
+        "data_type": "VARCHAR",
+        "name": "insurance_type"
+      },
+      {
+        "data_type": "VARCHAR",
+        "name": "primary_care_provider"
+      },
+      {
+        "data_type": "DECIMAL(4,2)",
+        "name": "risk_score"
+      },
+      {
+        "data_type": "VARCHAR",
+        "name": "age_band"
+      },
+      {
+        "data_type": "VARCHAR",
+        "name": "risk_category"
+      }
+    ],
+    "layer": "silver",
+    "rows": [
+      {
+        "age": 44,
+        "age_band": "40-64",
+        "city": "Stonefield",
+        "date_of_birth": "1981-05-21",
+        "first_name": "Kendall",
+        "gender": "Male",
+        "insurance_type": "Commercial",
+        "last_name": "Cindervale",
+        "patient_id": "SYN-P-00001",
+        "primary_care_provider": "Provider SYN-14",
+        "race": "White",
+        "risk_category": "Low",
+        "risk_score": "0.16",
+        "state": "ZZ",
+        "zip_code": "00091"
+      },
+      {
+        "age": 29,
+        "age_band": "18-39",
+        "city": "Riverbend Hollow",
+        "date_of_birth": "1996-05-06",
+        "first_name": "Jordan",
+        "gender": "Female",
+        "insurance_type": "Commercial",
+        "last_name": "Hollowell",
+        "patient_id": "SYN-P-00002",
+        "primary_care_provider": "Provider SYN-36",
+        "race": "Black or African American",
+        "risk_category": "Low",
+        "risk_score": "0.21",
+        "state": "ZZ",
+        "zip_code": "00012"
+      },
+      {
+        "age": 86,
+        "age_band": "65+",
+        "city": "Harbor Point",
+        "date_of_birth": "1939-06-08",
+        "first_name": "Blake",
+        "gender": "Male",
+        "insurance_type": "Medicare",
+        "last_name": "Ashgrove",
+        "patient_id": "SYN-P-00003",
+        "primary_care_provider": "Provider SYN-22",
+        "race": "White",
+        "risk_category": "Moderate",
+        "risk_score": "0.51",
+        "state": "ZZ",
+        "zip_code": "00009"
+      }
+    ],
+    "table": "silver_patients",
+    "total_rows": 200,
+    "truncated": true
+  },
+  "equivalent_fabric_service": "Fabric Lakehouse SQL analytics endpoint (read)",
+  "evidence": [
+    {
+      "category": "SIMULATED LOCALLY",
+      "reference": null,
+      "statement": "Read 3 of 200 rows from local silver_patients."
+    }
+  ],
+  "execution_label": "LOCAL",
+  "fallback_reason": null,
+  "fallback_used": false,
+  "operating_mode": "OFFLINE",
+  "requested_provider": "Local Fabric Educational Provider",
+  "selected_provider": "Local Fabric Educational Provider",
+  "simulation_notice": "LOCAL educational analog over synthetic Parquet data. No Microsoft Fabric, OneLake or Power BI operation was performed.",
+  "teaching_objective": "Inspect governed data safely: bounded, read-only, catalogued tables only.",
+  "timestamp": "2026-10-07T21:42:10.006618Z"
+}

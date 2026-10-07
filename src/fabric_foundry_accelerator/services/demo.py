@@ -512,8 +512,9 @@ async def _failure_act(container: Container, tracker: _Tracker) -> DemoStep:
         passed=passed,
         label=results[-1].execution_label.value,
         summary=(
-            f"{len(results)} reads fell back to LOCAL (labeled HYBRID with a reason); breaker {breaker.state} "
-            f"after {breaker.consecutive_failures} failures; the last read skipped the live call."
+            f"{len(results)} reads fell back to LOCAL data in HYBRID mode (fallback_used, with a reason); "
+            f"breaker {breaker.state} after {breaker.consecutive_failures} failures; "
+            "the last read skipped the live call."
         ),
         evidence=(
             results[-1].fallback_reason or "",

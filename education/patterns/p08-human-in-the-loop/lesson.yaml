@@ -1,0 +1,54 @@
+id: p08-human-in-the-loop
+area: patterns
+title: "P08: Human-in-the-loop governed action"
+summary: >-
+  Models propose, deterministic logic validates, policy constrains, a human approves and only a
+  narrowly scoped writer changes anything. Every step leaves evidence.
+status: GA
+pattern_ids: [P08]
+learning_objectives:
+  - Explain why model intent is not proof of user authorization.
+  - Walk a change through PLAN, VALIDATE, APPROVE, EXECUTE, VERIFY and AUDIT.
+  - Identify which checks are deterministic and which need a human.
+  - Explain why an approved LIVE write must never be redirected to a local simulation.
+concepts:
+  - term: Proposed change
+    definition: A plan with target, operation, risk, expected impact, validation, rollback and policy reasons. Nothing has run.
+  - term: Separation of duties
+    definition: The person (or agent) that requests a change cannot approve it.
+  - term: Destination binding
+    definition: An approval is tied to a hash of the exact target and destination, so it cannot be reused for a different item.
+  - term: Scoped writer
+    definition: The only identity allowed to perform the write, limited to the operations and targets it needs.
+evidence:
+  - statement: Plans, self-approval refusal, duplicate blocking, approval expiry and destination binding are enforced in code and covered by tests.
+    category: SIMULATED LOCALLY
+  - statement: An approved LIVE change returns UNAVAILABLE when no authorized live writer exists, and is never redirected to LOCAL.
+    category: SIMULATED LOCALLY
+  - statement: Foundry agents can call tools and request human approval before a tool runs.
+    category: DOCUMENTED BEHAVIOR
+    sources: [foundry-agent-service, agent-framework]
+  - statement: A live Fabric writer must re-check existence and use exact item IDs immediately before writing.
+    category: PRODUCTION RECOMMENDATION
+try_it:
+  - label: Run the governed-change act of the offline demo
+    command: ffia demo offline
+    result_label: SIMULATED
+  - label: Propose a plan through the API (then approve as a different person)
+    command: "curl -s -X POST localhost:8000/api/v1/plans -H 'Content-Type: application/json' -d @plan.json"
+    result_label: SIMULATED
+copilot_prompt: >-
+  Using the ffia-local MCP server, call generate_fabric_change_plan to propose creating a Lakehouse
+  named bronze_lab in the demo-dev workspace with destination LOCAL. Show the risk, validation,
+  rollback and policy reasons. Do not try to approve or execute it; tell me what a human must do next.
+claude_code_prompt: >-
+  Use the ffia-local MCP server to propose (not execute) a LOCAL create_lakehouse change for
+  bronze_lab in demo-dev. Explain each field of the plan and why the MCP server cannot approve it.
+production_notes:
+  - Approvals belong to an identity with the authority to accept the risk, recorded with who, when and why.
+  - Expire approvals and bind them to the exact target; re-check preconditions at execution time.
+  - The writer identity is a separate, least-privilege identity (for example a managed identity scoped to one workspace).
+  - Verify against the system of record after the write and keep the audit trail append-only.
+sources: [foundry-agent-service, agent-framework, fabric-rest-identity]
+related_labs: [lab-governed-change]
+related_guides: [hc-01-fabric-mcp-powerbi-medallion-lab]

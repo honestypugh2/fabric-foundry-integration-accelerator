@@ -1,0 +1,56 @@
+checks:
+  - id: exec-cloud-agent-approval
+    level: executive
+    question: Where is the approval point when the Copilot cloud agent works on an issue?
+    choices:
+      - Each MCP tool call
+      - The pull request it opens
+      - There is none
+    answer: 1
+    explanation: Configured tools run without per-call approval in the cloud agent, so review of the pull request is where a human decides.
+  - id: l100-preview
+    level: l100
+    question: Which Copilot surface is a technical preview as of October 2026?
+    choices:
+      - Copilot CLI
+      - VS Code agent mode
+      - The Copilot app
+      - The Copilot cloud agent
+    answer: 2
+    explanation: The Copilot app, with worktree sessions and Autopilot, is a technical preview; CLI, VS Code agent mode and the cloud agent are generally available.
+  - id: l200-lifecycle
+    level: l200
+    question: Which data-engineering step needs approval?
+    choices:
+      - Discovering workspace items
+      - Validating data quality with a read query
+      - Promoting a change from dev to test
+    answer: 2
+    explanation: Promotion changes a workspace, so it goes through a reviewed pull request and approval. Discovery and read-only validation do not.
+  - id: l300-files
+    level: l300
+    question: Which surface does not read AGENTS.md?
+    choices:
+      - Copilot Chat on GitHub.com
+      - Copilot cloud agent
+      - VS Code agent mode
+    answer: 0
+    explanation: GitHub.com Chat uses copilot-instructions.md and personal or organization instructions; the cloud agent, code review and VS Code read AGENTS.md.
+  - id: l300-mcp-file
+    level: l300
+    question: Where does the Copilot cloud agent get its MCP server configuration?
+    choices:
+      - The repository's .mcp.json
+      - Repository settings, with secrets prefixed COPILOT_MCP_
+      - ~/.copilot/mcp-config.json on the developer's machine
+    answer: 1
+    explanation: The cloud agent is configured in repository settings, not from the committed .mcp.json, which is why its tool list must be reviewed separately.
+  - id: l400-head-branch
+    level: l400
+    question: Why protect instruction files with CODEOWNERS?
+    choices:
+      - The cloud agent and code review read instructions from the pull request's head branch, so a PR could change its own review rules
+      - Because instruction files contain secrets
+      - Because Copilot refuses to read unprotected files
+    answer: 0
+    explanation: Reviewing changes to instruction files stops a pull request from weakening the rules it is evaluated against.

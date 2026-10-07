@@ -113,11 +113,24 @@ def test_cli_demo_offline_text_and_json(capsys: pytest.CaptureFixture[str], tmp_
 
 
 def test_cli_schemas_export_and_check(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
-    assert main(["schemas", "check", "--dir", str(REPO_ROOT / "schemas")]) == 0
-    target = tmp_path / "schemas"
-    assert main(["schemas", "check", "--dir", str(target)]) == 1
-    assert main(["schemas", "export", "--dir", str(target)]) == 0
-    assert main(["schemas", "check", "--dir", str(target)]) == 0
+    repo_ts = str(REPO_ROOT / "frontend" / "src" / "api" / "generated.ts")
+    assert (
+        main(["schemas", "check", "--dir", str(REPO_ROOT / "schemas"), "--typescript", repo_ts])
+        == 0
+    )
+    target = [
+        "--dir",
+        str(tmp_path / "schemas"),
+        "--typescript",
+        str(tmp_path / "ts" / "generated.ts"),
+    ]
+    assert main(["schemas", "check", *target]) == 1
+    assert main(["schemas", "export", *target]) == 0
+    assert main(["schemas", "check", *target]) == 0
+    assert (tmp_path / "schemas" / "openapi.json").is_file()
+    assert "export interface LessonView" in (tmp_path / "ts" / "generated.ts").read_text(
+        encoding="utf-8"
+    )
     assert "up to date" in capsys.readouterr().out
 
 

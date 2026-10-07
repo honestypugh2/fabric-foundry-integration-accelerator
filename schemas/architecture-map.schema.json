@@ -1,0 +1,236 @@
+{
+  "$defs": {
+    "ArchitectureComponent": {
+      "additionalProperties": false,
+      "description": "A component of the reference architecture.",
+      "properties": {
+        "description": {
+          "$ref": "#/$defs/LevelText"
+        },
+        "does_not_own": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Does Not Own",
+          "type": "array"
+        },
+        "id": {
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "layer": {
+          "title": "Layer",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "offline_equivalent": {
+          "title": "Offline Equivalent",
+          "type": "string"
+        },
+        "owns": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Owns",
+          "type": "array"
+        },
+        "pattern_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Pattern Ids",
+          "type": "array"
+        },
+        "sources": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Sources",
+          "type": "array"
+        },
+        "status": {
+          "enum": [
+            "GA",
+            "PREVIEW",
+            "MIXED",
+            "DEPRECATED",
+            "UNKNOWN/NEEDS VALIDATION",
+            "LOCAL"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "layer",
+        "status",
+        "description",
+        "owns",
+        "offline_equivalent"
+      ],
+      "title": "ArchitectureComponent",
+      "type": "object"
+    },
+    "ArchitectureFlow": {
+      "additionalProperties": false,
+      "description": "A directed interaction between two components.",
+      "properties": {
+        "id": {
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "context",
+            "reasoning",
+            "access",
+            "authority",
+            "evidence",
+            "fallback",
+            "change"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "target": {
+          "title": "Target",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "source",
+        "target",
+        "label",
+        "kind"
+      ],
+      "title": "ArchitectureFlow",
+      "type": "object"
+    },
+    "ArchitectureLayer": {
+      "additionalProperties": false,
+      "description": "A layer of the reference architecture and the question it answers.",
+      "properties": {
+        "id": {
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "question": {
+          "title": "Question",
+          "type": "string"
+        },
+        "summary": {
+          "title": "Summary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "question",
+        "summary"
+      ],
+      "title": "ArchitectureLayer",
+      "type": "object"
+    },
+    "LevelText": {
+      "additionalProperties": false,
+      "description": "A short description per level.",
+      "properties": {
+        "executive": {
+          "title": "Executive",
+          "type": "string"
+        },
+        "l100": {
+          "title": "L100",
+          "type": "string"
+        },
+        "l200": {
+          "title": "L200",
+          "type": "string"
+        },
+        "l300": {
+          "title": "L300",
+          "type": "string"
+        },
+        "l400": {
+          "title": "L400",
+          "type": "string"
+        }
+      },
+      "required": [
+        "executive",
+        "l100",
+        "l200",
+        "l300",
+        "l400"
+      ],
+      "title": "LevelText",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "``education/architecture/explorer.yaml``.",
+  "properties": {
+    "components": {
+      "items": {
+        "$ref": "#/$defs/ArchitectureComponent"
+      },
+      "minItems": 1,
+      "title": "Components",
+      "type": "array"
+    },
+    "flows": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ArchitectureFlow"
+      },
+      "title": "Flows",
+      "type": "array"
+    },
+    "layers": {
+      "items": {
+        "$ref": "#/$defs/ArchitectureLayer"
+      },
+      "minItems": 1,
+      "title": "Layers",
+      "type": "array"
+    },
+    "version": {
+      "const": 1,
+      "title": "Version",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "version",
+    "layers",
+    "components"
+  ],
+  "title": "ArchitectureMap",
+  "type": "object"
+}

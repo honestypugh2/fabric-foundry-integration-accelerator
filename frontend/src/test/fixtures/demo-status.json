@@ -1,0 +1,51 @@
+{
+  "lines": [
+    {
+      "component": "Fabric Authentication",
+      "detail": "Azure CLI credential cache present (local check only; not proof of Fabric access)",
+      "status": "PASS"
+    },
+    {
+      "component": "Fabric API",
+      "detail": "No live Fabric provider is configured in this build (added in Phase 5).",
+      "status": "NOT AVAILABLE"
+    },
+    {
+      "component": "Fabric MCP",
+      "detail": "Configure the Fabric MCP servers per guide (e.g. HC-01 step 01); not probed here.",
+      "status": "NOT CONFIGURED"
+    },
+    {
+      "component": "Foundry",
+      "detail": "Foundry providers are added in Phase 6.",
+      "status": "NOT CONFIGURED"
+    },
+    {
+      "component": "Local Dataset",
+      "detail": "Committed synthetic CSVs match the generator.",
+      "status": "PASS"
+    },
+    {
+      "component": "Offline Provider",
+      "detail": "Built profiles: core-healthcare-v1, hc-lab-7file-v1",
+      "status": "READY"
+    },
+    {
+      "component": "API",
+      "detail": "30 API paths (in-process check)",
+      "status": "READY"
+    },
+    {
+      "component": "Frontend",
+      "detail": "Run `make setup-frontend` then `make run-frontend`.",
+      "status": "BUILT"
+    },
+    {
+      "component": "MCP Server",
+      "detail": "15 allow-listed tools (in-process MCP call)",
+      "status": "READY"
+    }
+  ],
+  "reason": "No live provider is configured and healthy; OFFLINE runs everything locally with honest labels.",
+  "recommended_mode": "OFFLINE"
+}

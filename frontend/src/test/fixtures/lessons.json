@@ -1,0 +1,238 @@
+[
+  {
+    "area": "agentic-data-engineering",
+    "id": "copilot-maturity-ladder",
+    "pattern_ids": [
+      "P19",
+      "P20",
+      "P21",
+      "P22",
+      "P23",
+      "P24"
+    ],
+    "related_guides": [
+      "hc-01-fabric-mcp-powerbi-medallion-lab"
+    ],
+    "related_labs": [
+      "lab-copilot-maturity-ladder"
+    ],
+    "status": "MIXED",
+    "summary": "GitHub Copilot is an agent harness that turns data-engineering intent into correct, reviewable Fabric artifacts and operations. It is grounded by Skills, executed through MCP, CLI and Git, constrained by permissions and policy, and evidenced by pull requests and audit records. The L0\u2013L6 maturity ladder shows what each level adds, what it is worth, what can go wrong and how to measure it.",
+    "title": "Leveling up Fabric data engineering with GitHub Copilot"
+  },
+  {
+    "area": "agentic-data-engineering",
+    "id": "copilot-vs-claude-code",
+    "pattern_ids": [
+      "P19",
+      "P20",
+      "P23"
+    ],
+    "related_guides": [
+      "hc-01-fabric-mcp-powerbi-medallion-lab"
+    ],
+    "related_labs": [
+      "lab-copilot-maturity-ladder"
+    ],
+    "status": "GA",
+    "summary": "An honest, evidence-labeled comparison of two generally available agent harnesses for Fabric data engineering. Both read the same repository instructions, skills and MCP configuration in this accelerator; they differ in permission models, enforcement hooks, parallelism, GitHub integration and admin planes. A same-task bake-off (arriving in Phase 7) records observations, not product claims.",
+    "title": "GitHub Copilot and Claude Code for Fabric data engineering"
+  },
+  {
+    "area": "architecture",
+    "id": "fabric-foundry-boundaries",
+    "pattern_ids": [
+      "P06",
+      "P08",
+      "P09",
+      "P17"
+    ],
+    "related_guides": [
+      "hc-01-fabric-mcp-powerbi-medallion-lab"
+    ],
+    "related_labs": [
+      "lab-governed-change",
+      "lab-mcp-allow-list",
+      "lab-resilience-break-it"
+    ],
+    "status": "MIXED",
+    "summary": "The central lesson of the accelerator. Fabric provides governed business context, Foundry turns that context into reasoning, orchestration, evaluation and action, MCP standardizes capability access without granting authority, Entra identity and policy decide authority, and business systems stay the authority for transactional writes. Evidence and offline resilience keep the whole story honest and teachable.",
+    "title": "Fabric + Foundry: who owns what"
+  },
+  {
+    "area": "copilot",
+    "id": "copilot-surfaces",
+    "pattern_ids": [
+      "P19",
+      "P20",
+      "P21",
+      "P22"
+    ],
+    "related_guides": [
+      "hc-01-fabric-mcp-powerbi-medallion-lab"
+    ],
+    "related_labs": [
+      "lab-copilot-maturity-ladder"
+    ],
+    "status": "MIXED",
+    "summary": "GitHub Copilot reaches data engineers through several surfaces that share one agent runtime \u2014 VS Code agent mode, Copilot CLI, the Copilot app (technical preview), the Copilot cloud agent and the Copilot SDK. Each fits different steps of the Fabric data-engineering lifecycle, and all of them are steered by the same repository instruction files, skills and MCP configuration.",
+    "title": "GitHub Copilot surfaces for data engineers"
+  },
+  {
+    "area": "fabric",
+    "id": "fabric-skills",
+    "pattern_ids": [
+      "P19"
+    ],
+    "related_guides": [
+      "hc-01-fabric-mcp-powerbi-medallion-lab"
+    ],
+    "related_labs": [
+      "lab-mcp-allow-list",
+      "lab-copilot-maturity-ladder"
+    ],
+    "status": "MIXED",
+    "summary": "Fabric Skills (the open-source microsoft/skills-for-fabric repository) are Markdown knowledge packs that teach coding agents the correct Fabric REST, SQL, KQL and PySpark procedures. They make an agent competent, not authorized. Skills drive commands under your own identity, and the bundled MCP configuration includes write-capable and arbitrary T-SQL servers, so the accelerator teaches a hardened overlay and a five-part mental model - knowledge, execution, harness, authority, evidence.",
+    "title": "Fabric Skills: knowledge packs for coding agents"
+  },
+  {
+    "area": "fabric",
+    "id": "power-bi-agentic-tooling",
+    "pattern_ids": [
+      "P12",
+      "P19"
+    ],
+    "related_guides": [
+      "hc-01-fabric-mcp-powerbi-medallion-lab"
+    ],
+    "related_labs": [
+      "lab-copilot-maturity-ladder"
+    ],
+    "status": "MIXED",
+    "summary": "How coding agents work with Power BI the governed way - semantic models and reports as PBIP/PBIR/TMDL files in Git, the Power BI Authoring (Modeling) MCP server for model edits, semantic-model and report skills for procedure, Fabric IQ MCP for read-only DAX checks, and Direct Lake over the Gold layer. Numbers are proven by reconciling DAX with the Gold baseline, and a local PBIR file is never mistaken for publication.",
+    "title": "Power BI agentic tooling for data engineers"
+  },
+  {
+    "area": "mcp",
+    "id": "fabric-mcp-landscape",
+    "pattern_ids": [
+      "P09",
+      "P19"
+    ],
+    "related_guides": [
+      "hc-01-fabric-mcp-powerbi-medallion-lab"
+    ],
+    "related_labs": [
+      "lab-mcp-allow-list"
+    ],
+    "status": "MIXED",
+    "summary": "\"Fabric MCP\" is not one server. The local Fabric MCP server, Fabric IQ MCP, Data Warehouse MCP, Power BI Authoring MCP, Ontology MCP, the data agent MCP endpoint and the Real-Time Intelligence servers each have a different host, identity path, read/write surface and release status. Pick the narrowest server for the job, never conflate them, and remember that the accelerator's ffia-local server is not a Fabric MCP server at all.",
+    "title": "The Fabric MCP landscape: which server for which job"
+  },
+  {
+    "area": "patterns",
+    "id": "p06-enterprise-agent",
+    "pattern_ids": [
+      "P06"
+    ],
+    "related_guides": [
+      "hc-01-fabric-mcp-powerbi-medallion-lab"
+    ],
+    "related_labs": [
+      "lab-governed-change"
+    ],
+    "status": "MIXED",
+    "summary": "The anchor pattern end to end: Fabric supplies governed context, a Foundry agent reasons, orchestrates and is evaluated, MCP standardizes tool access, Entra identity and policy decide authority, a human approves any action, and every step leaves evidence.",
+    "title": "P06: Fabric + Foundry enterprise agent (anchor)"
+  },
+  {
+    "area": "patterns",
+    "id": "p08-human-in-the-loop",
+    "pattern_ids": [
+      "P08"
+    ],
+    "related_guides": [
+      "hc-01-fabric-mcp-powerbi-medallion-lab"
+    ],
+    "related_labs": [
+      "lab-governed-change"
+    ],
+    "status": "GA",
+    "summary": "Models propose, deterministic logic validates, policy constrains, a human approves and only a narrowly scoped writer changes anything. Every step leaves evidence.",
+    "title": "P08: Human-in-the-loop governed action"
+  },
+  {
+    "area": "patterns",
+    "id": "p09-governed-mcp",
+    "pattern_ids": [
+      "P09"
+    ],
+    "related_guides": [
+      "hc-01-fabric-mcp-powerbi-medallion-lab"
+    ],
+    "related_labs": [
+      "lab-mcp-allow-list"
+    ],
+    "status": "GA",
+    "summary": "Expose capabilities to agents and developer tools as typed, allow-listed MCP tools with an owner, version, classification, rate limit, audit and revocation path. Read-only by default, no shell, SQL or REST proxy, and never mistaken for authority.",
+    "title": "P09: Governed MCP"
+  },
+  {
+    "area": "patterns",
+    "id": "p10-medallion-ai",
+    "pattern_ids": [
+      "P10"
+    ],
+    "related_guides": [
+      "hc-01-fabric-mcp-powerbi-medallion-lab"
+    ],
+    "related_labs": [],
+    "status": "GA",
+    "summary": "Raw lands, Bronze preserves, Silver conforms, Gold serves and the semantic model defines the business language. AI accelerates profiling, notebook drafting and explanation; deterministic SQL, tests and baselines decide what is correct.",
+    "title": "P10: Medallion + AI"
+  },
+  {
+    "area": "patterns",
+    "id": "p11-mirroring-ai",
+    "pattern_ids": [
+      "P11"
+    ],
+    "related_guides": [],
+    "related_labs": [
+      "lab-open-mirroring-recovery"
+    ],
+    "status": "GA",
+    "summary": "Mirroring replicates operational data into OneLake so analytics and agents work on fresh context. Open Mirroring lets any publisher land change files in a documented format. Recovery is your responsibility: plan snapshots, retain change files and rehearse a restore.",
+    "title": "P11: Mirroring / Open Mirroring + AI"
+  },
+  {
+    "area": "patterns",
+    "id": "p16-evaluation-observability",
+    "pattern_ids": [
+      "P16"
+    ],
+    "related_guides": [
+      "hc-01-fabric-mcp-powerbi-medallion-lab"
+    ],
+    "related_labs": [
+      "lab-resilience-break-it"
+    ],
+    "status": "MIXED",
+    "summary": "Prove numbers with deterministic baselines, judge language with model-graded evaluators, and trace every request end to end with correlation IDs, audit records and honest execution labels. Evaluations become release gates, not reports nobody reads.",
+    "title": "P16: Evaluation + observability"
+  },
+  {
+    "area": "patterns",
+    "id": "p17-resilience",
+    "pattern_ids": [
+      "P17"
+    ],
+    "related_guides": [],
+    "related_labs": [
+      "lab-resilience-break-it"
+    ],
+    "status": "GA",
+    "summary": "A provider router with per-capability timeouts, bounded retries with jitter and circuit breakers keeps demos and operations alive. Reads may fall back to an approved local equivalent, visibly labeled HYBRID with a reason. Writes and client errors never fall back.",
+    "title": "P17: LIVE / HYBRID / OFFLINE resilience"
+  }
+]

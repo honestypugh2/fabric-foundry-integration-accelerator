@@ -1,0 +1,544 @@
+[
+  {
+    "authority": "End-user identity through on-behalf-of; Fabric permissions decide what is visible.",
+    "default_demo_path": "LOCAL",
+    "fabric_role": "Owns governed context, data permissions and the data agent's curated sources.",
+    "foundry_role": "Owns reasoning, orchestration, conversation and evaluation.",
+    "id": "P01",
+    "mcp_role": "Optional transport (data agent MCP endpoint); grants no authority.",
+    "name": "Fabric Data Agent + Foundry",
+    "offline_equivalent": "Local deterministic data agent over the semantic model with allow-listed queries.",
+    "preview_dependencies": [
+      "Foundry Agent Service Microsoft Fabric tool"
+    ],
+    "selection_signals": [
+      "conversational-structured-analytics",
+      "enterprise-agent"
+    ],
+    "sources": [
+      "fabric-data-agent",
+      "foundry-fabric-tool"
+    ],
+    "status": "MIXED",
+    "summary": "A Foundry agent asks a governed Fabric data agent for answers over structured Fabric data.",
+    "when_not_to_use": "When a fixed report answers the question, or when service-principal-only access is required.",
+    "when_to_use": "Conversational questions over curated lakehouse, warehouse or semantic-model data."
+  },
+  {
+    "authority": "Per-domain Fabric permissions under the end user's identity.",
+    "default_demo_path": "LOCAL",
+    "fabric_role": "Domain data agents and the shared semantic layer.",
+    "foundry_role": "Coordinator agent, routing and evaluation.",
+    "id": "P02",
+    "mcp_role": "Optional per-domain endpoints.",
+    "name": "Multiple Fabric Data Agents via Fabric IQ",
+    "offline_equivalent": "Local domain routing over separate semantic subsets.",
+    "preview_dependencies": [
+      "Fabric IQ",
+      "Foundry Fabric IQ tool"
+    ],
+    "selection_signals": [
+      "multiple-governed-domains",
+      "shared-business-vocabulary"
+    ],
+    "sources": [
+      "fabric-iq-overview",
+      "fabric-data-agent"
+    ],
+    "status": "PREVIEW",
+    "summary": "A coordinating agent routes to bounded, domain-specific data agents through Fabric IQ.",
+    "when_not_to_use": "One domain, or when a single bounded data agent is enough.",
+    "when_to_use": "Several governed business domains with different owners and permissions."
+  },
+  {
+    "authority": "Bindings inherit the underlying item permissions.",
+    "default_demo_path": "LOCAL",
+    "fabric_role": "Ontology entities, relationships and bindings.",
+    "foundry_role": "Uses the ontology to ground reasoning.",
+    "id": "P03",
+    "mcp_role": "Ontology MCP exposes entities for discovery (preview).",
+    "name": "Fabric IQ Ontology",
+    "offline_equivalent": "Local semantic YAML (entities, relationships, vocabulary).",
+    "preview_dependencies": [
+      "Fabric IQ ontology",
+      "Ontology MCP server"
+    ],
+    "selection_signals": [
+      "shared-business-vocabulary"
+    ],
+    "sources": [
+      "fabric-iq-ontology"
+    ],
+    "status": "PREVIEW",
+    "summary": "Business entities, relationships and vocabulary bound to Fabric data without copying it.",
+    "when_not_to_use": "A single report or app where a semantic model already carries the meaning.",
+    "when_to_use": "Many consumers need one shared business vocabulary and entity model."
+  },
+  {
+    "authority": "The search service's managed identity indexes content; plan entitlement trimming explicitly.",
+    "default_demo_path": "LOCAL",
+    "fabric_role": "Stores and governs the files.",
+    "foundry_role": "Indexes, retrieves and cites; evaluates groundedness.",
+    "id": "P04",
+    "mcp_role": "None required.",
+    "name": "OneLake as Foundry knowledge",
+    "offline_equivalent": "Local retrieval over synthetic documents with citations.",
+    "preview_dependencies": [
+      "Foundry IQ portal experience"
+    ],
+    "selection_signals": [
+      "document-knowledge-retrieval"
+    ],
+    "sources": [
+      "foundry-iq"
+    ],
+    "status": "MIXED",
+    "summary": "Unstructured files in OneLake become cited knowledge for agents through Foundry IQ.",
+    "when_not_to_use": "Numeric questions that belong to governed measures.",
+    "when_to_use": "Retrieval over documents with citations, alongside structured analytics."
+  },
+  {
+    "authority": "Workspace identity and tenant settings for AI features.",
+    "default_demo_path": "LOCAL",
+    "fabric_role": "Runs the pipeline and stores enriched results.",
+    "foundry_role": "Provides models.",
+    "id": "P05",
+    "mcp_role": "None.",
+    "name": "Foundry tools in Fabric (AI in data engineering)",
+    "offline_equivalent": "Deterministic local enrichment labeled SIMULATED.",
+    "preview_dependencies": [],
+    "selection_signals": [
+      "ai-in-data-engineering"
+    ],
+    "sources": [
+      "fabric-ai-functions"
+    ],
+    "status": "GA",
+    "summary": "AI functions classify, extract and summarize inside notebooks and pipelines.",
+    "when_not_to_use": "Interactive questions that need conversation and tools.",
+    "when_to_use": "Batch enrichment that should be repeatable, reviewed and stored in Silver or Gold."
+  },
+  {
+    "authority": "Entra identity plus policy; humans approve high-impact actions.",
+    "default_demo_path": "HYBRID",
+    "fabric_role": "Governed structured context.",
+    "foundry_role": "Reasoning, orchestration, evaluation and tracing.",
+    "id": "P06",
+    "mcp_role": "Standardized tool access with allow-lists; never authorization.",
+    "name": "Fabric + Foundry enterprise agent (anchor)",
+    "offline_equivalent": "Local providers, deterministic agent, local evaluation and audit.",
+    "preview_dependencies": [
+      "Foundry Fabric data agent tool",
+      "Fabric IQ tool"
+    ],
+    "selection_signals": [
+      "enterprise-agent",
+      "production-enterprise-ai"
+    ],
+    "sources": [
+      "foundry-agent-service",
+      "agent-framework",
+      "fabric-data-agent"
+    ],
+    "status": "MIXED",
+    "summary": "An application agent combines Foundry knowledge and Fabric context with identity, evaluation, audit and approval.",
+    "when_not_to_use": "Simple Q&A that one data agent or report already answers.",
+    "when_to_use": "Production assistants that read governed data and may propose actions."
+  },
+  {
+    "authority": "Policy and human approval before any action.",
+    "default_demo_path": "LOCAL",
+    "fabric_role": "Eventstream, Eventhouse and Activator.",
+    "foundry_role": "Interprets context and proposes actions.",
+    "id": "P07",
+    "mcp_role": "Optional event and query tools.",
+    "name": "Real-time Fabric + Foundry agent",
+    "offline_equivalent": "Local event replay.",
+    "preview_dependencies": [],
+    "selection_signals": [
+      "real-time-context"
+    ],
+    "sources": [
+      "fabric-overview"
+    ],
+    "status": "MIXED",
+    "summary": "Operational events feed context to an agent that proposes, never autonomously executes, actions.",
+    "when_not_to_use": "When a deterministic alert rule is sufficient.",
+    "when_to_use": "Time-sensitive operational signals that need triage and proposed actions."
+  },
+  {
+    "authority": "Human approver plus a narrowly scoped writer identity.",
+    "default_demo_path": "LOCAL",
+    "fabric_role": "Target of approved changes; source of context.",
+    "foundry_role": "Proposes; never performs authoritative writes directly.",
+    "id": "P08",
+    "mcp_role": "May expose a plan tool; approval stays outside MCP.",
+    "name": "Human-in-the-loop governed action",
+    "offline_equivalent": "Full plan, approve, simulated execute, verify and audit flow.",
+    "preview_dependencies": [],
+    "selection_signals": [
+      "business-system-write"
+    ],
+    "sources": [
+      "agent-framework",
+      "foundry-agent-service"
+    ],
+    "status": "GA",
+    "summary": "Retrieve, cite, reason, propose, validate, apply policy, approve, scoped write, verify, audit.",
+    "when_not_to_use": "Never skip it for high-impact, destructive, regulated or financially material actions.",
+    "when_to_use": "Any write to a business system or Fabric item."
+  },
+  {
+    "authority": "Entra identity and the server's own authorization checks.",
+    "default_demo_path": "LOCAL",
+    "fabric_role": "Exposes capabilities through the narrowest Fabric MCP server.",
+    "foundry_role": "Consumes tools with allow-lists and approval settings.",
+    "id": "P09",
+    "mcp_role": "Standardizes capability access; it does not grant authority.",
+    "name": "Governed MCP",
+    "offline_equivalent": "Local FastMCP educational server with an allow-listed manifest.",
+    "preview_dependencies": [],
+    "selection_signals": [
+      "governed-tool-access",
+      "developer-automation-cli"
+    ],
+    "sources": [
+      "mcp-specification",
+      "fabric-mcp-servers-list"
+    ],
+    "status": "GA",
+    "summary": "Typed MCP tools with owner, version, classification, limits, audit and revocation.",
+    "when_not_to_use": "Exposing arbitrary shell, SQL, filesystem or URL access.",
+    "when_to_use": "Sharing capabilities with many agents and developer tools."
+  },
+  {
+    "authority": "Layer-level permissions.",
+    "default_demo_path": "LOCAL",
+    "fabric_role": "Lakehouse layers and notebooks.",
+    "foundry_role": "Consumes Gold through semantic models or data agents.",
+    "id": "P10",
+    "mcp_role": "Inspection and documentation tools.",
+    "name": "Medallion + AI",
+    "offline_equivalent": "Local DuckDB medallion over synthetic data.",
+    "preview_dependencies": [],
+    "selection_signals": [
+      "medallion-foundation"
+    ],
+    "sources": [
+      "fabric-medallion"
+    ],
+    "status": "GA",
+    "summary": "Bronze preserves, Silver conforms, Gold serves semantic models and agents.",
+    "when_not_to_use": "Never let agents read Bronze for business answers.",
+    "when_to_use": "Every analytical foundation that agents will consume."
+  },
+  {
+    "authority": "Source credentials and Fabric permissions; RLS/OLS are not propagated.",
+    "default_demo_path": "LOCAL",
+    "fabric_role": "Mirrored database and landing zone.",
+    "foundry_role": "Consumes the resulting context.",
+    "id": "P11",
+    "mcp_role": "None required.",
+    "name": "Mirroring / Open Mirroring + AI",
+    "offline_equivalent": "Landing-zone simulation and recovery drill.",
+    "preview_dependencies": [],
+    "selection_signals": [
+      "operational-replication-recovery"
+    ],
+    "sources": [
+      "fabric-open-mirroring-format",
+      "fabric-git-integration"
+    ],
+    "status": "GA",
+    "summary": "Replicate operational data into OneLake and plan for recovery explicitly.",
+    "when_not_to_use": "As a backup or disaster-recovery mechanism (not documented as one).",
+    "when_to_use": "Near-real-time operational data for analytics and agents."
+  },
+  {
+    "authority": "Model permissions and RLS/OLS.",
+    "default_demo_path": "LOCAL",
+    "fabric_role": "Direct Lake semantic model.",
+    "foundry_role": "Queries measures, never redefines them.",
+    "id": "P12",
+    "mcp_role": "Fabric IQ MCP (query) and Power BI Authoring MCP (authoring).",
+    "name": "Direct Lake + semantic model + AI",
+    "offline_equivalent": "Local semantic model contract evaluated with DuckDB.",
+    "preview_dependencies": [],
+    "selection_signals": [
+      "semantic-model-reporting"
+    ],
+    "sources": [
+      "fabric-direct-lake",
+      "fabric-iq-mcp",
+      "powerbi-authoring-mcp"
+    ],
+    "status": "GA",
+    "summary": "Semantic models over OneLake tables give agents governed measures and relationships.",
+    "when_not_to_use": "When tables are not yet modeled with clear grain and keys.",
+    "when_to_use": "Governed measures for reports and agents."
+  },
+  {
+    "authority": "Domain owners.",
+    "default_demo_path": "DOCUMENTATION",
+    "fabric_role": "Domain boundaries in data.",
+    "foundry_role": "Deterministic orchestration first.",
+    "id": "P13",
+    "mcp_role": "Per-domain tool sets.",
+    "name": "Multi-domain is not multi-agent",
+    "offline_equivalent": "Documentation and local routing examples.",
+    "preview_dependencies": [],
+    "selection_signals": [
+      "multiple-governed-domains"
+    ],
+    "sources": [
+      "agent-framework"
+    ],
+    "status": "GA",
+    "summary": "Add agents only where tools, context, policy, ownership or lifecycle truly differ.",
+    "when_not_to_use": "Splitting agents only because there are several data domains.",
+    "when_to_use": "Deciding agent boundaries."
+  },
+  {
+    "authority": "Entra, RBAC and network controls.",
+    "default_demo_path": "DOCUMENTATION",
+    "fabric_role": "Workspace isolation and private links.",
+    "foundry_role": "Private endpoints and agent identity.",
+    "id": "P14",
+    "mcp_role": "Private MCP endpoints where required.",
+    "name": "Secure enterprise Foundry + Fabric",
+    "offline_equivalent": "Architecture diagrams and checklists.",
+    "preview_dependencies": [],
+    "selection_signals": [
+      "secure-production-deployment",
+      "production-enterprise-ai"
+    ],
+    "sources": [
+      "baseline-foundry-chat",
+      "fabric-deployment-patterns",
+      "fabric-waf"
+    ],
+    "status": "GA",
+    "summary": "Private networking, managed identity, Key Vault, monitoring and policy around the solution.",
+    "when_not_to_use": "Treating the demo topology as production.",
+    "when_to_use": "Production deployments."
+  },
+  {
+    "authority": "Gateway policies plus backend authorization.",
+    "default_demo_path": "DOCUMENTATION",
+    "fabric_role": "Upstream data APIs.",
+    "foundry_role": "Model and agent endpoints behind the gateway.",
+    "id": "P15",
+    "mcp_role": "REST APIs exposed as governed MCP tools.",
+    "name": "APIM AI, MCP and tool governance",
+    "offline_equivalent": "Local policy simulation.",
+    "preview_dependencies": [],
+    "selection_signals": [
+      "centralized-api-governance",
+      "governed-tool-access"
+    ],
+    "sources": [
+      "apim-mcp"
+    ],
+    "status": "GA",
+    "summary": "A central gateway for authentication, quotas, routing, versioning and telemetry.",
+    "when_not_to_use": "A single app and a single model, where the gateway adds only latency and cost.",
+    "when_to_use": "Many consumers, shared quotas or a central tool registry."
+  },
+  {
+    "authority": "Release owners.",
+    "default_demo_path": "LOCAL",
+    "fabric_role": "Data-quality metrics and baselines.",
+    "foundry_role": "Built-in evaluators and tracing.",
+    "id": "P16",
+    "mcp_role": "Tool-call telemetry.",
+    "name": "Evaluation + observability",
+    "offline_equivalent": "Deterministic local evaluation against committed baselines.",
+    "preview_dependencies": [
+      "Some agent evaluators"
+    ],
+    "selection_signals": [
+      "evaluation-and-observability"
+    ],
+    "sources": [
+      "foundry-evaluators"
+    ],
+    "status": "MIXED",
+    "summary": "Traces and evaluations become quality gates for agents and data.",
+    "when_not_to_use": "Never optional for production.",
+    "when_to_use": "Always, before and after release."
+  },
+  {
+    "authority": "The environment's fallback policy.",
+    "default_demo_path": "LOCAL",
+    "fabric_role": "Live provider when healthy.",
+    "foundry_role": "Live provider when healthy.",
+    "id": "P17",
+    "mcp_role": "Local server as the offline counterpart.",
+    "name": "LIVE / HYBRID / OFFLINE resilience",
+    "offline_equivalent": "The offline demo itself.",
+    "preview_dependencies": [],
+    "selection_signals": [
+      "resilience-offline"
+    ],
+    "sources": [
+      "fabric-waf"
+    ],
+    "status": "GA",
+    "summary": "A provider router with breakers and approved fallback keeps the demo and the lesson alive.",
+    "when_not_to_use": "Silently replacing live writes with simulation (never allowed).",
+    "when_to_use": "Demos, workshops and degraded operations."
+  },
+  {
+    "authority": "Overlay owners; real identifiers stay in git-ignored files.",
+    "default_demo_path": "LOCAL",
+    "fabric_role": "Workspace aliases only.",
+    "foundry_role": "Project aliases only.",
+    "id": "P18",
+    "mcp_role": "Tool allow-lists.",
+    "name": "Customer overlay",
+    "offline_equivalent": "Example overlay with synthetic data.",
+    "preview_dependencies": [],
+    "selection_signals": [
+      "multi-customer-reuse"
+    ],
+    "sources": [
+      "fabric-deployment-patterns"
+    ],
+    "status": "GA",
+    "summary": "Configuration controls industry, domains, tools, policy, thresholds and learning modules.",
+    "when_not_to_use": "Forking core code per customer.",
+    "when_to_use": "Reusing the accelerator for another customer or industry."
+  },
+  {
+    "authority": "The developer's identity and workspace role.",
+    "default_demo_path": "HYBRID",
+    "fabric_role": "Target workspace (dev).",
+    "foundry_role": "Not required.",
+    "id": "P19",
+    "mcp_role": "Fabric MCP servers with hardened allow-lists.",
+    "name": "Copilot CLI + Fabric Skills + MCP",
+    "offline_equivalent": "Skills read locally plus the local MCP server.",
+    "preview_dependencies": [],
+    "selection_signals": [
+      "developer-automation-cli"
+    ],
+    "sources": [
+      "skills-for-fabric",
+      "copilot-cli-ga",
+      "fabric-mcp-local"
+    ],
+    "status": "MIXED",
+    "summary": "A terminal agent follows Microsoft-authored Fabric skills and calls Fabric MCP or REST.",
+    "when_not_to_use": "Production changes without a reviewed pull request.",
+    "when_to_use": "Fast exploration, triage and operator workflows."
+  },
+  {
+    "authority": "Pull-request review and branch protection.",
+    "default_demo_path": "LOCAL",
+    "fabric_role": "Git integration and deployment pipelines.",
+    "foundry_role": "Not required.",
+    "id": "P20",
+    "mcp_role": "Documentation and schema tools.",
+    "name": "Repo-first (Git as source of truth)",
+    "offline_equivalent": "Local definitions and dry-run plans.",
+    "preview_dependencies": [],
+    "selection_signals": [
+      "reviewable-change-ci-cd"
+    ],
+    "sources": [
+      "fabric-git-integration"
+    ],
+    "status": "GA",
+    "summary": "Agents edit notebooks, TMDL and pipeline definitions in Git; CI validates; deployment applies.",
+    "when_not_to_use": "One-off exploration.",
+    "when_to_use": "Anything that must be reviewable, repeatable and auditable."
+  },
+  {
+    "authority": "Pull-request reviewers.",
+    "default_demo_path": "DOCUMENTATION",
+    "fabric_role": "Item definitions in Git.",
+    "foundry_role": "Not required.",
+    "id": "P21",
+    "mcp_role": "Read-only servers only (no per-call approval in the cloud agent).",
+    "name": "Cloud agent issue to pull request",
+    "offline_equivalent": "Issue template and recorded replay.",
+    "preview_dependencies": [],
+    "selection_signals": [
+      "backlog-automation"
+    ],
+    "sources": [
+      "copilot-instructions-support"
+    ],
+    "status": "GA",
+    "summary": "A well-scoped issue becomes a pull request from the Copilot cloud agent with read-only tools.",
+    "when_not_to_use": "Tasks that need live writes or tenant secrets.",
+    "when_to_use": "A backlog of well-defined data-engineering tasks."
+  },
+  {
+    "authority": "Reviewers and CI gates.",
+    "default_demo_path": "DOCUMENTATION",
+    "fabric_role": "Migration target.",
+    "foundry_role": "Not required.",
+    "id": "P22",
+    "mcp_role": "Documentation tools.",
+    "name": "Parallel agentic migration",
+    "offline_equivalent": "Synthetic legacy notebooks and replay.",
+    "preview_dependencies": [
+      "GitHub Copilot app"
+    ],
+    "selection_signals": [
+      "bulk-migration"
+    ],
+    "sources": [
+      "skills-for-fabric"
+    ],
+    "status": "PREVIEW",
+    "summary": "Many isolated agent sessions convert legacy notebooks or pipelines into reviewable pull requests.",
+    "when_not_to_use": "Without automated validation of every change.",
+    "when_to_use": "Bulk conversions with strong CI gates."
+  },
+  {
+    "authority": "Human reviewers keep approval authority.",
+    "default_demo_path": "DOCUMENTATION",
+    "fabric_role": "Item definitions under review.",
+    "foundry_role": "Not required.",
+    "id": "P23",
+    "mcp_role": "Documentation tools only.",
+    "name": "Headless agent review in CI",
+    "offline_equivalent": "Recorded review transcripts.",
+    "preview_dependencies": [],
+    "selection_signals": [
+      "automated-review"
+    ],
+    "sources": [
+      "copilot-cli-ga",
+      "claude-code-memory"
+    ],
+    "status": "GA",
+    "summary": "A non-interactive agent reviews notebooks and models in pull requests.",
+    "when_not_to_use": "As the only reviewer for high-risk changes.",
+    "when_to_use": "Consistent automated review alongside human review."
+  },
+  {
+    "authority": "On-behalf-of user identity plus approvals.",
+    "default_demo_path": "DOCUMENTATION",
+    "fabric_role": "Governed context and approved write targets.",
+    "foundry_role": "Agent runtime, evaluation and tracing.",
+    "id": "P24",
+    "mcp_role": "Typed tools with allow-lists.",
+    "name": "Embedded data-engineering assistant",
+    "offline_equivalent": "Local providers and deterministic agent.",
+    "preview_dependencies": [],
+    "selection_signals": [
+      "embedded-assistant"
+    ],
+    "sources": [
+      "agent-framework",
+      "foundry-agent-service"
+    ],
+    "status": "GA",
+    "summary": "An internal app embeds an agent runtime that calls Fabric tools under app identity or on behalf of the user.",
+    "when_not_to_use": "When an existing developer tool suffices.",
+    "when_to_use": "A product experience for many users."
+  }
+]

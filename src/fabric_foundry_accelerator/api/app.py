@@ -6,14 +6,18 @@ contain no business logic; they validate input, call a service and return its re
 
 import re
 from collections.abc import Awaitable, Callable
+from typing import Any
 
 from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from pydantic import BaseModel
+from pydantic.json_schema import models_json_schema
 
 from fabric_foundry_accelerator import __version__
 from fabric_foundry_accelerator.api.routes import router
 from fabric_foundry_accelerator.fallback.router import CapabilityUnavailableError
+from fabric_foundry_accelerator.models.changes import ExecutionResult
 from fabric_foundry_accelerator.models.execution import new_correlation_id
 from fabric_foundry_accelerator.observability.logging import (
     bind_correlation_id,
@@ -27,8 +31,17 @@ from fabric_foundry_accelerator.providers.errors import (
     ProviderUnavailableError,
     UnknownResourceError,
 )
+from fabric_foundry_accelerator.providers.fabric.port import (
+    ItemInfo,
+    MeasureValue,
+    TableInfo,
+    TablePreview,
+    WorkspaceInfo,
+)
+from fabric_foundry_accelerator.recovery.scenario import RecoveryReport
 from fabric_foundry_accelerator.services.changes import ApprovalError, LiveWriteUnavailableError
 from fabric_foundry_accelerator.services.container import Container, build_container
+from fabric_foundry_accelerator.services.evaluation import EvaluationResult
 from fabric_foundry_accelerator.synthetic.medallion import DataNotBuiltError
 
 CORRELATION_HEADER = "X-Correlation-ID"
@@ -63,14 +76,47 @@ def _error_response(request: Request, error: Exception, status: int) -> JSONResp
     return JSONResponse(status_code=status, content=body)
 
 
-def create_app(container: Container | None = None) -> FastAPI:
-    """Create the API application around a container (built from settings when omitted)."""
-    services = container or build_container()
+def _new_app() -> FastAPI:
     app = FastAPI(
         title="Fabric Foundry Integration Accelerator API",
         version=__version__,
         description="Control plane for the offline-first Fabric + Foundry reference implementation.",
     )
+    app.include_router(router)
+    return app
+
+
+# Payloads carried inside ExecutionEnvelope.data. The envelope is generic over ``object`` on
+# the wire, so these are published as extra components for typed clients.
+ENVELOPE_PAYLOADS: tuple[type[BaseModel], ...] = (
+    WorkspaceInfo,
+    ItemInfo,
+    TableInfo,
+    TablePreview,
+    MeasureValue,
+    EvaluationResult,
+    ExecutionResult,
+    RecoveryReport,
+)
+
+
+def openapi_document() -> dict[str, object]:
+    """Return the OpenAPI document without building a container (no data, no providers)."""
+    document: dict[str, Any] = _new_app().openapi()
+    _, definitions = models_json_schema(
+        [(model, "serialization") for model in ENVELOPE_PAYLOADS],
+        ref_template="#/components/schemas/{model}",
+    )
+    schemas: dict[str, Any] = document.setdefault("components", {}).setdefault("schemas", {})
+    for name, schema in definitions.get("$defs", {}).items():
+        schemas.setdefault(name, schema)
+    return document
+
+
+def create_app(container: Container | None = None) -> FastAPI:
+    """Create the API application around a container (built from settings when omitted)."""
+    services = container or build_container()
+    app = _new_app()
     app.state.container = services
     app.add_middleware(
         CORSMiddleware,
@@ -102,6 +148,5 @@ def create_app(container: Container | None = None) -> FastAPI:
 
         app.add_exception_handler(error_type, handler)
 
-    app.include_router(router)
     _log.info("api.ready", environment=services.environment.name, mode=services.mode.value)
     return app

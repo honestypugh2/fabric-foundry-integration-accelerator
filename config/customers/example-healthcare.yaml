@@ -13,11 +13,12 @@ fabric_workspace_aliases:
 foundry_project_aliases:
   demo-project: Foundry project for agent labs (identifiers kept in a local file)
 allowed_reads: [list_workspaces, list_items, list_tables, read_table, get_semantic_model, evaluate_measures]
-allowed_writes: [create_lakehouse, create_notebook, upload_files, update_semantic_model, publish_report]
+allowed_writes: [create_lakehouse, create_notebook, upload_files, create_semantic_model, update_semantic_model, publish_report]
 required_approvals:
   - {operation: create_lakehouse, approvers: 1, reason: Creates a new governed data store.}
   - {operation: create_notebook, approvers: 1, reason: Adds executable code to the workspace.}
   - {operation: upload_files, approvers: 1, reason: Lands data in OneLake.}
+  - {operation: create_semantic_model, approvers: 1, reason: Adds business definitions that reports and agents bind to.}
   - {operation: update_semantic_model, approvers: 1, reason: Changes business definitions used by reports and agents.}
   - {operation: publish_report, approvers: 1, reason: Makes content visible to report consumers.}
 feature_flags:

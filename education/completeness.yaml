@@ -1,0 +1,35 @@
+# Architecture Completeness Gate: 30 questions the accelerator must answer at every level
+# (Executive, L100-L400). A question is answered when every lesson in `answered_by` exists;
+# lessons always carry all five levels. Unanswered questions name the phase that answers them.
+version: 1
+questions:
+  - {id: Q01, question: "What does Fabric own and what does Foundry own?", answered_by: [fabric-foundry-boundaries]}
+  - {id: Q02, question: "Where does governed business context live?", answered_by: [fabric-foundry-boundaries, p10-medallion-ai]}
+  - {id: Q03, question: "What does MCP provide and what does it not provide?", answered_by: [fabric-mcp-landscape, p09-governed-mcp]}
+  - {id: Q04, question: "Which Fabric MCP server fits which job?", answered_by: [fabric-mcp-landscape]}
+  - {id: Q05, question: "Who decides whether an action is allowed?", answered_by: [fabric-foundry-boundaries, p08-human-in-the-loop]}
+  - {id: Q06, question: "How is a write proposed, validated, approved, executed and verified?", answered_by: [p08-human-in-the-loop]}
+  - {id: Q07, question: "What stops an agent or requester from approving its own change?", answered_by: [p08-human-in-the-loop]}
+  - {id: Q08, question: "What happens when Fabric or Foundry is unavailable?", answered_by: [p17-resilience]}
+  - {id: Q09, question: "Can an approved LIVE write fall back to a local simulation?", answered_by: [p17-resilience, p08-human-in-the-loop]}
+  - {id: Q10, question: "How are results labeled so simulation is never mistaken for production?", answered_by: [p17-resilience, p16-evaluation-observability]}
+  - {id: Q11, question: "How is data refined from raw to business-ready?", answered_by: [p10-medallion-ai]}
+  - {id: Q12, question: "Where should AI help in data engineering and where must deterministic logic decide?", answered_by: [p10-medallion-ai]}
+  - {id: Q13, question: "How does Open Mirroring land data and how is it recovered?", answered_by: [p11-mirroring-ai]}
+  - {id: Q14, question: "How is the quality of data and answers evaluated?", answered_by: [p16-evaluation-observability]}
+  - {id: Q15, question: "How do we trace what happened end to end?", answered_by: [p16-evaluation-observability]}
+  - {id: Q16, question: "What does GitHub Copilot do in Fabric data engineering?", answered_by: [copilot-maturity-ladder]}
+  - {id: Q17, question: "How does a team level up with GitHub Copilot safely?", answered_by: [copilot-maturity-ladder]}
+  - {id: Q18, question: "What are Fabric Skills and what risks do they carry?", answered_by: [fabric-skills]}
+  - {id: Q19, question: "Which GitHub Copilot surface fits which data-engineering task?", answered_by: [copilot-surfaces]}
+  - {id: Q20, question: "How does Claude Code compare with GitHub Copilot for this work?", answered_by: [copilot-vs-claude-code]}
+  - {id: Q21, question: "How do Power BI semantic models and reports fit agentic workflows?", answered_by: [power-bi-agentic-tooling]}
+  - {id: Q22, question: "What is the end-to-end Fabric + Foundry enterprise agent pattern?", answered_by: [p06-enterprise-agent]}
+  - {id: Q23, question: "How does a Foundry agent use Fabric data under the user's identity?", answered_by: [p06-enterprise-agent]}
+  - {id: Q24, question: "How are preview features isolated from the default experience?", planned_phase: 5}
+  - {id: Q25, question: "How is the accelerator customized for another customer or industry?", planned_phase: 7}
+  - {id: Q26, question: "What is the threat model for agents with tool access?", planned_phase: 8}
+  - {id: Q27, question: "How are secrets and environment identifiers kept out of the repository?", planned_phase: 8}
+  - {id: Q28, question: "How do changes move from development to production through Git and CI/CD?", planned_phase: 7}
+  - {id: Q29, question: "How are cost and usage of models and tools controlled?", planned_phase: 8}
+  - {id: Q30, question: "How is the architecture demonstrated when no cloud service is available?", answered_by: [p17-resilience]}

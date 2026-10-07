@@ -1,0 +1,56 @@
+checks:
+  - id: exec-prove-numbers
+    level: executive
+    question: What should a leader require before an agent-built report is considered done?
+    choices:
+      - A screenshot showing the report renders
+      - A reconciliation of every measure against an independent baseline, plus evidence of publication
+      - Confirmation that the PBIR file is valid on the engineer's laptop
+    answer: 1
+    explanation: Prove numbers, not appearance. A rendered page or a local file proves neither correctness nor publication.
+  - id: l100-query-vs-author
+    level: l100
+    question: Which server should be used to run read-only DAX checks against a model?
+    choices:
+      - Fabric IQ MCP
+      - Power BI Authoring MCP (hosted)
+      - Data Warehouse MCP
+    answer: 0
+    explanation: Fabric IQ MCP is GA and read-only. Authoring servers are for changing models.
+  - id: l100-pbir
+    level: l100
+    question: An agent says "the report is published" because the PBIR project validates locally. Is that evidence?
+    choices:
+      - Yes, a valid PBIR file is the published report
+      - Yes, if the file is committed to Git
+      - No, publication is a separate step with its own evidence
+    answer: 2
+    explanation: A local PBIR file is not publication. Evidence is the published report, its workspace and its model binding.
+  - id: l200-status
+    level: l200
+    question: Which combination of statuses is correct as of October 2026?
+    choices:
+      - Authoring MCP local PREVIEW, hosted GA
+      - Authoring MCP local GA, hosted PREVIEW; Fabric IQ MCP GA
+      - Both Authoring MCP deployments GA; Fabric IQ MCP PREVIEW
+    answer: 1
+    explanation: The local Power BI Authoring MCP server is GA (1.0.0); the hosted one is preview; Fabric IQ MCP is GA and read-only.
+  - id: l300-evaluate
+    level: l300
+    question: In this repo, which ffia-local tool evaluates the HC-01 measure contracts offline?
+    choices:
+      - preview_table
+      - generate_fabric_change_plan
+      - get_runtime_status
+      - evaluate_measures
+    answer: 3
+    explanation: evaluate_measures evaluates declared measures by name over Gold Parquet and labels results LOCAL; evaluate_against_baseline then compares them.
+  - id: l400-bed-occupancy
+    level: l400
+    question: Why does the semantic model contract exclude a bed occupancy measure?
+    choices:
+      - The dataset has no available-bed denominator, so the measure cannot be defined honestly
+      - Direct Lake does not support ratio measures
+      - Fabric IQ MCP cannot query percentages
+    answer: 0
+    explanation: Agents can invent plausible metrics. The contract records excluded measures and reasons so a model never claims a number it cannot compute.

@@ -1,0 +1,56 @@
+checks:
+  - id: exec-competent-not-authorized
+    level: executive
+    question: What do Fabric Skills add to a coding agent?
+    choices:
+      - Permission to change Fabric items
+      - Microsoft-authored knowledge that makes the agent's Fabric work more correct
+      - A GA-supported Fabric service with an SLA
+    answer: 1
+    explanation: Skills make an agent competent. Authority still comes from identity, roles, policy and approval, and the project is pre-1.0 open source.
+  - id: l100-what-is-a-skill
+    level: l100
+    question: Which description of a skill is accurate?
+    choices:
+      - A SKILL.md knowledge pack that the agent follows using its own tools
+      - A background service that runs Fabric jobs on a schedule
+      - A Fabric item type stored in the workspace
+    answer: 0
+    explanation: A skill is instructions. The harness and its tools do the execution.
+  - id: l200-bundled-risk
+    level: l200
+    question: What is the main risk of installing the bundled MCP configuration as-is?
+    choices:
+      - It only works offline
+      - It disables Fabric IQ MCP
+      - It enables write-capable model authoring and arbitrary T-SQL under your identity, in preview services
+      - It requires a service principal
+    answer: 2
+    explanation: The bundle allows every authoring tool and a SQL execution tool. The hardened overlay keeps read-only tools by default and moves writes to an opt-in profile.
+  - id: l200-identity
+    level: l200
+    question: A skill calls the Fabric REST API through az rest. Whose permissions apply?
+    choices:
+      - The skill author's
+      - The signed-in user's (or whichever identity the Azure CLI holds)
+      - None; skills bypass Fabric permissions
+    answer: 1
+    explanation: Skills run with the identity of the session. That is why tenant pinning and least privilege matter.
+  - id: l300-first-exercise
+    level: l300
+    question: In this repo, what is a safe first exercise with Fabric Skills?
+    choices:
+      - Use the planning skill to design a medallion for hc-lab-7file-v1, then compare with the offline build and inspect_medallion_architecture
+      - Install the bundle and let a persona agent create items in a production workspace
+      - Give the SQL endpoint server a DROP statement to test permissions
+    answer: 0
+    explanation: Planning without calling Fabric, then checking against LOCAL results, exercises the knowledge layer with no write surface.
+  - id: l400-supply-chain
+    level: l400
+    question: Why should a skills upgrade be reviewed like a code change?
+    choices:
+      - Because skills are compiled into the Fabric runtime
+      - Because upgrades reset Fabric permissions
+      - Because a changed skill is a changed runbook that agents execute with your credentials
+    answer: 2
+    explanation: Skills are instructions that drive real commands. Pin the version and review diffs before upgrading.

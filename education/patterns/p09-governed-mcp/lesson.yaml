@@ -1,0 +1,75 @@
+id: p09-governed-mcp
+area: patterns
+title: "P09: Governed MCP"
+summary: >-
+  Expose capabilities to agents and developer tools as typed, allow-listed MCP tools with an owner,
+  version, classification, rate limit, audit and revocation path. Read-only by default, no shell,
+  SQL or REST proxy, and never mistaken for authority.
+status: GA
+pattern_ids: [P09]
+learning_objectives:
+  - Explain why MCP standardizes access but does not grant authority.
+  - Describe the governance metadata every tool needs and where this repository keeps it.
+  - Choose the narrowest MCP server and tool set for a job and pin its version.
+  - Recognize unsafe tool shapes (shell, free-form SQL, URL fetch, REST proxy, wildcard tool grants) and replace them with typed tools.
+  - Explain where a gateway such as Azure API Management fits (pattern P15).
+prerequisites: [fabric-mcp-landscape]
+concepts:
+  - term: Tool allow-list
+    definition: The explicit list of tools a server registers or a client may call. Anything not listed does not exist for the agent.
+  - term: Tool manifest
+    definition: Governance metadata per tool (owner, version, classification, allowed operations, read-only flag, rate limit, timeout, audit, enabled, revocation). Here it is config/policies/tools.yaml.
+  - term: Tool annotations
+    definition: MCP hints such as readOnlyHint and destructiveHint that tell clients how a tool behaves. They inform approval prompts but are not an enforcement mechanism.
+  - term: Narrowest server
+    definition: Picking the MCP server and tool subset with the least capability that still does the job (docs tools for how, read-only tools for what is, the change flow for change it).
+  - term: Wildcard grant
+    definition: A client configuration such as tools ["*"] that enables every tool a server offers, including write-capable ones.
+evidence:
+  - statement: The ffia-local server registers only enabled manifest tools, fails at startup if an enabled tool has no implementation, rate limits and audits every call, and exposes no approve, execute, shell, SQL, filesystem or URL tool.
+    category: SIMULATED LOCALLY
+  - statement: The MCP specification defines tools, tool annotations and an OAuth-based authorization model in which remote servers act as protected resources.
+    category: DOCUMENTED BEHAVIOR
+    sources: [mcp-specification]
+  - statement: Remote Fabric MCP servers act with the signed-in identity's own Fabric permissions; connecting through MCP does not elevate them.
+    category: DOCUMENTED FABRIC BEHAVIOR
+    sources: [fabric-mcp-servers-list, fabric-mcp-local]
+  - statement: Azure API Management can expose REST APIs as MCP tools with central authentication, rate limiting and logging; only tools (not resources or prompts) are supported.
+    category: DOCUMENTED BEHAVIOR
+    sources: [apim-mcp]
+  - statement: Foundry agents can restrict MCP servers to allowed tools and require approval before a tool call runs.
+    category: DOCUMENTED BEHAVIOR
+    sources: [foundry-agent-service]
+  - statement: The Fabric Data Warehouse MCP server exposes a T-SQL execution tool and is in preview; treat it as an opt-in, separately approved profile.
+    category: PREVIEW LIMITATION
+    sources: [fabric-dw-mcp]
+  - statement: Replace wildcard tool grants from bundled skill configurations with a hardened, read-only overlay and pin every external server version.
+    category: PRODUCTION RECOMMENDATION
+    sources: [skills-for-fabric, vscode-mcp-servers]
+try_it:
+  - label: Start the allow-listed local MCP server (stdio)
+    command: make run-mcp
+    result_label: LOCAL
+  - label: Run the MCP act of the offline demo (a real protocol call)
+    command: ffia demo offline
+    result_label: LOCAL
+  - label: Read the manifest that decides which tools exist
+    command: cat config/policies/tools.yaml
+    result_label: LOCAL
+copilot_prompt: >-
+  Using the ffia-local MCP server, call get_demo_capabilities and list every tool it exposes with
+  its read-only hint. Then try to find a tool that approves or executes a change or runs SQL, and
+  explain why none exists. Finally call get_audit_record with the correlation_id of your first call.
+claude_code_prompt: >-
+  Read config/policies/tools.yaml and src/fabric_foundry_accelerator/mcp/server.py. Explain how a
+  tool becomes callable, what happens when a manifest entry has no implementation, how rate
+  limiting and auditing wrap each call, and which ToolAnnotations are set. Do not modify any files.
+production_notes:
+  - Inventory every MCP server in use, its owner, version and identity; pin versions and review upgrades like any dependency.
+  - Default every profile to read-only tools; put write-capable or authoring servers in a separate, opt-in profile against a dev workspace with approvals on.
+  - Never ship tools ["*"] for write-capable servers; diff any bundled skill configuration against a hardened overlay before use.
+  - Put shared remote tools behind a gateway (P15) for authentication, quotas and telemetry, and keep the backend's own authorization checks.
+  - Audit every call with a correlation ID, the caller identity and the tool version; make revocation a configuration change that takes effect on restart or reload.
+sources: [mcp-specification, fabric-mcp-servers-list, fabric-mcp-local, fabric-dw-mcp, apim-mcp, foundry-agent-service, skills-for-fabric, vscode-mcp-servers]
+related_labs: [lab-mcp-allow-list]
+related_guides: [hc-01-fabric-mcp-powerbi-medallion-lab]

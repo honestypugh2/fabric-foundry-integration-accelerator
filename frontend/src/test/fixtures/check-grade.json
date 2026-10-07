@@ -1,0 +1,6 @@
+{
+  "check_id": "exec-accountable",
+  "correct": true,
+  "correct_choice": 1,
+  "explanation": "The engineering is reusable; deciding which changes need accountable approval is an operating-model decision."
+}

@@ -50,7 +50,7 @@ merge.
 | Situation | Action |
 |---|---|
 | The tenant is healthy | Run in `LIVE` (from Phase 5) and narrate the provider, server and tool before each call |
-| Fabric is slow or failing | `FFIA_ENVIRONMENT=hybrid`. Reads fall back with a visible `HYBRID` label and reason. |
+| Fabric is slow or failing | `FFIA_ENVIRONMENT=hybrid`. Reads fall back to LOCAL data in `HYBRID` mode, with `fallback_used` and a visible reason. |
 | No network | `FFIA_ENVIRONMENT=offline`. Everything is LOCAL or SIMULATED and labeled that way. |
 | You want to teach failure | `FFIA_SIMULATE_FABRIC_OUTAGE=1` (act 7) |
 

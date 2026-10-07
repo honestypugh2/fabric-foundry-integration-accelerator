@@ -99,6 +99,17 @@
           "title": "Offline Equivalent",
           "type": "string"
         },
+        "rehearsal": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Rehearsal"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "requires_windows": {
           "default": false,
           "title": "Requires Windows",
@@ -130,6 +141,45 @@
         "offline_equivalent"
       ],
       "title": "GuideStep",
+      "type": "object"
+    },
+    "Rehearsal": {
+      "additionalProperties": false,
+      "description": "The governed change a write step can rehearse against the simulated workspace.",
+      "properties": {
+        "item_name": {
+          "maxLength": 120,
+          "minLength": 1,
+          "title": "Item Name",
+          "type": "string"
+        },
+        "item_type": {
+          "enum": [
+            "Lakehouse",
+            "Notebook",
+            "SemanticModel",
+            "Report"
+          ],
+          "title": "Item Type",
+          "type": "string"
+        },
+        "note": {
+          "default": "",
+          "title": "Note",
+          "type": "string"
+        },
+        "operation": {
+          "pattern": "^[a-z][a-z_]*$",
+          "title": "Operation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "operation",
+        "item_type",
+        "item_name"
+      ],
+      "title": "Rehearsal",
       "type": "object"
     },
     "ToolPath": {

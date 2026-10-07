@@ -1,0 +1,75 @@
+{
+  "$defs": {
+    "KnowledgeCheck": {
+      "additionalProperties": false,
+      "description": "A multiple-choice check for one level. The answer never leaves the backend unasked.",
+      "properties": {
+        "answer": {
+          "minimum": 0,
+          "title": "Answer",
+          "type": "integer"
+        },
+        "choices": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 5,
+          "minItems": 2,
+          "title": "Choices",
+          "type": "array"
+        },
+        "explanation": {
+          "title": "Explanation",
+          "type": "string"
+        },
+        "id": {
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "level": {
+          "enum": [
+            "executive",
+            "l100",
+            "l200",
+            "l300",
+            "l400"
+          ],
+          "title": "Level",
+          "type": "string"
+        },
+        "question": {
+          "title": "Question",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "level",
+        "question",
+        "choices",
+        "answer",
+        "explanation"
+      ],
+      "title": "KnowledgeCheck",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "``checks.yaml``.",
+  "properties": {
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/KnowledgeCheck"
+      },
+      "minItems": 1,
+      "title": "Checks",
+      "type": "array"
+    }
+  },
+  "required": [
+    "checks"
+  ],
+  "title": "ChecksFile",
+  "type": "object"
+}

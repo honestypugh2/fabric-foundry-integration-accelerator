@@ -1,0 +1,46 @@
+checks:
+  - id: exec-accountable
+    level: executive
+    question: What is the main decision leaders make for this pattern?
+    choices:
+      - Which model to use
+      - Which changes need a human and who is accountable for approving them
+      - Which MCP servers to install
+    answer: 1
+    explanation: The engineering is reusable; deciding which changes need accountable approval is an operating-model decision.
+  - id: l100-order
+    level: l100
+    question: Which order is correct?
+    choices:
+      - APPROVE → PLAN → EXECUTE → AUDIT
+      - PLAN → VALIDATE → APPROVE → EXECUTE → VERIFY → AUDIT
+      - EXECUTE → VERIFY → APPROVE
+    answer: 1
+    explanation: Nothing runs before the plan is validated and approved; verification and audit follow execution.
+  - id: l200-self-approval
+    level: l200
+    question: An engineer requests a change and then approves it. What happens?
+    choices:
+      - It executes immediately
+      - It is refused because of separation of duties
+      - It is redirected to the simulated workspace
+    answer: 1
+    explanation: The requester can never approve their own change.
+  - id: l300-mcp
+    level: l300
+    question: Which ffia-local MCP tool can execute a change?
+    choices:
+      - generate_fabric_change_plan
+      - validate_change_plan
+      - None of them
+    answer: 2
+    explanation: MCP clients can propose and validate plans; approval and execution stay outside MCP.
+  - id: l400-live
+    level: l400
+    question: An approved LIVE change has no authorized writer available. What is the correct result?
+    choices:
+      - Execute it in the LOCAL simulation and label it LIVE
+      - Execute it in the LOCAL simulation and label it SIMULATED
+      - Return UNAVAILABLE and leave the simulation untouched
+    answer: 2
+    explanation: An approved LIVE write is never silently redirected; the requester must plan again.

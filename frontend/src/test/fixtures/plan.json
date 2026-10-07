@@ -1,0 +1,36 @@
+{
+  "approval_required": true,
+  "change_id": "539483de733e40d59f536fd7519b3093",
+  "correlation_id": "6c7e429fa31f49ae8b5f31c0bc16dbfc",
+  "created_at": "2026-10-07T21:42:10.086109Z",
+  "destination_hash": "9761057d57fe159276b8ab7860d0eec83cff2ef46ab9c43e074f1be1bfd5e1d9",
+  "expected_impact": "Adds an empty lakehouse item to the target workspace.",
+  "operation": "create_lakehouse",
+  "policy_allowed": true,
+  "policy_reasons": [
+    "Policy checks passed; human approval is still required."
+  ],
+  "precondition": {
+    "category": "SIMULATED LOCALLY",
+    "detail": "Lakehouse 'healthcare_lakehouse' not found in demo-dev (simulated workspace)",
+    "name": "No duplicate item exists",
+    "passed": true
+  },
+  "provider": "Simulated Workspace (LOCAL)",
+  "reason": "Rehearsal of guide step: Create and confirm the lakehouse",
+  "requested_by": "engineer-a",
+  "reversible": true,
+  "risk": "medium",
+  "rollback": "Delete the lakehouse after confirming it is empty and unused.",
+  "status": "PROPOSED",
+  "target": {
+    "destination": "LOCAL",
+    "item_name": "healthcare_lakehouse",
+    "item_type": "Lakehouse",
+    "workspace_alias": "demo-dev"
+  },
+  "validation": [
+    "Item name is unique in the workspace",
+    "Workspace alias is allowed by the overlay"
+  ]
+}

@@ -1,0 +1,57 @@
+checks:
+  - id: exec-not-one-server
+    level: executive
+    question: A team says "we connected the agent to Fabric MCP". What should a leader ask first?
+    choices:
+      - Which model the agent uses
+      - Which server, which tools, and under which identity
+      - How many tokens the agent consumed
+    answer: 1
+    explanation: Fabric MCP is a family of servers with different write surfaces and statuses. Server, tools and identity determine the risk.
+  - id: l100-acts-as-you
+    level: l100
+    question: A remote Fabric MCP server is called by a user who cannot see a table. What happens?
+    choices:
+      - The server can still read the table because MCP has its own permissions
+      - The call is limited by the user's own Fabric permissions
+      - The server copies the table so the user can see it
+    answer: 1
+    explanation: Fabric MCP servers act with the caller's identity and permissions; they never elevate access.
+  - id: l100-ffia-local
+    level: l100
+    question: Which statement about ffia-local is true?
+    choices:
+      - It is a LOCAL educational server over synthetic data and is not a Fabric MCP server
+      - It is the local Fabric MCP server published by Microsoft
+      - It forwards calls to Fabric when you are signed in
+    answer: 0
+    explanation: ffia-local never calls Fabric. Its results are labeled LOCAL or SIMULATED with cloud_operation_performed false.
+  - id: l200-narrowest
+    level: l200
+    question: An engineer needs the JSON definition format for a Lakehouse item. Which is the narrowest choice?
+    choices:
+      - Data Warehouse MCP with a T-SQL query
+      - Fabric Core MCP with write tools enabled
+      - The local Fabric MCP server's docs tools
+      - Power BI Authoring MCP
+    answer: 2
+    explanation: Documentation and item-definition tools answer "how" questions without a tenant and without any write surface.
+  - id: l300-mapping
+    level: l300
+    question: In the offline mapping, which Fabric server does ffia-local's evaluate_measures stand in for?
+    choices:
+      - Data Warehouse MCP
+      - Ontology MCP
+      - Power BI Authoring MCP
+      - Fabric IQ MCP
+    answer: 3
+    explanation: Evaluating measures is a read-only semantic-model query, which live maps to Fabric IQ MCP (DAX). Authoring MCP is for changing the model.
+  - id: l400-dw-mcp
+    level: l400
+    question: Why does the accelerator keep Data Warehouse MCP off by default?
+    choices:
+      - It only works offline
+      - It is PREVIEW and its single tool runs arbitrary T-SQL, so the read/write surface equals the caller's SQL permissions
+      - It cannot authenticate with Entra ID
+    answer: 1
+    explanation: Arbitrary SQL can change data or schema. Keep it behind a preview flag, item-scoped, with a read-only SQL role for teaching.

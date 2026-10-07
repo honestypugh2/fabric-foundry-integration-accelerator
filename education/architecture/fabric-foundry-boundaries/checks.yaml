@@ -1,0 +1,57 @@
+checks:
+  - id: exec-authority
+    level: executive
+    question: Which layer decides whether an agent may perform an action?
+    choices:
+      - The MCP server that exposes the tool
+      - Entra identity, role assignments, policy and human approval
+      - The Foundry model that chose the tool
+      - Fabric, because it stores the data
+    answer: 1
+    explanation: MCP standardizes access and the model only proposes. Authority comes from identity, roles, policy and accountable approval.
+  - id: exec-status
+    level: executive
+    question: Why is this architecture labeled MIXED rather than GA?
+    choices:
+      - Because the core building blocks are GA but some optional capabilities, such as Fabric IQ and the Foundry Fabric data agent tool, are preview
+      - Because Foundry is a preview product
+      - Because MCP is not a published specification
+    answer: 0
+    explanation: Fabric, Foundry Agent Service, Agent Framework and the local Fabric MCP server are GA; preview features stay behind flags and are never required.
+  - id: l100-plug-not-key
+    level: l100
+    question: Which statement best describes MCP in this architecture?
+    choices:
+      - It is the key that grants access to Fabric data
+      - It is a standard plug for discovering and calling tools; it grants no authority
+      - It is the system of record for agent actions
+    answer: 1
+    explanation: MCP describes how to reach a capability. Whether the caller may use it is decided by identity and policy.
+  - id: l200-writes
+    level: l200
+    question: An agent proposes to create a follow-up task for a claim. Where should the write land?
+    choices:
+      - In a Fabric lakehouse table, because that is where the context came from
+      - In the agent's memory, so it can act faster next time
+      - In the owning business system, through a scoped writer after approval
+      - Anywhere, as long as the MCP server allows it
+    answer: 2
+    explanation: Business systems remain the authority for transactional writes. Analytics provides context; it does not become the record.
+  - id: l300-foundry-act
+    level: l300
+    question: In `ffia demo offline`, what label does the Foundry act report today, and why?
+    choices:
+      - SIMULATED, because the demo fakes a Foundry agent locally
+      - LIVE, because the demo calls Foundry when credentials exist
+      - UNAVAILABLE, because Foundry providers arrive in Phase 6 and nothing is simulated as Foundry
+    answer: 2
+    explanation: The accelerator never pretends a capability exists. Missing providers are reported as UNAVAILABLE.
+  - id: l400-confused-deputy
+    level: l400
+    question: An agent's managed identity has Contributor on the workspace and answers questions for many users. What is the main risk?
+    choices:
+      - Users may see data their own permissions would hide, because the agent acts as a confused deputy
+      - The MCP server will refuse the calls because it is remote
+      - Evaluation scores will drop because the model is different
+    answer: 0
+    explanation: Reads made under a broad agent identity bypass per-user permissions. Prefer delegated reads or tightly scoped agent roles, and rely on Fabric security rather than prompts.

@@ -1,0 +1,71 @@
+{
+  "$defs": {
+    "CompletenessQuestion": {
+      "additionalProperties": false,
+      "description": "One question the architecture must be able to answer at every level.",
+      "properties": {
+        "answered_by": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Answered By",
+          "type": "array"
+        },
+        "id": {
+          "pattern": "^Q\\d{2}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "planned_phase": {
+          "anyOf": [
+            {
+              "maximum": 9,
+              "minimum": 4,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Planned Phase"
+        },
+        "question": {
+          "title": "Question",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "question"
+      ],
+      "title": "CompletenessQuestion",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "``education/completeness.yaml``: the 30-question architecture completeness gate.",
+  "properties": {
+    "questions": {
+      "items": {
+        "$ref": "#/$defs/CompletenessQuestion"
+      },
+      "maxItems": 30,
+      "minItems": 30,
+      "title": "Questions",
+      "type": "array"
+    },
+    "version": {
+      "const": 1,
+      "title": "Version",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "version",
+    "questions"
+  ],
+  "title": "Completeness",
+  "type": "object"
+}
