@@ -48,6 +48,10 @@ jobs:
         run: ffia sources check
       - name: Synthetic data matches the generator
         run: ffia data generate --check
+      - name: JSON Schemas match the models
+        run: ffia schemas check
+      - name: Offline demo release gate
+        run: ffia demo check --no-azure-cli && ffia demo offline
       - name: Build distribution
         run: uv build
 

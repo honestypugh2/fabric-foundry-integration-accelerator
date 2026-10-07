@@ -1,0 +1,340 @@
+{
+  "$defs": {
+    "ExcludedItem": {
+      "additionalProperties": false,
+      "description": "A table or measure deliberately left out, with the reason recorded.",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "reason"
+      ],
+      "title": "ExcludedItem",
+      "type": "object"
+    },
+    "SemanticMeasure": {
+      "additionalProperties": false,
+      "description": "A measure contract with its local SQL and reference DAX.",
+      "properties": {
+        "dax": {
+          "title": "Dax",
+          "type": "string"
+        },
+        "dax_validated": {
+          "default": false,
+          "title": "Dax Validated",
+          "type": "boolean"
+        },
+        "definition": {
+          "title": "Definition",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "display_name": {
+          "title": "Display Name",
+          "type": "string"
+        },
+        "format": {
+          "enum": [
+            "integer",
+            "decimal",
+            "percent",
+            "currency"
+          ],
+          "title": "Format",
+          "type": "string"
+        },
+        "home_table": {
+          "pattern": "^[a-z_][a-z0-9_]*$",
+          "title": "Home Table",
+          "type": "string"
+        },
+        "name": {
+          "pattern": "^[a-z_][a-z0-9_]*$",
+          "title": "Name",
+          "type": "string"
+        },
+        "sql": {
+          "title": "Sql",
+          "type": "string"
+        },
+        "synthetic_demonstration": {
+          "default": false,
+          "title": "Synthetic Demonstration",
+          "type": "boolean"
+        },
+        "zero_denominator": {
+          "default": "Returns blank (null) when the denominator is zero.",
+          "title": "Zero Denominator",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "display_name",
+        "home_table",
+        "description",
+        "definition",
+        "format",
+        "sql",
+        "dax"
+      ],
+      "title": "SemanticMeasure",
+      "type": "object"
+    },
+    "SemanticRelationship": {
+      "additionalProperties": false,
+      "description": "A one-to-many, single-direction relationship from a dimension to a fact.",
+      "properties": {
+        "active": {
+          "default": true,
+          "title": "Active",
+          "type": "boolean"
+        },
+        "cardinality": {
+          "const": "one_to_many",
+          "default": "one_to_many",
+          "title": "Cardinality",
+          "type": "string"
+        },
+        "cross_filter": {
+          "const": "single",
+          "default": "single",
+          "title": "Cross Filter",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "from_column": {
+          "pattern": "^[a-z_][a-z0-9_]*$",
+          "title": "From Column",
+          "type": "string"
+        },
+        "from_table": {
+          "pattern": "^[a-z_][a-z0-9_]*$",
+          "title": "From Table",
+          "type": "string"
+        },
+        "role": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Role"
+        },
+        "to_column": {
+          "pattern": "^[a-z_][a-z0-9_]*$",
+          "title": "To Column",
+          "type": "string"
+        },
+        "to_table": {
+          "pattern": "^[a-z_][a-z0-9_]*$",
+          "title": "To Table",
+          "type": "string"
+        }
+      },
+      "required": [
+        "from_table",
+        "from_column",
+        "to_table",
+        "to_column",
+        "description"
+      ],
+      "title": "SemanticRelationship",
+      "type": "object"
+    },
+    "SemanticTable": {
+      "additionalProperties": false,
+      "description": "A table included in the semantic model.",
+      "properties": {
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "grain": {
+          "title": "Grain",
+          "type": "string"
+        },
+        "key": {
+          "anyOf": [
+            {
+              "pattern": "^[a-z_][a-z0-9_]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Key"
+        },
+        "name": {
+          "pattern": "^[a-z_][a-z0-9_]*$",
+          "title": "Name",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "fact",
+            "dimension"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "synonyms": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Synonyms",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "role",
+        "grain",
+        "description"
+      ],
+      "title": "SemanticTable",
+      "type": "object"
+    },
+    "VocabularyTerm": {
+      "additionalProperties": false,
+      "description": "A business term with its definition and synonyms (AI readiness).",
+      "properties": {
+        "definition": {
+          "title": "Definition",
+          "type": "string"
+        },
+        "synonyms": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Synonyms",
+          "type": "array"
+        },
+        "term": {
+          "title": "Term",
+          "type": "string"
+        }
+      },
+      "required": [
+        "term",
+        "definition"
+      ],
+      "title": "VocabularyTerm",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "The full semantic model for one dataset profile.",
+  "properties": {
+    "description": {
+      "title": "Description",
+      "type": "string"
+    },
+    "excluded_measures": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ExcludedItem"
+      },
+      "title": "Excluded Measures",
+      "type": "array"
+    },
+    "excluded_tables": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ExcludedItem"
+      },
+      "title": "Excluded Tables",
+      "type": "array"
+    },
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "measures": {
+      "items": {
+        "$ref": "#/$defs/SemanticMeasure"
+      },
+      "title": "Measures",
+      "type": "array"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "profile": {
+      "title": "Profile",
+      "type": "string"
+    },
+    "relationships": {
+      "items": {
+        "$ref": "#/$defs/SemanticRelationship"
+      },
+      "title": "Relationships",
+      "type": "array"
+    },
+    "storage_mode": {
+      "enum": [
+        "DirectLake",
+        "Import",
+        "DirectQuery"
+      ],
+      "title": "Storage Mode",
+      "type": "string"
+    },
+    "synthetic_notice": {
+      "title": "Synthetic Notice",
+      "type": "string"
+    },
+    "tables": {
+      "items": {
+        "$ref": "#/$defs/SemanticTable"
+      },
+      "title": "Tables",
+      "type": "array"
+    },
+    "vocabulary": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/VocabularyTerm"
+      },
+      "title": "Vocabulary",
+      "type": "array"
+    }
+  },
+  "required": [
+    "id",
+    "profile",
+    "name",
+    "description",
+    "synthetic_notice",
+    "storage_mode",
+    "tables",
+    "relationships",
+    "measures"
+  ],
+  "title": "SemanticModel",
+  "type": "object"
+}

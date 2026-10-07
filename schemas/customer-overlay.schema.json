@@ -1,0 +1,241 @@
+{
+  "$defs": {
+    "ApprovalRule": {
+      "additionalProperties": false,
+      "description": "Approval requirement for a write operation.",
+      "properties": {
+        "approvers": {
+          "default": 1,
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Approvers",
+          "type": "integer"
+        },
+        "operation": {
+          "title": "Operation",
+          "type": "string"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "operation",
+        "reason"
+      ],
+      "title": "ApprovalRule",
+      "type": "object"
+    },
+    "EvaluationThresholds": {
+      "additionalProperties": false,
+      "description": "Thresholds the evaluation gate applies.",
+      "properties": {
+        "measure_absolute_tolerance": {
+          "default": 1e-06,
+          "minimum": 0,
+          "title": "Measure Absolute Tolerance",
+          "type": "number"
+        },
+        "minimum_pass_rate": {
+          "default": 1.0,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Minimum Pass Rate",
+          "type": "number"
+        }
+      },
+      "title": "EvaluationThresholds",
+      "type": "object"
+    },
+    "RecoveryObjectives": {
+      "additionalProperties": false,
+      "description": "Recovery objectives used by the recovery lab (synthetic assumptions).",
+      "properties": {
+        "change_file_retention_days": {
+          "minimum": 1,
+          "title": "Change File Retention Days",
+          "type": "integer"
+        },
+        "rpo_hours": {
+          "minimum": 0,
+          "title": "Rpo Hours",
+          "type": "integer"
+        },
+        "rto_hours": {
+          "minimum": 0,
+          "title": "Rto Hours",
+          "type": "integer"
+        },
+        "snapshot_interval_days": {
+          "minimum": 1,
+          "title": "Snapshot Interval Days",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "rpo_hours",
+        "rto_hours",
+        "snapshot_interval_days",
+        "change_file_retention_days"
+      ],
+      "title": "RecoveryObjectives",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A customer or industry overlay (``config/customers/<alias>.yaml``).",
+  "properties": {
+    "alias": {
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "title": "Alias",
+      "type": "string"
+    },
+    "allowed_reads": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Allowed Reads",
+      "type": "array"
+    },
+    "allowed_writes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Allowed Writes",
+      "type": "array"
+    },
+    "compliance_notes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Compliance Notes",
+      "type": "array"
+    },
+    "data_domains": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Data Domains",
+      "type": "array"
+    },
+    "demo_sequence": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Demo Sequence",
+      "type": "array"
+    },
+    "description": {
+      "title": "Description",
+      "type": "string"
+    },
+    "evaluation_thresholds": {
+      "$ref": "#/$defs/EvaluationThresholds",
+      "default": {
+        "measure_absolute_tolerance": 1e-06,
+        "minimum_pass_rate": 1.0
+      }
+    },
+    "fabric_workspace_aliases": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Fabric Workspace Aliases",
+      "type": "object"
+    },
+    "feature_flags": {
+      "additionalProperties": {
+        "type": "boolean"
+      },
+      "title": "Feature Flags",
+      "type": "object"
+    },
+    "foundry_project_aliases": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Foundry Project Aliases",
+      "type": "object"
+    },
+    "guides": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Guides",
+      "type": "array"
+    },
+    "industry": {
+      "title": "Industry",
+      "type": "string"
+    },
+    "learning_modules": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Learning Modules",
+      "type": "array"
+    },
+    "preview_feature_flags": {
+      "additionalProperties": {
+        "type": "boolean"
+      },
+      "title": "Preview Feature Flags",
+      "type": "object"
+    },
+    "recovery_objectives": {
+      "$ref": "#/$defs/RecoveryObjectives"
+    },
+    "required_approvals": {
+      "items": {
+        "$ref": "#/$defs/ApprovalRule"
+      },
+      "title": "Required Approvals",
+      "type": "array"
+    },
+    "retention_assumptions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Retention Assumptions",
+      "type": "array"
+    },
+    "scenario": {
+      "title": "Scenario",
+      "type": "string"
+    },
+    "synthetic": {
+      "const": true,
+      "title": "Synthetic",
+      "type": "boolean"
+    },
+    "synthetic_dataset": {
+      "title": "Synthetic Dataset",
+      "type": "string"
+    }
+  },
+  "required": [
+    "alias",
+    "industry",
+    "scenario",
+    "description",
+    "synthetic",
+    "data_domains",
+    "fabric_workspace_aliases",
+    "foundry_project_aliases",
+    "allowed_reads",
+    "allowed_writes",
+    "required_approvals",
+    "feature_flags",
+    "preview_feature_flags",
+    "learning_modules",
+    "demo_sequence",
+    "synthetic_dataset",
+    "compliance_notes",
+    "retention_assumptions",
+    "recovery_objectives"
+  ],
+  "title": "CustomerOverlay",
+  "type": "object"
+}

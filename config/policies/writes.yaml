@@ -1,0 +1,57 @@
+# Write policy. Every mutation follows PLAN -> VALIDATE -> APPROVE -> EXECUTE -> VERIFY -> AUDIT.
+version: 1
+approval_ttl_minutes: 30
+separation_of_duties: true   # the requester can never approve their own change
+operations:
+  - name: create_lakehouse
+    item_types: [Lakehouse]
+    risk: medium
+    reversible: true
+    expected_impact: Adds an empty lakehouse item to the target workspace.
+    validation: [Item name is unique in the workspace, Workspace alias is allowed by the overlay]
+    rollback: Delete the lakehouse after confirming it is empty and unused.
+  - name: create_notebook
+    item_types: [Notebook]
+    risk: medium
+    reversible: true
+    expected_impact: Adds executable code bound to a lakehouse. Nothing runs until separately approved.
+    validation: [Reviewed notebook definition is attached, Default lakehouse binding is confirmed]
+    rollback: Delete the notebook item.
+  - name: upload_files
+    item_types: [Lakehouse]
+    risk: medium
+    reversible: true
+    expected_impact: Lands files under Files/ in the lakehouse.
+    validation: [Source checksums recorded before upload, Destination folder confirmed]
+    rollback: Delete the uploaded files.
+  - name: update_semantic_model
+    item_types: [SemanticModel]
+    risk: high
+    reversible: true
+    expected_impact: Changes relationships or measures consumed by reports and agents.
+    validation: [Model identity confirmed, Change plan reviewed, DAX checks re-run after change]
+    rollback: Restore the previous model definition from Git (PBIP/TMDL).
+  - name: publish_report
+    item_types: [Report]
+    risk: medium
+    reversible: true
+    expected_impact: Makes a report visible to workspace viewers.
+    validation: [Rendered visuals reviewed, Model binding confirmed]
+    rollback: Unpublish or delete the report.
+  - name: delete_item
+    item_types: [Lakehouse, Notebook, SemanticModel, Report]
+    risk: high
+    reversible: false
+    expected_impact: Permanently removes an item and its contents.
+    validation: [Item has no downstream dependents, Backup or definition export exists]
+    rollback: Not reversible. Restore from backup or definitions only.
+destinations:
+  LOCAL:
+    allowed: true
+    note: Simulated local workspace. Executions are labeled SIMULATED.
+  LIVE:
+    allowed: true
+    note: >-
+      Requires FFIA_ALLOW_LIVE_MUTATION=1 and human approval. Execution also needs an authorized,
+      narrowly scoped live writer (not implemented before Phase 5): until then an approved LIVE
+      change returns UNAVAILABLE. An approved LIVE change is never redirected to LOCAL.

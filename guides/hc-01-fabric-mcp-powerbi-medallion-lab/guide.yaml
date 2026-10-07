@@ -1,0 +1,391 @@
+# Use-Case Guide HC-01 (sanitized, synthetic). Derived from a customer engagement guide and
+# re-expressed in our own words. No customer identity, people, titles, identifiers or URLs.
+# Placeholders in <ANGLE_BRACKETS> are filled in locally and never committed.
+id: hc-01-fabric-mcp-powerbi-medallion-lab
+title: "HC-01: Fabric MCP + Power BI medallion lab (healthcare, synthetic)"
+industry: Healthcare
+scenario: Build a healthcare analytics solution in a new Fabric workspace from seven synthetic CSV sources.
+summary: >-
+  GitHub Copilot in VS Code agent mode uses the local Fabric MCP server to create a lakehouse and land
+  data; reviewed notebooks build Bronze, Silver and Gold on remote Fabric Spark; a Direct Lake semantic
+  model is edited with Power BI Authoring MCP and authoring skills; DAX checks reconcile with the Gold
+  baseline; a two-page report is reviewed and published; final validation uses evidence, not appearance.
+version: 1.0.0
+status: validated-offline
+provenance:
+  derived_from: customer engagement guide (sanitized)
+  sanitized_on: 2026-10-07
+  denylist_ref: config/privacy/denylist.yaml
+patterns: [P10, P12, P09, P19, P08, P16]
+maturity_levels: [L1, L2, L3, L4, L5]
+harnesses: [copilot-vscode, copilot-cli, claude-code]
+operating_rules:
+  - Submit one prompt at a time and stop at its checkpoint.
+  - Propose first, review, then apply. Authoring and execution are separate prompts.
+  - Before each cloud operation, state the provider, server and actual tool used.
+  - For steps assigned to Fabric MCP, call that server's tool directly. Do not substitute REST, Azure CLI or a skill that calls APIs. If the tool is unavailable, report the limitation and stop.
+  - Check for an existing item before creating one, and before retrying any write.
+  - Never print tokens or enable token-bearing debug output.
+  - Use exact workspace, lakehouse and model IDs (kept in local notes only) for every write.
+tools:
+  - {name: VS Code with GitHub Copilot Chat (agent mode), purpose: Agent harness for every step, status: GA, install: Install VS Code and the GitHub Copilot Chat extension; sign in.}
+  - {name: Fabric MCP Server (local), purpose: "OneLake and item tools (list workspaces, items and files; create items; upload files)", version: 1.4.0, status: GA, install: "VS Code extension fabric.vscode-fabric-mcp-server or npx -y @microsoft/fabric-mcp@1.4.0"}
+  - {name: Microsoft Fabric extension, purpose: Fabric explorer sign-in and workspace browsing, version: 0.41.1, status: GA, install: VS Code extension fabric.vscode-fabric}
+  - {name: Fabric Data Engineering extension, purpose: Publish notebooks and run them on remote Fabric Spark, version: 1.26.1, status: GA, install: VS Code extension SynapseVSCode.synapse}
+  - {name: Jupyter extension and Python, purpose: Notebook editing and local CSV profiling (local Python is not the Fabric runtime), status: GA, install: "VS Code extension ms-toolsai.jupyter; Python 3.14 via uv"}
+  - {name: Azure CLI, purpose: Sign in to the intended tenant; credential source for the Fabric MCP server, status: GA, install: Install the Azure CLI and run az login --tenant <TENANT_ID>}
+  - {name: Power BI Authoring (Modeling) MCP server, purpose: Connect to and edit the semantic model, version: 1.0.0, status: GA, install: "VS Code extension analysis-services.powerbi-modeling-mcp or npx -y @microsoft/powerbi-modeling-mcp@1.0.0"}
+  - {name: Power BI authoring skills, purpose: semantic-model-authoring and report planning/design/authoring/management workflows, version: v0.3.18, status: OSS, install: "Add microsoft/skills-for-fabric to chat.plugins.marketplaces, then enable the powerbi-authoring plugin"}
+  - {name: Power BI Desktop, purpose: Report preview and publication, status: GA, install: Install on Windows, required: false}
+  - {name: Claude Code, purpose: Alternative harness for the same steps, version: 2.1.289, status: GA, install: Native installer; project .mcp.json shares the same servers, required: false}
+tenant_settings:
+  - A supported Fabric capacity for Spark and Direct Lake.
+  - Permission to create workspaces and edit semantic models.
+  - XMLA read/write enabled on the capacity for modeling edits.
+os_constraints:
+  - Power BI Desktop preview and publish steps need Windows. Other steps run on Windows, macOS or Linux.
+dataset_profile: hc-lab-7file-v1
+expected_baseline: data/synthetic/expected/hc-lab-7file-v1.json
+steps:
+  - id: 01-set-up-tools
+    title: Set up and verify the tools
+    objective: Install the extensions, MCP servers and skills, and prepare a separate lab project folder.
+    copilot_prompt: >-
+      Check my lab prerequisites without changing anything. List which MCP servers are running and which
+      tools each exposes, confirm the Power BI authoring skills are enabled in this chat, and tell me
+      which items in the guide's tool list are missing. Do not call any cloud tool.
+    claude_code_prompt: >-
+      Run `claude mcp list` and report which servers from .mcp.json are connected and which tools they
+      expose. Confirm the Power BI authoring skills are available. Do not call any cloud tool.
+    tool_path: {provider: Local workstation, tools: ["MCP: List Servers"]}
+    writes: false
+    approval_required: false
+    checkpoint: Every required tool is installed and the Fabric MCP server is running with callable tools.
+    evidence_required:
+      - The Fabric MCP server shows as running in MCP List Servers.
+      - The chat tool picker lists its OneLake and item tools as enabled.
+      - The data folder holds seven CSVs whose SHA-256 values match SHA256SUMS.
+    not_evidence:
+      - A configured server or a listed manifest is not proof that a tool can be called.
+    offline_equivalent: Run the demo readiness check and export the synthetic data to a separate folder.
+    offline_command: "make demo-check && ffia data export --profile hc-lab-7file-v1 --dest <LAB_PATH>/data/raw"
+    failure_modes:
+      - Tools are described but not callable (wrong chat mode or tools disabled).
+  - id: 02-verify-tenant-anchor
+    title: Verify the tenant through a real MCP call
+    objective: Prove the Fabric MCP server reaches the intended tenant before any write.
+    copilot_prompt: >-
+      Call the Fabric MCP onelake_list-workspaces tool directly. Look for workspace ID <KNOWN_WORKSPACE_ID>
+      and report its exact returned name, following continuation pages if any. Show the invocation and
+      result. If the ID is missing or the tool cannot be called, stop. Do not create anything and do not
+      fall back to REST or the CLI.
+    claude_code_prompt: >-
+      Using the fabric MCP server from .mcp.json, call onelake_list-workspaces and confirm workspace ID
+      <KNOWN_WORKSPACE_ID> is present with its exact name. Show the raw tool call and result. Stop if it
+      is missing. No REST or CLI fallback.
+    tool_path: {provider: Fabric MCP Server (local), server: fabric-mcp, tools: [onelake_list-workspaces]}
+    writes: false
+    approval_required: false
+    checkpoint: The known workspace ID appears in the actual MCP response.
+    evidence_required:
+      - The real tool invocation and its response containing the known workspace ID.
+    not_evidence:
+      - A workspace name or regional endpoint alone does not identify the tenant.
+    offline_equivalent: List workspaces from the Local Fabric Provider (labeled LOCAL).
+    offline_command: "curl -s -X POST localhost:8000/api/v1/fabric/read -H 'content-type: application/json' -d '{\"operation\":\"list_workspaces\"}'"
+    failure_modes:
+      - The MCP server picks a different credential than the Azure CLI (see troubleshooting).
+  - id: 03-create-workspace
+    title: Create the lab workspace (portal)
+    objective: Create a new, empty workspace on the intended capacity.
+    copilot_prompt: >-
+      I created a new blank workspace in the portal. Repeat the step 02 read-only check with the new
+      workspace ID <WORKSPACE_ID> and confirm it appears. Do not create anything.
+    claude_code_prompt: >-
+      Repeat the onelake_list-workspaces check for the new workspace ID <WORKSPACE_ID>. Read-only.
+    tool_path: {provider: Fabric portal (manual), tools: []}
+    writes: true
+    approval_required: true
+    checkpoint: The empty workspace exists on the intended capacity and appears in the MCP listing.
+    evidence_required:
+      - Workspace ID copied from the portal and confirmed by onelake_list-workspaces.
+    offline_equivalent: Not applicable (portal step). The local provider exposes a simulated workspace.
+    failure_modes:
+      - Workspace assigned to the wrong capacity.
+  - id: 04-create-lakehouse
+    title: Create and confirm the lakehouse
+    objective: Create the lakehouse through Fabric MCP after a duplicate check.
+    copilot_prompt: >-
+      Using the Fabric MCP core_create-item tool, create a Lakehouse named healthcare_lakehouse in
+      workspace <WORKSPACE_ID>. First check onelake_list-items for an existing item with that name and
+      report it instead of creating a duplicate. Confirm with onelake_list-items and return the lakehouse
+      ID. Stop after confirmation.
+    claude_code_prompt: >-
+      Check for an existing healthcare_lakehouse with onelake_list-items in <WORKSPACE_ID>; if absent,
+      create it with core_create-item and confirm with onelake_list-items. Return the lakehouse ID. Stop.
+    tool_path: {provider: Fabric MCP Server (local), server: fabric-mcp, tools: [onelake_list-items, core_create-item]}
+    writes: true
+    approval_required: true
+    checkpoint: Exactly one healthcare_lakehouse exists and its ID is recorded locally.
+    evidence_required:
+      - The create call response and a follow-up listing that shows one matching lakehouse.
+    not_evidence:
+      - An item's existence alone does not prove later operations succeeded.
+    offline_equivalent: Plan the change, approve it as a different person, execute it in the simulated workspace (labeled SIMULATED).
+    offline_command: "Use the generate_fabric_change_plan MCP tool, then POST /api/v1/approvals and POST /api/v1/fabric/change"
+    failure_modes:
+      - Retrying a create after a timeout produces a duplicate (check first).
+  - id: 05-upload-data
+    title: Upload the synthetic CSVs
+    objective: Land the seven source files under Files/raw.
+    copilot_prompt: >-
+      First check the seven CSVs under <PROJECT_PATH>/data/raw. Using Fabric MCP, create Files/raw in
+      lakehouse <LAKEHOUSE_ID> and upload each CSV with onelake_upload-file using its local-file-path
+      parameter. List Files/raw with onelake_list-files and compare every remote byte size with the local
+      file. If a call fails or the tool has no local-file-path parameter, stop. Do not create tables.
+    claude_code_prompt: >-
+      Upload the seven CSVs to Files/raw in lakehouse <LAKEHOUSE_ID> with onelake_upload-file, then list
+      them with onelake_list-files and compare sizes. Stop on any failure. No tables.
+    tool_path: {provider: Fabric MCP Server (local), server: fabric-mcp, tools: [onelake_upload-file, onelake_list-files]}
+    writes: true
+    approval_required: true
+    checkpoint: Files/raw contains exactly the seven CSVs and every remote size matches its local file.
+    evidence_required:
+      - onelake_list-files output with seven files and sizes equal to the local files.
+    not_evidence:
+      - Matching byte size verifies transfer length, not content. It is not a content hash.
+    offline_equivalent: Export the CSVs with SHA256SUMS and verify the checksums.
+    offline_command: "ffia data export --profile hc-lab-7file-v1 --dest <LAB_PATH>/data/raw && (cd <LAB_PATH>/data/raw && sha256sum -c SHA256SUMS)"
+  - id: 06-profile-data
+    title: Profile the source data locally
+    objective: Establish the baseline (counts, keys, joins, date and text quirks) before writing code.
+    copilot_prompt: >-
+      Read the seven CSVs in data/raw without changing them, using a CSV-aware parser. Report parsed row
+      counts, columns, candidate keys, blank or duplicate keys, and unmatched patient_id and encounter_id
+      values. Check discharge_date in encounters, and distinguish real newlines from the literal
+      two-character sequence \n in clinical notes. Draw an entity-relationship diagram from the joins the
+      data supports. Stop after the profile.
+    claude_code_prompt: >-
+      Profile data/raw/*.csv with a CSV-aware parser (no edits): row counts, keys, orphans, discharge_date,
+      literal \n versus real newlines, and an ER diagram of supported joins. Stop after the profile.
+    tool_path: {provider: Local Python (not a cloud call), tools: []}
+    writes: false
+    approval_required: false
+    checkpoint: The profile matches the expected baseline and records the date and text quirks.
+    evidence_required:
+      - Parsed counts 200, 1025, 428, 1025, 4299, 643 and 150.
+      - All condition encounter_id values are blank; conditions are a patient-level problem list.
+      - 56 notes contain the literal sequence \n and none contain a real newline.
+    not_evidence:
+      - Line counts are not row counts for CSVs with quoted fields.
+    offline_equivalent: Inspect the scenario and its documented quirks.
+    offline_command: "ffia data build --profile hc-lab-7file-v1 --verbose"
+  - id: 07-bronze-draft
+    title: Draft the Bronze notebook (no execution)
+    objective: Author a reviewed ingestion notebook that preserves source values and grain.
+    copilot_prompt: >-
+      Create only a local draft at notebooks/MCP_01_Bronze.ipynb for workspace <WORKSPACE_ID> and default
+      lakehouse healthcare_lakehouse (<LAKEHOUSE_ID>) with valid Fabric PySpark metadata. Four cells:
+      explanation, configuration with expected counts, an ingestion function, and a driver. Read all seven
+      CSVs from Files/raw with header, inferSchema, multiLine and a double-quote escape. Keep the literal
+      \n text and the blank condition encounter_id values. Write the seven bronze_ tables as Delta with
+      overwrite and overwriteSchema. Validate parsed counts before writing and read every table back.
+      Show the code. Do not execute, publish or upload.
+    claude_code_prompt: >-
+      Draft notebooks/MCP_01_Bronze.ipynb (local only) with the same four-cell structure, count validation
+      before write, read-back after write, and Delta overwrite of the seven bronze_ tables. Do not run or
+      publish.
+    tool_path: {provider: Local editor, tools: []}
+    writes: false
+    approval_required: false
+    checkpoint: The draft is reviewed, including output table names and the lakehouse binding.
+    evidence_required:
+      - Reviewed notebook code and metadata bound to the exact workspace and lakehouse IDs.
+    offline_equivalent: Compare with the local Bronze SQL and build.
+    offline_command: "ffia data build --profile hc-lab-7file-v1"
+  - id: 08-bronze-publish-run
+    title: Publish and run Bronze on Fabric Spark
+    objective: Publish the reviewed notebook and run it once on remote Fabric Spark.
+    copilot_prompt: >-
+      The Bronze draft is reviewed. Check the current Fabric Data Engineering workspace with
+      fabricWorkspaceInfo and require <WORKSPACE_ID>. Publish the reviewed notebook as MCP_01_Bronze with
+      a supported operation and name the tool you used. Confirm the cloud notebook ID, its source and its
+      default lakehouse. Then, with the notebook attached to the Microsoft Fabric Runtime kernel, run it
+      once and report each table's input and persisted counts. Stop on any failure.
+    claude_code_prompt: >-
+      In VS Code (Claude harness) or the Fabric portal, publish the reviewed notebook, confirm its cloud ID
+      and lakehouse binding, run it once on Fabric Spark, and report per-table counts. Name the provider.
+    tool_path: {provider: Fabric Data Engineering extension, tools: [fabricWorkspaceInfo, Microsoft Fabric Runtime kernel]}
+    writes: true
+    approval_required: true
+    checkpoint: Seven Bronze Delta tables exist with persisted counts equal to the baseline.
+    evidence_required:
+      - Printed input and persisted counts for all seven tables, and a cloud notebook ID with the correct binding.
+    not_evidence:
+      - A Spark application status or an item timestamp alone does not verify outputs.
+      - An editor or portal run is not a Fabric MCP job.
+    offline_equivalent: Bronze row counts in the local build and expected baseline.
+    failure_modes:
+      - Notebook opened locally without the remote kernel; wrong default lakehouse.
+  - id: 09-silver
+    title: Design, draft, publish and run Silver
+    objective: Apply explicit types and reviewed analytical fields while keeping every row.
+    copilot_prompt: >-
+      Inspect the Bronze schema and propose the Silver rules: exact types, date parsing, age, risk and LOS
+      thresholds, condition category mapping with an explicit unmapped category, null handling and
+      diagnostics. Keep all seven row counts. Stop for review. After I approve, draft
+      notebooks/MCP_02_Silver.ipynb, then publish and run it in a separate prompt.
+    claude_code_prompt: >-
+      Propose Silver rules (types, dates, bands, mappings, nulls, diagnostics) and stop. After approval,
+      draft MCP_02_Silver.ipynb; publishing and running is a separate step.
+    tool_path: {provider: Fabric Data Engineering extension, tools: [Microsoft Fabric Runtime kernel]}
+    writes: true
+    approval_required: true
+    checkpoint: Seven typed Silver tables preserve the baseline counts, and parsing and range issues are explained.
+    evidence_required:
+      - Persisted counts and diagnostics for overlapping encounters, length-of-stay mismatches, blank charges and out-of-range vitals.
+    offline_equivalent: Local Silver SQL and diagnostics (counts must match the expected baseline).
+    offline_command: "ffia data build --profile hc-lab-7file-v1 --verbose"
+  - id: 10-gold
+    title: Design, draft, publish and run Gold
+    objective: Build six gold_ tables and four physical dim_ tables at reviewed grains.
+    copilot_prompt: >-
+      Propose the Gold logic and dimension keys: one row per index inpatient encounter using the actual
+      discharge_date and the next inpatient admission strictly after it (1 to 30 days inclusive), with a
+      follow-up eligibility rule; patient-year ED utilization; diagnosis-facility ALOS keeping counts and
+      totals; encounter and claim grain facts; population health including zero-condition patients; and
+      dim_date, dim_patient, dim_facility, dim_payer. Include checks for duplicate keys, row multiplication
+      and missing dimension keys. Stop for review. Then draft, publish and run MCP_03_Gold.
+    claude_code_prompt: >-
+      Propose the Gold grains, readmission and eligibility rule, and key checks; stop for review; then draft
+      and separately run MCP_03_Gold with reconciliation totals printed.
+    tool_path: {provider: Fabric Data Engineering extension, tools: [Microsoft Fabric Runtime kernel]}
+    writes: true
+    approval_required: true
+    checkpoint: Twenty-four lab tables exist (7 Bronze, 7 Silver, 6 Gold, 4 dimensions) and reconciliation totals are captured.
+    evidence_required:
+      - Grain and key assertions pass; financial totals reconcile; readmission numerator and denominator printed.
+    not_evidence:
+      - Do not assume a namespace; discover the actual schema.
+    offline_equivalent: Local Gold build and expected baseline (the live totals must match).
+    offline_command: "ffia data build --profile hc-lab-7file-v1"
+  - id: 11-semantic-model
+    title: Bootstrap and connect the Direct Lake semantic model
+    objective: Create the model from seven tables in the portal, then connect the modeling tools.
+    copilot_prompt: >-
+      Using Power BI Authoring MCP connection tools and the semantic-model-authoring skill, connect to model
+      <MODEL_ID> in workspace <WORKSPACE_ID> at <XMLA_ENDPOINT>. Confirm the connected model identity and
+      inspect its seven tables, columns, storage modes and relationships. Report the tools used. Do not
+      change the model.
+    claude_code_prompt: >-
+      Connect to <MODEL_ID> with the Power BI Authoring MCP server and report tables, storage modes and
+      relationships. Read-only.
+    tool_path: {provider: Power BI Authoring MCP (local), server: powerbi-modeling-mcp, tools: [connection, model inspection]}
+    writes: false
+    approval_required: false
+    checkpoint: The exact model is connected and its seven tables use Direct Lake.
+    evidence_required:
+      - The connected model identity and the table list returned by the server.
+    offline_equivalent: The semantic model contract (tables, grains and roles).
+    offline_command: "curl -s -X POST localhost:8000/api/v1/fabric/read -H 'content-type: application/json' -d '{\"operation\":\"get_semantic_model\",\"semantic_model_id\":\"local-sm-hc-lab-7file-v1\"}'"
+  - id: 12-relationships-and-measures
+    title: Apply relationships and measures, then reconcile DAX
+    objective: Star relationships, then measure contracts validated against the Gold baseline.
+    copilot_prompt: >-
+      Propose the relationships (one-to-many, single direction, dimension to fact, one active date role per
+      fact), friendly names, hidden keys and descriptions, then the measures with formats and zero-denominator
+      behavior. Do not add a bed occupancy measure (no denominator exists). Stop for review. After approval,
+      apply through Power BI Authoring MCP and run DAX checks for encounters, ED visits, inpatient count and
+      LOS, paid and denied amounts, denial rate, patient counts and the readmission numerator, denominator
+      and rate. Compare with the Gold totals and report mismatches.
+    claude_code_prompt: >-
+      Propose relationships and measures; stop for review; then apply through Power BI Authoring MCP and
+      reconcile DAX results with the Gold totals.
+    tool_path: {provider: Power BI Authoring MCP (local), server: powerbi-modeling-mcp, tools: [relationships, measures, DAX query]}
+    writes: true
+    approval_required: true
+    checkpoint: Relationships are verified and every DAX check equals the expected baseline.
+    evidence_required:
+      - DAX query results compared value by value with the expected baseline (POST /api/v1/evaluations/run).
+    offline_equivalent: Evaluate the measure contracts locally and compare observed values with the baseline.
+    offline_command: "curl -s -X POST localhost:8000/api/v1/evaluations/run -H 'content-type: application/json' -d '{\"profile\":\"hc-lab-7file-v1\"}'"
+  - id: 13-model-review
+    title: Review the model (read-only)
+    objective: Best-practice and AI-readiness review before further changes.
+    copilot_prompt: >-
+      Use the semantic-model-authoring workflow to review <MODEL_ID> for best practices and AI readiness:
+      relationship ambiguity, grain, date roles, hidden keys, descriptions, synonyms, measure definitions and
+      unsupported clinical interpretations. Group findings by severity. Do not change the model.
+    claude_code_prompt: Review <MODEL_ID> read-only for best practices and AI readiness; group findings by severity.
+    tool_path: {provider: Power BI authoring skills + Power BI Authoring MCP, server: powerbi-modeling-mcp, tools: [model inspection]}
+    writes: false
+    approval_required: false
+    checkpoint: Findings are recorded; only explicitly approved fixes are applied and re-checked.
+    evidence_required:
+      - The findings list with severities and the tools that produced it.
+    offline_equivalent: Compare the live model with the semantic model contract and vocabulary.
+  - id: 14-report
+    title: Plan, build, preview and publish the report
+    objective: A two-page report bound to the validated model.
+    copilot_prompt: >-
+      Using the report planning skill, propose a two-page report on <MODEL_ID>: an executive overview
+      (readmission rate, inpatient ALOS, ED visits and denial rate cards, a monthly encounter trend and a
+      facility breakdown with clear date-role labels) and a population page from dim_patient with
+      patient-attribute slicers. Do not author yet. After review, build it as a PBIP/PBIR project bound to
+      the existing model, validate the definition and stop before publication.
+    claude_code_prompt: >-
+      Plan the two-page report, stop for review, then build the PBIR project bound to <MODEL_ID> and stop
+      before publishing.
+    tool_path: {provider: Power BI authoring skills, tools: [report planner, report authoring]}
+    writes: true
+    approval_required: true
+    checkpoint: The report renders in preview, cards reconcile with DAX checks, and it is published as a separate step.
+    evidence_required:
+      - Rendered pages reviewed, then the published report ID, workspace ID and model binding.
+    not_evidence:
+      - A valid local PBIR file is not publication.
+    offline_equivalent: Report plan review against the measure contracts.
+    requires_windows: true
+  - id: 15-final-validation
+    title: Final read-only validation
+    objective: Pass, fail or not-verified for every acceptance check, with evidence.
+    copilot_prompt: >-
+      Perform a read-only final validation for workspace <WORKSPACE_ID>, lakehouse <LAKEHOUSE_ID> and model
+      <MODEL_ID>: workspace and capacity, raw files, Bronze, Silver, Gold and dimension counts, notebook
+      bindings, model storage mode and relationships, DAX reconciliation, review findings and the published
+      report. Name the provider and tool for each check, report pass, fail or not verified with concrete
+      evidence, and do not repair or rerun anything.
+    claude_code_prompt: Run the same read-only acceptance checks; report pass, fail or not verified with evidence and tools used.
+    tool_path: {provider: "Mixed: Fabric MCP, Power BI Authoring MCP and the Fabric portal", tools: []}
+    writes: false
+    approval_required: false
+    checkpoint: Every required check passes; unavailable checks are resolved before calling the lab complete.
+    evidence_required:
+      - A table of checks with provider, tool, result and evidence, plus the baseline comparison.
+    not_evidence:
+      - Existing item names alone do not establish successful execution or correct model behavior.
+    offline_equivalent: Run the offline demo, which prints LIVE versus SIMULATED evidence.
+    offline_command: "make demo-offline"
+  - id: 16-troubleshooting
+    title: Troubleshoot credentials and tooling
+    objective: Diagnose the control that governs a failing operation, then repeat its checkpoint.
+    copilot_prompt: >-
+      Diagnose why <FAILING_STEP> failed without changing authentication or server settings. Check, in
+      order, agent mode and enabled tools, the MCP server log, the Azure CLI account and tenant, the
+      credential selector inherited by VS Code, the Data Engineering workspace selection and the Spark
+      kernel. Never print tokens.
+    claude_code_prompt: >-
+      Diagnose <FAILING_STEP> read-only: MCP server status, Azure CLI account and tenant, credential
+      selection and notebook binding. Never print tokens.
+    tool_path: {provider: Local workstation, tools: []}
+    writes: false
+    approval_required: false
+    checkpoint: The governing control is identified and the failed step's checkpoint passes on retry.
+    evidence_required:
+      - The specific misconfigured control and a successful repeat of the failed checkpoint.
+    not_evidence:
+      - A token-acquisition timeout is not proof of a wrong tenant.
+    offline_equivalent: Inject a Fabric outage and watch the circuit breaker and fallback.
+    offline_command: "FFIA_ENVIRONMENT=hybrid FFIA_SIMULATE_FABRIC_OUTAGE=1 make demo-offline"
+    failure_modes:
+      - "The credential selector (AZURE_TOKEN_CREDENTIALS=AzureCliCredential) is inherited when VS Code starts; setting it in an integrated terminal does not affect a running extension host."

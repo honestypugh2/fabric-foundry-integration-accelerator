@@ -52,3 +52,4 @@ data/synthetic/bronze/*/
 data/synthetic/silver/*/
 data/synthetic/gold/*/
 data/synthetic/recovery/runs/
+data/runtime/

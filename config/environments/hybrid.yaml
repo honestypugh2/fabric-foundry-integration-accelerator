@@ -1,0 +1,14 @@
+# HYBRID: use live services when healthy; READS fall back to local equivalents, visibly labeled.
+# Writes NEVER fall back: an approved LIVE write is never redirected to LOCAL simulation.
+name: hybrid
+mode: HYBRID
+description: Live where available, local educational equivalents where not.
+capabilities:
+  fabric_data: {preferred: live, fallback: local, timeout_seconds: 5, max_retries: 1, backoff_seconds: 0.2}
+  semantic_model: {preferred: live, fallback: local, timeout_seconds: 5, max_retries: 1, backoff_seconds: 0.2}
+  mcp: {preferred: local, fallback: none}
+  evaluation: {preferred: local, fallback: none}
+  audit: {preferred: local, fallback: none}
+circuit_breaker:
+  failure_threshold: 3
+  reset_timeout_seconds: 60

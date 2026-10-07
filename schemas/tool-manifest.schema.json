@@ -1,0 +1,146 @@
+{
+  "$defs": {
+    "ToolManifestEntry": {
+      "additionalProperties": false,
+      "description": "Governance metadata for one MCP tool.",
+      "properties": {
+        "allowed_operations": {
+          "items": {
+            "enum": [
+              "read",
+              "propose"
+            ],
+            "type": "string"
+          },
+          "title": "Allowed Operations",
+          "type": "array"
+        },
+        "audit": {
+          "title": "Audit",
+          "type": "boolean"
+        },
+        "classification": {
+          "title": "Classification",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "enabled": {
+          "title": "Enabled",
+          "type": "boolean"
+        },
+        "failure_policy": {
+          "title": "Failure Policy",
+          "type": "string"
+        },
+        "identity": {
+          "title": "Identity",
+          "type": "string"
+        },
+        "name": {
+          "pattern": "^[a-z][a-z_]*$",
+          "title": "Name",
+          "type": "string"
+        },
+        "owner": {
+          "title": "Owner",
+          "type": "string"
+        },
+        "rate_limit_per_minute": {
+          "minimum": 1,
+          "title": "Rate Limit Per Minute",
+          "type": "integer"
+        },
+        "read_only": {
+          "title": "Read Only",
+          "type": "boolean"
+        },
+        "revocation": {
+          "title": "Revocation",
+          "type": "string"
+        },
+        "timeout_seconds": {
+          "exclusiveMinimum": 0,
+          "maximum": 300,
+          "title": "Timeout Seconds",
+          "type": "number"
+        },
+        "version": {
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "description",
+        "owner",
+        "version",
+        "classification",
+        "identity",
+        "allowed_operations",
+        "read_only",
+        "rate_limit_per_minute",
+        "timeout_seconds",
+        "audit",
+        "enabled",
+        "failure_policy",
+        "revocation"
+      ],
+      "title": "ToolManifestEntry",
+      "type": "object"
+    },
+    "ToolServer": {
+      "additionalProperties": false,
+      "description": "Server-level manifest metadata.",
+      "properties": {
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "identity": {
+          "title": "Identity",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "description",
+        "identity"
+      ],
+      "title": "ToolServer",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "``config/policies/tools.yaml``.",
+  "properties": {
+    "server": {
+      "$ref": "#/$defs/ToolServer"
+    },
+    "tools": {
+      "items": {
+        "$ref": "#/$defs/ToolManifestEntry"
+      },
+      "title": "Tools",
+      "type": "array"
+    },
+    "version": {
+      "const": 1,
+      "title": "Version",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "version",
+    "server",
+    "tools"
+  ],
+  "title": "ToolManifest",
+  "type": "object"
+}

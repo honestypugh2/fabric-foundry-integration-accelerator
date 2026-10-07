@@ -1,0 +1,10 @@
+# OFFLINE: no Azure subscription, Fabric workspace, Foundry project or network is required.
+name: offline
+mode: OFFLINE
+description: Everything runs on the Local Fabric Educational Provider and local services.
+capabilities:
+  fabric_data: {preferred: local, fallback: none}
+  semantic_model: {preferred: local, fallback: none}
+  mcp: {preferred: local, fallback: none}
+  evaluation: {preferred: local, fallback: none}
+  audit: {preferred: local, fallback: none}

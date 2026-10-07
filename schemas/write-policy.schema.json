@@ -1,0 +1,129 @@
+{
+  "$defs": {
+    "DestinationRule": {
+      "additionalProperties": false,
+      "description": "Whether a write destination may be executed.",
+      "properties": {
+        "allowed": {
+          "title": "Allowed",
+          "type": "boolean"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "allowed",
+        "note"
+      ],
+      "title": "DestinationRule",
+      "type": "object"
+    },
+    "WriteOperation": {
+      "additionalProperties": false,
+      "description": "A write operation the policy knows about.",
+      "properties": {
+        "expected_impact": {
+          "title": "Expected Impact",
+          "type": "string"
+        },
+        "item_types": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Item Types",
+          "type": "array"
+        },
+        "name": {
+          "pattern": "^[a-z][a-z_]*$",
+          "title": "Name",
+          "type": "string"
+        },
+        "reversible": {
+          "title": "Reversible",
+          "type": "boolean"
+        },
+        "risk": {
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "title": "Risk",
+          "type": "string"
+        },
+        "rollback": {
+          "title": "Rollback",
+          "type": "string"
+        },
+        "validation": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Validation",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "item_types",
+        "risk",
+        "reversible",
+        "expected_impact",
+        "validation",
+        "rollback"
+      ],
+      "title": "WriteOperation",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "``config/policies/writes.yaml``.",
+  "properties": {
+    "approval_ttl_minutes": {
+      "maximum": 1440,
+      "minimum": 1,
+      "title": "Approval Ttl Minutes",
+      "type": "integer"
+    },
+    "destinations": {
+      "additionalProperties": {
+        "$ref": "#/$defs/DestinationRule"
+      },
+      "propertyNames": {
+        "enum": [
+          "LOCAL",
+          "LIVE"
+        ]
+      },
+      "title": "Destinations",
+      "type": "object"
+    },
+    "operations": {
+      "items": {
+        "$ref": "#/$defs/WriteOperation"
+      },
+      "title": "Operations",
+      "type": "array"
+    },
+    "separation_of_duties": {
+      "title": "Separation Of Duties",
+      "type": "boolean"
+    },
+    "version": {
+      "const": 1,
+      "title": "Version",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "version",
+    "approval_ttl_minutes",
+    "separation_of_duties",
+    "operations",
+    "destinations"
+  ],
+  "title": "WritePolicy",
+  "type": "object"
+}

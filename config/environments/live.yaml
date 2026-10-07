@@ -1,0 +1,13 @@
+# LIVE: configured cloud services only. No fallback: unavailable capabilities report UNAVAILABLE.
+name: live
+mode: LIVE
+description: Real configured services after access checks succeed. Read-only by default.
+capabilities:
+  fabric_data: {preferred: live, fallback: none, timeout_seconds: 10, max_retries: 2, backoff_seconds: 0.5}
+  semantic_model: {preferred: live, fallback: none, timeout_seconds: 10, max_retries: 2, backoff_seconds: 0.5}
+  mcp: {preferred: local, fallback: none}
+  evaluation: {preferred: local, fallback: none}
+  audit: {preferred: local, fallback: none}
+circuit_breaker:
+  failure_threshold: 3
+  reset_timeout_seconds: 120

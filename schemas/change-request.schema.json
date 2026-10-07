@@ -1,0 +1,80 @@
+{
+  "$defs": {
+    "FabricTarget": {
+      "additionalProperties": false,
+      "description": "What a change applies to. Workspaces are referenced by overlay alias, never by ID.",
+      "properties": {
+        "destination": {
+          "enum": [
+            "LOCAL",
+            "LIVE"
+          ],
+          "title": "Destination",
+          "type": "string"
+        },
+        "item_name": {
+          "maxLength": 120,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9 _.-]*$",
+          "title": "Item Name",
+          "type": "string"
+        },
+        "item_type": {
+          "enum": [
+            "Lakehouse",
+            "Notebook",
+            "SemanticModel",
+            "Report"
+          ],
+          "title": "Item Type",
+          "type": "string"
+        },
+        "workspace_alias": {
+          "pattern": "^[a-z][a-z0-9-]*$",
+          "title": "Workspace Alias",
+          "type": "string"
+        }
+      },
+      "required": [
+        "workspace_alias",
+        "item_type",
+        "item_name",
+        "destination"
+      ],
+      "title": "FabricTarget",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A request to plan a change (from a person, an agent or an MCP tool).",
+  "properties": {
+    "operation": {
+      "pattern": "^[a-z][a-z_]*$",
+      "title": "Operation",
+      "type": "string"
+    },
+    "reason": {
+      "maxLength": 500,
+      "minLength": 5,
+      "title": "Reason",
+      "type": "string"
+    },
+    "requested_by": {
+      "maxLength": 80,
+      "minLength": 1,
+      "title": "Requested By",
+      "type": "string"
+    },
+    "target": {
+      "$ref": "#/$defs/FabricTarget"
+    }
+  },
+  "required": [
+    "operation",
+    "target",
+    "reason",
+    "requested_by"
+  ],
+  "title": "ChangeRequest",
+  "type": "object"
+}

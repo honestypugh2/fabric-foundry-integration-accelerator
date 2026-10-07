@@ -1,5 +1,4 @@
 # Customization
 
-customer-overlay guide and the Use-Case Guide intake/sanitization process.
-
-Populated in: Phase 3.
+- [customer-overlay.md](customer-overlay.md): customer overlays, and the Use-Case Guide intake
+  and sanitization process

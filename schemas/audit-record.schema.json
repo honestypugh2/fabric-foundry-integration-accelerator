@@ -1,0 +1,181 @@
+{
+  "$defs": {
+    "ExecutionLabel": {
+      "description": "How a single result was produced.",
+      "enum": [
+        "LIVE",
+        "HYBRID",
+        "LOCAL",
+        "SIMULATED",
+        "MOCKED",
+        "PREVIEW",
+        "UNAVAILABLE"
+      ],
+      "title": "ExecutionLabel",
+      "type": "string"
+    },
+    "OperatingMode": {
+      "description": "How the system as a whole is running.",
+      "enum": [
+        "LIVE",
+        "HYBRID",
+        "OFFLINE"
+      ],
+      "title": "OperatingMode",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "One audit entry.",
+  "properties": {
+    "action": {
+      "title": "Action",
+      "type": "string"
+    },
+    "actor": {
+      "title": "Actor",
+      "type": "string"
+    },
+    "approval_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Approval Id"
+    },
+    "audit_id": {
+      "title": "Audit Id",
+      "type": "string"
+    },
+    "capability": {
+      "title": "Capability",
+      "type": "string"
+    },
+    "change_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Change Id"
+    },
+    "cloud_operation_performed": {
+      "title": "Cloud Operation Performed",
+      "type": "boolean"
+    },
+    "correlation_id": {
+      "title": "Correlation Id",
+      "type": "string"
+    },
+    "details": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "title": "Details",
+      "type": "object"
+    },
+    "duration_ms": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Duration Ms"
+    },
+    "execution_label": {
+      "$ref": "#/$defs/ExecutionLabel"
+    },
+    "fallback_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fallback Reason"
+    },
+    "fallback_used": {
+      "default": false,
+      "title": "Fallback Used",
+      "type": "boolean"
+    },
+    "operating_mode": {
+      "$ref": "#/$defs/OperatingMode"
+    },
+    "requested_provider": {
+      "title": "Requested Provider",
+      "type": "string"
+    },
+    "selected_provider": {
+      "title": "Selected Provider",
+      "type": "string"
+    },
+    "success": {
+      "title": "Success",
+      "type": "boolean"
+    },
+    "timestamp": {
+      "format": "date-time",
+      "title": "Timestamp",
+      "type": "string"
+    },
+    "tool": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Tool"
+    }
+  },
+  "required": [
+    "correlation_id",
+    "actor",
+    "action",
+    "capability",
+    "requested_provider",
+    "selected_provider",
+    "operating_mode",
+    "execution_label",
+    "cloud_operation_performed",
+    "success"
+  ],
+  "title": "AuditRecord",
+  "type": "object"
+}

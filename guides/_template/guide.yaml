@@ -1,0 +1,35 @@
+# Template for a new Use-Case Guide. Copy this folder to guides/<industry>-<nn>-<slug>/, set id to the
+# folder name, and follow the intake process in docs/customization/customer-overlay.md:
+# private source -> extract -> sanitize -> hash denylist terms -> validate offline -> validate live -> publish.
+id: xx-00-template
+title: "XX-00: Guide title"
+industry: Industry
+scenario: One-sentence scenario.
+summary: Two or three sentences in your own words. No customer identity.
+version: 0.1.0
+status: draft
+provenance:
+  derived_from: customer engagement guide (sanitized)
+  sanitized_on: 2026-01-01
+  denylist_ref: config/privacy/denylist.yaml
+patterns: [P10]
+maturity_levels: [L1]
+harnesses: [copilot-vscode, claude-code]
+operating_rules:
+  - One prompt at a time; stop at each checkpoint.
+tools:
+  - {name: VS Code with GitHub Copilot Chat (agent mode), purpose: Agent harness, status: GA, install: Install and sign in.}
+dataset_profile: core-healthcare-v1
+expected_baseline: data/synthetic/expected/core-healthcare-v1.json
+steps:
+  - id: 01-example
+    title: Example step
+    objective: What this step achieves.
+    copilot_prompt: The prompt for GitHub Copilot.
+    claude_code_prompt: The equivalent prompt for Claude Code.
+    tool_path: {provider: Local workstation, tools: []}
+    writes: false
+    approval_required: false
+    checkpoint: What must be true before continuing.
+    evidence_required: [The concrete evidence that proves the checkpoint.]
+    offline_equivalent: How to practice this step offline.

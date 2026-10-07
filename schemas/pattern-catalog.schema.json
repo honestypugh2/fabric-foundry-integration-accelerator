@@ -1,0 +1,131 @@
+{
+  "$defs": {
+    "ArchitecturePattern": {
+      "additionalProperties": false,
+      "description": "One catalog pattern (summary level).",
+      "properties": {
+        "authority": {
+          "title": "Authority",
+          "type": "string"
+        },
+        "default_demo_path": {
+          "enum": [
+            "LOCAL",
+            "HYBRID",
+            "DOCUMENTATION"
+          ],
+          "title": "Default Demo Path",
+          "type": "string"
+        },
+        "fabric_role": {
+          "title": "Fabric Role",
+          "type": "string"
+        },
+        "foundry_role": {
+          "title": "Foundry Role",
+          "type": "string"
+        },
+        "id": {
+          "pattern": "^P\\d{2}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "mcp_role": {
+          "title": "Mcp Role",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "offline_equivalent": {
+          "title": "Offline Equivalent",
+          "type": "string"
+        },
+        "preview_dependencies": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Preview Dependencies",
+          "type": "array"
+        },
+        "selection_signals": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Selection Signals",
+          "type": "array"
+        },
+        "sources": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Sources",
+          "type": "array"
+        },
+        "status": {
+          "enum": [
+            "GA",
+            "PREVIEW",
+            "MIXED"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "summary": {
+          "title": "Summary",
+          "type": "string"
+        },
+        "when_not_to_use": {
+          "title": "When Not To Use",
+          "type": "string"
+        },
+        "when_to_use": {
+          "title": "When To Use",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "summary",
+        "status",
+        "preview_dependencies",
+        "default_demo_path",
+        "when_to_use",
+        "when_not_to_use",
+        "fabric_role",
+        "foundry_role",
+        "mcp_role",
+        "authority",
+        "offline_equivalent",
+        "selection_signals",
+        "sources"
+      ],
+      "title": "ArchitecturePattern",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "``education/patterns/catalog.yaml``.",
+  "properties": {
+    "patterns": {
+      "items": {
+        "$ref": "#/$defs/ArchitecturePattern"
+      },
+      "title": "Patterns",
+      "type": "array"
+    },
+    "version": {
+      "const": 1,
+      "title": "Version",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "version",
+    "patterns"
+  ],
+  "title": "PatternCatalog",
+  "type": "object"
+}

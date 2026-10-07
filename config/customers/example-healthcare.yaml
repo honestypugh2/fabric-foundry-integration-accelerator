@@ -1,0 +1,49 @@
+# FICTIONAL overlay for a regional healthcare provider. Aliases only — real tenant, workspace,
+# capacity or item identifiers belong in a git-ignored example-healthcare.local.yaml, never here.
+alias: example-healthcare
+industry: Healthcare
+scenario: Clinical operations and claims analytics for a fictional regional healthcare provider
+description: >-
+  Synthetic medallion lakehouse, Direct Lake semantic model and governed agent patterns. All
+  metrics are synthetic analytical demonstrations, not clinical measures.
+synthetic: true
+data_domains: [patients, encounters, conditions, claims, vitals, medications, clinical_notes, facilities, payers]
+fabric_workspace_aliases:
+  demo-dev: Dedicated development workspace for labs (identifiers kept in a local file)
+foundry_project_aliases:
+  demo-project: Foundry project for agent labs (identifiers kept in a local file)
+allowed_reads: [list_workspaces, list_items, list_tables, read_table, get_semantic_model, evaluate_measures]
+allowed_writes: [create_lakehouse, create_notebook, upload_files, update_semantic_model, publish_report]
+required_approvals:
+  - {operation: create_lakehouse, approvers: 1, reason: Creates a new governed data store.}
+  - {operation: create_notebook, approvers: 1, reason: Adds executable code to the workspace.}
+  - {operation: upload_files, approvers: 1, reason: Lands data in OneLake.}
+  - {operation: update_semantic_model, approvers: 1, reason: Changes business definitions used by reports and agents.}
+  - {operation: publish_report, approvers: 1, reason: Makes content visible to report consumers.}
+feature_flags:
+  recovery_lab: true
+  copilot_vs_claude_bakeoff: true
+preview_feature_flags:
+  fabric_iq: false
+  fabric_iq_ontology: false
+  foundry_fabric_data_agent_tool: false
+  data_warehouse_mcp: false
+  powerbi_hosted_authoring_mcp: false
+learning_modules: [architecture, medallion, fabric-mcp, copilot, claude-code, recovery, evaluation]
+demo_sequence: [why, data, mcp, patterns, agentic-change, foundry, failure, recovery, education, proof]
+synthetic_dataset: core-healthcare-v1
+guides: [hc-01-fabric-mcp-powerbi-medallion-lab]
+evaluation_thresholds:
+  measure_absolute_tolerance: 0.000001
+  minimum_pass_rate: 1.0
+compliance_notes:
+  - Synthetic data only. No PHI or PII is stored or processed.
+  - No clinical diagnosis, treatment advice or real clinical quality measures.
+retention_assumptions:
+  - Open Mirroring processed files are removed after seven days (documented service behavior).
+  - Publisher-side change files are retained for at least 14 days (assumption for the lab).
+recovery_objectives:
+  rpo_hours: 24
+  rto_hours: 8
+  snapshot_interval_days: 7
+  change_file_retention_days: 14

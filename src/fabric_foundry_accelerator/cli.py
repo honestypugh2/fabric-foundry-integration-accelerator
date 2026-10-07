@@ -10,6 +10,7 @@ from collections.abc import Sequence
 from pathlib import Path
 
 from fabric_foundry_accelerator import __version__
+from fabric_foundry_accelerator.observability.logging import configure_logging
 from fabric_foundry_accelerator.privacy.leak_scan import (
     DEFAULT_DENYLIST_PATH,
     LOCAL_DENYLIST_PATH,
@@ -25,6 +26,7 @@ from fabric_foundry_accelerator.research.sources import (
     load_registry,
     render_markdown,
 )
+from fabric_foundry_accelerator.services import commands as runtime_commands
 from fabric_foundry_accelerator.synthetic import commands as data_commands
 
 
@@ -112,11 +114,14 @@ def build_parser() -> argparse.ArgumentParser:
 
     data_commands.register(sub)
     recovery_commands.register(sub)
+    runtime_commands.register(sub)
     return parser
 
 
 def main(argv: Sequence[str] | None = None) -> int:
     """Run the CLI and return a process exit code."""
+    # Logs always go to stderr so stdout stays clean for command output and MCP stdio.
+    configure_logging()
     args = build_parser().parse_args(argv)
     return int(args.func(args))
 

@@ -15,7 +15,7 @@ define pending
 endef
 
 .PHONY: help setup setup-backend setup-frontend format lint typecheck test test-cov \
-	security sbom privacy-scan sources build validate clean data data-check recovery-demo \
+	security sbom privacy-scan sources schemas build validate clean data data-check recovery-demo \
 	run-api run-mcp run-frontend run demo-check demo demo-live demo-hybrid demo-offline
 
 help: ## Show available targets
@@ -60,6 +60,9 @@ privacy-scan: ## Scan for customer identifiers, GUIDs, secrets and e-mail addres
 sources: ## Re-render docs/research/source-validation.md from sources.yaml
 	$(ACTIVATE) && ffia sources render
 
+schemas: ## Re-export JSON Schemas for public models into schemas/
+	$(ACTIVATE) && ffia schemas export
+
 data: ## Build Bronze/Silver/Gold for every profile and validate against expected baselines
 	$(ACTIVATE) && ffia data build
 
@@ -84,7 +87,7 @@ build: ## Build Python distribution and frontend bundle
 	cd $(FRONTEND) && npm run build
 
 validate: lint typecheck test-cov data-check privacy-scan build security ## Full local validation (CI equivalent)
-	$(ACTIVATE) && ffia sources check
+	$(ACTIVATE) && ffia sources check && ffia schemas check && ffia demo offline >/dev/null && echo "offline demo: PASSED"
 	@echo "validate: all checks passed"
 
 clean: ## Remove build, cache and coverage artifacts (keeps .venv and node_modules)
@@ -93,11 +96,11 @@ clean: ## Remove build, cache and coverage artifacts (keeps .venv and node_modul
 	find . -name __pycache__ -type d -prune -not -path './.venv/*' -exec rm -rf {} +
 
 # ---------------------------------------------------------------- run (later phases)
-run-api: ## Run the FastAPI control plane
-	$(call pending,3)
+run-api: ## Run the FastAPI control plane on http://127.0.0.1:8000 (docs at /docs)
+	$(ACTIVATE) && ffia serve api
 
-run-mcp: ## Run the local FastMCP educational server
-	$(call pending,3)
+run-mcp: ## Run the local FastMCP educational server (stdio)
+	$(ACTIVATE) && ffia serve mcp
 
 run-frontend: ## Run the frontend dev server
 	cd $(FRONTEND) && npm run dev
@@ -107,7 +110,7 @@ run: ## Run API, MCP server and frontend together
 
 # ---------------------------------------------------------------- demo (later phases)
 demo-check: ## Probe Fabric, Foundry, MCP, local dataset, API and frontend; recommend a mode
-	$(call pending,3)
+	$(ACTIVATE) && ffia demo check
 
 demo: ## Run the recommended demo mode
 	$(call pending,4)
@@ -118,5 +121,5 @@ demo-live: ## Run the demo against configured live services (read-only by defaul
 demo-hybrid: ## Run the demo with available live services and local fallbacks
 	$(call pending,6)
 
-demo-offline: ## Run the demo with no cloud access (release gate)
-	$(call pending,3)
+demo-offline: ## Run the ten-act demo with no cloud access (release gate)
+	$(ACTIVATE) && ffia demo offline

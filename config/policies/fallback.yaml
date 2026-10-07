@@ -1,0 +1,5 @@
+# Fallback rules applied by the provider router on top of each environment's capability policy.
+version: 1
+reads: Reads may fall back to an approved LOCAL equivalent; results carry fallback_used and fallback_reason.
+writes: Writes never fall back. An unavailable LIVE destination returns UNAVAILABLE and requires a new plan.
+client_errors: Unknown resources and invalid requests are returned as errors and never trigger fallback.

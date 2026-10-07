@@ -16,8 +16,14 @@ classifiers = [
 # (see docs/research/source-validation.md and the Phase 0 dependency plan).
 dependencies = [
     "duckdb==1.5.6",
+    "fastapi==0.142.2",
+    "fastmcp==4.0.11",
     "pydantic==2.13.5",
+    "pydantic-settings==2.15.0",
     "pyyaml==6.0.3",
+    "structlog==26.1.0",
+    "tenacity==9.2.1",
+    "uvicorn[standard]==0.54.0",
 ]
 
 [project.scripts]
@@ -26,6 +32,7 @@ ffia = "fabric_foundry_accelerator.cli:main"
 [dependency-groups]
 dev = [
     "cyclonedx-bom==7.5.0",
+    "httpx==0.28.1",
     "pip-audit==2.10.1",
     "pyright==1.1.414",
     "pytest==9.1.1",
@@ -65,6 +72,16 @@ ignore = [
 # Reproducible pseudo-randomness for synthetic teaching data, never for security.
 "src/fabric_foundry_accelerator/synthetic/generator.py" = ["S311"]
 "src/fabric_foundry_accelerator/recovery/scenario.py" = ["S311"]
+# Fault injector methods must match the FabricProvider port signature but ignore their inputs.
+"src/fabric_foundry_accelerator/providers/fabric/outage.py" = ["ARG002"]
+
+[tool.ruff.lint.pycodestyle]
+# The formatter targets 100 columns; long human-readable messages may run to 120.
+max-line-length = 120
+
+[tool.ruff.lint.pylint]
+# Keyword-only parameters keep call sites explicit; positional parameters stay limited (PLR0917).
+max-args = 8
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"

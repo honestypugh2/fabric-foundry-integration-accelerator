@@ -1,0 +1,235 @@
+# MCP tool manifest for the local educational server. MCP standardizes capability access; it does
+# NOT grant authority. There are deliberately no approve or execute tools: approval is a human
+# action through the API/UI, recorded in the audit log.
+version: 1
+server:
+  name: ffia-local
+  description: 'Local educational MCP server. Exposes typed, allow-listed tools only: no shell, SQL, filesystem,
+    URL fetch or REST proxy.'
+  identity: Local process. Holds no cloud credentials.
+tools:
+- name: get_demo_capabilities
+  description: Summarize what the accelerator can demonstrate and how each capability is labeled.
+  owner: accelerator-maintainers
+  version: 1.0.0
+  classification: public-synthetic
+  identity: local-process (no cloud identity)
+  allowed_operations:
+  - read
+  read_only: true
+  rate_limit_per_minute: 60
+  timeout_seconds: 15
+  audit: true
+  enabled: true
+  failure_policy: return-error-no-fallback-for-writes
+  revocation: 'Set enabled: false in config/policies/tools.yaml and restart the server.'
+- name: get_runtime_status
+  description: Report operating mode, providers, preview flags, write mode and circuit-breaker state.
+  owner: accelerator-maintainers
+  version: 1.0.0
+  classification: public-synthetic
+  identity: local-process (no cloud identity)
+  allowed_operations:
+  - read
+  read_only: true
+  rate_limit_per_minute: 60
+  timeout_seconds: 15
+  audit: true
+  enabled: true
+  failure_policy: return-error-no-fallback-for-writes
+  revocation: 'Set enabled: false in config/policies/tools.yaml and restart the server.'
+- name: get_architecture_pattern
+  description: Return one Fabric + Foundry architecture pattern by ID (P01-P24).
+  owner: accelerator-maintainers
+  version: 1.0.0
+  classification: public-synthetic
+  identity: local-process (no cloud identity)
+  allowed_operations:
+  - read
+  read_only: true
+  rate_limit_per_minute: 60
+  timeout_seconds: 15
+  audit: true
+  enabled: true
+  failure_policy: return-error-no-fallback-for-writes
+  revocation: 'Set enabled: false in config/policies/tools.yaml and restart the server.'
+- name: recommend_architecture_pattern
+  description: Recommend patterns for a set of declared needs from the selection vocabulary.
+  owner: accelerator-maintainers
+  version: 1.0.0
+  classification: public-synthetic
+  identity: local-process (no cloud identity)
+  allowed_operations:
+  - read
+  read_only: true
+  rate_limit_per_minute: 60
+  timeout_seconds: 15
+  audit: true
+  enabled: true
+  failure_policy: return-error-no-fallback-for-writes
+  revocation: 'Set enabled: false in config/policies/tools.yaml and restart the server.'
+- name: inspect_healthcare_scenario
+  description: 'Describe a synthetic dataset profile: sources, row counts and deliberate data-quality quirks.'
+  owner: accelerator-maintainers
+  version: 1.0.0
+  classification: public-synthetic
+  identity: local-process (no cloud identity)
+  allowed_operations:
+  - read
+  read_only: true
+  rate_limit_per_minute: 60
+  timeout_seconds: 15
+  audit: true
+  enabled: true
+  failure_policy: return-error-no-fallback-for-writes
+  revocation: 'Set enabled: false in config/policies/tools.yaml and restart the server.'
+- name: inspect_medallion_architecture
+  description: List Bronze, Silver and Gold tables with row counts for a dataset profile.
+  owner: accelerator-maintainers
+  version: 1.0.0
+  classification: synthetic-data
+  identity: local-process (no cloud identity)
+  allowed_operations:
+  - read
+  read_only: true
+  rate_limit_per_minute: 60
+  timeout_seconds: 15
+  audit: true
+  enabled: true
+  failure_policy: return-error-no-fallback-for-writes
+  revocation: 'Set enabled: false in config/policies/tools.yaml and restart the server.'
+- name: preview_table
+  description: Return a bounded preview (max 20 rows) of a catalogued table. No free-form SQL.
+  owner: accelerator-maintainers
+  version: 1.0.0
+  classification: synthetic-data
+  identity: local-process (no cloud identity)
+  allowed_operations:
+  - read
+  read_only: true
+  rate_limit_per_minute: 60
+  timeout_seconds: 15
+  audit: true
+  enabled: true
+  failure_policy: return-error-no-fallback-for-writes
+  revocation: 'Set enabled: false in config/policies/tools.yaml and restart the server.'
+- name: evaluate_measures
+  description: Evaluate declared semantic-model measures by name. No free-form SQL or DAX.
+  owner: accelerator-maintainers
+  version: 1.0.0
+  classification: synthetic-data
+  identity: local-process (no cloud identity)
+  allowed_operations:
+  - read
+  read_only: true
+  rate_limit_per_minute: 60
+  timeout_seconds: 15
+  audit: true
+  enabled: true
+  failure_policy: return-error-no-fallback-for-writes
+  revocation: 'Set enabled: false in config/policies/tools.yaml and restart the server.'
+- name: get_guide_step
+  description: Return one step of a Use-Case Guide with its prompts, checkpoint and required evidence.
+  owner: accelerator-maintainers
+  version: 1.0.0
+  classification: public-synthetic
+  identity: local-process (no cloud identity)
+  allowed_operations:
+  - read
+  read_only: true
+  rate_limit_per_minute: 60
+  timeout_seconds: 15
+  audit: true
+  enabled: true
+  failure_policy: return-error-no-fallback-for-writes
+  revocation: 'Set enabled: false in config/policies/tools.yaml and restart the server.'
+- name: generate_fabric_change_plan
+  description: Create a change PLAN (never executes). Approval is a separate human action outside MCP.
+  owner: accelerator-maintainers
+  version: 1.0.0
+  classification: change-plan
+  identity: local-process (no cloud identity)
+  allowed_operations:
+  - propose
+  read_only: false
+  rate_limit_per_minute: 60
+  timeout_seconds: 15
+  audit: true
+  enabled: true
+  failure_policy: return-error-no-fallback-for-writes
+  revocation: 'Set enabled: false in config/policies/tools.yaml and restart the server.'
+- name: validate_change_plan
+  description: Re-validate a change plan against policy and duplicate checks.
+  owner: accelerator-maintainers
+  version: 1.0.0
+  classification: change-plan
+  identity: local-process (no cloud identity)
+  allowed_operations:
+  - propose
+  read_only: false
+  rate_limit_per_minute: 60
+  timeout_seconds: 15
+  audit: true
+  enabled: true
+  failure_policy: return-error-no-fallback-for-writes
+  revocation: 'Set enabled: false in config/policies/tools.yaml and restart the server.'
+- name: simulate_recovery_drill
+  description: Run the Open Mirroring snapshot + incremental + restore drill (SIMULATED).
+  owner: accelerator-maintainers
+  version: 1.0.0
+  classification: synthetic-data
+  identity: local-process (no cloud identity)
+  allowed_operations:
+  - read
+  read_only: true
+  rate_limit_per_minute: 60
+  timeout_seconds: 60
+  audit: true
+  enabled: true
+  failure_policy: return-error-no-fallback-for-writes
+  revocation: 'Set enabled: false in config/policies/tools.yaml and restart the server.'
+- name: detect_duplicate_records
+  description: Count duplicated keys in a catalogued table.
+  owner: accelerator-maintainers
+  version: 1.0.0
+  classification: synthetic-data
+  identity: local-process (no cloud identity)
+  allowed_operations:
+  - read
+  read_only: true
+  rate_limit_per_minute: 60
+  timeout_seconds: 15
+  audit: true
+  enabled: true
+  failure_policy: return-error-no-fallback-for-writes
+  revocation: 'Set enabled: false in config/policies/tools.yaml and restart the server.'
+- name: evaluate_against_baseline
+  description: Compare observed measure values with the committed expected baseline.
+  owner: accelerator-maintainers
+  version: 1.0.0
+  classification: synthetic-data
+  identity: local-process (no cloud identity)
+  allowed_operations:
+  - read
+  read_only: true
+  rate_limit_per_minute: 60
+  timeout_seconds: 15
+  audit: true
+  enabled: true
+  failure_policy: return-error-no-fallback-for-writes
+  revocation: 'Set enabled: false in config/policies/tools.yaml and restart the server.'
+- name: get_audit_record
+  description: Return audit records for a correlation ID (redacted).
+  owner: accelerator-maintainers
+  version: 1.0.0
+  classification: audit
+  identity: local-process (no cloud identity)
+  allowed_operations:
+  - read
+  read_only: true
+  rate_limit_per_minute: 60
+  timeout_seconds: 15
+  audit: true
+  enabled: true
+  failure_policy: return-error-no-fallback-for-writes
+  revocation: 'Set enabled: false in config/policies/tools.yaml and restart the server.'

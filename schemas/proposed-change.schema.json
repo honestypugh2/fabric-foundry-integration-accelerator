@@ -1,0 +1,214 @@
+{
+  "$defs": {
+    "ChangeStatus": {
+      "description": "Lifecycle of a change.",
+      "enum": [
+        "PROPOSED",
+        "BLOCKED",
+        "APPROVED",
+        "REJECTED",
+        "EXECUTED",
+        "VERIFIED",
+        "FAILED"
+      ],
+      "title": "ChangeStatus",
+      "type": "string"
+    },
+    "CheckResult": {
+      "additionalProperties": false,
+      "description": "The outcome of one deterministic validation check.",
+      "properties": {
+        "category": {
+          "$ref": "#/$defs/EvidenceCategory",
+          "default": "SIMULATED LOCALLY"
+        },
+        "detail": {
+          "title": "Detail",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "name",
+        "passed",
+        "detail"
+      ],
+      "title": "CheckResult",
+      "type": "object"
+    },
+    "EvidenceCategory": {
+      "description": "How strongly a statement is supported. Used to keep teaching claims honest.",
+      "enum": [
+        "SIMULATED LOCALLY",
+        "DOCUMENTED FABRIC BEHAVIOR",
+        "REQUIRES TENANT VALIDATION",
+        "ASSUMPTION",
+        "PRODUCTION RECOMMENDATION",
+        "PREVIEW LIMITATION"
+      ],
+      "title": "EvidenceCategory",
+      "type": "string"
+    },
+    "FabricTarget": {
+      "additionalProperties": false,
+      "description": "What a change applies to. Workspaces are referenced by overlay alias, never by ID.",
+      "properties": {
+        "destination": {
+          "enum": [
+            "LOCAL",
+            "LIVE"
+          ],
+          "title": "Destination",
+          "type": "string"
+        },
+        "item_name": {
+          "maxLength": 120,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9 _.-]*$",
+          "title": "Item Name",
+          "type": "string"
+        },
+        "item_type": {
+          "enum": [
+            "Lakehouse",
+            "Notebook",
+            "SemanticModel",
+            "Report"
+          ],
+          "title": "Item Type",
+          "type": "string"
+        },
+        "workspace_alias": {
+          "pattern": "^[a-z][a-z0-9-]*$",
+          "title": "Workspace Alias",
+          "type": "string"
+        }
+      },
+      "required": [
+        "workspace_alias",
+        "item_type",
+        "item_name",
+        "destination"
+      ],
+      "title": "FabricTarget",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A validated change plan. Nothing has executed.",
+  "properties": {
+    "approval_required": {
+      "title": "Approval Required",
+      "type": "boolean"
+    },
+    "change_id": {
+      "title": "Change Id",
+      "type": "string"
+    },
+    "correlation_id": {
+      "title": "Correlation Id",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "destination_hash": {
+      "title": "Destination Hash",
+      "type": "string"
+    },
+    "expected_impact": {
+      "title": "Expected Impact",
+      "type": "string"
+    },
+    "operation": {
+      "title": "Operation",
+      "type": "string"
+    },
+    "policy_allowed": {
+      "title": "Policy Allowed",
+      "type": "boolean"
+    },
+    "policy_reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Policy Reasons",
+      "type": "array"
+    },
+    "precondition": {
+      "$ref": "#/$defs/CheckResult"
+    },
+    "provider": {
+      "title": "Provider",
+      "type": "string"
+    },
+    "reason": {
+      "title": "Reason",
+      "type": "string"
+    },
+    "requested_by": {
+      "title": "Requested By",
+      "type": "string"
+    },
+    "reversible": {
+      "title": "Reversible",
+      "type": "boolean"
+    },
+    "risk": {
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "title": "Risk",
+      "type": "string"
+    },
+    "rollback": {
+      "title": "Rollback",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/ChangeStatus"
+    },
+    "target": {
+      "$ref": "#/$defs/FabricTarget"
+    },
+    "validation": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Validation",
+      "type": "array"
+    }
+  },
+  "required": [
+    "correlation_id",
+    "operation",
+    "target",
+    "provider",
+    "reason",
+    "requested_by",
+    "risk",
+    "reversible",
+    "expected_impact",
+    "validation",
+    "rollback",
+    "approval_required",
+    "policy_allowed",
+    "policy_reasons",
+    "precondition",
+    "destination_hash",
+    "status"
+  ],
+  "title": "ProposedChange",
+  "type": "object"
+}

@@ -24,7 +24,7 @@ Customize it · Productionize it — in one project, with **synthetic data only*
 | 0 | Research + architecture | ✅ Complete |
 | 1 | Repository foundation: uv/Python, React/TS/Vite, instructions, docs, quality tooling, CI | ✅ Complete |
 | 2 | Offline-first data foundation (synthetic medallion, recovery fixtures, Local Fabric Provider, dataset profiles) | ✅ Complete |
-| 3 | Application control plane (FastAPI, FastMCP, providers, router, circuit breaker, approvals, audit) | Planned |
+| 3 | Application control plane (FastAPI, FastMCP, providers, router, circuit breaker, approvals, audit) | ✅ Complete |
 | 4 | Interactive educational application (explorers, learning paths, labs, guides, demo mode) | Planned |
 | 5 | Fabric integration (validated surfaces, MCP profiles, contract fixtures) | Planned |
 | 6 | Foundry integration (Agent Service, Agent Framework, Data Agent, Fabric IQ/Foundry IQ, evaluation) | Planned |
@@ -67,8 +67,20 @@ make data            # build Bronze/Silver/Gold for every profile and validate a
 make recovery-demo   # Open Mirroring snapshot + incremental + restore drill (SIMULATED)
 ```
 
-Run `make help` for every target. Targets for later phases (for example `make demo-offline`)
-print the phase in which they become available.
+Run the control plane and the demo (still offline, labeled LOCAL or SIMULATED):
+
+```bash
+make demo-check      # probe Fabric, Foundry, MCP, dataset, API and frontend; recommend a mode
+make demo-offline    # ten-act release gate (must print "Release gate: PASSED")
+make run-api         # FastAPI control plane on http://127.0.0.1:8000 (OpenAPI at /docs)
+make run-mcp         # local educational MCP server (stdio), also registered in .mcp.json as ffia-local
+```
+
+See [control plane](docs/architecture/control-plane.md), [resilience](docs/architecture/resilience.md)
+and [demo continuity](docs/operations/demo-continuity.md).
+
+Run `make help` for every target. Targets for later phases print the phase in which they become
+available.
 
 ## Repository map
 
@@ -92,7 +104,8 @@ print the phase in which they become available.
 - [`.github/copilot-instructions.md`](.github/copilot-instructions.md) summarizes it for GitHub
   Copilot.
 - The root [`.mcp.json`](.mcp.json) is the portable MCP configuration shared by VS Code, Copilot
-  CLI and Claude Code. In Phase 1 it contains only the Microsoft Learn documentation server.
+  CLI and Claude Code. It contains the Microsoft Learn documentation server and the local
+  educational server `ffia-local`. The Fabric MCP profiles are added in Phase 5.
 
 ## Operating modes
 
@@ -101,7 +114,7 @@ print the phase in which they become available.
 
 - Simulation is never presented as a real Fabric, Azure, Foundry, Power BI or MCP operation.
 - An approved live write is never silently redirected to a local simulation.
-- The offline demo is a release gate (from Phase 3).
+- The offline demo is a release gate: `make validate` runs it.
 
 ## Privacy and safety
 

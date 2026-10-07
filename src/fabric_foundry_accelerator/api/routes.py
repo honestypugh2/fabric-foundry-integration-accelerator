@@ -1,0 +1,285 @@
+"""HTTP routes. Thin by design: validate, call a service, return its result."""
+
+import asyncio
+from typing import Annotated
+
+from fastapi import APIRouter, Body, Depends, Request, Response
+from pydantic import BaseModel, ConfigDict, Field
+
+from fabric_foundry_accelerator.audit.store import AuditRecord
+from fabric_foundry_accelerator.education.guides import GuideStep, UseCaseGuide
+from fabric_foundry_accelerator.models.changes import (
+    Approval,
+    ApprovalRequest,
+    ChangeRequest,
+    ExecuteRequest,
+    ProposedChange,
+)
+from fabric_foundry_accelerator.models.execution import ExecutionEnvelope, new_correlation_id
+from fabric_foundry_accelerator.patterns.catalog import (
+    ArchitecturePattern,
+    Recommendation,
+    recommend,
+)
+from fabric_foundry_accelerator.recovery.scenario import (
+    DEFAULT_SCENARIO_PATH,
+    load_scenario,
+    run_recovery_drill,
+)
+from fabric_foundry_accelerator.services.container import Container
+from fabric_foundry_accelerator.services.demo import DemoCheckReport, demo_check
+from fabric_foundry_accelerator.services.evaluation import EvaluationRequest
+from fabric_foundry_accelerator.services.fabric_reads import FabricReadRequest, execute_read
+from fabric_foundry_accelerator.services.runtime import (
+    ProviderStatus,
+    RuntimeStatus,
+    provider_statuses,
+    runtime_status,
+)
+from fabric_foundry_accelerator.synthetic.profiles import PROFILES
+
+router = APIRouter()
+
+
+def get_container(request: Request) -> Container:
+    """Return the process container."""
+    container: Container = request.app.state.container
+    return container
+
+
+def get_correlation_id(request: Request) -> str:
+    """Return the request correlation ID set by middleware."""
+    value: str = getattr(request.state, "correlation_id", new_correlation_id())
+    return value
+
+
+ContainerDep = Annotated[Container, Depends(get_container)]
+CorrelationDep = Annotated[str, Depends(get_correlation_id)]
+
+
+class Health(BaseModel):
+    """Liveness."""
+
+    model_config = ConfigDict(frozen=True)
+
+    status: str
+
+
+class Readiness(BaseModel):
+    """Readiness with the checks behind it."""
+
+    model_config = ConfigDict(frozen=True)
+
+    ready: bool
+    checks: dict[str, bool]
+
+
+class RecommendRequest(BaseModel):
+    """Needs from the selection vocabulary."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    needs: list[str] = Field(min_length=1)
+    include_preview: bool = True
+
+
+class Capability(BaseModel):
+    """A capability and how it is currently served."""
+
+    model_config = ConfigDict(frozen=True)
+
+    name: str
+    description: str
+    served_by: str
+
+
+# ------------------------------------------------------------------ health
+@router.get("/health", tags=["health"])
+def health() -> Health:
+    """Liveness probe."""
+    return Health(status="ok")
+
+
+@router.get("/ready", tags=["health"])
+def ready(container: ContainerDep, response: Response) -> Readiness:
+    """Readiness probe: local data built, guides and MCP manifest loaded."""
+    checks = {
+        "local_lakehouse_built": bool(runtime_status(container).built_profiles),
+        "guides_loaded": bool(container.guides),
+        "mcp_manifest_loaded": bool(container.tool_manifest.enabled()),
+    }
+    is_ready = all(checks.values())
+    response.status_code = 200 if is_ready else 503
+    return Readiness(ready=is_ready, checks=checks)
+
+
+# ------------------------------------------------------------------ runtime
+@router.get("/api/v1/runtime/status", tags=["runtime"])
+def get_runtime_status(container: ContainerDep) -> RuntimeStatus:
+    """Execution state for the status bar."""
+    return runtime_status(container)
+
+
+@router.get("/api/v1/runtime/providers", tags=["runtime"])
+def get_providers(container: ContainerDep) -> list[ProviderStatus]:
+    """Provider readiness per capability."""
+    return list(provider_statuses(container))
+
+
+@router.get("/api/v1/capabilities", tags=["runtime"])
+def get_capabilities(container: ContainerDep) -> list[Capability]:
+    """What the control plane can do and what serves each capability."""
+    status = runtime_status(container)
+    return [
+        Capability(
+            name="fabric_read",
+            description="Typed, bounded reads of workspaces, items, tables and measures.",
+            served_by=status.data_provider,
+        ),
+        Capability(
+            name="change_plans",
+            description="Plan, approve and execute changes under policy.",
+            served_by="Change service (LOCAL simulated; LIVE unavailable)",
+        ),
+        Capability(
+            name="recovery_drill",
+            description="Open Mirroring snapshot and replay drill.",
+            served_by="Local Open Mirroring Simulator (SIMULATED)",
+        ),
+        Capability(
+            name="evaluation",
+            description="Compare measures with expected baselines.",
+            served_by="Baseline Evaluator (LOCAL)",
+        ),
+        Capability(name="mcp", description="Allow-listed MCP tools.", served_by=status.mcp),
+        Capability(
+            name="agents",
+            description="Foundry agents and Agent Framework workflows.",
+            served_by=status.agent_provider,
+        ),
+    ]
+
+
+# ------------------------------------------------------------------ patterns and guides
+@router.get("/api/v1/patterns", tags=["patterns"])
+def list_patterns(container: ContainerDep) -> list[ArchitecturePattern]:
+    """All architecture patterns."""
+    return list(container.catalog.patterns)
+
+
+@router.get("/api/v1/patterns/{pattern_id}", tags=["patterns"])
+def get_pattern(pattern_id: str, container: ContainerDep) -> ArchitecturePattern:
+    """One architecture pattern."""
+    return container.catalog.get(pattern_id)
+
+
+@router.post("/api/v1/patterns/recommend", tags=["patterns"])
+def recommend_patterns(body: RecommendRequest, container: ContainerDep) -> list[Recommendation]:
+    """Rank patterns for declared needs."""
+    return recommend(container.catalog, body.needs, include_preview=body.include_preview)
+
+
+@router.get("/api/v1/guides", tags=["guides"])
+def list_guides(container: ContainerDep) -> list[UseCaseGuide]:
+    """All Use-Case Guides."""
+    return list(container.guides.values())
+
+
+@router.get("/api/v1/guides/{guide_id}", tags=["guides"])
+def get_guide(guide_id: str, container: ContainerDep) -> UseCaseGuide:
+    """One Use-Case Guide."""
+    return container.guides[guide_id]
+
+
+@router.get("/api/v1/guides/{guide_id}/steps/{step_id}", tags=["guides"])
+def get_guide_step(guide_id: str, step_id: str, container: ContainerDep) -> GuideStep:
+    """One guide step."""
+    return container.guides[guide_id].step(step_id)
+
+
+# ------------------------------------------------------------------ fabric reads and changes
+@router.post("/api/v1/fabric/read", tags=["fabric"])
+async def fabric_read(
+    body: Annotated[FabricReadRequest, Body()],
+    container: ContainerDep,
+    correlation_id: CorrelationDep,
+) -> ExecutionEnvelope[object]:
+    """Typed, read-only Fabric operations through the provider router."""
+    return await execute_read(container.fabric, body, correlation_id=correlation_id)
+
+
+@router.post("/api/v1/plans", tags=["changes"])
+def create_plan(
+    body: ChangeRequest, container: ContainerDep, correlation_id: CorrelationDep
+) -> ProposedChange:
+    """Plan and validate a change. Nothing executes."""
+    return container.changes.plan(body, correlation_id=correlation_id)
+
+
+@router.get("/api/v1/plans", tags=["changes"])
+def list_plans(container: ContainerDep) -> list[ProposedChange]:
+    """All plans in this process."""
+    return container.changes.plans()
+
+
+@router.get("/api/v1/plans/{change_id}", tags=["changes"])
+def get_plan(change_id: str, container: ContainerDep) -> ProposedChange:
+    """One plan."""
+    return container.changes.get_plan(change_id)
+
+
+@router.post("/api/v1/approvals", tags=["changes"])
+def approve(body: ApprovalRequest, container: ContainerDep) -> Approval:
+    """Record a human approval or rejection."""
+    return container.changes.approve(body)
+
+
+@router.post("/api/v1/fabric/change", tags=["changes"])
+def execute_change(body: ExecuteRequest, container: ContainerDep) -> ExecutionEnvelope[object]:
+    """Execute an approved change. LIVE changes are never redirected to LOCAL."""
+    result = container.changes.execute(body)
+    return ExecutionEnvelope[object].model_validate(result.model_dump())
+
+
+# ------------------------------------------------------------------ recovery, evaluation, audit, demo
+@router.post("/api/v1/recovery/drill", tags=["recovery"])
+async def recovery_drill(
+    container: ContainerDep, correlation_id: CorrelationDep
+) -> ExecutionEnvelope[object]:
+    """Run the Open Mirroring snapshot + incremental + restore drill (SIMULATED)."""
+    data_root = container.settings.data_root
+    scenario = load_scenario(data_root / "recovery" / DEFAULT_SCENARIO_PATH.name)
+    work_dir = data_root / "recovery" / "runs" / f"api-{correlation_id}"
+    envelope = await asyncio.to_thread(
+        run_recovery_drill, scenario, data_root=data_root, work_dir=work_dir
+    )
+    return ExecutionEnvelope[object].model_validate(
+        envelope.model_copy(update={"correlation_id": correlation_id}).model_dump()
+    )
+
+
+@router.post("/api/v1/evaluations/run", tags=["evaluation"])
+async def run_evaluation(
+    body: EvaluationRequest, container: ContainerDep, correlation_id: CorrelationDep
+) -> ExecutionEnvelope[object]:
+    """Compare observed (or local) measure values with the expected baseline."""
+    envelope = await container.evaluation.run(body, correlation_id=correlation_id)
+    return ExecutionEnvelope[object].model_validate(envelope.model_dump())
+
+
+@router.get("/api/v1/audit/{correlation_id}", tags=["audit"])
+def get_audit(correlation_id: str, container: ContainerDep) -> list[AuditRecord]:
+    """Redacted audit records for a correlation ID."""
+    return container.audit.for_correlation(correlation_id)
+
+
+@router.get("/api/v1/demo/status", tags=["demo"])
+async def demo_status(container: ContainerDep) -> DemoCheckReport:
+    """Readiness of every demo component and the recommended mode."""
+    return await demo_check(container, azure_probe=container.settings.demo_check_azure_cli)
+
+
+@router.get("/api/v1/profiles", tags=["data"])
+def list_profiles() -> list[str]:
+    """Dataset profiles."""
+    return sorted(PROFILES)

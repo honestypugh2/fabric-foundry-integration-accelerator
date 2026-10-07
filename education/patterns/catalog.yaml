@@ -1,0 +1,364 @@
+# Fabric + Foundry architecture pattern catalog (summary level). Lesson content per level
+# (Executive, L100-L400) is added in Phase 4. `sources` reference ids in docs/research/sources.yaml.
+version: 1
+patterns:
+  - id: P01
+    name: Fabric Data Agent + Foundry
+    summary: A Foundry agent asks a governed Fabric data agent for answers over structured Fabric data.
+    status: MIXED
+    preview_dependencies: [Foundry Agent Service Microsoft Fabric tool]
+    default_demo_path: LOCAL
+    when_to_use: Conversational questions over curated lakehouse, warehouse or semantic-model data.
+    when_not_to_use: When a fixed report answers the question, or when service-principal-only access is required.
+    fabric_role: Owns governed context, data permissions and the data agent's curated sources.
+    foundry_role: Owns reasoning, orchestration, conversation and evaluation.
+    mcp_role: Optional transport (data agent MCP endpoint); grants no authority.
+    authority: End-user identity through on-behalf-of; Fabric permissions decide what is visible.
+    offline_equivalent: Local deterministic data agent over the semantic model with allow-listed queries.
+    selection_signals: [conversational-structured-analytics, enterprise-agent]
+    sources: [fabric-data-agent, foundry-fabric-tool]
+  - id: P02
+    name: Multiple Fabric Data Agents via Fabric IQ
+    summary: A coordinating agent routes to bounded, domain-specific data agents through Fabric IQ.
+    status: PREVIEW
+    preview_dependencies: [Fabric IQ, Foundry Fabric IQ tool]
+    default_demo_path: LOCAL
+    when_to_use: Several governed business domains with different owners and permissions.
+    when_not_to_use: One domain, or when a single bounded data agent is enough.
+    fabric_role: Domain data agents and the shared semantic layer.
+    foundry_role: Coordinator agent, routing and evaluation.
+    mcp_role: Optional per-domain endpoints.
+    authority: Per-domain Fabric permissions under the end user's identity.
+    offline_equivalent: Local domain routing over separate semantic subsets.
+    selection_signals: [multiple-governed-domains, shared-business-vocabulary]
+    sources: [fabric-iq-overview, fabric-data-agent]
+  - id: P03
+    name: Fabric IQ Ontology
+    summary: Business entities, relationships and vocabulary bound to Fabric data without copying it.
+    status: PREVIEW
+    preview_dependencies: [Fabric IQ ontology, Ontology MCP server]
+    default_demo_path: LOCAL
+    when_to_use: Many consumers need one shared business vocabulary and entity model.
+    when_not_to_use: A single report or app where a semantic model already carries the meaning.
+    fabric_role: Ontology entities, relationships and bindings.
+    foundry_role: Uses the ontology to ground reasoning.
+    mcp_role: Ontology MCP exposes entities for discovery (preview).
+    authority: Bindings inherit the underlying item permissions.
+    offline_equivalent: Local semantic YAML (entities, relationships, vocabulary).
+    selection_signals: [shared-business-vocabulary]
+    sources: [fabric-iq-ontology]
+  - id: P04
+    name: OneLake as Foundry knowledge
+    summary: Unstructured files in OneLake become cited knowledge for agents through Foundry IQ.
+    status: MIXED
+    preview_dependencies: [Foundry IQ portal experience]
+    default_demo_path: LOCAL
+    when_to_use: Retrieval over documents with citations, alongside structured analytics.
+    when_not_to_use: Numeric questions that belong to governed measures.
+    fabric_role: Stores and governs the files.
+    foundry_role: Indexes, retrieves and cites; evaluates groundedness.
+    mcp_role: None required.
+    authority: The search service's managed identity indexes content; plan entitlement trimming explicitly.
+    offline_equivalent: Local retrieval over synthetic documents with citations.
+    selection_signals: [document-knowledge-retrieval]
+    sources: [foundry-iq]
+  - id: P05
+    name: Foundry tools in Fabric (AI in data engineering)
+    summary: AI functions classify, extract and summarize inside notebooks and pipelines.
+    status: GA
+    preview_dependencies: []
+    default_demo_path: LOCAL
+    when_to_use: Batch enrichment that should be repeatable, reviewed and stored in Silver or Gold.
+    when_not_to_use: Interactive questions that need conversation and tools.
+    fabric_role: Runs the pipeline and stores enriched results.
+    foundry_role: Provides models.
+    mcp_role: None.
+    authority: Workspace identity and tenant settings for AI features.
+    offline_equivalent: Deterministic local enrichment labeled SIMULATED.
+    selection_signals: [ai-in-data-engineering]
+    sources: [fabric-ai-functions]
+  - id: P06
+    name: Fabric + Foundry enterprise agent (anchor)
+    summary: An application agent combines Foundry knowledge and Fabric context with identity, evaluation, audit and approval.
+    status: MIXED
+    preview_dependencies: [Foundry Fabric data agent tool, Fabric IQ tool]
+    default_demo_path: HYBRID
+    when_to_use: Production assistants that read governed data and may propose actions.
+    when_not_to_use: Simple Q&A that one data agent or report already answers.
+    fabric_role: Governed structured context.
+    foundry_role: Reasoning, orchestration, evaluation and tracing.
+    mcp_role: Standardized tool access with allow-lists; never authorization.
+    authority: Entra identity plus policy; humans approve high-impact actions.
+    offline_equivalent: Local providers, deterministic agent, local evaluation and audit.
+    selection_signals: [enterprise-agent, production-enterprise-ai]
+    sources: [foundry-agent-service, agent-framework, fabric-data-agent]
+  - id: P07
+    name: Real-time Fabric + Foundry agent
+    summary: Operational events feed context to an agent that proposes, never autonomously executes, actions.
+    status: MIXED
+    preview_dependencies: []
+    default_demo_path: LOCAL
+    when_to_use: Time-sensitive operational signals that need triage and proposed actions.
+    when_not_to_use: When a deterministic alert rule is sufficient.
+    fabric_role: Eventstream, Eventhouse and Activator.
+    foundry_role: Interprets context and proposes actions.
+    mcp_role: Optional event and query tools.
+    authority: Policy and human approval before any action.
+    offline_equivalent: Local event replay.
+    selection_signals: [real-time-context]
+    sources: [fabric-overview]
+  - id: P08
+    name: Human-in-the-loop governed action
+    summary: Retrieve, cite, reason, propose, validate, apply policy, approve, scoped write, verify, audit.
+    status: GA
+    preview_dependencies: []
+    default_demo_path: LOCAL
+    when_to_use: Any write to a business system or Fabric item.
+    when_not_to_use: Never skip it for high-impact, destructive, regulated or financially material actions.
+    fabric_role: Target of approved changes; source of context.
+    foundry_role: Proposes; never performs authoritative writes directly.
+    mcp_role: May expose a plan tool; approval stays outside MCP.
+    authority: Human approver plus a narrowly scoped writer identity.
+    offline_equivalent: Full plan, approve, simulated execute, verify and audit flow.
+    selection_signals: [business-system-write]
+    sources: [agent-framework, foundry-agent-service]
+  - id: P09
+    name: Governed MCP
+    summary: Typed MCP tools with owner, version, classification, limits, audit and revocation.
+    status: GA
+    preview_dependencies: []
+    default_demo_path: LOCAL
+    when_to_use: Sharing capabilities with many agents and developer tools.
+    when_not_to_use: Exposing arbitrary shell, SQL, filesystem or URL access.
+    fabric_role: Exposes capabilities through the narrowest Fabric MCP server.
+    foundry_role: Consumes tools with allow-lists and approval settings.
+    mcp_role: Standardizes capability access; it does not grant authority.
+    authority: Entra identity and the server's own authorization checks.
+    offline_equivalent: Local FastMCP educational server with an allow-listed manifest.
+    selection_signals: [governed-tool-access, developer-automation-cli]
+    sources: [mcp-specification, fabric-mcp-servers-list]
+  - id: P10
+    name: Medallion + AI
+    summary: Bronze preserves, Silver conforms, Gold serves semantic models and agents.
+    status: GA
+    preview_dependencies: []
+    default_demo_path: LOCAL
+    when_to_use: Every analytical foundation that agents will consume.
+    when_not_to_use: Never let agents read Bronze for business answers.
+    fabric_role: Lakehouse layers and notebooks.
+    foundry_role: Consumes Gold through semantic models or data agents.
+    mcp_role: Inspection and documentation tools.
+    authority: Layer-level permissions.
+    offline_equivalent: Local DuckDB medallion over synthetic data.
+    selection_signals: [medallion-foundation]
+    sources: [fabric-medallion]
+  - id: P11
+    name: Mirroring / Open Mirroring + AI
+    summary: Replicate operational data into OneLake and plan for recovery explicitly.
+    status: GA
+    preview_dependencies: []
+    default_demo_path: LOCAL
+    when_to_use: Near-real-time operational data for analytics and agents.
+    when_not_to_use: As a backup or disaster-recovery mechanism (not documented as one).
+    fabric_role: Mirrored database and landing zone.
+    foundry_role: Consumes the resulting context.
+    mcp_role: None required.
+    authority: Source credentials and Fabric permissions; RLS/OLS are not propagated.
+    offline_equivalent: Landing-zone simulation and recovery drill.
+    selection_signals: [operational-replication-recovery]
+    sources: [fabric-open-mirroring-format, fabric-git-integration]
+  - id: P12
+    name: Direct Lake + semantic model + AI
+    summary: Semantic models over OneLake tables give agents governed measures and relationships.
+    status: GA
+    preview_dependencies: []
+    default_demo_path: LOCAL
+    when_to_use: Governed measures for reports and agents.
+    when_not_to_use: When tables are not yet modeled with clear grain and keys.
+    fabric_role: Direct Lake semantic model.
+    foundry_role: Queries measures, never redefines them.
+    mcp_role: Fabric IQ MCP (query) and Power BI Authoring MCP (authoring).
+    authority: Model permissions and RLS/OLS.
+    offline_equivalent: Local semantic model contract evaluated with DuckDB.
+    selection_signals: [semantic-model-reporting]
+    sources: [fabric-direct-lake, fabric-iq-mcp, powerbi-authoring-mcp]
+  - id: P13
+    name: Multi-domain is not multi-agent
+    summary: Add agents only where tools, context, policy, ownership or lifecycle truly differ.
+    status: GA
+    preview_dependencies: []
+    default_demo_path: DOCUMENTATION
+    when_to_use: Deciding agent boundaries.
+    when_not_to_use: Splitting agents only because there are several data domains.
+    fabric_role: Domain boundaries in data.
+    foundry_role: Deterministic orchestration first.
+    mcp_role: Per-domain tool sets.
+    authority: Domain owners.
+    offline_equivalent: Documentation and local routing examples.
+    selection_signals: [multiple-governed-domains]
+    sources: [agent-framework]
+  - id: P14
+    name: Secure enterprise Foundry + Fabric
+    summary: Private networking, managed identity, Key Vault, monitoring and policy around the solution.
+    status: GA
+    preview_dependencies: []
+    default_demo_path: DOCUMENTATION
+    when_to_use: Production deployments.
+    when_not_to_use: Treating the demo topology as production.
+    fabric_role: Workspace isolation and private links.
+    foundry_role: Private endpoints and agent identity.
+    mcp_role: Private MCP endpoints where required.
+    authority: Entra, RBAC and network controls.
+    offline_equivalent: Architecture diagrams and checklists.
+    selection_signals: [secure-production-deployment, production-enterprise-ai]
+    sources: [baseline-foundry-chat, fabric-deployment-patterns, fabric-waf]
+  - id: P15
+    name: APIM AI, MCP and tool governance
+    summary: A central gateway for authentication, quotas, routing, versioning and telemetry.
+    status: GA
+    preview_dependencies: []
+    default_demo_path: DOCUMENTATION
+    when_to_use: Many consumers, shared quotas or a central tool registry.
+    when_not_to_use: A single app and a single model, where the gateway adds only latency and cost.
+    fabric_role: Upstream data APIs.
+    foundry_role: Model and agent endpoints behind the gateway.
+    mcp_role: REST APIs exposed as governed MCP tools.
+    authority: Gateway policies plus backend authorization.
+    offline_equivalent: Local policy simulation.
+    selection_signals: [centralized-api-governance, governed-tool-access]
+    sources: [apim-mcp]
+  - id: P16
+    name: Evaluation + observability
+    summary: Traces and evaluations become quality gates for agents and data.
+    status: MIXED
+    preview_dependencies: [Some agent evaluators]
+    default_demo_path: LOCAL
+    when_to_use: Always, before and after release.
+    when_not_to_use: Never optional for production.
+    fabric_role: Data-quality metrics and baselines.
+    foundry_role: Built-in evaluators and tracing.
+    mcp_role: Tool-call telemetry.
+    authority: Release owners.
+    offline_equivalent: Deterministic local evaluation against committed baselines.
+    selection_signals: [evaluation-and-observability]
+    sources: [foundry-evaluators]
+  - id: P17
+    name: LIVE / HYBRID / OFFLINE resilience
+    summary: A provider router with breakers and approved fallback keeps the demo and the lesson alive.
+    status: GA
+    preview_dependencies: []
+    default_demo_path: LOCAL
+    when_to_use: Demos, workshops and degraded operations.
+    when_not_to_use: Silently replacing live writes with simulation (never allowed).
+    fabric_role: Live provider when healthy.
+    foundry_role: Live provider when healthy.
+    mcp_role: Local server as the offline counterpart.
+    authority: The environment's fallback policy.
+    offline_equivalent: The offline demo itself.
+    selection_signals: [resilience-offline]
+    sources: [fabric-waf]
+  - id: P18
+    name: Customer overlay
+    summary: Configuration controls industry, domains, tools, policy, thresholds and learning modules.
+    status: GA
+    preview_dependencies: []
+    default_demo_path: LOCAL
+    when_to_use: Reusing the accelerator for another customer or industry.
+    when_not_to_use: Forking core code per customer.
+    fabric_role: Workspace aliases only.
+    foundry_role: Project aliases only.
+    mcp_role: Tool allow-lists.
+    authority: Overlay owners; real identifiers stay in git-ignored files.
+    offline_equivalent: Example overlay with synthetic data.
+    selection_signals: [multi-customer-reuse]
+    sources: [fabric-deployment-patterns]
+  - id: P19
+    name: Copilot CLI + Fabric Skills + MCP
+    summary: A terminal agent follows Microsoft-authored Fabric skills and calls Fabric MCP or REST.
+    status: MIXED
+    preview_dependencies: []
+    default_demo_path: HYBRID
+    when_to_use: Fast exploration, triage and operator workflows.
+    when_not_to_use: Production changes without a reviewed pull request.
+    fabric_role: Target workspace (dev).
+    foundry_role: Not required.
+    mcp_role: Fabric MCP servers with hardened allow-lists.
+    authority: The developer's identity and workspace role.
+    offline_equivalent: Skills read locally plus the local MCP server.
+    selection_signals: [developer-automation-cli]
+    sources: [skills-for-fabric, copilot-cli-ga, fabric-mcp-local]
+  - id: P20
+    name: Repo-first (Git as source of truth)
+    summary: Agents edit notebooks, TMDL and pipeline definitions in Git; CI validates; deployment applies.
+    status: GA
+    preview_dependencies: []
+    default_demo_path: LOCAL
+    when_to_use: Anything that must be reviewable, repeatable and auditable.
+    when_not_to_use: One-off exploration.
+    fabric_role: Git integration and deployment pipelines.
+    foundry_role: Not required.
+    mcp_role: Documentation and schema tools.
+    authority: Pull-request review and branch protection.
+    offline_equivalent: Local definitions and dry-run plans.
+    selection_signals: [reviewable-change-ci-cd]
+    sources: [fabric-git-integration]
+  - id: P21
+    name: Cloud agent issue to pull request
+    summary: A well-scoped issue becomes a pull request from the Copilot cloud agent with read-only tools.
+    status: GA
+    preview_dependencies: []
+    default_demo_path: DOCUMENTATION
+    when_to_use: A backlog of well-defined data-engineering tasks.
+    when_not_to_use: Tasks that need live writes or tenant secrets.
+    fabric_role: Item definitions in Git.
+    foundry_role: Not required.
+    mcp_role: Read-only servers only (no per-call approval in the cloud agent).
+    authority: Pull-request reviewers.
+    offline_equivalent: Issue template and recorded replay.
+    selection_signals: [backlog-automation]
+    sources: [copilot-instructions-support]
+  - id: P22
+    name: Parallel agentic migration
+    summary: Many isolated agent sessions convert legacy notebooks or pipelines into reviewable pull requests.
+    status: PREVIEW
+    preview_dependencies: [GitHub Copilot app]
+    default_demo_path: DOCUMENTATION
+    when_to_use: Bulk conversions with strong CI gates.
+    when_not_to_use: Without automated validation of every change.
+    fabric_role: Migration target.
+    foundry_role: Not required.
+    mcp_role: Documentation tools.
+    authority: Reviewers and CI gates.
+    offline_equivalent: Synthetic legacy notebooks and replay.
+    selection_signals: [bulk-migration]
+    sources: [skills-for-fabric]
+  - id: P23
+    name: Headless agent review in CI
+    summary: A non-interactive agent reviews notebooks and models in pull requests.
+    status: GA
+    preview_dependencies: []
+    default_demo_path: DOCUMENTATION
+    when_to_use: Consistent automated review alongside human review.
+    when_not_to_use: As the only reviewer for high-risk changes.
+    fabric_role: Item definitions under review.
+    foundry_role: Not required.
+    mcp_role: Documentation tools only.
+    authority: Human reviewers keep approval authority.
+    offline_equivalent: Recorded review transcripts.
+    selection_signals: [automated-review]
+    sources: [copilot-cli-ga, claude-code-memory]
+  - id: P24
+    name: Embedded data-engineering assistant
+    summary: An internal app embeds an agent runtime that calls Fabric tools under app identity or on behalf of the user.
+    status: GA
+    preview_dependencies: []
+    default_demo_path: DOCUMENTATION
+    when_to_use: A product experience for many users.
+    when_not_to_use: When an existing developer tool suffices.
+    fabric_role: Governed context and approved write targets.
+    foundry_role: Agent runtime, evaluation and tracing.
+    mcp_role: Typed tools with allow-lists.
+    authority: On-behalf-of user identity plus approvals.
+    offline_equivalent: Local providers and deterministic agent.
+    selection_signals: [embedded-assistant]
+    sources: [agent-framework, foundry-agent-service]

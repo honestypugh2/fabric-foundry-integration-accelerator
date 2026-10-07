@@ -1,0 +1,133 @@
+{
+  "$defs": {
+    "CapabilityPolicy": {
+      "additionalProperties": false,
+      "description": "How one capability is routed.",
+      "properties": {
+        "backoff_seconds": {
+          "default": 0.2,
+          "maximum": 5,
+          "minimum": 0,
+          "title": "Backoff Seconds",
+          "type": "number"
+        },
+        "fallback": {
+          "enum": [
+            "local",
+            "none"
+          ],
+          "title": "Fallback",
+          "type": "string"
+        },
+        "max_retries": {
+          "default": 1,
+          "maximum": 3,
+          "minimum": 0,
+          "title": "Max Retries",
+          "type": "integer"
+        },
+        "preferred": {
+          "enum": [
+            "live",
+            "local"
+          ],
+          "title": "Preferred",
+          "type": "string"
+        },
+        "timeout_seconds": {
+          "default": 5.0,
+          "exclusiveMinimum": 0,
+          "maximum": 60,
+          "title": "Timeout Seconds",
+          "type": "number"
+        }
+      },
+      "required": [
+        "preferred",
+        "fallback"
+      ],
+      "title": "CapabilityPolicy",
+      "type": "object"
+    },
+    "CircuitBreakerPolicy": {
+      "additionalProperties": false,
+      "description": "Circuit breaker thresholds shared by live providers.",
+      "properties": {
+        "failure_threshold": {
+          "default": 3,
+          "maximum": 20,
+          "minimum": 1,
+          "title": "Failure Threshold",
+          "type": "integer"
+        },
+        "reset_timeout_seconds": {
+          "default": 60.0,
+          "exclusiveMinimum": 0,
+          "maximum": 3600,
+          "title": "Reset Timeout Seconds",
+          "type": "number"
+        }
+      },
+      "title": "CircuitBreakerPolicy",
+      "type": "object"
+    },
+    "OperatingMode": {
+      "description": "How the system as a whole is running.",
+      "enum": [
+        "LIVE",
+        "HYBRID",
+        "OFFLINE"
+      ],
+      "title": "OperatingMode",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A named environment profile (``config/environments/<name>.yaml``).",
+  "properties": {
+    "capabilities": {
+      "additionalProperties": {
+        "$ref": "#/$defs/CapabilityPolicy"
+      },
+      "propertyNames": {
+        "enum": [
+          "fabric_data",
+          "semantic_model",
+          "foundry_agent",
+          "knowledge",
+          "mcp",
+          "evaluation",
+          "audit"
+        ]
+      },
+      "title": "Capabilities",
+      "type": "object"
+    },
+    "circuit_breaker": {
+      "$ref": "#/$defs/CircuitBreakerPolicy",
+      "default": {
+        "failure_threshold": 3,
+        "reset_timeout_seconds": 60.0
+      }
+    },
+    "description": {
+      "title": "Description",
+      "type": "string"
+    },
+    "mode": {
+      "$ref": "#/$defs/OperatingMode"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "mode",
+    "description",
+    "capabilities"
+  ],
+  "title": "EnvironmentConfiguration",
+  "type": "object"
+}

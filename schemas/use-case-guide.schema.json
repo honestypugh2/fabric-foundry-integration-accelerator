@@ -1,0 +1,373 @@
+{
+  "$defs": {
+    "GuideProvenance": {
+      "additionalProperties": false,
+      "description": "Sanitized provenance. Never names, titles, authors, identifiers or URLs.",
+      "properties": {
+        "denylist_ref": {
+          "title": "Denylist Ref",
+          "type": "string"
+        },
+        "derived_from": {
+          "enum": [
+            "customer engagement guide (sanitized)",
+            "original"
+          ],
+          "title": "Derived From",
+          "type": "string"
+        },
+        "sanitized_on": {
+          "format": "date",
+          "title": "Sanitized On",
+          "type": "string"
+        }
+      },
+      "required": [
+        "derived_from",
+        "sanitized_on",
+        "denylist_ref"
+      ],
+      "title": "GuideProvenance",
+      "type": "object"
+    },
+    "GuideStep": {
+      "additionalProperties": false,
+      "description": "One step with prompts, checkpoint and the evidence that proves it.",
+      "properties": {
+        "approval_required": {
+          "title": "Approval Required",
+          "type": "boolean"
+        },
+        "checkpoint": {
+          "title": "Checkpoint",
+          "type": "string"
+        },
+        "claude_code_prompt": {
+          "title": "Claude Code Prompt",
+          "type": "string"
+        },
+        "copilot_prompt": {
+          "title": "Copilot Prompt",
+          "type": "string"
+        },
+        "evidence_required": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Evidence Required",
+          "type": "array"
+        },
+        "failure_modes": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Failure Modes",
+          "type": "array"
+        },
+        "id": {
+          "pattern": "^\\d{2}-[a-z0-9-]+$",
+          "title": "Id",
+          "type": "string"
+        },
+        "not_evidence": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Not Evidence",
+          "type": "array"
+        },
+        "objective": {
+          "title": "Objective",
+          "type": "string"
+        },
+        "offline_command": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Offline Command"
+        },
+        "offline_equivalent": {
+          "title": "Offline Equivalent",
+          "type": "string"
+        },
+        "requires_windows": {
+          "default": false,
+          "title": "Requires Windows",
+          "type": "boolean"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "tool_path": {
+          "$ref": "#/$defs/ToolPath"
+        },
+        "writes": {
+          "title": "Writes",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "objective",
+        "copilot_prompt",
+        "claude_code_prompt",
+        "tool_path",
+        "writes",
+        "approval_required",
+        "checkpoint",
+        "evidence_required",
+        "offline_equivalent"
+      ],
+      "title": "GuideStep",
+      "type": "object"
+    },
+    "ToolPath": {
+      "additionalProperties": false,
+      "description": "The provider, server and tool a step must use. Substitution is not allowed.",
+      "properties": {
+        "provider": {
+          "title": "Provider",
+          "type": "string"
+        },
+        "server": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Server"
+        },
+        "substitution_allowed": {
+          "default": false,
+          "title": "Substitution Allowed",
+          "type": "boolean"
+        },
+        "tools": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Tools",
+          "type": "array"
+        }
+      },
+      "required": [
+        "provider"
+      ],
+      "title": "ToolPath",
+      "type": "object"
+    },
+    "ToolRequirement": {
+      "additionalProperties": false,
+      "description": "A tool, server, extension or service the guide needs.",
+      "properties": {
+        "install": {
+          "title": "Install",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "purpose": {
+          "title": "Purpose",
+          "type": "string"
+        },
+        "required": {
+          "default": true,
+          "title": "Required",
+          "type": "boolean"
+        },
+        "status": {
+          "enum": [
+            "GA",
+            "PREVIEW",
+            "OSS",
+            "UNKNOWN/NEEDS VALIDATION"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Version"
+        }
+      },
+      "required": [
+        "name",
+        "purpose",
+        "status",
+        "install"
+      ],
+      "title": "ToolRequirement",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A Use-Case Guide (``guides/<id>/guide.yaml``).",
+  "properties": {
+    "dataset_profile": {
+      "title": "Dataset Profile",
+      "type": "string"
+    },
+    "expected_baseline": {
+      "title": "Expected Baseline",
+      "type": "string"
+    },
+    "harnesses": {
+      "items": {
+        "enum": [
+          "copilot-vscode",
+          "copilot-cli",
+          "copilot-app",
+          "copilot-cloud-agent",
+          "claude-code"
+        ],
+        "type": "string"
+      },
+      "title": "Harnesses",
+      "type": "array"
+    },
+    "id": {
+      "pattern": "^[a-z]+-\\d{2}-[a-z0-9-]+$",
+      "title": "Id",
+      "type": "string"
+    },
+    "industry": {
+      "title": "Industry",
+      "type": "string"
+    },
+    "maturity_levels": {
+      "items": {
+        "enum": [
+          "L0",
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "L5",
+          "L6"
+        ],
+        "type": "string"
+      },
+      "title": "Maturity Levels",
+      "type": "array"
+    },
+    "operating_rules": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Operating Rules",
+      "type": "array"
+    },
+    "os_constraints": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Os Constraints",
+      "type": "array"
+    },
+    "patterns": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Patterns",
+      "type": "array"
+    },
+    "provenance": {
+      "$ref": "#/$defs/GuideProvenance"
+    },
+    "scenario": {
+      "title": "Scenario",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "validated-offline",
+        "validated-live"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "steps": {
+      "items": {
+        "$ref": "#/$defs/GuideStep"
+      },
+      "minItems": 1,
+      "title": "Steps",
+      "type": "array"
+    },
+    "summary": {
+      "title": "Summary",
+      "type": "string"
+    },
+    "tenant_settings": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Tenant Settings",
+      "type": "array"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    },
+    "tools": {
+      "items": {
+        "$ref": "#/$defs/ToolRequirement"
+      },
+      "title": "Tools",
+      "type": "array"
+    },
+    "version": {
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "industry",
+    "scenario",
+    "summary",
+    "version",
+    "status",
+    "provenance",
+    "patterns",
+    "maturity_levels",
+    "harnesses",
+    "operating_rules",
+    "tools",
+    "dataset_profile",
+    "expected_baseline",
+    "steps"
+  ],
+  "title": "UseCaseGuide",
+  "type": "object"
+}

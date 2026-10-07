@@ -19,3 +19,12 @@ Copy the data into a separate lab project folder, as the guide recommends:
 ffia data export --profile hc-lab-7file-v1 --dest ~/hc-01-lab/data/raw
 cd ~/hc-01-lab/data/raw && sha256sum -c SHA256SUMS
 ```
+
+## Available now (Phase 3)
+
+| Asset | Where | Notes |
+|---|---|---|
+| Guide manifest | `guide.yaml` | 16 steps. Each one has Copilot and Claude Code prompts, a checkpoint, required evidence, an offline equivalent and, where relevant, "not evidence" warnings. Every write step requires approval. |
+| Step lookup | `GET /api/v1/guides/hc-01-fabric-mcp-powerbi-medallion-lab/steps/{step_id}` or the `get_guide_step` tool on `ffia-local` | Read-only. LOCAL label. |
+| Governed write rehearsal | `POST /api/v1/plans` → `/approvals` → `/fabric/change` with `destination: LOCAL` | SIMULATED. Rehearses the lakehouse, notebook, upload, model and report writes without a tenant. |
+| Baseline check | `POST /api/v1/evaluations/run` or the `evaluate_against_baseline` tool | Compares the measures with `data/synthetic/expected/hc-lab-7file-v1.json` |

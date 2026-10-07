@@ -1,5 +1,7 @@
 # Architecture documentation
 
-reference-architecture, fabric-foundry-boundaries, mcp-topology, resilience, live-vs-offline.
-
-Populated in: Phase 3-6.
+| Document | Status |
+|---|---|
+| [control-plane.md](control-plane.md): API, local MCP server, governed change flow | Phase 3 |
+| [resilience.md](resilience.md): LIVE, HYBRID and OFFLINE, router, circuit breaker, fallback | Phase 3 |
+| reference-architecture, fabric-foundry-boundaries, mcp-topology, live-vs-offline | Phases 4–6 |
