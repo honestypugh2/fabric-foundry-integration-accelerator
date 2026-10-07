@@ -19,6 +19,10 @@ updates:
       # typescript-eslint 8.71.x supports TypeScript < 6.1.0; upgrade together deliberately.
       - dependency-name: typescript
         versions: [">=6.1.0"]
+      # @types/node tracks the Node LTS runtime (24). Move to 26 together with the runtime
+      # switch after Node 26 becomes LTS (2026-10-28).
+      - dependency-name: "@types/node"
+        versions: [">=25.0.0"]
     open-pull-requests-limit: 5
   - package-ecosystem: github-actions
     directory: /
