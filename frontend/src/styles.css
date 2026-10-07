@@ -545,3 +545,421 @@ caption {
 button[aria-pressed="true"] .badge {
   color: inherit;
 }
+
+/* ------------------------------------------------------------------ architecture studio */
+:root {
+  --k-fabric-fill: #e3f4f1;
+  --k-fabric: #117865;
+  --k-foundry-fill: #f0eafb;
+  --k-foundry: #5c2d91;
+  --k-mcp-fill: #fff1e5;
+  --k-mcp: #c55a11;
+  --k-blue-fill: #e8f1fb;
+  --k-blue: #0078d4;
+  --k-policy-fill: #fff8e1;
+  --k-policy: #8a5300;
+  --k-evidence-fill: #e9f5ea;
+  --k-evidence: #107c10;
+  --k-neutral-fill: #f3f3f3;
+  --k-neutral: #5e5e5e;
+  --k-card: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --k-fabric-fill: #10302b;
+    --k-fabric: #4fc3a8;
+    --k-foundry-fill: #2a1f3d;
+    --k-foundry: #b79cf0;
+    --k-mcp-fill: #3a2614;
+    --k-mcp: #f0a060;
+    --k-blue-fill: #132b45;
+    --k-blue: #6cb4ff;
+    --k-policy-fill: #3a2e10;
+    --k-policy: #f2c26b;
+    --k-evidence-fill: #13321a;
+    --k-evidence: #6ccb8b;
+    --k-neutral-fill: #26262d;
+    --k-neutral: #b3b3bd;
+    --k-card: #1b1b21;
+  }
+}
+
+.view-tabs ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.75rem;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+
+.view-tabs a.active {
+  font-weight: 700;
+  text-decoration-thickness: 3px;
+}
+
+.studio__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  align-items: center;
+}
+
+.segmented {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.trace-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  align-items: center;
+}
+
+button.primary {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.overlays {
+  display: flex;
+  gap: 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.375rem;
+  margin: 0;
+  padding: 0.125rem 0.75rem 0.375rem;
+}
+
+.studio__cue {
+  border-left: 4px solid var(--color-accent);
+  background: var(--color-surface);
+  padding: 0.25rem 1rem;
+  margin-block: 0.75rem;
+}
+
+.studio__body {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(16rem, 1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.studio__canvas {
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  background: var(--k-card);
+}
+
+.inspector {
+  position: sticky;
+  top: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.inspector h3 {
+  margin-top: 0;
+}
+
+.tight {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.bands {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 0.375rem;
+}
+
+.band {
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  background: var(--k-neutral-fill);
+}
+
+.band--identity {
+  background: var(--k-blue-fill);
+}
+
+.band--policy {
+  background: var(--k-policy-fill);
+}
+
+.band--evidence {
+  background: var(--k-evidence-fill);
+}
+
+.band--failure {
+  background: var(--color-surface);
+  border-left: 4px solid var(--color-fail);
+}
+
+.legend,
+.studio__links {
+  font-size: 0.9rem;
+}
+
+.diagram {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: inherit;
+}
+
+main:has(.studio) {
+  max-width: 110rem;
+}
+
+.studio__canvas {
+  max-height: 80vh;
+  overflow: auto;
+}
+
+.diagram__zone rect {
+  fill: none;
+  stroke: var(--k-neutral);
+  stroke-dasharray: 8 4;
+}
+
+.diagram__zone text {
+  font-size: 12px;
+  font-weight: 700;
+  fill: var(--k-neutral);
+}
+
+.diagram__zone--fabric rect,
+.diagram__zone--fabric text {
+  stroke: var(--k-fabric);
+  fill: var(--k-fabric);
+}
+
+.diagram__zone--foundry rect,
+.diagram__zone--foundry text {
+  stroke: var(--k-foundry);
+  fill: var(--k-foundry);
+}
+
+.diagram__zone--tenant rect,
+.diagram__zone--tenant text {
+  stroke: var(--k-blue);
+  fill: var(--k-blue);
+}
+
+.diagram__zone--offline rect,
+.diagram__zone--offline text {
+  stroke: var(--k-policy);
+  fill: var(--k-policy);
+}
+
+.diagram__zone rect {
+  fill: none;
+}
+
+.diagram__edge path {
+  fill: none;
+  stroke: var(--k-neutral);
+  stroke-width: 1.5;
+}
+
+.diagram__arrow {
+  fill: var(--k-neutral);
+}
+
+.diagram__edge--authority path {
+  stroke: var(--k-policy);
+}
+
+.diagram__edge--evidence path {
+  stroke: var(--k-evidence);
+}
+
+.diagram__edge--change path {
+  stroke: var(--color-fail);
+}
+
+.diagram__edge--dashed path {
+  stroke-dasharray: 6 4;
+}
+
+.diagram__edge--active path {
+  stroke: var(--color-accent);
+  stroke-width: 4;
+}
+
+.diagram__edge-label {
+  font-size: 10px;
+  fill: var(--color-fg);
+  paint-order: stroke;
+  stroke: var(--k-card);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+.diagram__node {
+  cursor: pointer;
+}
+
+.diagram__node rect {
+  fill: var(--k-neutral-fill);
+  stroke: var(--k-neutral);
+  stroke-width: 1.5;
+}
+
+.diagram__node--fabric > rect,
+.diagram__node--data > rect {
+  fill: var(--k-fabric-fill);
+  stroke: var(--k-fabric);
+}
+
+.diagram__node--foundry > rect {
+  fill: var(--k-foundry-fill);
+  stroke: var(--k-foundry);
+}
+
+.diagram__node--mcp > rect {
+  fill: var(--k-mcp-fill);
+  stroke: var(--k-mcp);
+}
+
+.diagram__node--gateway > rect,
+.diagram__node--identity > rect,
+.diagram__node--app > rect,
+.diagram__node--service > rect {
+  fill: var(--k-blue-fill);
+  stroke: var(--k-blue);
+}
+
+.diagram__node--policy > rect {
+  fill: var(--k-policy-fill);
+  stroke: var(--k-policy);
+}
+
+.diagram__node--evidence > rect {
+  fill: var(--k-evidence-fill);
+  stroke: var(--k-evidence);
+}
+
+.diagram__node--person > rect,
+.diagram__node--client > rect,
+.diagram__node--harness > rect,
+.diagram__node--external > rect {
+  fill: var(--k-card);
+}
+
+.diagram__node--planned > rect,
+.diagram__node--preview > rect,
+.diagram__node--optional > rect {
+  stroke-dasharray: 6 4;
+}
+
+.diagram__node--tenant-validation > rect {
+  stroke-dasharray: 2 3;
+}
+
+.diagram__title {
+  font-size: 12px;
+  font-weight: 700;
+  fill: var(--color-fg);
+}
+
+.diagram__sub {
+  font-size: 10px;
+  fill: var(--color-muted);
+}
+
+.diagram__state {
+  font-size: 9.5px;
+  font-style: italic;
+  fill: var(--k-policy);
+}
+
+.diagram__node--selected > rect,
+.diagram__node--active > rect {
+  stroke: var(--color-accent);
+  stroke-width: 4;
+}
+
+.diagram__node:focus {
+  outline: none;
+}
+
+.diagram__node:focus-visible > rect {
+  stroke: var(--color-accent);
+  stroke-width: 5;
+  stroke-dasharray: none;
+}
+
+.diagram__faded {
+  opacity: 0.3;
+}
+
+.diagram__runtime rect {
+  fill: var(--k-neutral);
+  stroke: none;
+}
+
+.diagram__runtime text {
+  font-size: 9.5px;
+  font-weight: 700;
+  fill: var(--k-card);
+}
+
+.diagram__node--rt-active .diagram__runtime rect {
+  fill: var(--k-evidence);
+}
+
+.diagram__node--rt-ready .diagram__runtime rect {
+  fill: var(--k-blue);
+}
+
+.diagram__node--rt-degraded .diagram__runtime rect {
+  fill: var(--k-policy);
+}
+
+.diagram__node--rt-unavailable .diagram__runtime rect {
+  fill: var(--color-fail);
+}
+
+.diagram__badge circle {
+  fill: var(--k-blue);
+  stroke: var(--k-card);
+  stroke-width: 2;
+}
+
+.diagram__badge text {
+  font-size: 11px;
+  font-weight: 700;
+  fill: #ffffff;
+}
+
+.guide-diagram {
+  margin-block: 1rem;
+}
+
+@media (max-width: 64rem) {
+  .studio__body {
+    grid-template-columns: 1fr;
+  }
+
+  .inspector {
+    position: static;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .diagram__node > rect,
+  .diagram__edge path {
+    transition:
+      opacity 150ms ease,
+      stroke-width 150ms ease;
+  }
+}

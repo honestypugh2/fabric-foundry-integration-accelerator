@@ -1,0 +1,89 @@
+# Production deployment target, aligned to the Azure Architecture Center baseline Microsoft Foundry
+# chat architecture, extended with Microsoft Fabric as the governed data platform. Nothing here is
+# deployed by this repository; every box is documented Microsoft behavior to validate per tenant.
+id: production
+title: Production deployment (aligned to the Foundry baseline)
+kind: reference
+summary: >-
+  How the reference architecture is deployed for production. The application tier follows the
+  Azure Architecture Center baseline Microsoft Foundry chat architecture (WAF ingress, private
+  endpoints, firewall-controlled egress, managed identities, customer-owned agent state). Fabric
+  supplies governed data through the Fabric data agent (preview, on behalf of the user). MCP tools
+  are governed once, through an API Management-backed gateway.
+cue: >-
+  This is the production shape, not what runs on a laptop. The local accelerator corresponds to
+  the Basic Foundry chat tier - identity as the perimeter, no network isolation. Production adds
+  the network, the egress control and the shared-responsibility data stores.
+columns: 7
+rows: 5
+doc: production-architecture
+aligned_to: [baseline-foundry-chat, basic-foundry-chat, baseline-foundry-landing-zone, foundry-fabric-tool, apim-mcp, foundry-mcp-governance, fabric-deployment-patterns, fabric-waf, caf-agent-data-architecture]
+pattern_ids: [P01, P06, P14, P15, P16]
+steps:
+  - {id: app, label: "Application tier (Foundry baseline)", cue: "WAF ingress, a zone-redundant web app, Foundry Agent Service and its customer-owned stores, all behind private endpoints."}
+  - {id: data, label: "+ Fabric data", cue: "Fabric capacity and workspace. The Foundry agent reaches the Fabric data agent with the user's identity - same tenant, same region, preview."}
+  - {id: tools, label: "+ Governed tools and egress", cue: "MCP tools are governed once through an API Management-backed gateway; all outbound traffic leaves through the firewall."}
+  - {id: operate, label: "+ Identity and operations", cue: "Managed identities everywhere, Entra ID for users, Application Insights and Azure Monitor for evidence."}
+zones:
+  - {id: vnet, label: "Workload virtual network (private endpoints)", kind: tenant, col: 1, row: 0, cols: 4, rows: 4, step: app}
+  - {id: fabric-capacity, label: "Microsoft Fabric capacity (F2 or higher) - same tenant and region", kind: fabric, col: 5, row: 0, cols: 2, rows: 3, step: data}
+  - {id: tool-zone, label: "Governed tool access (private)", kind: tenant, col: 5, row: 3, cols: 2, rows: 1, step: tools}
+  - {id: platform, label: "Identity and operations", kind: tenant, col: 0, row: 4, cols: 7, rows: 1, step: operate}
+nodes:
+  - {id: users, icon: identity/Users, label: "Users", sublabel: "Entra ID sign-in", kind: person, state: documented, col: 0, row: 1, step: app, summary: "Users sign in with Microsoft Entra ID. Their identity flows to the Fabric data agent, which only returns data they are allowed to see."}
+  - {id: app-gateway, icon: networking/Application_Gateways, label: "Application Gateway + WAF", sublabel: "Sole public entry point", kind: gateway, state: documented, col: 1, row: 1, step: app, sources: [baseline-foundry-chat], summary: "Terminates TLS, inspects traffic with the web application firewall and routes to the web app. It is the only public entry point in the baseline."}
+  - {id: web-app, icon: app_services/App_Services, label: "App Service web app", sublabel: "Chat UI and API, zone-redundant", kind: app, state: documented, col: 2, row: 1, step: app, sources: [baseline-foundry-chat], summary: "Hosts the chat experience. Calls Foundry Agent Service over a private endpoint with a managed identity - no keys in configuration."}
+  - {id: foundry-agent, icon: ai_machine_learning/Foundry_Agent_Service, label: "Foundry Agent Service", sublabel: "Foundry project, standard setup", kind: foundry, state: documented, col: 3, row: 1, step: app, component: foundry-agent, sources: [baseline-foundry-chat]}
+  - {id: models, icon: ai_machine_learning/Foundry_Models, label: "Foundry models", sublabel: "Deployed model", kind: foundry, state: documented, col: 3, row: 0, step: app, sources: [baseline-foundry-chat], summary: "The deployed model the agent reasons with, reached over private connectivity."}
+  - {id: ai-search, icon: app_services/Search_Services, label: "Azure AI Search", sublabel: "Grounding index", kind: foundry, state: documented, col: 4, row: 0, step: app, sources: [baseline-foundry-chat], summary: "Grounding index used by the agent's search tool, reached through a private endpoint with managed identity and least-privilege roles."}
+  - {id: cosmos, icon: databases/Azure_Cosmos_DB, label: "Azure Cosmos DB", sublabel: "Agent conversations (customer-owned)", kind: data, state: documented, col: 1, row: 2, step: app, sources: [baseline-foundry-chat], summary: "Stores agent conversation state in your subscription. Foundry manages the schema; you own the resource, its governance and its audit."}
+  - {id: storage, icon: storage/Storage_Accounts, label: "Azure Storage", sublabel: "Uploaded files (customer-owned)", kind: data, state: documented, col: 2, row: 2, step: app, sources: [baseline-foundry-chat], summary: "Holds files uploaded in chat sessions, owned by your subscription and managed by Foundry."}
+  - {id: key-vault, icon: security/Key_Vaults, label: "Key Vault", sublabel: "Gateway TLS certificate", kind: identity, state: documented, col: 1, row: 3, step: app, sources: [baseline-foundry-chat], summary: "Holds the TLS certificate for Application Gateway. Services authenticate with managed identities, so no application secrets are stored."}
+  - {id: private-endpoints, icon: networking/Private_Endpoint, label: "Private endpoints", sublabel: "All PaaS in the network", kind: gateway, state: documented, col: 2, row: 3, step: app, sources: [baseline-foundry-chat], summary: "Every platform service is reached through a private endpoint; public access is disabled."}
+  - {id: data-agent, label: "Fabric data agent", sublabel: "Read, user's permissions", kind: fabric, state: preview, col: 5, row: 1, step: data, component: fabric-data-agent, sources: [foundry-fabric-tool]}
+  - {id: semantic-model, icon: power_platform/PowerBI, label: "Semantic model", sublabel: "Direct Lake, RLS applies", kind: fabric, state: documented, col: 6, row: 1, step: data, component: semantic-model}
+  - {id: onelake, label: "OneLake medallion", sublabel: "Deployment pattern chosen per tenant", kind: data, state: documented, col: 6, row: 2, step: data, component: onelake-medallion, sources: [fabric-deployment-patterns]}
+  - {id: apim, icon: app_services/API_Management_Services, label: "API Management AI gateway", sublabel: "Govern MCP tools once", kind: gateway, state: optional, col: 5, row: 3, step: tools, component: apim-gateway, sources: [apim-mcp, foundry-mcp-governance]}
+  - {id: mcp-servers, label: "MCP servers", sublabel: "Private, in the network", kind: mcp, state: documented, col: 6, row: 3, step: tools, summary: "Workload-owned MCP servers reached privately. Record-level authorization stays in the server."}
+  - {id: firewall, icon: networking/Firewalls, label: "Azure Firewall", sublabel: "Sole egress path", kind: gateway, state: documented, col: 3, row: 3, step: tools, sources: [baseline-foundry-chat], summary: "All outbound traffic from agents - public tools and external MCP servers - is inspected and allowed or denied here."}
+  - {id: entra, icon: other/Entra_Identity, label: "Microsoft Entra ID", sublabel: "Users and managed identities", kind: identity, state: documented, col: 1, row: 4, step: operate, component: entra-identity}
+  - {id: managed-identity, icon: identity/Entra_Managed_Identities, label: "Managed identities", sublabel: "Service to service", kind: identity, state: documented, col: 2, row: 4, step: operate, sources: [baseline-foundry-chat], summary: "The web app, Foundry project and gateway authenticate to each other with managed identities and least-privilege role assignments."}
+  - {id: app-insights, icon: devops/Application_Insights, label: "Application Insights", sublabel: "Traces and correlation", kind: evidence, state: documented, col: 3, row: 4, step: operate, component: observability}
+  - {id: log-analytics, icon: analytics/Log_Analytics_Workspaces, label: "Azure Monitor", sublabel: "Logs and alerts", kind: evidence, state: documented, col: 4, row: 4, step: operate, sources: [baseline-foundry-chat], summary: "Central logs, metrics and alerts for the workload, including gateway and firewall diagnostics."}
+  - {id: purview, icon: databases/Azure_Purview_Accounts, label: "Microsoft Purview", sublabel: "Data governance", kind: policy, state: tenant-validation, col: 5, row: 4, step: operate, summary: "Data governance across Fabric items. Validate which Purview capabilities apply to your Fabric items and region."}
+  - {id: approvals, icon: general/Workflow, label: "Approved change flow", sublabel: "Scoped writer, audit", kind: policy, state: implemented, col: 6, row: 4, step: operate, component: human-approval}
+edges:
+  - {id: users-gateway, source: users, target: app-gateway, label: "HTTPS", kind: access, step: app}
+  - {id: gateway-app, source: app-gateway, target: web-app, label: "WAF inspected", kind: access, step: app}
+  - {id: app-agent, source: web-app, target: foundry-agent, label: "Managed identity", kind: reasoning, step: app}
+  - {id: agent-models, source: foundry-agent, target: models, label: "Reason", kind: reasoning, step: app}
+  - {id: agent-search, source: foundry-agent, target: ai-search, label: "Ground", kind: context, step: app}
+  - {id: agent-storage, source: foundry-agent, target: storage, label: "Files", kind: data, step: app}
+  - {id: agent-state, source: storage, target: cosmos, label: "Conversation state", kind: data, step: app}
+  - {id: agent-data-agent, source: foundry-agent, target: data-agent, label: "Fabric tool (PREVIEW) as the user", kind: access, step: data}
+  - {id: data-agent-model, source: data-agent, target: semantic-model, label: "Governed measures", kind: context, step: data}
+  - {id: model-lake, source: semantic-model, target: onelake, label: "Direct Lake", kind: context, step: data}
+  - {id: agent-firewall, source: foundry-agent, target: firewall, label: "Outbound tool calls", kind: access, step: tools}
+  - {id: firewall-apim, source: firewall, target: apim, label: "Allowed egress", kind: access, step: tools}
+  - {id: apim-mcp, source: apim, target: mcp-servers, label: "Policy, quota, audit", kind: access, step: tools}
+  - {id: entra-managed, source: entra, target: managed-identity, kind: authority, step: operate}
+  - {id: insights-monitor, source: app-insights, target: log-analytics, kind: evidence, step: operate}
+bands:
+  - {id: identity, kind: identity, step: operate, text: "Identity: users act through Entra ID and the Fabric data agent uses their identity (no service principal). Services use managed identities; no keys or secrets in application configuration."}
+  - {id: network, kind: network, step: tools, text: "Network: one public entry (Application Gateway + WAF), private endpoints for every platform service, and Azure Firewall as the only egress path for agent tool calls."}
+  - {id: shared, kind: policy, step: app, text: "Shared responsibility: Foundry manages agent state in Cosmos DB, Storage and AI Search, but they live in your subscription - govern, monitor and audit them as yours."}
+traces:
+  - id: production-question
+    title: A question in production
+    summary: The governed-question flow on production infrastructure, numbered like an Azure Architecture Center workflow.
+    label: DOCUMENTED
+    steps:
+      - {node: users, say: "A signed-in user opens the chat experience over HTTPS."}
+      - {node: app-gateway, edge: users-gateway, say: "Application Gateway terminates TLS and the WAF inspects the request."}
+      - {node: web-app, edge: gateway-app, say: "The web app calls Foundry Agent Service through a private endpoint with its managed identity."}
+      - {node: foundry-agent, edge: app-agent, say: "The agent follows its instructions and selects tools."}
+      - {node: data-agent, edge: agent-data-agent, say: "It asks the Fabric data agent with the user's identity.", note: "Preview. Same tenant and region; each user needs access to the data agent and its sources."}
+      - {node: semantic-model, edge: data-agent-model, say: "The data agent answers from governed measures; row-level security still applies."}
+      - {node: models, edge: agent-models, say: "The model composes the answer with the retrieved context."}
+      - {node: cosmos, edge: agent-state, say: "The conversation is persisted in your Cosmos DB before the response returns."}
+      - {node: app-insights, say: "Traces and logs land in Application Insights and Azure Monitor."}

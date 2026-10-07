@@ -1,0 +1,92 @@
+# This repository at run time: what talks to what, where it lives in the repo, and what is live.
+id: system
+title: This accelerator at run time
+kind: system
+summary: >-
+  How the educational app, the control plane, the local MCP server, the providers, policies,
+  data and audit log fit together in this repository, and which parts are live right now.
+cue: >-
+  This is the system you are using. Turn on the runtime overlay: every box that is green is
+  answering right now; grey boxes arrive in later phases and are never faked.
+columns: 7
+rows: 6
+doc: system-architecture
+aligned_to: [baseline-foundry-chat, fabric-mcp-local, mcp-specification]
+pattern_ids: [P08, P09, P16, P17]
+zones:
+  - {id: workstation, label: "Your workstation (offline-capable)", kind: local, col: 0, row: 0, cols: 6, rows: 6}
+  - {id: cloud, label: "Microsoft cloud (later phases)", kind: tenant, col: 6, row: 0, cols: 1, rows: 6}
+nodes:
+  - {id: web-app, icon: general/Browser, label: "Educational app", sublabel: "React + TypeScript + Vite", kind: client, state: implemented, col: 0, row: 1, component: learner-app, repo_path: frontend/src, runtime: api}
+  - {id: coding-agent, icon: general/Code, label: "GitHub Copilot / Claude Code", sublabel: "Reads AGENTS.md", kind: harness, state: implemented, col: 0, row: 4, component: coding-agents, repo_path: AGENTS.md}
+  - {id: vite-proxy, label: "Vite dev server", sublabel: "Proxies /api (same origin)", kind: service, state: implemented, col: 1, row: 1, repo_path: frontend/vite.config.ts, summary: "Serves the app on port 5173 and forwards /api to the control plane, so the browser holds no API host or credentials."}
+  - {id: mcp-config, icon: general/File, label: ".mcp.json", sublabel: "Shared by every harness", kind: knowledge, state: implemented, col: 1, row: 4, repo_path: .mcp.json, summary: "The portable MCP configuration read by VS Code, Copilot CLI and Claude Code. It lists Microsoft Learn and the local ffia-local server."}
+  - {id: api, label: "FastAPI control plane", sublabel: "Thin routes, correlation IDs", kind: service, state: implemented, col: 2, row: 1, repo_path: src/fabric_foundry_accelerator/api, runtime: api, summary: "The control plane. Routes validate input and call services; errors come back in one problem shape. OpenAPI is exported and the frontend types are generated from it."}
+  - {id: ffia-local, label: "ffia-local MCP server", sublabel: "stdio, allow-listed tools", kind: mcp, state: implemented, col: 2, row: 4, component: ffia-local-mcp, repo_path: src/fabric_foundry_accelerator/mcp/server.py, runtime: mcp}
+  - {id: learn-mcp, label: "Microsoft Learn MCP", sublabel: "Documentation, no tenant", kind: external, state: documented, col: 2, row: 5, summary: "The public Microsoft Learn MCP server used for how-to questions. It needs network access but no tenant or credentials."}
+  - {id: changes, label: "Change service", sublabel: "Plan, approve, execute, verify", kind: policy, state: implemented, col: 3, row: 0, component: human-approval, repo_path: src/fabric_foundry_accelerator/services/changes.py, runtime: changes}
+  - {id: education, label: "Education service", sublabel: "Lessons, labs, diagrams", kind: service, state: implemented, col: 3, row: 1, repo_path: src/fabric_foundry_accelerator/services/education.py, runtime: education, summary: "Serves validated lessons, labs, the architecture views and the completeness gate. Knowledge-check answers stay on the server."}
+  - {id: evaluation, label: "Evaluation service", sublabel: "Measures vs baseline", kind: evidence, state: implemented, col: 3, row: 2, component: evaluation, repo_path: src/fabric_foundry_accelerator/services/evaluation.py, runtime: evaluation}
+  - {id: router, label: "Provider router", sublabel: "Timeouts, retries, breaker", kind: service, state: implemented, col: 3, row: 3, component: provider-router, repo_path: src/fabric_foundry_accelerator/fallback/router.py, runtime: router}
+  - {id: policies, icon: general/Workflow, label: "Policies and overlay", sublabel: "config/", kind: policy, state: implemented, col: 4, row: 0, component: policy-engine, repo_path: config/policies}
+  - {id: content, icon: general/Folder_Blank, label: "Learning content", sublabel: "education/ and guides/", kind: knowledge, state: implemented, col: 4, row: 1, repo_path: education, summary: "Lessons, labs, architecture views, the pattern catalog and Use-Case Guides as validated YAML and Markdown."}
+  - {id: audit, icon: general/File, label: "Audit log", sublabel: "data/runtime/audit.jsonl", kind: evidence, state: implemented, col: 4, row: 2, component: audit-store, repo_path: src/fabric_foundry_accelerator/audit/store.py, runtime: audit}
+  - {id: local-provider, label: "Local Fabric provider", sublabel: "DuckDB over Parquet", kind: local, state: implemented, col: 4, row: 3, component: local-fabric-provider, repo_path: src/fabric_foundry_accelerator/providers/fabric/local.py, runtime: fabric-local}
+  - {id: synthetic-data, icon: general/Folder_Blank, label: "Synthetic medallion data", sublabel: "data/synthetic", kind: data, state: implemented, col: 5, row: 3, repo_path: data/synthetic, summary: "Generated synthetic CSVs, built Bronze, Silver and Gold Parquet, semantic model contracts and expected baselines. No real data."}
+  - {id: foundry, icon: ai_machine_learning/Foundry_Agent_Service, label: "Foundry Agent Service", sublabel: "Agents and evaluation", kind: foundry, state: planned, phase: 6, col: 6, row: 1, component: foundry-agent, runtime: foundry}
+  - {id: fabric-live, label: "Fabric REST and MCP", sublabel: "Live, read-only first", kind: fabric, state: planned, phase: 5, col: 6, row: 3, component: fabric-mcp, runtime: fabric-live}
+edges:
+  - {id: app-to-proxy, source: web-app, target: vite-proxy, label: "/api requests", kind: access}
+  - {id: proxy-to-api, source: vite-proxy, target: api, label: "Same-origin proxy", kind: access}
+  - {id: api-to-changes, source: api, target: changes, label: "Plans and approvals", kind: change}
+  - {id: api-to-education, source: api, target: education, label: "Lessons and diagrams", kind: context}
+  - {id: api-to-evaluation, source: api, target: evaluation, label: "Evaluate", kind: evidence}
+  - {id: api-to-router, source: api, target: router, label: "Typed reads", kind: access}
+  - {id: changes-to-policies, source: changes, target: policies, label: "Evaluate policy", kind: authority}
+  - {id: education-to-content, source: education, target: content, label: "Load and validate", kind: context}
+  - {id: evaluation-to-audit, source: evaluation, target: audit, label: "Evidence", kind: evidence}
+  - {id: router-to-local, source: router, target: local-provider, label: "LOCAL read or fallback", kind: fallback}
+  - {id: local-to-data, source: local-provider, target: synthetic-data, label: "Query Parquet", kind: data}
+  - {id: router-to-live, source: router, target: fabric-live, label: "LIVE read (Phase 5)", kind: access, planned: true}
+  - {id: api-to-foundry, source: api, target: foundry, label: "Agents (Phase 6)", kind: reasoning, planned: true}
+  - {id: agent-to-config, source: coding-agent, target: mcp-config, label: "Loads", kind: config}
+  - {id: config-to-ffia, source: mcp-config, target: ffia-local, label: "Starts over stdio", kind: access}
+  - {id: config-to-learn, source: mcp-config, target: learn-mcp, label: "Docs over HTTPS", kind: access}
+  - {id: ffia-to-router, source: ffia-local, target: router, label: "Read tools", kind: access}
+traces:
+  - id: guide-rehearsal
+    title: Rehearse a guide write
+    summary: The HC-01 guide runner rehearses a governed write against the simulated workspace.
+    label: SIMULATED
+    demo_act: 5
+    steps:
+      - {node: web-app, say: "In the guide runner you press Plan and validate.", note: "The browser only shows what the backend decides."}
+      - {node: vite-proxy, edge: app-to-proxy, say: "The request goes to /api on the same origin."}
+      - {node: api, edge: proxy-to-api, say: "The control plane assigns a correlation ID and calls the change service."}
+      - {node: changes, edge: api-to-changes, say: "The change service records the plan and checks for duplicates."}
+      - {node: policies, edge: changes-to-policies, say: "Policy decides whether the operation, item type and workspace alias are allowed."}
+      - {node: changes, say: "After a different person approves, the scoped writer executes in the simulated workspace and verifies.", note: "Labeled SIMULATED. No Fabric item is created."}
+      - {node: audit, say: "Plan, approvals (including refused ones) and execution are audited under one correlation ID."}
+  - id: fallback-read
+    title: Read with fallback
+    summary: A read goes through the router; when the live provider fails, the approved LOCAL equivalent answers, visibly labeled.
+    label: LOCAL
+    demo_act: 7
+    steps:
+      - {node: web-app, say: "The data explorer asks for the lakehouse tables."}
+      - {node: api, say: "The control plane sends a typed read to the router."}
+      - {node: router, edge: api-to-router, say: "The router tries the live provider with a timeout and bounded retries.", note: "Offline there is no live provider, so it goes straight to LOCAL."}
+      - {node: fabric-live, edge: router-to-live, say: "The live call fails or the breaker is open (simulated outage in training)."}
+      - {node: local-provider, edge: router-to-local, say: "The approved LOCAL equivalent answers. The result is labeled LOCAL in HYBRID mode with a fallback reason."}
+      - {node: synthetic-data, edge: local-to-data, say: "Data comes from synthetic Parquet built by ffia data build."}
+  - id: agent-plan
+    title: A coding agent proposes a plan
+    summary: GitHub Copilot or Claude Code calls ffia-local over MCP. It can read and propose, but never approve or execute.
+    label: LOCAL
+    demo_act: 3
+    steps:
+      - {node: coding-agent, say: "You ask the coding agent to propose a lakehouse change."}
+      - {node: mcp-config, edge: agent-to-config, say: "The harness reads .mcp.json and starts ffia-local."}
+      - {node: ffia-local, edge: config-to-ffia, say: "It calls generate_fabric_change_plan. There is no approve or execute tool.", note: "MCP access is not authority."}
+      - {node: router, edge: ffia-to-router, say: "Read tools such as preview_table go through the same router, labeled LOCAL."}
+      - {node: audit, say: "Every tool call is rate limited and audited."}

@@ -1,0 +1,71 @@
+# Resilience: reads may fall back (visibly); writes never do.
+id: live-vs-offline
+title: LIVE, HYBRID and OFFLINE
+kind: resilience
+summary: >-
+  How a request is served when services are healthy, slow or unavailable. Reads may fall back to
+  an approved local equivalent with a visible label and reason; writes never fall back; client
+  errors never trigger a fallback.
+cue: >-
+  Trace the outage. Watch the breaker open after three failures and the label stay honest - the
+  data is LOCAL, the mode is HYBRID, and the reason is on the result. Then trace the approved
+  LIVE write: it is refused, not quietly simulated.
+columns: 6
+rows: 5
+doc: live-vs-offline
+aligned_to: [fabric-waf, baseline-foundry-chat]
+pattern_ids: [P17, P08]
+zones:
+  - {id: reads, label: "Reads", kind: local, col: 0, row: 0, cols: 6, rows: 3}
+  - {id: writes, label: "Writes - never fall back", kind: tenant, col: 0, row: 3, cols: 6, rows: 2}
+nodes:
+  - {id: caller, label: "Caller", sublabel: "App, MCP tool or demo", kind: client, state: implemented, col: 0, row: 1, icon: general/Browser, summary: "Any consumer of the control plane - the web app, an ffia-local tool or the offline demo."}
+  - {id: router, label: "Provider router", sublabel: "Per-capability policy", kind: service, state: implemented, col: 1, row: 1, component: provider-router, repo_path: src/fabric_foundry_accelerator/fallback/router.py, runtime: router}
+  - {id: breaker, label: "Circuit breaker", sublabel: "CLOSED, OPEN, HALF_OPEN", kind: policy, state: implemented, col: 2, row: 0, repo_path: src/fabric_foundry_accelerator/fallback/circuit_breaker.py, summary: "Opens after three consecutive failures and skips the live call; after the reset timeout one trial call decides whether it closes again."}
+  - {id: live, label: "LIVE Fabric provider", sublabel: "Timeout + bounded retries", kind: fabric, state: planned, phase: 5, col: 3, row: 0, component: fabric-mcp, runtime: fabric-live}
+  - {id: fallback-policy, label: "Fallback policy", sublabel: "config/environments", kind: policy, state: implemented, col: 2, row: 2, repo_path: config/policies/fallback.yaml, summary: "Which capabilities may fall back in each environment. Unknown resources and invalid requests are client errors and never fall back."}
+  - {id: local, label: "Local Fabric provider", sublabel: "Approved equivalent", kind: local, state: implemented, col: 3, row: 2, component: local-fabric-provider, runtime: fabric-local}
+  - {id: envelope, label: "Labeled result", sublabel: "LIVE / LOCAL in HYBRID mode / UNAVAILABLE", kind: evidence, state: implemented, col: 4, row: 1, repo_path: src/fabric_foundry_accelerator/models/execution.py, summary: "Every result is an execution envelope with a label, the requested and selected provider, fallback_used and the reason. Non-cloud labels cannot claim a cloud operation."}
+  - {id: audit, icon: general/File, label: "Audit and route decisions", kind: evidence, state: implemented, col: 5, row: 1, component: audit-store, runtime: audit}
+  - {id: write-request, label: "Approved LIVE write", sublabel: "Plan + approval", kind: policy, state: implemented, col: 0, row: 4, component: human-approval}
+  - {id: live-writer, label: "Live writer", sublabel: "Authorized, narrowly scoped", kind: policy, state: planned, phase: 5, col: 2, row: 4, component: scoped-writer}
+  - {id: simulated-workspace, label: "Simulated workspace", sublabel: "LOCAL rehearsals only", kind: local, state: implemented, col: 2, row: 3, repo_path: src/fabric_foundry_accelerator/services/changes.py, summary: "Where LOCAL plans execute, labeled SIMULATED. An approved LIVE change is never redirected here."}
+  - {id: unavailable, label: "UNAVAILABLE (HTTP 409)", sublabel: "Plan again - nothing redirected", kind: evidence, state: implemented, col: 4, row: 4, summary: "When no authorized live writer exists the result is UNAVAILABLE with redirected_to_local false, and the attempt is audited."}
+edges:
+  - {id: caller-router, source: caller, target: router, label: "Typed read", kind: access}
+  - {id: router-breaker, source: router, target: breaker, label: "Allowed?", kind: authority}
+  - {id: breaker-live, source: breaker, target: live, label: "Try LIVE", kind: access, planned: true}
+  - {id: router-policy, source: router, target: fallback-policy, label: "On failure", kind: fallback}
+  - {id: policy-local, source: fallback-policy, target: local, label: "Approved fallback", kind: fallback}
+  - {id: live-envelope, source: live, target: envelope, label: "LIVE", kind: evidence, planned: true}
+  - {id: local-envelope, source: local, target: envelope, label: "LOCAL (HYBRID mode, reason)", kind: evidence}
+  - {id: envelope-audit, source: envelope, target: audit, kind: evidence}
+  - {id: write-writer, source: write-request, target: live-writer, label: "Execute", kind: change}
+  - {id: writer-unavailable, source: live-writer, target: unavailable, label: "Writer not available", kind: evidence}
+bands:
+  - {id: rule, kind: failure, text: "Never silently redirect an approved LIVE write to LOCAL simulation. Never present LOCAL or SIMULATED results as a Fabric, Foundry or Power BI operation."}
+traces:
+  - id: outage
+    title: Fabric outage, read falls back
+    summary: Reads during a simulated outage - three failures open the breaker, the approved LOCAL equivalent answers with an honest label.
+    label: LOCAL
+    demo_act: 7
+    steps:
+      - {node: caller, say: "The caller asks for the lakehouse tables."}
+      - {node: router, edge: caller-router, say: "The router applies the HYBRID policy for fabric_data."}
+      - {node: breaker, edge: router-breaker, say: "The breaker is CLOSED, so the live call is allowed."}
+      - {node: live, edge: breaker-live, say: "The live provider times out; a bounded retry fails too.", note: "In training the outage is injected with FFIA_SIMULATE_FABRIC_OUTAGE=1."}
+      - {node: fallback-policy, edge: router-policy, say: "Reads may fall back in HYBRID; this is a provider failure, not a client error."}
+      - {node: local, edge: policy-local, say: "The approved LOCAL equivalent answers."}
+      - {node: envelope, edge: local-envelope, say: "The result says LOCAL, mode HYBRID, fallback_used true, with the reason."}
+      - {node: breaker, say: "After three failures the breaker opens and later reads skip the live call until the reset timeout."}
+  - id: live-write
+    title: Approved LIVE write, no writer
+    summary: Approval is not enough - without an authorized live writer the result is UNAVAILABLE and nothing runs locally instead.
+    label: SIMULATED
+    demo_act: 5
+    steps:
+      - {node: write-request, say: "A LIVE plan was approved by a second person."}
+      - {node: live-writer, edge: write-writer, say: "Execution needs an authorized, narrowly scoped live writer. None exists yet."}
+      - {node: unavailable, edge: writer-unavailable, say: "The result is UNAVAILABLE (HTTP 409) with redirected_to_local false."}
+      - {node: simulated-workspace, say: "The simulated workspace is untouched - the demo asserts it."}

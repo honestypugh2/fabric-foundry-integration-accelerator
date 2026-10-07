@@ -1,0 +1,93 @@
+# Guide HC-01 as a diagram: what each step touches, in the tenant and offline.
+id: hc-01
+title: "HC-01: Fabric MCP + Power BI medallion lab"
+kind: flow
+summary: >-
+  GitHub Copilot in VS Code (or Claude Code) uses the local Fabric MCP server to create a
+  lakehouse and land seven synthetic CSVs; reviewed notebooks build Bronze, Silver and Gold on
+  Fabric Spark; a Direct Lake semantic model is edited with Power BI Authoring MCP; DAX checks
+  reconcile with the Gold baseline; a two-page report is published after review.
+cue: >-
+  Follow the guide left to right. Every write - lakehouse, upload, notebooks, model, report - is
+  proposed first and applied only after approval. The bottom row is the offline equivalent of
+  each step, so the lab can be rehearsed with no tenant.
+columns: 7
+rows: 5
+doc: hc-01-architecture
+aligned_to: [fabric-medallion, fabric-direct-lake, fabric-mcp-local, powerbi-authoring-mcp, fabric-git-integration]
+pattern_ids: [P10, P12, P09, P19, P08, P16]
+steps:
+  - {id: tools, label: "1 · Tools and tenant anchor", cue: "Steps 01-02. Install and verify the tools, then prove the tenant with one real, read-only MCP call."}
+  - {id: workspace, label: "2 · Workspace and lakehouse", cue: "Steps 03-04. Create the lab workspace in the portal and the lakehouse through Fabric MCP after a duplicate check."}
+  - {id: data, label: "3 · Land and profile data", cue: "Steps 05-06. Upload the seven synthetic CSVs with checksums; profile them locally."}
+  - {id: medallion, label: "4 · Bronze, Silver, Gold", cue: "Steps 07-10. Draft each notebook, review it, then publish and run it once on Fabric Spark."}
+  - {id: model, label: "5 · Semantic model", cue: "Steps 11-13. Create the Direct Lake model, apply relationships and measures, then review read-only."}
+  - {id: report, label: "6 · Report and validation", cue: "Steps 14-15. Build the two-page report, reconcile DAX against the Gold baseline, publish after review, validate with evidence."}
+zones:
+  - {id: workstation, label: "Your workstation", kind: local, col: 0, row: 0, cols: 2, rows: 4}
+  - {id: tenant, label: "Fabric lab workspace (dev)", kind: fabric, col: 2, row: 0, cols: 5, rows: 4, step: workspace}
+  - {id: offline, label: "Offline equivalent (this repo)", kind: offline, col: 0, row: 4, cols: 7, rows: 1}
+nodes:
+  - {id: copilot, label: "VS Code + GitHub Copilot", sublabel: "Agent mode", kind: harness, state: documented, col: 0, row: 1, step: tools, icon: general/Code, component: coding-agents}
+  - {id: claude, icon: general/Code, label: "Claude Code", sublabel: "Alternate path for every step", kind: harness, state: documented, col: 0, row: 2, step: tools, summary: "Every HC-01 step has an equivalent Claude Code prompt using the same MCP servers and instructions."}
+  - {id: lab-data, label: "Lab folder", sublabel: "7 synthetic CSVs + SHA256SUMS", kind: local, state: implemented, col: 0, row: 0, step: tools, icon: general/Folder_Blank, repo_path: data/synthetic, summary: "ffia data export copies the hc-lab-7file-v1 profile and checksums into a separate lab folder."}
+  - {id: fabric-mcp, label: "Fabric MCP Server (local)", sublabel: "onelake_*, core_create-item", kind: mcp, state: documented, col: 1, row: 1, step: tools, sources: [fabric-mcp-local], summary: "The local Fabric MCP server. The guide requires calling its tools directly - no substitution with REST or CLI."}
+  - {id: de-extension, label: "Fabric Data Engineering extension", sublabel: "Publish and run notebooks", kind: service, state: documented, col: 1, row: 2, step: medallion, summary: "VS Code extension used to publish reviewed notebooks and run them on the Microsoft Fabric Runtime kernel."}
+  - {id: pbi-mcp, label: "Power BI Authoring MCP + skills", sublabel: "Relationships, measures, DAX", kind: mcp, state: documented, col: 1, row: 3, step: model, icon: power_platform/PowerBI, sources: [powerbi-authoring-mcp], summary: "Edits the semantic model and runs DAX checks. Write-capable - changes are proposed, reviewed and applied after approval."}
+  - {id: workspace, label: "Lab workspace", sublabel: "Created in the portal", kind: fabric, state: tenant-validation, col: 2, row: 0, step: workspace, summary: "A dedicated dev workspace for the lab. Its ID stays in local notes only."}
+  - {id: lakehouse, label: "healthcare_lakehouse", sublabel: "Files/ raw CSVs", kind: data, state: tenant-validation, col: 2, row: 1, step: workspace, component: onelake-medallion}
+  - {id: bronze, label: "Bronze tables", sublabel: "MCP_01_Bronze", kind: data, state: tenant-validation, col: 3, row: 1, step: medallion, summary: "Raw data persisted as Delta with ingestion metadata. Counts must match the source profile."}
+  - {id: silver, label: "Silver tables", sublabel: "MCP_02_Silver", kind: data, state: tenant-validation, col: 4, row: 1, step: medallion, summary: "Cleaned and conformed tables with documented diagnostics (duplicates, invalid values, orphans)."}
+  - {id: gold, label: "Gold tables", sublabel: "MCP_03_Gold", kind: data, state: tenant-validation, col: 5, row: 1, step: medallion, summary: "Star-schema facts and dimensions at a declared grain, reconciled against the expected baseline."}
+  - {id: spark, label: "Fabric Spark", sublabel: "Remote runtime", kind: fabric, state: tenant-validation, col: 4, row: 2, step: medallion, summary: "Notebooks run once each on the Fabric Spark runtime; per-table counts are the evidence."}
+  - {id: semantic-model, icon: power_platform/PowerBI, label: "Direct Lake semantic model", sublabel: "7 tables, governed measures", kind: fabric, state: tenant-validation, col: 6, row: 1, step: model, component: semantic-model}
+  - {id: dax-checks, label: "DAX reconciliation", sublabel: "Against the Gold baseline", kind: evidence, state: tenant-validation, col: 5, row: 3, step: report, summary: "Every measure is checked against the expected values in data/synthetic/expected - evidence, not appearance."}
+  - {id: report, label: "Two-page report", sublabel: "Published after review", kind: fabric, state: tenant-validation, col: 6, row: 3, step: report, icon: power_platform/PowerBI, summary: "An executive overview and a population page bound to the validated model. A local PBIR file is not publication."}
+  - {id: approval, icon: general/Workflow, label: "Approval gate", sublabel: "Every write step", kind: policy, state: implemented, col: 2, row: 3, step: workspace, component: human-approval}
+  - {id: offline-provider, label: "Local Fabric provider", sublabel: "ffia data build", kind: local, state: implemented, col: 2, row: 4, component: local-fabric-provider}
+  - {id: offline-rehearsal, label: "Guide runner rehearsal", sublabel: "Plan, approve, execute (SIMULATED)", kind: local, state: implemented, col: 3, row: 4, repo_path: frontend/src/features/guides, summary: "The guide runner rehearses each write step against the simulated workspace with the real policy and approval rules."}
+  - {id: offline-medallion, label: "Local Bronze, Silver, Gold", sublabel: "SQL per table", kind: local, state: implemented, col: 4, row: 4, repo_path: src/fabric_foundry_accelerator/synthetic/sql, summary: "The same medallion built locally with DuckDB, one SQL file per output table."}
+  - {id: offline-eval, label: "Baseline evaluation", sublabel: "23 measures", kind: evidence, state: implemented, col: 5, row: 4, component: evaluation}
+  - {id: offline-contract, label: "Semantic model contract", sublabel: "semantic-model.yaml", kind: local, state: implemented, col: 6, row: 4, repo_path: data/synthetic/semantic, summary: "Tables, relationships and measure contracts with reference DAX for the hc-lab-7file-v1 profile."}
+edges:
+  - {id: copilot-mcp, source: copilot, target: fabric-mcp, label: "One prompt at a time", kind: access, step: tools}
+  - {id: mcp-lakehouse, source: fabric-mcp, target: lakehouse, label: "Create after duplicate check", kind: change, step: workspace}
+  - {id: data-upload, source: lab-data, target: lakehouse, label: "onelake_upload-file", kind: data, step: data}
+  - {id: lake-bronze, source: lakehouse, target: bronze, label: "MCP_01_Bronze", kind: data, step: medallion}
+  - {id: bronze-silver, source: bronze, target: silver, label: "MCP_02_Silver", kind: data, step: medallion}
+  - {id: silver-gold, source: silver, target: gold, label: "MCP_03_Gold", kind: data, step: medallion}
+  - {id: extension-spark, source: de-extension, target: spark, label: "Publish and run once", kind: change, step: medallion}
+  - {id: gold-model, source: gold, target: semantic-model, label: "Direct Lake", kind: context, step: model}
+  - {id: pbi-model, source: pbi-mcp, target: dax-checks, label: "Relationships, measures, DAX", kind: change, step: model}
+  - {id: dax-report, source: dax-checks, target: report, label: "Reconciled measures", kind: evidence, step: report}
+  - {id: approval-lakehouse, source: approval, target: lakehouse, label: "Approve each write", kind: authority, step: workspace}
+  - {id: offline-a, source: offline-rehearsal, target: offline-medallion, kind: data}
+  - {id: offline-b, source: offline-medallion, target: offline-eval, label: "Compare", kind: evidence}
+bands:
+  - {id: rules, kind: policy, text: "Operating rules: one prompt at a time, propose before apply, name the provider, server and tool before each cloud call, check for duplicates before every write, and never print tokens."}
+  - {id: evidence, kind: evidence, step: report, text: "Evidence, not appearance: create responses plus follow-up listings, per-table counts, DAX results against the baseline, and the published report's IDs."}
+traces:
+  - id: end-to-end
+    title: Run the whole lab
+    summary: The fifteen working steps of HC-01 in order, with the tool used at each one.
+    label: PLANNED FLOW
+    steps:
+      - {node: copilot, say: "Steps 01-02 - verify the tools, then make one real read-only call to prove the tenant.", note: "Claude Code can follow every step with its own prompt."}
+      - {node: fabric-mcp, edge: copilot-mcp, say: "Every cloud step names the provider, server and tool before it runs."}
+      - {node: lakehouse, edge: mcp-lakehouse, say: "Step 04 - create healthcare_lakehouse only after a duplicate check, and only after approval."}
+      - {node: lakehouse, edge: data-upload, say: "Step 05 - upload the seven CSVs and confirm checksums."}
+      - {node: bronze, edge: lake-bronze, say: "Steps 07-08 - draft, review, publish and run the Bronze notebook once."}
+      - {node: silver, edge: bronze-silver, say: "Step 09 - Silver with documented diagnostics."}
+      - {node: gold, edge: silver-gold, say: "Step 10 - Gold at a declared grain."}
+      - {node: semantic-model, edge: gold-model, say: "Steps 11-13 - the Direct Lake model, relationships and measures, then a read-only review."}
+      - {node: dax-checks, edge: pbi-model, say: "DAX results are reconciled against the Gold baseline."}
+      - {node: report, edge: dax-report, say: "Step 14 - build, review and publish the report. Step 15 - final validation with evidence."}
+  - id: offline
+    title: Rehearse offline
+    summary: The same journey with no tenant - every write rehearsed, every number checked.
+    label: SIMULATED
+    steps:
+      - {node: offline-provider, say: "ffia data build creates the same Bronze, Silver and Gold locally."}
+      - {node: offline-rehearsal, say: "The guide runner rehearses each write with real policy and approval rules (SIMULATED)."}
+      - {node: offline-medallion, edge: offline-a, say: "Inspect the SQL behind each table."}
+      - {node: offline-eval, edge: offline-b, say: "All 23 measures are compared with the expected baseline."}

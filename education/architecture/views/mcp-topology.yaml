@@ -1,0 +1,102 @@
+# MCP topology: which harness reaches which server, for which job, under whose identity.
+id: mcp-topology
+title: MCP topology for Fabric data engineering
+kind: topology
+summary: >-
+  Every agent harness shares one MCP configuration and one set of instructions. Each job uses the
+  narrowest server: documentation tools for how, read-only tools for what is, and the approved
+  change flow for change it. A gateway is optional.
+cue: >-
+  Start with the direct path - it is the default and the control. Add the gateway only when
+  several clients and teams share the same servers and you need central sign-in, quotas and
+  logging. Either way, the caller's Fabric permissions still decide.
+columns: 6
+rows: 7
+doc: mcp-topology
+aligned_to: [fabric-mcp-servers-list, fabric-mcp-local, fabric-iq-mcp, fabric-dw-mcp, powerbi-authoring-mcp, apim-mcp, mcp-specification, vscode-mcp-servers]
+pattern_ids: [P09, P15, P19]
+steps:
+  - id: direct
+    label: Direct (default)
+    cue: Harnesses read .mcp.json and connect directly to each server with the user's identity.
+  - id: gateway
+    label: + Gateway (optional)
+    cue: API Management becomes one front door for MCP tools - central sign-in checks, quotas and audit. Backend authorization stays where it is.
+zones:
+  - {id: harness-zone, label: "Agent harnesses", kind: local, col: 0, row: 0, cols: 1, rows: 5}
+  - {id: knowledge-zone, label: "Shared knowledge and configuration", kind: local, col: 1, row: 0, cols: 1, rows: 3}
+  - {id: gateway-zone, label: "Optional gateway", kind: optional, col: 2, row: 2, cols: 1, rows: 1, step: gateway}
+  - {id: server-zone, label: "MCP servers", kind: tenant, col: 3, row: 0, cols: 1, rows: 7}
+  - {id: target-zone, label: "Fabric and local targets", kind: fabric, col: 4, row: 0, cols: 1, rows: 6}
+nodes:
+  - {id: vscode, label: "VS Code agent mode", sublabel: "GitHub Copilot", kind: harness, state: documented, col: 0, row: 0, icon: general/Code, sources: [vscode-mcp-servers], summary: "Copilot agent mode in VS Code with tool approvals, terminal auto-approve rules, custom agents, skills and MCP servers from .mcp.json."}
+  - {id: copilot-cli, icon: general/Code, label: "Copilot CLI", sublabel: "Terminal agent, GA", kind: harness, state: documented, col: 0, row: 1, sources: [copilot-cli-ga], summary: "Terminal agent with plan mode, tool permissions, skills, plugins, MCP and a headless -p mode."}
+  - {id: copilot-app, icon: general/Code, label: "Copilot app", sublabel: "Worktrees, technical preview", kind: harness, state: preview, col: 0, row: 2, summary: "Desktop app running parallel agent sessions in isolated git worktrees, with Plan and Autopilot modes. Technical preview."}
+  - {id: cloud-agent, icon: general/Code, label: "Copilot cloud agent", sublabel: "Issue to pull request", kind: harness, state: documented, col: 0, row: 3, summary: "Assign an issue and the agent works in a sandbox and opens a pull request. MCP servers come from repository settings; there is no per-call approval, so the pull request is the control."}
+  - {id: claude-code, icon: general/Code, label: "Claude Code", sublabel: "CLAUDE.md imports AGENTS.md", kind: harness, state: documented, col: 0, row: 4, sources: [claude-code-memory, claude-code-skills], summary: "Anthropic's agentic CLI. In this repository CLAUDE.md imports AGENTS.md and the same .mcp.json and .claude/skills are shared."}
+  - {id: agents-md, label: "AGENTS.md and instructions", sublabel: "How to work here", kind: knowledge, state: implemented, col: 1, row: 0, icon: general/File, repo_path: AGENTS.md, sources: [copilot-instructions-support], summary: "The single source of truth for every coding agent - rules, commands, safety and evidence requirements."}
+  - {id: skills, label: "Skills", sublabel: "Fabric Skills + repo skills", kind: knowledge, state: documented, col: 1, row: 1, component: fabric-skills}
+  - {id: mcp-json, label: ".mcp.json", sublabel: "One config for every harness", kind: knowledge, state: implemented, col: 1, row: 2, icon: general/File, repo_path: .mcp.json, summary: "The portable MCP configuration. Today it lists Microsoft Learn and ffia-local; Fabric MCP profiles are added as opt-in examples in Phase 5."}
+  - {id: apim, label: "API Management", sublabel: "MCP gateway", kind: gateway, state: optional, col: 2, row: 2, step: gateway, icon: app_services/API_Management_Services, component: apim-gateway}
+  - {id: learn-mcp, label: "Microsoft Learn MCP", sublabel: "How - documentation", kind: mcp, state: documented, col: 3, row: 0, summary: "Public documentation search and fetch. Answers how questions without any tenant access."}
+  - {id: fabric-mcp-local, label: "Fabric MCP Server (local)", sublabel: "Docs, OneLake, core items", kind: mcp, state: documented, col: 3, row: 1, sources: [fabric-mcp-local], summary: "Local server with documentation and item-definition tools that work without a tenant, plus OneLake and core item tools that run with your Fabric permissions. Some tools can write."}
+  - {id: fabric-iq-mcp, label: "Fabric IQ MCP", sublabel: "What is - read-only DAX", kind: mcp, state: documented, col: 3, row: 2, sources: [fabric-iq-mcp], summary: "Remote, read-only server for querying semantic models. Good for what is questions in a live workspace."}
+  - {id: dw-mcp, label: "Data Warehouse MCP", sublabel: "Arbitrary T-SQL - preview", kind: mcp, state: preview, col: 3, row: 3, sources: [fabric-dw-mcp], summary: "Remote server that runs T-SQL against a warehouse or SQL endpoint. Preview, and broad by design - off by default, read-only labs against a dev workspace only."}
+  - {id: pbi-mcp, label: "Power BI Authoring MCP", sublabel: "Change it - sandbox PBIP", kind: mcp, state: documented, col: 3, row: 4, icon: power_platform/PowerBI, sources: [powerbi-authoring-mcp], summary: "Local server for authoring semantic models (TMDL, relationships, measures, DAX queries). Write-capable, so use it on a reviewed copy and publish through approval."}
+  - {id: ffia-local, label: "ffia-local (this repo)", sublabel: "Allow-listed, plan-only", kind: mcp, state: implemented, col: 3, row: 5, component: ffia-local-mcp, repo_path: config/policies/tools.yaml}
+  - {id: data-agent-mcp, label: "Fabric data agent MCP", sublabel: "Curated Q&A endpoint", kind: mcp, state: tenant-validation, col: 3, row: 6, sources: [fabric-data-agent], summary: "A published Fabric data agent can be reached as an MCP endpoint. Read-only and scoped to the agent's sources; validate availability and behavior in your tenant."}
+  - {id: onelake, label: "OneLake and items", sublabel: "Lakehouses, notebooks, files", kind: data, state: documented, col: 4, row: 1, component: onelake-medallion}
+  - {id: semantic-model, icon: power_platform/PowerBI, label: "Semantic models", sublabel: "Measures and relationships", kind: fabric, state: documented, col: 4, row: 2, component: semantic-model}
+  - {id: warehouse, label: "Warehouse or SQL endpoint", sublabel: "T-SQL", kind: fabric, state: documented, col: 4, row: 3, summary: "Fabric Data Warehouse or a lakehouse SQL analytics endpoint."}
+  - {id: pbip, label: "PBIP / TMDL in Git", sublabel: "Reviewed definitions", kind: knowledge, state: planned, phase: 5, col: 4, row: 4, summary: "Power BI project files under version control, so model changes are diffs that can be reviewed before publication."}
+  - {id: synthetic, label: "Synthetic local data", sublabel: "Offline equivalent", kind: local, state: implemented, col: 4, row: 5, component: local-fabric-provider}
+  - {id: entra, label: "Entra ID", sublabel: "Caller's permissions", kind: identity, state: documented, col: 5, row: 1, icon: other/Entra_Identity, component: entra-identity}
+  - {id: change-flow, icon: general/Workflow, label: "Approved change flow", sublabel: "Plan, approve, PR", kind: policy, state: implemented, col: 5, row: 4, component: human-approval}
+edges:
+  - {id: vscode-config, source: vscode, target: mcp-json, kind: config}
+  - {id: cli-config, source: copilot-cli, target: mcp-json, kind: config}
+  - {id: app-config, source: copilot-app, target: mcp-json, kind: config}
+  - {id: cloud-config, source: cloud-agent, target: mcp-json, label: "Repository settings", kind: config}
+  - {id: claude-config, source: claude-code, target: mcp-json, kind: config}
+  - {id: to-learn, source: mcp-json, target: learn-mcp, label: "How", kind: access}
+  - {id: to-fabric-local, source: mcp-json, target: fabric-mcp-local, label: "How and what is", kind: access}
+  - {id: to-iq, source: mcp-json, target: fabric-iq-mcp, label: "What is", kind: access, step: direct}
+  - {id: to-dw, source: mcp-json, target: dw-mcp, label: "Off by default", kind: access, planned: true}
+  - {id: to-pbi, source: mcp-json, target: pbi-mcp, label: "Change it (reviewed)", kind: change}
+  - {id: to-ffia, source: mcp-json, target: ffia-local, label: "Offline", kind: access}
+  - {id: to-data-agent, source: mcp-json, target: data-agent-mcp, label: "Ask", kind: access, planned: true}
+  - {id: to-gateway, source: mcp-json, target: apim, label: "One front door", kind: access, step: gateway}
+  - {id: gateway-to-iq, source: apim, target: fabric-iq-mcp, label: "Policy, quota, audit", kind: access, step: gateway}
+  - {id: fabric-local-lake, source: fabric-mcp-local, target: onelake, kind: access}
+  - {id: iq-model, source: fabric-iq-mcp, target: semantic-model, label: "DAX (read)", kind: context}
+  - {id: dw-warehouse, source: dw-mcp, target: warehouse, label: "T-SQL", kind: access}
+  - {id: pbi-pbip, source: pbi-mcp, target: pbip, label: "Edit a copy", kind: change}
+  - {id: ffia-synthetic, source: ffia-local, target: synthetic, label: "LOCAL", kind: data}
+  - {id: entra-lake, source: entra, target: onelake, label: "Decides access", kind: authority}
+  - {id: pbip-change, source: pbip, target: change-flow, label: "Publish after approval", kind: authority}
+bands:
+  - {id: identity, kind: identity, text: "Identity: every server runs with the caller's Entra identity and Fabric permissions. MCP standardizes access; it does not grant authority."}
+  - {id: policy, kind: policy, text: "Narrowest server: documentation tools for how, read-only tools for what is, and Git or the approved change flow for change it. Pin server versions; never enable broad write tools by default."}
+  - {id: gateway-band, kind: network, step: gateway, text: "A gateway adds central sign-in checks, quotas, logging and versioning. It never replaces record-level authorization in the server or Fabric."}
+traces:
+  - id: narrowest-server
+    title: Pick the narrowest server
+    summary: One data-engineering task, three kinds of question, three different servers.
+    label: PLANNED FLOW
+    steps:
+      - {node: copilot-cli, say: "An engineer asks Copilot CLI to add a Silver table for encounters."}
+      - {node: mcp-json, edge: cli-config, say: "The harness loads the shared MCP configuration and repo instructions."}
+      - {node: learn-mcp, edge: to-learn, say: "How - documentation tools explain the right notebook and Delta patterns. No tenant needed."}
+      - {node: fabric-mcp-local, edge: to-fabric-local, say: "What is - read-only tools list the lakehouse tables with the engineer's permissions."}
+      - {node: onelake, edge: fabric-local-lake, say: "Fabric permissions decide what the engineer can see."}
+      - {node: change-flow, say: "Change it - the notebook arrives as a reviewed pull request or an approved plan, not a direct write."}
+  - id: offline-practice
+    title: Practice offline
+    summary: The same questions answered against synthetic data with no tenant.
+    label: LOCAL
+    demo_act: 3
+    steps:
+      - {node: claude-code, say: "Claude Code (or Copilot) uses the same .mcp.json."}
+      - {node: mcp-json, edge: claude-config, say: "It starts ffia-local over stdio."}
+      - {node: ffia-local, edge: to-ffia, say: "Read tools inspect the medallion; plan tools propose but never execute."}
+      - {node: synthetic, edge: ffia-synthetic, say: "Answers come from synthetic data, labeled LOCAL."}

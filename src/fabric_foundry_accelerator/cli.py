@@ -11,6 +11,7 @@ from pathlib import Path
 
 from fabric_foundry_accelerator import __version__
 from fabric_foundry_accelerator.education import commands as education_commands
+from fabric_foundry_accelerator.education import diagram_docs
 from fabric_foundry_accelerator.observability.logging import configure_logging
 from fabric_foundry_accelerator.privacy.leak_scan import (
     DEFAULT_DENYLIST_PATH,
@@ -117,6 +118,7 @@ def build_parser() -> argparse.ArgumentParser:
     recovery_commands.register(sub)
     runtime_commands.register(sub)
     education_commands.register(sub)
+    diagram_docs.register(sub)
     return parser
 
 

@@ -1,0 +1,134 @@
+# Reference architecture: Fabric provides governed context, Foundry reasons and acts, MCP is
+# access (not authority), identity and policy decide, evidence proves. Customer-neutral.
+id: reference
+title: Fabric + Foundry reference architecture
+kind: reference
+summary: >-
+  The end-to-end reference: governed business context in Microsoft Fabric, reasoning and
+  orchestration in Microsoft Foundry, MCP as standardized capability access, Entra identity and
+  policy as authority, a human-approved scoped writer for changes, and evidence at every hop.
+cue: >-
+  Build it one layer at a time. Fabric first, because the answer is only as good as the governed
+  data and definitions. Then Foundry for reasoning. Then MCP for access. Then authority, because
+  access is not permission. Then evidence, because a claim without proof is not a result.
+columns: 7
+rows: 7
+doc: reference-architecture
+aligned_to: [caf-agent-data-architecture, basic-foundry-chat, baseline-foundry-chat, fabric-medallion, fabric-deployment-patterns, fabric-waf, foundry-fabric-tool, fabric-mcp-servers-list, apim-mcp, foundry-mcp-governance, ai-agent-orchestration]
+pattern_ids: [P01, P04, P06, P08, P09, P10, P11, P12, P15, P16]
+steps:
+  - id: fabric
+    label: Fabric governed context
+    cue: Start with the data. Mirrored and landed data is refined from Bronze to Gold, and the semantic model holds the business definitions everyone reuses.
+  - id: foundry
+    label: + Foundry reasoning
+    cue: Foundry adds an agent that reasons over that context. It asks a Fabric data agent on behalf of the user, so Fabric permissions still decide what is visible.
+  - id: mcp
+    label: + MCP access
+    cue: MCP standardizes how agents and coding tools reach capabilities. A gateway is optional. Note what MCP does not do - it does not grant authority.
+  - id: authority
+    label: + Authority
+    cue: Any change is proposed, validated by policy, approved by a person and executed only by a narrowly scoped writer. The model never approves.
+  - id: evidence
+    label: + Evidence
+    cue: Traces, evaluations and audit records turn every claim into evidence. Labels say what really ran.
+zones:
+  - {id: foundry-zone, label: "Microsoft Foundry", kind: foundry, col: 2, row: 0, cols: 1, rows: 4, step: foundry}
+  - {id: access-zone, label: "Capability access (MCP)", kind: optional, col: 3, row: 3, cols: 1, rows: 2, step: mcp}
+  - {id: fabric-zone, label: "Microsoft Fabric", kind: fabric, col: 4, row: 0, cols: 3, rows: 3}
+  - {id: authority-zone, label: "Authority", kind: tenant, col: 1, row: 5, cols: 5, rows: 1, step: authority}
+  - {id: evidence-zone, label: "Evidence", kind: tenant, col: 1, row: 6, cols: 4, rows: 1, step: evidence}
+nodes:
+  # People and experience
+  - {id: business-users, icon: identity/Users, label: "Business users", sublabel: "Signed in with Entra ID", kind: person, state: documented, col: 0, row: 1, step: foundry, summary: "People asking questions of governed data through an agent experience. They act with their own identity."}
+  - {id: engineers, icon: identity/Users, label: "Data engineers", sublabel: "Build and change Fabric items", kind: person, state: documented, col: 0, row: 4, step: mcp, summary: "Engineers who build pipelines, notebooks and semantic models, increasingly with an AI coding agent."}
+  - {id: agent-app, icon: app_services/App_Services, label: "Agent experience", sublabel: "Web app or Teams", kind: app, state: documented, col: 1, row: 1, step: foundry, sources: [baseline-foundry-chat], summary: "The user-facing chat or app that hosts the agent conversation. In the Microsoft baseline Foundry chat architecture this is a web app behind a web application firewall, calling Foundry Agent Service with a managed identity."}
+  - {id: coding-agents, icon: general/Code, label: "GitHub Copilot / Claude Code", sublabel: "Agent harness", kind: harness, state: documented, col: 1, row: 4, step: mcp, component: coding-agents}
+  # Foundry
+  - {id: foundry-models, icon: ai_machine_learning/Foundry_Models, label: "Foundry models", sublabel: "Deployed models", kind: foundry, state: documented, col: 2, row: 0, step: foundry, sources: [foundry-overview], summary: "Models deployed in a Foundry project that the agent uses to reason. Model choice and deployment are Foundry concerns, not Fabric ones."}
+  - {id: foundry-agent, icon: ai_machine_learning/Foundry_Agent_Service, label: "Foundry Agent Service", sublabel: "Reasoning and orchestration", kind: foundry, state: documented, col: 2, row: 1, step: foundry, component: foundry-agent}
+  - {id: foundry-iq, icon: ai_machine_learning/AI_Foundry_IQ, label: "Foundry IQ knowledge", sublabel: "Cited retrieval", kind: foundry, state: preview, col: 2, row: 2, step: foundry, sources: [foundry-iq], summary: "Knowledge bases that ground the agent in documents with citations, including files in OneLake. Some experiences are in preview."}
+  - {id: agent-framework, icon: general/Code, label: "Agent Framework", sublabel: "Code-first agents and workflows", kind: foundry, state: documented, col: 2, row: 3, step: foundry, component: agent-framework}
+  # Access
+  - {id: apim-gateway, icon: app_services/API_Management_Services, label: "API Management", sublabel: "Optional AI gateway for MCP tools", kind: gateway, state: optional, col: 3, row: 3, step: mcp, component: apim-gateway}
+  - {id: fabric-mcp, label: "Fabric MCP servers", sublabel: "Narrowest server per job", kind: mcp, state: documented, col: 3, row: 4, step: mcp, component: fabric-mcp}
+  # Fabric
+  - {id: fabric-iq, label: "Fabric IQ ontology", sublabel: "Shared business vocabulary", kind: fabric, state: preview, col: 4, row: 0, component: fabric-iq}
+  - {id: data-agent, label: "Fabric data agent", sublabel: "Curated Q&A, user permissions", kind: fabric, state: documented, col: 4, row: 1, component: fabric-data-agent}
+  - {id: semantic-model, icon: power_platform/PowerBI, label: "Semantic model", sublabel: "Direct Lake, governed measures", kind: fabric, state: documented, col: 4, row: 2, component: semantic-model}
+  - {id: onelake, label: "OneLake medallion", sublabel: "Bronze → Silver → Gold", kind: data, state: documented, col: 5, row: 2, component: onelake-medallion}
+  - {id: open-mirroring, label: "Open Mirroring", sublabel: "Landing zone replication", kind: data, state: documented, col: 6, row: 2, component: open-mirroring}
+  - {id: source-systems, label: "Operational systems", sublabel: "Authority for transactions", kind: external, state: documented, col: 6, row: 3, summary: "The business systems that own transactional truth. Analytics and agents read replicated copies; writes go back only through an approved, scoped path."}
+  # Authority
+  - {id: entra, icon: other/Entra_Identity, label: "Entra ID", sublabel: "Who is asking", kind: identity, state: documented, col: 1, row: 5, step: authority, component: entra-identity}
+  - {id: policy, icon: general/Workflow, label: "Deterministic policy", sublabel: "Validate the proposal", kind: policy, state: implemented, col: 2, row: 5, step: authority, component: policy-engine, repo_path: config/policies/writes.yaml}
+  - {id: approval, label: "Human approval", sublabel: "Not the requester", kind: policy, state: implemented, col: 3, row: 5, step: authority, component: human-approval, repo_path: src/fabric_foundry_accelerator/services/changes.py}
+  - {id: scoped-writer, label: "Scoped writer", sublabel: "Only the approved change", kind: policy, state: planned, phase: 5, col: 4, row: 5, step: authority, component: scoped-writer}
+  - {id: system-of-record, label: "Fabric item or system of record", sublabel: "Verified after the write", kind: external, state: documented, col: 5, row: 5, step: authority, summary: "The target of an approved change. The writer verifies the result against it, and the audit trail records the outcome."}
+  # Evidence
+  - {id: observability, icon: devops/Application_Insights, label: "Tracing and monitoring", sublabel: "Correlation IDs", kind: evidence, state: documented, col: 1, row: 6, step: evidence, component: observability}
+  - {id: evaluation, label: "Evaluation", sublabel: "Baselines and evaluators", kind: evidence, state: implemented, col: 2, row: 6, step: evidence, component: evaluation, repo_path: src/fabric_foundry_accelerator/services/evaluation.py}
+  - {id: audit, icon: general/File, label: "Audit trail", sublabel: "Append-only, redacted", kind: evidence, state: implemented, col: 4, row: 6, step: evidence, component: audit-store, repo_path: src/fabric_foundry_accelerator/audit/store.py}
+edges:
+  - {id: mirror-to-lake, source: open-mirroring, target: onelake, label: "Replicate changes", kind: data}
+  - {id: sources-to-mirror, source: source-systems, target: open-mirroring, label: "Change files", kind: data}
+  - {id: model-to-lake, source: semantic-model, target: onelake, label: "Direct Lake", kind: context}
+  - {id: agent-to-model, source: data-agent, target: semantic-model, label: "Governed definitions", kind: context}
+  - {id: iq-to-model, source: fabric-iq, target: data-agent, label: "Shared vocabulary", kind: context}
+  - {id: users-to-app, source: business-users, target: agent-app, label: "Ask", kind: access, step: foundry}
+  - {id: app-to-foundry, source: agent-app, target: foundry-agent, label: "Conversation", kind: reasoning, step: foundry}
+  - {id: foundry-to-models, source: foundry-agent, target: foundry-models, label: "Reason", kind: reasoning, step: foundry}
+  - {id: foundry-to-iq, source: foundry-agent, target: foundry-iq, label: "Cited knowledge", kind: context, step: foundry}
+  - {id: foundry-to-data-agent, source: foundry-agent, target: data-agent, label: "Fabric data agent tool - PREVIEW, on behalf of the user", kind: access, step: foundry}
+  - {id: engineers-to-agents, source: engineers, target: coding-agents, label: "Intent", kind: access, step: mcp}
+  - {id: agents-to-fabric-mcp, source: coding-agents, target: fabric-mcp, label: "Tools - how and what is", kind: access, step: mcp}
+  - {id: framework-to-gateway, source: agent-framework, target: apim-gateway, label: "MCP tools", kind: access, step: mcp}
+  - {id: gateway-to-mcp, source: apim-gateway, target: fabric-mcp, label: "Govern, limit, log", kind: access, step: mcp}
+  - {id: mcp-to-lake, source: fabric-mcp, target: onelake, label: "Caller's Fabric permissions", kind: access, step: mcp}
+  - {id: entra-to-policy, source: entra, target: policy, label: "Who is asking", kind: authority, step: authority}
+  - {id: policy-to-approval, source: policy, target: approval, label: "Validated plan", kind: authority, step: authority}
+  - {id: approval-to-writer, source: approval, target: scoped-writer, label: "Approved and destination-bound", kind: authority, step: authority}
+  - {id: writer-to-target, source: scoped-writer, target: system-of-record, label: "Only the approved write", kind: change, step: authority, planned: true}
+  - {id: writer-to-audit, source: scoped-writer, target: audit, label: "Record every step", kind: evidence, step: evidence}
+  - {id: eval-to-observability, source: evaluation, target: observability, label: "Scores linked to traces", kind: evidence, step: evidence}
+bands:
+  - {id: identity-band, kind: identity, step: authority, text: "Identity: users act with their own Entra identity, and Fabric permissions decide what each one sees (on-behalf-of). The writer is a separate, least-privilege identity."}
+  - {id: policy-band, kind: policy, step: authority, text: "Authority: models propose, deterministic policy validates, a human approves, and only the scoped writer writes. MCP access and gateway policy never replace backend authorization."}
+  - {id: evidence-band, kind: evidence, step: evidence, text: "Evidence: every hop carries a correlation ID and an execution label. A configured server, a tool description or an existing item is not proof that an operation ran."}
+traces:
+  - id: governed-question
+    title: Ask a governed question
+    summary: A business user asks a question; the answer comes from governed Fabric definitions under the user's own permissions.
+    label: PLANNED FLOW
+    steps:
+      - {node: business-users, say: "A user asks a question in the agent experience.", note: "Signed in with Entra ID."}
+      - {node: agent-app, edge: users-to-app, say: "The app passes the conversation to the Foundry agent.", note: "The app holds no data permissions of its own."}
+      - {node: foundry-agent, edge: app-to-foundry, say: "The agent decides it needs governed numbers, not a guess."}
+      - {node: data-agent, edge: foundry-to-data-agent, say: "It asks the Fabric data agent on behalf of the user.", note: "The Foundry Fabric data agent tool is in preview and uses the user's identity."}
+      - {node: semantic-model, edge: agent-to-model, say: "The data agent answers from the semantic model's governed measures."}
+      - {node: onelake, edge: model-to-lake, say: "Direct Lake reads Gold tables in OneLake. Fabric permissions filter what this user may see."}
+      - {node: foundry-agent, say: "The agent composes the answer with its sources."}
+      - {node: evaluation, say: "Evaluations score groundedness and correctness against expected answers.", note: "Offline, Act 6 of the demo is UNAVAILABLE until Phase 6 - nothing is simulated as Foundry."}
+  - id: governed-action
+    title: Make a governed change
+    summary: An agent proposes a change; policy validates, a person approves, and only the scoped writer executes.
+    label: SIMULATED
+    demo_act: 5
+    steps:
+      - {node: foundry-agent, say: "The agent proposes a change, for example a new lakehouse.", note: "Model intent is not proof of authorization."}
+      - {node: policy, say: "Deterministic policy checks the operation, workspace, duplicates and risk."}
+      - {node: approval, edge: policy-to-approval, say: "A different person approves. Self-approval is refused and audited."}
+      - {node: scoped-writer, edge: approval-to-writer, say: "Only the scoped writer executes, and only the approved, destination-bound change."}
+      - {node: system-of-record, edge: writer-to-target, say: "The writer verifies the result against the target.", note: "Offline this is a simulated workspace labeled SIMULATED. An approved LIVE change is never redirected to it."}
+      - {node: audit, edge: writer-to-audit, say: "Every step is in the audit trail under one correlation ID."}
+  - id: engineer-change
+    title: Engineer with a coding agent
+    summary: An engineer uses GitHub Copilot or Claude Code; MCP gives access to docs and context, and changes still go through review and approval.
+    label: PLANNED FLOW
+    steps:
+      - {node: engineers, say: "An engineer asks the coding agent to design or fix a pipeline."}
+      - {node: coding-agents, edge: engineers-to-agents, say: "The harness loads repo instructions and skills - the knowledge to do it correctly."}
+      - {node: fabric-mcp, edge: agents-to-fabric-mcp, say: "It uses the narrowest MCP server - docs for how, read-only tools for what is."}
+      - {node: onelake, edge: mcp-to-lake, say: "Reads run with the engineer's own Fabric permissions."}
+      - {node: policy, say: "Any change becomes a plan or a pull request, never a direct write."}
+      - {node: approval, edge: policy-to-approval, say: "A reviewer approves before anything is applied."}

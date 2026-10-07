@@ -52,6 +52,11 @@ def main() -> None:
                 "architecture": "/api/v1/education/architecture",
                 "completeness": "/api/v1/education/completeness",
                 "profiles": "/api/v1/profiles",
+                "views": "/api/v1/education/views",
+                "view-reference": "/api/v1/education/views/reference",
+                "view-system": "/api/v1/education/views/system",
+                "view-hc01": "/api/v1/education/views/hc-01",
+                "view-system-runtime": "/api/v1/education/views/system/runtime",
             }
             for name, path in gets.items():
                 response = client.get(path)

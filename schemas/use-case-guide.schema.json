@@ -50,6 +50,14 @@
           "title": "Copilot Prompt",
           "type": "string"
         },
+        "diagram_focus": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Diagram Focus",
+          "type": "array"
+        },
         "evidence_required": {
           "items": {
             "type": "string"
@@ -282,6 +290,18 @@
     "dataset_profile": {
       "title": "Dataset Profile",
       "type": "string"
+    },
+    "diagram": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Diagram"
     },
     "expected_baseline": {
       "title": "Expected Baseline",

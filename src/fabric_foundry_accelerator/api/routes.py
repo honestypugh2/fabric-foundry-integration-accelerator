@@ -7,7 +7,10 @@ from fastapi import APIRouter, Body, Depends, Request, Response
 from pydantic import BaseModel, ConfigDict, Field
 
 from fabric_foundry_accelerator.audit.store import AuditRecord
+from fabric_foundry_accelerator.education.diagrams import DiagramView
+from fabric_foundry_accelerator.education.drawio import render_drawio
 from fabric_foundry_accelerator.education.guides import GuideStep, UseCaseGuide
+from fabric_foundry_accelerator.education.layout import ViewLayout, compute_layout
 from fabric_foundry_accelerator.education.lessons import ArchitectureMap, CompletenessReport, Lab
 from fabric_foundry_accelerator.models.changes import (
     Approval,
@@ -35,6 +38,7 @@ from fabric_foundry_accelerator.services.demo import (
     demo_check,
     run_offline_demo,
 )
+from fabric_foundry_accelerator.services.diagram_runtime import ViewRuntime, view_runtime
 from fabric_foundry_accelerator.services.education import (
     CheckAnswer,
     CheckGrade,
@@ -366,3 +370,65 @@ def get_architecture(container: ContainerDep) -> ArchitectureMap:
 def get_completeness(container: ContainerDep) -> CompletenessReport:
     """Coverage of the 30-question architecture completeness gate."""
     return container.education.library.completeness_report()
+
+
+class ViewSummary(BaseModel):
+    """An architecture view in a list."""
+
+    model_config = ConfigDict(frozen=True)
+
+    id: str
+    title: str
+    kind: str
+    summary: str
+    doc: str | None
+    pattern_ids: tuple[str, ...]
+
+
+@router.get("/api/v1/education/views", tags=["education"])
+def list_views(container: ContainerDep) -> list[ViewSummary]:
+    """Architecture views (interactive diagrams)."""
+    return [
+        ViewSummary(
+            id=v.id,
+            title=v.title,
+            kind=v.kind,
+            summary=v.summary,
+            doc=v.doc,
+            pattern_ids=v.pattern_ids,
+        )
+        for v in container.education.library.views
+    ]
+
+
+class RenderedView(BaseModel):
+    """A view with the shared layout used by both the app and the draw.io files."""
+
+    model_config = ConfigDict(frozen=True)
+
+    view: DiagramView
+    layout: ViewLayout
+
+
+@router.get("/api/v1/education/views/{view_id}", tags=["education"])
+def get_view(view_id: str, container: ContainerDep) -> RenderedView:
+    """One architecture view and its layout: nodes, edges, zones, bands, build steps and traces."""
+    view = container.education.library.view(view_id)
+    return RenderedView(view=view, layout=compute_layout(view))
+
+
+@router.get("/api/v1/education/views/{view_id}/drawio", tags=["education"])
+def get_view_drawio(view_id: str, container: ContainerDep) -> Response:
+    """The view as a draw.io file (same content as docs/architecture/diagrams)."""
+    view = container.education.library.view(view_id)
+    return Response(
+        content=render_drawio(view),
+        media_type="application/xml",
+        headers={"Content-Disposition": f'attachment; filename="{view.id}.drawio"'},
+    )
+
+
+@router.get("/api/v1/education/views/{view_id}/runtime", tags=["education"])
+def get_view_runtime(view_id: str, container: ContainerDep) -> ViewRuntime:
+    """The live state of every runtime-bound node in a view."""
+    return view_runtime(container, container.education.library.view(view_id))

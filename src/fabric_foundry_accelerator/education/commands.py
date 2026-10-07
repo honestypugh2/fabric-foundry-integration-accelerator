@@ -5,7 +5,11 @@ import sys
 from pathlib import Path
 
 from fabric_foundry_accelerator.education.guides import load_guides
-from fabric_foundry_accelerator.education.lessons import EducationReferences, load_education
+from fabric_foundry_accelerator.education.lessons import (
+    EducationReferences,
+    guide_diagram_errors,
+    load_education,
+)
 from fabric_foundry_accelerator.patterns.catalog import load_catalog
 from fabric_foundry_accelerator.research.sources import DEFAULT_REGISTRY_PATH, load_registry
 
@@ -22,6 +26,10 @@ def _cmd_check(args: argparse.Namespace) -> int:
         library = load_education(education_root, refs)
     except ValueError as error:
         sys.stderr.write(f"education content is invalid:\n{error}\n")
+        return 1
+    diagram_errors = guide_diagram_errors(library, load_guides(Path(args.guides_root), catalog))
+    if diagram_errors:
+        sys.stderr.write("guide diagrams are invalid:\n- " + "\n- ".join(diagram_errors) + "\n")
         return 1
     report = library.completeness_report()
     checks = sum(len(lesson.checks) for lesson in library.lessons)

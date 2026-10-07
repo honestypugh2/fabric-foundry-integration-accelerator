@@ -11,9 +11,9 @@ const START: readonly { readonly to: string; readonly title: string; readonly te
     text: "Fabric MCP + Power BI medallion lab with GitHub Copilot or Claude Code, step by step.",
   },
   {
-    to: "/architecture",
+    to: "/architecture/reference",
     title: "Explore the architecture",
-    text: "Who owns context, reasoning, access, authority and evidence, at your level.",
+    text: "Interactive diagrams: build them layer by layer, trace a request, see live runtime state.",
   },
   {
     to: "/learn/copilot-maturity-ladder",

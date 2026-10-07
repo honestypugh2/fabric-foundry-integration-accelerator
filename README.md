@@ -77,6 +77,9 @@ make run-mcp         # local educational MCP server (stdio), also registered in 
 make run             # API + educational app on http://localhost:5173 (Guide HC-01 runner at /guides)
 ```
 
+Architecture diagrams (draw.io, Azure Architecture Center style, generated from YAML) are in
+[`docs/architecture`](docs/architecture/README.md) and interactive in the app at `/architecture`.
+
 See [control plane](docs/architecture/control-plane.md), [frontend](docs/architecture/frontend.md),
 [resilience](docs/architecture/resilience.md), [demo continuity](docs/operations/demo-continuity.md)
 and [learning paths](docs/education/learning-paths.md).

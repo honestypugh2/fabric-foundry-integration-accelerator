@@ -1,0 +1,101 @@
+[
+  {
+    "doc": "agentic-data-engineering",
+    "id": "agentic-de",
+    "kind": "maturity",
+    "pattern_ids": [
+      "P19",
+      "P20",
+      "P21",
+      "P22",
+      "P23",
+      "P24"
+    ],
+    "summary": "Five columns - knowledge, harness, execution, authority and evidence - filled in one maturity level at a time, from assisted coding (L1) to governed change (L5) and parallel agents (L6).",
+    "title": "Leveling up Fabric data engineering with GitHub Copilot"
+  },
+  {
+    "doc": "hc-01-architecture",
+    "id": "hc-01",
+    "kind": "flow",
+    "pattern_ids": [
+      "P10",
+      "P12",
+      "P09",
+      "P19",
+      "P08",
+      "P16"
+    ],
+    "summary": "GitHub Copilot in VS Code (or Claude Code) uses the local Fabric MCP server to create a lakehouse and land seven synthetic CSVs; reviewed notebooks build Bronze, Silver and Gold on Fabric Spark; a Direct Lake semantic model is edited with Power BI Authoring MCP; DAX checks reconcile with the Gold baseline; a two-page report is published after review.",
+    "title": "HC-01: Fabric MCP + Power BI medallion lab"
+  },
+  {
+    "doc": "live-vs-offline",
+    "id": "live-vs-offline",
+    "kind": "resilience",
+    "pattern_ids": [
+      "P17",
+      "P08"
+    ],
+    "summary": "How a request is served when services are healthy, slow or unavailable. Reads may fall back to an approved local equivalent with a visible label and reason; writes never fall back; client errors never trigger a fallback.",
+    "title": "LIVE, HYBRID and OFFLINE"
+  },
+  {
+    "doc": "mcp-topology",
+    "id": "mcp-topology",
+    "kind": "topology",
+    "pattern_ids": [
+      "P09",
+      "P15",
+      "P19"
+    ],
+    "summary": "Every agent harness shares one MCP configuration and one set of instructions. Each job uses the narrowest server: documentation tools for how, read-only tools for what is, and the approved change flow for change it. A gateway is optional.",
+    "title": "MCP topology for Fabric data engineering"
+  },
+  {
+    "doc": "production-architecture",
+    "id": "production",
+    "kind": "reference",
+    "pattern_ids": [
+      "P01",
+      "P06",
+      "P14",
+      "P15",
+      "P16"
+    ],
+    "summary": "How the reference architecture is deployed for production. The application tier follows the Azure Architecture Center baseline Microsoft Foundry chat architecture (WAF ingress, private endpoints, firewall-controlled egress, managed identities, customer-owned agent state). Fabric supplies governed data through the Fabric data agent (preview, on behalf of the user). MCP tools are governed once, through an API Management-backed gateway.",
+    "title": "Production deployment (aligned to the Foundry baseline)"
+  },
+  {
+    "doc": "reference-architecture",
+    "id": "reference",
+    "kind": "reference",
+    "pattern_ids": [
+      "P01",
+      "P04",
+      "P06",
+      "P08",
+      "P09",
+      "P10",
+      "P11",
+      "P12",
+      "P15",
+      "P16"
+    ],
+    "summary": "The end-to-end reference: governed business context in Microsoft Fabric, reasoning and orchestration in Microsoft Foundry, MCP as standardized capability access, Entra identity and policy as authority, a human-approved scoped writer for changes, and evidence at every hop.",
+    "title": "Fabric + Foundry reference architecture"
+  },
+  {
+    "doc": "system-architecture",
+    "id": "system",
+    "kind": "system",
+    "pattern_ids": [
+      "P08",
+      "P09",
+      "P16",
+      "P17"
+    ],
+    "summary": "How the educational app, the control plane, the local MCP server, the providers, policies, data and audit log fit together in this repository, and which parts are live right now.",
+    "title": "This accelerator at run time"
+  }
+]

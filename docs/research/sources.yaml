@@ -335,6 +335,76 @@ sources:
     security_implications: Private networking and identity-based access are primary controls.
     limitations: Guidance only.
     fallback: Not applicable.
+  - id: basic-foundry-chat
+    title: Basic Microsoft Foundry chat reference architecture
+    url: https://learn.microsoft.com/azure/architecture/ai-ml/architecture/basic-microsoft-foundry-chat
+    publisher: Azure Architecture Center
+    retrieved_date: 2026-10-07
+    last_updated_date: 2026-06-17
+    technology: Microsoft Foundry
+    associated_patterns: [P06, P17]
+    status: GUIDANCE
+    key_architecture_statement: Introductory, not-for-production chat architecture that uses identity as its perimeter (App Service with Easy Auth, Foundry Agent Service, AI Search, Application Insights).
+    implementation_relevance: The local accelerator corresponds to this proof-of-concept tier; production diagrams follow the baseline.
+    security_implications: No network isolation or egress control; the article itself defers those to the baseline.
+    limitations: Explicitly not for production.
+    fallback: Not applicable.
+  - id: baseline-foundry-landing-zone
+    title: Baseline Microsoft Foundry chat reference architecture in an Azure landing zone
+    url: https://learn.microsoft.com/azure/architecture/ai-ml/architecture/baseline-microsoft-foundry-landing-zone
+    publisher: Azure Architecture Center
+    retrieved_date: 2026-10-07
+    last_updated_date: 2026-06-17
+    technology: Microsoft Foundry
+    associated_patterns: [P14]
+    status: GUIDANCE
+    key_architecture_statement: Splits the baseline between a workload landing zone and a platform landing zone (hub network, firewall, connectivity).
+    implementation_relevance: Production deployment view and operating-model notes for platform versus workload teams.
+    security_implications: Egress and connectivity are owned by the platform team; the workload team owns application resources.
+    limitations: Guidance only.
+    fallback: Not applicable.
+  - id: foundry-mcp-governance
+    title: Govern MCP tools by using an AI gateway (Microsoft Foundry)
+    url: https://learn.microsoft.com/azure/foundry/agents/how-to/tools/governance
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-07
+    last_updated_date: 2026-08-19
+    technology: Microsoft Foundry
+    associated_patterns: [P09, P15]
+    status: PREVIEW
+    key_architecture_statement: The Foundry AI gateway for MCP tools is backed by an Azure API Management instance; policies such as rate limits and IP filtering are API Management policies.
+    implementation_relevance: Diagrams show one API Management-backed gateway for MCP tools rather than two separate gateways.
+    security_implications: Gateway policy adds central controls but does not replace authorization in the MCP server or data platform.
+    limitations: Preview; applies only to new MCP tools created in the Foundry portal that do not use managed OAuth.
+    fallback: Local rate limiting and audit in ffia-local.
+  - id: caf-agent-data-architecture
+    title: Data architecture for AI agents across your organization
+    url: https://learn.microsoft.com/azure/cloud-adoption-framework/ai-agents/data-architecture-plan
+    publisher: Cloud Adoption Framework
+    retrieved_date: 2026-10-07
+    last_updated_date: 2025-12-01
+    technology: Microsoft Fabric and Microsoft Foundry
+    associated_patterns: [P01, P02, P06]
+    status: GUIDANCE
+    key_architecture_statement: OneLake is the central governed data lake for data products; agents consume them through Fabric IQ, Foundry IQ and Copilot Studio, inside an Azure landing zone.
+    implementation_relevance: The closest first-party guidance combining Fabric and Foundry; the reference architecture follows its framing.
+    security_implications: Prefer built-in retrieval before custom MCP servers; govern data products per domain.
+    limitations: Conceptual guidance, not a deployable reference architecture.
+    fallback: Not applicable.
+  - id: ai-agent-orchestration
+    title: AI agent orchestration patterns
+    url: https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns
+    publisher: Azure Architecture Center
+    retrieved_date: 2026-10-07
+    last_updated_date: 2026-02-12
+    technology: AI agents
+    associated_patterns: [P02, P13]
+    status: GUIDANCE
+    key_architecture_statement: Use the lowest complexity that works - a direct model call, a single agent with tools, then multi-agent orchestration (sequential, concurrent, group chat, handoff, magentic).
+    implementation_relevance: Pattern 13 (multi-domain is not multi-agent) and orchestration choices in Foundry lessons.
+    security_implications: More agents mean more tool surfaces and identities to govern.
+    limitations: Guidance only.
+    fallback: Not applicable.
   - id: foundry-evaluators
     title: Built-in evaluators in Microsoft Foundry
     url: https://learn.microsoft.com/azure/foundry/concepts/built-in-evaluators

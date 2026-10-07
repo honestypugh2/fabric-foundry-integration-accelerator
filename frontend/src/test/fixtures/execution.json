@@ -1,9 +1,9 @@
 {
   "cloud_operation_performed": false,
-  "correlation_id": "6c7e429fa31f49ae8b5f31c0bc16dbfc",
+  "correlation_id": "5129270e0075444f90e7efafe8a4c517",
   "data": {
-    "approval_id": "183af3629a554f51bc99feef2480abc5",
-    "change_id": "539483de733e40d59f536fd7519b3093",
+    "approval_id": "48550118938c4a43b4a852d7209cafd2",
+    "change_id": "c5847d97037f4a348996a4b91cb92ce6",
     "execution_label": "SIMULATED",
     "rollback": "Delete the lakehouse after confirming it is empty and unused.",
     "status": "VERIFIED",
@@ -24,5 +24,5 @@
   "selected_provider": "Simulated Workspace (LOCAL)",
   "simulation_notice": "SIMULATED change against a local simulated workspace. No Microsoft Fabric item was created, changed or deleted.",
   "teaching_objective": "A model proposes, policy validates, a human approves, a scoped writer executes, then verify and audit.",
-  "timestamp": "2026-10-07T21:42:10.093501Z"
+  "timestamp": "2026-10-07T23:08:05.362526Z"
 }

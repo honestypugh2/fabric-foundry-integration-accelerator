@@ -25,11 +25,11 @@ make run          # API on :8000 and the Vite dev server on :5173 (proxying /api
 | Route | What it does |
 |---|---|
 | `/` | The central lesson, starting points, completeness coverage |
-| `/architecture` | Layers → components → per-level description, ownership, interactions, offline equivalent |
+| `/architecture/:view` | **Architecture Studio**: interactive diagrams (reference, production, system, MCP topology, maturity ladder, HC-01, LIVE/HYBRID/OFFLINE) built layer by layer, request traces with a presenter cue, an inspector that follows the level, a live runtime overlay, a text alternative and draw.io download. `/architecture/components` keeps the per-layer component catalog. |
 | `/patterns`, `/patterns/:id` | Search and filter 24 patterns, compare up to three, recommend by need, pattern detail with lessons |
 | `/learn`, `/learn/:id` | Lessons by area; reader with level tabs, evidence categories, prompts, server-graded checks |
 | `/labs`, `/labs/:id` | Eleven-stage labs with commands and local progress |
-| `/guides`, `/guides/:id/:step` | **Guide runner** (HC-01): provider/server/tool, Copilot and Claude Code prompts, checkpoint, evidence checklist, "not evidence", offline equivalent, and rehearsal of the step's governed write |
+| `/guides`, `/guides/:id/:step` | **Guide runner** (HC-01): provider/server/tool, Copilot and Claude Code prompts, checkpoint, evidence checklist, "not evidence", offline equivalent, where the step happens on the HC-01 diagram, and rehearsal of the step's governed write |
 | `/data` | Lakehouse tables and previews through the router, and evaluation against the baseline |
 | `/demo` | Readiness probes and the ten-act offline demo |
 

@@ -8,11 +8,13 @@
 import { z } from "zod";
 import type * as G from "./generated";
 
-type DeepRequired<T> = T extends readonly (infer U)[]
-  ? DeepRequired<U>[]
-  : T extends object
-    ? { -readonly [K in keyof T]-?: DeepRequired<Exclude<T[K], undefined>> }
-    : T;
+type DeepRequired<T> = T extends readonly [unknown, ...unknown[]]
+  ? { -readonly [K in keyof T]: DeepRequired<T[K]> }
+  : T extends readonly (infer U)[]
+    ? DeepRequired<U>[]
+    : T extends object
+      ? { -readonly [K in keyof T]-?: DeepRequired<Exclude<T[K], undefined>> }
+      : T;
 
 /** `true` when every server response of type `Full` satisfies the UI view `View`. */
 type Conforms<Full, View> = [DeepRequired<Full>] extends [View] ? true : never;
@@ -174,6 +176,7 @@ export const guideStepSchema = z.object({
   failure_modes: z.array(z.string()),
   requires_windows: z.boolean(),
   rehearsal: rehearsalSchema.nullable(),
+  diagram_focus: z.array(z.string()),
 });
 export type GuideStep = z.output<typeof guideStepSchema>;
 
@@ -201,6 +204,7 @@ export const guideSchema = z.object({
   ),
   dataset_profile: z.string(),
   expected_baseline: z.string(),
+  diagram: z.string().nullable(),
   steps: z.array(guideStepSchema),
 });
 export type Guide = z.output<typeof guideSchema>;
@@ -473,6 +477,177 @@ export const completenessSchema = z.object({
 });
 export type Completeness = z.output<typeof completenessSchema>;
 
+// ------------------------------------------------------------------ architecture views (diagrams)
+const nodeKind = z.enum([
+  "person",
+  "client",
+  "harness",
+  "knowledge",
+  "app",
+  "service",
+  "foundry",
+  "fabric",
+  "data",
+  "mcp",
+  "gateway",
+  "identity",
+  "policy",
+  "evidence",
+  "local",
+  "external",
+]);
+const nodeState = z.enum([
+  "implemented",
+  "planned",
+  "documented",
+  "preview",
+  "tenant-validation",
+  "optional",
+]);
+const runtimeBinding = z.enum([
+  "api",
+  "mcp",
+  "fabric-local",
+  "fabric-live",
+  "foundry",
+  "changes",
+  "audit",
+  "education",
+  "evaluation",
+  "router",
+]);
+const edgeKind = z.enum([
+  "context",
+  "reasoning",
+  "access",
+  "authority",
+  "evidence",
+  "fallback",
+  "change",
+  "data",
+  "config",
+]);
+const boxSchema = z.object({ x: z.number(), y: z.number(), w: z.number(), h: z.number() });
+const pointSchema = z.tuple([z.number(), z.number()]);
+
+export const viewSummarySchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  kind: z.string(),
+  summary: z.string(),
+  doc: z.string().nullable(),
+  pattern_ids: z.array(z.string()),
+});
+export type ViewSummary = z.output<typeof viewSummarySchema>;
+
+export const diagramViewSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  kind: z.enum(["reference", "system", "topology", "flow", "maturity", "resilience"]),
+  summary: z.string(),
+  cue: z.string(),
+  aligned_to: z.array(z.string()),
+  pattern_ids: z.array(z.string()),
+  doc: z.string().nullable(),
+  steps: z.array(z.object({ id: z.string(), label: z.string(), cue: z.string() })),
+  zones: z.array(
+    z.object({
+      id: z.string(),
+      label: z.string(),
+      kind: z.enum(["local", "tenant", "fabric", "foundry", "github", "optional", "offline"]),
+      step: z.string().nullable(),
+    }),
+  ),
+  nodes: z.array(
+    z.object({
+      id: z.string(),
+      label: z.string(),
+      sublabel: z.string(),
+      kind: nodeKind,
+      state: nodeState,
+      step: z.string().nullable(),
+      component: z.string().nullable(),
+      summary: z.string(),
+      repo_path: z.string().nullable(),
+      phase: z.number().nullable(),
+      runtime: runtimeBinding.nullable(),
+      sources: z.array(z.string()),
+    }),
+  ),
+  edges: z.array(
+    z.object({
+      id: z.string(),
+      source: z.string(),
+      target: z.string(),
+      label: z.string(),
+      kind: edgeKind,
+      step: z.string().nullable(),
+      planned: z.boolean(),
+    }),
+  ),
+  bands: z.array(
+    z.object({
+      id: z.string(),
+      kind: z.enum(["identity", "policy", "evidence", "failure", "network"]),
+      text: z.string(),
+      step: z.string().nullable(),
+    }),
+  ),
+  traces: z.array(
+    z.object({
+      id: z.string(),
+      title: z.string(),
+      summary: z.string(),
+      label: z.enum(["PLANNED FLOW", "LOCAL", "SIMULATED", "PREVIEW", "DOCUMENTED"]),
+      demo_act: z.number().nullable(),
+      steps: z.array(
+        z.object({
+          node: z.string(),
+          edge: z.string().nullable(),
+          say: z.string(),
+          note: z.string(),
+        }),
+      ),
+    }),
+  ),
+});
+export type DiagramView = z.output<typeof diagramViewSchema>;
+export type DiagramNode = DiagramView["nodes"][number];
+export type DiagramTrace = DiagramView["traces"][number];
+
+export const viewLayoutSchema = z.object({
+  width: z.number(),
+  height: z.number(),
+  grid_bottom: z.number(),
+  nodes: z.record(z.string(), boxSchema),
+  zones: z.record(z.string(), boxSchema),
+  edges: z.record(
+    z.string(),
+    z.object({ points: z.array(pointSchema), label_at: pointSchema, label_fraction: z.number() }),
+  ),
+});
+export type ViewLayout = z.output<typeof viewLayoutSchema>;
+
+export const renderedViewSchema = z.object({ view: diagramViewSchema, layout: viewLayoutSchema });
+export type RenderedView = z.output<typeof renderedViewSchema>;
+
+export const viewRuntimeSchema = z.object({
+  view_id: z.string(),
+  operating_mode: operatingMode,
+  observed_at: z.string(),
+  nodes: z.array(
+    z.object({
+      node: z.string(),
+      binding: runtimeBinding,
+      status: z.enum(["ACTIVE", "READY", "DEGRADED", "UNAVAILABLE", "NOT CONFIGURED"]),
+      label: z.string(),
+      detail: z.string(),
+    }),
+  ),
+});
+export type ViewRuntime = z.output<typeof viewRuntimeSchema>;
+export type NodeRuntime = ViewRuntime["nodes"][number];
+
 /** Compile-time drift detection between the backend contract and the UI's views. */
 export const contractChecks = {
   runtimeStatus: true satisfies Conforms<G.RuntimeStatus, RuntimeStatus>,
@@ -502,4 +677,7 @@ export const contractChecks = {
   lab: true satisfies Conforms<G.Lab, Lab>,
   architecture: true satisfies Conforms<G.ArchitectureMap, ArchitectureMap>,
   completeness: true satisfies Conforms<G.CompletenessReport, Completeness>,
+  viewSummary: true satisfies Conforms<G.ViewSummary, ViewSummary>,
+  renderedView: true satisfies Conforms<G.RenderedView, RenderedView>,
+  viewRuntime: true satisfies Conforms<G.ViewRuntime, ViewRuntime>,
 } as const;

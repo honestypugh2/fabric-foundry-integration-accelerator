@@ -60,6 +60,7 @@ uv sync --frozen            # install exactly what uv.lock specifies
 | Control plane | `ffia serve api` · `ffia serve mcp` (stdio) |
 | JSON Schemas, OpenAPI, frontend API types | `ffia schemas export` (after model changes) · `ffia schemas check` |
 | Education content | `ffia education check` · frontend fixtures: `make fixtures` (after API model changes) |
+| Architecture diagrams | Edit `education/architecture/views/*.yaml`, then `ffia diagrams render` · `ffia diagrams check` |
 | Run the app | `make run` (API on :8000 + frontend on :5173) |
 | Source registry | `ffia sources render` (after editing `sources.yaml`) · `ffia sources check` |
 | Synthetic data | `ffia data generate --check` · `ffia data build` (Bronze → Silver → Gold + baseline) · `ffia data export --profile <id> --dest <dir>` |

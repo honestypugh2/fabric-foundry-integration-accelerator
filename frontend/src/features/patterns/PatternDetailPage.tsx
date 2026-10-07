@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router";
-import { useLessons, usePattern } from "../../api/hooks";
+import { useLessons, usePattern, useViews } from "../../api/hooks";
 import { usePageTitle } from "../../app/usePageTitle";
 import { Badge } from "../../components/Badge";
 import { QueryState } from "../../components/QueryState";
@@ -19,6 +19,7 @@ export function PatternDetailPage() {
   usePageTitle(`Pattern ${patternId}`);
   const pattern = usePattern(patternId);
   const lessons = useLessons();
+  const views = useViews();
   return (
     <QueryState label={`pattern ${patternId}`} {...pattern}>
       {(p) => {
@@ -67,6 +68,20 @@ export function PatternDetailPage() {
                 </ul>
               )}
             </section>
+            {(views.data ?? []).some((v) => v.pattern_ids.includes(p.id)) ? (
+              <section aria-labelledby="pattern-diagrams">
+                <h2 id="pattern-diagrams">Appears in these architecture diagrams</h2>
+                <ul>
+                  {(views.data ?? [])
+                    .filter((v) => v.pattern_ids.includes(p.id))
+                    .map((v) => (
+                      <li key={v.id}>
+                        <Link to={`/architecture/${v.id}`}>{v.title}</Link>
+                      </li>
+                    ))}
+                </ul>
+              </section>
+            ) : null}
             <p>
               <Link to="/patterns">Back to the catalog</Link>
             </p>

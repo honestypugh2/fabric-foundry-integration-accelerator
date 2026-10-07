@@ -104,6 +104,14 @@ export interface AuditRecord {
   readonly details?: Readonly<Record<string, string | number | boolean | null>>;
 }
 
+/** A rectangle in diagram coordinates. */
+export interface Box {
+  readonly x: number;
+  readonly y: number;
+  readonly w: number;
+  readonly h: number;
+}
+
 /** Circuit breaker state. */
 export type BreakerState = "CLOSED" | "OPEN" | "HALF_OPEN";
 
@@ -207,6 +215,101 @@ export interface DemoStep {
   readonly label: string;
   readonly summary: string;
   readonly evidence?: readonly string[];
+}
+
+/** A cross-cutting rule drawn as a band under the diagram (identity, policy, evidence…). */
+export interface DiagramBand {
+  readonly id: string;
+  readonly kind: "identity" | "policy" | "evidence" | "failure" | "network";
+  readonly text: string;
+  readonly step?: string | null;
+}
+
+/** A directed arrow between two nodes. */
+export interface DiagramEdge {
+  readonly id: string;
+  readonly source: string;
+  readonly target: string;
+  readonly label?: string;
+  readonly kind: "context" | "reasoning" | "access" | "authority" | "evidence" | "fallback" | "change" | "data" | "config";
+  readonly step?: string | null;
+  readonly planned?: boolean;
+}
+
+/** A box on the diagram. */
+export interface DiagramNode {
+  readonly id: string;
+  readonly label: string;
+  readonly sublabel?: string;
+  readonly kind: "person" | "client" | "harness" | "knowledge" | "app" | "service" | "foundry" | "fabric" | "data" | "mcp" | "gateway" | "identity" | "policy" | "evidence" | "local" | "external";
+  readonly state: "implemented" | "planned" | "documented" | "preview" | "tenant-validation" | "optional";
+  readonly col: number;
+  readonly row: number;
+  readonly width?: number;
+  readonly step?: string | null;
+  readonly component?: string | null;
+  readonly summary?: string;
+  readonly repo_path?: string | null;
+  readonly phase?: number | null;
+  readonly runtime?: "api" | "mcp" | "fabric-local" | "fabric-live" | "foundry" | "changes" | "audit" | "education" | "evaluation" | "router" | null;
+  readonly icon?: string | null;
+  readonly sources?: readonly string[];
+}
+
+/** One build-up step of a whiteboard view. */
+export interface DiagramStep {
+  readonly id: string;
+  readonly label: string;
+  readonly cue: string;
+}
+
+/** A request followed one hop at a time. */
+export interface DiagramTrace {
+  readonly id: string;
+  readonly title: string;
+  readonly summary: string;
+  readonly label: "PLANNED FLOW" | "LOCAL" | "SIMULATED" | "PREVIEW" | "DOCUMENTED";
+  readonly demo_act?: number | null;
+  readonly steps: readonly TraceStep[];
+}
+
+/** ``education/architecture/views/<id>.yaml``. */
+export interface DiagramView {
+  readonly id: string;
+  readonly title: string;
+  readonly kind: "reference" | "system" | "topology" | "flow" | "maturity" | "resilience";
+  readonly summary: string;
+  readonly cue: string;
+  readonly columns: number;
+  readonly rows: number;
+  readonly aligned_to?: readonly string[];
+  readonly pattern_ids?: readonly string[];
+  readonly doc?: string | null;
+  readonly steps?: readonly DiagramStep[];
+  readonly zones?: readonly DiagramZone[];
+  readonly nodes: readonly DiagramNode[];
+  readonly edges?: readonly DiagramEdge[];
+  readonly bands?: readonly DiagramBand[];
+  readonly traces?: readonly DiagramTrace[];
+}
+
+/** A labeled region (trust boundary, tenant, local machine, optional add-on). */
+export interface DiagramZone {
+  readonly id: string;
+  readonly label: string;
+  readonly kind: "local" | "tenant" | "fabric" | "foundry" | "github" | "optional" | "offline";
+  readonly col: number;
+  readonly row: number;
+  readonly cols: number;
+  readonly rows: number;
+  readonly step?: string | null;
+}
+
+/** A routed edge: the full polyline (endpoints included) and its label anchor. */
+export interface EdgePath {
+  readonly points: readonly (readonly [number, number])[];
+  readonly label_at: readonly [number, number];
+  readonly label_fraction: number;
 }
 
 /** Evaluate declared measures. */
@@ -333,6 +436,7 @@ export interface GuideStep {
   readonly failure_modes?: readonly string[];
   readonly requires_windows?: boolean;
   readonly rehearsal?: Rehearsal | null;
+  readonly diagram_focus?: readonly string[];
 }
 
 /** HTTPValidationError */
@@ -476,6 +580,15 @@ export interface MeasureValue {
   readonly synthetic_demonstration: boolean;
 }
 
+/** The live state of one diagram node. */
+export interface NodeRuntime {
+  readonly node: string;
+  readonly binding: "api" | "mcp" | "fabric-local" | "fabric-live" | "foundry" | "changes" | "audit" | "education" | "evaluation" | "router";
+  readonly status: "ACTIVE" | "READY" | "DEGRADED" | "UNAVAILABLE" | "NOT CONFIGURED";
+  readonly label: string;
+  readonly detail: string;
+}
+
 /** Outcome of the offline demo (a release gate). */
 export interface OfflineDemoReport {
   readonly passed: boolean;
@@ -591,6 +704,12 @@ export interface Rehearsal {
   readonly note?: string;
 }
 
+/** A view with the shared layout used by both the app and the draw.io files. */
+export interface RenderedView {
+  readonly view: DiagramView;
+  readonly layout: ViewLayout;
+}
+
 /** Why a request went where it went. */
 export interface RouteDecision {
   readonly capability: string;
@@ -690,6 +809,14 @@ export interface ToolRequirement {
   readonly required?: boolean;
 }
 
+/** One hop of a traced request. */
+export interface TraceStep {
+  readonly node: string;
+  readonly edge?: string | null;
+  readonly say: string;
+  readonly note?: string;
+}
+
 /** An offline command the learner can run, and the label its result carries. */
 export interface TryIt {
   readonly label: string;
@@ -716,6 +843,7 @@ export interface UseCaseGuide {
   readonly os_constraints?: readonly string[];
   readonly dataset_profile: string;
   readonly expected_baseline: string;
+  readonly diagram?: string | null;
   readonly steps: readonly GuideStep[];
 }
 
@@ -726,6 +854,34 @@ export interface ValidationError {
   readonly type: string;
   readonly input?: unknown;
   readonly ctx?: Readonly<Record<string, unknown>>;
+}
+
+/** Geometry for every node, zone and edge of a view. */
+export interface ViewLayout {
+  readonly width: number;
+  readonly height: number;
+  readonly grid_bottom: number;
+  readonly nodes: Readonly<Record<string, Box>>;
+  readonly zones: Readonly<Record<string, Box>>;
+  readonly edges: Readonly<Record<string, EdgePath>>;
+}
+
+/** The runtime overlay for one view. */
+export interface ViewRuntime {
+  readonly view_id: string;
+  readonly operating_mode: OperatingMode;
+  readonly observed_at: string;
+  readonly nodes: readonly NodeRuntime[];
+}
+
+/** An architecture view in a list. */
+export interface ViewSummary {
+  readonly id: string;
+  readonly title: string;
+  readonly kind: string;
+  readonly summary: string;
+  readonly doc: string | null;
+  readonly pattern_ids: readonly string[];
 }
 
 /** A workspace visible to the provider. */

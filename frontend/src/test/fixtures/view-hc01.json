@@ -1,0 +1,1112 @@
+{
+  "layout": {
+    "edges": {
+      "approval-lakehouse": {
+        "label_at": [
+          650.0,
+          432.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            650.0,
+            534.0
+          ],
+          [
+            650.0,
+            330.0
+          ]
+        ]
+      },
+      "bronze-silver": {
+        "label_at": [
+          1040.0,
+          292.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            1000.0,
+            292.0
+          ],
+          [
+            1080.0,
+            292.0
+          ]
+        ]
+      },
+      "copilot-mcp": {
+        "label_at": [
+          260.0,
+          292.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            220.0,
+            292.0
+          ],
+          [
+            300.0,
+            292.0
+          ]
+        ]
+      },
+      "data-upload": {
+        "label_at": [
+          363.33333333333337,
+          152.0
+        ],
+        "label_fraction": 0.2986111111111111,
+        "points": [
+          [
+            220.0,
+            152.0
+          ],
+          [
+            506.6666666666667,
+            152.0
+          ],
+          [
+            506.6666666666667,
+            292.0
+          ],
+          [
+            560.0,
+            292.0
+          ]
+        ]
+      },
+      "dax-report": {
+        "label_at": [
+          1560.0,
+          572.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            1520.0,
+            572.0
+          ],
+          [
+            1600.0,
+            572.0
+          ]
+        ]
+      },
+      "extension-spark": {
+        "label_at": [
+          780.0,
+          432.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            480.0,
+            432.0
+          ],
+          [
+            1080.0,
+            432.0
+          ]
+        ]
+      },
+      "gold-model": {
+        "label_at": [
+          1560.0,
+          292.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            1520.0,
+            292.0
+          ],
+          [
+            1600.0,
+            292.0
+          ]
+        ]
+      },
+      "lake-bronze": {
+        "label_at": [
+          780.0,
+          292.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            740.0,
+            292.0
+          ],
+          [
+            820.0,
+            292.0
+          ]
+        ]
+      },
+      "mcp-lakehouse": {
+        "label_at": [
+          520.0,
+          292.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            480.0,
+            292.0
+          ],
+          [
+            560.0,
+            292.0
+          ]
+        ]
+      },
+      "offline-a": {
+        "label_at": [
+          1040.0,
+          712.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            1000.0,
+            712.0
+          ],
+          [
+            1080.0,
+            712.0
+          ]
+        ]
+      },
+      "offline-b": {
+        "label_at": [
+          1300.0,
+          712.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            1260.0,
+            712.0
+          ],
+          [
+            1340.0,
+            712.0
+          ]
+        ]
+      },
+      "pbi-model": {
+        "label_at": [
+          916.6666666666667,
+          502.0
+        ],
+        "label_fraction": 0.5066666666666667,
+        "points": [
+          [
+            480.0,
+            572.0
+          ],
+          [
+            533.3333333333334,
+            572.0
+          ],
+          [
+            533.3333333333334,
+            502.0
+          ],
+          [
+            1300.0,
+            502.0
+          ],
+          [
+            1300.0,
+            572.0
+          ],
+          [
+            1340.0,
+            572.0
+          ]
+        ]
+      },
+      "silver-gold": {
+        "label_at": [
+          1300.0,
+          292.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            1260.0,
+            292.0
+          ],
+          [
+            1340.0,
+            292.0
+          ]
+        ]
+      }
+    },
+    "grid_bottom": 810.0,
+    "height": 974.0,
+    "nodes": {
+      "approval": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 560.0,
+        "y": 534.0
+      },
+      "bronze": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 820.0,
+        "y": 254.0
+      },
+      "claude": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 40.0,
+        "y": 394.0
+      },
+      "copilot": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 40.0,
+        "y": 254.0
+      },
+      "dax-checks": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 1340.0,
+        "y": 534.0
+      },
+      "de-extension": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 300.0,
+        "y": 394.0
+      },
+      "fabric-mcp": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 300.0,
+        "y": 254.0
+      },
+      "gold": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 1340.0,
+        "y": 254.0
+      },
+      "lab-data": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 40.0,
+        "y": 114.0
+      },
+      "lakehouse": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 560.0,
+        "y": 254.0
+      },
+      "offline-contract": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 1600.0,
+        "y": 674.0
+      },
+      "offline-eval": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 1340.0,
+        "y": 674.0
+      },
+      "offline-medallion": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 1080.0,
+        "y": 674.0
+      },
+      "offline-provider": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 560.0,
+        "y": 674.0
+      },
+      "offline-rehearsal": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 820.0,
+        "y": 674.0
+      },
+      "pbi-mcp": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 300.0,
+        "y": 534.0
+      },
+      "report": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 1600.0,
+        "y": 534.0
+      },
+      "semantic-model": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 1600.0,
+        "y": 254.0
+      },
+      "silver": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 1080.0,
+        "y": 254.0
+      },
+      "spark": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 1080.0,
+        "y": 394.0
+      },
+      "workspace": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 560.0,
+        "y": 114.0
+      }
+    },
+    "width": 1820.0,
+    "zones": {
+      "offline": {
+        "h": 120.0,
+        "w": 1768.0,
+        "x": 26.0,
+        "y": 644.0
+      },
+      "tenant": {
+        "h": 540.0,
+        "w": 1248.0,
+        "x": 546.0,
+        "y": 84.0
+      },
+      "workstation": {
+        "h": 540.0,
+        "w": 468.0,
+        "x": 26.0,
+        "y": 84.0
+      }
+    }
+  },
+  "view": {
+    "aligned_to": [
+      "fabric-medallion",
+      "fabric-direct-lake",
+      "fabric-mcp-local",
+      "powerbi-authoring-mcp",
+      "fabric-git-integration"
+    ],
+    "bands": [
+      {
+        "id": "rules",
+        "kind": "policy",
+        "step": null,
+        "text": "Operating rules: one prompt at a time, propose before apply, name the provider, server and tool before each cloud call, check for duplicates before every write, and never print tokens."
+      },
+      {
+        "id": "evidence",
+        "kind": "evidence",
+        "step": "report",
+        "text": "Evidence, not appearance: create responses plus follow-up listings, per-table counts, DAX results against the baseline, and the published report's IDs."
+      }
+    ],
+    "columns": 7,
+    "cue": "Follow the guide left to right. Every write - lakehouse, upload, notebooks, model, report - is proposed first and applied only after approval. The bottom row is the offline equivalent of each step, so the lab can be rehearsed with no tenant.",
+    "doc": "hc-01-architecture",
+    "edges": [
+      {
+        "id": "copilot-mcp",
+        "kind": "access",
+        "label": "One prompt at a time",
+        "planned": false,
+        "source": "copilot",
+        "step": "tools",
+        "target": "fabric-mcp"
+      },
+      {
+        "id": "mcp-lakehouse",
+        "kind": "change",
+        "label": "Create after duplicate check",
+        "planned": false,
+        "source": "fabric-mcp",
+        "step": "workspace",
+        "target": "lakehouse"
+      },
+      {
+        "id": "data-upload",
+        "kind": "data",
+        "label": "onelake_upload-file",
+        "planned": false,
+        "source": "lab-data",
+        "step": "data",
+        "target": "lakehouse"
+      },
+      {
+        "id": "lake-bronze",
+        "kind": "data",
+        "label": "MCP_01_Bronze",
+        "planned": false,
+        "source": "lakehouse",
+        "step": "medallion",
+        "target": "bronze"
+      },
+      {
+        "id": "bronze-silver",
+        "kind": "data",
+        "label": "MCP_02_Silver",
+        "planned": false,
+        "source": "bronze",
+        "step": "medallion",
+        "target": "silver"
+      },
+      {
+        "id": "silver-gold",
+        "kind": "data",
+        "label": "MCP_03_Gold",
+        "planned": false,
+        "source": "silver",
+        "step": "medallion",
+        "target": "gold"
+      },
+      {
+        "id": "extension-spark",
+        "kind": "change",
+        "label": "Publish and run once",
+        "planned": false,
+        "source": "de-extension",
+        "step": "medallion",
+        "target": "spark"
+      },
+      {
+        "id": "gold-model",
+        "kind": "context",
+        "label": "Direct Lake",
+        "planned": false,
+        "source": "gold",
+        "step": "model",
+        "target": "semantic-model"
+      },
+      {
+        "id": "pbi-model",
+        "kind": "change",
+        "label": "Relationships, measures, DAX",
+        "planned": false,
+        "source": "pbi-mcp",
+        "step": "model",
+        "target": "dax-checks"
+      },
+      {
+        "id": "dax-report",
+        "kind": "evidence",
+        "label": "Reconciled measures",
+        "planned": false,
+        "source": "dax-checks",
+        "step": "report",
+        "target": "report"
+      },
+      {
+        "id": "approval-lakehouse",
+        "kind": "authority",
+        "label": "Approve each write",
+        "planned": false,
+        "source": "approval",
+        "step": "workspace",
+        "target": "lakehouse"
+      },
+      {
+        "id": "offline-a",
+        "kind": "data",
+        "label": "",
+        "planned": false,
+        "source": "offline-rehearsal",
+        "step": null,
+        "target": "offline-medallion"
+      },
+      {
+        "id": "offline-b",
+        "kind": "evidence",
+        "label": "Compare",
+        "planned": false,
+        "source": "offline-medallion",
+        "step": null,
+        "target": "offline-eval"
+      }
+    ],
+    "id": "hc-01",
+    "kind": "flow",
+    "nodes": [
+      {
+        "col": 0.0,
+        "component": "coding-agents",
+        "icon": "general/Code",
+        "id": "copilot",
+        "kind": "harness",
+        "label": "VS Code + GitHub Copilot",
+        "phase": null,
+        "repo_path": null,
+        "row": 1.0,
+        "runtime": null,
+        "sources": [],
+        "state": "documented",
+        "step": "tools",
+        "sublabel": "Agent mode",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 0.0,
+        "component": null,
+        "icon": "general/Code",
+        "id": "claude",
+        "kind": "harness",
+        "label": "Claude Code",
+        "phase": null,
+        "repo_path": null,
+        "row": 2.0,
+        "runtime": null,
+        "sources": [],
+        "state": "documented",
+        "step": "tools",
+        "sublabel": "Alternate path for every step",
+        "summary": "Every HC-01 step has an equivalent Claude Code prompt using the same MCP servers and instructions.",
+        "width": 1.0
+      },
+      {
+        "col": 0.0,
+        "component": null,
+        "icon": "general/Folder_Blank",
+        "id": "lab-data",
+        "kind": "local",
+        "label": "Lab folder",
+        "phase": null,
+        "repo_path": "data/synthetic",
+        "row": 0.0,
+        "runtime": null,
+        "sources": [],
+        "state": "implemented",
+        "step": "tools",
+        "sublabel": "7 synthetic CSVs + SHA256SUMS",
+        "summary": "ffia data export copies the hc-lab-7file-v1 profile and checksums into a separate lab folder.",
+        "width": 1.0
+      },
+      {
+        "col": 1.0,
+        "component": null,
+        "icon": null,
+        "id": "fabric-mcp",
+        "kind": "mcp",
+        "label": "Fabric MCP Server (local)",
+        "phase": null,
+        "repo_path": null,
+        "row": 1.0,
+        "runtime": null,
+        "sources": [
+          "fabric-mcp-local"
+        ],
+        "state": "documented",
+        "step": "tools",
+        "sublabel": "onelake_*, core_create-item",
+        "summary": "The local Fabric MCP server. The guide requires calling its tools directly - no substitution with REST or CLI.",
+        "width": 1.0
+      },
+      {
+        "col": 1.0,
+        "component": null,
+        "icon": null,
+        "id": "de-extension",
+        "kind": "service",
+        "label": "Fabric Data Engineering extension",
+        "phase": null,
+        "repo_path": null,
+        "row": 2.0,
+        "runtime": null,
+        "sources": [],
+        "state": "documented",
+        "step": "medallion",
+        "sublabel": "Publish and run notebooks",
+        "summary": "VS Code extension used to publish reviewed notebooks and run them on the Microsoft Fabric Runtime kernel.",
+        "width": 1.0
+      },
+      {
+        "col": 1.0,
+        "component": null,
+        "icon": "power_platform/PowerBI",
+        "id": "pbi-mcp",
+        "kind": "mcp",
+        "label": "Power BI Authoring MCP + skills",
+        "phase": null,
+        "repo_path": null,
+        "row": 3.0,
+        "runtime": null,
+        "sources": [
+          "powerbi-authoring-mcp"
+        ],
+        "state": "documented",
+        "step": "model",
+        "sublabel": "Relationships, measures, DAX",
+        "summary": "Edits the semantic model and runs DAX checks. Write-capable - changes are proposed, reviewed and applied after approval.",
+        "width": 1.0
+      },
+      {
+        "col": 2.0,
+        "component": null,
+        "icon": null,
+        "id": "workspace",
+        "kind": "fabric",
+        "label": "Lab workspace",
+        "phase": null,
+        "repo_path": null,
+        "row": 0.0,
+        "runtime": null,
+        "sources": [],
+        "state": "tenant-validation",
+        "step": "workspace",
+        "sublabel": "Created in the portal",
+        "summary": "A dedicated dev workspace for the lab. Its ID stays in local notes only.",
+        "width": 1.0
+      },
+      {
+        "col": 2.0,
+        "component": "onelake-medallion",
+        "icon": null,
+        "id": "lakehouse",
+        "kind": "data",
+        "label": "healthcare_lakehouse",
+        "phase": null,
+        "repo_path": null,
+        "row": 1.0,
+        "runtime": null,
+        "sources": [],
+        "state": "tenant-validation",
+        "step": "workspace",
+        "sublabel": "Files/ raw CSVs",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 3.0,
+        "component": null,
+        "icon": null,
+        "id": "bronze",
+        "kind": "data",
+        "label": "Bronze tables",
+        "phase": null,
+        "repo_path": null,
+        "row": 1.0,
+        "runtime": null,
+        "sources": [],
+        "state": "tenant-validation",
+        "step": "medallion",
+        "sublabel": "MCP_01_Bronze",
+        "summary": "Raw data persisted as Delta with ingestion metadata. Counts must match the source profile.",
+        "width": 1.0
+      },
+      {
+        "col": 4.0,
+        "component": null,
+        "icon": null,
+        "id": "silver",
+        "kind": "data",
+        "label": "Silver tables",
+        "phase": null,
+        "repo_path": null,
+        "row": 1.0,
+        "runtime": null,
+        "sources": [],
+        "state": "tenant-validation",
+        "step": "medallion",
+        "sublabel": "MCP_02_Silver",
+        "summary": "Cleaned and conformed tables with documented diagnostics (duplicates, invalid values, orphans).",
+        "width": 1.0
+      },
+      {
+        "col": 5.0,
+        "component": null,
+        "icon": null,
+        "id": "gold",
+        "kind": "data",
+        "label": "Gold tables",
+        "phase": null,
+        "repo_path": null,
+        "row": 1.0,
+        "runtime": null,
+        "sources": [],
+        "state": "tenant-validation",
+        "step": "medallion",
+        "sublabel": "MCP_03_Gold",
+        "summary": "Star-schema facts and dimensions at a declared grain, reconciled against the expected baseline.",
+        "width": 1.0
+      },
+      {
+        "col": 4.0,
+        "component": null,
+        "icon": null,
+        "id": "spark",
+        "kind": "fabric",
+        "label": "Fabric Spark",
+        "phase": null,
+        "repo_path": null,
+        "row": 2.0,
+        "runtime": null,
+        "sources": [],
+        "state": "tenant-validation",
+        "step": "medallion",
+        "sublabel": "Remote runtime",
+        "summary": "Notebooks run once each on the Fabric Spark runtime; per-table counts are the evidence.",
+        "width": 1.0
+      },
+      {
+        "col": 6.0,
+        "component": "semantic-model",
+        "icon": "power_platform/PowerBI",
+        "id": "semantic-model",
+        "kind": "fabric",
+        "label": "Direct Lake semantic model",
+        "phase": null,
+        "repo_path": null,
+        "row": 1.0,
+        "runtime": null,
+        "sources": [],
+        "state": "tenant-validation",
+        "step": "model",
+        "sublabel": "7 tables, governed measures",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 5.0,
+        "component": null,
+        "icon": null,
+        "id": "dax-checks",
+        "kind": "evidence",
+        "label": "DAX reconciliation",
+        "phase": null,
+        "repo_path": null,
+        "row": 3.0,
+        "runtime": null,
+        "sources": [],
+        "state": "tenant-validation",
+        "step": "report",
+        "sublabel": "Against the Gold baseline",
+        "summary": "Every measure is checked against the expected values in data/synthetic/expected - evidence, not appearance.",
+        "width": 1.0
+      },
+      {
+        "col": 6.0,
+        "component": null,
+        "icon": "power_platform/PowerBI",
+        "id": "report",
+        "kind": "fabric",
+        "label": "Two-page report",
+        "phase": null,
+        "repo_path": null,
+        "row": 3.0,
+        "runtime": null,
+        "sources": [],
+        "state": "tenant-validation",
+        "step": "report",
+        "sublabel": "Published after review",
+        "summary": "An executive overview and a population page bound to the validated model. A local PBIR file is not publication.",
+        "width": 1.0
+      },
+      {
+        "col": 2.0,
+        "component": "human-approval",
+        "icon": "general/Workflow",
+        "id": "approval",
+        "kind": "policy",
+        "label": "Approval gate",
+        "phase": null,
+        "repo_path": null,
+        "row": 3.0,
+        "runtime": null,
+        "sources": [],
+        "state": "implemented",
+        "step": "workspace",
+        "sublabel": "Every write step",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 2.0,
+        "component": "local-fabric-provider",
+        "icon": null,
+        "id": "offline-provider",
+        "kind": "local",
+        "label": "Local Fabric provider",
+        "phase": null,
+        "repo_path": null,
+        "row": 4.0,
+        "runtime": null,
+        "sources": [],
+        "state": "implemented",
+        "step": null,
+        "sublabel": "ffia data build",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 3.0,
+        "component": null,
+        "icon": null,
+        "id": "offline-rehearsal",
+        "kind": "local",
+        "label": "Guide runner rehearsal",
+        "phase": null,
+        "repo_path": "frontend/src/features/guides",
+        "row": 4.0,
+        "runtime": null,
+        "sources": [],
+        "state": "implemented",
+        "step": null,
+        "sublabel": "Plan, approve, execute (SIMULATED)",
+        "summary": "The guide runner rehearses each write step against the simulated workspace with the real policy and approval rules.",
+        "width": 1.0
+      },
+      {
+        "col": 4.0,
+        "component": null,
+        "icon": null,
+        "id": "offline-medallion",
+        "kind": "local",
+        "label": "Local Bronze, Silver, Gold",
+        "phase": null,
+        "repo_path": "src/fabric_foundry_accelerator/synthetic/sql",
+        "row": 4.0,
+        "runtime": null,
+        "sources": [],
+        "state": "implemented",
+        "step": null,
+        "sublabel": "SQL per table",
+        "summary": "The same medallion built locally with DuckDB, one SQL file per output table.",
+        "width": 1.0
+      },
+      {
+        "col": 5.0,
+        "component": "evaluation",
+        "icon": null,
+        "id": "offline-eval",
+        "kind": "evidence",
+        "label": "Baseline evaluation",
+        "phase": null,
+        "repo_path": null,
+        "row": 4.0,
+        "runtime": null,
+        "sources": [],
+        "state": "implemented",
+        "step": null,
+        "sublabel": "23 measures",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 6.0,
+        "component": null,
+        "icon": null,
+        "id": "offline-contract",
+        "kind": "local",
+        "label": "Semantic model contract",
+        "phase": null,
+        "repo_path": "data/synthetic/semantic",
+        "row": 4.0,
+        "runtime": null,
+        "sources": [],
+        "state": "implemented",
+        "step": null,
+        "sublabel": "semantic-model.yaml",
+        "summary": "Tables, relationships and measure contracts with reference DAX for the hc-lab-7file-v1 profile.",
+        "width": 1.0
+      }
+    ],
+    "pattern_ids": [
+      "P10",
+      "P12",
+      "P09",
+      "P19",
+      "P08",
+      "P16"
+    ],
+    "rows": 5,
+    "steps": [
+      {
+        "cue": "Steps 01-02. Install and verify the tools, then prove the tenant with one real, read-only MCP call.",
+        "id": "tools",
+        "label": "1 \u00b7 Tools and tenant anchor"
+      },
+      {
+        "cue": "Steps 03-04. Create the lab workspace in the portal and the lakehouse through Fabric MCP after a duplicate check.",
+        "id": "workspace",
+        "label": "2 \u00b7 Workspace and lakehouse"
+      },
+      {
+        "cue": "Steps 05-06. Upload the seven synthetic CSVs with checksums; profile them locally.",
+        "id": "data",
+        "label": "3 \u00b7 Land and profile data"
+      },
+      {
+        "cue": "Steps 07-10. Draft each notebook, review it, then publish and run it once on Fabric Spark.",
+        "id": "medallion",
+        "label": "4 \u00b7 Bronze, Silver, Gold"
+      },
+      {
+        "cue": "Steps 11-13. Create the Direct Lake model, apply relationships and measures, then review read-only.",
+        "id": "model",
+        "label": "5 \u00b7 Semantic model"
+      },
+      {
+        "cue": "Steps 14-15. Build the two-page report, reconcile DAX against the Gold baseline, publish after review, validate with evidence.",
+        "id": "report",
+        "label": "6 \u00b7 Report and validation"
+      }
+    ],
+    "summary": "GitHub Copilot in VS Code (or Claude Code) uses the local Fabric MCP server to create a lakehouse and land seven synthetic CSVs; reviewed notebooks build Bronze, Silver and Gold on Fabric Spark; a Direct Lake semantic model is edited with Power BI Authoring MCP; DAX checks reconcile with the Gold baseline; a two-page report is published after review.",
+    "title": "HC-01: Fabric MCP + Power BI medallion lab",
+    "traces": [
+      {
+        "demo_act": null,
+        "id": "end-to-end",
+        "label": "PLANNED FLOW",
+        "steps": [
+          {
+            "edge": null,
+            "node": "copilot",
+            "note": "Claude Code can follow every step with its own prompt.",
+            "say": "Steps 01-02 - verify the tools, then make one real read-only call to prove the tenant."
+          },
+          {
+            "edge": "copilot-mcp",
+            "node": "fabric-mcp",
+            "note": "",
+            "say": "Every cloud step names the provider, server and tool before it runs."
+          },
+          {
+            "edge": "mcp-lakehouse",
+            "node": "lakehouse",
+            "note": "",
+            "say": "Step 04 - create healthcare_lakehouse only after a duplicate check, and only after approval."
+          },
+          {
+            "edge": "data-upload",
+            "node": "lakehouse",
+            "note": "",
+            "say": "Step 05 - upload the seven CSVs and confirm checksums."
+          },
+          {
+            "edge": "lake-bronze",
+            "node": "bronze",
+            "note": "",
+            "say": "Steps 07-08 - draft, review, publish and run the Bronze notebook once."
+          },
+          {
+            "edge": "bronze-silver",
+            "node": "silver",
+            "note": "",
+            "say": "Step 09 - Silver with documented diagnostics."
+          },
+          {
+            "edge": "silver-gold",
+            "node": "gold",
+            "note": "",
+            "say": "Step 10 - Gold at a declared grain."
+          },
+          {
+            "edge": "gold-model",
+            "node": "semantic-model",
+            "note": "",
+            "say": "Steps 11-13 - the Direct Lake model, relationships and measures, then a read-only review."
+          },
+          {
+            "edge": "pbi-model",
+            "node": "dax-checks",
+            "note": "",
+            "say": "DAX results are reconciled against the Gold baseline."
+          },
+          {
+            "edge": "dax-report",
+            "node": "report",
+            "note": "",
+            "say": "Step 14 - build, review and publish the report. Step 15 - final validation with evidence."
+          }
+        ],
+        "summary": "The fifteen working steps of HC-01 in order, with the tool used at each one.",
+        "title": "Run the whole lab"
+      },
+      {
+        "demo_act": null,
+        "id": "offline",
+        "label": "SIMULATED",
+        "steps": [
+          {
+            "edge": null,
+            "node": "offline-provider",
+            "note": "",
+            "say": "ffia data build creates the same Bronze, Silver and Gold locally."
+          },
+          {
+            "edge": null,
+            "node": "offline-rehearsal",
+            "note": "",
+            "say": "The guide runner rehearses each write with real policy and approval rules (SIMULATED)."
+          },
+          {
+            "edge": "offline-a",
+            "node": "offline-medallion",
+            "note": "",
+            "say": "Inspect the SQL behind each table."
+          },
+          {
+            "edge": "offline-b",
+            "node": "offline-eval",
+            "note": "",
+            "say": "All 23 measures are compared with the expected baseline."
+          }
+        ],
+        "summary": "The same journey with no tenant - every write rehearsed, every number checked.",
+        "title": "Rehearse offline"
+      }
+    ],
+    "zones": [
+      {
+        "col": 0.0,
+        "cols": 2.0,
+        "id": "workstation",
+        "kind": "local",
+        "label": "Your workstation",
+        "row": 0.0,
+        "rows": 4.0,
+        "step": null
+      },
+      {
+        "col": 2.0,
+        "cols": 5.0,
+        "id": "tenant",
+        "kind": "fabric",
+        "label": "Fabric lab workspace (dev)",
+        "row": 0.0,
+        "rows": 4.0,
+        "step": "workspace"
+      },
+      {
+        "col": 0.0,
+        "cols": 7.0,
+        "id": "offline",
+        "kind": "offline",
+        "label": "Offline equivalent (this repo)",
+        "row": 4.0,
+        "rows": 1.0,
+        "step": null
+      }
+    ]
+  }
+}

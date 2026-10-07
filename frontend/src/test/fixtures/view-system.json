@@ -1,0 +1,1157 @@
+{
+  "layout": {
+    "edges": {
+      "agent-to-config": {
+        "label_at": [
+          260.0,
+          712.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            220.0,
+            712.0
+          ],
+          [
+            300.0,
+            712.0
+          ]
+        ]
+      },
+      "api-to-changes": {
+        "label_at": [
+          766.6666666666666,
+          222.0
+        ],
+        "label_fraction": 0.4393939393939392,
+        "points": [
+          [
+            740.0,
+            292.0
+          ],
+          [
+            766.6666666666666,
+            292.0
+          ],
+          [
+            766.6666666666666,
+            152.0
+          ],
+          [
+            820.0,
+            152.0
+          ]
+        ]
+      },
+      "api-to-education": {
+        "label_at": [
+          780.0,
+          292.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            740.0,
+            292.0
+          ],
+          [
+            820.0,
+            292.0
+          ]
+        ]
+      },
+      "api-to-evaluation": {
+        "label_at": [
+          766.6666666666666,
+          362.0
+        ],
+        "label_fraction": 0.4393939393939392,
+        "points": [
+          [
+            740.0,
+            292.0
+          ],
+          [
+            766.6666666666666,
+            292.0
+          ],
+          [
+            766.6666666666666,
+            432.0
+          ],
+          [
+            820.0,
+            432.0
+          ]
+        ]
+      },
+      "api-to-foundry": {
+        "label_at": [
+          1170.0,
+          222.0
+        ],
+        "label_fraction": 0.49999999999999994,
+        "points": [
+          [
+            740.0,
+            292.0
+          ],
+          [
+            766.6666666666666,
+            292.0
+          ],
+          [
+            766.6666666666666,
+            222.0
+          ],
+          [
+            1573.3333333333333,
+            222.0
+          ],
+          [
+            1573.3333333333333,
+            292.0
+          ],
+          [
+            1600.0,
+            292.0
+          ]
+        ]
+      },
+      "api-to-router": {
+        "label_at": [
+          766.6666666666666,
+          432.0
+        ],
+        "label_fraction": 0.46296296296296285,
+        "points": [
+          [
+            740.0,
+            292.0
+          ],
+          [
+            766.6666666666666,
+            292.0
+          ],
+          [
+            766.6666666666666,
+            572.0
+          ],
+          [
+            820.0,
+            572.0
+          ]
+        ]
+      },
+      "app-to-proxy": {
+        "label_at": [
+          260.0,
+          292.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            220.0,
+            292.0
+          ],
+          [
+            300.0,
+            292.0
+          ]
+        ]
+      },
+      "changes-to-policies": {
+        "label_at": [
+          1040.0,
+          152.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            1000.0,
+            152.0
+          ],
+          [
+            1080.0,
+            152.0
+          ]
+        ]
+      },
+      "config-to-ffia": {
+        "label_at": [
+          520.0,
+          712.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            480.0,
+            712.0
+          ],
+          [
+            560.0,
+            712.0
+          ]
+        ]
+      },
+      "config-to-learn": {
+        "label_at": [
+          520.0,
+          782.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            480.0,
+            712.0
+          ],
+          [
+            520.0,
+            712.0
+          ],
+          [
+            520.0,
+            852.0
+          ],
+          [
+            560.0,
+            852.0
+          ]
+        ]
+      },
+      "education-to-content": {
+        "label_at": [
+          1040.0,
+          292.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            1000.0,
+            292.0
+          ],
+          [
+            1080.0,
+            292.0
+          ]
+        ]
+      },
+      "evaluation-to-audit": {
+        "label_at": [
+          1040.0,
+          432.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            1000.0,
+            432.0
+          ],
+          [
+            1080.0,
+            432.0
+          ]
+        ]
+      },
+      "ffia-to-router": {
+        "label_at": [
+          793.3333333333334,
+          642.0
+        ],
+        "label_fraction": 0.5606060606060608,
+        "points": [
+          [
+            740.0,
+            712.0
+          ],
+          [
+            793.3333333333334,
+            712.0
+          ],
+          [
+            793.3333333333334,
+            572.0
+          ],
+          [
+            820.0,
+            572.0
+          ]
+        ]
+      },
+      "local-to-data": {
+        "label_at": [
+          1300.0,
+          572.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            1260.0,
+            572.0
+          ],
+          [
+            1340.0,
+            572.0
+          ]
+        ]
+      },
+      "proxy-to-api": {
+        "label_at": [
+          520.0,
+          292.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            480.0,
+            292.0
+          ],
+          [
+            560.0,
+            292.0
+          ]
+        ]
+      },
+      "router-to-live": {
+        "label_at": [
+          1293.3333333333335,
+          502.0
+        ],
+        "label_fraction": 0.490990990990991,
+        "points": [
+          [
+            1000.0,
+            572.0
+          ],
+          [
+            1040.0,
+            572.0
+          ],
+          [
+            1040.0,
+            502.0
+          ],
+          [
+            1546.6666666666667,
+            502.0
+          ],
+          [
+            1546.6666666666667,
+            572.0
+          ],
+          [
+            1600.0,
+            572.0
+          ]
+        ]
+      },
+      "router-to-local": {
+        "label_at": [
+          1040.0,
+          572.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            1000.0,
+            572.0
+          ],
+          [
+            1080.0,
+            572.0
+          ]
+        ]
+      }
+    },
+    "grid_bottom": 950.0,
+    "height": 1030.0,
+    "nodes": {
+      "api": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 560.0,
+        "y": 254.0
+      },
+      "audit": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 1080.0,
+        "y": 394.0
+      },
+      "changes": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 820.0,
+        "y": 114.0
+      },
+      "coding-agent": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 40.0,
+        "y": 674.0
+      },
+      "content": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 1080.0,
+        "y": 254.0
+      },
+      "education": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 820.0,
+        "y": 254.0
+      },
+      "evaluation": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 820.0,
+        "y": 394.0
+      },
+      "fabric-live": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 1600.0,
+        "y": 534.0
+      },
+      "ffia-local": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 560.0,
+        "y": 674.0
+      },
+      "foundry": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 1600.0,
+        "y": 254.0
+      },
+      "learn-mcp": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 560.0,
+        "y": 814.0
+      },
+      "local-provider": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 1080.0,
+        "y": 534.0
+      },
+      "mcp-config": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 300.0,
+        "y": 674.0
+      },
+      "policies": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 1080.0,
+        "y": 114.0
+      },
+      "router": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 820.0,
+        "y": 534.0
+      },
+      "synthetic-data": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 1340.0,
+        "y": 534.0
+      },
+      "vite-proxy": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 300.0,
+        "y": 254.0
+      },
+      "web-app": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 40.0,
+        "y": 254.0
+      }
+    },
+    "width": 1820.0,
+    "zones": {
+      "cloud": {
+        "h": 820.0,
+        "w": 208.0,
+        "x": 1586.0,
+        "y": 84.0
+      },
+      "workstation": {
+        "h": 820.0,
+        "w": 1508.0,
+        "x": 26.0,
+        "y": 84.0
+      }
+    }
+  },
+  "view": {
+    "aligned_to": [
+      "baseline-foundry-chat",
+      "fabric-mcp-local",
+      "mcp-specification"
+    ],
+    "bands": [],
+    "columns": 7,
+    "cue": "This is the system you are using. Turn on the runtime overlay: every box that is green is answering right now; grey boxes arrive in later phases and are never faked.",
+    "doc": "system-architecture",
+    "edges": [
+      {
+        "id": "app-to-proxy",
+        "kind": "access",
+        "label": "/api requests",
+        "planned": false,
+        "source": "web-app",
+        "step": null,
+        "target": "vite-proxy"
+      },
+      {
+        "id": "proxy-to-api",
+        "kind": "access",
+        "label": "Same-origin proxy",
+        "planned": false,
+        "source": "vite-proxy",
+        "step": null,
+        "target": "api"
+      },
+      {
+        "id": "api-to-changes",
+        "kind": "change",
+        "label": "Plans and approvals",
+        "planned": false,
+        "source": "api",
+        "step": null,
+        "target": "changes"
+      },
+      {
+        "id": "api-to-education",
+        "kind": "context",
+        "label": "Lessons and diagrams",
+        "planned": false,
+        "source": "api",
+        "step": null,
+        "target": "education"
+      },
+      {
+        "id": "api-to-evaluation",
+        "kind": "evidence",
+        "label": "Evaluate",
+        "planned": false,
+        "source": "api",
+        "step": null,
+        "target": "evaluation"
+      },
+      {
+        "id": "api-to-router",
+        "kind": "access",
+        "label": "Typed reads",
+        "planned": false,
+        "source": "api",
+        "step": null,
+        "target": "router"
+      },
+      {
+        "id": "changes-to-policies",
+        "kind": "authority",
+        "label": "Evaluate policy",
+        "planned": false,
+        "source": "changes",
+        "step": null,
+        "target": "policies"
+      },
+      {
+        "id": "education-to-content",
+        "kind": "context",
+        "label": "Load and validate",
+        "planned": false,
+        "source": "education",
+        "step": null,
+        "target": "content"
+      },
+      {
+        "id": "evaluation-to-audit",
+        "kind": "evidence",
+        "label": "Evidence",
+        "planned": false,
+        "source": "evaluation",
+        "step": null,
+        "target": "audit"
+      },
+      {
+        "id": "router-to-local",
+        "kind": "fallback",
+        "label": "LOCAL read or fallback",
+        "planned": false,
+        "source": "router",
+        "step": null,
+        "target": "local-provider"
+      },
+      {
+        "id": "local-to-data",
+        "kind": "data",
+        "label": "Query Parquet",
+        "planned": false,
+        "source": "local-provider",
+        "step": null,
+        "target": "synthetic-data"
+      },
+      {
+        "id": "router-to-live",
+        "kind": "access",
+        "label": "LIVE read (Phase 5)",
+        "planned": true,
+        "source": "router",
+        "step": null,
+        "target": "fabric-live"
+      },
+      {
+        "id": "api-to-foundry",
+        "kind": "reasoning",
+        "label": "Agents (Phase 6)",
+        "planned": true,
+        "source": "api",
+        "step": null,
+        "target": "foundry"
+      },
+      {
+        "id": "agent-to-config",
+        "kind": "config",
+        "label": "Loads",
+        "planned": false,
+        "source": "coding-agent",
+        "step": null,
+        "target": "mcp-config"
+      },
+      {
+        "id": "config-to-ffia",
+        "kind": "access",
+        "label": "Starts over stdio",
+        "planned": false,
+        "source": "mcp-config",
+        "step": null,
+        "target": "ffia-local"
+      },
+      {
+        "id": "config-to-learn",
+        "kind": "access",
+        "label": "Docs over HTTPS",
+        "planned": false,
+        "source": "mcp-config",
+        "step": null,
+        "target": "learn-mcp"
+      },
+      {
+        "id": "ffia-to-router",
+        "kind": "access",
+        "label": "Read tools",
+        "planned": false,
+        "source": "ffia-local",
+        "step": null,
+        "target": "router"
+      }
+    ],
+    "id": "system",
+    "kind": "system",
+    "nodes": [
+      {
+        "col": 0.0,
+        "component": "learner-app",
+        "icon": "general/Browser",
+        "id": "web-app",
+        "kind": "client",
+        "label": "Educational app",
+        "phase": null,
+        "repo_path": "frontend/src",
+        "row": 1.0,
+        "runtime": "api",
+        "sources": [],
+        "state": "implemented",
+        "step": null,
+        "sublabel": "React + TypeScript + Vite",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 0.0,
+        "component": "coding-agents",
+        "icon": "general/Code",
+        "id": "coding-agent",
+        "kind": "harness",
+        "label": "GitHub Copilot / Claude Code",
+        "phase": null,
+        "repo_path": "AGENTS.md",
+        "row": 4.0,
+        "runtime": null,
+        "sources": [],
+        "state": "implemented",
+        "step": null,
+        "sublabel": "Reads AGENTS.md",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 1.0,
+        "component": null,
+        "icon": null,
+        "id": "vite-proxy",
+        "kind": "service",
+        "label": "Vite dev server",
+        "phase": null,
+        "repo_path": "frontend/vite.config.ts",
+        "row": 1.0,
+        "runtime": null,
+        "sources": [],
+        "state": "implemented",
+        "step": null,
+        "sublabel": "Proxies /api (same origin)",
+        "summary": "Serves the app on port 5173 and forwards /api to the control plane, so the browser holds no API host or credentials.",
+        "width": 1.0
+      },
+      {
+        "col": 1.0,
+        "component": null,
+        "icon": "general/File",
+        "id": "mcp-config",
+        "kind": "knowledge",
+        "label": ".mcp.json",
+        "phase": null,
+        "repo_path": ".mcp.json",
+        "row": 4.0,
+        "runtime": null,
+        "sources": [],
+        "state": "implemented",
+        "step": null,
+        "sublabel": "Shared by every harness",
+        "summary": "The portable MCP configuration read by VS Code, Copilot CLI and Claude Code. It lists Microsoft Learn and the local ffia-local server.",
+        "width": 1.0
+      },
+      {
+        "col": 2.0,
+        "component": null,
+        "icon": null,
+        "id": "api",
+        "kind": "service",
+        "label": "FastAPI control plane",
+        "phase": null,
+        "repo_path": "src/fabric_foundry_accelerator/api",
+        "row": 1.0,
+        "runtime": "api",
+        "sources": [],
+        "state": "implemented",
+        "step": null,
+        "sublabel": "Thin routes, correlation IDs",
+        "summary": "The control plane. Routes validate input and call services; errors come back in one problem shape. OpenAPI is exported and the frontend types are generated from it.",
+        "width": 1.0
+      },
+      {
+        "col": 2.0,
+        "component": "ffia-local-mcp",
+        "icon": null,
+        "id": "ffia-local",
+        "kind": "mcp",
+        "label": "ffia-local MCP server",
+        "phase": null,
+        "repo_path": "src/fabric_foundry_accelerator/mcp/server.py",
+        "row": 4.0,
+        "runtime": "mcp",
+        "sources": [],
+        "state": "implemented",
+        "step": null,
+        "sublabel": "stdio, allow-listed tools",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 2.0,
+        "component": null,
+        "icon": null,
+        "id": "learn-mcp",
+        "kind": "external",
+        "label": "Microsoft Learn MCP",
+        "phase": null,
+        "repo_path": null,
+        "row": 5.0,
+        "runtime": null,
+        "sources": [],
+        "state": "documented",
+        "step": null,
+        "sublabel": "Documentation, no tenant",
+        "summary": "The public Microsoft Learn MCP server used for how-to questions. It needs network access but no tenant or credentials.",
+        "width": 1.0
+      },
+      {
+        "col": 3.0,
+        "component": "human-approval",
+        "icon": null,
+        "id": "changes",
+        "kind": "policy",
+        "label": "Change service",
+        "phase": null,
+        "repo_path": "src/fabric_foundry_accelerator/services/changes.py",
+        "row": 0.0,
+        "runtime": "changes",
+        "sources": [],
+        "state": "implemented",
+        "step": null,
+        "sublabel": "Plan, approve, execute, verify",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 3.0,
+        "component": null,
+        "icon": null,
+        "id": "education",
+        "kind": "service",
+        "label": "Education service",
+        "phase": null,
+        "repo_path": "src/fabric_foundry_accelerator/services/education.py",
+        "row": 1.0,
+        "runtime": "education",
+        "sources": [],
+        "state": "implemented",
+        "step": null,
+        "sublabel": "Lessons, labs, diagrams",
+        "summary": "Serves validated lessons, labs, the architecture views and the completeness gate. Knowledge-check answers stay on the server.",
+        "width": 1.0
+      },
+      {
+        "col": 3.0,
+        "component": "evaluation",
+        "icon": null,
+        "id": "evaluation",
+        "kind": "evidence",
+        "label": "Evaluation service",
+        "phase": null,
+        "repo_path": "src/fabric_foundry_accelerator/services/evaluation.py",
+        "row": 2.0,
+        "runtime": "evaluation",
+        "sources": [],
+        "state": "implemented",
+        "step": null,
+        "sublabel": "Measures vs baseline",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 3.0,
+        "component": "provider-router",
+        "icon": null,
+        "id": "router",
+        "kind": "service",
+        "label": "Provider router",
+        "phase": null,
+        "repo_path": "src/fabric_foundry_accelerator/fallback/router.py",
+        "row": 3.0,
+        "runtime": "router",
+        "sources": [],
+        "state": "implemented",
+        "step": null,
+        "sublabel": "Timeouts, retries, breaker",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 4.0,
+        "component": "policy-engine",
+        "icon": "general/Workflow",
+        "id": "policies",
+        "kind": "policy",
+        "label": "Policies and overlay",
+        "phase": null,
+        "repo_path": "config/policies",
+        "row": 0.0,
+        "runtime": null,
+        "sources": [],
+        "state": "implemented",
+        "step": null,
+        "sublabel": "config/",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 4.0,
+        "component": null,
+        "icon": "general/Folder_Blank",
+        "id": "content",
+        "kind": "knowledge",
+        "label": "Learning content",
+        "phase": null,
+        "repo_path": "education",
+        "row": 1.0,
+        "runtime": null,
+        "sources": [],
+        "state": "implemented",
+        "step": null,
+        "sublabel": "education/ and guides/",
+        "summary": "Lessons, labs, architecture views, the pattern catalog and Use-Case Guides as validated YAML and Markdown.",
+        "width": 1.0
+      },
+      {
+        "col": 4.0,
+        "component": "audit-store",
+        "icon": "general/File",
+        "id": "audit",
+        "kind": "evidence",
+        "label": "Audit log",
+        "phase": null,
+        "repo_path": "src/fabric_foundry_accelerator/audit/store.py",
+        "row": 2.0,
+        "runtime": "audit",
+        "sources": [],
+        "state": "implemented",
+        "step": null,
+        "sublabel": "data/runtime/audit.jsonl",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 4.0,
+        "component": "local-fabric-provider",
+        "icon": null,
+        "id": "local-provider",
+        "kind": "local",
+        "label": "Local Fabric provider",
+        "phase": null,
+        "repo_path": "src/fabric_foundry_accelerator/providers/fabric/local.py",
+        "row": 3.0,
+        "runtime": "fabric-local",
+        "sources": [],
+        "state": "implemented",
+        "step": null,
+        "sublabel": "DuckDB over Parquet",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 5.0,
+        "component": null,
+        "icon": "general/Folder_Blank",
+        "id": "synthetic-data",
+        "kind": "data",
+        "label": "Synthetic medallion data",
+        "phase": null,
+        "repo_path": "data/synthetic",
+        "row": 3.0,
+        "runtime": null,
+        "sources": [],
+        "state": "implemented",
+        "step": null,
+        "sublabel": "data/synthetic",
+        "summary": "Generated synthetic CSVs, built Bronze, Silver and Gold Parquet, semantic model contracts and expected baselines. No real data.",
+        "width": 1.0
+      },
+      {
+        "col": 6.0,
+        "component": "foundry-agent",
+        "icon": "ai_machine_learning/Foundry_Agent_Service",
+        "id": "foundry",
+        "kind": "foundry",
+        "label": "Foundry Agent Service",
+        "phase": 6,
+        "repo_path": null,
+        "row": 1.0,
+        "runtime": "foundry",
+        "sources": [],
+        "state": "planned",
+        "step": null,
+        "sublabel": "Agents and evaluation",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 6.0,
+        "component": "fabric-mcp",
+        "icon": null,
+        "id": "fabric-live",
+        "kind": "fabric",
+        "label": "Fabric REST and MCP",
+        "phase": 5,
+        "repo_path": null,
+        "row": 3.0,
+        "runtime": "fabric-live",
+        "sources": [],
+        "state": "planned",
+        "step": null,
+        "sublabel": "Live, read-only first",
+        "summary": "",
+        "width": 1.0
+      }
+    ],
+    "pattern_ids": [
+      "P08",
+      "P09",
+      "P16",
+      "P17"
+    ],
+    "rows": 6,
+    "steps": [],
+    "summary": "How the educational app, the control plane, the local MCP server, the providers, policies, data and audit log fit together in this repository, and which parts are live right now.",
+    "title": "This accelerator at run time",
+    "traces": [
+      {
+        "demo_act": 5,
+        "id": "guide-rehearsal",
+        "label": "SIMULATED",
+        "steps": [
+          {
+            "edge": null,
+            "node": "web-app",
+            "note": "The browser only shows what the backend decides.",
+            "say": "In the guide runner you press Plan and validate."
+          },
+          {
+            "edge": "app-to-proxy",
+            "node": "vite-proxy",
+            "note": "",
+            "say": "The request goes to /api on the same origin."
+          },
+          {
+            "edge": "proxy-to-api",
+            "node": "api",
+            "note": "",
+            "say": "The control plane assigns a correlation ID and calls the change service."
+          },
+          {
+            "edge": "api-to-changes",
+            "node": "changes",
+            "note": "",
+            "say": "The change service records the plan and checks for duplicates."
+          },
+          {
+            "edge": "changes-to-policies",
+            "node": "policies",
+            "note": "",
+            "say": "Policy decides whether the operation, item type and workspace alias are allowed."
+          },
+          {
+            "edge": null,
+            "node": "changes",
+            "note": "Labeled SIMULATED. No Fabric item is created.",
+            "say": "After a different person approves, the scoped writer executes in the simulated workspace and verifies."
+          },
+          {
+            "edge": null,
+            "node": "audit",
+            "note": "",
+            "say": "Plan, approvals (including refused ones) and execution are audited under one correlation ID."
+          }
+        ],
+        "summary": "The HC-01 guide runner rehearses a governed write against the simulated workspace.",
+        "title": "Rehearse a guide write"
+      },
+      {
+        "demo_act": 7,
+        "id": "fallback-read",
+        "label": "LOCAL",
+        "steps": [
+          {
+            "edge": null,
+            "node": "web-app",
+            "note": "",
+            "say": "The data explorer asks for the lakehouse tables."
+          },
+          {
+            "edge": null,
+            "node": "api",
+            "note": "",
+            "say": "The control plane sends a typed read to the router."
+          },
+          {
+            "edge": "api-to-router",
+            "node": "router",
+            "note": "Offline there is no live provider, so it goes straight to LOCAL.",
+            "say": "The router tries the live provider with a timeout and bounded retries."
+          },
+          {
+            "edge": "router-to-live",
+            "node": "fabric-live",
+            "note": "",
+            "say": "The live call fails or the breaker is open (simulated outage in training)."
+          },
+          {
+            "edge": "router-to-local",
+            "node": "local-provider",
+            "note": "",
+            "say": "The approved LOCAL equivalent answers. The result is labeled LOCAL in HYBRID mode with a fallback reason."
+          },
+          {
+            "edge": "local-to-data",
+            "node": "synthetic-data",
+            "note": "",
+            "say": "Data comes from synthetic Parquet built by ffia data build."
+          }
+        ],
+        "summary": "A read goes through the router; when the live provider fails, the approved LOCAL equivalent answers, visibly labeled.",
+        "title": "Read with fallback"
+      },
+      {
+        "demo_act": 3,
+        "id": "agent-plan",
+        "label": "LOCAL",
+        "steps": [
+          {
+            "edge": null,
+            "node": "coding-agent",
+            "note": "",
+            "say": "You ask the coding agent to propose a lakehouse change."
+          },
+          {
+            "edge": "agent-to-config",
+            "node": "mcp-config",
+            "note": "",
+            "say": "The harness reads .mcp.json and starts ffia-local."
+          },
+          {
+            "edge": "config-to-ffia",
+            "node": "ffia-local",
+            "note": "MCP access is not authority.",
+            "say": "It calls generate_fabric_change_plan. There is no approve or execute tool."
+          },
+          {
+            "edge": "ffia-to-router",
+            "node": "router",
+            "note": "",
+            "say": "Read tools such as preview_table go through the same router, labeled LOCAL."
+          },
+          {
+            "edge": null,
+            "node": "audit",
+            "note": "",
+            "say": "Every tool call is rate limited and audited."
+          }
+        ],
+        "summary": "GitHub Copilot or Claude Code calls ffia-local over MCP. It can read and propose, but never approve or execute.",
+        "title": "A coding agent proposes a plan"
+      }
+    ],
+    "zones": [
+      {
+        "col": 0.0,
+        "cols": 6.0,
+        "id": "workstation",
+        "kind": "local",
+        "label": "Your workstation (offline-capable)",
+        "row": 0.0,
+        "rows": 6.0,
+        "step": null
+      },
+      {
+        "col": 6.0,
+        "cols": 1.0,
+        "id": "cloud",
+        "kind": "tenant",
+        "label": "Microsoft cloud (later phases)",
+        "row": 0.0,
+        "rows": 6.0,
+        "step": null
+      }
+    ]
+  }
+}

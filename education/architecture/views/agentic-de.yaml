@@ -1,0 +1,100 @@
+# The GitHub Copilot maturity ladder for Fabric data engineering, as a whiteboard you build level by level.
+id: agentic-de
+title: Leveling up Fabric data engineering with GitHub Copilot
+kind: maturity
+summary: >-
+  Five columns - knowledge, harness, execution, authority and evidence - filled in one maturity
+  level at a time, from assisted coding (L1) to governed change (L5) and parallel agents (L6).
+cue: >-
+  Skills make the agent competent, MCP makes it capable, the harness makes it productive,
+  identity and approval make it safe, and evidence makes it trustworthy. Climb one level at a
+  time, and measure each climb.
+columns: 5
+rows: 6
+doc: agentic-data-engineering
+aligned_to: [copilot-cli-ga, copilot-instructions-support, skills-for-fabric, fabric-mcp-local, fabric-git-integration, claude-code-skills]
+pattern_ids: [P19, P20, P21, P22, P23, P24]
+steps:
+  - {id: l1, label: "L1 Assisted", cue: "Copilot completes and explains PySpark, SQL and DAX in Git-synced Fabric item files. The control is code review."}
+  - {id: l2, label: "L2 Grounded", cue: "Repo instructions and documentation tools ground the agent in real APIs and item formats instead of plausible guesses."}
+  - {id: l3, label: "L3 Skilled", cue: "Fabric Skills add Microsoft-authored procedures. Skills act with your permissions, so harden the MCP configuration and use a dev workspace."}
+  - {id: l4, label: "L4 Connected", cue: "Read-only access to the real workspace lets the agent validate assumptions. Pin the target and keep it read-only."}
+  - {id: l5, label: "L5 Governed change", cue: "Changes arrive as plans and pull requests; humans approve; a scoped writer or pipeline applies them. This is the production default."}
+  - {id: l6, label: "L6 Parallel", cue: "Many agent sessions in isolated worktrees or the cloud. Preview-heavy - keep it to controlled experiments with budgets and sandboxes."}
+zones:
+  - {id: knowledge, label: "KNOWLEDGE - how to do it correctly", kind: local, col: 0, row: 0, cols: 1, rows: 6}
+  - {id: harness, label: "HARNESS - the agent loop", kind: local, col: 1, row: 0, cols: 1, rows: 6}
+  - {id: execution, label: "EXECUTION - the hands", kind: tenant, col: 2, row: 0, cols: 1, rows: 6}
+  - {id: authority, label: "AUTHORITY - who may do it", kind: tenant, col: 3, row: 0, cols: 1, rows: 6}
+  - {id: evidence, label: "EVIDENCE - proof it happened", kind: tenant, col: 4, row: 0, cols: 1, rows: 6}
+nodes:
+  - {id: l1-know, label: "Your own expertise", sublabel: "No repo guidance yet", kind: knowledge, state: documented, col: 0, row: 0, step: l1, summary: "At L1 the agent relies on general training and what you type. Plausible but wrong Fabric APIs are the main risk."}
+  - {id: l1-harness, label: "VS Code + Copilot", sublabel: "Completions and chat", kind: harness, state: documented, col: 1, row: 0, step: l1, icon: general/Code, summary: "Inline completions and chat on notebook-content.py, SQL, M and DAX files."}
+  - {id: l1-exec, label: "Git-synced Fabric items", sublabel: "notebook-content.py, TMDL", kind: knowledge, state: documented, col: 2, row: 0, step: l1, sources: [fabric-git-integration], summary: "Fabric Git integration stores items as files, so they can be edited and reviewed like code."}
+  - {id: l1-auth, label: "Code review", sublabel: "You decide", kind: policy, state: documented, col: 3, row: 0, step: l1, summary: "The developer reviews every suggestion before committing."}
+  - {id: l1-evidence, label: "The diff", kind: evidence, state: documented, col: 4, row: 0, step: l1, summary: "The commit diff is the only evidence at this level."}
+  - {id: l2-know, label: "AGENTS.md + instructions", sublabel: "Repo rules and commands", kind: knowledge, state: implemented, col: 0, row: 1, step: l2, icon: general/File, repo_path: AGENTS.md, summary: "Repository instructions read by Copilot and Claude Code - conventions, commands, safety and evidence rules."}
+  - {id: l2-harness, label: "Copilot agent mode or CLI", sublabel: "Tools with approvals", kind: harness, state: documented, col: 1, row: 1, step: l2, sources: [copilot-cli-ga], summary: "The agent can call tools, each with an approval prompt or an explicit allow rule."}
+  - {id: l2-exec, label: "Documentation MCP tools", sublabel: "Microsoft Learn, Fabric docs tools", kind: mcp, state: documented, col: 2, row: 1, step: l2, sources: [fabric-mcp-local], summary: "Item definitions, API specifications and best practices without any tenant access."}
+  - {id: l2-auth, label: "Pinned tool versions", kind: policy, state: implemented, col: 3, row: 1, step: l2, repo_path: .mcp.json, summary: "External servers are pinned so behavior does not change underneath you."}
+  - {id: l2-evidence, label: "Tool-call log", kind: evidence, state: documented, col: 4, row: 1, step: l2, summary: "The harness records which tools were called with which inputs."}
+  - {id: l3-know, label: "Fabric Skills", sublabel: "Microsoft-authored procedures", kind: knowledge, state: documented, col: 0, row: 2, step: l3, component: fabric-skills}
+  - {id: l3-harness, label: "Plugins and skills loaded", sublabel: "Copilot CLI or Claude Code", kind: harness, state: documented, col: 1, row: 2, step: l3, sources: [skills-for-fabric, claude-code-skills], summary: "Skills are installed through the plugin marketplace and loaded on demand when a task matches."}
+  - {id: l3-exec, label: "Skill dry run", sublabel: "Against the local provider", kind: local, state: implemented, col: 2, row: 2, step: l3, component: local-fabric-provider}
+  - {id: l3-auth, label: "Hardened MCP overlay", sublabel: "Dev workspace, read-only default", kind: policy, state: planned, phase: 5, col: 3, row: 2, step: l3, summary: "The bundled skill configuration allows broad tools. A hardened overlay keeps read-only defaults and a separate opt-in authoring profile."}
+  - {id: l3-evidence, label: "Skill named in the audit", kind: evidence, state: planned, phase: 7, col: 4, row: 2, step: l3, summary: "Each call records which skill drove it, so reviewers can trace procedure to outcome."}
+  - {id: l4-know, label: "Workspace context", sublabel: "Real schemas and counts", kind: knowledge, state: tenant-validation, col: 0, row: 3, step: l4, summary: "What the agent learns by inspecting the actual workspace. Must be validated in your tenant."}
+  - {id: l4-harness, label: "Same harness", sublabel: "Now connected", kind: harness, state: documented, col: 1, row: 3, step: l4, summary: "The same agent, now with read-only access to a real workspace."}
+  - {id: l4-exec, label: "Read-only remote MCP", sublabel: "Fabric IQ, OneLake read", kind: mcp, state: planned, phase: 5, col: 2, row: 3, step: l4, component: fabric-mcp}
+  - {id: l4-auth, label: "Read-only allow-list", sublabel: "Pinned workspace and tenant", kind: identity, state: planned, phase: 5, col: 3, row: 3, step: l4, icon: other/Entra_Identity, summary: "Only read tools are allowed, and the workspace and tenant are pinned so the agent cannot wander."}
+  - {id: l4-evidence, label: "Correlation and request IDs", kind: evidence, state: implemented, col: 4, row: 3, step: l4, component: audit-store}
+  - {id: l5-know, label: "Change templates", sublabel: "Plans, rollback, validation", kind: knowledge, state: implemented, col: 0, row: 4, step: l5, repo_path: config/policies/writes.yaml, summary: "Policy defines each operation's risk, validation and rollback, so every plan is complete."}
+  - {id: l5-harness, label: "Cloud agent pull requests", sublabel: "Issue to PR", kind: harness, state: documented, col: 1, row: 4, step: l5, summary: "Well-scoped issues become pull requests that humans review."}
+  - {id: l5-exec, label: "Plan, approve, execute", sublabel: "Scoped writer or deployment pipeline", kind: policy, state: implemented, col: 2, row: 4, step: l5, component: scoped-writer, repo_path: src/fabric_foundry_accelerator/services/changes.py}
+  - {id: l5-auth, label: "Approvals and branch protection", sublabel: "Not the requester", kind: policy, state: implemented, col: 3, row: 4, step: l5, component: human-approval}
+  - {id: l5-evidence, label: "PR + audit + verification", kind: evidence, state: implemented, col: 4, row: 4, step: l5, component: audit-store}
+  - {id: l6-know, label: "Migration playbooks", sublabel: "Repeatable at scale", kind: knowledge, state: planned, phase: 7, col: 0, row: 5, step: l6, summary: "Procedures that many parallel sessions can follow consistently."}
+  - {id: l6-harness, label: "Copilot app and fleets", sublabel: "Worktrees, preview", kind: harness, state: preview, col: 1, row: 5, step: l6, summary: "Parallel sessions in isolated worktrees or the cloud. Technical preview."}
+  - {id: l6-exec, label: "Parallel pull requests", kind: harness, state: preview, col: 2, row: 5, step: l6, summary: "Many small, reviewable changes instead of one large one."}
+  - {id: l6-auth, label: "Sandboxes and budgets", sublabel: "Firewall, allow-lists", kind: policy, state: preview, col: 3, row: 5, step: l6, summary: "Limits on what each session can reach and spend."}
+  - {id: l6-evidence, label: "Per-session logs", kind: evidence, state: preview, col: 4, row: 5, step: l6, summary: "Every session leaves its own trail and pull request."}
+edges:
+  - {id: l1-a, source: l1-know, target: l1-harness, kind: context, step: l1}
+  - {id: l1-b, source: l1-harness, target: l1-exec, label: "Edits files", kind: change, step: l1}
+  - {id: l1-c, source: l1-exec, target: l1-auth, kind: authority, step: l1}
+  - {id: l1-d, source: l1-auth, target: l1-evidence, kind: evidence, step: l1}
+  - {id: l2-a, source: l2-know, target: l2-harness, label: "Grounds", kind: context, step: l2}
+  - {id: l2-b, source: l2-harness, target: l2-exec, label: "Looks up", kind: access, step: l2}
+  - {id: l2-c, source: l2-exec, target: l2-auth, kind: authority, step: l2}
+  - {id: l2-d, source: l2-auth, target: l2-evidence, kind: evidence, step: l2}
+  - {id: l3-a, source: l3-know, target: l3-harness, label: "Procedures", kind: context, step: l3}
+  - {id: l3-b, source: l3-harness, target: l3-exec, label: "Rehearses", kind: access, step: l3}
+  - {id: l3-c, source: l3-exec, target: l3-auth, kind: authority, step: l3}
+  - {id: l3-d, source: l3-auth, target: l3-evidence, kind: evidence, step: l3}
+  - {id: l4-a, source: l4-know, target: l4-harness, kind: context, step: l4}
+  - {id: l4-b, source: l4-harness, target: l4-exec, label: "Inspects", kind: access, step: l4}
+  - {id: l4-c, source: l4-exec, target: l4-auth, kind: authority, step: l4}
+  - {id: l4-d, source: l4-auth, target: l4-evidence, kind: evidence, step: l4}
+  - {id: l5-a, source: l5-know, target: l5-harness, kind: context, step: l5}
+  - {id: l5-b, source: l5-harness, target: l5-exec, label: "Proposes", kind: change, step: l5}
+  - {id: l5-c, source: l5-exec, target: l5-auth, label: "Approval gate", kind: authority, step: l5}
+  - {id: l5-d, source: l5-auth, target: l5-evidence, kind: evidence, step: l5}
+  - {id: l6-a, source: l6-know, target: l6-harness, kind: context, step: l6}
+  - {id: l6-b, source: l6-harness, target: l6-exec, kind: change, step: l6}
+  - {id: l6-c, source: l6-exec, target: l6-auth, kind: authority, step: l6}
+  - {id: l6-d, source: l6-auth, target: l6-evidence, kind: evidence, step: l6}
+bands:
+  - {id: identity, kind: identity, step: l3, text: "Skills and MCP tools act with your own Fabric permissions. Harness permissions are not authorization."}
+  - {id: policy, kind: policy, step: l5, text: "L5 is the production default: every change is a plan or pull request, approved by someone other than the requester."}
+traces:
+  - id: climb
+    title: Climb the ladder
+    summary: One task - add a Silver table - done at each level, and what each level adds.
+    label: PLANNED FLOW
+    steps:
+      - {node: l1-harness, say: "L1 - Copilot suggests the PySpark; you check it against what you remember."}
+      - {node: l2-exec, say: "L2 - documentation tools confirm the correct Delta and notebook patterns."}
+      - {node: l3-know, say: "L3 - a Fabric Skill supplies the Microsoft-authored procedure and its gotchas."}
+      - {node: l4-exec, say: "L4 - read-only tools check the real Bronze schema and row counts."}
+      - {node: l5-exec, say: "L5 - the change becomes a plan or pull request; someone else approves; the writer applies it."}
+      - {node: l5-evidence, say: "The pull request, audit trail and verification are the evidence a reviewer can trust."}

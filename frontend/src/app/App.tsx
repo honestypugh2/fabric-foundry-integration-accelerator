@@ -61,6 +61,14 @@ export function App() {
       <Route element={<Layout />}>
         <Route index element={<HomePage />} />
         <Route
+          path="architecture/:viewId"
+          element={
+            <Page>
+              <ArchitecturePage />
+            </Page>
+          }
+        />
+        <Route
           path="architecture"
           element={
             <Page>

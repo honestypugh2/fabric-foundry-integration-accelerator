@@ -38,6 +38,20 @@ describe("guide runner", () => {
     expect(screen.getByText(/has no simulated equivalent/)).toBeInTheDocument();
   });
 
+  it("shows where each step happens on the HC-01 diagram", async () => {
+    mockApi(defaultRoutes);
+    renderApp(`${GUIDE_URL}/04-create-lakehouse`);
+    const section = await screen.findByRole("region", { name: "Where this step happens" });
+    expect(
+      await within(section).findByText(
+        /Highlighted: Fabric MCP Server \(local\), healthcare_lakehouse, Approval gate\./,
+      ),
+    ).toBeInTheDocument();
+    expect(
+      within(section).getByRole("link", { name: "Open the full interactive diagram" }),
+    ).toHaveAttribute("href", "/architecture/hc-01");
+  });
+
   it("tracks completed steps and copies prompts", async () => {
     mockApi(defaultRoutes);
     const writeText = vi.fn(() => Promise.resolve());

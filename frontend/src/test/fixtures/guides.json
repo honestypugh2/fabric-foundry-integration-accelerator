@@ -1,6 +1,7 @@
 [
   {
     "dataset_profile": "hc-lab-7file-v1",
+    "diagram": "hc-01",
     "expected_baseline": "data/synthetic/expected/hc-lab-7file-v1.json",
     "harnesses": [
       "copilot-vscode",
@@ -49,6 +50,11 @@
         "checkpoint": "Every required tool is installed and the Fabric MCP server is running with callable tools.",
         "claude_code_prompt": "Run `claude mcp list` and report which servers from .mcp.json are connected and which tools they expose. Confirm the Power BI authoring skills are available. Do not call any cloud tool.",
         "copilot_prompt": "Check my lab prerequisites without changing anything. List which MCP servers are running and which tools each exposes, confirm the Power BI authoring skills are enabled in this chat, and tell me which items in the guide's tool list are missing. Do not call any cloud tool.",
+        "diagram_focus": [
+          "copilot",
+          "claude",
+          "fabric-mcp"
+        ],
         "evidence_required": [
           "The Fabric MCP server shows as running in MCP List Servers.",
           "The chat tool picker lists its OneLake and item tools as enabled.",
@@ -82,6 +88,10 @@
         "checkpoint": "The known workspace ID appears in the actual MCP response.",
         "claude_code_prompt": "Using the fabric MCP server from .mcp.json, call onelake_list-workspaces and confirm workspace ID <KNOWN_WORKSPACE_ID> is present with its exact name. Show the raw tool call and result. Stop if it is missing. No REST or CLI fallback.",
         "copilot_prompt": "Call the Fabric MCP onelake_list-workspaces tool directly. Look for workspace ID <KNOWN_WORKSPACE_ID> and report its exact returned name, following continuation pages if any. Show the invocation and result. If the ID is missing or the tool cannot be called, stop. Do not create anything and do not fall back to REST or the CLI.",
+        "diagram_focus": [
+          "copilot",
+          "fabric-mcp"
+        ],
         "evidence_required": [
           "The real tool invocation and its response containing the known workspace ID."
         ],
@@ -113,6 +123,10 @@
         "checkpoint": "The empty workspace exists on the intended capacity and appears in the MCP listing.",
         "claude_code_prompt": "Repeat the onelake_list-workspaces check for the new workspace ID <WORKSPACE_ID>. Read-only.",
         "copilot_prompt": "I created a new blank workspace in the portal. Repeat the step 02 read-only check with the new workspace ID <WORKSPACE_ID> and confirm it appears. Do not create anything.",
+        "diagram_focus": [
+          "workspace",
+          "approval"
+        ],
         "evidence_required": [
           "Workspace ID copied from the portal and confirmed by onelake_list-workspaces."
         ],
@@ -140,6 +154,11 @@
         "checkpoint": "Exactly one healthcare_lakehouse exists and its ID is recorded locally.",
         "claude_code_prompt": "Check for an existing healthcare_lakehouse with onelake_list-items in <WORKSPACE_ID>; if absent, create it with core_create-item and confirm with onelake_list-items. Return the lakehouse ID. Stop.",
         "copilot_prompt": "Using the Fabric MCP core_create-item tool, create a Lakehouse named healthcare_lakehouse in workspace <WORKSPACE_ID>. First check onelake_list-items for an existing item with that name and report it instead of creating a duplicate. Confirm with onelake_list-items and return the lakehouse ID. Stop after confirmation.",
+        "diagram_focus": [
+          "fabric-mcp",
+          "lakehouse",
+          "approval"
+        ],
         "evidence_required": [
           "The create call response and a follow-up listing that shows one matching lakehouse."
         ],
@@ -177,6 +196,11 @@
         "checkpoint": "Files/raw contains exactly the seven CSVs and every remote size matches its local file.",
         "claude_code_prompt": "Upload the seven CSVs to Files/raw in lakehouse <LAKEHOUSE_ID> with onelake_upload-file, then list them with onelake_list-files and compare sizes. Stop on any failure. No tables.",
         "copilot_prompt": "First check the seven CSVs under <PROJECT_PATH>/data/raw. Using Fabric MCP, create Files/raw in lakehouse <LAKEHOUSE_ID> and upload each CSV with onelake_upload-file using its local-file-path parameter. List Files/raw with onelake_list-files and compare every remote byte size with the local file. If a call fails or the tool has no local-file-path parameter, stop. Do not create tables.",
+        "diagram_focus": [
+          "lab-data",
+          "lakehouse",
+          "approval"
+        ],
         "evidence_required": [
           "onelake_list-files output with seven files and sizes equal to the local files."
         ],
@@ -212,6 +236,9 @@
         "checkpoint": "The profile matches the expected baseline and records the date and text quirks.",
         "claude_code_prompt": "Profile data/raw/*.csv with a CSV-aware parser (no edits): row counts, keys, orphans, discharge_date, literal \\n versus real newlines, and an ER diagram of supported joins. Stop after the profile.",
         "copilot_prompt": "Read the seven CSVs in data/raw without changing them, using a CSV-aware parser. Report parsed row counts, columns, candidate keys, blank or duplicate keys, and unmatched patient_id and encounter_id values. Check discharge_date in encounters, and distinguish real newlines from the literal two-character sequence \\n in clinical notes. Draw an entity-relationship diagram from the joins the data supports. Stop after the profile.",
+        "diagram_focus": [
+          "lab-data"
+        ],
         "evidence_required": [
           "Parsed counts 200, 1025, 428, 1025, 4299, 643 and 150.",
           "All condition encounter_id values are blank; conditions are a patient-level problem list.",
@@ -241,6 +268,10 @@
         "checkpoint": "The draft is reviewed, including output table names and the lakehouse binding.",
         "claude_code_prompt": "Draft notebooks/MCP_01_Bronze.ipynb (local only) with the same four-cell structure, count validation before write, read-back after write, and Delta overwrite of the seven bronze_ tables. Do not run or publish.",
         "copilot_prompt": "Create only a local draft at notebooks/MCP_01_Bronze.ipynb for workspace <WORKSPACE_ID> and default lakehouse healthcare_lakehouse (<LAKEHOUSE_ID>) with valid Fabric PySpark metadata. Four cells: explanation, configuration with expected counts, an ingestion function, and a driver. Read all seven CSVs from Files/raw with header, inferSchema, multiLine and a double-quote escape. Keep the literal \\n text and the blank condition encounter_id values. Write the seven bronze_ tables as Delta with overwrite and overwriteSchema. Validate parsed counts before writing and read every table back. Show the code. Do not execute, publish or upload.",
+        "diagram_focus": [
+          "copilot",
+          "bronze"
+        ],
         "evidence_required": [
           "Reviewed notebook code and metadata bound to the exact workspace and lakehouse IDs."
         ],
@@ -266,6 +297,12 @@
         "checkpoint": "Seven Bronze Delta tables exist with persisted counts equal to the baseline.",
         "claude_code_prompt": "In VS Code (Claude harness) or the Fabric portal, publish the reviewed notebook, confirm its cloud ID and lakehouse binding, run it once on Fabric Spark, and report per-table counts. Name the provider.",
         "copilot_prompt": "The Bronze draft is reviewed. Check the current Fabric Data Engineering workspace with fabricWorkspaceInfo and require <WORKSPACE_ID>. Publish the reviewed notebook as MCP_01_Bronze with a supported operation and name the tool you used. Confirm the cloud notebook ID, its source and its default lakehouse. Then, with the notebook attached to the Microsoft Fabric Runtime kernel, run it once and report each table's input and persisted counts. Stop on any failure.",
+        "diagram_focus": [
+          "de-extension",
+          "spark",
+          "bronze",
+          "approval"
+        ],
         "evidence_required": [
           "Printed input and persisted counts for all seven tables, and a cloud notebook ID with the correct binding."
         ],
@@ -304,6 +341,12 @@
         "checkpoint": "Seven typed Silver tables preserve the baseline counts, and parsing and range issues are explained.",
         "claude_code_prompt": "Propose Silver rules (types, dates, bands, mappings, nulls, diagnostics) and stop. After approval, draft MCP_02_Silver.ipynb; publishing and running is a separate step.",
         "copilot_prompt": "Inspect the Bronze schema and propose the Silver rules: exact types, date parsing, age, risk and LOS thresholds, condition category mapping with an explicit unmapped category, null handling and diagnostics. Keep all seven row counts. Stop for review. After I approve, draft notebooks/MCP_02_Silver.ipynb, then publish and run it in a separate prompt.",
+        "diagram_focus": [
+          "de-extension",
+          "spark",
+          "silver",
+          "approval"
+        ],
         "evidence_required": [
           "Persisted counts and diagnostics for overlapping encounters, length-of-stay mismatches, blank charges and out-of-range vitals."
         ],
@@ -336,6 +379,12 @@
         "checkpoint": "Twenty-four lab tables exist (7 Bronze, 7 Silver, 6 Gold, 4 dimensions) and reconciliation totals are captured.",
         "claude_code_prompt": "Propose the Gold grains, readmission and eligibility rule, and key checks; stop for review; then draft and separately run MCP_03_Gold with reconciliation totals printed.",
         "copilot_prompt": "Propose the Gold logic and dimension keys: one row per index inpatient encounter using the actual discharge_date and the next inpatient admission strictly after it (1 to 30 days inclusive), with a follow-up eligibility rule; patient-year ED utilization; diagnosis-facility ALOS keeping counts and totals; encounter and claim grain facts; population health including zero-condition patients; and dim_date, dim_patient, dim_facility, dim_payer. Include checks for duplicate keys, row multiplication and missing dimension keys. Stop for review. Then draft, publish and run MCP_03_Gold.",
+        "diagram_focus": [
+          "de-extension",
+          "spark",
+          "gold",
+          "approval"
+        ],
         "evidence_required": [
           "Grain and key assertions pass; financial totals reconcile; readmission numerator and denominator printed."
         ],
@@ -370,6 +419,11 @@
         "checkpoint": "The exact model is connected and its seven tables use Direct Lake.",
         "claude_code_prompt": "Connect to <MODEL_ID> with the Power BI Authoring MCP server and report tables, storage modes and relationships. Read-only.",
         "copilot_prompt": "Using Power BI Authoring MCP connection tools and the semantic-model-authoring skill, connect to model <MODEL_ID> in workspace <WORKSPACE_ID> at <XMLA_ENDPOINT>. Confirm the connected model identity and inspect its seven tables, columns, storage modes and relationships. Report the tools used. Do not change the model.",
+        "diagram_focus": [
+          "gold",
+          "semantic-model",
+          "approval"
+        ],
         "evidence_required": [
           "The connected model identity and the table list returned by the server."
         ],
@@ -403,6 +457,12 @@
         "checkpoint": "Relationships are verified and every DAX check equals the expected baseline.",
         "claude_code_prompt": "Propose relationships and measures; stop for review; then apply through Power BI Authoring MCP and reconcile DAX results with the Gold totals.",
         "copilot_prompt": "Propose the relationships (one-to-many, single direction, dimension to fact, one active date role per fact), friendly names, hidden keys and descriptions, then the measures with formats and zero-denominator behavior. Do not add a bed occupancy measure (no denominator exists). Stop for review. After approval, apply through Power BI Authoring MCP and run DAX checks for encounters, ED visits, inpatient count and LOS, paid and denied amounts, denial rate, patient counts and the readmission numerator, denominator and rate. Compare with the Gold totals and report mismatches.",
+        "diagram_focus": [
+          "pbi-mcp",
+          "semantic-model",
+          "dax-checks",
+          "approval"
+        ],
         "evidence_required": [
           "DAX query results compared value by value with the expected baseline (POST /api/v1/evaluations/run)."
         ],
@@ -437,6 +497,10 @@
         "checkpoint": "Findings are recorded; only explicitly approved fixes are applied and re-checked.",
         "claude_code_prompt": "Review <MODEL_ID> read-only for best practices and AI readiness; group findings by severity.",
         "copilot_prompt": "Use the semantic-model-authoring workflow to review <MODEL_ID> for best practices and AI readiness: relationship ambiguity, grain, date roles, hidden keys, descriptions, synonyms, measure definitions and unsupported clinical interpretations. Group findings by severity. Do not change the model.",
+        "diagram_focus": [
+          "pbi-mcp",
+          "semantic-model"
+        ],
         "evidence_required": [
           "The findings list with severities and the tools that produced it."
         ],
@@ -464,6 +528,11 @@
         "checkpoint": "The report renders in preview, cards reconcile with DAX checks, and it is published as a separate step.",
         "claude_code_prompt": "Plan the two-page report, stop for review, then build the PBIR project bound to <MODEL_ID> and stop before publishing.",
         "copilot_prompt": "Using the report planning skill, propose a two-page report on <MODEL_ID>: an executive overview (readmission rate, inpatient ALOS, ED visits and denial rate cards, a monthly encounter trend and a facility breakdown with clear date-role labels) and a population page from dim_patient with patient-attribute slicers. Do not author yet. After review, build it as a PBIP/PBIR project bound to the existing model, validate the definition and stop before publication.",
+        "diagram_focus": [
+          "dax-checks",
+          "report",
+          "approval"
+        ],
         "evidence_required": [
           "Rendered pages reviewed, then the published report ID, workspace ID and model binding."
         ],
@@ -499,6 +568,15 @@
         "checkpoint": "Every required check passes; unavailable checks are resolved before calling the lab complete.",
         "claude_code_prompt": "Run the same read-only acceptance checks; report pass, fail or not verified with evidence and tools used.",
         "copilot_prompt": "Perform a read-only final validation for workspace <WORKSPACE_ID>, lakehouse <LAKEHOUSE_ID> and model <MODEL_ID>: workspace and capacity, raw files, Bronze, Silver, Gold and dimension counts, notebook bindings, model storage mode and relationships, DAX reconciliation, review findings and the published report. Name the provider and tool for each check, report pass, fail or not verified with concrete evidence, and do not repair or rerun anything.",
+        "diagram_focus": [
+          "lakehouse",
+          "bronze",
+          "silver",
+          "gold",
+          "semantic-model",
+          "dax-checks",
+          "report"
+        ],
         "evidence_required": [
           "A table of checks with provider, tool, result and evidence, plus the baseline comparison."
         ],
@@ -526,6 +604,12 @@
         "checkpoint": "The governing control is identified and the failed step's checkpoint passes on retry.",
         "claude_code_prompt": "Diagnose <FAILING_STEP> read-only: MCP server status, Azure CLI account and tenant, credential selection and notebook binding. Never print tokens.",
         "copilot_prompt": "Diagnose why <FAILING_STEP> failed without changing authentication or server settings. Check, in order, agent mode and enabled tools, the MCP server log, the Azure CLI account and tenant, the credential selector inherited by VS Code, the Data Engineering workspace selection and the Spark kernel. Never print tokens.",
+        "diagram_focus": [
+          "copilot",
+          "claude",
+          "fabric-mcp",
+          "pbi-mcp"
+        ],
         "evidence_required": [
           "The specific misconfigured control and a successful repeat of the failed checkpoint."
         ],

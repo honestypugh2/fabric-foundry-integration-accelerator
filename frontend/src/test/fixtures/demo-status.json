@@ -32,7 +32,7 @@
     },
     {
       "component": "API",
-      "detail": "30 API paths (in-process check)",
+      "detail": "34 API paths (in-process check)",
       "status": "READY"
     },
     {

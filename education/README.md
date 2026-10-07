@@ -8,6 +8,7 @@ Content is data, not React copy. The control plane validates it at startup, and
 | `<area>/<lesson-id>/` | `lesson.yaml`, `executive.md`, `l100.md`, `l200.md`, `l300.md`, `l400.md`, `checks.yaml` |
 | `labs/<lab-id>/lab.yaml` | Eleven stages in the fixed order LEARN → … → PRODUCTION NOTES |
 | `architecture/explorer.yaml` | Layers, components (with per-level descriptions) and flows |
+| `architecture/views/<id>.yaml` | Diagram views (grid nodes, edges, zones, bands, build steps, traces). Rendered in the app, as draw.io files and in `docs/architecture` |
 | `patterns/catalog.yaml` | The 24-pattern catalog |
 | `completeness.yaml` | The 30-question architecture completeness gate |
 

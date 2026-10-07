@@ -20,11 +20,14 @@ import {
   offlineDemoReportSchema,
   patternSchema,
   proposedChangeSchema,
+  renderedViewSchema,
   recommendationSchema,
   runtimeStatusSchema,
   selectionSignalSchema,
   tableInfoSchema,
   tablePreviewSchema,
+  viewRuntimeSchema,
+  viewSummarySchema,
   workspaceSchema,
   type Rehearsal,
 } from "./contracts";
@@ -146,6 +149,36 @@ export function useArchitecture() {
   return useQuery({
     queryKey: ["architecture"],
     queryFn: ({ signal }) => api.get("/api/v1/education/architecture", architectureSchema, signal),
+  });
+}
+
+export function useViews() {
+  return useQuery({
+    queryKey: ["views"],
+    queryFn: ({ signal }) => api.get("/api/v1/education/views", z.array(viewSummarySchema), signal),
+  });
+}
+
+export function useView(viewId: string) {
+  return useQuery({
+    queryKey: ["view", viewId],
+    queryFn: ({ signal }) =>
+      api.get(`/api/v1/education/views/${encodeURIComponent(viewId)}`, renderedViewSchema, signal),
+  });
+}
+
+/** Live node states for a view, refreshed while the overlay is on. */
+export function useViewRuntime(viewId: string, enabled: boolean) {
+  return useQuery({
+    queryKey: ["view-runtime", viewId],
+    enabled,
+    refetchInterval: enabled ? 10_000 : false,
+    queryFn: ({ signal }) =>
+      api.get(
+        `/api/v1/education/views/${encodeURIComponent(viewId)}/runtime`,
+        viewRuntimeSchema,
+        signal,
+      ),
   });
 }
 

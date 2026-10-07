@@ -24,6 +24,11 @@ import readWorkspaces from "./fixtures/read-workspaces.json";
 import recommend from "./fixtures/recommend.json";
 import runtimeStatus from "./fixtures/runtime-status.json";
 import signals from "./fixtures/signals.json";
+import viewHc01 from "./fixtures/view-hc01.json";
+import viewReference from "./fixtures/view-reference.json";
+import viewSystemRuntime from "./fixtures/view-system-runtime.json";
+import viewSystem from "./fixtures/view-system.json";
+import views from "./fixtures/views.json";
 import type { Routes } from "./mockApi";
 
 /** Real control-plane responses exported by `python -m tests.contract.export_frontend_fixtures`. */
@@ -54,6 +59,11 @@ export const fixtures = {
   recommend,
   runtimeStatus,
   signals,
+  viewHc01,
+  viewReference,
+  viewSystem,
+  viewSystemRuntime,
+  views,
 } as const;
 
 const READS: Readonly<Record<string, unknown>> = {
@@ -93,4 +103,9 @@ export const defaultRoutes: Routes = {
   "POST /api/v1/approvals": approval,
   "POST /api/v1/fabric/change": execution,
   [`GET /api/v1/audit/${plan.correlation_id}`]: audit,
+  "GET /api/v1/education/views": views,
+  "GET /api/v1/education/views/reference": viewReference,
+  "GET /api/v1/education/views/system": viewSystem,
+  "GET /api/v1/education/views/system/runtime": viewSystemRuntime,
+  "GET /api/v1/education/views/hc-01": viewHc01,
 };

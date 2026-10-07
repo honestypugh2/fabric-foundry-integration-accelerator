@@ -78,6 +78,7 @@ class GuideStep(BaseModel):
     failure_modes: tuple[str, ...] = ()
     requires_windows: bool = False
     rehearsal: Rehearsal | None = None
+    diagram_focus: tuple[str, ...] = ()
 
     @model_validator(mode="after")
     def _writes_need_approval(self) -> Self:
@@ -120,6 +121,7 @@ class UseCaseGuide(BaseModel):
     os_constraints: tuple[str, ...] = ()
     dataset_profile: str
     expected_baseline: str
+    diagram: str | None = None
     steps: tuple[GuideStep, ...] = Field(min_length=1)
 
     @model_validator(mode="after")

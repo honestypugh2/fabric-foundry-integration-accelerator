@@ -46,8 +46,10 @@ os_constraints:
   - Power BI Desktop preview and publish steps need Windows. Other steps run on Windows, macOS or Linux.
 dataset_profile: hc-lab-7file-v1
 expected_baseline: data/synthetic/expected/hc-lab-7file-v1.json
+diagram: hc-01
 steps:
   - id: 01-set-up-tools
+    diagram_focus: [copilot, claude, fabric-mcp]
     title: Set up and verify the tools
     objective: Install the extensions, MCP servers and skills, and prepare a separate lab project folder.
     copilot_prompt: >-
@@ -72,6 +74,7 @@ steps:
     failure_modes:
       - Tools are described but not callable (wrong chat mode or tools disabled).
   - id: 02-verify-tenant-anchor
+    diagram_focus: [copilot, fabric-mcp]
     title: Verify the tenant through a real MCP call
     objective: Prove the Fabric MCP server reaches the intended tenant before any write.
     copilot_prompt: >-
@@ -96,6 +99,7 @@ steps:
     failure_modes:
       - The MCP server picks a different credential than the Azure CLI (see troubleshooting).
   - id: 03-create-workspace
+    diagram_focus: [workspace, approval]
     title: Create the lab workspace (portal)
     objective: Create a new, empty workspace on the intended capacity.
     copilot_prompt: >-
@@ -113,6 +117,7 @@ steps:
     failure_modes:
       - Workspace assigned to the wrong capacity.
   - id: 04-create-lakehouse
+    diagram_focus: [fabric-mcp, lakehouse, approval]
     title: Create and confirm the lakehouse
     objective: Create the lakehouse through Fabric MCP after a duplicate check.
     copilot_prompt: >-
@@ -137,6 +142,7 @@ steps:
     failure_modes:
       - Retrying a create after a timeout produces a duplicate (check first).
   - id: 05-upload-data
+    diagram_focus: [lab-data, lakehouse, approval]
     title: Upload the synthetic CSVs
     objective: Land the seven source files under Files/raw.
     copilot_prompt: >-
@@ -159,6 +165,7 @@ steps:
     offline_equivalent: Export the CSVs with SHA256SUMS and verify the checksums.
     offline_command: "ffia data export --profile hc-lab-7file-v1 --dest <LAB_PATH>/data/raw && (cd <LAB_PATH>/data/raw && sha256sum -c SHA256SUMS)"
   - id: 06-profile-data
+    diagram_focus: [lab-data]
     title: Profile the source data locally
     objective: Establish the baseline (counts, keys, joins, date and text quirks) before writing code.
     copilot_prompt: >-
@@ -183,6 +190,7 @@ steps:
     offline_equivalent: Inspect the scenario and its documented quirks.
     offline_command: "ffia data build --profile hc-lab-7file-v1 --verbose"
   - id: 07-bronze-draft
+    diagram_focus: [copilot, bronze]
     title: Draft the Bronze notebook (no execution)
     objective: Author a reviewed ingestion notebook that preserves source values and grain.
     copilot_prompt: >-
@@ -206,6 +214,7 @@ steps:
     offline_equivalent: Compare with the local Bronze SQL and build.
     offline_command: "ffia data build --profile hc-lab-7file-v1"
   - id: 08-bronze-publish-run
+    diagram_focus: [de-extension, spark, bronze, approval]
     title: Publish and run Bronze on Fabric Spark
     objective: Publish the reviewed notebook and run it once on remote Fabric Spark.
     copilot_prompt: >-
@@ -231,6 +240,7 @@ steps:
     failure_modes:
       - Notebook opened locally without the remote kernel; wrong default lakehouse.
   - id: 09-silver
+    diagram_focus: [de-extension, spark, silver, approval]
     title: Design, draft, publish and run Silver
     objective: Apply explicit types and reviewed analytical fields while keeping every row.
     copilot_prompt: >-
@@ -251,6 +261,7 @@ steps:
     offline_equivalent: Local Silver SQL and diagnostics (counts must match the expected baseline).
     offline_command: "ffia data build --profile hc-lab-7file-v1 --verbose"
   - id: 10-gold
+    diagram_focus: [de-extension, spark, gold, approval]
     title: Design, draft, publish and run Gold
     objective: Build six gold_ tables and four physical dim_ tables at reviewed grains.
     copilot_prompt: >-
@@ -275,6 +286,7 @@ steps:
     offline_equivalent: Local Gold build and expected baseline (the live totals must match).
     offline_command: "ffia data build --profile hc-lab-7file-v1"
   - id: 11-semantic-model
+    diagram_focus: [gold, semantic-model, approval]
     title: Bootstrap and connect the Direct Lake semantic model
     objective: Create the model from seven tables in the portal, then connect the modeling tools.
     copilot_prompt: >-
@@ -295,6 +307,7 @@ steps:
     offline_equivalent: The semantic model contract (tables, grains and roles).
     offline_command: "curl -s -X POST localhost:8000/api/v1/fabric/read -H 'content-type: application/json' -d '{\"operation\":\"get_semantic_model\",\"semantic_model_id\":\"local-sm-hc-lab-7file-v1\"}'"
   - id: 12-relationships-and-measures
+    diagram_focus: [pbi-mcp, semantic-model, dax-checks, approval]
     title: Apply relationships and measures, then reconcile DAX
     objective: Star relationships, then measure contracts validated against the Gold baseline.
     copilot_prompt: >-
@@ -317,6 +330,7 @@ steps:
     offline_equivalent: Evaluate the measure contracts locally and compare observed values with the baseline.
     offline_command: "curl -s -X POST localhost:8000/api/v1/evaluations/run -H 'content-type: application/json' -d '{\"profile\":\"hc-lab-7file-v1\"}'"
   - id: 13-model-review
+    diagram_focus: [pbi-mcp, semantic-model]
     title: Review the model (read-only)
     objective: Best-practice and AI-readiness review before further changes.
     copilot_prompt: >-
@@ -332,6 +346,7 @@ steps:
       - The findings list with severities and the tools that produced it.
     offline_equivalent: Compare the live model with the semantic model contract and vocabulary.
   - id: 14-report
+    diagram_focus: [dax-checks, report, approval]
     title: Plan, build, preview and publish the report
     objective: A two-page report bound to the validated model.
     copilot_prompt: >-
@@ -355,6 +370,7 @@ steps:
     offline_equivalent: Report plan review against the measure contracts.
     requires_windows: true
   - id: 15-final-validation
+    diagram_focus: [lakehouse, bronze, silver, gold, semantic-model, dax-checks, report]
     title: Final read-only validation
     objective: Pass, fail or not-verified for every acceptance check, with evidence.
     copilot_prompt: >-
@@ -375,6 +391,7 @@ steps:
     offline_equivalent: Run the offline demo, which prints LIVE versus SIMULATED evidence.
     offline_command: "make demo-offline"
   - id: 16-troubleshooting
+    diagram_focus: [copilot, claude, fabric-mcp, pbi-mcp]
     title: Troubleshoot credentials and tooling
     objective: Diagnose the control that governs a failing operation, then repeat its checkpoint.
     copilot_prompt: >-

@@ -545,6 +545,36 @@
         "title": "AuditRecord",
         "type": "object"
       },
+      "Box": {
+        "additionalProperties": false,
+        "description": "A rectangle in diagram coordinates.",
+        "properties": {
+          "h": {
+            "title": "H",
+            "type": "number"
+          },
+          "w": {
+            "title": "W",
+            "type": "number"
+          },
+          "x": {
+            "title": "X",
+            "type": "number"
+          },
+          "y": {
+            "title": "Y",
+            "type": "number"
+          }
+        },
+        "required": [
+          "x",
+          "y",
+          "w",
+          "h"
+        ],
+        "title": "Box",
+        "type": "object"
+      },
       "BreakerState": {
         "description": "Circuit breaker state.",
         "enum": [
@@ -960,6 +990,625 @@
           "summary"
         ],
         "title": "DemoStep",
+        "type": "object"
+      },
+      "DiagramBand": {
+        "additionalProperties": false,
+        "description": "A cross-cutting rule drawn as a band under the diagram (identity, policy, evidence\u2026).",
+        "properties": {
+          "id": {
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "identity",
+              "policy",
+              "evidence",
+              "failure",
+              "network"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "step": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Step"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "text"
+        ],
+        "title": "DiagramBand",
+        "type": "object"
+      },
+      "DiagramEdge": {
+        "additionalProperties": false,
+        "description": "A directed arrow between two nodes.",
+        "properties": {
+          "id": {
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "context",
+              "reasoning",
+              "access",
+              "authority",
+              "evidence",
+              "fallback",
+              "change",
+              "data",
+              "config"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "label": {
+            "default": "",
+            "title": "Label",
+            "type": "string"
+          },
+          "planned": {
+            "default": false,
+            "title": "Planned",
+            "type": "boolean"
+          },
+          "source": {
+            "title": "Source",
+            "type": "string"
+          },
+          "step": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Step"
+          },
+          "target": {
+            "title": "Target",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "source",
+          "target",
+          "kind"
+        ],
+        "title": "DiagramEdge",
+        "type": "object"
+      },
+      "DiagramNode": {
+        "additionalProperties": false,
+        "description": "A box on the diagram.",
+        "properties": {
+          "col": {
+            "minimum": 0.0,
+            "title": "Col",
+            "type": "number"
+          },
+          "component": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Component"
+          },
+          "icon": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Icon"
+          },
+          "id": {
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "person",
+              "client",
+              "harness",
+              "knowledge",
+              "app",
+              "service",
+              "foundry",
+              "fabric",
+              "data",
+              "mcp",
+              "gateway",
+              "identity",
+              "policy",
+              "evidence",
+              "local",
+              "external"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "phase": {
+            "anyOf": [
+              {
+                "maximum": 9.0,
+                "minimum": 1.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Phase"
+          },
+          "repo_path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Repo Path"
+          },
+          "row": {
+            "minimum": 0.0,
+            "title": "Row",
+            "type": "number"
+          },
+          "runtime": {
+            "anyOf": [
+              {
+                "enum": [
+                  "api",
+                  "mcp",
+                  "fabric-local",
+                  "fabric-live",
+                  "foundry",
+                  "changes",
+                  "audit",
+                  "education",
+                  "evaluation",
+                  "router"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Runtime"
+          },
+          "sources": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Sources",
+            "type": "array"
+          },
+          "state": {
+            "enum": [
+              "implemented",
+              "planned",
+              "documented",
+              "preview",
+              "tenant-validation",
+              "optional"
+            ],
+            "title": "State",
+            "type": "string"
+          },
+          "step": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Step"
+          },
+          "sublabel": {
+            "default": "",
+            "title": "Sublabel",
+            "type": "string"
+          },
+          "summary": {
+            "default": "",
+            "title": "Summary",
+            "type": "string"
+          },
+          "width": {
+            "default": 1,
+            "exclusiveMinimum": 0.0,
+            "maximum": 6.0,
+            "title": "Width",
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "label",
+          "kind",
+          "state",
+          "col",
+          "row"
+        ],
+        "title": "DiagramNode",
+        "type": "object"
+      },
+      "DiagramStep": {
+        "additionalProperties": false,
+        "description": "One build-up step of a whiteboard view.",
+        "properties": {
+          "cue": {
+            "title": "Cue",
+            "type": "string"
+          },
+          "id": {
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "title": "Id",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "label",
+          "cue"
+        ],
+        "title": "DiagramStep",
+        "type": "object"
+      },
+      "DiagramTrace": {
+        "additionalProperties": false,
+        "description": "A request followed one hop at a time.",
+        "properties": {
+          "demo_act": {
+            "anyOf": [
+              {
+                "maximum": 10.0,
+                "minimum": 1.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Demo Act"
+          },
+          "id": {
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "title": "Id",
+            "type": "string"
+          },
+          "label": {
+            "enum": [
+              "PLANNED FLOW",
+              "LOCAL",
+              "SIMULATED",
+              "PREVIEW",
+              "DOCUMENTED"
+            ],
+            "title": "Label",
+            "type": "string"
+          },
+          "steps": {
+            "items": {
+              "$ref": "#/components/schemas/TraceStep"
+            },
+            "minItems": 2,
+            "title": "Steps",
+            "type": "array"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "summary",
+          "label",
+          "steps"
+        ],
+        "title": "DiagramTrace",
+        "type": "object"
+      },
+      "DiagramView": {
+        "additionalProperties": false,
+        "description": "``education/architecture/views/<id>.yaml``.",
+        "properties": {
+          "aligned_to": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Aligned To",
+            "type": "array"
+          },
+          "bands": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/DiagramBand"
+            },
+            "title": "Bands",
+            "type": "array"
+          },
+          "columns": {
+            "maximum": 8.0,
+            "minimum": 2.0,
+            "title": "Columns",
+            "type": "integer"
+          },
+          "cue": {
+            "title": "Cue",
+            "type": "string"
+          },
+          "doc": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Doc"
+          },
+          "edges": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/DiagramEdge"
+            },
+            "title": "Edges",
+            "type": "array"
+          },
+          "id": {
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "reference",
+              "system",
+              "topology",
+              "flow",
+              "maturity",
+              "resilience"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "nodes": {
+            "items": {
+              "$ref": "#/components/schemas/DiagramNode"
+            },
+            "minItems": 2,
+            "title": "Nodes",
+            "type": "array"
+          },
+          "pattern_ids": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Pattern Ids",
+            "type": "array"
+          },
+          "rows": {
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "title": "Rows",
+            "type": "integer"
+          },
+          "steps": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/DiagramStep"
+            },
+            "title": "Steps",
+            "type": "array"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "traces": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/DiagramTrace"
+            },
+            "title": "Traces",
+            "type": "array"
+          },
+          "zones": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/DiagramZone"
+            },
+            "title": "Zones",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "kind",
+          "summary",
+          "cue",
+          "columns",
+          "rows",
+          "nodes"
+        ],
+        "title": "DiagramView",
+        "type": "object"
+      },
+      "DiagramZone": {
+        "additionalProperties": false,
+        "description": "A labeled region (trust boundary, tenant, local machine, optional add-on).",
+        "properties": {
+          "col": {
+            "minimum": 0.0,
+            "title": "Col",
+            "type": "number"
+          },
+          "cols": {
+            "exclusiveMinimum": 0.0,
+            "title": "Cols",
+            "type": "number"
+          },
+          "id": {
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "local",
+              "tenant",
+              "fabric",
+              "foundry",
+              "github",
+              "optional",
+              "offline"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "row": {
+            "minimum": 0.0,
+            "title": "Row",
+            "type": "number"
+          },
+          "rows": {
+            "exclusiveMinimum": 0.0,
+            "title": "Rows",
+            "type": "number"
+          },
+          "step": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Step"
+          }
+        },
+        "required": [
+          "id",
+          "label",
+          "kind",
+          "col",
+          "row",
+          "cols",
+          "rows"
+        ],
+        "title": "DiagramZone",
+        "type": "object"
+      },
+      "EdgePath": {
+        "additionalProperties": false,
+        "description": "A routed edge: the full polyline (endpoints included) and its label anchor.",
+        "properties": {
+          "label_at": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Label At",
+            "type": "array"
+          },
+          "label_fraction": {
+            "title": "Label Fraction",
+            "type": "number"
+          },
+          "points": {
+            "items": {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                }
+              ],
+              "type": "array"
+            },
+            "title": "Points",
+            "type": "array"
+          }
+        },
+        "required": [
+          "points",
+          "label_at",
+          "label_fraction"
+        ],
+        "title": "EdgePath",
         "type": "object"
       },
       "EvaluateMeasures": {
@@ -1483,6 +2132,14 @@
           "copilot_prompt": {
             "title": "Copilot Prompt",
             "type": "string"
+          },
+          "diagram_focus": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Diagram Focus",
+            "type": "array"
           },
           "evidence_required": {
             "items": {
@@ -2311,6 +2968,60 @@
         "title": "MeasureValue",
         "type": "object"
       },
+      "NodeRuntime": {
+        "additionalProperties": false,
+        "description": "The live state of one diagram node.",
+        "properties": {
+          "binding": {
+            "enum": [
+              "api",
+              "mcp",
+              "fabric-local",
+              "fabric-live",
+              "foundry",
+              "changes",
+              "audit",
+              "education",
+              "evaluation",
+              "router"
+            ],
+            "title": "Binding",
+            "type": "string"
+          },
+          "detail": {
+            "title": "Detail",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "node": {
+            "title": "Node",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "ACTIVE",
+              "READY",
+              "DEGRADED",
+              "UNAVAILABLE",
+              "NOT CONFIGURED"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "node",
+          "binding",
+          "status",
+          "label",
+          "detail"
+        ],
+        "title": "NodeRuntime",
+        "type": "object"
+      },
       "OfflineDemoReport": {
         "additionalProperties": false,
         "description": "Outcome of the offline demo (a release gate).",
@@ -2838,6 +3549,23 @@
         "title": "Rehearsal",
         "type": "object"
       },
+      "RenderedView": {
+        "description": "A view with the shared layout used by both the app and the draw.io files.",
+        "properties": {
+          "layout": {
+            "$ref": "#/components/schemas/ViewLayout"
+          },
+          "view": {
+            "$ref": "#/components/schemas/DiagramView"
+          }
+        },
+        "required": [
+          "view",
+          "layout"
+        ],
+        "title": "RenderedView",
+        "type": "object"
+      },
       "RouteDecision": {
         "additionalProperties": false,
         "description": "Why a request went where it went.",
@@ -3333,6 +4061,42 @@
         "title": "ToolRequirement",
         "type": "object"
       },
+      "TraceStep": {
+        "additionalProperties": false,
+        "description": "One hop of a traced request.",
+        "properties": {
+          "edge": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Edge"
+          },
+          "node": {
+            "title": "Node",
+            "type": "string"
+          },
+          "note": {
+            "default": "",
+            "title": "Note",
+            "type": "string"
+          },
+          "say": {
+            "title": "Say",
+            "type": "string"
+          }
+        },
+        "required": [
+          "node",
+          "say"
+        ],
+        "title": "TraceStep",
+        "type": "object"
+      },
       "TryIt": {
         "additionalProperties": false,
         "description": "An offline command the learner can run, and the label its result carries.",
@@ -3372,6 +4136,17 @@
           "dataset_profile": {
             "title": "Dataset Profile",
             "type": "string"
+          },
+          "diagram": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Diagram"
           },
           "expected_baseline": {
             "title": "Expected Baseline",
@@ -3549,6 +4324,136 @@
           "type"
         ],
         "title": "ValidationError",
+        "type": "object"
+      },
+      "ViewLayout": {
+        "additionalProperties": false,
+        "description": "Geometry for every node, zone and edge of a view.",
+        "properties": {
+          "edges": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/EdgePath"
+            },
+            "title": "Edges",
+            "type": "object"
+          },
+          "grid_bottom": {
+            "title": "Grid Bottom",
+            "type": "number"
+          },
+          "height": {
+            "title": "Height",
+            "type": "number"
+          },
+          "nodes": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Box"
+            },
+            "title": "Nodes",
+            "type": "object"
+          },
+          "width": {
+            "title": "Width",
+            "type": "number"
+          },
+          "zones": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Box"
+            },
+            "title": "Zones",
+            "type": "object"
+          }
+        },
+        "required": [
+          "width",
+          "height",
+          "grid_bottom",
+          "nodes",
+          "zones",
+          "edges"
+        ],
+        "title": "ViewLayout",
+        "type": "object"
+      },
+      "ViewRuntime": {
+        "additionalProperties": false,
+        "description": "The runtime overlay for one view.",
+        "properties": {
+          "nodes": {
+            "items": {
+              "$ref": "#/components/schemas/NodeRuntime"
+            },
+            "title": "Nodes",
+            "type": "array"
+          },
+          "observed_at": {
+            "title": "Observed At",
+            "type": "string"
+          },
+          "operating_mode": {
+            "$ref": "#/components/schemas/OperatingMode"
+          },
+          "view_id": {
+            "title": "View Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "view_id",
+          "operating_mode",
+          "observed_at",
+          "nodes"
+        ],
+        "title": "ViewRuntime",
+        "type": "object"
+      },
+      "ViewSummary": {
+        "description": "An architecture view in a list.",
+        "properties": {
+          "doc": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Doc"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "title": "Kind",
+            "type": "string"
+          },
+          "pattern_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Pattern Ids",
+            "type": "array"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "kind",
+          "summary",
+          "doc",
+          "pattern_ids"
+        ],
+        "title": "ViewSummary",
         "type": "object"
       },
       "WorkspaceInfo": {
@@ -4027,6 +4932,159 @@
           }
         },
         "summary": "Answer Check",
+        "tags": [
+          "education"
+        ]
+      }
+    },
+    "/api/v1/education/views": {
+      "get": {
+        "description": "Architecture views (interactive diagrams).",
+        "operationId": "list_views_api_v1_education_views_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ViewSummary"
+                  },
+                  "title": "Response List Views Api V1 Education Views Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "List Views",
+        "tags": [
+          "education"
+        ]
+      }
+    },
+    "/api/v1/education/views/{view_id}": {
+      "get": {
+        "description": "One architecture view and its layout: nodes, edges, zones, bands, build steps and traces.",
+        "operationId": "get_view_api_v1_education_views__view_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "view_id",
+            "required": true,
+            "schema": {
+              "title": "View Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RenderedView"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get View",
+        "tags": [
+          "education"
+        ]
+      }
+    },
+    "/api/v1/education/views/{view_id}/drawio": {
+      "get": {
+        "description": "The view as a draw.io file (same content as docs/architecture/diagrams).",
+        "operationId": "get_view_drawio_api_v1_education_views__view_id__drawio_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "view_id",
+            "required": true,
+            "schema": {
+              "title": "View Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get View Drawio",
+        "tags": [
+          "education"
+        ]
+      }
+    },
+    "/api/v1/education/views/{view_id}/runtime": {
+      "get": {
+        "description": "The live state of every runtime-bound node in a view.",
+        "operationId": "get_view_runtime_api_v1_education_views__view_id__runtime_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "view_id",
+            "required": true,
+            "schema": {
+              "title": "View Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewRuntime"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get View Runtime",
         "tags": [
           "education"
         ]

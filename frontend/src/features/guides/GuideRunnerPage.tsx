@@ -6,7 +6,48 @@ import { usePageTitle } from "../../app/usePageTitle";
 import { Badge } from "../../components/Badge";
 import { PromptBlock } from "../../components/PromptBlock";
 import { QueryState } from "../../components/QueryState";
+import { DiagramCanvas } from "../architecture/DiagramCanvas";
+import { useView } from "../../api/hooks";
 import { ChangeRehearsal } from "./ChangeRehearsal";
+
+function StepDiagram({
+  viewId,
+  focus,
+  stepTitle,
+}: {
+  readonly viewId: string;
+  readonly focus: readonly string[];
+  readonly stepTitle: string;
+}) {
+  const view = useView(viewId);
+  const names = new Map((view.data?.view.nodes ?? []).map((n) => [n.id, n.label]));
+  return (
+    <section aria-labelledby="step-diagram-heading" className="guide-diagram">
+      <h3 id="step-diagram-heading">Where this step happens</h3>
+      <QueryState label="the guide diagram" {...view}>
+        {(rendered) => (
+          <>
+            <div className="studio__canvas">
+              <DiagramCanvas
+                rendered={rendered}
+                upto={null}
+                selected={null}
+                onSelect={() => undefined}
+                focus={focus}
+                interactive={false}
+                label={`Guide diagram for ${stepTitle}`}
+              />
+            </div>
+            <p>
+              Highlighted: {focus.map((id) => names.get(id) ?? id).join(", ")}.{" "}
+              <Link to={`/architecture/${viewId}`}>Open the full interactive diagram</Link>
+            </p>
+          </>
+        )}
+      </QueryState>
+    </section>
+  );
+}
 
 function StepView({ guide, step }: { readonly guide: Guide; readonly step: GuideStep }) {
   const evidence = useLocalProgress(`guide.${guide.id}.${step.id}.evidence`);
@@ -115,6 +156,10 @@ function StepView({ guide, step }: { readonly guide: Guide; readonly step: Guide
           <PromptBlock title="Offline command" text={step.offline_command} />
         ) : null}
       </section>
+
+      {guide.diagram && step.diagram_focus.length > 0 ? (
+        <StepDiagram viewId={guide.diagram} focus={step.diagram_focus} stepTitle={step.title} />
+      ) : null}
 
       {step.rehearsal ? (
         <ChangeRehearsal key={step.id} rehearsal={step.rehearsal} stepTitle={step.title} />

@@ -11,7 +11,11 @@ from fabric_foundry_accelerator.config.environment import EnvironmentConfigurati
 from fabric_foundry_accelerator.config.overlay import CustomerOverlay, load_overlay
 from fabric_foundry_accelerator.config.settings import Settings
 from fabric_foundry_accelerator.education.guides import UseCaseGuide, load_guides
-from fabric_foundry_accelerator.education.lessons import EducationReferences, load_education
+from fabric_foundry_accelerator.education.lessons import (
+    EducationReferences,
+    guide_diagram_errors,
+    load_education,
+)
 from fabric_foundry_accelerator.fallback.router import ProviderRouter
 from fabric_foundry_accelerator.models.execution import OperatingMode, utc_now
 from fabric_foundry_accelerator.models.semantic import load_semantic_model
@@ -126,6 +130,9 @@ def build_container(
             guide_ids=frozenset(guides),
         ),
     )
+    diagram_errors = guide_diagram_errors(library, guides)
+    if diagram_errors:
+        raise ValueError("guide diagrams are invalid:\n- " + "\n- ".join(diagram_errors))
     return Container(
         settings=settings,
         environment=environment,

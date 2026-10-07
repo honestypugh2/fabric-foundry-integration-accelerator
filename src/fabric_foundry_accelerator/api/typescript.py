@@ -55,7 +55,8 @@ def _union(parts: Sequence[str]) -> str:
 
 
 def _wrap(expression: str) -> str:
-    return f"({expression})" if " | " in expression else expression
+    needs_parens = " | " in expression or expression.startswith("readonly ")
+    return f"({expression})" if needs_parens else expression
 
 
 _SCALARS = {

@@ -6,12 +6,19 @@ knowledge checks for each. Every lab follows the fixed eleven-stage sequence. Cr
 """
 
 import re
+from collections.abc import Mapping
 from pathlib import Path
 from typing import Literal, Self
 
 import yaml
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
+from fabric_foundry_accelerator.education.diagrams import (
+    DiagramView,
+    load_views,
+    view_reference_errors,
+)
+from fabric_foundry_accelerator.education.guides import UseCaseGuide
 from fabric_foundry_accelerator.models.execution import EvidenceCategory
 
 Level = Literal["executive", "l100", "l200", "l300", "l400"]
@@ -384,6 +391,14 @@ class EducationLibrary(BaseModel):
     labs: tuple[Lab, ...]
     architecture: ArchitectureMap
     completeness: Completeness
+    views: tuple[DiagramView, ...] = ()
+
+    def view(self, view_id: str) -> DiagramView:
+        """Return an architecture view by ID or raise ``KeyError``."""
+        for candidate in self.views:
+            if candidate.id == view_id:
+                return candidate
+        raise KeyError(f"unknown architecture view {view_id!r}")
 
     def lesson(self, lesson_id: str) -> Lesson:
         """Return a lesson by ID or raise ``KeyError``."""
@@ -509,11 +524,47 @@ def _cross_reference_errors(library: EducationLibrary, refs: EducationReferences
             for s in component.sources
             if s not in refs.source_ids
         ]
+    component_ids = {c.id for c in library.architecture.components}
+    for view in library.views:
+        errors += view_reference_errors(
+            view,
+            component_ids=component_ids,
+            source_ids=refs.source_ids,
+            pattern_ids=refs.pattern_ids,
+        )
     for question in library.completeness.questions:
         errors += [
             f"completeness {question.id}: unknown lesson {item}"
             for item in question.answered_by
             if item not in lesson_ids
+        ]
+    return errors
+
+
+def guide_diagram_errors(
+    library: EducationLibrary, guides: Mapping[str, UseCaseGuide]
+) -> list[str]:
+    """Return guide diagram references (view and focus nodes) that do not exist."""
+    views = {v.id: v for v in library.views}
+    errors: list[str] = []
+    for guide in guides.values():
+        if guide.diagram is None:
+            errors += [
+                f"guide {guide.id} step {s.id}: diagram_focus needs a guide diagram"
+                for s in guide.steps
+                if s.diagram_focus
+            ]
+            continue
+        view = views.get(guide.diagram)
+        if view is None:
+            errors.append(f"guide {guide.id}: unknown diagram {guide.diagram}")
+            continue
+        node_ids = {n.id for n in view.nodes}
+        errors += [
+            f"guide {guide.id} step {step.id}: unknown diagram node {node}"
+            for step in guide.steps
+            for node in step.diagram_focus
+            if node not in node_ids
         ]
     return errors
 
@@ -536,6 +587,7 @@ def load_education(education_root: Path, refs: EducationReferences) -> Education
             _yaml(education_root / "architecture" / "explorer.yaml")
         ),
         completeness=Completeness.model_validate(_yaml(education_root / "completeness.yaml")),
+        views=load_views(education_root / "architecture" / "views"),
     )
     errors = _cross_reference_errors(library, refs)
     if errors:

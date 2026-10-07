@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 from pydantic import TypeAdapter
 
-from fabric_foundry_accelerator.api.routes import SelectionSignal
+from fabric_foundry_accelerator.api.routes import RenderedView, SelectionSignal, ViewSummary
 from fabric_foundry_accelerator.audit.store import AuditRecord
 from fabric_foundry_accelerator.education.guides import UseCaseGuide
 from fabric_foundry_accelerator.education.lessons import ArchitectureMap, CompletenessReport, Lab
@@ -20,6 +20,7 @@ from fabric_foundry_accelerator.providers.fabric.port import (
     WorkspaceInfo,
 )
 from fabric_foundry_accelerator.services.demo import DemoCheckReport, OfflineDemoReport
+from fabric_foundry_accelerator.services.diagram_runtime import ViewRuntime
 from fabric_foundry_accelerator.services.education import (
     CheckGrade,
     LabSummary,
@@ -50,6 +51,11 @@ CONTRACTS: dict[str, object] = {
     "completeness": CompletenessReport,
     "profiles": list[str],
     "signals": list[SelectionSignal],
+    "views": list[ViewSummary],
+    "view-reference": RenderedView,
+    "view-system": RenderedView,
+    "view-hc01": RenderedView,
+    "view-system-runtime": ViewRuntime,
     "read-workspaces": ExecutionEnvelope[list[WorkspaceInfo]],
     "read-items": ExecutionEnvelope[list[ItemInfo]],
     "read-tables": ExecutionEnvelope[list[TableInfo]],

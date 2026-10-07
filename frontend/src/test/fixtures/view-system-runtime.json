@@ -1,0 +1,84 @@
+{
+  "nodes": [
+    {
+      "binding": "api",
+      "detail": "Serving this request in OFFLINE mode.",
+      "label": "LOCAL",
+      "node": "web-app",
+      "status": "ACTIVE"
+    },
+    {
+      "binding": "api",
+      "detail": "Serving this request in OFFLINE mode.",
+      "label": "LOCAL",
+      "node": "api",
+      "status": "ACTIVE"
+    },
+    {
+      "binding": "mcp",
+      "detail": "Local server ready: 15 allow-listed tools; each harness starts it over stdio.",
+      "label": "LOCAL",
+      "node": "ffia-local",
+      "status": "READY"
+    },
+    {
+      "binding": "changes",
+      "detail": "0 plans in this process. Approval required; LOCAL executions are SIMULATED; LIVE writes disabled.",
+      "label": "SIMULATED",
+      "node": "changes",
+      "status": "ACTIVE"
+    },
+    {
+      "binding": "education",
+      "detail": "14 lessons, 7 architecture views.",
+      "label": "LOCAL",
+      "node": "education",
+      "status": "ACTIVE"
+    },
+    {
+      "binding": "evaluation",
+      "detail": "Compares measures with the expected baselines.",
+      "label": "LOCAL",
+      "node": "evaluation",
+      "status": "READY"
+    },
+    {
+      "binding": "router",
+      "detail": "offline policy; no breaker tripped.",
+      "label": "LOCAL",
+      "node": "router",
+      "status": "ACTIVE"
+    },
+    {
+      "binding": "audit",
+      "detail": "0 recent records.",
+      "label": "LOCAL",
+      "node": "audit",
+      "status": "ACTIVE"
+    },
+    {
+      "binding": "fabric-local",
+      "detail": "Primary provider; profiles: core-healthcare-v1, hc-lab-7file-v1.",
+      "label": "LOCAL",
+      "node": "local-provider",
+      "status": "ACTIVE"
+    },
+    {
+      "binding": "foundry",
+      "detail": "Foundry and Agent Framework providers arrive in Phase 6.",
+      "label": "UNAVAILABLE",
+      "node": "foundry",
+      "status": "NOT CONFIGURED"
+    },
+    {
+      "binding": "fabric-live",
+      "detail": "No live Fabric provider in this build (Phase 5).",
+      "label": "UNAVAILABLE",
+      "node": "fabric-live",
+      "status": "NOT CONFIGURED"
+    }
+  ],
+  "observed_at": "2026-10-07T23:08:05.030885+00:00",
+  "operating_mode": "OFFLINE",
+  "view_id": "system"
+}

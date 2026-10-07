@@ -52,6 +52,8 @@ jobs:
         run: ffia schemas check
       - name: Education content and completeness gate
         run: ffia education check
+      - name: Architecture diagrams (draw.io and docs) are current
+        run: ffia diagrams check
       - name: Offline demo release gate
         run: ffia demo check --no-azure-cli && ffia demo offline
       - name: Build distribution

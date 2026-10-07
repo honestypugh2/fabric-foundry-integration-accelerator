@@ -1,0 +1,1466 @@
+{
+  "layout": {
+    "edges": {
+      "agent-to-model": {
+        "label_at": [
+          1170.0,
+          362.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            1170.0,
+            330.0
+          ],
+          [
+            1170.0,
+            394.0
+          ]
+        ]
+      },
+      "agents-to-fabric-mcp": {
+        "label_at": [
+          650.0,
+          712.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            480.0,
+            712.0
+          ],
+          [
+            820.0,
+            712.0
+          ]
+        ]
+      },
+      "app-to-foundry": {
+        "label_at": [
+          520.0,
+          292.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            480.0,
+            292.0
+          ],
+          [
+            560.0,
+            292.0
+          ]
+        ]
+      },
+      "approval-to-writer": {
+        "label_at": [
+          1040.0,
+          852.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            1000.0,
+            852.0
+          ],
+          [
+            1080.0,
+            852.0
+          ]
+        ]
+      },
+      "engineers-to-agents": {
+        "label_at": [
+          260.0,
+          712.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            220.0,
+            712.0
+          ],
+          [
+            300.0,
+            712.0
+          ]
+        ]
+      },
+      "entra-to-policy": {
+        "label_at": [
+          520.0,
+          852.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            480.0,
+            852.0
+          ],
+          [
+            560.0,
+            852.0
+          ]
+        ]
+      },
+      "eval-to-observability": {
+        "label_at": [
+          520.0,
+          992.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            560.0,
+            992.0
+          ],
+          [
+            480.0,
+            992.0
+          ]
+        ]
+      },
+      "foundry-to-data-agent": {
+        "label_at": [
+          910.0,
+          292.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            740.0,
+            292.0
+          ],
+          [
+            1080.0,
+            292.0
+          ]
+        ]
+      },
+      "foundry-to-iq": {
+        "label_at": [
+          650.0,
+          362.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            650.0,
+            330.0
+          ],
+          [
+            650.0,
+            394.0
+          ]
+        ]
+      },
+      "foundry-to-models": {
+        "label_at": [
+          650.0,
+          222.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            650.0,
+            254.0
+          ],
+          [
+            650.0,
+            190.0
+          ]
+        ]
+      },
+      "framework-to-gateway": {
+        "label_at": [
+          780.0,
+          572.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            740.0,
+            572.0
+          ],
+          [
+            820.0,
+            572.0
+          ]
+        ]
+      },
+      "gateway-to-mcp": {
+        "label_at": [
+          910.0,
+          642.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            910.0,
+            610.0
+          ],
+          [
+            910.0,
+            674.0
+          ]
+        ]
+      },
+      "iq-to-model": {
+        "label_at": [
+          1170.0,
+          222.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            1170.0,
+            190.0
+          ],
+          [
+            1170.0,
+            254.0
+          ]
+        ]
+      },
+      "mcp-to-lake": {
+        "label_at": [
+          1150.0,
+          712.0
+        ],
+        "label_fraction": 0.24193548387096775,
+        "points": [
+          [
+            1000.0,
+            712.0
+          ],
+          [
+            1300.0,
+            712.0
+          ],
+          [
+            1300.0,
+            432.0
+          ],
+          [
+            1340.0,
+            432.0
+          ]
+        ]
+      },
+      "mirror-to-lake": {
+        "label_at": [
+          1560.0,
+          432.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            1600.0,
+            432.0
+          ],
+          [
+            1520.0,
+            432.0
+          ]
+        ]
+      },
+      "model-to-lake": {
+        "label_at": [
+          1300.0,
+          432.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            1260.0,
+            432.0
+          ],
+          [
+            1340.0,
+            432.0
+          ]
+        ]
+      },
+      "policy-to-approval": {
+        "label_at": [
+          780.0,
+          852.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            740.0,
+            852.0
+          ],
+          [
+            820.0,
+            852.0
+          ]
+        ]
+      },
+      "sources-to-mirror": {
+        "label_at": [
+          1690.0,
+          502.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            1690.0,
+            534.0
+          ],
+          [
+            1690.0,
+            470.0
+          ]
+        ]
+      },
+      "users-to-app": {
+        "label_at": [
+          260.0,
+          292.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            220.0,
+            292.0
+          ],
+          [
+            300.0,
+            292.0
+          ]
+        ]
+      },
+      "writer-to-audit": {
+        "label_at": [
+          1170.0,
+          922.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            1170.0,
+            890.0
+          ],
+          [
+            1170.0,
+            954.0
+          ]
+        ]
+      },
+      "writer-to-target": {
+        "label_at": [
+          1300.0,
+          852.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            1260.0,
+            852.0
+          ],
+          [
+            1340.0,
+            852.0
+          ]
+        ]
+      }
+    },
+    "grid_bottom": 1090.0,
+    "height": 1296.0,
+    "nodes": {
+      "agent-app": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 300.0,
+        "y": 254.0
+      },
+      "agent-framework": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 560.0,
+        "y": 534.0
+      },
+      "apim-gateway": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 820.0,
+        "y": 534.0
+      },
+      "approval": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 820.0,
+        "y": 814.0
+      },
+      "audit": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 1080.0,
+        "y": 954.0
+      },
+      "business-users": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 40.0,
+        "y": 254.0
+      },
+      "coding-agents": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 300.0,
+        "y": 674.0
+      },
+      "data-agent": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 1080.0,
+        "y": 254.0
+      },
+      "engineers": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 40.0,
+        "y": 674.0
+      },
+      "entra": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 300.0,
+        "y": 814.0
+      },
+      "evaluation": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 560.0,
+        "y": 954.0
+      },
+      "fabric-iq": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 1080.0,
+        "y": 114.0
+      },
+      "fabric-mcp": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 820.0,
+        "y": 674.0
+      },
+      "foundry-agent": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 560.0,
+        "y": 254.0
+      },
+      "foundry-iq": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 560.0,
+        "y": 394.0
+      },
+      "foundry-models": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 560.0,
+        "y": 114.0
+      },
+      "observability": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 300.0,
+        "y": 954.0
+      },
+      "onelake": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 1340.0,
+        "y": 394.0
+      },
+      "open-mirroring": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 1600.0,
+        "y": 394.0
+      },
+      "policy": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 560.0,
+        "y": 814.0
+      },
+      "scoped-writer": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 1080.0,
+        "y": 814.0
+      },
+      "semantic-model": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 1080.0,
+        "y": 394.0
+      },
+      "source-systems": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 1600.0,
+        "y": 534.0
+      },
+      "system-of-record": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 1340.0,
+        "y": 814.0
+      }
+    },
+    "width": 1820.0,
+    "zones": {
+      "access-zone": {
+        "h": 260.0,
+        "w": 208.0,
+        "x": 806.0,
+        "y": 504.0
+      },
+      "authority-zone": {
+        "h": 120.0,
+        "w": 1248.0,
+        "x": 286.0,
+        "y": 784.0
+      },
+      "evidence-zone": {
+        "h": 120.0,
+        "w": 988.0,
+        "x": 286.0,
+        "y": 924.0
+      },
+      "fabric-zone": {
+        "h": 400.0,
+        "w": 728.0,
+        "x": 1066.0,
+        "y": 84.0
+      },
+      "foundry-zone": {
+        "h": 540.0,
+        "w": 208.0,
+        "x": 546.0,
+        "y": 84.0
+      }
+    }
+  },
+  "view": {
+    "aligned_to": [
+      "caf-agent-data-architecture",
+      "basic-foundry-chat",
+      "baseline-foundry-chat",
+      "fabric-medallion",
+      "fabric-deployment-patterns",
+      "fabric-waf",
+      "foundry-fabric-tool",
+      "fabric-mcp-servers-list",
+      "apim-mcp",
+      "foundry-mcp-governance",
+      "ai-agent-orchestration"
+    ],
+    "bands": [
+      {
+        "id": "identity-band",
+        "kind": "identity",
+        "step": "authority",
+        "text": "Identity: users act with their own Entra identity, and Fabric permissions decide what each one sees (on-behalf-of). The writer is a separate, least-privilege identity."
+      },
+      {
+        "id": "policy-band",
+        "kind": "policy",
+        "step": "authority",
+        "text": "Authority: models propose, deterministic policy validates, a human approves, and only the scoped writer writes. MCP access and gateway policy never replace backend authorization."
+      },
+      {
+        "id": "evidence-band",
+        "kind": "evidence",
+        "step": "evidence",
+        "text": "Evidence: every hop carries a correlation ID and an execution label. A configured server, a tool description or an existing item is not proof that an operation ran."
+      }
+    ],
+    "columns": 7,
+    "cue": "Build it one layer at a time. Fabric first, because the answer is only as good as the governed data and definitions. Then Foundry for reasoning. Then MCP for access. Then authority, because access is not permission. Then evidence, because a claim without proof is not a result.",
+    "doc": "reference-architecture",
+    "edges": [
+      {
+        "id": "mirror-to-lake",
+        "kind": "data",
+        "label": "Replicate changes",
+        "planned": false,
+        "source": "open-mirroring",
+        "step": null,
+        "target": "onelake"
+      },
+      {
+        "id": "sources-to-mirror",
+        "kind": "data",
+        "label": "Change files",
+        "planned": false,
+        "source": "source-systems",
+        "step": null,
+        "target": "open-mirroring"
+      },
+      {
+        "id": "model-to-lake",
+        "kind": "context",
+        "label": "Direct Lake",
+        "planned": false,
+        "source": "semantic-model",
+        "step": null,
+        "target": "onelake"
+      },
+      {
+        "id": "agent-to-model",
+        "kind": "context",
+        "label": "Governed definitions",
+        "planned": false,
+        "source": "data-agent",
+        "step": null,
+        "target": "semantic-model"
+      },
+      {
+        "id": "iq-to-model",
+        "kind": "context",
+        "label": "Shared vocabulary",
+        "planned": false,
+        "source": "fabric-iq",
+        "step": null,
+        "target": "data-agent"
+      },
+      {
+        "id": "users-to-app",
+        "kind": "access",
+        "label": "Ask",
+        "planned": false,
+        "source": "business-users",
+        "step": "foundry",
+        "target": "agent-app"
+      },
+      {
+        "id": "app-to-foundry",
+        "kind": "reasoning",
+        "label": "Conversation",
+        "planned": false,
+        "source": "agent-app",
+        "step": "foundry",
+        "target": "foundry-agent"
+      },
+      {
+        "id": "foundry-to-models",
+        "kind": "reasoning",
+        "label": "Reason",
+        "planned": false,
+        "source": "foundry-agent",
+        "step": "foundry",
+        "target": "foundry-models"
+      },
+      {
+        "id": "foundry-to-iq",
+        "kind": "context",
+        "label": "Cited knowledge",
+        "planned": false,
+        "source": "foundry-agent",
+        "step": "foundry",
+        "target": "foundry-iq"
+      },
+      {
+        "id": "foundry-to-data-agent",
+        "kind": "access",
+        "label": "Fabric data agent tool - PREVIEW, on behalf of the user",
+        "planned": false,
+        "source": "foundry-agent",
+        "step": "foundry",
+        "target": "data-agent"
+      },
+      {
+        "id": "engineers-to-agents",
+        "kind": "access",
+        "label": "Intent",
+        "planned": false,
+        "source": "engineers",
+        "step": "mcp",
+        "target": "coding-agents"
+      },
+      {
+        "id": "agents-to-fabric-mcp",
+        "kind": "access",
+        "label": "Tools - how and what is",
+        "planned": false,
+        "source": "coding-agents",
+        "step": "mcp",
+        "target": "fabric-mcp"
+      },
+      {
+        "id": "framework-to-gateway",
+        "kind": "access",
+        "label": "MCP tools",
+        "planned": false,
+        "source": "agent-framework",
+        "step": "mcp",
+        "target": "apim-gateway"
+      },
+      {
+        "id": "gateway-to-mcp",
+        "kind": "access",
+        "label": "Govern, limit, log",
+        "planned": false,
+        "source": "apim-gateway",
+        "step": "mcp",
+        "target": "fabric-mcp"
+      },
+      {
+        "id": "mcp-to-lake",
+        "kind": "access",
+        "label": "Caller's Fabric permissions",
+        "planned": false,
+        "source": "fabric-mcp",
+        "step": "mcp",
+        "target": "onelake"
+      },
+      {
+        "id": "entra-to-policy",
+        "kind": "authority",
+        "label": "Who is asking",
+        "planned": false,
+        "source": "entra",
+        "step": "authority",
+        "target": "policy"
+      },
+      {
+        "id": "policy-to-approval",
+        "kind": "authority",
+        "label": "Validated plan",
+        "planned": false,
+        "source": "policy",
+        "step": "authority",
+        "target": "approval"
+      },
+      {
+        "id": "approval-to-writer",
+        "kind": "authority",
+        "label": "Approved and destination-bound",
+        "planned": false,
+        "source": "approval",
+        "step": "authority",
+        "target": "scoped-writer"
+      },
+      {
+        "id": "writer-to-target",
+        "kind": "change",
+        "label": "Only the approved write",
+        "planned": true,
+        "source": "scoped-writer",
+        "step": "authority",
+        "target": "system-of-record"
+      },
+      {
+        "id": "writer-to-audit",
+        "kind": "evidence",
+        "label": "Record every step",
+        "planned": false,
+        "source": "scoped-writer",
+        "step": "evidence",
+        "target": "audit"
+      },
+      {
+        "id": "eval-to-observability",
+        "kind": "evidence",
+        "label": "Scores linked to traces",
+        "planned": false,
+        "source": "evaluation",
+        "step": "evidence",
+        "target": "observability"
+      }
+    ],
+    "id": "reference",
+    "kind": "reference",
+    "nodes": [
+      {
+        "col": 0.0,
+        "component": null,
+        "icon": "identity/Users",
+        "id": "business-users",
+        "kind": "person",
+        "label": "Business users",
+        "phase": null,
+        "repo_path": null,
+        "row": 1.0,
+        "runtime": null,
+        "sources": [],
+        "state": "documented",
+        "step": "foundry",
+        "sublabel": "Signed in with Entra ID",
+        "summary": "People asking questions of governed data through an agent experience. They act with their own identity.",
+        "width": 1.0
+      },
+      {
+        "col": 0.0,
+        "component": null,
+        "icon": "identity/Users",
+        "id": "engineers",
+        "kind": "person",
+        "label": "Data engineers",
+        "phase": null,
+        "repo_path": null,
+        "row": 4.0,
+        "runtime": null,
+        "sources": [],
+        "state": "documented",
+        "step": "mcp",
+        "sublabel": "Build and change Fabric items",
+        "summary": "Engineers who build pipelines, notebooks and semantic models, increasingly with an AI coding agent.",
+        "width": 1.0
+      },
+      {
+        "col": 1.0,
+        "component": null,
+        "icon": "app_services/App_Services",
+        "id": "agent-app",
+        "kind": "app",
+        "label": "Agent experience",
+        "phase": null,
+        "repo_path": null,
+        "row": 1.0,
+        "runtime": null,
+        "sources": [
+          "baseline-foundry-chat"
+        ],
+        "state": "documented",
+        "step": "foundry",
+        "sublabel": "Web app or Teams",
+        "summary": "The user-facing chat or app that hosts the agent conversation. In the Microsoft baseline Foundry chat architecture this is a web app behind a web application firewall, calling Foundry Agent Service with a managed identity.",
+        "width": 1.0
+      },
+      {
+        "col": 1.0,
+        "component": "coding-agents",
+        "icon": "general/Code",
+        "id": "coding-agents",
+        "kind": "harness",
+        "label": "GitHub Copilot / Claude Code",
+        "phase": null,
+        "repo_path": null,
+        "row": 4.0,
+        "runtime": null,
+        "sources": [],
+        "state": "documented",
+        "step": "mcp",
+        "sublabel": "Agent harness",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 2.0,
+        "component": null,
+        "icon": "ai_machine_learning/Foundry_Models",
+        "id": "foundry-models",
+        "kind": "foundry",
+        "label": "Foundry models",
+        "phase": null,
+        "repo_path": null,
+        "row": 0.0,
+        "runtime": null,
+        "sources": [
+          "foundry-overview"
+        ],
+        "state": "documented",
+        "step": "foundry",
+        "sublabel": "Deployed models",
+        "summary": "Models deployed in a Foundry project that the agent uses to reason. Model choice and deployment are Foundry concerns, not Fabric ones.",
+        "width": 1.0
+      },
+      {
+        "col": 2.0,
+        "component": "foundry-agent",
+        "icon": "ai_machine_learning/Foundry_Agent_Service",
+        "id": "foundry-agent",
+        "kind": "foundry",
+        "label": "Foundry Agent Service",
+        "phase": null,
+        "repo_path": null,
+        "row": 1.0,
+        "runtime": null,
+        "sources": [],
+        "state": "documented",
+        "step": "foundry",
+        "sublabel": "Reasoning and orchestration",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 2.0,
+        "component": null,
+        "icon": "ai_machine_learning/AI_Foundry_IQ",
+        "id": "foundry-iq",
+        "kind": "foundry",
+        "label": "Foundry IQ knowledge",
+        "phase": null,
+        "repo_path": null,
+        "row": 2.0,
+        "runtime": null,
+        "sources": [
+          "foundry-iq"
+        ],
+        "state": "preview",
+        "step": "foundry",
+        "sublabel": "Cited retrieval",
+        "summary": "Knowledge bases that ground the agent in documents with citations, including files in OneLake. Some experiences are in preview.",
+        "width": 1.0
+      },
+      {
+        "col": 2.0,
+        "component": "agent-framework",
+        "icon": "general/Code",
+        "id": "agent-framework",
+        "kind": "foundry",
+        "label": "Agent Framework",
+        "phase": null,
+        "repo_path": null,
+        "row": 3.0,
+        "runtime": null,
+        "sources": [],
+        "state": "documented",
+        "step": "foundry",
+        "sublabel": "Code-first agents and workflows",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 3.0,
+        "component": "apim-gateway",
+        "icon": "app_services/API_Management_Services",
+        "id": "apim-gateway",
+        "kind": "gateway",
+        "label": "API Management",
+        "phase": null,
+        "repo_path": null,
+        "row": 3.0,
+        "runtime": null,
+        "sources": [],
+        "state": "optional",
+        "step": "mcp",
+        "sublabel": "Optional AI gateway for MCP tools",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 3.0,
+        "component": "fabric-mcp",
+        "icon": null,
+        "id": "fabric-mcp",
+        "kind": "mcp",
+        "label": "Fabric MCP servers",
+        "phase": null,
+        "repo_path": null,
+        "row": 4.0,
+        "runtime": null,
+        "sources": [],
+        "state": "documented",
+        "step": "mcp",
+        "sublabel": "Narrowest server per job",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 4.0,
+        "component": "fabric-iq",
+        "icon": null,
+        "id": "fabric-iq",
+        "kind": "fabric",
+        "label": "Fabric IQ ontology",
+        "phase": null,
+        "repo_path": null,
+        "row": 0.0,
+        "runtime": null,
+        "sources": [],
+        "state": "preview",
+        "step": null,
+        "sublabel": "Shared business vocabulary",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 4.0,
+        "component": "fabric-data-agent",
+        "icon": null,
+        "id": "data-agent",
+        "kind": "fabric",
+        "label": "Fabric data agent",
+        "phase": null,
+        "repo_path": null,
+        "row": 1.0,
+        "runtime": null,
+        "sources": [],
+        "state": "documented",
+        "step": null,
+        "sublabel": "Curated Q&A, user permissions",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 4.0,
+        "component": "semantic-model",
+        "icon": "power_platform/PowerBI",
+        "id": "semantic-model",
+        "kind": "fabric",
+        "label": "Semantic model",
+        "phase": null,
+        "repo_path": null,
+        "row": 2.0,
+        "runtime": null,
+        "sources": [],
+        "state": "documented",
+        "step": null,
+        "sublabel": "Direct Lake, governed measures",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 5.0,
+        "component": "onelake-medallion",
+        "icon": null,
+        "id": "onelake",
+        "kind": "data",
+        "label": "OneLake medallion",
+        "phase": null,
+        "repo_path": null,
+        "row": 2.0,
+        "runtime": null,
+        "sources": [],
+        "state": "documented",
+        "step": null,
+        "sublabel": "Bronze \u2192 Silver \u2192 Gold",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 6.0,
+        "component": "open-mirroring",
+        "icon": null,
+        "id": "open-mirroring",
+        "kind": "data",
+        "label": "Open Mirroring",
+        "phase": null,
+        "repo_path": null,
+        "row": 2.0,
+        "runtime": null,
+        "sources": [],
+        "state": "documented",
+        "step": null,
+        "sublabel": "Landing zone replication",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 6.0,
+        "component": null,
+        "icon": null,
+        "id": "source-systems",
+        "kind": "external",
+        "label": "Operational systems",
+        "phase": null,
+        "repo_path": null,
+        "row": 3.0,
+        "runtime": null,
+        "sources": [],
+        "state": "documented",
+        "step": null,
+        "sublabel": "Authority for transactions",
+        "summary": "The business systems that own transactional truth. Analytics and agents read replicated copies; writes go back only through an approved, scoped path.",
+        "width": 1.0
+      },
+      {
+        "col": 1.0,
+        "component": "entra-identity",
+        "icon": "other/Entra_Identity",
+        "id": "entra",
+        "kind": "identity",
+        "label": "Entra ID",
+        "phase": null,
+        "repo_path": null,
+        "row": 5.0,
+        "runtime": null,
+        "sources": [],
+        "state": "documented",
+        "step": "authority",
+        "sublabel": "Who is asking",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 2.0,
+        "component": "policy-engine",
+        "icon": "general/Workflow",
+        "id": "policy",
+        "kind": "policy",
+        "label": "Deterministic policy",
+        "phase": null,
+        "repo_path": "config/policies/writes.yaml",
+        "row": 5.0,
+        "runtime": null,
+        "sources": [],
+        "state": "implemented",
+        "step": "authority",
+        "sublabel": "Validate the proposal",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 3.0,
+        "component": "human-approval",
+        "icon": null,
+        "id": "approval",
+        "kind": "policy",
+        "label": "Human approval",
+        "phase": null,
+        "repo_path": "src/fabric_foundry_accelerator/services/changes.py",
+        "row": 5.0,
+        "runtime": null,
+        "sources": [],
+        "state": "implemented",
+        "step": "authority",
+        "sublabel": "Not the requester",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 4.0,
+        "component": "scoped-writer",
+        "icon": null,
+        "id": "scoped-writer",
+        "kind": "policy",
+        "label": "Scoped writer",
+        "phase": 5,
+        "repo_path": null,
+        "row": 5.0,
+        "runtime": null,
+        "sources": [],
+        "state": "planned",
+        "step": "authority",
+        "sublabel": "Only the approved change",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 5.0,
+        "component": null,
+        "icon": null,
+        "id": "system-of-record",
+        "kind": "external",
+        "label": "Fabric item or system of record",
+        "phase": null,
+        "repo_path": null,
+        "row": 5.0,
+        "runtime": null,
+        "sources": [],
+        "state": "documented",
+        "step": "authority",
+        "sublabel": "Verified after the write",
+        "summary": "The target of an approved change. The writer verifies the result against it, and the audit trail records the outcome.",
+        "width": 1.0
+      },
+      {
+        "col": 1.0,
+        "component": "observability",
+        "icon": "devops/Application_Insights",
+        "id": "observability",
+        "kind": "evidence",
+        "label": "Tracing and monitoring",
+        "phase": null,
+        "repo_path": null,
+        "row": 6.0,
+        "runtime": null,
+        "sources": [],
+        "state": "documented",
+        "step": "evidence",
+        "sublabel": "Correlation IDs",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 2.0,
+        "component": "evaluation",
+        "icon": null,
+        "id": "evaluation",
+        "kind": "evidence",
+        "label": "Evaluation",
+        "phase": null,
+        "repo_path": "src/fabric_foundry_accelerator/services/evaluation.py",
+        "row": 6.0,
+        "runtime": null,
+        "sources": [],
+        "state": "implemented",
+        "step": "evidence",
+        "sublabel": "Baselines and evaluators",
+        "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 4.0,
+        "component": "audit-store",
+        "icon": "general/File",
+        "id": "audit",
+        "kind": "evidence",
+        "label": "Audit trail",
+        "phase": null,
+        "repo_path": "src/fabric_foundry_accelerator/audit/store.py",
+        "row": 6.0,
+        "runtime": null,
+        "sources": [],
+        "state": "implemented",
+        "step": "evidence",
+        "sublabel": "Append-only, redacted",
+        "summary": "",
+        "width": 1.0
+      }
+    ],
+    "pattern_ids": [
+      "P01",
+      "P04",
+      "P06",
+      "P08",
+      "P09",
+      "P10",
+      "P11",
+      "P12",
+      "P15",
+      "P16"
+    ],
+    "rows": 7,
+    "steps": [
+      {
+        "cue": "Start with the data. Mirrored and landed data is refined from Bronze to Gold, and the semantic model holds the business definitions everyone reuses.",
+        "id": "fabric",
+        "label": "Fabric governed context"
+      },
+      {
+        "cue": "Foundry adds an agent that reasons over that context. It asks a Fabric data agent on behalf of the user, so Fabric permissions still decide what is visible.",
+        "id": "foundry",
+        "label": "+ Foundry reasoning"
+      },
+      {
+        "cue": "MCP standardizes how agents and coding tools reach capabilities. A gateway is optional. Note what MCP does not do - it does not grant authority.",
+        "id": "mcp",
+        "label": "+ MCP access"
+      },
+      {
+        "cue": "Any change is proposed, validated by policy, approved by a person and executed only by a narrowly scoped writer. The model never approves.",
+        "id": "authority",
+        "label": "+ Authority"
+      },
+      {
+        "cue": "Traces, evaluations and audit records turn every claim into evidence. Labels say what really ran.",
+        "id": "evidence",
+        "label": "+ Evidence"
+      }
+    ],
+    "summary": "The end-to-end reference: governed business context in Microsoft Fabric, reasoning and orchestration in Microsoft Foundry, MCP as standardized capability access, Entra identity and policy as authority, a human-approved scoped writer for changes, and evidence at every hop.",
+    "title": "Fabric + Foundry reference architecture",
+    "traces": [
+      {
+        "demo_act": null,
+        "id": "governed-question",
+        "label": "PLANNED FLOW",
+        "steps": [
+          {
+            "edge": null,
+            "node": "business-users",
+            "note": "Signed in with Entra ID.",
+            "say": "A user asks a question in the agent experience."
+          },
+          {
+            "edge": "users-to-app",
+            "node": "agent-app",
+            "note": "The app holds no data permissions of its own.",
+            "say": "The app passes the conversation to the Foundry agent."
+          },
+          {
+            "edge": "app-to-foundry",
+            "node": "foundry-agent",
+            "note": "",
+            "say": "The agent decides it needs governed numbers, not a guess."
+          },
+          {
+            "edge": "foundry-to-data-agent",
+            "node": "data-agent",
+            "note": "The Foundry Fabric data agent tool is in preview and uses the user's identity.",
+            "say": "It asks the Fabric data agent on behalf of the user."
+          },
+          {
+            "edge": "agent-to-model",
+            "node": "semantic-model",
+            "note": "",
+            "say": "The data agent answers from the semantic model's governed measures."
+          },
+          {
+            "edge": "model-to-lake",
+            "node": "onelake",
+            "note": "",
+            "say": "Direct Lake reads Gold tables in OneLake. Fabric permissions filter what this user may see."
+          },
+          {
+            "edge": null,
+            "node": "foundry-agent",
+            "note": "",
+            "say": "The agent composes the answer with its sources."
+          },
+          {
+            "edge": null,
+            "node": "evaluation",
+            "note": "Offline, Act 6 of the demo is UNAVAILABLE until Phase 6 - nothing is simulated as Foundry.",
+            "say": "Evaluations score groundedness and correctness against expected answers."
+          }
+        ],
+        "summary": "A business user asks a question; the answer comes from governed Fabric definitions under the user's own permissions.",
+        "title": "Ask a governed question"
+      },
+      {
+        "demo_act": 5,
+        "id": "governed-action",
+        "label": "SIMULATED",
+        "steps": [
+          {
+            "edge": null,
+            "node": "foundry-agent",
+            "note": "Model intent is not proof of authorization.",
+            "say": "The agent proposes a change, for example a new lakehouse."
+          },
+          {
+            "edge": null,
+            "node": "policy",
+            "note": "",
+            "say": "Deterministic policy checks the operation, workspace, duplicates and risk."
+          },
+          {
+            "edge": "policy-to-approval",
+            "node": "approval",
+            "note": "",
+            "say": "A different person approves. Self-approval is refused and audited."
+          },
+          {
+            "edge": "approval-to-writer",
+            "node": "scoped-writer",
+            "note": "",
+            "say": "Only the scoped writer executes, and only the approved, destination-bound change."
+          },
+          {
+            "edge": "writer-to-target",
+            "node": "system-of-record",
+            "note": "Offline this is a simulated workspace labeled SIMULATED. An approved LIVE change is never redirected to it.",
+            "say": "The writer verifies the result against the target."
+          },
+          {
+            "edge": "writer-to-audit",
+            "node": "audit",
+            "note": "",
+            "say": "Every step is in the audit trail under one correlation ID."
+          }
+        ],
+        "summary": "An agent proposes a change; policy validates, a person approves, and only the scoped writer executes.",
+        "title": "Make a governed change"
+      },
+      {
+        "demo_act": null,
+        "id": "engineer-change",
+        "label": "PLANNED FLOW",
+        "steps": [
+          {
+            "edge": null,
+            "node": "engineers",
+            "note": "",
+            "say": "An engineer asks the coding agent to design or fix a pipeline."
+          },
+          {
+            "edge": "engineers-to-agents",
+            "node": "coding-agents",
+            "note": "",
+            "say": "The harness loads repo instructions and skills - the knowledge to do it correctly."
+          },
+          {
+            "edge": "agents-to-fabric-mcp",
+            "node": "fabric-mcp",
+            "note": "",
+            "say": "It uses the narrowest MCP server - docs for how, read-only tools for what is."
+          },
+          {
+            "edge": "mcp-to-lake",
+            "node": "onelake",
+            "note": "",
+            "say": "Reads run with the engineer's own Fabric permissions."
+          },
+          {
+            "edge": null,
+            "node": "policy",
+            "note": "",
+            "say": "Any change becomes a plan or a pull request, never a direct write."
+          },
+          {
+            "edge": "policy-to-approval",
+            "node": "approval",
+            "note": "",
+            "say": "A reviewer approves before anything is applied."
+          }
+        ],
+        "summary": "An engineer uses GitHub Copilot or Claude Code; MCP gives access to docs and context, and changes still go through review and approval.",
+        "title": "Engineer with a coding agent"
+      }
+    ],
+    "zones": [
+      {
+        "col": 2.0,
+        "cols": 1.0,
+        "id": "foundry-zone",
+        "kind": "foundry",
+        "label": "Microsoft Foundry",
+        "row": 0.0,
+        "rows": 4.0,
+        "step": "foundry"
+      },
+      {
+        "col": 3.0,
+        "cols": 1.0,
+        "id": "access-zone",
+        "kind": "optional",
+        "label": "Capability access (MCP)",
+        "row": 3.0,
+        "rows": 2.0,
+        "step": "mcp"
+      },
+      {
+        "col": 4.0,
+        "cols": 3.0,
+        "id": "fabric-zone",
+        "kind": "fabric",
+        "label": "Microsoft Fabric",
+        "row": 0.0,
+        "rows": 3.0,
+        "step": null
+      },
+      {
+        "col": 1.0,
+        "cols": 5.0,
+        "id": "authority-zone",
+        "kind": "tenant",
+        "label": "Authority",
+        "row": 5.0,
+        "rows": 1.0,
+        "step": "authority"
+      },
+      {
+        "col": 1.0,
+        "cols": 4.0,
+        "id": "evidence-zone",
+        "kind": "tenant",
+        "label": "Evidence",
+        "row": 6.0,
+        "rows": 1.0,
+        "step": "evidence"
+      }
+    ]
+  }
+}

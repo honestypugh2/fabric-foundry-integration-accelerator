@@ -11,6 +11,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 
 | Technology | Source | Status | Retrieved |
 |---|---|---|---|
+| AI agents | [AI agent orchestration patterns](#ai-agent-orchestration) | GUIDANCE | 2026-10-07 |
 | Azure API Management | [Overview of MCP servers in Azure API Management](#apim-mcp) | GA | 2026-10-05 |
 | Developer experience | [How Claude remembers your project (CLAUDE.md and AGENTS.md)](#claude-code-memory) | GA | 2026-10-05 |
 | Developer experience | [Extend Claude with skills](#claude-code-skills) | GA | 2026-10-05 |
@@ -31,11 +32,15 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Microsoft Fabric | [What is Microsoft Fabric?](#fabric-overview) | GA | 2026-10-05 |
 | Microsoft Fabric | [Fabric REST API identity support](#fabric-rest-identity) | GA | 2026-10-05 |
 | Microsoft Fabric | [Azure Well-Architected Framework service guide for Microsoft Fabric](#fabric-waf) | GUIDANCE | 2026-10-05 |
+| Microsoft Fabric and Microsoft Foundry | [Data architecture for AI agents across your organization](#caf-agent-data-architecture) | GUIDANCE | 2026-10-07 |
 | Microsoft Foundry | [Baseline Microsoft Foundry chat reference architecture](#baseline-foundry-chat) | GUIDANCE | 2026-10-05 |
+| Microsoft Foundry | [Baseline Microsoft Foundry chat reference architecture in an Azure landing zone](#baseline-foundry-landing-zone) | GUIDANCE | 2026-10-07 |
+| Microsoft Foundry | [Basic Microsoft Foundry chat reference architecture](#basic-foundry-chat) | GUIDANCE | 2026-10-07 |
 | Microsoft Foundry | [Foundry Agent Service overview](#foundry-agent-service) | GA | 2026-10-05 |
 | Microsoft Foundry | [Built-in evaluators in Microsoft Foundry](#foundry-evaluators) | GA | 2026-10-05 |
 | Microsoft Foundry | [Use the Microsoft Fabric data agent tool in Foundry Agent Service](#foundry-fabric-tool) | PREVIEW | 2026-10-05 |
 | Microsoft Foundry | [What is Foundry IQ?](#foundry-iq) | PREVIEW | 2026-10-05 |
+| Microsoft Foundry | [Govern MCP tools by using an AI gateway (Microsoft Foundry)](#foundry-mcp-governance) | PREVIEW | 2026-10-07 |
 | Microsoft Foundry | [What is Microsoft Foundry?](#foundry-overview) | GA | 2026-10-05 |
 | Model Context Protocol | [Fabric Data Warehouse MCP server (Preview)](#fabric-dw-mcp) | PREVIEW | 2026-10-05 |
 | Model Context Protocol | [Get started with Fabric IQ MCP](#fabric-iq-mcp) | GA | 2026-10-05 |
@@ -45,6 +50,27 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Model Context Protocol | [Power BI Authoring (Modeling) MCP server](#powerbi-authoring-mcp) | GA | 2026-10-05 |
 | Toolchain | [Node.js release schedule](#node-release-schedule) | GA | 2026-10-05 |
 | Toolchain | [Status of Python versions](#python-lifecycle) | GA | 2026-10-05 |
+
+## AI agents
+
+<a id="ai-agent-orchestration"></a>
+
+### AI agent orchestration patterns
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/azure/architecture/ai-ml/guide/ai-agent-design-patterns |
+| Publisher | Azure Architecture Center |
+| Retrieved | 2026-10-07 |
+| Last updated | 2026-02-12 |
+| Status | GUIDANCE |
+| Associated patterns | P02, P13 |
+| Key architecture statement | Use the lowest complexity that works - a direct model call, a single agent with tools, then multi-agent orchestration (sequential, concurrent, group chat, handoff, magentic). |
+| Implementation relevance | Pattern 13 (multi-domain is not multi-agent) and orchestration choices in Foundry lessons. |
+| Security implications | More agents mean more tool surfaces and identities to govern. |
+| Limitations | Guidance only. |
+| Fallback | Not applicable. |
+| Deprecation / replacement | — |
 
 ## Azure API Management
 
@@ -436,6 +462,27 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Fallback | Not applicable. |
 | Deprecation / replacement | — |
 
+## Microsoft Fabric and Microsoft Foundry
+
+<a id="caf-agent-data-architecture"></a>
+
+### Data architecture for AI agents across your organization
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/azure/cloud-adoption-framework/ai-agents/data-architecture-plan |
+| Publisher | Cloud Adoption Framework |
+| Retrieved | 2026-10-07 |
+| Last updated | 2025-12-01 |
+| Status | GUIDANCE |
+| Associated patterns | P01, P02, P06 |
+| Key architecture statement | OneLake is the central governed data lake for data products; agents consume them through Fabric IQ, Foundry IQ and Copilot Studio, inside an Azure landing zone. |
+| Implementation relevance | The closest first-party guidance combining Fabric and Foundry; the reference architecture follows its framing. |
+| Security implications | Prefer built-in retrieval before custom MCP servers; govern data products per domain. |
+| Limitations | Conceptual guidance, not a deployable reference architecture. |
+| Fallback | Not applicable. |
+| Deprecation / replacement | — |
+
 ## Microsoft Foundry
 
 <a id="baseline-foundry-chat"></a>
@@ -454,6 +501,44 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Implementation relevance | Pattern 14 (secure enterprise) and production notes. |
 | Security implications | Private networking and identity-based access are primary controls. |
 | Limitations | Guidance only. |
+| Fallback | Not applicable. |
+| Deprecation / replacement | — |
+
+<a id="baseline-foundry-landing-zone"></a>
+
+### Baseline Microsoft Foundry chat reference architecture in an Azure landing zone
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/azure/architecture/ai-ml/architecture/baseline-microsoft-foundry-landing-zone |
+| Publisher | Azure Architecture Center |
+| Retrieved | 2026-10-07 |
+| Last updated | 2026-06-17 |
+| Status | GUIDANCE |
+| Associated patterns | P14 |
+| Key architecture statement | Splits the baseline between a workload landing zone and a platform landing zone (hub network, firewall, connectivity). |
+| Implementation relevance | Production deployment view and operating-model notes for platform versus workload teams. |
+| Security implications | Egress and connectivity are owned by the platform team; the workload team owns application resources. |
+| Limitations | Guidance only. |
+| Fallback | Not applicable. |
+| Deprecation / replacement | — |
+
+<a id="basic-foundry-chat"></a>
+
+### Basic Microsoft Foundry chat reference architecture
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/azure/architecture/ai-ml/architecture/basic-microsoft-foundry-chat |
+| Publisher | Azure Architecture Center |
+| Retrieved | 2026-10-07 |
+| Last updated | 2026-06-17 |
+| Status | GUIDANCE |
+| Associated patterns | P06, P17 |
+| Key architecture statement | Introductory, not-for-production chat architecture that uses identity as its perimeter (App Service with Easy Auth, Foundry Agent Service, AI Search, Application Insights). |
+| Implementation relevance | The local accelerator corresponds to this proof-of-concept tier; production diagrams follow the baseline. |
+| Security implications | No network isolation or egress control; the article itself defers those to the baseline. |
+| Limitations | Explicitly not for production. |
 | Fallback | Not applicable. |
 | Deprecation / replacement | — |
 
@@ -531,6 +616,25 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | OneLake knowledge source indexes with the search service managed identity, not end-user passthrough. |
 | Limitations | Mixed GA/preview by API version; portal experience preview. |
 | Fallback | Local retrieval over synthetic documents with citations. |
+| Deprecation / replacement | — |
+
+<a id="foundry-mcp-governance"></a>
+
+### Govern MCP tools by using an AI gateway (Microsoft Foundry)
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/azure/foundry/agents/how-to/tools/governance |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-07 |
+| Last updated | 2026-08-19 |
+| Status | PREVIEW |
+| Associated patterns | P09, P15 |
+| Key architecture statement | The Foundry AI gateway for MCP tools is backed by an Azure API Management instance; policies such as rate limits and IP filtering are API Management policies. |
+| Implementation relevance | Diagrams show one API Management-backed gateway for MCP tools rather than two separate gateways. |
+| Security implications | Gateway policy adds central controls but does not replace authorization in the MCP server or data platform. |
+| Limitations | Preview; applies only to new MCP tools created in the Foundry portal that do not use managed OAuth. |
+| Fallback | Local rate limiting and audit in ffia-local. |
 | Deprecation / replacement | — |
 
 <a id="foundry-overview"></a>
