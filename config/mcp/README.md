@@ -29,4 +29,8 @@ ffia mcp check                                          # runs in make validate 
 
 Evidence: starting the rendered `fabric-docs` and `fabric-readonly` profiles and calling MCP
 `tools/list` returned exactly 6 and 16 tools, all `readOnlyHint: true` (LOCAL; no tenant call).
-Calling the tenant tools REQUIRES TENANT VALIDATION.
+In the presenter's demo tenant (VERIFIED LIVE, 2026-10-07):
+
+- `core_search-catalog` found the dev workspace;
+- `onelake_list-workspaces` returned an empty list for a new, empty workspace;
+- calling the non-allow-listed `core_create-item` was refused by the server.

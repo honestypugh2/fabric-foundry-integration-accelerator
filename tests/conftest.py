@@ -1,5 +1,6 @@
 """Shared fixtures: build every dataset profile once per test session into a temp directory."""
 
+import shutil
 from collections.abc import Callable
 from pathlib import Path
 
@@ -35,13 +36,28 @@ def built(tmp_path_factory: pytest.TempPathFactory) -> tuple[Path, dict[str, Val
 CONFIG_ROOT = REPO_ROOT / "config"
 
 
+@pytest.fixture(scope="session")
+def offline_config_root(tmp_path_factory: pytest.TempPathFactory) -> Path:
+    """The committed configuration without git-ignored local files (tenant bindings, overrides).
+
+    Offline tests must behave the same on a presenter's machine that has a real bindings file.
+    """
+    target = tmp_path_factory.mktemp("config") / "config"
+    shutil.copytree(
+        CONFIG_ROOT, target, ignore=shutil.ignore_patterns("*.local.yaml", "*.local.json")
+    )
+    return target
+
+
 @pytest.fixture
-def make_settings(built: tuple[Path, dict[str, ValidationReport]]) -> Callable[..., Settings]:
+def make_settings(
+    built: tuple[Path, dict[str, ValidationReport]], offline_config_root: Path
+) -> Callable[..., Settings]:
     """Factory for settings pointing at the repository content and the session-built lakehouse."""
 
     def factory(**overrides: object) -> Settings:
         values: dict[str, object] = {
-            "config_root": CONFIG_ROOT,
+            "config_root": offline_config_root,
             "data_root": DATA_ROOT,
             "output_root": built[0],
             "guides_root": REPO_ROOT / "guides",

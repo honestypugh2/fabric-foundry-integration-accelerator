@@ -720,9 +720,15 @@ def _ready_routes(**overrides: Any) -> Handler:
                 },
                 {
                     "settingName": "S3",
-                    "title": "Users can create and share data agent item types",
-                    "enabled": False,
+                    "title": "Users can sync workspace items with GitHub repositories",
+                    "enabled": True,
                 },
+                {
+                    "settingName": "S4",
+                    "title": "Fabric data agents can send operational metadata for observability",
+                    "enabled": True,
+                },
+                {"settingName": "OntologyPreview", "enabled": False},
             ]
         },
     }
@@ -736,8 +742,10 @@ async def test_readiness_passes_on_a_ready_tenant() -> None:
     assert report.ready, report.checks
     statuses = {c.name: c.status for c in report.checks}
     assert statuses["Fabric capacity"] == "PASS" and statuses["Workspace demo-dev"] == "PASS"
-    assert statuses["Tenant setting: Fabric data agent items (preview features)"] == "WARN"
-    assert statuses["Tenant setting: Copilot and Azure OpenAI features"] == "SKIPPED"
+    # A title that merely mentions data agents must not satisfy the Copilot requirement.
+    assert statuses["Tenant setting: Copilot and Fabric data agents (Azure OpenAI)"] == "SKIPPED"
+    assert statuses["Tenant setting: Ontology items (Fabric IQ) (PREVIEW)"] == "SKIPPED"
+    assert statuses["Tenant setting: Power BI MCP server endpoints"] == "SKIPPED"
 
 
 async def test_readiness_reports_unlicensed_account_with_remediation() -> None:
@@ -789,6 +797,11 @@ async def test_readiness_flags_unknown_workspace_disabled_settings_and_no_alias(
     assert statuses["Workspace demo-dev"] == "FAIL"
     assert statuses["Tenant setting: Users can create Fabric items"] == "FAIL"
     assert statuses["Tenant setting: Git integration for workspaces"] == "WARN"
+    github = (
+        "Tenant setting: Workspace sync with GitHub repositories "
+        "(repo-first change, Pattern 20; not used by HC-01)"
+    )
+    assert statuses[github] == "SKIPPED"  # optional, and absent from this response
 
 
 def test_readiness_sync_warns_without_bound_workspaces() -> None:
@@ -880,3 +893,32 @@ async def test_writer_packages_the_committed_reference_notebook() -> None:
     }
     assert parts["notebook-content.py"].startswith("# Fabric notebook source")
     assert json.loads(parts[".platform"])["metadata"]["displayName"] == "MCP_01_Bronze"
+
+
+async def test_readiness_rejects_premium_per_user_capacity_and_personal_workspaces() -> None:
+    client, _ = _client(
+        _ready_routes(
+            **{
+                "/v1/capacities": {"value": [{"id": CAPACITY, "state": "Active", "sku": "PP3"}]},
+                "/v1/workspaces": {
+                    "value": [{"id": WORKSPACE, "type": "Personal", "capacityId": CAPACITY}]
+                },
+            }
+        )
+    )
+    report = await run_readiness(client, None, TENANT)
+    checks = {c.name: c for c in report.checks}
+    assert not report.ready
+    assert checks["Fabric capacity"].status == "FAIL"
+    assert "Premium Per User cannot host Fabric items" in checks["Fabric capacity"].detail
+    assert "0 shared workspace(s)" in checks["Bound dev workspace"].detail
+
+
+@pytest.mark.parametrize(
+    ("sku", "fabric"),
+    [("F2", True), ("FT1", True), ("P1", True), ("PP3", False), ("A1", False), ("EM1", False)],
+)
+def test_fabric_capable_skus(sku: str, fabric: bool) -> None:
+    from fabric_foundry_accelerator.services.fabric_readiness import FABRIC_SKU  # noqa: PLC0415
+
+    assert bool(FABRIC_SKU.match(sku)) is fabric

@@ -36,6 +36,7 @@ class SettingRequirement(BaseModel):
     names: tuple[str, ...]
     title_pattern: str
     required: bool = True
+    preview: bool = False
 
     def find(self, settings: list[JsonObject]) -> JsonObject | None:
         """Return the matching setting, if the tenant reported one."""
@@ -47,6 +48,8 @@ class SettingRequirement(BaseModel):
         return next((s for s in settings if pattern.search(str(s.get("title", "")))), None)
 
 
+# Setting names observed in a tenant's List Tenant Settings response (October 2026); titles are the
+# fallback because names are not published as a stable catalog.
 SETTING_REQUIREMENTS: tuple[SettingRequirement, ...] = (
     SettingRequirement(
         purpose="Users can create Fabric items",
@@ -55,32 +58,50 @@ SETTING_REQUIREMENTS: tuple[SettingRequirement, ...] = (
     ),
     SettingRequirement(
         purpose="XMLA endpoints (Power BI Modeling MCP and DAX tools)",
-        names=("AllowXMLAEndpoints", "XmlaEndpoints"),
+        names=("OnPremAnalyzeInExcel", "AllowXMLAEndpoints"),
         title_pattern=r"xmla endpoint",
     ),
     SettingRequirement(
         purpose="Semantic model Execute Queries REST API (DAX reconciliation)",
-        names=("ExecuteQueriesRestApi", "DatasetExecuteQueries"),
+        names=("DatasetExecuteQueries",),
         title_pattern=r"execute queries rest api",
     ),
     SettingRequirement(
         purpose="Git integration for workspaces",
-        names=("EnableGitIntegration", "GitIntegrationTenantSwitch"),
-        title_pattern=r"synchronize workspace items with their git|git integration",
+        names=("GitIntegrationTenantSwitch",),
+        title_pattern=r"synchronize workspace items with their git",
     ),
     SettingRequirement(
-        purpose="Fabric data agent items (preview features)",
-        names=("AISkillArtifactTenantSwitch",),
-        title_pattern=r"data agent",
+        purpose="Workspace sync with GitHub repositories (repo-first change, Pattern 20; not used by HC-01)",
+        names=("GitHubTenantSettings",),
+        title_pattern=r"sync workspace items with github",
         required=False,
     ),
     SettingRequirement(
-        purpose="Copilot and Azure OpenAI features",
-        names=("CopilotTenantSwitch",),
-        title_pattern=r"copilot and other features powered by azure openai",
+        purpose="Copilot and Fabric data agents (Azure OpenAI)",
+        names=("EnableAOAI", "CopilotTenantSwitch"),
+        title_pattern=r"copilot.*powered by azure openai",
         required=False,
+    ),
+    SettingRequirement(
+        purpose="Ontology items (Fabric IQ)",
+        names=("OntologyPreview",),
+        title_pattern=r"create ontology",
+        required=False,
+        preview=True,
+    ),
+    SettingRequirement(
+        purpose="Power BI MCP server endpoints",
+        names=("PowerBIMCP",),
+        title_pattern=r"power bi model context protocol",
+        required=False,
+        preview=True,
     ),
 )
+
+# Capacity SKUs that can host Fabric items: F (Fabric), FT (Fabric trial) and P (Power BI Premium).
+# Premium Per User (PP*), Embedded (A*, EM*) and shared capacity cannot.
+FABRIC_SKU = re.compile(r"^(F\d+|FT\d+|P\d+)$", re.IGNORECASE)
 
 
 class ReadinessCheck(BaseModel):
@@ -130,36 +151,62 @@ async def _api_access(client: FabricRestClient) -> tuple[ReadinessCheck, list[Js
     ), workspaces
 
 
-async def _capacity(client: FabricRestClient) -> ReadinessCheck:
+async def _capacity(client: FabricRestClient) -> tuple[ReadinessCheck, set[str]]:
     capacities = await client.get_all("/capacities")
     active = [c for c in capacities if str(c.get("state", "")).lower() == "active"]
-    if active:
-        skus = sorted({str(c.get("sku", "?")) for c in active})
+    fabric = [c for c in active if FABRIC_SKU.match(str(c.get("sku", "")))]
+    if fabric:
+        skus = sorted({str(c.get("sku", "?")) for c in fabric})
         return ReadinessCheck(
             name="Fabric capacity",
             status="PASS",
-            detail=f"{len(active)} active ({', '.join(skus)})",
-        )
+            detail=f"{len(fabric)} active Fabric-capable ({', '.join(skus)})",
+        ), {str(c.get("id", "")).lower() for c in fabric}
+    other = sorted({str(c.get("sku", "?")) for c in active})
     return ReadinessCheck(
         name="Fabric capacity",
         status="FAIL",
-        detail=f"{len(capacities)} capacities visible, none active",
+        detail=(
+            f"{len(capacities)} capacities visible, none Fabric-capable"
+            + (
+                f" (active: {', '.join(other)}; Premium Per User cannot host Fabric items)"
+                if other
+                else ""
+            )
+        ),
         remediation=(
             "Start a Fabric trial (Fabric portal → account manager → Start trial) or create an F2+ capacity "
             "in an Azure subscription of this tenant (register Microsoft.Fabric, then create it in the "
             "Azure portal), and make the account a capacity administrator or contributor."
         ),
-    )
+    ), set()
 
 
-def _workspaces(rows: list[JsonObject], bindings: TenantBindings | None) -> list[ReadinessCheck]:
+def _on_fabric(row: JsonObject, fabric_capacities: set[str]) -> bool:
+    return str(row.get("capacityId", "")).lower() in fabric_capacities
+
+
+def _workspaces(
+    rows: list[JsonObject], bindings: TenantBindings | None, fabric_capacities: set[str]
+) -> list[ReadinessCheck]:
     if bindings is None or not bindings.workspaces:
+        usable = [
+            r
+            for r in rows
+            if str(r.get("type", "")) != "Personal" and _on_fabric(r, fabric_capacities)
+        ]
         return [
             ReadinessCheck(
                 name="Bound dev workspace",
                 status="WARN",
-                detail="No workspace aliases are bound",
-                remediation="Create a dedicated dev workspace on the capacity and add it to the local bindings file.",
+                detail=(
+                    f"no workspace aliases are bound; {len(usable)} shared workspace(s) visible on a "
+                    "Fabric-capable capacity"
+                ),
+                remediation=(
+                    "Create a dedicated dev workspace on the Fabric capacity and add it to the local "
+                    "bindings file."
+                ),
             )
         ]
     checks: list[ReadinessCheck] = []
@@ -177,16 +224,16 @@ def _workspaces(rows: list[JsonObject], bindings: TenantBindings | None) -> list
                 )
             )
             continue
-        on_capacity = bool(match.get("capacityId"))
+        on_fabric = _on_fabric(match, fabric_capacities)
         checks.append(
             ReadinessCheck(
                 name=f"Workspace {alias}",
-                status="PASS" if on_capacity else "FAIL",
-                detail="visible and assigned to a capacity"
-                if on_capacity
-                else "visible but not on a capacity",
+                status="PASS" if on_fabric else "FAIL",
+                detail="visible and on a Fabric-capable capacity"
+                if on_fabric
+                else "visible but not on a Fabric-capable capacity",
                 remediation=""
-                if on_capacity
+                if on_fabric
                 else "Assign the workspace to the trial or F capacity (workspace settings → License info).",
             )
         )
@@ -226,11 +273,22 @@ async def _tenant_settings(client: FabricRestClient) -> list[ReadinessCheck]:
             )
             continue
         enabled = bool(setting.get("enabled"))
+        detail = f"{setting.get('settingName', '?')}: {'enabled' if enabled else 'disabled'}"
+        if requirement.preview:
+            # Preview features stay off by default; report the state without asking for a change.
+            checks.append(
+                ReadinessCheck(
+                    name=f"{name} (PREVIEW)",
+                    status="SKIPPED",
+                    detail=f"{detail}; not needed by the default demo",
+                )
+            )
+            continue
         checks.append(
             ReadinessCheck(
                 name=name,
                 status="PASS" if enabled else ("FAIL" if requirement.required else "WARN"),
-                detail=f"{setting.get('settingName', '?')}: {'enabled' if enabled else 'disabled'}",
+                detail=detail,
                 remediation=""
                 if enabled
                 else "Enable it in the Fabric admin portal → Tenant settings (or for the lab group).",
@@ -278,8 +336,9 @@ async def run_readiness(
     access, workspaces = await _api_access(client)
     checks.append(access)
     if access.status == "PASS":
-        checks.append(await _capacity(client))
-        checks += _workspaces(workspaces, bindings)
+        capacity, fabric_capacities = await _capacity(client)
+        checks.append(capacity)
+        checks += _workspaces(workspaces, bindings, fabric_capacities)
         checks += await _tenant_settings(client)
     ready = all(c.status != "FAIL" for c in checks)
     return ReadinessReport(ready=ready, checks=tuple(checks))

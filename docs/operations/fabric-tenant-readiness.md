@@ -45,6 +45,9 @@ not active in the Fabric service yet.
 
 ## 3. Get capacity — (change)
 
+A **Premium Per User** capacity (SKU `PP*`) does not count: it cannot host lakehouses or
+notebooks. Readiness only accepts F, FT (trial) and P SKUs.
+
 Choose one:
 
 - **Fabric trial.** In the Fabric portal, open account manager → **Start trial**. The trial lasts
@@ -53,7 +56,16 @@ Choose one:
   1. Register the `Microsoft.Fabric` resource provider.
   2. Create an F2 or larger capacity.
   3. Add the demo admin account as a capacity administrator.
-  4. Pause the capacity when it is not in use.
+  4. Pause the capacity when it is not in use. F SKUs bill per CU-hour while running; for
+     example, an F8 in Central US is 8 × the per-CU retail price, about $1.44/hour as of
+     2026-10-07.
+
+  Pause and resume with the Azure CLI:
+
+  ```bash
+  az rest --method post --url "https://management.azure.com/subscriptions/<SUB>/resourceGroups/<RG>/providers/Microsoft.Fabric/capacities/<NAME>/suspend?api-version=2023-11-01"
+  az rest --method post --url "https://management.azure.com/subscriptions/<SUB>/resourceGroups/<RG>/providers/Microsoft.Fabric/capacities/<NAME>/resume?api-version=2023-11-01"
+  ```
 
 ## 4. Tenant settings — (change, Fabric administrator)
 
@@ -67,8 +79,9 @@ publish a stable catalog of setting names.
 | Power BI Modeling MCP and DAX tools | XMLA endpoints | Yes |
 | DAX reconciliation through `executeQueries` | Dataset Execute Queries REST API (Integration settings) | Yes |
 | Git integration for workspaces | Users can synchronize workspace items with their Git repositories | Yes |
-| Fabric data agent (PREVIEW) | Data agent item types | No, preview only |
-| Copilot | Users can use Copilot and other features powered by Azure OpenAI | No |
+| Workspace sync with GitHub | Users can sync workspace items with GitHub repositories | No (needed for repo-first change, Pattern 20; HC-01 does not use it) |
+| Copilot and Fabric data agents | Users can use Copilot, AI Agents and other AI experiences powered by Azure OpenAI | No |
+| Ontology (PREVIEW), Power BI MCP endpoints (PREVIEW) | Users can create Ontology (preview) items; Power BI Model Context Protocol server endpoints (preview) | No, reported as informational and left off |
 
 ## 5. Dedicated dev workspace — (change)
 
@@ -113,6 +126,12 @@ all of these hold:
 Every change then still needs a plan, policy approval, approval by a different person, and a live
 duplicate re-check. It is verified and audited afterwards. Run it only against the dev workspace,
 and only after you have reviewed the plan.
+
+## Fabric MCP note
+
+In a new, empty workspace, `onelake_list-workspaces` (Fabric MCP 1.4.0) returned an empty list,
+while `core_search-catalog` found the workspace. Use `core_search-catalog` to discover workspaces,
+and confirm with the Fabric portal.
 
 ## If the tenant cannot be made ready
 

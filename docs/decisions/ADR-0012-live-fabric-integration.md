@@ -9,7 +9,7 @@
 Phase 5 connects the accelerator to a real Fabric tenant without weakening the offline default or
 the authority rules. Four facts shaped it:
 
-- **The presenter's demo tenant was not Fabric-ready on build day.** `ffia fabric readiness`
+- **The presenter's demo tenant was not Fabric-ready at first.** `ffia fabric readiness`
   found:
   - `401 UserNotLicensed` from the Fabric API;
   - no Fabric capacity;
@@ -91,10 +91,39 @@ Options 2 and 4.
   keys, missing dimension keys, diagnostics, reconciliation to the cent, and readmissions of 35 out
   of 211.
 
+## Live verification (2026-10-07, presenter's demo tenant)
+
+The tenant was first made ready through an approved plan. A person approved it, and each step was
+verified and audited:
+
+1. A dedicated resource group.
+2. An F8 Fabric capacity.
+3. A `ffia-dev` workspace on that capacity.
+
+Then the following were observed (labels as recorded):
+
+| What | Tool | Result |
+|---|---|---|
+| Tenant readiness | `ffia fabric readiness` (GET only) | READY: F8 active, bound workspace on capacity, required settings enabled. GitHub workspace sync off (optional, not used by HC-01) |
+| Live smoke test | `FFIA_FABRIC_LIVE=1 pytest -m live` | VERIFIED LIVE: passed |
+| Router → live provider | API `POST /api/v1/fabric/read` in HYBRID | VERIFIED LIVE: `list_workspaces` and `list_items` labeled LIVE, `cloud_operation_performed: true`, no fallback |
+| Fabric MCP `fabric-readonly` profile | `@microsoft/fabric-mcp@1.4.0` over stdio | VERIFIED LIVE: 16 tools exposed; `core_search-catalog` found the workspace; `onelake_list-workspaces` returned an empty list for the new, empty workspace (cause unverified); `core_create-item` refused by the server as not found |
+
+Readiness also found a defect, now fixed: it had counted a Premium Per User (PP) capacity as
+Fabric-capable. PPU cannot host Fabric items, so only F, FT (trial) and P SKUs count now.
+
+Still **REQUIRES TENANT VALIDATION**:
+
+- DAX reconciliation (no semantic model yet);
+- the preview List Tables API;
+- throttling;
+- the reference notebooks on Fabric Spark;
+- the scoped writer.
+
 ## Trade-offs
 
-- **Live paths are unproven in a tenant.** Throttling, Delta writes, OneLake paths and capacity
-  behavior all require tenant validation.
+- **Live reads are verified in one tenant; the rest is not.** Throttling, Delta writes, OneLake
+  paths, DAX reconciliation and the writer still require tenant validation.
 - **The rewriter is intentionally small.** New SQL idioms need a rule and a test.
 - **The Bronze reference reads strings, where the lab prompt says `inferSchema`.** This is
   documented as a comparison point.
