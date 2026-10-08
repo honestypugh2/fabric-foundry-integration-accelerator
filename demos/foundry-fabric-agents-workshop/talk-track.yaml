@@ -128,11 +128,41 @@ parts:
           - "Lakehouse tables: sales_orders, customers, products, business_teams, sales_targets, plants."
           - "Data agent → ask: \"What was booked revenue by product line last month?\""
         fallback: "Offline: terminal `ffia mfg brief` shows the same numbers, labeled LOCAL."
+      - title: "Set it up (1): the Fabric data agent"
+        entry: fabric
+        path: "Fabric portal → ffia-dev → mfg-sales-data-agent → Data sources and Agent instructions (show, don't rebuild)"
+        label: LIVE
+        say:
+          - "\"Setting this up took about five minutes. Land the data in a lakehouse (here: six synthetic CSVs loaded as Delta tables). Then New item → Data agent, add the lakehouse tables as a source, write instructions in business language (how booked revenue is calculated, what the product codes mean, to report data-quality problems), test a question, and Publish.\""
+          - "\"Prerequisites: an F2 or larger capacity, and the tenant setting that allows Copilot and Azure OpenAI features. Everything runs with the asker's permissions.\""
+        show:
+          - "Data sources: `mfg_lakehouse` with six tables selected."
+          - "Agent instructions: the booked-revenue definition and the data-quality instruction."
+          - "The Published state."
+        check: "The data agent answers \"booked revenue by product line in September 2026\" in Fabric."
   - id: build-and-orchestrate
     title: "Approaches for building and orchestrating agents (Foundry + Fabric demo)"
     minutes: 12
     goal: "Answer \"Can we see Foundry and Fabric working together?\" twice: no-code in the portal and code-first in VS Code."
     steps:
+      - title: "Set it up (2): Foundry project, model and Fabric connection"
+        entry: foundry
+        path: "ai.azure.com → ffia-agents → Models (deployment) → Management center → Connected resources → fabric-mfg-sales"
+        label: LIVE
+        say:
+          - "\"On the Foundry side: a Foundry resource and project, one model deployment (Data Zone Standard keeps processing in the US data zone), and the Foundry User role for the people who build agents. Then one connection of type Microsoft Fabric that points at the data agent: its workspace ID and artifact ID come from the data agent's URL.\""
+          - "\"We scripted the Azure parts with the Azure CLI; each was one command. The connection and the data agent were a few clicks in the portals.\""
+        code: |
+          az cognitiveservices account create -n <foundry> -g <rg> -l eastus2 --kind AIServices --sku S0 \
+            --custom-domain <foundry> --allow-project-management --assign-identity
+          az cognitiveservices account project create -n <foundry> -g <rg> -l eastus2 --project-name <project>
+          az cognitiveservices account deployment create -n <foundry> -g <rg> --deployment-name <model> \
+            --model-name <model> --model-version <version> --model-format OpenAI --sku-name DataZoneStandard --sku-capacity 50
+          az role assignment create --role "Foundry User" --assignee-object-id <user> --scope <foundry-resource-id>
+        show:
+          - "Models: the deployment and its deployment type."
+          - "Connected resources: `fabric-mfg-sales` of type Microsoft Fabric (don't open the IDs on screen)."
+        check: "The project, deployment and Fabric connection are listed."
       - title: "Portal: a prompt agent with the Fabric data agent tool"
         entry: foundry
         path: "Foundry portal → Agents → sales-insights-agent → Tools → Fabric data agent (preview) → Playground"
