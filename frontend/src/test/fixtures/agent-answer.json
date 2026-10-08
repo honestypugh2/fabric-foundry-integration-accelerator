@@ -1,6 +1,6 @@
 {
   "cloud_operation_performed": false,
-  "correlation_id": "88f57f301144466d9c7287648b3d607b",
+  "correlation_id": "0763ecd6a7104f8e8e26b04c19336960",
   "data": {
     "agent": "sales-insights-agent",
     "answer": "**Enclosures (ENC) grew fastest**: booked revenue up 55.78% in September 2026 versus August 2026 ($56,623.73 \u2192 $88,207.09).",
@@ -30,5 +30,5 @@
   "selected_provider": "Local sales agent (deterministic, synthetic)",
   "simulation_notice": "LOCAL deterministic agent over synthetic data. No Foundry or Fabric call was made.",
   "teaching_objective": "Numbers come from a governed data tool, never from the model.",
-  "timestamp": "2026-10-08T17:16:19.514788Z"
+  "timestamp": "2026-10-08T17:31:11.424205Z"
 }

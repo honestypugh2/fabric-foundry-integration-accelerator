@@ -6,6 +6,7 @@ import {
   agentEvalReportSchema,
   agentProfileSchema,
   approvalSchema,
+  monthlyInsightsRunSchema,
   architectureSchema,
   auditRecordSchema,
   checkGradeSchema,
@@ -348,5 +349,12 @@ export function useAgentEvaluation(suite: string) {
         agentEvalReportSchema,
         undefined,
       ),
+  });
+}
+
+export function useMonthlyInsights() {
+  return useMutation({
+    mutationFn: () =>
+      api.post("/api/v1/agents/workflows/monthly-insights", monthlyInsightsRunSchema, {}),
   });
 }

@@ -176,6 +176,9 @@ export interface BreakerStatus {
   readonly last_failure_reason: string | null;
 }
 
+/** Where a draft ends: ready for a human, or held by the gate. */
+export type BriefStatus = "READY FOR APPROVAL" | "HELD";
+
 /** A capability and how it is currently served. */
 export interface Capability {
   readonly name: string;
@@ -650,6 +653,27 @@ export interface MeasureValue {
   readonly synthetic_demonstration: boolean;
 }
 
+/** Which teams to brief; all teams by default. */
+export interface MonthlyInsightsRequest {
+  readonly teams?: readonly string[];
+}
+
+/** The result of one workflow run. Nothing was delivered. */
+export interface MonthlyInsightsRun {
+  readonly run_id?: string;
+  readonly workflow: string;
+  readonly engine: string;
+  readonly dataset_profile: string;
+  readonly observation_month: string;
+  readonly steps: readonly string[];
+  readonly drafts: readonly TeamBriefDraft[];
+  readonly ready: number;
+  readonly held: number;
+  readonly labels: readonly string[];
+  readonly delivery: string;
+  readonly synthetic_notice: string;
+}
+
 /** The live state of one diagram node. */
 export interface NodeRuntime {
   readonly node: string;
@@ -859,6 +883,23 @@ export interface TablePreview {
   readonly rows: readonly (Readonly<Record<string, string | number | boolean | null>>)[];
   readonly total_rows: number;
   readonly truncated: boolean;
+}
+
+/** One team's draft brief and the gate's verdict. */
+export interface TeamBriefDraft {
+  readonly team_id: string;
+  readonly team_name: string;
+  readonly question: string;
+  readonly answer: string;
+  readonly label: string;
+  readonly provider: string;
+  readonly fallback_used: boolean;
+  readonly grounded: boolean;
+  readonly expected: readonly string[];
+  readonly missing: readonly string[];
+  readonly status: BriefStatus;
+  readonly reason: string;
+  readonly correlation_id: string;
 }
 
 /** One tool the agent used, as reported by the agent runtime. */

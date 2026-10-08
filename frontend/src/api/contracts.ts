@@ -695,6 +695,38 @@ export const agentEvalReportSchema = z.object({
 });
 export type AgentEvalReport = z.output<typeof agentEvalReportSchema>;
 
+export const monthlyInsightsRunSchema = z.object({
+  run_id: z.string(),
+  workflow: z.string(),
+  engine: z.string(),
+  dataset_profile: z.string(),
+  observation_month: z.string(),
+  steps: z.array(z.string()),
+  drafts: z.array(
+    z.object({
+      team_id: z.string(),
+      team_name: z.string(),
+      question: z.string(),
+      answer: z.string(),
+      label: z.string(),
+      provider: z.string(),
+      fallback_used: z.boolean(),
+      grounded: z.boolean(),
+      expected: z.array(z.string()),
+      missing: z.array(z.string()),
+      status: z.enum(["READY FOR APPROVAL", "HELD"]),
+      reason: z.string(),
+      correlation_id: z.string(),
+    }),
+  ),
+  ready: z.number(),
+  held: z.number(),
+  labels: z.array(z.string()),
+  delivery: z.string(),
+  synthetic_notice: z.string(),
+});
+export type MonthlyInsightsRun = z.output<typeof monthlyInsightsRunSchema>;
+
 /** Compile-time drift detection between the backend contract and the UI's views. */
 export const contractChecks = {
   runtimeStatus: true satisfies Conforms<G.RuntimeStatus, RuntimeStatus>,
@@ -730,4 +762,5 @@ export const contractChecks = {
   agentProfile: true satisfies Conforms<G.AgentProfile, AgentProfile>,
   agentAnswer: true satisfies Conforms<G.AgentAnswer, AgentAnswer>,
   agentEvalReport: true satisfies Conforms<G.AgentEvalReport, AgentEvalReport>,
+  monthlyInsights: true satisfies Conforms<G.MonthlyInsightsRun, MonthlyInsightsRun>,
 } as const;

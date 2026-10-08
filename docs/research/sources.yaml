@@ -409,15 +409,28 @@ sources:
     title: Microsoft Agent Framework overview
     url: https://learn.microsoft.com/agent-framework/overview/
     publisher: Microsoft Learn
-    retrieved_date: 2026-10-05
+    retrieved_date: 2026-10-08
     technology: Microsoft Agent Framework
     associated_patterns: [P06, P08, P13]
     status: GA
     key_architecture_statement: Successor to Semantic Kernel and AutoGen with agents, graph workflows, checkpointing, tool approval, MCP client support and OpenTelemetry.
-    implementation_relevance: Orchestration runtime for live and local agent paths (agent-framework-core 1.20.0).
+    implementation_relevance: agent-framework-core 1.21.0 runs the monthly-insights workflow; Foundry calls stay in the azure-ai-projects provider (ADR-0013).
     security_implications: Tool approval enables human-in-the-loop for high-impact actions.
-    limitations: agent-framework-azure-ai is a stale release candidate; use agent-framework-foundry.
-    fallback: Same framework with a deterministic local chat client.
+    limitations: agent-framework-foundry 1.14.1 requires azure-ai-projects<2.8.0 and the pre-release azure-ai-inference 1.0.0b9, so it is not used; agent-framework-azure-ai is a stale release candidate.
+    fallback: The same workflow over the deterministic LOCAL agent.
+  - id: agent-framework-workflows
+    title: Microsoft Agent Framework workflow capabilities
+    url: https://learn.microsoft.com/agent-framework/workflows/
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-08
+    technology: Microsoft Agent Framework
+    associated_patterns: [P06, P08, P16]
+    status: GA
+    key_architecture_statement: Graph workflows of executors and edges, with agents as participants, human-in-the-loop pauses, checkpoints and observability.
+    implementation_relevance: The monthly-insights workflow fans out one drafting executor per team and ends in a deterministic review gate.
+    security_implications: A workflow orchestrates; it does not authorize. Delivery remains a governed write.
+    limitations: Checkpointing and human-in-the-loop pauses are not used yet; approval runs through the change flow.
+    fallback: Run the same executors over the LOCAL agent offline.
   - id: baseline-foundry-chat
     title: Baseline Microsoft Foundry chat reference architecture
     url: https://learn.microsoft.com/azure/architecture/ai-ml/architecture/baseline-microsoft-foundry-chat
@@ -514,6 +527,19 @@ sources:
     security_implications: Safety evaluators support responsible AI release gates.
     limitations: Intent resolution and task adherence evaluators are preview.
     fallback: Deterministic local evaluators in CI.
+  - id: azure-monitor-opentelemetry
+    title: Enable OpenTelemetry in Application Insights (Azure Monitor OpenTelemetry Distro)
+    url: https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-08
+    technology: Azure Monitor
+    associated_patterns: [P16]
+    status: GA
+    key_architecture_statement: The Azure Monitor OpenTelemetry Distro sends OpenTelemetry traces, metrics and logs to Application Insights using a connection string.
+    implementation_relevance: Opt-in export of the ffia.agent.ask spans when FFIA_APPLICATIONINSIGHTS_CONNECTION_STRING is set.
+    security_implications: The connection string is a secret (local .env only); spans never record question text.
+    limitations: The distro pulls beta instrumentation packages; only the span API is used directly.
+    fallback: Spans stay in-process (no exporter) when no connection string is set.
   - id: apim-mcp
     title: Overview of MCP servers in Azure API Management
     url: https://learn.microsoft.com/azure/api-management/mcp-server-overview

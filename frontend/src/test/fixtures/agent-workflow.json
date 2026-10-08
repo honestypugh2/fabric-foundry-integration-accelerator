@@ -1,0 +1,94 @@
+{
+  "dataset_profile": "mfg-sales-v1",
+  "delivery": "Not sent. Delivering briefs to business teams (e-mail, Teams, a portal) is a governed write: PLAN, then human APPROVE, then EXECUTE through an authorized service, then AUDIT.",
+  "drafts": [
+    {
+      "answer": "**Enclosures**, September 2026: booked revenue $88,207.09 (+55.8% vs last month, +58.5% vs last year), 143.1% of target, gross margin 31.6%. Top growing product: P-ENC-012. Synthetic demonstration data.",
+      "correlation_id": "e494fa207360421cb8bec00349c1b673",
+      "expected": [
+        "88207.09",
+        "143.1"
+      ],
+      "fallback_used": false,
+      "grounded": true,
+      "label": "LOCAL",
+      "missing": [],
+      "provider": "Local sales agent (deterministic, synthetic)",
+      "question": "Write the monthly brief for the Enclosures team.",
+      "reason": "Grounded and matches the baseline.",
+      "status": "READY FOR APPROVAL",
+      "team_id": "T-ENC",
+      "team_name": "Enclosures"
+    },
+    {
+      "answer": "**Hardware & Fabrication**, September 2026: booked revenue $288,994.48 (+3.5% vs last month, +72.7% vs last year), 106.6% of target, gross margin 20.9%. Top growing product: P-FAB-009. Synthetic demonstration data.",
+      "correlation_id": "a3c7c18851304b57a3765f4916d955d4",
+      "expected": [
+        "288994.48",
+        "106.6"
+      ],
+      "fallback_used": false,
+      "grounded": true,
+      "label": "LOCAL",
+      "missing": [],
+      "provider": "Local sales agent (deterministic, synthetic)",
+      "question": "Write the monthly brief for the Hardware & Fabrication team.",
+      "reason": "Grounded and matches the baseline.",
+      "status": "READY FOR APPROVAL",
+      "team_id": "T-HWFAB",
+      "team_name": "Hardware & Fabrication"
+    },
+    {
+      "answer": "**Key Accounts**, September 2026: booked revenue $76,765.17 (+39.7% vs last month, +206.8% vs last year), 117.6% of target, gross margin 18.8%. Top growing product: P-FAB-004. Synthetic demonstration data.",
+      "correlation_id": "35d89b0c54d44126945a0f3d062a3104",
+      "expected": [
+        "76765.17",
+        "117.6"
+      ],
+      "fallback_used": false,
+      "grounded": true,
+      "label": "LOCAL",
+      "missing": [],
+      "provider": "Local sales agent (deterministic, synthetic)",
+      "question": "Write the monthly brief for the Key Accounts team.",
+      "reason": "Grounded and matches the baseline.",
+      "status": "READY FOR APPROVAL",
+      "team_id": "T-KEY",
+      "team_name": "Key Accounts"
+    },
+    {
+      "answer": "**Structural & Metals**, September 2026: booked revenue $132,524.66 (+24.1% vs last month, +21.9% vs last year), 108.6% of target, gross margin 27.9%. Top growing product: P-STR-004. Synthetic demonstration data.",
+      "correlation_id": "bfe721e973c940a3ab27cae7e7b994e2",
+      "expected": [
+        "132524.66",
+        "108.6"
+      ],
+      "fallback_used": false,
+      "grounded": true,
+      "label": "LOCAL",
+      "missing": [],
+      "provider": "Local sales agent (deterministic, synthetic)",
+      "question": "Write the monthly brief for the Structural & Metals team.",
+      "reason": "Grounded and matches the baseline.",
+      "status": "READY FOR APPROVAL",
+      "team_id": "T-STRMET",
+      "team_name": "Structural & Metals"
+    }
+  ],
+  "engine": "Microsoft Agent Framework workflow (agent-framework-core 1.21.0)",
+  "held": 0,
+  "labels": [
+    "LOCAL"
+  ],
+  "observation_month": "2026-09-01",
+  "ready": 4,
+  "run_id": "fda2bb65411f4f4c893d0d15c262e471",
+  "steps": [
+    "select: choose the business teams for this run",
+    "draft: one executor per team asks the agent for its brief (fan-out, concurrent)",
+    "review: deterministic gate checks grounding and the team's baseline numbers",
+    "deliver: not performed; sending briefs is a governed write that needs approval"
+  ],
+  "synthetic_notice": "SYNTHETIC DATA. Fictional manufacturer, customers, products and people generated for education. Not real sales data.",
+  "workflow": "monthly-insights"
+}

@@ -7,6 +7,7 @@ import pytest
 from pydantic import TypeAdapter
 
 from fabric_foundry_accelerator.agents.port import AgentAnswer
+from fabric_foundry_accelerator.agents.workflows import MonthlyInsightsRun
 from fabric_foundry_accelerator.api.routes import RenderedView, SelectionSignal, ViewSummary
 from fabric_foundry_accelerator.audit.store import AuditRecord
 from fabric_foundry_accelerator.education.guides import UseCaseGuide
@@ -71,6 +72,7 @@ CONTRACTS: dict[str, object] = {
     "agent-answer": ExecutionEnvelope[AgentAnswer],
     "agent-unsupported": ExecutionEnvelope[AgentAnswer],
     "agent-eval": AgentEvalReport,
+    "agent-workflow": MonthlyInsightsRun,
 }
 
 

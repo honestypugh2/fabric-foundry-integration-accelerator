@@ -1,7 +1,12 @@
 import { useId, useState } from "react";
 import { describeError } from "../../api/client";
 import type { AgentAnswer, AgentProfile } from "../../api/contracts";
-import { useAgentEvaluation, useAgentProfile, useAskAgent } from "../../api/hooks";
+import {
+  useAgentEvaluation,
+  useAgentProfile,
+  useAskAgent,
+  useMonthlyInsights,
+} from "../../api/hooks";
 import { usePageTitle } from "../../app/usePageTitle";
 import { Badge } from "../../components/Badge";
 import { Markdown } from "../../components/Markdown";
@@ -133,6 +138,80 @@ function AskAgent({ profile }: { readonly profile: AgentProfile }) {
   );
 }
 
+function MonthlyInsights() {
+  const workflow = useMonthlyInsights();
+  const run = workflow.data;
+  return (
+    <section aria-labelledby="workflow-heading">
+      <h2 id="workflow-heading">Orchestrate: monthly insights workflow</h2>
+      <p>
+        A Microsoft Agent Framework workflow drafts each business team&apos;s monthly brief through
+        the same agent, in parallel. A deterministic review gate checks every draft against the
+        baseline. Nothing is sent: delivering briefs is a governed write that needs approval.
+      </p>
+      <button
+        type="button"
+        disabled={workflow.isPending}
+        onClick={() => {
+          workflow.mutate();
+        }}
+      >
+        Run monthly insights workflow
+      </button>
+      <div aria-live="polite">
+        {workflow.isPending ? (
+          <p className="loading" role="status">
+            Drafting team briefs…
+          </p>
+        ) : null}
+      </div>
+      {workflow.error ? (
+        <p className="notice notice--error" role="alert">
+          {describeError(workflow.error)}
+        </p>
+      ) : null}
+      {run ? (
+        <div>
+          <p>
+            <strong>
+              {run.ready} ready for approval, {run.held} held
+            </strong>{" "}
+            for {run.observation_month.slice(0, 7)}. Engine: {run.engine}. Labels{" "}
+            {run.labels.map((label) => (
+              <Badge key={label} value={label} />
+            ))}
+          </p>
+          <ol>
+            {run.steps.map((step) => (
+              <li key={step}>{step}</li>
+            ))}
+          </ol>
+          <ul className="drafts">
+            {run.drafts.map((draft) => (
+              <li key={draft.team_id}>
+                <article aria-labelledby={`draft-${draft.team_id}`}>
+                  <h3 id={`draft-${draft.team_id}`}>
+                    {draft.team_name} <Badge value={draft.status} kind="gate" />
+                  </h3>
+                  <p className="meta">
+                    {draft.reason}
+                    {draft.missing.length > 0 ? ` Missing: ${draft.missing.join(", ")}.` : ""}{" "}
+                    <Badge value={draft.label} /> {draft.provider}
+                    {draft.fallback_used ? " (fallback)" : ""}
+                  </p>
+                  <Markdown>{draft.answer}</Markdown>
+                </article>
+              </li>
+            ))}
+          </ul>
+          <p className="notice">{run.delivery}</p>
+          <p className="meta">{run.synthetic_notice}</p>
+        </div>
+      ) : null}
+    </section>
+  );
+}
+
 function EvaluateAgent({ profile }: { readonly profile: AgentProfile }) {
   const evaluation = useAgentEvaluation(profile.suite);
   const report = evaluation.data;
@@ -244,6 +323,7 @@ export function AgentPage() {
               </div>
             </dl>
             <AskAgent profile={data} />
+            <MonthlyInsights />
             <EvaluateAgent profile={data} />
           </>
         )}

@@ -871,6 +871,15 @@
         "title": "BreakerStatus",
         "type": "object"
       },
+      "BriefStatus": {
+        "description": "Where a draft ends: ready for a human, or held by the gate.",
+        "enum": [
+          "READY FOR APPROVAL",
+          "HELD"
+        ],
+        "title": "BriefStatus",
+        "type": "string"
+      },
       "Capability": {
         "description": "A capability and how it is currently served.",
         "properties": {
@@ -3305,6 +3314,101 @@
         "title": "MeasureValue",
         "type": "object"
       },
+      "MonthlyInsightsRequest": {
+        "additionalProperties": false,
+        "description": "Which teams to brief; all teams by default.",
+        "properties": {
+          "teams": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 4,
+            "title": "Teams",
+            "type": "array"
+          }
+        },
+        "title": "MonthlyInsightsRequest",
+        "type": "object"
+      },
+      "MonthlyInsightsRun": {
+        "additionalProperties": false,
+        "description": "The result of one workflow run. Nothing was delivered.",
+        "properties": {
+          "dataset_profile": {
+            "title": "Dataset Profile",
+            "type": "string"
+          },
+          "delivery": {
+            "title": "Delivery",
+            "type": "string"
+          },
+          "drafts": {
+            "items": {
+              "$ref": "#/components/schemas/TeamBriefDraft"
+            },
+            "title": "Drafts",
+            "type": "array"
+          },
+          "engine": {
+            "title": "Engine",
+            "type": "string"
+          },
+          "held": {
+            "title": "Held",
+            "type": "integer"
+          },
+          "labels": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Labels",
+            "type": "array"
+          },
+          "observation_month": {
+            "title": "Observation Month",
+            "type": "string"
+          },
+          "ready": {
+            "title": "Ready",
+            "type": "integer"
+          },
+          "run_id": {
+            "title": "Run Id",
+            "type": "string"
+          },
+          "steps": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Steps",
+            "type": "array"
+          },
+          "synthetic_notice": {
+            "title": "Synthetic Notice",
+            "type": "string"
+          },
+          "workflow": {
+            "title": "Workflow",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workflow",
+          "engine",
+          "dataset_profile",
+          "observation_month",
+          "steps",
+          "drafts",
+          "ready",
+          "held",
+          "labels",
+          "delivery",
+          "synthetic_notice"
+        ],
+        "title": "MonthlyInsightsRun",
+        "type": "object"
+      },
       "NodeRuntime": {
         "additionalProperties": false,
         "description": "The live state of one diagram node.",
@@ -4314,6 +4418,86 @@
         "title": "TablePreview",
         "type": "object"
       },
+      "TeamBriefDraft": {
+        "additionalProperties": false,
+        "description": "One team's draft brief and the gate's verdict.",
+        "properties": {
+          "answer": {
+            "title": "Answer",
+            "type": "string"
+          },
+          "correlation_id": {
+            "title": "Correlation Id",
+            "type": "string"
+          },
+          "expected": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Expected",
+            "type": "array"
+          },
+          "fallback_used": {
+            "title": "Fallback Used",
+            "type": "boolean"
+          },
+          "grounded": {
+            "title": "Grounded",
+            "type": "boolean"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "missing": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Missing",
+            "type": "array"
+          },
+          "provider": {
+            "title": "Provider",
+            "type": "string"
+          },
+          "question": {
+            "title": "Question",
+            "type": "string"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/BriefStatus"
+          },
+          "team_id": {
+            "title": "Team Id",
+            "type": "string"
+          },
+          "team_name": {
+            "title": "Team Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "team_id",
+          "team_name",
+          "question",
+          "answer",
+          "label",
+          "provider",
+          "fallback_used",
+          "grounded",
+          "expected",
+          "missing",
+          "status",
+          "reason",
+          "correlation_id"
+        ],
+        "title": "TeamBriefDraft",
+        "type": "object"
+      },
       "ToolCall": {
         "additionalProperties": false,
         "description": "One tool the agent used, as reported by the agent runtime.",
@@ -4935,6 +5119,48 @@
           }
         },
         "summary": "Evaluate Agent",
+        "tags": [
+          "agents"
+        ]
+      }
+    },
+    "/api/v1/agents/workflows/monthly-insights": {
+      "post": {
+        "description": "Draft each team's monthly brief through an Agent Framework workflow. Nothing is sent.",
+        "operationId": "run_monthly_insights_workflow_api_v1_agents_workflows_monthly_insights_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MonthlyInsightsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MonthlyInsightsRun"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Run Monthly Insights Workflow",
         "tags": [
           "agents"
         ]

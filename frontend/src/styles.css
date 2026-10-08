@@ -328,6 +328,23 @@ textarea {
   justify-self: start;
 }
 
+.drafts {
+  display: grid;
+  gap: 0.75rem;
+  padding: 0;
+  list-style: none;
+}
+
+.drafts article {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+}
+
+.drafts h3 {
+  margin-top: 0;
+}
+
 .suggestions {
   display: flex;
   flex-wrap: wrap;

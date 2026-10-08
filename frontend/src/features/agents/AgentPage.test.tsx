@@ -86,6 +86,59 @@ describe("agent page", () => {
     expect(calls.at(-1)?.path).toBe("/api/v1/agents/evaluate");
   });
 
+  it("runs the monthly insights workflow and sends nothing", async () => {
+    const { calls } = mockApi(defaultRoutes);
+    renderApp("/agent");
+    await userEvent.click(
+      await screen.findByRole("button", { name: "Run monthly insights workflow" }),
+    );
+    const run = fixtures.agentWorkflow;
+    expect(
+      await screen.findByText(`${String(run.ready)} ready for approval, ${String(run.held)} held`),
+    ).toBeInTheDocument();
+    for (const draft of run.drafts) {
+      expect(
+        screen.getByRole("article", { name: new RegExp(draft.team_name) }),
+      ).toBeInTheDocument();
+    }
+    expect(screen.getByText(run.delivery)).toBeInTheDocument();
+    expect(calls.at(-1)?.path).toBe("/api/v1/agents/workflows/monthly-insights");
+  });
+
+  it("shows a held draft and a workflow error", async () => {
+    const held = {
+      ...fixtures.agentWorkflow,
+      ready: 0,
+      held: 1,
+      drafts: [
+        {
+          ...fixtures.agentWorkflow.drafts[0],
+          status: "HELD",
+          reason: "The draft does not match the baseline.",
+          missing: ["143.1"],
+          fallback_used: true,
+        },
+      ],
+    };
+    mockApi({ ...defaultRoutes, "POST /api/v1/agents/workflows/monthly-insights": held });
+    renderApp("/agent");
+    await userEvent.click(
+      await screen.findByRole("button", { name: "Run monthly insights workflow" }),
+    );
+    expect(await screen.findByText(/Missing: 143\.1\./)).toBeInTheDocument();
+    expect(screen.getByText(/\(fallback\)/)).toBeInTheDocument();
+    mockApi({
+      ...defaultRoutes,
+      "POST /api/v1/agents/workflows/monthly-insights": problem(
+        422,
+        "InvalidRequestError",
+        "bad team",
+      ),
+    });
+    await userEvent.click(screen.getByRole("button", { name: "Run monthly insights workflow" }));
+    expect(await screen.findByText("bad team (HTTP 422)")).toBeInTheDocument();
+  });
+
   it("shows ask and evaluation errors", async () => {
     mockApi({
       ...defaultRoutes,
@@ -112,6 +165,8 @@ describe("agent page", () => {
     const { container } = renderApp("/agent");
     await userEvent.click(await screen.findByRole("button", { name: "Run evaluation suite" }));
     await screen.findByRole("table", { name: /Agent evaluation cases/ });
+    await userEvent.click(screen.getByRole("button", { name: "Run monthly insights workflow" }));
+    await screen.findByText(/ready for approval, /);
     expect((await axe.run(container)).violations).toEqual([]);
   });
 });

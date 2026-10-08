@@ -7,6 +7,11 @@ from fastapi import APIRouter, Body, Depends, Request, Response
 from pydantic import BaseModel, ConfigDict, Field
 
 from fabric_foundry_accelerator.agents.port import AgentAnswer, AgentQuestion
+from fabric_foundry_accelerator.agents.workflows import (
+    MonthlyInsightsRequest,
+    MonthlyInsightsRun,
+    run_monthly_insights,
+)
 from fabric_foundry_accelerator.audit.store import AuditRecord
 from fabric_foundry_accelerator.education.diagrams import DiagramView
 from fabric_foundry_accelerator.education.drawio import render_drawio
@@ -277,6 +282,14 @@ async def evaluate_agent(
 ) -> AgentEvalReport:
     """Run an agent evaluation suite (sequential; live agents are slow and metered)."""
     return await run_suite(container.agents, load_suite(container.settings.config_root, suite))
+
+
+@router.post("/api/v1/agents/workflows/monthly-insights", tags=["agents"])
+async def run_monthly_insights_workflow(
+    body: Annotated[MonthlyInsightsRequest, Body()], container: ContainerDep
+) -> MonthlyInsightsRun:
+    """Draft each team's monthly brief through an Agent Framework workflow. Nothing is sent."""
+    return await run_monthly_insights(container.agents, container.settings.data_root, body)
 
 
 @router.post("/api/v1/plans", tags=["changes"])

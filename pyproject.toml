@@ -15,6 +15,7 @@ classifiers = [
 # Exact pins only. Each dependency is added in the phase that first uses it
 # (see docs/research/source-validation.md and the Phase 0 dependency plan).
 dependencies = [
+    "agent-framework-core==1.21.0",
     "azure-ai-projects==2.8.0",
     "azure-identity==1.26.0",
     "azure-monitor-opentelemetry==1.8.11",

@@ -1,8 +1,8 @@
 {
   "approval_required": true,
-  "change_id": "970e897f6a7a47baa8d0a764f948a103",
-  "correlation_id": "6c0be4b3bcf64309a4babf1fb6f8d244",
-  "created_at": "2026-10-08T17:16:11.334410Z",
+  "change_id": "68eaaf4ea00b4feaaef47fcf1677ce44",
+  "correlation_id": "71cf9a02a2fd4600ae6ec662fd2f4afb",
+  "created_at": "2026-10-08T17:31:02.064059Z",
   "destination_hash": "9761057d57fe159276b8ab7860d0eec83cff2ef46ab9c43e074f1be1bfd5e1d9",
   "expected_impact": "Adds an empty lakehouse item to the target workspace.",
   "operation": "create_lakehouse",

@@ -1,10 +1,14 @@
-"""``ffia agents ask``: ask the sales agent (LOCAL by default; live Foundry is opt-in)."""
+"""``ffia agents ask|eval|workflow``: the sales agent (LOCAL by default; live Foundry is opt-in)."""
 
 import argparse
 import asyncio
 import sys
 
 from fabric_foundry_accelerator.agents.port import AgentQuestion
+from fabric_foundry_accelerator.agents.workflows import (
+    MonthlyInsightsRequest,
+    run_monthly_insights,
+)
 from fabric_foundry_accelerator.config.settings import Settings
 from fabric_foundry_accelerator.evaluation.agent_eval import load_suite, run_suite
 from fabric_foundry_accelerator.observability.tracing import configure_tracing
@@ -58,6 +62,31 @@ def _cmd_eval(args: argparse.Namespace) -> int:
     return 0 if report.gate_passed else 1
 
 
+def _cmd_workflow(args: argparse.Namespace) -> int:
+    settings = Settings()
+    configure_tracing(settings.applicationinsights_connection_string)
+    container = build_container(settings)
+    run = asyncio.run(
+        run_monthly_insights(
+            container.agents, settings.data_root, MonthlyInsightsRequest(teams=tuple(args.team))
+        )
+    )
+    if args.json:
+        sys.stdout.write(run.model_dump_json(indent=2) + "\n")
+        return 0
+    sys.stdout.write(
+        f"Workflow {run.workflow} ({run.engine}) [{', '.join(run.labels)}], "
+        f"month {run.observation_month}\n"
+    )
+    for draft in run.drafts:
+        sys.stdout.write(f"\n[{draft.status.value}] {draft.team_name}: {draft.reason}\n")
+        sys.stdout.write(f"  {draft.answer}\n")
+    sys.stdout.write(
+        f"\n{run.ready} ready for approval, {run.held} held.\n{run.delivery}\n{run.synthetic_notice}\n"
+    )
+    return 0
+
+
 def register(subparsers: argparse._SubParsersAction[argparse.ArgumentParser]) -> None:  # pyright: ignore[reportPrivateUsage]
     """Register ``agents`` subcommands."""
     agents = subparsers.add_parser("agents", help="ask agents (LOCAL by default; Foundry opt-in)")
@@ -71,3 +100,12 @@ def register(subparsers: argparse._SubParsersAction[argparse.ArgumentParser]) ->
     evaluate.add_argument("--suite", default="sales-insights-agent")
     evaluate.add_argument("--json", action="store_true")
     evaluate.set_defaults(func=_cmd_eval)
+    workflow = sub.add_parser(
+        "workflow",
+        help="run the monthly-insights Agent Framework workflow (drafts only; nothing is sent)",
+    )
+    workflow.add_argument(
+        "--team", action="append", default=[], help="team id (repeatable; default: all)"
+    )
+    workflow.add_argument("--json", action="store_true")
+    workflow.set_defaults(func=_cmd_workflow)

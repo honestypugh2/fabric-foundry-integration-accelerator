@@ -144,6 +144,10 @@ def main() -> None:
                 response.raise_for_status()
                 _write(name, response.json())
             _write("agent-eval", client.post("/api/v1/agents/evaluate").json())
+            _write(
+                "agent-workflow",
+                client.post("/api/v1/agents/workflows/monthly-insights", json={}).json(),
+            )
     print(f"exported fixtures to {FIXTURES}")  # noqa: T201
 
 

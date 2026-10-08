@@ -14,6 +14,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | AI agents | [AI agent orchestration patterns](#ai-agent-orchestration) | GUIDANCE | 2026-10-07 |
 | Azure API Management | [Overview of MCP servers in Azure API Management](#apim-mcp) | GA | 2026-10-05 |
 | Azure Logic Apps | [Automate Microsoft Foundry agents with workflows in Azure Logic Apps](#logic-apps-foundry-agents) | PREVIEW | 2026-10-08 |
+| Azure Monitor | [Enable OpenTelemetry in Application Insights (Azure Monitor OpenTelemetry Distro)](#azure-monitor-opentelemetry) | GA | 2026-10-08 |
 | Developer experience | [How Claude remembers your project (CLAUDE.md and AGENTS.md)](#claude-code-memory) | GA | 2026-10-05 |
 | Developer experience | [Extend Claude with skills](#claude-code-skills) | GA | 2026-10-05 |
 | Developer experience | [GitHub Copilot CLI is now generally available](#copilot-cli-ga) | GA | 2026-10-05 |
@@ -24,7 +25,8 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Fabric IQ and Data Agents | [Ontology overview (Fabric IQ)](#fabric-iq-ontology) | PREVIEW | 2026-10-05 |
 | Fabric IQ and Data Agents | [What is Fabric IQ?](#fabric-iq-overview) | PREVIEW | 2026-10-05 |
 | Microsoft Agent 365 | [Overview of Microsoft Agent 365](#agent-365) | GA | 2026-10-08 |
-| Microsoft Agent Framework | [Microsoft Agent Framework overview](#agent-framework) | GA | 2026-10-05 |
+| Microsoft Agent Framework | [Microsoft Agent Framework overview](#agent-framework) | GA | 2026-10-08 |
+| Microsoft Agent Framework | [Microsoft Agent Framework workflow capabilities](#agent-framework-workflows) | GA | 2026-10-08 |
 | Microsoft Fabric | [What is Fabric Activator?](#fabric-activator) | GA | 2026-10-08 |
 | Microsoft Fabric | [Tenants - List Tenant Settings (Fabric Admin REST API)](#fabric-admin-tenant-settings) | GA | 2026-10-07 |
 | Microsoft Fabric | [AI functions in Fabric](#fabric-ai-functions) | GA | 2026-10-05 |
@@ -134,6 +136,27 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Connections use managed identity; scope mailbox and Teams permissions. |
 | Limitations | Preview; Standard tier. |
 | Fallback | Azure Functions timer trigger (GA) calling the Foundry SDK. |
+| Deprecation / replacement | — |
+
+## Azure Monitor
+
+<a id="azure-monitor-opentelemetry"></a>
+
+### Enable OpenTelemetry in Application Insights (Azure Monitor OpenTelemetry Distro)
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-08 |
+| Last updated | — |
+| Status | GA |
+| Associated patterns | P16 |
+| Key architecture statement | The Azure Monitor OpenTelemetry Distro sends OpenTelemetry traces, metrics and logs to Application Insights using a connection string. |
+| Implementation relevance | Opt-in export of the ffia.agent.ask spans when FFIA_APPLICATIONINSIGHTS_CONNECTION_STRING is set. |
+| Security implications | The connection string is a secret (local .env only); spans never record question text. |
+| Limitations | The distro pulls beta instrumentation packages; only the span API is used directly. |
+| Fallback | Spans stay in-process (no exporter) when no connection string is set. |
 | Deprecation / replacement | — |
 
 ## Developer experience
@@ -342,15 +365,34 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 |---|---|
 | URL | https://learn.microsoft.com/agent-framework/overview/ |
 | Publisher | Microsoft Learn |
-| Retrieved | 2026-10-05 |
+| Retrieved | 2026-10-08 |
 | Last updated | — |
 | Status | GA |
 | Associated patterns | P06, P08, P13 |
 | Key architecture statement | Successor to Semantic Kernel and AutoGen with agents, graph workflows, checkpointing, tool approval, MCP client support and OpenTelemetry. |
-| Implementation relevance | Orchestration runtime for live and local agent paths (agent-framework-core 1.20.0). |
+| Implementation relevance | agent-framework-core 1.21.0 runs the monthly-insights workflow; Foundry calls stay in the azure-ai-projects provider (ADR-0013). |
 | Security implications | Tool approval enables human-in-the-loop for high-impact actions. |
-| Limitations | agent-framework-azure-ai is a stale release candidate; use agent-framework-foundry. |
-| Fallback | Same framework with a deterministic local chat client. |
+| Limitations | agent-framework-foundry 1.14.1 requires azure-ai-projects<2.8.0 and the pre-release azure-ai-inference 1.0.0b9, so it is not used; agent-framework-azure-ai is a stale release candidate. |
+| Fallback | The same workflow over the deterministic LOCAL agent. |
+| Deprecation / replacement | — |
+
+<a id="agent-framework-workflows"></a>
+
+### Microsoft Agent Framework workflow capabilities
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/agent-framework/workflows/ |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-08 |
+| Last updated | — |
+| Status | GA |
+| Associated patterns | P06, P08, P16 |
+| Key architecture statement | Graph workflows of executors and edges, with agents as participants, human-in-the-loop pauses, checkpoints and observability. |
+| Implementation relevance | The monthly-insights workflow fans out one drafting executor per team and ends in a deterministic review gate. |
+| Security implications | A workflow orchestrates; it does not authorize. Delivery remains a governed write. |
+| Limitations | Checkpointing and human-in-the-loop pauses are not used yet; approval runs through the change flow. |
+| Fallback | Run the same executors over the LOCAL agent offline. |
 | Deprecation / replacement | — |
 
 ## Microsoft Fabric

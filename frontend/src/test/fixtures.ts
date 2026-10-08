@@ -2,6 +2,7 @@ import agentAnswer from "./fixtures/agent-answer.json";
 import agentEval from "./fixtures/agent-eval.json";
 import agentProfile from "./fixtures/agent-profile.json";
 import agentUnsupported from "./fixtures/agent-unsupported.json";
+import agentWorkflow from "./fixtures/agent-workflow.json";
 import approval from "./fixtures/approval.json";
 import architecture from "./fixtures/architecture.json";
 import audit from "./fixtures/audit.json";
@@ -41,6 +42,7 @@ export const fixtures = {
   agentEval,
   agentProfile,
   agentUnsupported,
+  agentWorkflow,
   approval,
   architecture,
   audit,
@@ -119,4 +121,5 @@ export const defaultRoutes: Routes = {
   "GET /api/v1/agents/sales-insights-agent": agentProfile,
   "POST /api/v1/agents/ask": agentAnswer,
   "POST /api/v1/agents/evaluate": agentEval,
+  "POST /api/v1/agents/workflows/monthly-insights": agentWorkflow,
 };
