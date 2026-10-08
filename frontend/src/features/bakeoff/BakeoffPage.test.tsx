@@ -75,7 +75,16 @@ const LIVE_CARD = {
 
 describe("bake-off", () => {
   it("lists the five tasks with their prompts and an honest empty scorecard", async () => {
-    mockApi(defaultRoutes);
+    mockApi({
+      ...defaultRoutes,
+      "GET /api/v1/bakeoff/scorecard": {
+        ...fixtures.bakeoffScorecard,
+        label: "UNAVAILABLE",
+        note: "No recorded runs yet. Nothing here is simulated.",
+        rows: [],
+        runs: [],
+      },
+    });
     renderApp("/bakeoff");
     const scorecard = await screen.findByRole("region", { name: /Scorecard/ });
     expect(within(scorecard).getByText("UNAVAILABLE")).toBeInTheDocument();

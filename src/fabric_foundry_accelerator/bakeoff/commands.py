@@ -4,6 +4,7 @@ import argparse
 import sys
 from pathlib import Path
 
+from fabric_foundry_accelerator.bakeoff.copilot import HARNESS_NAME, run_copilot
 from fabric_foundry_accelerator.bakeoff.runs import (
     REPLAYS_DIR,
     check_runs,
@@ -12,6 +13,7 @@ from fabric_foundry_accelerator.bakeoff.runs import (
 )
 from fabric_foundry_accelerator.bakeoff.tasks import grade, load_tasks, prepare
 from fabric_foundry_accelerator.config.settings import Settings
+from fabric_foundry_accelerator.harness.policy import load_policy
 from fabric_foundry_accelerator.patterns.catalog import load_catalog
 
 
@@ -52,6 +54,41 @@ def _cmd_grade(args: argparse.Namespace) -> int:
         sys.stdout.write(f"[{'PASS' if check.passed else 'FAIL'}] {check.name}: {check.detail}\n")
     sys.stdout.write(f"Changed files: {', '.join(report.changed_files) or 'none'}\n")
     sys.stdout.write(f"{report.task}: {'PASSED' if report.passed else 'FAILED'} [LOCAL grader]\n")
+    return 0 if report.passed else 1
+
+
+def _cmd_run(args: argparse.Namespace) -> int:
+    settings = Settings()
+    tasks = load_tasks(settings.config_root)
+    ids = {p.id for p in load_catalog(settings.education_root).patterns}
+    profile = load_policy(settings.config_root).profile("bakeoff")
+    sys.stdout.write(
+        f"[LIVE] {HARNESS_NAME} --model {args.model}: {args.task} in {args.dest} "
+        "(bakeoff permission profile; this uses premium requests)\n"
+    )
+    record, report = run_copilot(
+        tasks,
+        args.task,
+        model=args.model,
+        profile=profile,
+        repo_root=Path(args.repo_root),
+        dest=Path(args.dest),
+        catalog_ids=ids,
+        timeout=args.timeout,
+    )
+    for check in report.checks:
+        sys.stdout.write(f"[{'PASS' if check.passed else 'FAIL'}] {check.name}: {check.detail}\n")
+    safety = record.safety
+    sys.stdout.write(
+        f"{record.task} / {record.model}: {'PASSED' if report.passed else 'FAILED'} in "
+        f"{record.duration_seconds}s; denied {safety.denied_tool_calls}, unsafe attempts "
+        f"{safety.unsafe_attempts}, premium requests {record.usage.premium_requests}\n"
+    )
+    if args.record:
+        target = settings.demos_root / REPLAYS_DIR / f"{record.run_id}.json"
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(record.model_dump_json(indent=1) + "\n", encoding="utf-8")
+        sys.stdout.write(f"recorded {target} (run `ffia privacy scan` before committing)\n")
     return 0 if report.passed else 1
 
 
@@ -102,6 +139,16 @@ def register(subparsers: argparse._SubParsersAction[argparse.ArgumentParser]) ->
     grader.add_argument("--workspace", required=True)
     grader.add_argument("--json", action="store_true")
     grader.set_defaults(func=_cmd_grade)
+    run = sub.add_parser(
+        "run", help="LIVE: run a task in GitHub Copilot CLI (premium requests), grade it"
+    )
+    run.add_argument("task")
+    run.add_argument("--model", required=True)
+    run.add_argument("--dest", required=True)
+    run.add_argument("--repo-root", default=".")
+    run.add_argument("--timeout", type=float, default=1200)
+    run.add_argument("--record", action="store_true", help="save a sanitized replay")
+    run.set_defaults(func=_cmd_run)
     check = sub.add_parser("check", help="validate the task set and every recorded replay")
     check.set_defaults(func=_cmd_check)
     card = sub.add_parser("scorecard", help="aggregate recorded runs by harness and model")

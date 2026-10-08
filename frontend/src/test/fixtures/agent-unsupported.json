@@ -1,6 +1,6 @@
 {
   "cloud_operation_performed": false,
-  "correlation_id": "03e114c189234076a34401c876f110d2",
+  "correlation_id": "cc37471b386a45488706ea8611574a8b",
   "data": {
     "agent": "sales-insights-agent",
     "answer": "This offline agent answers only allow-listed questions over synthetic data. Try one of the supported questions, or switch to the live Foundry agent.",
@@ -25,5 +25,5 @@
   "selected_provider": "Local sales agent (deterministic, synthetic)",
   "simulation_notice": "LOCAL deterministic agent over synthetic data. No Foundry or Fabric call was made.",
   "teaching_objective": "Numbers come from a governed data tool, never from the model.",
-  "timestamp": "2026-10-08T22:28:07.277704Z"
+  "timestamp": "2026-10-08T23:26:22.533421Z"
 }

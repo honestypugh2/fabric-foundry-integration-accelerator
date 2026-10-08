@@ -1,10 +1,10 @@
 {
-  "approval_id": "22267c6909ed4abfb633f186156dc6f2",
+  "approval_id": "bac35232b4d14d549c34326c65543119",
   "approver": "approver-b",
-  "change_id": "c83d0ba8f47b4d16a8837bd9fba84acf",
+  "change_id": "0865c08cb0594b3b9d1c7900104c9b57",
   "comment": "",
-  "created_at": "2026-10-08T22:27:59.230351Z",
+  "created_at": "2026-10-08T23:26:13.535620Z",
   "decision": "APPROVED",
   "destination_hash": "9761057d57fe159276b8ab7860d0eec83cff2ef46ab9c43e074f1be1bfd5e1d9",
-  "expires_at": "2026-10-08T22:57:59.230351Z"
+  "expires_at": "2026-10-08T23:56:13.535620Z"
 }

@@ -238,6 +238,7 @@ def test_runs_scorecard_api_and_cli(
 
     monkeypatch.chdir(REPO_ROOT)
     monkeypatch.setenv("FFIA_AUDIT_PATH", "")
+    monkeypatch.setenv("FFIA_DEMOS_ROOT", str(tmp_path / "no-replays"))
     assert main(["bakeoff", "tasks"]) == 0
     assert "fix-failing-transform" in capsys.readouterr().out
     assert main(["bakeoff", "check"]) == 0
