@@ -13,6 +13,7 @@ from fabric_foundry_accelerator.education.drawio import render_drawio
 from fabric_foundry_accelerator.education.guides import GuideStep, UseCaseGuide
 from fabric_foundry_accelerator.education.layout import ViewLayout, compute_layout
 from fabric_foundry_accelerator.education.lessons import ArchitectureMap, CompletenessReport, Lab
+from fabric_foundry_accelerator.evaluation.agent_eval import AgentEvalReport, load_suite, run_suite
 from fabric_foundry_accelerator.models.changes import (
     Approval,
     ApprovalRequest,
@@ -251,6 +252,14 @@ async def ask_agent(
 ) -> ExecutionEnvelope[AgentAnswer]:
     """Ask a named agent through the provider router (LOCAL by default; live Foundry is opt-in)."""
     return await container.agents.ask(body, correlation_id=correlation_id)
+
+
+@router.post("/api/v1/agents/evaluate", tags=["agents"])
+async def evaluate_agent(
+    container: ContainerDep, suite: str = "sales-insights-agent"
+) -> AgentEvalReport:
+    """Run an agent evaluation suite (sequential; live agents are slow and metered)."""
+    return await run_suite(container.agents, load_suite(container.settings.config_root, suite))
 
 
 @router.post("/api/v1/plans", tags=["changes"])

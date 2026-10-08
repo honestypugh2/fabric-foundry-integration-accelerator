@@ -10,6 +10,32 @@ export interface AgentAnswer {
   readonly supported_questions?: readonly string[];
 }
 
+/** The outcome of one case. */
+export interface AgentCaseResult {
+  readonly id: string;
+  readonly question: string;
+  readonly passed: boolean;
+  readonly grounded: boolean;
+  readonly missing: readonly string[];
+  readonly label: string;
+  readonly answer_excerpt: string;
+  readonly tools: readonly string[];
+}
+
+/** All cases, the pass rate and the gate. */
+export interface AgentEvalReport {
+  readonly evaluation_id?: string;
+  readonly suite: string;
+  readonly provider: string;
+  readonly labels: readonly string[];
+  readonly compared: number;
+  readonly passed: number;
+  readonly pass_rate: number;
+  readonly gate_passed: boolean;
+  readonly status: "PASSED" | "FAILED";
+  readonly cases: readonly AgentCaseResult[];
+}
+
 /** A question for a named agent. */
 export interface AgentQuestion {
   readonly agent?: string;

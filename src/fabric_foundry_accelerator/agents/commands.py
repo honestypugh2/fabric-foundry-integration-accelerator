@@ -6,6 +6,7 @@ import sys
 
 from fabric_foundry_accelerator.agents.port import AgentQuestion
 from fabric_foundry_accelerator.config.settings import Settings
+from fabric_foundry_accelerator.evaluation.agent_eval import load_suite, run_suite
 from fabric_foundry_accelerator.services.container import build_container
 
 
@@ -32,6 +33,27 @@ def _cmd_ask(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_eval(args: argparse.Namespace) -> int:
+    settings = Settings()
+    container = build_container(settings)
+    suite = load_suite(settings.config_root, args.suite)
+    report = asyncio.run(run_suite(container.agents, suite))
+    if args.json:
+        sys.stdout.write(report.model_dump_json(indent=2) + "\n")
+        return 0 if report.gate_passed else 1
+    sys.stdout.write(
+        f"Agent evaluation: {suite.id} via {report.provider} [{', '.join(report.labels)}]\n"
+    )
+    for case in report.cases:
+        mark = "PASS" if case.passed else "FAIL"
+        detail = (
+            f"missing {', '.join(case.missing)}" if case.missing else f"grounded={case.grounded}"
+        )
+        sys.stdout.write(f"  [{mark}] {case.id}: {detail}\n")
+    sys.stdout.write(f"\n{report.passed}/{report.compared} passed; gate {report.status}\n")
+    return 0 if report.gate_passed else 1
+
+
 def register(subparsers: argparse._SubParsersAction[argparse.ArgumentParser]) -> None:  # pyright: ignore[reportPrivateUsage]
     """Register ``agents`` subcommands."""
     agents = subparsers.add_parser("agents", help="ask agents (LOCAL by default; Foundry opt-in)")
@@ -41,3 +63,7 @@ def register(subparsers: argparse._SubParsersAction[argparse.ArgumentParser]) ->
     ask.add_argument("--agent", default="sales-insights-agent")
     ask.add_argument("--json", action="store_true")
     ask.set_defaults(func=_cmd_ask)
+    evaluate = sub.add_parser("eval", help="evaluate the agent against the governed baseline")
+    evaluate.add_argument("--suite", default="sales-insights-agent")
+    evaluate.add_argument("--json", action="store_true")
+    evaluate.set_defaults(func=_cmd_eval)

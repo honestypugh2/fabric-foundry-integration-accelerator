@@ -48,6 +48,131 @@
         "title": "AgentAnswer",
         "type": "object"
       },
+      "AgentCaseResult": {
+        "additionalProperties": false,
+        "description": "The outcome of one case.",
+        "properties": {
+          "answer_excerpt": {
+            "title": "Answer Excerpt",
+            "type": "string"
+          },
+          "grounded": {
+            "title": "Grounded",
+            "type": "boolean"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "missing": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Missing",
+            "type": "array"
+          },
+          "passed": {
+            "title": "Passed",
+            "type": "boolean"
+          },
+          "question": {
+            "title": "Question",
+            "type": "string"
+          },
+          "tools": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Tools",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "question",
+          "passed",
+          "grounded",
+          "missing",
+          "label",
+          "answer_excerpt",
+          "tools"
+        ],
+        "title": "AgentCaseResult",
+        "type": "object"
+      },
+      "AgentEvalReport": {
+        "additionalProperties": false,
+        "description": "All cases, the pass rate and the gate.",
+        "properties": {
+          "cases": {
+            "items": {
+              "$ref": "#/components/schemas/AgentCaseResult"
+            },
+            "title": "Cases",
+            "type": "array"
+          },
+          "compared": {
+            "title": "Compared",
+            "type": "integer"
+          },
+          "evaluation_id": {
+            "title": "Evaluation Id",
+            "type": "string"
+          },
+          "gate_passed": {
+            "title": "Gate Passed",
+            "type": "boolean"
+          },
+          "labels": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Labels",
+            "type": "array"
+          },
+          "pass_rate": {
+            "title": "Pass Rate",
+            "type": "number"
+          },
+          "passed": {
+            "title": "Passed",
+            "type": "integer"
+          },
+          "provider": {
+            "title": "Provider",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "PASSED",
+              "FAILED"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "suite": {
+            "title": "Suite",
+            "type": "string"
+          }
+        },
+        "required": [
+          "suite",
+          "provider",
+          "labels",
+          "compared",
+          "passed",
+          "pass_rate",
+          "gate_passed",
+          "status",
+          "cases"
+        ],
+        "title": "AgentEvalReport",
+        "type": "object"
+      },
       "AgentQuestion": {
         "additionalProperties": false,
         "description": "A question for a named agent.",
@@ -4716,6 +4841,50 @@
           }
         },
         "summary": "Ask Agent",
+        "tags": [
+          "agents"
+        ]
+      }
+    },
+    "/api/v1/agents/evaluate": {
+      "post": {
+        "description": "Run an agent evaluation suite (sequential; live agents are slow and metered).",
+        "operationId": "evaluate_agent_api_v1_agents_evaluate_post",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "suite",
+            "required": false,
+            "schema": {
+              "default": "sales-insights-agent",
+              "title": "Suite",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentEvalReport"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Evaluate Agent",
         "tags": [
           "agents"
         ]

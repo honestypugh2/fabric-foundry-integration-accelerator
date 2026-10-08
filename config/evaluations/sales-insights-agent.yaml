@@ -1,0 +1,29 @@
+# Evaluation suite for the sales insights agent (Guide MFG-01, synthetic data).
+# Expected values come from data/synthetic/expected/mfg-sales-v1.json; a unit test keeps them in
+# sync. Matching ignores "$" and thousands separators. Run: `ffia agents eval` (LOCAL by default;
+# set FFIA_FOUNDRY_LIVE=1 in a hybrid or live environment to evaluate the live Foundry agent).
+id: sales-insights-agent
+agent: sales-insights-agent
+profile: mfg-sales-v1
+min_pass_rate: 1.0
+cases:
+  - id: fastest-line
+    question: Which product line grew fastest last month?
+    expect_contains: ["Enclosures", "55.78"]
+    expect_grounded: true
+  - id: total-revenue
+    question: What was total booked revenue last month?
+    expect_contains: ["509726.22"]
+    expect_grounded: true
+  - id: duplicates
+    question: How many duplicate order lines are there?
+    expect_contains: ["12"]
+    expect_grounded: true
+  - id: enclosures-brief
+    question: Write the monthly brief for the Enclosures team.
+    expect_contains: ["88207.09", "143.1"]
+    expect_grounded: true
+  - id: out-of-scope
+    question: Tell me a joke about steel beams.
+    expect_contains: []
+    expect_grounded: false
