@@ -420,13 +420,22 @@ class MfgBuild:
     team_briefs: dict[str, dict[str, float | int | str | None]]
 
 
-def build(raw_dir: Path, profile: MfgProfile) -> MfgBuild:
-    """Load raw CSVs, build typed Silver with data-quality flags, and compute the monthly briefs."""
+def observation_cutoff(profile: MfgProfile) -> date:
+    """Last day of the observation month."""
     month = profile.observation_month
-    cutoff = (
-        date(month.year + (month.month == 12), month.month % 12 + 1, 1) - timedelta(days=1)
-    ).isoformat()
-    with duckdb.connect() as con:
+    return date(month.year + (month.month == 12), month.month % 12 + 1, 1) - timedelta(days=1)
+
+
+def open_sales(
+    raw_dir: Path, profile: MfgProfile
+) -> tuple[duckdb.DuckDBPyConnection, dict[str, int]]:
+    """Build Bronze, Silver (with data-quality flags) and ``gold_sales`` in memory.
+
+    Returns the open connection (the caller closes it) and the data-quality counts.
+    """
+    cutoff = observation_cutoff(profile).isoformat()
+    con = duckdb.connect()
+    try:
         for name in TABLES:
             con.execute(
                 f"CREATE TABLE bronze_{name} AS SELECT * FROM read_csv(?, header = true, all_varchar = true)",
@@ -474,6 +483,27 @@ def build(raw_dir: Path, profile: MfgProfile) -> MfgBuild:
             f"FROM silver_sales_orders AS o JOIN silver_customers AS c USING (customer_id) WHERE NOT ({any_flag}) "
             "AND o.status <> 'Cancelled'"
         )
+    except BaseException:
+        con.close()
+        raise
+    return con, quality
+
+
+def line_revenue(con: duckdb.DuckDBPyConnection, month: date) -> dict[str, float]:
+    """Booked revenue by product line for one month, from ``gold_sales``."""
+    rows = con.execute(
+        "SELECT product_line, round(sum(revenue), 2) FROM gold_sales "
+        "WHERE date_trunc('month', order_date) = ? GROUP BY product_line ORDER BY product_line",
+        [month],
+    ).fetchall()
+    return {str(line): float(total) for line, total in rows}
+
+
+def build(raw_dir: Path, profile: MfgProfile) -> MfgBuild:
+    """Load raw CSVs, build typed Silver with data-quality flags, and compute the monthly briefs."""
+    month = profile.observation_month
+    con, quality = open_sales(raw_dir, profile)
+    with con:
         clean = con.execute("SELECT count(*) FROM gold_sales").fetchone()
         month_revenue = con.execute(
             "SELECT round(sum(revenue), 2) FROM gold_sales WHERE date_trunc('month', order_date) = ?",

@@ -82,12 +82,15 @@ def _fabric_local(container: Container, status: RuntimeStatus) -> Overlay:
     return "ACTIVE", "LOCAL", f"{role} provider; profiles: {', '.join(status.built_profiles)}."
 
 
-def _foundry(_: Container, __: RuntimeStatus) -> Overlay:
-    return (
-        "NOT CONFIGURED",
-        "UNAVAILABLE",
-        "Foundry and Agent Framework providers arrive in Phase 6.",
-    )
+def _foundry(container: Container, __: RuntimeStatus) -> Overlay:
+    live = container.agents.live
+    if live is None:
+        return (
+            "NOT CONFIGURED",
+            "UNAVAILABLE",
+            "Live Foundry is opt-in (FFIA_FOUNDRY_LIVE=1); the LOCAL sales agent answers offline instead.",
+        )
+    return "READY", "LIVE", f"{live.name}: configured (called on demand, not probed here)."
 
 
 def _router(container: Container, status: RuntimeStatus) -> Overlay:

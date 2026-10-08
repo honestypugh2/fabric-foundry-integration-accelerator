@@ -1,5 +1,5 @@
 {
-  "agent_provider": "Not available (Phase 6)",
+  "agent_provider": "Local sales agent (deterministic, synthetic) (LOCAL)",
   "breakers": [],
   "built_profiles": [
     "core-healthcare-v1",
@@ -31,10 +31,18 @@
     },
     {
       "capability": "foundry_agent",
+      "configured": true,
+      "kind": "LOCAL",
+      "name": "Local sales agent (deterministic, synthetic)",
+      "note": "Deterministic, allow-listed questions over synthetic manufacturing data.",
+      "ready": true
+    },
+    {
+      "capability": "foundry_agent",
       "configured": false,
       "kind": "NOT AVAILABLE",
-      "name": "Foundry Agent Service / Agent Framework",
-      "note": "Agent providers are added in Phase 6.",
+      "name": "Foundry Agent Service",
+      "note": "Opt in with FFIA_FOUNDRY_LIVE=1, a hybrid or live environment and a `foundry:` binding; check with `ffia foundry readiness`.",
       "ready": false
     }
   ],

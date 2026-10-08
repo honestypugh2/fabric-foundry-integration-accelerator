@@ -1,6 +1,76 @@
 {
   "components": {
     "schemas": {
+      "AgentAnswer": {
+        "additionalProperties": false,
+        "description": "The agent's answer and how it was grounded.",
+        "properties": {
+          "agent": {
+            "title": "Agent",
+            "type": "string"
+          },
+          "answer": {
+            "title": "Answer",
+            "type": "string"
+          },
+          "grounded": {
+            "description": "True when a governed data tool produced the numbers.",
+            "title": "Grounded",
+            "type": "boolean"
+          },
+          "question": {
+            "title": "Question",
+            "type": "string"
+          },
+          "supported_questions": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Supported Questions",
+            "type": "array"
+          },
+          "tool_calls": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/ToolCall"
+            },
+            "title": "Tool Calls",
+            "type": "array"
+          }
+        },
+        "required": [
+          "agent",
+          "question",
+          "answer",
+          "grounded"
+        ],
+        "title": "AgentAnswer",
+        "type": "object"
+      },
+      "AgentQuestion": {
+        "additionalProperties": false,
+        "description": "A question for a named agent.",
+        "properties": {
+          "agent": {
+            "default": "sales-insights-agent",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,62}$",
+            "title": "Agent",
+            "type": "string"
+          },
+          "question": {
+            "maxLength": 2000,
+            "minLength": 3,
+            "title": "Question",
+            "type": "string"
+          }
+        },
+        "required": [
+          "question"
+        ],
+        "title": "AgentQuestion",
+        "type": "object"
+      },
       "Approval": {
         "additionalProperties": false,
         "description": "A recorded approval, bound to the target's destination hash and time-limited.",
@@ -1875,6 +1945,97 @@
           "executed_by"
         ],
         "title": "ExecuteRequest",
+        "type": "object"
+      },
+      "ExecutionEnvelope_AgentAnswer_": {
+        "additionalProperties": false,
+        "properties": {
+          "cloud_operation_performed": {
+            "title": "Cloud Operation Performed",
+            "type": "boolean"
+          },
+          "correlation_id": {
+            "pattern": "^[0-9a-f]{32}$",
+            "title": "Correlation Id",
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/AgentAnswer"
+          },
+          "equivalent_fabric_service": {
+            "title": "Equivalent Fabric Service",
+            "type": "string"
+          },
+          "evidence": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/Evidence"
+            },
+            "title": "Evidence",
+            "type": "array"
+          },
+          "execution_label": {
+            "$ref": "#/components/schemas/ExecutionLabel"
+          },
+          "fallback_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fallback Reason"
+          },
+          "fallback_used": {
+            "default": false,
+            "title": "Fallback Used",
+            "type": "boolean"
+          },
+          "operating_mode": {
+            "$ref": "#/components/schemas/OperatingMode"
+          },
+          "requested_provider": {
+            "title": "Requested Provider",
+            "type": "string"
+          },
+          "selected_provider": {
+            "title": "Selected Provider",
+            "type": "string"
+          },
+          "simulation_notice": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Simulation Notice"
+          },
+          "teaching_objective": {
+            "title": "Teaching Objective",
+            "type": "string"
+          },
+          "timestamp": {
+            "format": "date-time",
+            "title": "Timestamp",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operating_mode",
+          "execution_label",
+          "requested_provider",
+          "selected_provider",
+          "cloud_operation_performed",
+          "equivalent_fabric_service",
+          "teaching_objective",
+          "data"
+        ],
+        "title": "ExecutionEnvelope[AgentAnswer]",
         "type": "object"
       },
       "ExecutionEnvelope_object_": {
@@ -3978,6 +4139,26 @@
         "title": "TablePreview",
         "type": "object"
       },
+      "ToolCall": {
+        "additionalProperties": false,
+        "description": "One tool the agent used, as reported by the agent runtime.",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "summary": {
+            "default": "",
+            "title": "Summary",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "ToolCall",
+        "type": "object"
+      },
       "ToolPath": {
         "additionalProperties": false,
         "description": "The provider, server and tool a step must use. Substitution is not allowed.",
@@ -4498,6 +4679,48 @@
   },
   "openapi": "3.1.0",
   "paths": {
+    "/api/v1/agents/ask": {
+      "post": {
+        "description": "Ask a named agent through the provider router (LOCAL by default; live Foundry is opt-in).",
+        "operationId": "ask_agent_api_v1_agents_ask_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentQuestion"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExecutionEnvelope_AgentAnswer_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Ask Agent",
+        "tags": [
+          "agents"
+        ]
+      }
+    },
     "/api/v1/approvals": {
       "post": {
         "description": "Record a human approval or rejection.",

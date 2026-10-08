@@ -33,6 +33,7 @@ class Settings(BaseSettings):
     demo_check_azure_cli: bool = True
     allow_live_mutation: bool = False
     fabric_live: bool = False
+    foundry_live: bool = False
     definitions_root: Path = Path("fabric/workspace")
     demos_root: Path = Path("demos")
     simulate_fabric_outage: bool = False

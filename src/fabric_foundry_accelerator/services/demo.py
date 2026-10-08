@@ -10,6 +10,7 @@ from typing import Literal
 from fastmcp import Client
 from pydantic import BaseModel, ConfigDict
 
+from fabric_foundry_accelerator.agents.port import AgentQuestion
 from fabric_foundry_accelerator.config.environment import load_environment
 from fabric_foundry_accelerator.fallback.router import ProviderRouter
 from fabric_foundry_accelerator.mcp.server import build_mcp_server
@@ -135,8 +136,12 @@ async def demo_check(container: Container, *, azure_probe: bool = True) -> DemoC
         ),
         CheckLine(
             component="Foundry",
-            status="NOT CONFIGURED",
-            detail="Foundry providers are added in Phase 6.",
+            status="READY" if container.agents.live is not None else "NOT CONFIGURED",
+            detail=(
+                f"{container.agents.live.name} configured; check with `ffia foundry readiness`."
+                if container.agents.live is not None
+                else "Opt in with FFIA_FOUNDRY_LIVE=1 and a `foundry:` binding; the LOCAL sales agent is ready."
+            ),
         ),
         CheckLine(
             component="Local Dataset",
@@ -294,16 +299,7 @@ async def run_offline_demo(container: Container, *, work_dir: Path) -> OfflineDe
     )
 
     steps.append(await _agentic_change_act(container, tracker))
-    steps.append(
-        DemoStep(
-            act=6,
-            title="Foundry: an agent consuming governed context",
-            required=False,
-            passed=False,
-            label="UNAVAILABLE",
-            summary="Foundry and Agent Framework providers arrive in Phase 6. Nothing was simulated as Foundry here.",
-        )
-    )
+    steps.append(await _agent_act(container, tracker))
     steps.append(await _failure_act(container, tracker))
 
     scenario = load_scenario(container.settings.data_root / "recovery" / DEFAULT_SCENARIO_PATH.name)
@@ -484,6 +480,35 @@ async def _agentic_change_act(container: Container, tracker: _Tracker) -> DemoSt
             f"verification: {executed.data.verification.detail}",
             f"duplicate plan status: {duplicate.status}",
             f"LIVE write refused without redirect: {live_refused and not_redirected}",
+        ),
+    )
+
+
+async def _agent_act(container: Container, tracker: _Tracker) -> DemoStep:
+    """Act 6: an agent answers from governed data (the LOCAL analog of a Foundry agent + Fabric tool)."""
+    local = container.agents.local
+    answer = tracker.add(
+        await local.ask(AgentQuestion(question="Which product line grew fastest last month?"))
+    )
+    expected = "55.78%"
+    passed = (
+        answer.data.grounded
+        and expected in answer.data.answer
+        and not answer.cloud_operation_performed
+    )
+    return DemoStep(
+        act=6,
+        title="Agent: answers from governed data, never from the model (Foundry + Fabric analog)",
+        required=True,
+        passed=passed,
+        label=answer.execution_label.value,
+        summary=(
+            "The local sales agent answered with numbers from a governed data tool, matching the "
+            "baseline. The live equivalent is a Foundry agent with the Fabric data agent tool (opt-in)."
+        ),
+        evidence=(
+            answer.data.answer,
+            f"tools: {', '.join(c.name for c in answer.data.tool_calls)}",
         ),
     )
 

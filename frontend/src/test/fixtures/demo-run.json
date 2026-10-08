@@ -1,7 +1,7 @@
 {
   "cloud_operations": 0,
   "label_counts": {
-    "LOCAL": 6,
+    "LOCAL": 7,
     "SIMULATED": 2
   },
   "live_operations": 0,
@@ -72,12 +72,15 @@
     },
     {
       "act": 6,
-      "evidence": [],
-      "label": "UNAVAILABLE",
-      "passed": false,
-      "required": false,
-      "summary": "Foundry and Agent Framework providers arrive in Phase 6. Nothing was simulated as Foundry here.",
-      "title": "Foundry: an agent consuming governed context"
+      "evidence": [
+        "**Enclosures (ENC) grew fastest**: booked revenue up 55.78% in September 2026 versus August 2026 ($56,623.73 \u2192 $88,207.09).",
+        "tools: local_sales_query"
+      ],
+      "label": "LOCAL",
+      "passed": true,
+      "required": true,
+      "summary": "The local sales agent answered with numbers from a governed data tool, matching the baseline. The live equivalent is a Foundry agent with the Fabric data agent tool (opt-in).",
+      "title": "Agent: answers from governed data, never from the model (Foundry + Fabric analog)"
     },
     {
       "act": 7,
@@ -119,7 +122,7 @@
       "label": "LOCAL",
       "passed": true,
       "required": true,
-      "summary": "Envelopes by label: {'LOCAL': 6, 'SIMULATED': 2}. LIVE operations: 0. Cloud operations performed: 0.",
+      "summary": "Envelopes by label: {'LOCAL': 7, 'SIMULATED': 2}. LIVE operations: 0. Cloud operations performed: 0.",
       "title": "Proof: what ran LIVE and what was simulated"
     }
   ]

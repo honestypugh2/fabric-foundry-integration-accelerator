@@ -17,7 +17,7 @@
     },
     {
       "component": "Foundry",
-      "detail": "Foundry providers are added in Phase 6.",
+      "detail": "Opt in with FFIA_FOUNDRY_LIVE=1 and a `foundry:` binding; the LOCAL sales agent is ready.",
       "status": "NOT CONFIGURED"
     },
     {
@@ -32,7 +32,7 @@
     },
     {
       "component": "API",
-      "detail": "34 API paths (in-process check)",
+      "detail": "35 API paths (in-process check)",
       "status": "READY"
     },
     {

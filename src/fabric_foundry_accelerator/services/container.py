@@ -6,6 +6,14 @@ from collections.abc import Awaitable, Callable
 from dataclasses import dataclass, field
 from datetime import datetime
 
+from fabric_foundry_accelerator.agents.foundry import (
+    FoundryAgentProvider,
+    ResponsesClient,
+    SdkResponsesClient,
+)
+from fabric_foundry_accelerator.agents.local import LocalSalesAgent
+from fabric_foundry_accelerator.agents.port import AgentProvider
+from fabric_foundry_accelerator.agents.routed import RoutedAgentProvider
 from fabric_foundry_accelerator.audit.store import AuditStore, InMemoryAuditStore, JsonlAuditStore
 from fabric_foundry_accelerator.config.bindings import (
     BindingsError,
@@ -44,6 +52,7 @@ from fabric_foundry_accelerator.research.sources import load_registry
 from fabric_foundry_accelerator.services.changes import ChangeService
 from fabric_foundry_accelerator.services.education import EducationService
 from fabric_foundry_accelerator.services.evaluation import EvaluationService
+from fabric_foundry_accelerator.services.foundry_readiness import project_endpoint
 from fabric_foundry_accelerator.synthetic.medallion import build_profile, lakehouse_tables
 from fabric_foundry_accelerator.synthetic.paths import raw_dir, semantic_model_path
 from fabric_foundry_accelerator.synthetic.profiles import PROFILES
@@ -62,6 +71,7 @@ class Container:
     router: ProviderRouter
     local_fabric: LocalFabricProvider
     fabric: RoutedFabricProvider
+    agents: RoutedAgentProvider
     changes: ChangeService
     evaluation: EvaluationService
     catalog: PatternCatalog
@@ -112,12 +122,33 @@ def _live_client(
     return injected or FabricRestClient(AzureCliTokenProvider(bindings.tenant_id))
 
 
+def _live_agent(
+    settings: Settings,
+    mode: OperatingMode,
+    bindings: TenantBindings | None,
+    injected: ResponsesClient | None,
+) -> AgentProvider | None:
+    """Return a live Foundry agent provider only when explicitly enabled and fully configured."""
+    if not settings.foundry_live:
+        return None
+    if mode is OperatingMode.OFFLINE:
+        raise BindingsError("FFIA_FOUNDRY_LIVE=1 needs FFIA_ENVIRONMENT=hybrid or live")
+    if bindings is None or bindings.foundry is None:
+        raise BindingsError(
+            f"FFIA_FOUNDRY_LIVE=1 needs a `foundry:` section in "
+            f"{bindings_path(settings.config_root, settings.overlay)} (git-ignored)"
+        )
+    client = injected or SdkResponsesClient(project_endpoint(bindings.foundry), bindings.tenant_id)
+    return FoundryAgentProvider(client, mode=mode)
+
+
 def build_container(
     settings: Settings | None = None,
     *,
     audit: AuditStore | None = None,
     live_fabric: FabricProvider | None = None,
     fabric_client: FabricRestClient | None = None,
+    agent_client: ResponsesClient | None = None,
     clock: Callable[[], float] = time.monotonic,
     sleep: Callable[[float], Awaitable[None]] = asyncio.sleep,
     wall_clock: Callable[[], datetime] = utc_now,
@@ -153,6 +184,11 @@ def build_container(
         else None
     )
     fabric = RoutedFabricProvider(router, local=local, live=live)
+    agents = RoutedAgentProvider(
+        router,
+        local=LocalSalesAgent(settings.data_root, mode=local_mode),
+        live=_live_agent(settings, environment.mode, bindings, agent_client),
+    )
     write_policy = load_write_policy(settings.config_root)
     changes = ChangeService(
         policy=write_policy,
@@ -186,6 +222,7 @@ def build_container(
         router=router,
         local_fabric=local,
         fabric=fabric,
+        agents=agents,
         changes=changes,
         evaluation=EvaluationService(
             data_root=settings.data_root,

@@ -10,6 +10,7 @@ from collections.abc import Sequence
 from pathlib import Path
 
 from fabric_foundry_accelerator import __version__
+from fabric_foundry_accelerator.agents import commands as agent_commands
 from fabric_foundry_accelerator.education import commands as education_commands
 from fabric_foundry_accelerator.education import diagram_docs, talktrack_commands
 from fabric_foundry_accelerator.mcp import profile_commands
@@ -130,6 +131,7 @@ def build_parser() -> argparse.ArgumentParser:
     talktrack_commands.register(sub)
     mfg_commands.register(sub)
     foundry_commands.register(sub)
+    agent_commands.register(sub)
     return parser
 
 

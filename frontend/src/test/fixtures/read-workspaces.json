@@ -1,6 +1,6 @@
 {
   "cloud_operation_performed": false,
-  "correlation_id": "60589d9906b64b63b8365e910194a4ee",
+  "correlation_id": "a271464ff5a74c67bb866577bfd2ed9a",
   "data": [
     {
       "description": "Local educational workspace: one lakehouse per built dataset profile.",
@@ -24,5 +24,5 @@
   "selected_provider": "Local Fabric Educational Provider",
   "simulation_notice": "LOCAL educational analog over synthetic Parquet data. No Microsoft Fabric, OneLake or Power BI operation was performed.",
   "teaching_objective": "Discover where governed data lives before reading it.",
-  "timestamp": "2026-10-08T14:18:29.467616Z"
+  "timestamp": "2026-10-08T16:56:06.004128Z"
 }

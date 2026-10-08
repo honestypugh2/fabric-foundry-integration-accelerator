@@ -44,7 +44,7 @@ async def test_offline_demo_passes_with_honest_labels(
     assert report.live_operations == 0 and report.cloud_operations == 0
     acts = {step.act: step for step in report.steps}
     assert sorted(acts) == list(range(1, 11))
-    assert acts[6].label == "UNAVAILABLE" and not acts[6].required
+    assert acts[6].label == "LOCAL" and acts[6].required and acts[6].passed
     assert acts[5].label == "SIMULATED" and acts[8].label == "SIMULATED"
     assert all(step.passed for step in report.steps if step.required)
 
@@ -107,7 +107,7 @@ def test_cli_demo_check_text_and_json(capsys: pytest.CaptureFixture[str]) -> Non
 def test_cli_demo_offline_text_and_json(capsys: pytest.CaptureFixture[str], tmp_path: Path) -> None:
     assert main(["demo", "offline", "--work-dir", str(tmp_path / "a")]) == 0
     out = capsys.readouterr().out
-    assert "Release gate: PASSED" in out and "[SKIP] ACT  6 [UNAVAILABLE]" in out
+    assert "Release gate: PASSED" in out and "ACT  6 [LOCAL]" in out
     assert main(["demo", "offline", "--json", "--work-dir", str(tmp_path / "b")]) == 0
     assert json.loads(capsys.readouterr().out)["passed"] is True
 

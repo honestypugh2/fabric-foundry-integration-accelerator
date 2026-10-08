@@ -20,7 +20,7 @@ class CapabilityPolicy(BaseModel):
 
     preferred: Literal["live", "local"]
     fallback: Literal["local", "none"]
-    timeout_seconds: float = Field(default=5.0, gt=0, le=60)
+    timeout_seconds: float = Field(default=5.0, gt=0, le=300)
     max_retries: int = Field(default=1, ge=0, le=3)
     backoff_seconds: float = Field(default=0.2, ge=0, le=5)
 

@@ -90,11 +90,25 @@ def provider_statuses(container: Container) -> tuple[ProviderStatus, ...]:
     statuses.append(
         ProviderStatus(
             capability="foundry_agent",
-            name="Foundry Agent Service / Agent Framework",
-            kind="NOT AVAILABLE",
-            configured=False,
-            ready=False,
-            note="Agent providers are added in Phase 6.",
+            name=container.agents.local.name,
+            kind="LOCAL",
+            configured=True,
+            ready=True,
+            note="Deterministic, allow-listed questions over synthetic manufacturing data.",
+        )
+    )
+    live_agent = container.agents.live
+    statuses.append(
+        ProviderStatus(
+            capability="foundry_agent",
+            name=live_agent.name if live_agent else "Foundry Agent Service",
+            kind="LIVE" if live_agent else "NOT AVAILABLE",
+            configured=live_agent is not None,
+            ready=live_agent is not None,
+            note="Calls an existing Foundry agent (opt-in)."
+            if live_agent
+            else "Opt in with FFIA_FOUNDRY_LIVE=1, a hybrid or live environment and a `foundry:` binding; "
+            "check with `ffia foundry readiness`.",
         )
     )
     return tuple(statuses)
@@ -120,7 +134,11 @@ def runtime_status(container: Container) -> RuntimeStatus:
             if container.fabric.live is None
             else f"Router: {container.fabric.live.name} with LOCAL fallback per policy"
         ),
-        agent_provider="Not available (Phase 6)",
+        agent_provider=(
+            f"{container.agents.local.name} (LOCAL)"
+            if container.agents.live is None
+            else f"Router: {container.agents.live.name} with LOCAL fallback per policy"
+        ),
         mcp=f"Local server ready: {len(container.tool_manifest.enabled())} allow-listed tools",
         identity=(
             "Azure CLI user, delegated, pinned to the bound tenant"

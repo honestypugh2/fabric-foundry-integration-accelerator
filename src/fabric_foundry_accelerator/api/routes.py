@@ -6,6 +6,7 @@ from typing import Annotated
 from fastapi import APIRouter, Body, Depends, Request, Response
 from pydantic import BaseModel, ConfigDict, Field
 
+from fabric_foundry_accelerator.agents.port import AgentAnswer, AgentQuestion
 from fabric_foundry_accelerator.audit.store import AuditRecord
 from fabric_foundry_accelerator.education.diagrams import DiagramView
 from fabric_foundry_accelerator.education.drawio import render_drawio
@@ -239,6 +240,17 @@ async def fabric_read(
 ) -> ExecutionEnvelope[object]:
     """Typed, read-only Fabric operations through the provider router."""
     return await execute_read(container.fabric, body, correlation_id=correlation_id)
+
+
+# ------------------------------------------------------------------ agents
+@router.post("/api/v1/agents/ask", tags=["agents"])
+async def ask_agent(
+    body: Annotated[AgentQuestion, Body()],
+    container: ContainerDep,
+    correlation_id: CorrelationDep,
+) -> ExecutionEnvelope[AgentAnswer]:
+    """Ask a named agent through the provider router (LOCAL by default; live Foundry is opt-in)."""
+    return await container.agents.ask(body, correlation_id=correlation_id)
 
 
 @router.post("/api/v1/plans", tags=["changes"])

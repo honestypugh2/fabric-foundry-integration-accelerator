@@ -18,7 +18,7 @@ describe("demo mode", () => {
     expect(screen.getAllByRole("heading", { level: 3, name: /^Act / })).toHaveLength(
       fixtures.demoRun.steps.length,
     );
-    expect(screen.getByRole("heading", { level: 3, name: /^Act 6:/ })).toHaveTextContent("Skipped");
+    expect(screen.getByRole("heading", { level: 3, name: /^Act 6:/ })).toHaveTextContent("Passed");
   });
 
   it("shows demo failures", async () => {

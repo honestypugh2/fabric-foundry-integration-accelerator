@@ -65,7 +65,7 @@
     },
     {
       "binding": "foundry",
-      "detail": "Foundry and Agent Framework providers arrive in Phase 6.",
+      "detail": "Live Foundry is opt-in (FFIA_FOUNDRY_LIVE=1); the LOCAL sales agent answers offline instead.",
       "label": "UNAVAILABLE",
       "node": "foundry",
       "status": "NOT CONFIGURED"
@@ -78,7 +78,7 @@
       "status": "NOT CONFIGURED"
     }
   ],
-  "observed_at": "2026-10-08T14:18:29.463832+00:00",
+  "observed_at": "2026-10-08T16:56:06.000646+00:00",
   "operating_mode": "OFFLINE",
   "view_id": "system"
 }

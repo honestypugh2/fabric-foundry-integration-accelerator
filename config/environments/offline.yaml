@@ -5,6 +5,7 @@ description: Everything runs on the Local Fabric Educational Provider and local 
 capabilities:
   fabric_data: {preferred: local, fallback: none}
   semantic_model: {preferred: local, fallback: none}
+  foundry_agent: {preferred: local, fallback: none}
   mcp: {preferred: local, fallback: none}
   evaluation: {preferred: local, fallback: none}
   audit: {preferred: local, fallback: none}
