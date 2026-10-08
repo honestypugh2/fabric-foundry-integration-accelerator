@@ -240,21 +240,25 @@ parts:
     steps:
       - title: "Monthly insights for each business team"
         entry: vscode
-        path: "VS Code → code/monthly_brief.py → run (live) · Terminal → ffia mfg brief (offline)"
+        path: "Foundry playground → one team's brief (live) · Terminal → ffia mfg brief (all four teams, LOCAL)"
         label: LIVE
         say:
           - "\"Yes, Foundry can do this. Each team has a focus area. Once a month, a schedule asks the agent for that team's numbers from Fabric, the agent writes three insights and one action, and the brief goes to Teams or Outlook.\""
           - "\"Schedule options: a Logic Apps Recurrence trigger calling the Foundry agent (the agent action is preview), an Azure Functions timer, or Foundry routines. Delivery: the Teams and Outlook connectors.\""
         code: |
-          python demos/foundry-fabric-agents-workshop/code/monthly_brief.py
-          # offline equivalent (LOCAL, synthetic):
+          # Live, in the Foundry playground (one team, about 1-2 minutes):
+          #   "Write the monthly brief for the Enclosures team (product line ENC) for September 2026:
+          #    booked revenue, change vs August and vs September 2025, and three insights."
+          # All four teams, offline (LOCAL, synthetic, instant):
           ffia mfg brief
+          # Batch script (all teams, about 2-3 minutes per team; run before the session, not live):
+          python demos/foundry-fabric-agents-workshop/code/monthly_brief.py
         show:
           - "Enclosures: booked revenue up about 56% month over month and 143% of target (synthetic)."
           - "Key Accounts: up about 40% month over month; Hardware & Fabrication: flat month over month, well up year over year."
           - "MFG-01 trace: Schedule → Workflow → Insights agent → Fabric data agent → Tracing → Business teams."
         check: "Each brief's numbers match `ffia mfg brief` (the governed baseline)."
-        fallback: "Offline: `ffia mfg brief` prints all four briefs, labeled LOCAL."
+        fallback: "Offline: `ffia mfg brief` prints all four briefs, labeled LOCAL. Don't run the batch script live: each Fabric-backed brief takes about 2-3 minutes."
       - title: "Data quality: detect, explain, approve, fix upstream"
         entry: terminal
         path: "Terminal → ffia mfg quality · Fabric portal → data agent questions"

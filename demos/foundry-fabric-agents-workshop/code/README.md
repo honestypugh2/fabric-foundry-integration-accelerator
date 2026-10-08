@@ -19,7 +19,7 @@ python market_context_agent.py
 | Sample | Shows | Labels |
 |---|---|---|
 | `fabric_sales_agent.py` | A prompt agent with the Fabric data agent tool (preview); answers under the signed-in user's identity | LIVE when run; PREVIEW tool |
-| `monthly_brief.py` | One brief per business team focus area, using the same agent | LIVE when run |
+| `monthly_brief.py` | One brief per business team focus area, using the same agent (about 2-3 minutes per team; run before a session, not live) | LIVE when run |
 | `market_context_agent.py` | Web search tool with citations; why queries leave the compliance boundary | LIVE when run |
 
 Offline equivalents (LOCAL, synthetic): `ffia mfg brief`, `ffia mfg quality`.
