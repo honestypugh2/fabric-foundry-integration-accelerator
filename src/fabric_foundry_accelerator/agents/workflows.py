@@ -17,6 +17,7 @@ requires a pre-release package and an older ``azure-ai-projects``; Foundry calls
 ``FoundryAgentProvider`` behind the same provider port (ADR-0013).
 """
 
+import asyncio
 import importlib.metadata
 from enum import StrEnum
 from pathlib import Path
@@ -26,7 +27,8 @@ from agent_framework import Executor, WorkflowBuilder, WorkflowContext, handler
 from pydantic import BaseModel, ConfigDict, Field
 
 from fabric_foundry_accelerator.agents.port import AgentAnswer, AgentProvider, AgentQuestion
-from fabric_foundry_accelerator.evaluation.agent_eval import normalize
+from fabric_foundry_accelerator.agents.routed import RoutedAgentProvider
+from fabric_foundry_accelerator.evaluation.agent_eval import attainment_forms, missing_values
 from fabric_foundry_accelerator.models.execution import ExecutionEnvelope, new_correlation_id
 from fabric_foundry_accelerator.providers.errors import (
     InvalidRequestError,
@@ -39,7 +41,7 @@ PROFILE = "mfg-sales-v1"
 AGENT = "sales-insights-agent"
 STEPS: tuple[str, ...] = (
     "select: choose the business teams for this run",
-    "draft: one executor per team asks the agent for its brief (fan-out, concurrent)",
+    "draft: one executor per team asks the agent for its brief (fan-out; concurrency-limited)",
     "review: deterministic gate checks grounding and the team's baseline numbers",
     "deliver: not performed; sending briefs is a governed write that needs approval",
 )
@@ -96,12 +98,18 @@ class MonthlyInsightsRun(BaseModel):
     dataset_profile: str
     observation_month: str
     steps: tuple[str, ...]
+    max_concurrency: int
     drafts: tuple[TeamBriefDraft, ...]
     ready: int
     held: int
     labels: tuple[str, ...]
     delivery: str
     synthetic_notice: str
+
+
+def live_safe_concurrency(agent: RoutedAgentProvider) -> int:
+    """One draft at a time when a live Foundry agent is configured; all teams at once otherwise."""
+    return 1 if agent.live is not None else len(TEAMS)
 
 
 def engine_name() -> str:
@@ -127,24 +135,26 @@ def brief_question(team_id: str) -> str:
     return f"Write the monthly brief for the {_TEAM_NAMES[team_id]} team."
 
 
-def expected_values(baseline: MfgBaseline, team_id: str) -> tuple[str, ...]:
-    """Baseline numbers a correct brief must contain: revenue and target attainment."""
+def expected_values(baseline: MfgBaseline, team_id: str) -> tuple[str | tuple[str, ...], ...]:
+    """Baseline numbers a correct brief must contain: revenue, and attainment in either form."""
     brief = baseline.team_briefs[team_id]
     revenue, attainment = brief.get("revenue"), brief.get("target_attainment_pct")
-    values: list[str] = []
+    values: list[str | tuple[str, ...]] = []
     if isinstance(revenue, int | float):
         values.append(f"{revenue:.2f}")
     if isinstance(attainment, int | float):
-        values.append(str(attainment))
+        values.append(attainment_forms(float(attainment)))
     return tuple(values)
 
 
 def review(
-    team_id: str, envelope: ExecutionEnvelope[AgentAnswer], expected: tuple[str, ...]
+    team_id: str,
+    envelope: ExecutionEnvelope[AgentAnswer],
+    expected: tuple[str | tuple[str, ...], ...],
 ) -> TeamBriefDraft:
-    """The deterministic gate: grounded, and every expected value present."""
+    """The deterministic gate: grounded, and every expected value present (in any listed form)."""
     answer = envelope.data
-    missing = tuple(value for value in expected if value not in normalize(answer.answer))
+    missing = missing_values(answer.answer, expected)
     if not answer.grounded:
         status, reason = BriefStatus.HELD, "No governed data tool ran, so the numbers are unproven."
     elif missing:
@@ -160,7 +170,7 @@ def review(
         provider=envelope.selected_provider,
         fallback_used=envelope.fallback_used,
         grounded=answer.grounded,
-        expected=expected,
+        expected=tuple(e if isinstance(e, str) else " or ".join(e) for e in expected),
         missing=missing,
         status=status,
         reason=reason,
@@ -179,11 +189,18 @@ class _Select(Executor):
 class _Draft(Executor):
     """Drafts one team's brief. One instance per team, so drafts run concurrently."""
 
-    def __init__(self, team_id: str, agent: AgentProvider, baseline: MfgBaseline) -> None:
+    def __init__(
+        self,
+        team_id: str,
+        agent: AgentProvider,
+        baseline: MfgBaseline,
+        slots: asyncio.Semaphore,
+    ) -> None:
         super().__init__(id=f"draft-{team_id.lower()}")
         self._team_id = team_id
         self._agent = agent
         self._expected = expected_values(baseline, team_id)
+        self._slots = slots
 
     @handler
     async def draft(
@@ -191,10 +208,12 @@ class _Draft(Executor):
     ) -> None:
         if request.teams and self._team_id not in request.teams:
             return
-        envelope = await self._agent.ask(
-            AgentQuestion(agent=AGENT, question=brief_question(self._team_id)),
-            correlation_id=new_correlation_id(),
-        )
+        # The router's timeout starts only once this drafter holds a slot.
+        async with self._slots:
+            envelope = await self._agent.ask(
+                AgentQuestion(agent=AGENT, question=brief_question(self._team_id)),
+                correlation_id=new_correlation_id(),
+            )
         await ctx.send_message(review(self._team_id, envelope, self._expected))
 
 
@@ -207,9 +226,16 @@ class _Gate(Executor):
 
 
 async def run_monthly_insights(
-    agent: AgentProvider, data_root: Path, request: MonthlyInsightsRequest
+    agent: AgentProvider,
+    data_root: Path,
+    request: MonthlyInsightsRequest,
+    *,
+    max_concurrency: int = len(TEAMS),
 ) -> MonthlyInsightsRun:
     """Run the workflow. Drafts only; nothing is delivered.
+
+    ``max_concurrency`` limits simultaneous agent calls. Use 1 for a live Fabric data agent, which
+    accepts one active run per user.
 
     Raises:
         InvalidRequestError: an unknown team id was requested.
@@ -220,7 +246,8 @@ async def run_monthly_insights(
         raise InvalidRequestError(f"unknown team(s): {', '.join(unknown)}")
     baseline = load_baseline(data_root)
     select, gate = _Select(id="select"), _Gate(id="review")
-    drafters = [_Draft(team_id, agent, baseline) for team_id in _TEAM_NAMES]
+    slots = asyncio.Semaphore(max(1, max_concurrency))
+    drafters = [_Draft(team_id, agent, baseline, slots) for team_id in _TEAM_NAMES]
     builder = WorkflowBuilder(start_executor=select, name=WORKFLOW_ID).add_fan_out_edges(
         select, drafters
     )
@@ -240,6 +267,7 @@ async def run_monthly_insights(
         dataset_profile=PROFILE,
         observation_month=baseline.observation_month,
         steps=STEPS,
+        max_concurrency=max(1, max_concurrency),
         drafts=drafts,
         ready=ready,
         held=len(drafts) - ready,

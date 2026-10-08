@@ -8,7 +8,7 @@
   "data_provider": "Local Fabric Educational Provider (LOCAL)",
   "environment": "offline",
   "identity": "Local process (no cloud identity in use)",
-  "mcp": "Local server ready: 15 allow-listed tools",
+  "mcp": "Local server ready: 17 allow-listed tools",
   "operating_mode": "OFFLINE",
   "overlay": "example-healthcare",
   "preview_features": [],

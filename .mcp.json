@@ -4,6 +4,33 @@
       "type": "http",
       "url": "https://learn.microsoft.com/api/mcp"
     },
+    "fabric-mcp": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@microsoft/fabric-mcp@1.4.0",
+        "server",
+        "start",
+        "--read-only",
+        "--tool",
+        "docs_item-definitions",
+        "--tool",
+        "docs_best-practices",
+        "--tool",
+        "core_search-catalog",
+        "--tool",
+        "onelake_list-workspaces",
+        "--tool",
+        "onelake_list-items",
+        "--tool",
+        "onelake_list-files",
+        "--tool",
+        "onelake_list-tables",
+        "--tool",
+        "onelake_get-table"
+      ]
+    },
     "ffia-local": {
       "type": "stdio",
       "command": "uv",

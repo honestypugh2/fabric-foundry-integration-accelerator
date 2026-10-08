@@ -166,7 +166,16 @@ export const guideStepSchema = z.object({
     server: z.string().nullable(),
     tools: z.array(z.string()),
     substitution_allowed: z.boolean(),
+    fallback: z
+      .object({
+        server: z.string(),
+        tools: z.array(z.string()),
+        label: z.enum(["LOCAL", "SIMULATED"]),
+        note: z.string(),
+      })
+      .nullable(),
   }),
+  skills: z.array(z.string()),
   writes: z.boolean(),
   approval_required: z.boolean(),
   checkpoint: z.string(),
@@ -676,6 +685,7 @@ export const agentEvalReportSchema = z.object({
   suite: z.string(),
   provider: z.string(),
   labels: z.array(z.string()),
+  fallback_cases: z.number(),
   compared: z.number(),
   passed: z.number(),
   pass_rate: z.number(),
@@ -691,6 +701,8 @@ export const agentEvalReportSchema = z.object({
       label: z.string(),
       answer_excerpt: z.string(),
       tools: z.array(z.string()),
+      provider: z.string(),
+      fallback_used: z.boolean(),
     }),
   ),
 });

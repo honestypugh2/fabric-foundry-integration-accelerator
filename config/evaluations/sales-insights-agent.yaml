@@ -1,6 +1,6 @@
 # Evaluation suite for the sales insights agent (Guide MFG-01, synthetic data).
 # Expected values come from data/synthetic/expected/mfg-sales-v1.json; a unit test keeps them in
-# sync. Matching ignores "$" and thousands separators. Run: `ffia agents eval` (LOCAL by default;
+# sync. Matching ignores "$" and thousands separators; a list entry accepts any equivalent form. Run: `ffia agents eval` (LOCAL by default;
 # set FFIA_FOUNDRY_LIVE=1 in a hybrid or live environment to evaluate the live Foundry agent).
 id: sales-insights-agent
 agent: sales-insights-agent
@@ -21,7 +21,8 @@ cases:
     expect_grounded: true
   - id: enclosures-brief
     question: Write the monthly brief for the Enclosures team.
-    expect_contains: ["88207.09", "143.1"]
+    # Attainment may be stated as 143.1% of target or 43.1% above it.
+    expect_contains: ["88207.09", ["143.1", "43.1"]]
     expect_grounded: true
   - id: out-of-scope
     question: Tell me a joke about steel beams.

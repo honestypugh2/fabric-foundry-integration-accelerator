@@ -153,3 +153,39 @@ def test_hc01_fabric_mcp_tools_are_allow_listed_in_its_profile(catalog: PatternC
         t for s in guide.steps if s.tool_path.server == "fabric-mcp" for t in s.tool_path.tools
     }
     assert named and named <= allowed, named - allowed
+
+
+def test_hc01_fallbacks_and_skills_resolve(catalog: PatternCatalog) -> None:
+    from fabric_foundry_accelerator.policies.engine import load_tool_manifest  # noqa: PLC0415
+    from fabric_foundry_accelerator.skills.vendor import load_lock  # noqa: PLC0415
+
+    guide = load_guides(REPO_ROOT / "guides", catalog)[HC_01]
+    local_tools = set(load_tool_manifest(REPO_ROOT / "config").enabled())
+    skills = {s.name for s in load_lock(REPO_ROOT / "config").skills} | {
+        p.parent.name for p in (REPO_ROOT / ".claude" / "skills").glob("*/SKILL.md")
+    }
+    for step in guide.steps:
+        fallback = step.tool_path.fallback
+        if fallback:
+            assert set(fallback.tools) <= local_tools, (step.id, set(fallback.tools) - local_tools)
+            assert fallback.label == "SIMULATED" or not step.writes
+        assert set(step.skills) <= skills, (step.id, set(step.skills) - skills)
+    mcp_steps = [s for s in guide.steps if s.tool_path.server == "fabric-mcp"]
+    assert mcp_steps and all(s.tool_path.fallback for s in mcp_steps)
+
+
+def test_write_steps_never_fall_back_to_a_local_write() -> None:
+    template = yaml.safe_load(
+        (REPO_ROOT / "guides" / "_template" / "guide.yaml").read_text(encoding="utf-8")
+    )
+    step = {
+        **template["steps"][0],
+        "writes": True,
+        "approval_required": True,
+        "tool_path": {
+            "provider": "Fabric MCP",
+            "fallback": {"tools": ["generate_fabric_change_plan"], "label": "LOCAL"},
+        },
+    }
+    with pytest.raises(ValidationError, match="only fall back to SIMULATED"):
+        UseCaseGuide.model_validate({**template, "steps": [step]})

@@ -10,7 +10,13 @@ from fabric_foundry_accelerator.agents.local import LocalSalesAgent
 from fabric_foundry_accelerator.agents.port import AgentAnswer, AgentQuestion, ToolCall
 from fabric_foundry_accelerator.api.app import create_app
 from fabric_foundry_accelerator.cli import main
-from fabric_foundry_accelerator.evaluation.agent_eval import load_suite, normalize, run_suite
+from fabric_foundry_accelerator.evaluation.agent_eval import (
+    attainment_forms,
+    load_suite,
+    missing_values,
+    normalize,
+    run_suite,
+)
 from fabric_foundry_accelerator.models.execution import (
     ExecutionEnvelope,
     ExecutionLabel,
@@ -36,12 +42,23 @@ def test_suite_expectations_come_from_the_baseline() -> None:
     )
     enc = baseline.team_briefs["T-ENC"]
     assert f"{enc['revenue']:.2f}" in cases["enclosures-brief"].expect_contains
-    assert str(enc["target_attainment_pct"]) in cases["enclosures-brief"].expect_contains
+    assert attainment_forms(float(str(enc["target_attainment_pct"]))) in (
+        cases["enclosures-brief"].expect_contains
+    )
     assert any(not c.expect_grounded for c in SUITE.cases)
 
 
 def test_normalize_ignores_currency_separators_and_emphasis() -> None:
     assert normalize("**$509,726.22** and 12,000") == "509726.22 and 12000"
+
+
+def test_equivalent_forms_of_target_attainment() -> None:
+    assert attainment_forms(143.1) == ("143.1", "43.1")
+    assert attainment_forms(92.5) == ("92.5", "7.5")
+    assert attainment_forms(100.0) == ("100.0",)
+    expected = ("88207.09", ("143.1", "43.1"))
+    assert missing_values("$88,207.09, exceeding target by 43.1%", expected) == ()
+    assert missing_values("$88,207.09, 120% of target", expected) == ("143.1 or 43.1",)
 
 
 async def test_local_agent_passes_the_gate() -> None:
@@ -103,6 +120,22 @@ async def test_wrong_or_ungrounded_answers_fail_the_gate(
     report = await run_suite(agent, SUITE)
     assert not report.gate_passed and report.status == "FAILED"
     assert {c.id for c in report.cases if not c.passed} == failing
+
+
+class FellBack(Scripted):
+    """Answers correctly but from the fallback provider, as the router does after a live timeout."""
+
+    async def ask(
+        self, question: AgentQuestion, *, correlation_id: str | None = None
+    ) -> ExecutionEnvelope[AgentAnswer]:
+        envelope = await LocalSalesAgent(DATA_ROOT).ask(question)
+        return envelope.model_copy(update={"fallback_used": True, "fallback_reason": "timed out"})
+
+
+async def test_fallback_answers_do_not_pass_for_the_requested_agent() -> None:
+    report = await run_suite(FellBack("", grounded=True), SUITE)
+    assert report.fallback_cases == 5 and report.passed == 0 and report.status == "FAILED"
+    assert all(c.fallback_used and c.label.endswith("(fallback)") for c in report.cases)
 
 
 def test_suite_lookup_errors() -> None:

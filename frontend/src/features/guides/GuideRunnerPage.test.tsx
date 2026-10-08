@@ -26,7 +26,9 @@ describe("guide runner", () => {
       await screen.findByRole("heading", { level: 2, name: `Step 2: ${step?.title ?? ""}` }),
     ).toBeInTheDocument();
     expect(screen.getAllByText(/core_search-catalog/).length).toBeGreaterThan(0);
-    expect(screen.getByText(/^Use exactly this tool\./)).toBeInTheDocument();
+    expect(screen.getByText(/^Use exactly this tool first\./)).toBeInTheDocument();
+    const fallback = screen.getByText(/list_fabric_workspaces, list_fabric_items/);
+    expect(within(fallback).getByText("LOCAL")).toBeInTheDocument();
     expect(screen.getByText(step?.copilot_prompt ?? "")).toBeInTheDocument();
     expect(screen.getByText(step?.claude_code_prompt ?? "")).toBeInTheDocument();
     expect(screen.getByText(/does not change anything/)).toBeInTheDocument();

@@ -84,6 +84,31 @@ describe("agent page", () => {
     const table = screen.getByRole("table", { name: /Agent evaluation cases/ });
     expect(within(table).getAllByRole("row")).toHaveLength(report.cases.length + 1);
     expect(calls.at(-1)?.path).toBe("/api/v1/agents/evaluate");
+    expect(screen.queryByText(/answered by the fallback provider/)).not.toBeInTheDocument();
+  });
+
+  it("flags evaluation cases served by the fallback", async () => {
+    const [first, ...rest] = fixtures.agentEval.cases;
+    mockApi({
+      ...defaultRoutes,
+      "POST /api/v1/agents/evaluate": {
+        ...fixtures.agentEval,
+        fallback_cases: 1,
+        passed: rest.length,
+        gate_passed: false,
+        status: "FAILED",
+        cases: [
+          { ...first, passed: false, fallback_used: true, label: "LOCAL (fallback)" },
+          ...rest,
+        ],
+      },
+    });
+    renderApp("/agent");
+    await userEvent.click(await screen.findByRole("button", { name: "Run evaluation suite" }));
+    expect(
+      await screen.findByText(/1 case\(s\) were answered by the fallback provider/),
+    ).toBeInTheDocument();
+    expect(screen.getByText("LOCAL (fallback)")).toBeInTheDocument();
   });
 
   it("runs the monthly insights workflow and sends nothing", async () => {

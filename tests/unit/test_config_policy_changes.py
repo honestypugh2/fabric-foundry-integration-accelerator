@@ -7,7 +7,7 @@ from pydantic import ValidationError
 from tests.conftest import CONFIG_ROOT
 
 from fabric_foundry_accelerator.audit.store import InMemoryAuditStore
-from fabric_foundry_accelerator.config.environment import load_environment
+from fabric_foundry_accelerator.config.environment import EnvironmentConfiguration, load_environment
 from fabric_foundry_accelerator.config.overlay import CustomerOverlay, load_overlay
 from fabric_foundry_accelerator.config.settings import Settings
 from fabric_foundry_accelerator.models.changes import (
@@ -364,3 +364,12 @@ def test_unknown_plan_and_revalidate(tmp_path: Path) -> None:
     plan = service.plan(_request())
     fresh = service.revalidate(plan.change_id)
     assert fresh.change_id == plan.change_id and len(service.plans()) == 1
+
+
+def test_only_agent_calls_may_wait_longer_than_300_seconds() -> None:
+    hybrid = load_environment(CONFIG_ROOT, "hybrid")
+    assert hybrid.policy("foundry_agent").timeout_seconds == 600
+    data = hybrid.model_dump()
+    data["capabilities"]["fabric_data"]["timeout_seconds"] = 400
+    with pytest.raises(ValidationError, match="only for"):
+        EnvironmentConfiguration.model_validate(data)

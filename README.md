@@ -27,7 +27,7 @@ Customize it · Productionize it — in one project, with **synthetic data only*
 | 3 | Application control plane (FastAPI, FastMCP, providers, router, circuit breaker, approvals, audit) | ✅ Complete |
 | 4 | Interactive educational application (explorers, learning paths, labs, guides, demo mode) | ✅ Complete |
 | 5 | Fabric integration (live read-only provider, gated writer, MCP profiles, skills, reference notebooks) | ✅ Complete |
-| 6 | Foundry integration (agent port, LOCAL + Foundry agents, evaluation, tracing, Agent Framework workflow, Foundry IQ knowledge analog behind a preview flag) | ✅ Complete offline; live router path REQUIRES TENANT VALIDATION |
+| 6 | Foundry integration (agent port, LOCAL + Foundry agents, evaluation, tracing, Agent Framework workflow, Foundry IQ knowledge analog behind a preview flag) | ✅ Complete; live router path, live eval (5/5) and workflow VERIFIED LIVE (App Insights export pending) |
 | 7 | GitHub Copilot + Claude Code (skills, prompt packs, bake-off) | Planned |
 | 8 | Security, CI/CD and production readiness | Planned |
 | 9 | Final validation | Planned |
@@ -118,9 +118,11 @@ available.
 - [`.github/copilot-instructions.md`](.github/copilot-instructions.md) summarizes it for GitHub
   Copilot.
 - The root [`.mcp.json`](.mcp.json) is the portable MCP configuration shared by VS Code, Copilot
-  CLI and Claude Code. It contains the Microsoft Learn documentation server and the local
-  educational server `ffia-local`, rendered from the default profile in
-  [`config/mcp/profiles.yaml`](config/mcp/profiles.yaml). Opt-in Fabric MCP and Power BI Modeling
+  CLI and Claude Code, rendered from the default profile `fabric-first` in
+  [`config/mcp/profiles.yaml`](config/mcp/profiles.yaml). It starts the **real Fabric MCP server**
+  (`@microsoft/fabric-mcp` 1.4.0, read-only, metadata only; LIVE once you `az login` to your demo
+  tenant), Microsoft Learn, and the local educational server **`ffia-local` as the labeled
+  fallback** when Fabric MCP is unavailable. Fabric Skills install with `ffia skills install`. Opt-in Fabric MCP and Power BI Modeling
   MCP profiles are rendered per client with `ffia mcp render <profile> --client vscode|claude|copilot-cli`.
 
 ## Operating modes

@@ -37,7 +37,7 @@
         "timeout_seconds": {
           "default": 5.0,
           "exclusiveMinimum": 0,
-          "maximum": 300,
+          "maximum": 600,
           "title": "Timeout Seconds",
           "type": "number"
         }

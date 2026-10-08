@@ -16,7 +16,7 @@
     },
     {
       "binding": "mcp",
-      "detail": "Local server ready: 15 allow-listed tools; each harness starts it over stdio.",
+      "detail": "Local server ready: 17 allow-listed tools; each harness starts it over stdio.",
       "label": "LOCAL",
       "node": "ffia-local",
       "status": "READY"
@@ -85,7 +85,7 @@
       "status": "NOT CONFIGURED"
     }
   ],
-  "observed_at": "2026-10-08T18:21:16.257583+00:00",
+  "observed_at": "2026-10-08T21:21:05.785796+00:00",
   "operating_mode": "OFFLINE",
   "view_id": "system"
 }

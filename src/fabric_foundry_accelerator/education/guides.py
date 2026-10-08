@@ -36,6 +36,21 @@ class ToolRequirement(BaseModel):
     required: bool = True
 
 
+class Fallback(BaseModel):
+    """The labeled local equivalent an agent may use when the step's primary tool is unavailable.
+
+    It is never silent: the agent first says the primary tool is unavailable. Read steps fall back
+    to LOCAL reads; write steps only to a SIMULATED rehearsal, never to a local write.
+    """
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    server: Literal["ffia-local"] = "ffia-local"
+    tools: tuple[str, ...] = Field(min_length=1)
+    label: Literal["LOCAL", "SIMULATED"]
+    note: str = ""
+
+
 class ToolPath(BaseModel):
     """The provider, server and tool a step must use. Substitution is not allowed."""
 
@@ -45,6 +60,7 @@ class ToolPath(BaseModel):
     server: str | None = None
     tools: tuple[str, ...] = ()
     substitution_allowed: bool = False
+    fallback: Fallback | None = None
 
 
 class Rehearsal(BaseModel):
@@ -69,6 +85,8 @@ class GuideStep(BaseModel):
     copilot_prompt: str
     claude_code_prompt: str
     tool_path: ToolPath
+    # Fabric Skills (or repository skills) the agent should load for this step.
+    skills: tuple[str, ...] = ()
     writes: bool
     approval_required: bool
     checkpoint: str
@@ -132,6 +150,10 @@ class UseCaseGuide(BaseModel):
         ids = [s.id for s in self.steps]
         if len(set(ids)) != len(ids):
             raise ValueError("duplicate step ids")
+        for step in self.steps:
+            fallback = step.tool_path.fallback
+            if fallback and step.writes and fallback.label != "SIMULATED":
+                raise ValueError(f"step {step.id}: a write step may only fall back to SIMULATED")
         return self
 
     def step(self, step_id: str) -> GuideStep:

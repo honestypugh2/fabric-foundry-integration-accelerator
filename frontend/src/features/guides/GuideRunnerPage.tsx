@@ -89,11 +89,31 @@ function StepView({ guide, step }: { readonly guide: Guide; readonly step: Guide
             <dt>Tools</dt>
             <dd>{step.tool_path.tools.length > 0 ? step.tool_path.tools.join(", ") : "None"}</dd>
           </div>
+          <div>
+            <dt>Fabric Skills</dt>
+            <dd>{step.skills.length > 0 ? step.skills.join(", ") : "None"}</dd>
+          </div>
+          <div>
+            <dt>Fallback</dt>
+            <dd>
+              {step.tool_path.fallback === null ? (
+                "None: report the limitation and stop"
+              ) : (
+                <>
+                  <Badge value={step.tool_path.fallback.label} />{" "}
+                  <code>{step.tool_path.fallback.server}</code>:{" "}
+                  {step.tool_path.fallback.tools.join(", ")}
+                  {step.tool_path.fallback.note ? `. ${step.tool_path.fallback.note}` : ""}
+                </>
+              )}
+            </dd>
+          </div>
         </dl>
         {step.tool_path.substitution_allowed ? null : (
           <p className="notice">
-            Use exactly this tool. If it is unavailable, report the limitation and stop. Do not
-            substitute REST, a CLI or another tool.
+            {step.tool_path.fallback === null
+              ? "Use exactly this tool. If it is unavailable, report the limitation and stop. Do not substitute REST, a CLI or another tool."
+              : "Use exactly this tool first. If it is unavailable, say so, then use only the labeled ffia-local fallback above. Never REST or a CLI, and never a local write in place of a live one."}
           </p>
         )}
       </section>

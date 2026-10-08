@@ -140,6 +140,11 @@ uv sync --frozen            # install exactly what uv.lock specifies
   - read-only remote tools for *what is*;
   - Git/PR or the approved change flow for *change it*.
 - Do not conflate different Fabric MCP servers. Pin external server versions.
+- **Fabric MCP first, `ffia-local` as the fallback.** The root `.mcp.json` (profile
+  `fabric-first`) starts the real Fabric MCP server with read-only tools, plus `ffia-local`. When a
+  Fabric MCP tool is unavailable, say so with the error, then use the named `ffia-local`
+  equivalent and label it `LOCAL` (reads) or `SIMULATED` (rehearsed writes). The fallback is never
+  silent, never REST or CLI, and a failed live write never becomes a local write.
 
 ## 9. Privacy (absolute)
 

@@ -60,7 +60,7 @@ steps:
     claude_code_prompt: >-
       Run `claude mcp list` and report which servers from .mcp.json are connected and which tools they
       expose. Confirm the Power BI authoring skills are available. Do not call any cloud tool.
-    tool_path: {provider: Local workstation, tools: ["MCP: List Servers"]}
+    tool_path: {provider: Local workstation, tools: ["MCP: List Servers"], fallback: {tools: [get_runtime_status], label: LOCAL, note: "Reports which providers and MCP tools are ready."}}
     writes: false
     approval_required: false
     checkpoint: Every required tool is installed and the Fabric MCP server is running with callable tools.
@@ -87,7 +87,7 @@ steps:
       Using the fabric-mcp server from this guide's .mcp.json, call core_search-catalog for <WORKSPACE_NAME>,
       then onelake_list-items with the returned workspace ID. Show the raw tool calls and results. Stop if
       the workspace is missing. No REST or CLI fallback.
-    tool_path: {provider: Fabric MCP Server (local), server: fabric-mcp, tools: [core_search-catalog, onelake_list-items]}
+    tool_path: {provider: Fabric MCP Server (local), server: fabric-mcp, tools: [core_search-catalog, onelake_list-items], fallback: {tools: [list_fabric_workspaces, list_fabric_items], label: LOCAL, note: "LOCAL offline; LIVE through the router when FFIA_FABRIC_LIVE=1 in hybrid."}}
     writes: false
     approval_required: false
     checkpoint: The known workspace ID appears in the actual MCP response and a workspace-scoped call succeeds.
@@ -132,7 +132,8 @@ steps:
     claude_code_prompt: >-
       Check for an existing healthcare_lakehouse with onelake_list-items in <WORKSPACE_ID>; if absent,
       create it with core_create-item and confirm with onelake_list-items. Return the lakehouse ID. Stop.
-    tool_path: {provider: Fabric MCP Server (local), server: fabric-mcp, tools: [onelake_list-items, core_create-item]}
+    tool_path: {provider: Fabric MCP Server (local), server: fabric-mcp, tools: [onelake_list-items, core_create-item], fallback: {tools: [generate_fabric_change_plan, validate_change_plan], label: SIMULATED, note: "Rehearsal only; a failed live create stops and is never redirected."}}
+    skills: [ffia-governed-fabric-change]
     writes: true
     approval_required: true
     rehearsal: {operation: create_lakehouse, item_type: Lakehouse, item_name: healthcare_lakehouse, note: "Rehearse twice to see the duplicate check block the second plan."}
@@ -160,7 +161,8 @@ steps:
       List Files/raw in <LAKEHOUSE_ID> and stop if it is not empty; then upload the seven CSVs with
       onelake_upload-file (overwrite false), list them with onelake_list-files and compare sizes. Stop on any
       failure. No tables.
-    tool_path: {provider: Fabric MCP Server (local), server: fabric-mcp, tools: [onelake_list-files, onelake_create-directory, onelake_upload-file]}
+    tool_path: {provider: Fabric MCP Server (local), server: fabric-mcp, tools: [onelake_list-files, onelake_create-directory, onelake_upload-file], fallback: {tools: [inspect_healthcare_scenario, generate_fabric_change_plan], label: SIMULATED, note: "Profiles the seven source files and rehearses the upload plan; nothing is uploaded."}}
+    skills: [ffia-governed-fabric-change]
     writes: true
     approval_required: true
     rehearsal: {operation: upload_files, item_type: Lakehouse, item_name: healthcare_lakehouse, note: "Needs the step 04 rehearsal first: the target lakehouse must exist."}
@@ -184,7 +186,8 @@ steps:
     claude_code_prompt: >-
       Profile data/raw/*.csv with a CSV-aware parser (no edits): row counts, keys, orphans, discharge_date,
       literal \n versus real newlines, and an ER diagram of supported joins. Stop after the profile.
-    tool_path: {provider: Local Python (not a cloud call), tools: []}
+    tool_path: {provider: Local Python (not a cloud call), tools: [], fallback: {tools: [inspect_healthcare_scenario], label: LOCAL}}
+    skills: [e2e-medallion-architecture]
     writes: false
     approval_required: false
     checkpoint: The profile matches the expected baseline and records the date and text quirks.
@@ -212,7 +215,8 @@ steps:
       Draft notebooks/MCP_01_Bronze.ipynb (local only) with the same four-cell structure, count validation
       before write, read-back after write, and Delta overwrite of the seven bronze_ tables. Do not run or
       publish.
-    tool_path: {provider: Local editor, tools: []}
+    tool_path: {provider: Local editor, tools: [], fallback: {tools: [inspect_medallion_architecture], label: LOCAL}}
+    skills: [e2e-medallion-architecture, spark-cli]
     writes: false
     approval_required: false
     checkpoint: The draft is reviewed, including output table names and the lakehouse binding.
@@ -233,7 +237,8 @@ steps:
     claude_code_prompt: >-
       In VS Code (Claude harness) or the Fabric portal, publish the reviewed notebook, confirm its cloud ID
       and lakehouse binding, run it once on Fabric Spark, and report per-table counts. Name the provider.
-    tool_path: {provider: Fabric Data Engineering extension, tools: [fabricWorkspaceInfo, Microsoft Fabric Runtime kernel]}
+    tool_path: {provider: Fabric Data Engineering extension, tools: [fabricWorkspaceInfo, Microsoft Fabric Runtime kernel], fallback: {tools: [generate_fabric_change_plan], label: SIMULATED, note: "Rehearses publishing the notebook; the local Bronze build is `ffia data build`."}}
+    skills: [spark-cli]
     writes: true
     approval_required: true
     rehearsal: {operation: create_notebook, item_type: Notebook, item_name: MCP_01_Bronze, note: "Covers publishing the notebook item. Running it is a separate action on Fabric Spark."}
@@ -258,7 +263,8 @@ steps:
     claude_code_prompt: >-
       Propose Silver rules (types, dates, bands, mappings, nulls, diagnostics) and stop. After approval,
       draft MCP_02_Silver.ipynb; publishing and running is a separate step.
-    tool_path: {provider: Fabric Data Engineering extension, tools: [Microsoft Fabric Runtime kernel]}
+    tool_path: {provider: Fabric Data Engineering extension, tools: [Microsoft Fabric Runtime kernel], fallback: {tools: [generate_fabric_change_plan, detect_duplicate_records, preview_table], label: SIMULATED, note: "Diagnostics read the local Silver tables; publishing is rehearsed."}}
+    skills: [e2e-medallion-architecture, spark-cli]
     writes: true
     approval_required: true
     rehearsal: {operation: create_notebook, item_type: Notebook, item_name: MCP_02_Silver, note: "Covers publishing the notebook item. Running it is a separate action on Fabric Spark."}
@@ -281,7 +287,8 @@ steps:
     claude_code_prompt: >-
       Propose the Gold grains, readmission and eligibility rule, and key checks; stop for review; then draft
       and separately run MCP_03_Gold with reconciliation totals printed.
-    tool_path: {provider: Fabric Data Engineering extension, tools: [Microsoft Fabric Runtime kernel]}
+    tool_path: {provider: Fabric Data Engineering extension, tools: [Microsoft Fabric Runtime kernel], fallback: {tools: [generate_fabric_change_plan, inspect_medallion_architecture, evaluate_measures], label: SIMULATED, note: "Reads the local Gold tables; publishing is rehearsed."}}
+    skills: [e2e-medallion-architecture, spark-cli]
     writes: true
     approval_required: true
     rehearsal: {operation: create_notebook, item_type: Notebook, item_name: MCP_03_Gold, note: "Covers publishing the notebook item. Running it is a separate action on Fabric Spark."}
@@ -304,7 +311,8 @@ steps:
     claude_code_prompt: >-
       Connect to <MODEL_ID> with the Power BI Authoring MCP server and report tables, storage modes and
       relationships. Read-only.
-    tool_path: {provider: Power BI Authoring MCP (local), server: powerbi-modeling-mcp, tools: [connection, model inspection]}
+    tool_path: {provider: Power BI Authoring MCP (local), server: powerbi-modeling-mcp, tools: [connection, model inspection], fallback: {tools: [generate_fabric_change_plan, evaluate_measures], label: SIMULATED, note: "Rehearses the model creation; measures evaluate locally."}}
+    skills: [semantic-model-authoring]
     writes: true
     approval_required: true
     rehearsal: {operation: create_semantic_model, item_type: SemanticModel, item_name: healthcare_semantic_model, note: "The live step creates the model in the portal; connecting the tools afterwards is read-only."}
@@ -327,7 +335,8 @@ steps:
     claude_code_prompt: >-
       Propose relationships and measures; stop for review; then apply through Power BI Authoring MCP and
       reconcile DAX results with the Gold totals.
-    tool_path: {provider: Power BI Authoring MCP (local), server: powerbi-modeling-mcp, tools: [relationships, measures, DAX query]}
+    tool_path: {provider: Power BI Authoring MCP (local), server: powerbi-modeling-mcp, tools: [relationships, measures, DAX query], fallback: {tools: [generate_fabric_change_plan, evaluate_against_baseline], label: SIMULATED, note: "Rehearses the model change; the baseline check runs locally."}}
+    skills: [semantic-model-authoring]
     writes: true
     approval_required: true
     rehearsal: {operation: update_semantic_model, item_type: SemanticModel, item_name: healthcare_semantic_model, note: "Needs the step 11 rehearsal first: the model must exist."}
@@ -345,7 +354,8 @@ steps:
       relationship ambiguity, grain, date roles, hidden keys, descriptions, synonyms, measure definitions and
       unsupported clinical interpretations. Group findings by severity. Do not change the model.
     claude_code_prompt: Review <MODEL_ID> read-only for best practices and AI readiness; group findings by severity.
-    tool_path: {provider: Power BI authoring skills + Power BI Authoring MCP, server: powerbi-modeling-mcp, tools: [model inspection]}
+    tool_path: {provider: Power BI authoring skills + Power BI Authoring MCP, server: powerbi-modeling-mcp, tools: [model inspection], fallback: {tools: [evaluate_against_baseline, evaluate_measures], label: LOCAL}}
+    skills: [semantic-model-authoring]
     writes: false
     approval_required: false
     checkpoint: Findings are recorded; only explicitly approved fixes are applied and re-checked.
@@ -366,6 +376,7 @@ steps:
       Plan the two-page report, stop for review, then build the PBIR project bound to <MODEL_ID> and stop
       before publishing.
     tool_path: {provider: Power BI authoring skills, tools: [report planner, report authoring]}
+    skills: [powerbi-report-cli]
     writes: true
     approval_required: true
     rehearsal: {operation: publish_report, item_type: Report, item_name: healthcare_report, note: "Publication is the write. A local PBIR file is not publication."}
@@ -387,7 +398,7 @@ steps:
       report. Name the provider and tool for each check, report pass, fail or not verified with concrete
       evidence, and do not repair or rerun anything.
     claude_code_prompt: Run the same read-only acceptance checks; report pass, fail or not verified with evidence and tools used.
-    tool_path: {provider: "Mixed: Fabric MCP, Power BI Authoring MCP and the Fabric portal", tools: []}
+    tool_path: {provider: "Mixed: Fabric MCP, Power BI Authoring MCP and the Fabric portal", tools: [], fallback: {tools: [get_runtime_status, evaluate_against_baseline], label: LOCAL}}
     writes: false
     approval_required: false
     checkpoint: Every required check passes; unavailable checks are resolved before calling the lab complete.
@@ -409,7 +420,7 @@ steps:
     claude_code_prompt: >-
       Diagnose <FAILING_STEP> read-only: MCP server status, Azure CLI account and tenant, credential
       selection and notebook binding. Never print tokens.
-    tool_path: {provider: Local workstation, tools: []}
+    tool_path: {provider: Local workstation, tools: [], fallback: {tools: [get_runtime_status, get_audit_record], label: LOCAL}}
     writes: false
     approval_required: false
     checkpoint: The governing control is identified and the failed step's checkpoint passes on retry.

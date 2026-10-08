@@ -2,11 +2,13 @@
   "cases": [
     {
       "answer_excerpt": "**Enclosures (ENC) grew fastest**: booked revenue up 55.78% in September 2026 versus August 2026 ($56,623.73 \u2192 $88,207.09).",
+      "fallback_used": false,
       "grounded": true,
       "id": "fastest-line",
       "label": "LOCAL",
       "missing": [],
       "passed": true,
+      "provider": "Local sales agent (deterministic, synthetic)",
       "question": "Which product line grew fastest last month?",
       "tools": [
         "local_sales_query"
@@ -14,11 +16,13 @@
     },
     {
       "answer_excerpt": "Total booked revenue for September 2026 was **$509,726.22**, excluding cancelled lines and lines with data-quality flags.",
+      "fallback_used": false,
       "grounded": true,
       "id": "total-revenue",
       "label": "LOCAL",
       "missing": [],
       "passed": true,
+      "provider": "Local sales agent (deterministic, synthetic)",
       "question": "What was total booked revenue last month?",
       "tools": [
         "local_sales_query"
@@ -26,11 +30,13 @@
     },
     {
       "answer_excerpt": "There are **12** duplicate order lines (same order_id and line_number). A data steward should review them before they are removed in Silver.",
+      "fallback_used": false,
       "grounded": true,
       "id": "duplicates",
       "label": "LOCAL",
       "missing": [],
       "passed": true,
+      "provider": "Local sales agent (deterministic, synthetic)",
       "question": "How many duplicate order lines are there?",
       "tools": [
         "local_sales_query"
@@ -38,11 +44,13 @@
     },
     {
       "answer_excerpt": "**Enclosures**, September 2026: booked revenue $88,207.09 (+55.8% vs last month, +58.5% vs last year), 143.1% of target, gross margin 31.6%. Top growing product: P-ENC-012. Synthetic demonstration data.",
+      "fallback_used": false,
       "grounded": true,
       "id": "enclosures-brief",
       "label": "LOCAL",
       "missing": [],
       "passed": true,
+      "provider": "Local sales agent (deterministic, synthetic)",
       "question": "Write the monthly brief for the Enclosures team.",
       "tools": [
         "local_sales_query"
@@ -50,17 +58,20 @@
     },
     {
       "answer_excerpt": "This offline agent answers only allow-listed questions over synthetic data. Try one of the supported questions, or switch to the live Foundry agent.",
+      "fallback_used": false,
       "grounded": false,
       "id": "out-of-scope",
       "label": "LOCAL",
       "missing": [],
       "passed": true,
+      "provider": "Local sales agent (deterministic, synthetic)",
       "question": "Tell me a joke about steel beams.",
       "tools": []
     }
   ],
   "compared": 5,
-  "evaluation_id": "774ebbf3e459440e963a6dbe4caeac90",
+  "evaluation_id": "c46a1e801b834b4f9c6a4df86fa40d79",
+  "fallback_cases": 0,
   "gate_passed": true,
   "labels": [
     "LOCAL"

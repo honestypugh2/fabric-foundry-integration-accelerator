@@ -4,10 +4,10 @@
   "drafts": [
     {
       "answer": "**Enclosures**, September 2026: booked revenue $88,207.09 (+55.8% vs last month, +58.5% vs last year), 143.1% of target, gross margin 31.6%. Top growing product: P-ENC-012. Synthetic demonstration data.",
-      "correlation_id": "28ca34cac16e42ecbde04f2d7799522f",
+      "correlation_id": "1601ee972151483dbf8a70b35b710bfb",
       "expected": [
         "88207.09",
-        "143.1"
+        "143.1 or 43.1"
       ],
       "fallback_used": false,
       "grounded": true,
@@ -22,10 +22,10 @@
     },
     {
       "answer": "**Hardware & Fabrication**, September 2026: booked revenue $288,994.48 (+3.5% vs last month, +72.7% vs last year), 106.6% of target, gross margin 20.9%. Top growing product: P-FAB-009. Synthetic demonstration data.",
-      "correlation_id": "b03234479dbf4e56b8357a831c13067b",
+      "correlation_id": "6305ab4fa8ae43679f46b4b878a1004d",
       "expected": [
         "288994.48",
-        "106.6"
+        "106.6 or 6.6"
       ],
       "fallback_used": false,
       "grounded": true,
@@ -40,10 +40,10 @@
     },
     {
       "answer": "**Key Accounts**, September 2026: booked revenue $76,765.17 (+39.7% vs last month, +206.8% vs last year), 117.6% of target, gross margin 18.8%. Top growing product: P-FAB-004. Synthetic demonstration data.",
-      "correlation_id": "4a4746597a294368a7e15b32792153b6",
+      "correlation_id": "e57a52293c034be8a3306523722e48ab",
       "expected": [
         "76765.17",
-        "117.6"
+        "117.6 or 17.6"
       ],
       "fallback_used": false,
       "grounded": true,
@@ -58,10 +58,10 @@
     },
     {
       "answer": "**Structural & Metals**, September 2026: booked revenue $132,524.66 (+24.1% vs last month, +21.9% vs last year), 108.6% of target, gross margin 27.9%. Top growing product: P-STR-004. Synthetic demonstration data.",
-      "correlation_id": "962ace8f8a244d00ac30993046e95ce9",
+      "correlation_id": "928fedd51cbd4706899d43296193589e",
       "expected": [
         "132524.66",
-        "108.6"
+        "108.6 or 8.6"
       ],
       "fallback_used": false,
       "grounded": true,
@@ -80,12 +80,13 @@
   "labels": [
     "LOCAL"
   ],
+  "max_concurrency": 4,
   "observation_month": "2026-09-01",
   "ready": 4,
-  "run_id": "a80dec5dc05f4eaaaf4885b54dce9ec9",
+  "run_id": "460f168d54f14573b5f4b23ecf6c3375",
   "steps": [
     "select: choose the business teams for this run",
-    "draft: one executor per team asks the agent for its brief (fan-out, concurrent)",
+    "draft: one executor per team asks the agent for its brief (fan-out; concurrency-limited)",
     "review: deterministic gate checks grounding and the team's baseline numbers",
     "deliver: not performed; sending briefs is a governed write that needs approval"
   ],

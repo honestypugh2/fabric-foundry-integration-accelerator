@@ -20,6 +20,8 @@ export interface AgentCaseResult {
   readonly label: string;
   readonly answer_excerpt: string;
   readonly tools: readonly string[];
+  readonly provider: string;
+  readonly fallback_used: boolean;
 }
 
 /** All cases, the pass rate and the gate. */
@@ -28,6 +30,7 @@ export interface AgentEvalReport {
   readonly suite: string;
   readonly provider: string;
   readonly labels: readonly string[];
+  readonly fallback_cases: number;
   readonly compared: number;
   readonly passed: number;
   readonly pass_rate: number;
@@ -504,6 +507,14 @@ export interface FabricTarget {
   readonly destination: "LOCAL" | "LIVE";
 }
 
+/** The labeled local equivalent an agent may use when the step's primary tool is unavailable. */
+export interface Fallback {
+  readonly server?: "ffia-local";
+  readonly tools: readonly string[];
+  readonly label: "LOCAL" | "SIMULATED";
+  readonly note?: string;
+}
+
 /** Return a semantic model. */
 export interface GetSemanticModel {
   readonly operation: "get_semantic_model";
@@ -525,6 +536,7 @@ export interface GuideStep {
   readonly copilot_prompt: string;
   readonly claude_code_prompt: string;
   readonly tool_path: ToolPath;
+  readonly skills?: readonly string[];
   readonly writes: boolean;
   readonly approval_required: boolean;
   readonly checkpoint: string;
@@ -708,6 +720,7 @@ export interface MonthlyInsightsRun {
   readonly dataset_profile: string;
   readonly observation_month: string;
   readonly steps: readonly string[];
+  readonly max_concurrency: number;
   readonly drafts: readonly TeamBriefDraft[];
   readonly ready: number;
   readonly held: number;
@@ -963,6 +976,7 @@ export interface ToolPath {
   readonly server?: string | null;
   readonly tools?: readonly string[];
   readonly substitution_allowed?: boolean;
+  readonly fallback?: Fallback | null;
 }
 
 /** A tool, server, extension or service the guide needs. */

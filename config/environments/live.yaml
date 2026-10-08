@@ -5,7 +5,7 @@ description: Real configured services after access checks succeed. Read-only by 
 capabilities:
   fabric_data: {preferred: live, fallback: none, timeout_seconds: 10, max_retries: 2, backoff_seconds: 0.5}
   semantic_model: {preferred: live, fallback: none, timeout_seconds: 10, max_retries: 2, backoff_seconds: 0.5}
-  foundry_agent: {preferred: live, fallback: none, timeout_seconds: 240, max_retries: 0, backoff_seconds: 0}
+  foundry_agent: {preferred: live, fallback: none, timeout_seconds: 600, max_retries: 0, backoff_seconds: 0}
   mcp: {preferred: local, fallback: none}
   evaluation: {preferred: local, fallback: none}
   audit: {preferred: local, fallback: none}

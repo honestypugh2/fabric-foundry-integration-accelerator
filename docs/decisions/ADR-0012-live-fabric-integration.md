@@ -70,7 +70,8 @@ Options 2 and 4.
     the query and egress exclusions;
   - destructive tools are never exposed;
   - write-capable profiles are opt-in with per-call approval;
-  - the default profile is LOCAL and read-only, and equals the committed `.mcp.json`.
+  - the default profile is read-only, GA-only, names `ffia-local` as its fallback, and equals the
+    committed `.mcp.json` (amended 2026-10-08; see "Amendment" below).
 - **Reference notebooks.**
   - `ffia notebooks render` writes `MCP_01_Bronze`, `MCP_02_Silver` and `MCP_03_Gold` in Fabric
     Git source format, using a closed set of DuckDB→Spark rewrites. Any unknown construct fails
@@ -148,7 +149,8 @@ Still **REQUIRES TENANT VALIDATION**:
 None on the default experience:
 
 - With `FFIA_FABRIC_LIVE` unset, the container never builds a live client.
-- The default MCP profile is LOCAL.
+- The default MCP profile starts Fabric MCP read-only tools, but every answer still works offline
+  through the `ffia-local` fallback, and `ffia demo offline` never uses `.mcp.json`.
 - Every live test is skipped unless explicitly enabled.
 
 ## Education impact
@@ -157,6 +159,36 @@ None on the default experience:
 - Lessons now describe real profiles, the provider, the writer and the notebooks with honest
   labels.
 - Diagram nodes moved from planned to implemented or tenant-validation.
+
+## Amendment (2026-10-08): Fabric MCP first, `ffia-local` as the fallback
+
+The presenter asked for the repository and Guide HC-01 to use the real Fabric MCP server, with the
+local educational server as the fallback.
+
+- The default profile `fabric-first` renders the root `.mcp.json`:
+  - Fabric MCP 1.4.0 with `--read-only` and 8 metadata tools;
+  - Microsoft Learn;
+  - `ffia-local`, declared as `fallback`.
+
+  The previous default, `offline`, remains available.
+- `hc01-lab` (Guide HC-01's `.mcp.json`) adds `ffia-local` as its fallback.
+- `ffia-local` adds two typed reads through the provider router, `list_fabric_workspaces` and
+  `list_fabric_items`, as fallbacks for `core_search-catalog` and `onelake_list-items`.
+- **The fallback is an instruction, not automatic failover.** MCP clients do not fail over between
+  servers. AGENTS.md (root and guide) requires the agent to:
+  - say the Fabric MCP tool is unavailable, with the error;
+  - then use the named `ffia-local` tool, labeled LOCAL;
+  - for a failed write, only rehearse it (SIMULATED) and never perform a local write.
+- Each guide step names its Fabric Skills and its fallback.
+- `ffia mcp check` enforces:
+  - the default profile is read-only, GA-only and declares the fallback;
+  - every committed client configuration declares a fallback server;
+  - a write step's fallback is SIMULATED.
+- **VERIFIED LIVE (2026-10-08, demo tenant):**
+  - MCP handshake with Fabric MCP 1.4.0, which exposed exactly the 8 allow-listed tools;
+  - `core_search-catalog` found `mfg_lakehouse` and the data agent;
+  - `onelake_list-items` and `onelake_list-tables` (`namespace: dbo`) returned the 6 tables;
+  - `ffia-local` over MCP returned LOCAL offline and LIVE through the router in hybrid mode.
 
 ## Revisit trigger
 

@@ -10,6 +10,7 @@ from fabric_foundry_accelerator.agents.port import AgentAnswer, AgentQuestion
 from fabric_foundry_accelerator.agents.workflows import (
     MonthlyInsightsRequest,
     MonthlyInsightsRun,
+    live_safe_concurrency,
     run_monthly_insights,
 )
 from fabric_foundry_accelerator.audit.store import AuditRecord
@@ -295,7 +296,12 @@ async def run_monthly_insights_workflow(
     body: Annotated[MonthlyInsightsRequest, Body()], container: ContainerDep
 ) -> MonthlyInsightsRun:
     """Draft each team's monthly brief through an Agent Framework workflow. Nothing is sent."""
-    return await run_monthly_insights(container.agents, container.settings.data_root, body)
+    return await run_monthly_insights(
+        container.agents,
+        container.settings.data_root,
+        body,
+        max_concurrency=live_safe_concurrency(container.agents),
+    )
 
 
 # ------------------------------------------------------------------ knowledge, preview flag

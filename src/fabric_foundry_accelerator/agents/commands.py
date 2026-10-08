@@ -7,6 +7,7 @@ import sys
 from fabric_foundry_accelerator.agents.port import AgentQuestion
 from fabric_foundry_accelerator.agents.workflows import (
     MonthlyInsightsRequest,
+    live_safe_concurrency,
     run_monthly_insights,
 )
 from fabric_foundry_accelerator.config.settings import Settings
@@ -68,7 +69,10 @@ def _cmd_workflow(args: argparse.Namespace) -> int:
     container = build_container(settings)
     run = asyncio.run(
         run_monthly_insights(
-            container.agents, settings.data_root, MonthlyInsightsRequest(teams=tuple(args.team))
+            container.agents,
+            settings.data_root,
+            MonthlyInsightsRequest(teams=tuple(args.team)),
+            max_concurrency=live_safe_concurrency(container.agents),
         )
     )
     if args.json:

@@ -1,5 +1,6 @@
 """Agent provider port: local deterministic agent, live Foundry adapter (fake client), routing."""
 
+import asyncio
 import json
 import shutil
 import time
@@ -90,6 +91,54 @@ async def test_foundry_provider_labels_preview_tools_and_grounding() -> None:
         Q(question="hello?")
     )
     assert plain.execution_label is ExecutionLabel.LIVE and not plain.data.grounded
+
+
+class BusyClient(FakeClient):
+    """Rejects the first ``busy`` calls like the Fabric data agent does while a run is active."""
+
+    def __init__(
+        self, busy: int, error: str = "Can't add messages to thread t while a run r is active."
+    ) -> None:
+        super().__init__(["fabric_dataagent_preview_call"])
+        self.busy, self.error = busy, error
+
+    def ask(self, agent: str, question: str) -> tuple[str, list[str]]:
+        if self.busy:
+            self.busy -= 1
+            self.calls.append((agent, question))
+            raise RuntimeError(self.error)
+        return super().ask(agent, question)
+
+
+async def test_foundry_provider_retries_a_busy_thread_then_gives_up() -> None:
+    waits: list[float] = []
+    provider = FoundryAgentProvider(
+        BusyClient(busy=2),
+        mode=OperatingMode.HYBRID,
+        busy_retry_delays=(1, 2, 3),
+        sleep=waits.append,
+    )
+    envelope = await provider.ask(Q(question="Total revenue?"))
+    assert envelope.execution_label is ExecutionLabel.PREVIEW and waits == [1, 2]
+    stuck = FoundryAgentProvider(
+        BusyClient(busy=9), mode=OperatingMode.HYBRID, busy_retry_delays=(1, 2), sleep=waits.append
+    )
+    with pytest.raises(RuntimeError, match="is active"):
+        await stuck.ask(Q(question="Total revenue?"))
+    other = BusyClient(busy=1, error="401 Unauthorized")
+    with pytest.raises(RuntimeError, match="401"):
+        await FoundryAgentProvider(other, mode=OperatingMode.HYBRID, sleep=waits.append).ask(
+            Q(question="Total revenue?")
+        )
+    assert len(other.calls) == 1, "only a busy thread is retried"
+
+
+async def test_foundry_provider_serializes_live_calls() -> None:
+    client = FakeClient(["fabric_dataagent_preview_call"], delay=0.05)
+    provider = FoundryAgentProvider(client, mode=OperatingMode.HYBRID)
+    start = time.perf_counter()
+    await asyncio.gather(*(provider.ask(Q(question=f"question {i}")) for i in range(3)))
+    assert time.perf_counter() - start >= 0.15 and len(client.calls) == 3
 
 
 def test_foundry_provider_refuses_offline_and_sdk_client_is_lazy() -> None:

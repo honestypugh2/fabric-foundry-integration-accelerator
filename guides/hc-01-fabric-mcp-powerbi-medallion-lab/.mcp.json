@@ -23,6 +23,17 @@
         "--tool",
         "onelake_upload-file"
       ]
+    },
+    "ffia-local": {
+      "type": "stdio",
+      "command": "uv",
+      "args": [
+        "run",
+        "--frozen",
+        "ffia",
+        "serve",
+        "mcp"
+      ]
     }
   }
 }

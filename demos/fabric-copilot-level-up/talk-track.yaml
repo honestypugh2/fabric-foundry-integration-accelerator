@@ -141,7 +141,7 @@ parts:
           ffia mcp profiles
           ffia mcp check
         say:
-          - "\"Six profiles: offline (the default), docs-only, read-only (16 metadata tools), approval-gated authoring, the HC-01 lab profile, and a Power BI sandbox. The read-only profile starts the server with `--read-only` and an explicit allow-list. CI fails if anyone adds a write tool or unpins a version.\""
+          - "\"Seven profiles. The default, fabric-first, is what the repository's own .mcp.json starts: the real Fabric MCP server with 8 read-only metadata tools, plus our local ffia-local server as the labeled fallback. Then offline, docs-only, read-only (16 metadata tools), approval-gated authoring, the HC-01 lab profile, and a Power BI sandbox. Read-only profiles start the server with `--read-only` and an explicit allow-list. CI fails if anyone adds a write tool, unpins a version, or drops the fallback.\""
       - title: "Set it up: one command per client"
         entry: terminal
         path: "Terminal → ffia mcp render; open the generated file"
@@ -165,6 +165,25 @@ parts:
           - "\"Now I ask it to create a lakehouse. It can't: the write tool doesn't exist in this profile, and the server itself refuses it.\""
         check: "P-MCP-1 finds ffia-dev (LIVE); P-MCP-2 reports no create tool."
         fallback: "Offline: repository window, prompt P-MCP-3. The plan comes back BLOCKED: live mutation disabled, approval required, MCP cannot approve."
+      - title: "Fabric MCP first, ffia-local as the fallback"
+        entry: vscode
+        path: "Repository window → .mcp.json (fabric-mcp + ffia-local) → Chat: \"List the tables in mfg_lakehouse in ffia-dev\" → then the same question with fabric-mcp stopped"
+        label: LIVE
+        code: |
+          # What the root .mcp.json starts (profile fabric-first):
+          #   fabric-mcp  @microsoft/fabric-mcp@1.4.0 --read-only, 8 metadata tools  -> LIVE
+          #   ffia-local  uv run ffia serve mcp, 17 typed tools                       -> LOCAL fallback
+          ffia mcp render fabric-first --client vscode --output .vscode/mcp.json
+        say:
+          - "\"The repository's own MCP config is Fabric-first. Copilot calls the real Fabric MCP server: `core_search-catalog` finds mfg_lakehouse, and `onelake_list-tables` with namespace dbo lists its six tables. That's LIVE, under my identity.\""
+          - "\"Now I stop the Fabric MCP server, as if I weren't signed in. The instructions in AGENTS.md say: tell me it's unavailable, then use the named ffia-local tool and label it LOCAL. No silent switch, no REST or CLI workaround, and a failed write never becomes a local write. It only becomes a SIMULATED rehearsal.\""
+          - "\"Every Guide 1 step lists three things: its Fabric MCP tool, the Fabric Skills to load, and its labeled fallback. The guide runner in the app shows all three.\""
+        show:
+          - "Copilot's tool call: fabric-mcp → core_search-catalog (LIVE), then onelake_list-tables (namespace dbo)."
+          - "With fabric-mcp stopped: Copilot says it's unavailable, then calls ffia-local → list_fabric_workspaces / list_fabric_items, labeled LOCAL."
+          - "App → Guides → HC-01 → step 02: Tools, Fabric Skills and Fallback rows."
+        check: "Fabric MCP answers LIVE; with it stopped, the answer is labeled LOCAL and names the fallback tool."
+        fallback: "No tenant: the same flow with fabric-mcp never started. The first answer is already the labeled LOCAL fallback."
   - id: fabric-skills
     title: "Fabric Skills: the agent's know-how"
     minutes: 8
@@ -299,6 +318,19 @@ parts:
         say:
           - "\"Pick one team and one pipeline. Climb L1 to L4 in a dev workspace, measure with the lab scorecard, then pilot L5 with pull requests and a deployment pipeline.\""
 qa:
+  - featured: true
+    label: LIVE
+    q: "What happens when Fabric MCP isn't available?"
+    sources: [fabric-mcp-local]
+    a: |
+      The repository's `.mcp.json` starts the real Fabric MCP server first and `ffia-local` as the fallback.
+
+      - The agent says Fabric MCP is unavailable and shows the error. It never switches silently.
+      - Reads fall back to the named `ffia-local` tools (for example `list_fabric_workspaces` and `list_fabric_items`), labeled LOCAL. In a hybrid environment those tools read live Fabric metadata through the provider router, which has its own labeled fallback.
+      - Writes never fall back to a write. A failed create or upload stops, and the only fallback is a SIMULATED rehearsal (`generate_fabric_change_plan`).
+      - The fallback is never REST or the Azure CLI.
+
+      Verified on 2026-10-08 in the demo tenant: Fabric MCP 1.4.0 read-only calls (`core_search-catalog`, `onelake_list-items`, `onelake_list-tables`), and `ffia-local` returning LOCAL offline and LIVE through the router in hybrid.
   - featured: true
     label: LOCAL
     q: "What exactly is GitHub Copilot doing in this demo?"

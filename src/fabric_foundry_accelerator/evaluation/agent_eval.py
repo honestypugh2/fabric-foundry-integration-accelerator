@@ -32,7 +32,8 @@ class AgentEvalCase(BaseModel):
 
     id: str = Field(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     question: str
-    expect_contains: tuple[str, ...] = ()
+    # Each entry must appear in the answer. A list entry means "any of these equivalent forms".
+    expect_contains: tuple[str | tuple[str, ...], ...] = ()
     expect_grounded: bool
 
 
@@ -61,6 +62,8 @@ class AgentCaseResult(BaseModel):
     label: str
     answer_excerpt: str
     tools: tuple[str, ...]
+    provider: str
+    fallback_used: bool
 
 
 class AgentEvalReport(BaseModel):
@@ -72,6 +75,7 @@ class AgentEvalReport(BaseModel):
     suite: str
     provider: str
     labels: tuple[str, ...]
+    fallback_cases: int
     compared: int
     passed: int
     pass_rate: float
@@ -122,6 +126,23 @@ def load_suite(config_root: Path, suite_id: str) -> AgentEvalSuite:
     return AgentEvalSuite.model_validate(yaml.safe_load(path.read_text(encoding="utf-8")))
 
 
+def attainment_forms(pct: float) -> tuple[str, ...]:
+    """Equivalent ways to state target attainment: "143.1% of target" or "43.1% above target"."""
+    distance = round(abs(pct - 100), 1)
+    return (str(pct), str(distance)) if distance else (str(pct),)
+
+
+def missing_values(answer: str, expected: tuple[str | tuple[str, ...], ...]) -> tuple[str, ...]:
+    """Expected entries absent from ``answer``; alternatives are reported joined by " or "."""
+    text = normalize(answer)
+    missing: list[str] = []
+    for entry in expected:
+        forms = (entry,) if isinstance(entry, str) else entry
+        if not any(normalize(form) in text for form in forms):
+            missing.append(" or ".join(forms))
+    return tuple(missing)
+
+
 def normalize(text: str) -> str:
     """Drop currency symbols, thousands separators and Markdown emphasis before matching."""
     return re.sub(r"(?<=\d),(?=\d{3})", "", text.replace("$", "").replace("*", ""))
@@ -131,12 +152,11 @@ async def run_suite(agent: AgentProvider, suite: AgentEvalSuite) -> AgentEvalRep
     """Ask every case sequentially (live agent calls are slow and metered) and score the answers."""
     results: list[AgentCaseResult] = []
     labels: list[str] = []
-    provider = agent.name
+    providers: list[str] = []
     for case in suite.cases:
         envelope = await agent.ask(AgentQuestion(agent=suite.agent, question=case.question))
-        provider = envelope.selected_provider
-        answer = normalize(envelope.data.answer)
-        missing = tuple(v for v in case.expect_contains if normalize(v) not in answer)
+        providers.append(envelope.selected_provider)
+        missing = missing_values(envelope.data.answer, case.expect_contains)
         grounded = envelope.data.grounded
         label = envelope.execution_label.value + (" (fallback)" if envelope.fallback_used else "")
         labels.append(label)
@@ -144,12 +164,17 @@ async def run_suite(agent: AgentProvider, suite: AgentEvalSuite) -> AgentEvalRep
             AgentCaseResult(
                 id=case.id,
                 question=case.question,
-                passed=not missing and grounded == case.expect_grounded,
+                # A fallback answer did not come from the requested agent, so it cannot pass.
+                passed=not missing
+                and grounded == case.expect_grounded
+                and not envelope.fallback_used,
                 grounded=grounded,
                 missing=missing,
                 label=label,
                 answer_excerpt=envelope.data.answer[:300],
                 tools=tuple(c.name for c in envelope.data.tool_calls),
+                provider=envelope.selected_provider,
+                fallback_used=envelope.fallback_used,
             )
         )
     passed = sum(r.passed for r in results)
@@ -157,8 +182,9 @@ async def run_suite(agent: AgentProvider, suite: AgentEvalSuite) -> AgentEvalRep
     gate = rate >= suite.min_pass_rate
     return AgentEvalReport(
         suite=suite.id,
-        provider=provider,
+        provider=" + ".join(dict.fromkeys(providers)),
         labels=tuple(sorted(set(labels))),
+        fallback_cases=sum(r.fallback_used for r in results),
         compared=len(results),
         passed=passed,
         pass_rate=round(rate, 4),

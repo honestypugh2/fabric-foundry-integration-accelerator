@@ -124,13 +124,14 @@ def _live_client(
 
 def _live_agent(
     settings: Settings,
-    mode: OperatingMode,
+    environment: EnvironmentConfiguration,
     bindings: TenantBindings | None,
     injected: ResponsesClient | None,
 ) -> AgentProvider | None:
     """Return a live Foundry agent provider only when explicitly enabled and fully configured."""
     if not settings.foundry_live:
         return None
+    mode = environment.mode
     if mode is OperatingMode.OFFLINE:
         raise BindingsError("FFIA_FOUNDRY_LIVE=1 needs FFIA_ENVIRONMENT=hybrid or live")
     if bindings is None or bindings.foundry is None:
@@ -138,7 +139,13 @@ def _live_agent(
             f"FFIA_FOUNDRY_LIVE=1 needs a `foundry:` section in "
             f"{bindings_path(settings.config_root, settings.overlay)} (git-ignored)"
         )
-    client = injected or SdkResponsesClient(project_endpoint(bindings.foundry), bindings.tenant_id)
+    # End the HTTP call shortly before the router gives up, so an abandoned call frees the lock.
+    router_timeout = environment.policy("foundry_agent").timeout_seconds
+    client = injected or SdkResponsesClient(
+        project_endpoint(bindings.foundry),
+        bindings.tenant_id,
+        request_timeout=max(1.0, router_timeout - 10),
+    )
     return FoundryAgentProvider(client, mode=mode)
 
 
@@ -189,7 +196,7 @@ def build_container(
     agents = RoutedAgentProvider(
         router,
         local=LocalSalesAgent(settings.data_root, mode=local_mode),
-        live=_live_agent(settings, environment.mode, bindings, agent_client),
+        live=_live_agent(settings, environment, bindings, agent_client),
     )
     write_policy = load_write_policy(settings.config_root)
     changes = ChangeService(

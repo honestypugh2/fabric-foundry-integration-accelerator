@@ -72,8 +72,17 @@
       "offline_equivalent": "Run the demo readiness check and export the synthetic data to a separate folder.",
       "rehearsal": null,
       "requires_windows": false,
+      "skills": [],
       "title": "Set up and verify the tools",
       "tool_path": {
+        "fallback": {
+          "label": "LOCAL",
+          "note": "Reports which providers and MCP tools are ready.",
+          "server": "ffia-local",
+          "tools": [
+            "get_runtime_status"
+          ]
+        },
         "provider": "Local workstation",
         "server": null,
         "substitution_allowed": false,
@@ -109,8 +118,18 @@
       "offline_equivalent": "List workspaces from the Local Fabric Provider (labeled LOCAL).",
       "rehearsal": null,
       "requires_windows": false,
+      "skills": [],
       "title": "Verify the tenant through a real MCP call",
       "tool_path": {
+        "fallback": {
+          "label": "LOCAL",
+          "note": "LOCAL offline; LIVE through the router when FFIA_FABRIC_LIVE=1 in hybrid.",
+          "server": "ffia-local",
+          "tools": [
+            "list_fabric_workspaces",
+            "list_fabric_items"
+          ]
+        },
         "provider": "Fabric MCP Server (local)",
         "server": "fabric-mcp",
         "substitution_allowed": false,
@@ -143,8 +162,10 @@
       "offline_equivalent": "Not applicable (portal step). The local provider exposes a simulated workspace.",
       "rehearsal": null,
       "requires_windows": false,
+      "skills": [],
       "title": "Create the lab workspace (portal)",
       "tool_path": {
+        "fallback": null,
         "provider": "Fabric portal (manual)",
         "server": null,
         "substitution_allowed": false,
@@ -182,8 +203,20 @@
         "operation": "create_lakehouse"
       },
       "requires_windows": false,
+      "skills": [
+        "ffia-governed-fabric-change"
+      ],
       "title": "Create and confirm the lakehouse",
       "tool_path": {
+        "fallback": {
+          "label": "SIMULATED",
+          "note": "Rehearsal only; a failed live create stops and is never redirected.",
+          "server": "ffia-local",
+          "tools": [
+            "generate_fabric_change_plan",
+            "validate_change_plan"
+          ]
+        },
         "provider": "Fabric MCP Server (local)",
         "server": "fabric-mcp",
         "substitution_allowed": false,
@@ -222,8 +255,20 @@
         "operation": "upload_files"
       },
       "requires_windows": false,
+      "skills": [
+        "ffia-governed-fabric-change"
+      ],
       "title": "Upload the synthetic CSVs",
       "tool_path": {
+        "fallback": {
+          "label": "SIMULATED",
+          "note": "Profiles the seven source files and rehearses the upload plan; nothing is uploaded.",
+          "server": "ffia-local",
+          "tools": [
+            "inspect_healthcare_scenario",
+            "generate_fabric_change_plan"
+          ]
+        },
         "provider": "Fabric MCP Server (local)",
         "server": "fabric-mcp",
         "substitution_allowed": false,
@@ -258,8 +303,19 @@
       "offline_equivalent": "Inspect the scenario and its documented quirks.",
       "rehearsal": null,
       "requires_windows": false,
+      "skills": [
+        "e2e-medallion-architecture"
+      ],
       "title": "Profile the source data locally",
       "tool_path": {
+        "fallback": {
+          "label": "LOCAL",
+          "note": "",
+          "server": "ffia-local",
+          "tools": [
+            "inspect_healthcare_scenario"
+          ]
+        },
         "provider": "Local Python (not a cloud call)",
         "server": null,
         "substitution_allowed": false,
@@ -287,8 +343,20 @@
       "offline_equivalent": "Compare with the local Bronze SQL and build.",
       "rehearsal": null,
       "requires_windows": false,
+      "skills": [
+        "e2e-medallion-architecture",
+        "spark-cli"
+      ],
       "title": "Draft the Bronze notebook (no execution)",
       "tool_path": {
+        "fallback": {
+          "label": "LOCAL",
+          "note": "",
+          "server": "ffia-local",
+          "tools": [
+            "inspect_medallion_architecture"
+          ]
+        },
         "provider": "Local editor",
         "server": null,
         "substitution_allowed": false,
@@ -328,8 +396,19 @@
         "operation": "create_notebook"
       },
       "requires_windows": false,
+      "skills": [
+        "spark-cli"
+      ],
       "title": "Publish and run Bronze on Fabric Spark",
       "tool_path": {
+        "fallback": {
+          "label": "SIMULATED",
+          "note": "Rehearses publishing the notebook; the local Bronze build is `ffia data build`.",
+          "server": "ffia-local",
+          "tools": [
+            "generate_fabric_change_plan"
+          ]
+        },
         "provider": "Fabric Data Engineering extension",
         "server": null,
         "substitution_allowed": false,
@@ -367,8 +446,22 @@
         "operation": "create_notebook"
       },
       "requires_windows": false,
+      "skills": [
+        "e2e-medallion-architecture",
+        "spark-cli"
+      ],
       "title": "Design, draft, publish and run Silver",
       "tool_path": {
+        "fallback": {
+          "label": "SIMULATED",
+          "note": "Diagnostics read the local Silver tables; publishing is rehearsed.",
+          "server": "ffia-local",
+          "tools": [
+            "generate_fabric_change_plan",
+            "detect_duplicate_records",
+            "preview_table"
+          ]
+        },
         "provider": "Fabric Data Engineering extension",
         "server": null,
         "substitution_allowed": false,
@@ -407,8 +500,22 @@
         "operation": "create_notebook"
       },
       "requires_windows": false,
+      "skills": [
+        "e2e-medallion-architecture",
+        "spark-cli"
+      ],
       "title": "Design, draft, publish and run Gold",
       "tool_path": {
+        "fallback": {
+          "label": "SIMULATED",
+          "note": "Reads the local Gold tables; publishing is rehearsed.",
+          "server": "ffia-local",
+          "tools": [
+            "generate_fabric_change_plan",
+            "inspect_medallion_architecture",
+            "evaluate_measures"
+          ]
+        },
         "provider": "Fabric Data Engineering extension",
         "server": null,
         "substitution_allowed": false,
@@ -444,8 +551,20 @@
         "operation": "create_semantic_model"
       },
       "requires_windows": false,
+      "skills": [
+        "semantic-model-authoring"
+      ],
       "title": "Bootstrap and connect the Direct Lake semantic model",
       "tool_path": {
+        "fallback": {
+          "label": "SIMULATED",
+          "note": "Rehearses the model creation; measures evaluate locally.",
+          "server": "ffia-local",
+          "tools": [
+            "generate_fabric_change_plan",
+            "evaluate_measures"
+          ]
+        },
         "provider": "Power BI Authoring MCP (local)",
         "server": "powerbi-modeling-mcp",
         "substitution_allowed": false,
@@ -483,8 +602,20 @@
         "operation": "update_semantic_model"
       },
       "requires_windows": false,
+      "skills": [
+        "semantic-model-authoring"
+      ],
       "title": "Apply relationships and measures, then reconcile DAX",
       "tool_path": {
+        "fallback": {
+          "label": "SIMULATED",
+          "note": "Rehearses the model change; the baseline check runs locally.",
+          "server": "ffia-local",
+          "tools": [
+            "generate_fabric_change_plan",
+            "evaluate_against_baseline"
+          ]
+        },
         "provider": "Power BI Authoring MCP (local)",
         "server": "powerbi-modeling-mcp",
         "substitution_allowed": false,
@@ -516,8 +647,20 @@
       "offline_equivalent": "Compare the live model with the semantic model contract and vocabulary.",
       "rehearsal": null,
       "requires_windows": false,
+      "skills": [
+        "semantic-model-authoring"
+      ],
       "title": "Review the model (read-only)",
       "tool_path": {
+        "fallback": {
+          "label": "LOCAL",
+          "note": "",
+          "server": "ffia-local",
+          "tools": [
+            "evaluate_against_baseline",
+            "evaluate_measures"
+          ]
+        },
         "provider": "Power BI authoring skills + Power BI Authoring MCP",
         "server": "powerbi-modeling-mcp",
         "substitution_allowed": false,
@@ -555,8 +698,12 @@
         "operation": "publish_report"
       },
       "requires_windows": true,
+      "skills": [
+        "powerbi-report-cli"
+      ],
       "title": "Plan, build, preview and publish the report",
       "tool_path": {
+        "fallback": null,
         "provider": "Power BI authoring skills",
         "server": null,
         "substitution_allowed": false,
@@ -594,8 +741,18 @@
       "offline_equivalent": "Run the offline demo, which prints LIVE versus SIMULATED evidence.",
       "rehearsal": null,
       "requires_windows": false,
+      "skills": [],
       "title": "Final read-only validation",
       "tool_path": {
+        "fallback": {
+          "label": "LOCAL",
+          "note": "",
+          "server": "ffia-local",
+          "tools": [
+            "get_runtime_status",
+            "evaluate_against_baseline"
+          ]
+        },
         "provider": "Mixed: Fabric MCP, Power BI Authoring MCP and the Fabric portal",
         "server": null,
         "substitution_allowed": false,
@@ -629,8 +786,18 @@
       "offline_equivalent": "Inject a Fabric outage and watch the circuit breaker and fallback.",
       "rehearsal": null,
       "requires_windows": false,
+      "skills": [],
       "title": "Troubleshoot credentials and tooling",
       "tool_path": {
+        "fallback": {
+          "label": "LOCAL",
+          "note": "",
+          "server": "ffia-local",
+          "tools": [
+            "get_runtime_status",
+            "get_audit_record"
+          ]
+        },
         "provider": "Local workstation",
         "server": null,
         "substitution_allowed": false,

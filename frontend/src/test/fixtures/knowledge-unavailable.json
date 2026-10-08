@@ -1,6 +1,6 @@
 {
   "cloud_operation_performed": false,
-  "correlation_id": "78062631d8e6418a9fb2455fe2e6a8f6",
+  "correlation_id": "d435a9e720d84ac8921e7b048c0929bd",
   "data": {
     "enabled": false,
     "knowledge_base": "mfg-sales-v1",
@@ -19,5 +19,5 @@
   "selected_provider": "none",
   "simulation_notice": null,
   "teaching_objective": "Documents answer policy questions with citations; numbers come from governed data.",
-  "timestamp": "2026-10-08T18:21:25.111604Z"
+  "timestamp": "2026-10-08T21:21:14.809758Z"
 }

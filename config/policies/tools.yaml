@@ -113,6 +113,36 @@ tools:
   enabled: true
   failure_policy: return-error-no-fallback-for-writes
   revocation: 'Set enabled: false in config/policies/tools.yaml and restart the server.'
+- name: list_fabric_workspaces
+  description: Fallback for Fabric MCP core_search-catalog / onelake_list-workspaces. List workspaces through the provider router (LOCAL offline; live Fabric REST metadata with labeled fallback when opted in).
+  owner: accelerator-maintainers
+  version: 1.0.0
+  classification: synthetic-data
+  identity: local-process; reads live Fabric metadata only when FFIA_FABRIC_LIVE=1 in a hybrid environment, as the signed-in Azure CLI user
+  allowed_operations:
+  - read
+  read_only: true
+  rate_limit_per_minute: 30
+  timeout_seconds: 60
+  audit: true
+  enabled: true
+  failure_policy: return-error-no-fallback-for-writes
+  revocation: 'Set enabled: false in config/policies/tools.yaml and restart the server.'
+- name: list_fabric_items
+  description: Fallback for Fabric MCP onelake_list-items. List lakehouses and semantic models in a workspace through the provider router. Metadata only.
+  owner: accelerator-maintainers
+  version: 1.0.0
+  classification: synthetic-data
+  identity: local-process; reads live Fabric metadata only when FFIA_FABRIC_LIVE=1 in a hybrid environment, as the signed-in Azure CLI user
+  allowed_operations:
+  - read
+  read_only: true
+  rate_limit_per_minute: 30
+  timeout_seconds: 60
+  audit: true
+  enabled: true
+  failure_policy: return-error-no-fallback-for-writes
+  revocation: 'Set enabled: false in config/policies/tools.yaml and restart the server.'
 - name: evaluate_measures
   description: Evaluate declared semantic-model measures by name. No free-form SQL or DAX.
   owner: accelerator-maintainers

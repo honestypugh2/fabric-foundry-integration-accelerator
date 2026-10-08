@@ -31,10 +31,10 @@ checks:
     question: Someone adds a write-capable preview MCP server to the default profile. What stops it?
     choices:
       - Nothing; the client will ask for approval later
-      - ffia mcp check fails because the default profile must be LOCAL and read-only
+      - ffia mcp check fails because the default profile must be read-only and use only GA servers
       - The MCP server refuses to start
     answer: 1
-    explanation: The profile check runs in make validate and CI and rejects a default profile that writes or is not LOCAL.
+    explanation: The profile check runs in make validate and CI and rejects a default profile that writes, contains a PREVIEW server, or drops the ffia-local fallback.
   - id: l400-promotion
     level: l400
     question: Which promotion path keeps the default experience stable when a preview feature reaches GA?

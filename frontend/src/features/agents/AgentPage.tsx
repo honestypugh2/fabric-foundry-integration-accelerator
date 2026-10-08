@@ -346,6 +346,12 @@ function EvaluateAgent({ profile }: { readonly profile: AgentProfile }) {
               <Badge key={label} value={label} />
             ))}
           </p>
+          {report.fallback_cases > 0 ? (
+            <p className="notice" role="note">
+              {report.fallback_cases} case(s) were answered by the fallback provider, so they did
+              not evaluate the requested agent and count as failed.
+            </p>
+          ) : null}
           <div className="table-scroll" tabIndex={0} role="region" aria-label="Agent evaluation">
             <table>
               <caption>Agent evaluation cases (synthetic data)</caption>
@@ -355,6 +361,7 @@ function EvaluateAgent({ profile }: { readonly profile: AgentProfile }) {
                   <th scope="col">Question</th>
                   <th scope="col">Grounded</th>
                   <th scope="col">Label</th>
+                  <th scope="col">Served by</th>
                   <th scope="col">Missing values</th>
                   <th scope="col">Result</th>
                 </tr>
@@ -368,6 +375,7 @@ function EvaluateAgent({ profile }: { readonly profile: AgentProfile }) {
                     <td>{row.question}</td>
                     <td>{row.grounded ? "Yes" : "No"}</td>
                     <td>{row.label}</td>
+                    <td>{row.provider}</td>
                     <td>{row.missing.length === 0 ? "None" : row.missing.join(", ")}</td>
                     <td>{row.passed ? "Pass" : "Fail"}</td>
                   </tr>

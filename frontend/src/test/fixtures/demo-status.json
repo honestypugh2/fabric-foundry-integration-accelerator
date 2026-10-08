@@ -42,7 +42,7 @@
     },
     {
       "component": "MCP Server",
-      "detail": "15 allow-listed tools (in-process MCP call)",
+      "detail": "17 allow-listed tools (in-process MCP call)",
       "status": "READY"
     }
   ],

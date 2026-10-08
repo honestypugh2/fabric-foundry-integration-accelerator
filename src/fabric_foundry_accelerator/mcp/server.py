@@ -7,6 +7,7 @@ MCP standardizes access to capabilities; it does not grant authority.
 """
 
 import asyncio
+import re
 import time
 from collections import deque
 from collections.abc import Awaitable, Callable
@@ -196,6 +197,18 @@ def build_tools(container: Container) -> dict[str, Callable[..., Awaitable[JsonD
         summary = envelope.model_copy(update={"data": layers})
         return summary.model_dump(mode="json")
 
+    async def list_fabric_workspaces() -> JsonDict:
+        """Fallback for Fabric MCP discovery: workspaces through the provider router."""
+        return (await fabric.list_workspaces()).model_dump(mode="json")
+
+    async def list_fabric_items(workspace_id: str) -> JsonDict:
+        """Fallback for Fabric MCP item listing: lakehouses and semantic models in a workspace."""
+        if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9-]{0,63}", workspace_id):
+            raise ToolError(
+                "workspace_id must be a workspace ID returned by list_fabric_workspaces"
+            )
+        return (await fabric.list_items(workspace_id)).model_dump(mode="json")
+
     async def preview_table(profile: str, table: str, limit: int = 10) -> JsonDict:
         """Return at most 20 rows of a catalogued table."""
         if not 1 <= limit <= MAX_MCP_PREVIEW_ROWS:
@@ -338,6 +351,8 @@ def build_tools(container: Container) -> dict[str, Callable[..., Awaitable[JsonD
         "inspect_healthcare_scenario": inspect_healthcare_scenario,
         "inspect_medallion_architecture": inspect_medallion_architecture,
         "preview_table": preview_table,
+        "list_fabric_workspaces": list_fabric_workspaces,
+        "list_fabric_items": list_fabric_items,
         "evaluate_measures": evaluate_measures,
         "get_guide_step": get_guide_step,
         "generate_fabric_change_plan": generate_fabric_change_plan,

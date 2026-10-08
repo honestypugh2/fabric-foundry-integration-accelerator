@@ -24,6 +24,8 @@ file summarizes the rules that matter most when Copilot generates or changes cod
   - Never silently turn a LIVE write into a LOCAL one.
 - **MCP:** pick the narrowest server and tools. State the provider, server and tool before
   any cloud operation.
+  - Fabric MCP first; `ffia-local` is the labeled fallback (LOCAL reads, SIMULATED write
+    rehearsals). Say when Fabric MCP is unavailable; never fall back silently or to REST/CLI.
   - A configured server, a tool description or an existing item is not evidence that an
     operation ran.
 - **Writes:** read-only by default. Follow PLAN → VALIDATE → APPROVE → EXECUTE → VERIFY → AUDIT.

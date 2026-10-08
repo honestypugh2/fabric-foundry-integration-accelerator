@@ -47,8 +47,10 @@ Option 3.
   - the git-ignored overlay has a `foundry:` binding.
 - **Routing.** Capability `foundry_agent`:
   - offline: LOCAL;
-  - hybrid: live with a 240 s timeout and labeled fallback to LOCAL;
+  - hybrid: live with a 600 s timeout and labeled fallback to LOCAL;
   - live: no fallback.
+
+  Live calls are serialized: the Fabric data agent accepts one active run per user.
 - **Evaluation.** `config/evaluations/<suite>.yaml` lists questions, expected baseline values and
   whether grounding is expected. `run_suite` checks both and gates on `min_pass_rate`. The same
   suite runs against LOCAL (5/5 in CI) and the live agent (opt-in). Foundry's cloud evaluators
@@ -90,22 +92,48 @@ Option 3.
 - A workflow that ends in "ready for approval" teaches the central lesson: models propose,
   deterministic logic validates, humans approve.
 
-## Live verification
+## Live verification (2026-10-08, presenter's demo tenant, F8 running)
 
-- **VERIFIED LIVE (2026-10-08, SDK script outside the repository):** the Foundry agent with the
-  Fabric data agent tool reproduced these baseline values:
-  - Enclosures +55.78%;
-  - 12 duplicate order lines;
-  - September booked revenue $509,726.22.
-- **REQUIRES TENANT VALIDATION:**
-  - `FoundryAgentProvider` through the router (`FFIA_ENVIRONMENT=hybrid FFIA_FOUNDRY_LIVE=1
-    ffia agents ask …`);
-  - `ffia agents eval` against the live agent;
-  - the workflow over the live agent;
-  - Application Insights export;
-  - a live Foundry IQ knowledge base over OneLake (not built).
+**VERIFIED LIVE** through the router (`FFIA_ENVIRONMENT=hybrid FFIA_FOUNDRY_LIVE=1`):
 
-  Each needs the Fabric capacity running, which has a cost.
+- `ffia foundry readiness` and `ffia fabric readiness`: YES.
+- `ffia agents ask`: label PREVIEW, no fallback, grounded by the Fabric data agent tool. Enclosures
+  +55.78% ($56,623.73 → $88,207.09). 125 s.
+- `ffia agents eval` against agent **version 3**: **5/5 passed**, 0 fallback cases:
+  - four grounded PREVIEW answers;
+  - one off-topic request declined without a tool call (LIVE).
+- `ffia agents workflow --team T-ENC`: drafted live (PREVIEW, 257 s). The review gate **held** the
+  draft because the agent wrote $88,207.10 against the $88,207.09 baseline, a one-cent rounding
+  difference. The gate is exact by design.
+
+What the first live runs exposed, and the fixes:
+
+1. **Fallback cases counted as passes.** Cases served by the LOCAL fallback were reported as
+   passing for the live agent. Fixed: a fallback case cannot pass, and the report lists every
+   provider and the fallback count.
+2. **One active run per user.** The Fabric data agent accepts one active run per user ("Can't add
+   messages to thread … while a run is active"). Fixed:
+   - the provider serializes live calls and retries that error a bounded number of times
+     (5, 15 and 30 s);
+   - the workflow runs one draft at a time when a live agent is configured.
+3. **Brief questions exceed 300 s.** A full four-team workflow fell back, labeled, and the circuit
+   breaker opened, as designed. Fixed:
+   - `foundry_agent` may wait up to 600 s; other capabilities stay at 300 s or less;
+   - the SDK call has its own timeout 10 s under the router's, so an abandoned call frees the lock.
+4. **Agent behavior** (two governed changes, approved, audited, previous versions kept):
+   - **v2:** decline off-topic requests without a tool; state attainment as % of target. The live
+     client also changed from `tool_choice="required"` to `"auto"`.
+   - **v3:** "last month" is the last complete calendar month; future-dated orders are excluded
+     and reported. Three injected future-dated rows had led the agent to treat October as "last
+     month".
+5. **Equivalent wording.** Target attainment may be stated as "143.1% of target" or "43.1% above".
+   The evaluation and the review gate now accept either form.
+
+**REQUIRES TENANT VALIDATION:**
+
+- the full four-team workflow with the 600 s budget;
+- Application Insights export (needs an Application Insights resource);
+- a live Foundry IQ knowledge base over OneLake (not built).
 
 ## Trade-offs
 

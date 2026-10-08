@@ -79,10 +79,10 @@ def test_local_workflow_drafts_every_team_and_sends_nothing() -> None:
     assert (run.ready, run.held) == (4, 0)
     assert run.labels == ("LOCAL",)
     assert "agent-framework-core" in run.engine
-    assert run.delivery.startswith("Not sent.")
+    assert run.delivery.startswith("Not sent.") and run.max_concurrency == 4
     assert all(d.status is BriefStatus.READY and not d.missing for d in run.drafts)
     enclosures = run.drafts[0]
-    assert enclosures.expected == ("88207.09", "143.1")
+    assert enclosures.expected == ("88207.09", "143.1 or 43.1")
     assert run.observation_month == "2026-09-01"
 
 
@@ -93,12 +93,18 @@ def test_team_filter_and_concurrent_drafting() -> None:
 
     def correct(question: str) -> str:
         team = next(t for t, name in names.items() if name in question)
-        return " and ".join(expected_values(baseline, team))
+        values = expected_values(baseline, team)
+        return " and ".join(v if isinstance(v, str) else v[-1] for v in values)
 
     agent = ScriptedAgent(correct)
     run = asyncio.run(run_monthly_insights(agent, DATA_ROOT, MonthlyInsightsRequest()))
     assert run.ready == 4
     assert agent.peak > 1, "drafters should run concurrently (fan-out)"
+    serial = ScriptedAgent(correct)
+    asyncio.run(
+        run_monthly_insights(serial, DATA_ROOT, MonthlyInsightsRequest(), max_concurrency=1)
+    )
+    assert serial.peak == 1, "a live agent gets one draft at a time"
     single = asyncio.run(
         run_monthly_insights(agent, DATA_ROOT, MonthlyInsightsRequest(teams=("T-KEY",)))
     )
@@ -124,7 +130,7 @@ def test_gate_holds_ungrounded_and_wrong_numbers() -> None:
     )
     draft = wrong.drafts[0]
     assert draft.status is BriefStatus.HELD
-    assert draft.missing == ("143.1",)
+    assert draft.missing == ("143.1 or 43.1",)
     assert (wrong.ready, wrong.held) == (0, 1)
 
 

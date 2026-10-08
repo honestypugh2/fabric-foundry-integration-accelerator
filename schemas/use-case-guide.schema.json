@@ -1,5 +1,44 @@
 {
   "$defs": {
+    "Fallback": {
+      "additionalProperties": false,
+      "description": "The labeled local equivalent an agent may use when the step's primary tool is unavailable.\n\nIt is never silent: the agent first says the primary tool is unavailable. Read steps fall back\nto LOCAL reads; write steps only to a SIMULATED rehearsal, never to a local write.",
+      "properties": {
+        "label": {
+          "enum": [
+            "LOCAL",
+            "SIMULATED"
+          ],
+          "title": "Label",
+          "type": "string"
+        },
+        "note": {
+          "default": "",
+          "title": "Note",
+          "type": "string"
+        },
+        "server": {
+          "const": "ffia-local",
+          "default": "ffia-local",
+          "title": "Server",
+          "type": "string"
+        },
+        "tools": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Tools",
+          "type": "array"
+        }
+      },
+      "required": [
+        "tools",
+        "label"
+      ],
+      "title": "Fallback",
+      "type": "object"
+    },
     "GuideProvenance": {
       "additionalProperties": false,
       "description": "Sanitized provenance. Never names, titles, authors, identifiers or URLs.",
@@ -123,6 +162,14 @@
           "title": "Requires Windows",
           "type": "boolean"
         },
+        "skills": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Skills",
+          "type": "array"
+        },
         "title": {
           "title": "Title",
           "type": "string"
@@ -194,6 +241,17 @@
       "additionalProperties": false,
       "description": "The provider, server and tool a step must use. Substitution is not allowed.",
       "properties": {
+        "fallback": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Fallback"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "provider": {
           "title": "Provider",
           "type": "string"

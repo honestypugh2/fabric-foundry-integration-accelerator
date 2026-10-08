@@ -25,6 +25,7 @@ servers:
     version: "1.4.0"
     args: [server, start]
     catalog: catalog/fabric-mcp-1.4.0.yaml
+    status: GA
     description: >-
       Microsoft Fabric MCP server (local). Docs tools run offline; OneLake, Core and Data Factory
       tools call the tenant as the signed-in user.
@@ -45,11 +46,37 @@ never_read_only:
     reason: copies lakehouse data out of OneLake; read-only profiles stay at metadata
 
 profiles:
-  offline:
-    title: Offline teaching (default)
-    purpose: The default demo. Documentation plus this repository's local MCP server; no tenant.
-    execution_label: LOCAL
+  fabric-first:
+    title: Fabric MCP first, local fallback (default)
+    purpose: >-
+      The repository default for GitHub Copilot and Claude Code. Real Fabric MCP read-only tools
+      answer "what is" from the signed-in tenant (metadata only, no writes, no data download, no
+      queries). When Fabric MCP is unavailable (not signed in, no capacity, server down), the agent
+      says so and uses the named ffia-local equivalent, labeled LOCAL. Writes are never here.
+    execution_label: LIVE
     default: true
+    fallback: ffia-local
+    requires: [az login --tenant <demo tenant> for LIVE answers; nothing for the LOCAL fallback]
+    servers:
+      microsoft-learn: {}
+      fabric-mcp:
+        read_only: true
+        tools:
+          - docs_item-definitions
+          - docs_best-practices
+          - core_search-catalog
+          - onelake_list-workspaces
+          - onelake_list-items
+          - onelake_list-files
+          - onelake_list-tables
+          - onelake_get-table
+      ffia-local: {}
+
+  offline:
+    title: Offline teaching (no tenant)
+    purpose: Documentation plus this repository's local MCP server; no tenant, no Fabric MCP.
+    execution_label: LOCAL
+    fallback: ffia-local
     servers:
       microsoft-learn: {}
       ffia-local: {}
@@ -137,6 +164,8 @@ profiles:
     execution_label: LIVE
     approval: per-call
     requires: [dedicated dev workspace, explicit human approval for each write call, the guide's duplicate and empty-folder checks]
+    # Reads fall back to ffia-local (labeled LOCAL); a failed write stops and is never redirected.
+    fallback: ffia-local
     servers:
       fabric-mcp:
         read_only: false
@@ -153,6 +182,7 @@ profiles:
             reason: >-
               Marked destructive because it can overwrite a file. HC-01 step 05 lists Files/raw first,
               stops if it is not empty, and uploads with overwrite set to false.
+      ffia-local: {}
 
 # Committed client configurations that must equal a rendered profile (checked by `ffia mcp check`).
 rendered_files:

@@ -7,7 +7,14 @@ the narrowest servers and tools for one job. ``check_profiles`` enforces the rep
 - read-only profiles start servers with ``--read-only`` and an explicit allow-list;
 - tools that run arbitrary queries or copy data out never appear in a read-only profile;
 - every write-capable profile is opt-in and requires per-call human approval;
+- the default profile is read-only, uses only GA servers, and names ``ffia-local`` as its labeled
+  fallback;
+- every committed client configuration names a fallback server it includes;
 - the committed project ``.mcp.json`` is exactly the rendered default profile.
+
+A fallback is an instruction, not automatic failover: when a Fabric MCP tool is unavailable the
+agent says so and uses the named local equivalent, labeled LOCAL or SIMULATED. Writes never fall
+back.
 """
 
 import json
@@ -30,6 +37,7 @@ CLIENT_FILES: dict[McpClient, str] = {
 EXACT_VERSION = re.compile(r"^\d+\.\d+\.\d+$")
 FORBIDDEN_ARGS = ("--dangerously", "--accept-eula", "--accepteula", "@latest")
 PROJECT_MCP_FILE = ".mcp.json"
+LOCAL_FALLBACK = "ffia-local"
 
 
 class ServerSpec(BaseModel):
@@ -45,6 +53,7 @@ class ServerSpec(BaseModel):
     version: str | None = None
     args: tuple[str, ...] = ()
     catalog: str | None = None
+    status: Literal["GA", "PREVIEW"] = "GA"
 
 
 class DestructiveException(BaseModel):
@@ -77,6 +86,8 @@ class Profile(BaseModel):
     default: bool = False
     approval: Literal["none", "per-call"] = "none"
     requires: tuple[str, ...] = ()
+    # The server an agent uses, labeled, when a primary tool is unavailable. Reads only.
+    fallback: str | None = None
     servers: dict[str, ProfileServer]
 
     @property
@@ -284,6 +295,36 @@ def _check_usage(
     return errors
 
 
+def _check_default(profiles: McpProfiles, default: str) -> list[str]:
+    errors: list[str] = []
+    default_profile = profiles.profiles[default]
+    if default_profile.writes or default_profile.fallback != LOCAL_FALLBACK:
+        errors.append(
+            f"default profile {default}: must be read-only with fallback {LOCAL_FALLBACK}"
+        )
+    preview = sorted(
+        name
+        for name in default_profile.servers
+        if name in profiles.servers and profiles.servers[name].status == "PREVIEW"
+    )
+    if preview:
+        errors.append(f"default profile {default}: preview servers are opt-in only: {preview}")
+    return errors
+
+
+def _check_fallbacks(profiles: McpProfiles) -> list[str]:
+    errors: list[str] = []
+    for name, profile in profiles.profiles.items():
+        fallback = profile.fallback
+        if fallback is not None and (
+            fallback not in profile.servers or profiles.servers[fallback].package
+        ):
+            errors.append(
+                f"profile {name}: fallback {fallback!r} must be a local server in the profile"
+            )
+    return errors
+
+
 def check_profiles(config_root: Path, repo_root: Path) -> list[str]:
     """Return every rule violation; an empty list means the profiles are valid."""
     profiles = load_profiles(config_root)
@@ -301,11 +342,8 @@ def check_profiles(config_root: Path, repo_root: Path) -> list[str]:
         default = profiles.default_profile()
     except ValueError as error:
         return [*errors, str(error)]
-    if (
-        profiles.profiles[default].writes
-        or profiles.profiles[default].execution_label is not ExecutionLabel.LOCAL
-    ):
-        errors.append(f"default profile {default}: must be LOCAL and read-only")
+    errors += _check_default(profiles, default)
+    errors += _check_fallbacks(profiles)
     for profile_name, profile in profiles.profiles.items():
         for server_name, usage in profile.servers.items():
             errors += _check_usage(profiles, profile_name, profile, server_name, usage, catalogs)
@@ -317,6 +355,8 @@ def check_profiles(config_root: Path, repo_root: Path) -> list[str]:
         if target.profile not in profiles.profiles:
             errors.append(f"{target.path}: unknown profile {target.profile!r}")
             continue
+        if profiles.profiles[target.profile].fallback is None:
+            errors.append(f"{target.path}: profile {target.profile!r} must name a fallback server")
         path = repo_root / target.path
         expected = render(profiles, target.profile, target.client)
         if not path.is_file() or json.loads(path.read_text(encoding="utf-8")) != expected:

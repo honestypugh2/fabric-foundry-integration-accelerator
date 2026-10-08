@@ -56,6 +56,10 @@
             "title": "Answer Excerpt",
             "type": "string"
           },
+          "fallback_used": {
+            "title": "Fallback Used",
+            "type": "boolean"
+          },
           "grounded": {
             "title": "Grounded",
             "type": "boolean"
@@ -79,6 +83,10 @@
             "title": "Passed",
             "type": "boolean"
           },
+          "provider": {
+            "title": "Provider",
+            "type": "string"
+          },
           "question": {
             "title": "Question",
             "type": "string"
@@ -99,7 +107,9 @@
           "missing",
           "label",
           "answer_excerpt",
-          "tools"
+          "tools",
+          "provider",
+          "fallback_used"
         ],
         "title": "AgentCaseResult",
         "type": "object"
@@ -122,6 +132,10 @@
           "evaluation_id": {
             "title": "Evaluation Id",
             "type": "string"
+          },
+          "fallback_cases": {
+            "title": "Fallback Cases",
+            "type": "integer"
           },
           "gate_passed": {
             "title": "Gate Passed",
@@ -163,6 +177,7 @@
           "suite",
           "provider",
           "labels",
+          "fallback_cases",
           "compared",
           "passed",
           "pass_rate",
@@ -2530,6 +2545,45 @@
         "title": "FabricTarget",
         "type": "object"
       },
+      "Fallback": {
+        "additionalProperties": false,
+        "description": "The labeled local equivalent an agent may use when the step's primary tool is unavailable.\n\nIt is never silent: the agent first says the primary tool is unavailable. Read steps fall back\nto LOCAL reads; write steps only to a SIMULATED rehearsal, never to a local write.",
+        "properties": {
+          "label": {
+            "enum": [
+              "LOCAL",
+              "SIMULATED"
+            ],
+            "title": "Label",
+            "type": "string"
+          },
+          "note": {
+            "default": "",
+            "title": "Note",
+            "type": "string"
+          },
+          "server": {
+            "const": "ffia-local",
+            "default": "ffia-local",
+            "title": "Server",
+            "type": "string"
+          },
+          "tools": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Tools",
+            "type": "array"
+          }
+        },
+        "required": [
+          "tools",
+          "label"
+        ],
+        "title": "Fallback",
+        "type": "object"
+      },
       "GetSemanticModel": {
         "additionalProperties": false,
         "description": "Return a semantic model.",
@@ -2671,6 +2725,14 @@
             "default": false,
             "title": "Requires Windows",
             "type": "boolean"
+          },
+          "skills": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Skills",
+            "type": "array"
           },
           "title": {
             "title": "Title",
@@ -3554,6 +3616,10 @@
             "title": "Labels",
             "type": "array"
           },
+          "max_concurrency": {
+            "title": "Max Concurrency",
+            "type": "integer"
+          },
           "observation_month": {
             "title": "Observation Month",
             "type": "string"
@@ -3588,6 +3654,7 @@
           "dataset_profile",
           "observation_month",
           "steps",
+          "max_concurrency",
           "drafts",
           "ready",
           "held",
@@ -4736,6 +4803,16 @@
         "additionalProperties": false,
         "description": "The provider, server and tool a step must use. Substitution is not allowed.",
         "properties": {
+          "fallback": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Fallback"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "provider": {
             "title": "Provider",
             "type": "string"

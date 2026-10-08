@@ -31,7 +31,11 @@ def test_committed_profiles_and_project_file_are_valid() -> None:
     assert lab.approval == "per-call" and not lab.default
     assert [e.tool for e in lab.servers["fabric-mcp"].allow_destructive] == ["onelake_upload-file"]
     profiles = load_profiles(CONFIG_ROOT)
-    assert profiles.default_profile() == "offline"
+    assert profiles.default_profile() == "fabric-first"
+    default = profiles.profiles["fabric-first"]
+    assert not default.writes and default.fallback == "ffia-local"
+    assert default.servers["fabric-mcp"].read_only is True
+    assert lab.fallback == "ffia-local" and "ffia-local" in lab.servers
     assert not profiles.profiles["offline"].writes
     assert profiles.profiles["fabric-authoring-gated"].writes
 
@@ -51,7 +55,7 @@ def test_render_shapes_per_client() -> None:
     profiles = load_profiles(CONFIG_ROOT)
     vscode = render(profiles, "offline", "vscode")
     assert set(vscode) == {"servers"}
-    claude = render(profiles, "offline", "claude")
+    claude = render(profiles, "fabric-first", "claude")
     assert (
         claude["mcpServers"]
         == json.loads((REPO_ROOT / ".mcp.json").read_text(encoding="utf-8"))["mcpServers"]
@@ -72,7 +76,7 @@ def _write(
     shutil.copytree(CONFIG_ROOT / "mcp" / "catalog", config / "mcp" / "catalog")
     (config / "mcp" / "profiles.yaml").write_text(yaml.safe_dump(data), encoding="utf-8")
     if project is None:
-        project = render(load_profiles(CONFIG_ROOT), "offline", "claude")
+        project = render(load_profiles(CONFIG_ROOT), "fabric-first", "claude")
     (tmp_path / ".mcp.json").write_text(json.dumps(project), encoding="utf-8")
     committed = load_profiles(CONFIG_ROOT)
     for target in committed.rendered_files:
@@ -148,7 +152,14 @@ def _readonly_tools(*tools: str) -> Mutation:
         (_set("profiles.fabric-readonly.servers.fabric-mcp.read_only", None), "declare read_only"),
         (_set("profiles.fabric-docs.servers.nope", {}), "unknown server"),
         (_set("profiles.offline.servers.ffia-local", {"tools": ["x"]}), "no pinned catalog"),
-        (_set("profiles.offline.execution_label", "LIVE"), "must be LOCAL and read-only"),
+        (
+            _set("profiles.fabric-first.servers.fabric-mcp.read_only", False),
+            "must be read-only with fallback ffia-local",
+        ),
+        (_set("profiles.fabric-first.fallback", None), "must be read-only with fallback"),
+        (_set("servers.fabric-mcp.status", "PREVIEW"), "preview servers are opt-in only"),
+        (_set("profiles.hc01-lab.fallback", "fabric-mcp"), "must be a local server in the profile"),
+        (_set("profiles.hc01-lab.fallback", None), "must name a fallback server"),
         (_set("profiles.fabric-docs.default", True), "exactly one default profile"),
     ],
 )
@@ -172,7 +183,7 @@ def test_catalog_must_match_the_pin(tmp_path: Path) -> None:
 def test_stale_project_file_is_reported(tmp_path: Path) -> None:
     errors = check_profiles(*_write(tmp_path, copy.deepcopy(BASE), project={"mcpServers": {}}))
     assert errors == [
-        ".mcp.json is stale; run `ffia mcp render offline --client claude --output .mcp.json`"
+        ".mcp.json is stale; run `ffia mcp render fabric-first --client claude --output .mcp.json`"
     ]
 
 

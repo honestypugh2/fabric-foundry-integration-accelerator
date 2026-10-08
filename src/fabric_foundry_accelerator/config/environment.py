@@ -1,16 +1,21 @@
 """Environment configuration: per-capability provider preference, fallback policy and limits."""
 
 from pathlib import Path
-from typing import Literal
+from typing import Literal, Self
 
 import yaml
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from fabric_foundry_accelerator.models.execution import OperatingMode
 
 Capability = Literal[
     "fabric_data", "semantic_model", "foundry_agent", "knowledge", "mcp", "evaluation", "audit"
 ]
+
+
+MAX_TIMEOUT_SECONDS = 300.0
+# A live agent's data tool can run several queries per answer; a team brief can exceed 300 s.
+LONG_RUNNING: frozenset[Capability] = frozenset({"foundry_agent"})
 
 
 class CapabilityPolicy(BaseModel):
@@ -20,7 +25,8 @@ class CapabilityPolicy(BaseModel):
 
     preferred: Literal["live", "local"]
     fallback: Literal["local", "none"]
-    timeout_seconds: float = Field(default=5.0, gt=0, le=300)
+    # Up to 600 s only for agent calls (checked below); everything else stays at or under 300 s.
+    timeout_seconds: float = Field(default=5.0, gt=0, le=600)
     max_retries: int = Field(default=1, ge=0, le=3)
     backoff_seconds: float = Field(default=0.2, ge=0, le=5)
 
@@ -44,6 +50,16 @@ class EnvironmentConfiguration(BaseModel):
     description: str
     capabilities: dict[Capability, CapabilityPolicy]
     circuit_breaker: CircuitBreakerPolicy = CircuitBreakerPolicy()
+
+    @model_validator(mode="after")
+    def _check_timeouts(self) -> Self:
+        for capability, policy in self.capabilities.items():
+            if capability not in LONG_RUNNING and policy.timeout_seconds > MAX_TIMEOUT_SECONDS:
+                raise ValueError(
+                    f"{capability}: timeout_seconds may exceed {MAX_TIMEOUT_SECONDS} only for "
+                    f"{sorted(LONG_RUNNING)}"
+                )
+        return self
 
     def policy(self, capability: Capability) -> CapabilityPolicy:
         """Return the policy for a capability (local-only when not configured)."""

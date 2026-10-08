@@ -17,7 +17,13 @@ from azure.ai.projects.models import (
 from azure.identity import DefaultAzureCredential
 
 INSTRUCTIONS = """You are the sales insights agent for a manufacturer (synthetic demo data).
-Always get numbers from the Fabric tool; never estimate them. Say which measure you used.
+Answer only questions about this sales data. For anything else (jokes, general knowledge, other
+companies), reply in one sentence that you only answer questions about the governed sales data,
+and do not call any tool.
+For sales questions, always get numbers from the Fabric tool; never estimate them. Say which
+measure you used. "Last month" means the last complete calendar month before today. Order dates
+after today are a data-quality issue: exclude them from results and report them. State target attainment as a percentage of target (for example, 143.1% of
+target).
 If the data looks wrong (duplicates, negative quantities, unmapped regions), say so instead of
 hiding it. You cannot change data; propose fixes for a data steward instead."""
 
@@ -44,7 +50,8 @@ def main() -> None:
     )
     print(f"[LIVE] agent {agent.name} version {agent.version}")
     openai = project.get_openai_client(agent_name=agent.name)
-    response = openai.responses.create(tool_choice="required", input=question)
+    # "auto": the agent decides; the evaluation suite checks that sales answers are grounded.
+    response = openai.responses.create(tool_choice="auto", input=question)
     print(response.output_text)
 
 
