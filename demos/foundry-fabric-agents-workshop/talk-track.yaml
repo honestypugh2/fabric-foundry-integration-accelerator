@@ -72,6 +72,7 @@ prerequisites:
       - "Open the repository; terminal in `.venv`. Open `demos/foundry-fabric-agents-workshop/code/fabric_sales_agent.py`."
       - "Environment variables set: `FOUNDRY_PROJECT_ENDPOINT`, `FOUNDRY_MODEL_DEPLOYMENT`, `FABRIC_CONNECTION_NAME`. Never show their values on screen."
       - "Run `ffia mfg brief --team T-ENC` once so the output is cached in the terminal history."
+      - "**Warm up the live agent 10 minutes before:** ask `sales-insights-agent` one question in the Foundry playground. The first Fabric tool call can take about 2.5 minutes; later calls take about 30 seconds."
 architecture:
   - view: mfg-01
     caption: "The workshop architecture. Fabric owns governed data and meaning; Foundry owns reasoning and orchestration; web data enters only through grounding; identity, guardrails and approval hold authority; tracing and evaluations prove what happened. Step through it in the app at `/architecture/mfg-01`."
@@ -141,7 +142,7 @@ parts:
         show:
           - "Ask: \"Which product line grew fastest in September compared with August, and by how much?\""
           - "Open the run details or trace: the Fabric tool call, the generated query, the answer."
-        check: "The answer names Enclosures (about +56% month over month on the synthetic data) and cites the measure."
+        check: "The answer names Enclosures, +55.78% ($56,623.73 → $88,207.09), and cites the measure. VERIFIED LIVE on 2026-10-08. Warm up first: the first call took about 2.5 minutes, the next about 30 seconds."
         fallback: "Offline: `ffia mfg brief --team T-ENC` (LOCAL). Say: the portal flow is the same agent and tool; we are showing the numbers it would read."
       - title: "Code-first: the same agent in Python"
         entry: vscode

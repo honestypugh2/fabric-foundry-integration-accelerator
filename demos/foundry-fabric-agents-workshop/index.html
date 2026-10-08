@@ -193,6 +193,7 @@ details.qa .ans{display:block}
 <li>Open the repository; terminal in <code>.venv</code>. Open <code>demos/foundry-fabric-agents-workshop/code/fabric_sales_agent.py</code>.</li>
 <li>Environment variables set: <code>FOUNDRY_PROJECT_ENDPOINT</code>, <code>FOUNDRY_MODEL_DEPLOYMENT</code>, <code>FABRIC_CONNECTION_NAME</code>. Never show their values on screen.</li>
 <li>Run <code>ffia mfg brief --team T-ENC</code> once so the output is cached in the terminal history.</li>
+<li><strong>Warm up the live agent 10 minutes before:</strong> ask <code>sales-insights-agent</code> one question in the Foundry playground. The first Fabric tool call can take about 2.5 minutes; later calls take about 30 seconds.</li>
 </ul>
 <h2 id="timing">Timing</h2><table><thead><tr><th>Segment</th><th>Minutes</th><th>Entry points</th><th style="width:30%"></th></tr></thead><tbody>
 <tr><td><a href="#foundry-and-fabric">Foundry capabilities and its relationship to Fabric</a></td><td>10</td><td>Accelerator web app, Conversation, Microsoft Fabric portal, Microsoft Foundry portal</td><td><div class="bar" style="width:16.7%"></div></td></tr>
@@ -270,7 +271,7 @@ details.qa .ans{display:block}
 <li>Ask: "Which product line grew fastest in September compared with August, and by how much?"</li>
 <li>Open the run details or trace: the Fabric tool call, the generated query, the answer.</li>
 </ul></div>
-<div class="chk"><span class="lbl">Checkpoint</span>The answer names Enclosures (about +56% month over month on the synthetic data) and cites the measure.</div>
+<div class="chk"><span class="lbl">Checkpoint</span>The answer names Enclosures, +55.78% ($56,623.73 → $88,207.09), and cites the measure. VERIFIED LIVE on 2026-10-08. Warm up first: the first call took about 2.5 minutes, the next about 30 seconds.</div>
 <div class="fb"><span class="lbl">Fallback</span>Offline: <code>ffia mfg brief --team T-ENC</code> (LOCAL). Say: the portal flow is the same agent and tool; we are showing the numbers it would read.</div>
 </div></article>
 <article class="step"><div class="step-h"><span class="step-n">6</span><span class="step-t">Code-first: the same agent in Python</span><span class="entry-tag">VS Code (code-first)</span><span class="chip chip--live">LIVE</span></div><div class="step-b"><div class="path">VS Code → demos/foundry-fabric-agents-workshop/code/fabric_sales_agent.py</div><div class="says"><span class="lbl">Say</span><p>"Same agent, as code. <code>AIProjectClient</code> connects to the project; <code>create_version</code> defines the agent with the Fabric tool; the responses API runs it. This is how you put agents in source control and CI/CD."</p><p>"GitHub Copilot is open on the side. Ask it to explain the file or add the monthly brief loop; it reads our repository instructions first."</p></div>

@@ -41,6 +41,8 @@ Each step is a cloud write. Plan, approve, execute, verify, audit.
 | B6 | Foundry project connection to the data agent (workspace ID + artifact ID) | Foundry portal → Management → Connected resources → Microsoft Fabric | Connection listed |
 | B7 | Create `sales-insights-agent` | `python demos/foundry-fabric-agents-workshop/code/fabric_sales_agent.py` | Answer names Enclosures as the fastest grower |
 
+**Status 2026-10-08: B1–B7 completed and verified live** (Enclosures +55.78% and 12 duplicate lines, matching the baseline). Warm up the agent 10 minutes before: the first call took about 2.5 minutes.
+
 **Go/no-go:** if B1–B7 aren't verified 15 minutes before the meeting, run Guide 2 in **hybrid**
 mode: the Foundry portal tour, the code walkthrough labeled REQUIRES TENANT VALIDATION, and
 `ffia mfg brief` / `ffia mfg quality` for the numbers (LOCAL).
