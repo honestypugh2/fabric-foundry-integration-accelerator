@@ -1,0 +1,5 @@
+team_id,team_name,focus_type,focus_values,brief_recipient
+T-STRMET,Structural & Metals,product_line,STR|MET,t-strmet-leads@example.com
+T-ENC,Enclosures,product_line,ENC,t-enc-leads@example.com
+T-HWFAB,Hardware & Fabrication,product_line,FAS|FAB,t-hwfab-leads@example.com
+T-KEY,Key Accounts,segment,Key Account,t-key-leads@example.com

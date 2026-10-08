@@ -13,6 +13,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 |---|---|---|---|
 | AI agents | [AI agent orchestration patterns](#ai-agent-orchestration) | GUIDANCE | 2026-10-07 |
 | Azure API Management | [Overview of MCP servers in Azure API Management](#apim-mcp) | GA | 2026-10-05 |
+| Azure Logic Apps | [Automate Microsoft Foundry agents with workflows in Azure Logic Apps](#logic-apps-foundry-agents) | PREVIEW | 2026-10-08 |
 | Developer experience | [How Claude remembers your project (CLAUDE.md and AGENTS.md)](#claude-code-memory) | GA | 2026-10-05 |
 | Developer experience | [Extend Claude with skills](#claude-code-skills) | GA | 2026-10-05 |
 | Developer experience | [GitHub Copilot CLI is now generally available](#copilot-cli-ga) | GA | 2026-10-05 |
@@ -22,7 +23,9 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Fabric IQ and Data Agents | [Fabric data agent concepts](#fabric-data-agent) | GA | 2026-10-05 |
 | Fabric IQ and Data Agents | [Ontology overview (Fabric IQ)](#fabric-iq-ontology) | PREVIEW | 2026-10-05 |
 | Fabric IQ and Data Agents | [What is Fabric IQ?](#fabric-iq-overview) | PREVIEW | 2026-10-05 |
+| Microsoft Agent 365 | [Overview of Microsoft Agent 365](#agent-365) | GA | 2026-10-08 |
 | Microsoft Agent Framework | [Microsoft Agent Framework overview](#agent-framework) | GA | 2026-10-05 |
+| Microsoft Fabric | [What is Fabric Activator?](#fabric-activator) | GA | 2026-10-08 |
 | Microsoft Fabric | [Tenants - List Tenant Settings (Fabric Admin REST API)](#fabric-admin-tenant-settings) | GA | 2026-10-07 |
 | Microsoft Fabric | [AI functions in Fabric](#fabric-ai-functions) | GA | 2026-10-05 |
 | Microsoft Fabric | [Items - Create Lakehouse (Fabric REST API)](#fabric-create-lakehouse) | GA | 2026-10-07 |
@@ -38,16 +41,27 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Microsoft Fabric | [Runtime 1.3 in Fabric](#fabric-runtime-1-3) | GA | 2026-10-07 |
 | Microsoft Fabric | [Fabric trial capacity](#fabric-trial) | GA | 2026-10-07 |
 | Microsoft Fabric | [Azure Well-Architected Framework service guide for Microsoft Fabric](#fabric-waf) | GUIDANCE | 2026-10-05 |
+| Microsoft Fabric | [Data quality in materialized lake views](#mlv-data-quality) | GA | 2026-10-08 |
+| Microsoft Fabric | [Detect, explore and validate functional dependencies in your data](#semantic-link-validate) | GA | 2026-10-08 |
 | Microsoft Fabric and Microsoft Foundry | [Data architecture for AI agents across your organization](#caf-agent-data-architecture) | GUIDANCE | 2026-10-07 |
 | Microsoft Foundry | [Baseline Microsoft Foundry chat reference architecture](#baseline-foundry-chat) | GUIDANCE | 2026-10-05 |
 | Microsoft Foundry | [Baseline Microsoft Foundry chat reference architecture in an Azure landing zone](#baseline-foundry-landing-zone) | GUIDANCE | 2026-10-07 |
 | Microsoft Foundry | [Basic Microsoft Foundry chat reference architecture](#basic-foundry-chat) | GUIDANCE | 2026-10-07 |
+| Microsoft Foundry | [Foundry Agent Service FAQ (pricing)](#foundry-agent-faq) | GA | 2026-10-08 |
+| Microsoft Foundry | [Agent identity concepts in Microsoft Foundry](#foundry-agent-identity) | GA | 2026-10-08 |
 | Microsoft Foundry | [Foundry Agent Service overview](#foundry-agent-service) | GA | 2026-10-05 |
+| Microsoft Foundry | [Use Grounding with Bing Search tools with the agents API](#foundry-bing-grounding) | GA | 2026-10-08 |
 | Microsoft Foundry | [Built-in evaluators in Microsoft Foundry](#foundry-evaluators) | GA | 2026-10-05 |
 | Microsoft Foundry | [Use the Microsoft Fabric data agent tool in Foundry Agent Service](#foundry-fabric-tool) | PREVIEW | 2026-10-05 |
+| Microsoft Foundry | [Add a human-in-the-loop approval step](#foundry-human-in-the-loop) | PREVIEW | 2026-10-08 |
 | Microsoft Foundry | [What is Foundry IQ?](#foundry-iq) | PREVIEW | 2026-10-05 |
 | Microsoft Foundry | [Govern MCP tools by using an AI gateway (Microsoft Foundry)](#foundry-mcp-governance) | PREVIEW | 2026-10-07 |
 | Microsoft Foundry | [What is Microsoft Foundry?](#foundry-overview) | GA | 2026-10-05 |
+| Microsoft Foundry | [Set up private networking for Foundry Agent Service](#foundry-private-networking) | GA | 2026-10-08 |
+| Microsoft Foundry | [Routines in Foundry Agent Service](#foundry-routines) | UNKNOWN/NEEDS VALIDATION | 2026-10-08 |
+| Microsoft Foundry | [What is Toolbox in Microsoft Foundry?](#foundry-toolbox) | GA | 2026-10-08 |
+| Microsoft Foundry | [Use web search tool in Foundry Agent Service](#foundry-web-search) | GA | 2026-10-08 |
+| Microsoft Purview | [Data quality supported sources (Microsoft Purview Unified Catalog)](#purview-data-quality) | UNKNOWN/NEEDS VALIDATION | 2026-10-08 |
 | Model Context Protocol | [Fabric Data Warehouse MCP server (Preview)](#fabric-dw-mcp) | PREVIEW | 2026-10-05 |
 | Model Context Protocol | [Get started with Fabric IQ MCP](#fabric-iq-mcp) | GA | 2026-10-05 |
 | Model Context Protocol | [Fabric MCP Server (local) tools reference](#fabric-mcp-local) | GA | 2026-10-05 |
@@ -55,6 +69,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Model Context Protocol | [Model Context Protocol specification versioning](#mcp-specification) | GA | 2026-10-05 |
 | Model Context Protocol | [Power BI Authoring (Modeling) MCP server](#powerbi-authoring-mcp) | GA | 2026-10-05 |
 | Power BI | [Datasets - Execute Queries In Group (Power BI REST API)](#powerbi-execute-queries) | GA | 2026-10-07 |
+| Power BI | [Create report subscriptions with Copilot summaries](#powerbi-subscription-summaries) | PREVIEW | 2026-10-08 |
 | Toolchain | [Node.js release schedule](#node-release-schedule) | GA | 2026-10-05 |
 | Toolchain | [Status of Python versions](#python-lifecycle) | GA | 2026-10-05 |
 
@@ -98,6 +113,27 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Central policy enforcement point for tool access. |
 | Limitations | Tools only (no resources or prompts); not supported in APIM workspaces. |
 | Fallback | Local policy simulation. |
+| Deprecation / replacement | — |
+
+## Azure Logic Apps
+
+<a id="logic-apps-foundry-agents"></a>
+
+### Automate Microsoft Foundry agents with workflows in Azure Logic Apps
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/azure/logic-apps/automate-foundry-agents-with-workflows |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-08 |
+| Last updated | 2026-08-13 |
+| Status | PREVIEW |
+| Associated patterns | P06 |
+| Key architecture statement | Standard Logic Apps workflows can call Foundry agents; combine with the Recurrence trigger and Teams/Outlook connectors. |
+| Implementation relevance | Monthly insights: schedule and deliver. |
+| Security implications | Connections use managed identity; scope mailbox and Teams permissions. |
+| Limitations | Preview; Standard tier. |
+| Fallback | Azure Functions timer trigger (GA) calling the Foundry SDK. |
 | Deprecation / replacement | — |
 
 ## Developer experience
@@ -275,6 +311,27 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Fallback | Local semantic YAML (ontology analog). |
 | Deprecation / replacement | — |
 
+## Microsoft Agent 365
+
+<a id="agent-365"></a>
+
+### Overview of Microsoft Agent 365
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/microsoft-agent-365/overview |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-08 |
+| Last updated | — |
+| Status | GA |
+| Associated patterns | P14 |
+| Key architecture statement | A governance and security control plane for AI agents: registry, Entra-based access, Purview and Defender integration; generally available since May 1, 2026, licensed per user. |
+| Implementation relevance | Governance and licensing questions at enterprise scale. |
+| Security implications | Central inventory and policy for agents. |
+| Limitations | Per-user licensing; works best with Microsoft 365 E5. |
+| Fallback | Not used in the offline demo. |
+| Deprecation / replacement | — |
+
 ## Microsoft Agent Framework
 
 <a id="agent-framework"></a>
@@ -297,6 +354,25 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Deprecation / replacement | — |
 
 ## Microsoft Fabric
+
+<a id="fabric-activator"></a>
+
+### What is Fabric Activator?
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/fabric/real-time-intelligence/data-activator/activator-introduction |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-08 |
+| Last updated | 2026-04-17 |
+| Status | GA |
+| Associated patterns | P07 |
+| Key architecture statement | No-code rules on semantic models and eventstreams trigger email, Teams messages, pipelines or Power Automate flows. |
+| Implementation relevance | Monthly insights alternative: threshold alerts between briefs. |
+| Security implications | Rules run under the creator's permissions. |
+| Limitations | Event-driven, not calendar-driven. |
+| Fallback | Local brief only. |
+| Deprecation / replacement | — |
 
 <a id="fabric-admin-tenant-settings"></a>
 
@@ -583,6 +659,44 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Fallback | Not applicable. |
 | Deprecation / replacement | — |
 
+<a id="mlv-data-quality"></a>
+
+### Data quality in materialized lake views
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/fabric/data-engineering/materialized-lake-views/data-quality |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-08 |
+| Last updated | 2026-03-18 |
+| Status | GA |
+| Associated patterns | P10 |
+| Key architecture statement | Materialized lake views support CONSTRAINT ... CHECK rules that drop or fail rows on mismatch. |
+| Implementation relevance | Data-quality question: enforce rules in Silver. |
+| Security implications | Rules run in the lakehouse under workspace permissions. |
+| Limitations | Spark SQL only. |
+| Fallback | Local Silver data-quality flags. |
+| Deprecation / replacement | — |
+
+<a id="semantic-link-validate"></a>
+
+### Detect, explore and validate functional dependencies in your data
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/fabric/data-science/semantic-link-validate-data |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-08 |
+| Last updated | 2026-03-03 |
+| Status | GA |
+| Associated patterns | P10, P12 |
+| Key architecture statement | Semantic Link functions such as find_dependencies and list_relationship_violations validate data against a semantic model's relationships. |
+| Implementation relevance | Data-quality question: detect issues behind a semantic model. |
+| Security implications | Runs in Fabric notebooks with the user's permissions. |
+| Limitations | Detection only; fixes happen upstream. |
+| Fallback | Local DuckDB data-quality flags (ffia mfg quality). |
+| Deprecation / replacement | — |
+
 ## Microsoft Fabric and Microsoft Foundry
 
 <a id="caf-agent-data-architecture"></a>
@@ -663,6 +777,44 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Fallback | Not applicable. |
 | Deprecation / replacement | — |
 
+<a id="foundry-agent-faq"></a>
+
+### Foundry Agent Service FAQ (pricing)
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/azure/foundry/agents/faq |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-08 |
+| Last updated | — |
+| Status | GA |
+| Associated patterns | P06 |
+| Key architecture statement | There is no separate Foundry license; Agent Service orchestration is not separately charged; you pay for model tokens and specific tools. |
+| Implementation relevance | Licensing question. |
+| Security implications | Cost governance through quotas, budgets and an AI gateway. |
+| Limitations | Tool charges (Bing grounding, file search storage, code interpreter sessions) vary by region. |
+| Fallback | Offline demo costs nothing. |
+| Deprecation / replacement | — |
+
+<a id="foundry-agent-identity"></a>
+
+### Agent identity concepts in Microsoft Foundry
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/azure/foundry/agents/concepts/agent-identity |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-08 |
+| Last updated | 2026-09-24 |
+| Status | GA |
+| Associated patterns | P14 |
+| Key architecture statement | Foundry integrates with Microsoft Entra Agent ID, provisioning agent identities that are governed, authenticated and authorized like other Entra identities. |
+| Implementation relevance | Security segment: who the agent is. |
+| Security implications | Grant agent identities least-privilege RBAC on target resources. |
+| Limitations | Tools such as the Fabric data agent use the end user's identity instead. |
+| Fallback | Local process identity (offline). |
+| Deprecation / replacement | — |
+
 <a id="foundry-agent-service"></a>
 
 ### Foundry Agent Service overview
@@ -680,6 +832,25 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Agent identity in Entra; MCP tool output must be treated as untrusted input. |
 | Limitations | Several tools (Fabric data agent, Fabric IQ, Browser Automation) are preview. |
 | Fallback | Local Agent Framework runtime with deterministic client. |
+| Deprecation / replacement | — |
+
+<a id="foundry-bing-grounding"></a>
+
+### Use Grounding with Bing Search tools with the agents API
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/azure/foundry/agents/how-to/tools/bing-tools |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-08 |
+| Last updated | 2026-08-27 |
+| Status | GA |
+| Associated patterns | P06, P14 |
+| Key architecture statement | Grounding with Bing Search returns public web search results with citations; Bing Custom Search (preview) restricts results to configured domains. |
+| Implementation relevance | Answers the external-data question: search grounding with citations, not crawling or scraping. |
+| Security implications | Queries and the resource key leave the Azure compliance and geo boundary; Bing terms of use and use-and-display requirements apply; the Data Protection Addendum does not apply. |
+| Limitations | Separate Bing resource and per-transaction billing; results must show website and Bing query URLs. |
+| Fallback | Curated public data loaded into Fabric through a reviewed pipeline. |
 | Deprecation / replacement | — |
 
 <a id="foundry-evaluators"></a>
@@ -718,6 +889,25 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | User identity only (no service principal); responses may leave the Fabric compliance boundary. |
 | Limitations | Same tenant; data agent and sources in the same region; one Fabric data agent per Foundry agent. |
 | Fallback | Local data agent simulation; Fabric data agent MCP endpoint as alternative live path. |
+| Deprecation / replacement | — |
+
+<a id="foundry-human-in-the-loop"></a>
+
+### Add a human-in-the-loop approval step
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/azure/foundry/agents/how-to/add-human-in-the-loop |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-08 |
+| Last updated | 2026-08-05 |
+| Status | PREVIEW |
+| Associated patterns | P08 |
+| Key architecture statement | Pause an agent workflow until a person approves, then resume. |
+| Implementation relevance | Data-quality fixes need approval. |
+| Security implications | Approval is a control, not a replacement for authorization. |
+| Limitations | Preview. |
+| Fallback | Accelerator change flow: plan, approve, execute, verify. |
 | Deprecation / replacement | — |
 
 <a id="foundry-iq"></a>
@@ -776,6 +966,103 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Limitations | Hub-based (classic) projects are legacy. |
 | Fallback | Local deterministic agent runtime, labeled SIMULATED. |
 | Deprecation / replacement | Classic hub-based agents retire 2027-03-31; use Foundry Agent Service on new projects. |
+
+<a id="foundry-private-networking"></a>
+
+### Set up private networking for Foundry Agent Service
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/azure/foundry/agents/how-to/virtual-networks |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-08 |
+| Last updated | 2026-08-27 |
+| Status | GA |
+| Associated patterns | P14 |
+| Key architecture statement | Standard agent setup supports subnet injection and private resource access, with bring-your-own Storage, Azure AI Search and Cosmos DB so agent data stays in your tenant. |
+| Implementation relevance | Security segment: network isolation and data residency. |
+| Security implications | Private endpoints and BYO resources keep agent state in the customer's tenant. |
+| Limitations | Bing grounding still leaves the boundary by design. |
+| Fallback | Basic setup for demos. |
+| Deprecation / replacement | — |
+
+<a id="foundry-routines"></a>
+
+### Routines in Foundry Agent Service
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/azure/foundry/agents/concepts/routines |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-08 |
+| Last updated | 2026-09-24 |
+| Status | UNKNOWN/NEEDS VALIDATION |
+| Associated patterns | P06 |
+| Key architecture statement | Project-native triggers (schedule or cron, plus event triggers) invoke an agent without external orchestration. |
+| Implementation relevance | Monthly insights: a Foundry-native schedule option. |
+| Security implications | Runs under the configured identity; review what it can reach. |
+| Limitations | Status not stated on the page; minimum 5-minute interval. |
+| Fallback | Logic Apps Recurrence trigger (GA). |
+| Deprecation / replacement | — |
+
+<a id="foundry-toolbox"></a>
+
+### What is Toolbox in Microsoft Foundry?
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/azure/foundry/agents/concepts/toolbox-overview |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-08 |
+| Last updated | 2026-07-31 |
+| Status | GA |
+| Associated patterns | P06, P09 |
+| Key architecture statement | Lists Foundry tools: MCP, web search, Azure AI Search, code interpreter, file search, OpenAPI, A2A, browser automation, Fabric IQ, Work IQ, SharePoint, Fabric data agent, Azure Functions, Grounding with Bing. |
+| Implementation relevance | Catalog for the connecting-data segment. |
+| Security implications | Each tool has its own identity and data-handling model; curate tools once and reuse them. |
+| Limitations | Some tools are direct-only (Fabric data agent, SharePoint, Bing). |
+| Fallback | Local MCP tools in ffia-local. |
+| Deprecation / replacement | — |
+
+<a id="foundry-web-search"></a>
+
+### Use web search tool in Foundry Agent Service
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/azure/foundry/agents/how-to/tools/web-search |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-08 |
+| Last updated | 2026-09-11 |
+| Status | GA |
+| Associated patterns | P06, P14 |
+| Key architecture statement | The web search tool grounds agents in current web results through Grounding with Bing; domain-restricted search uses a Bing Custom Search connection. |
+| Implementation relevance | Code-first example for the market-context agent. |
+| Security implications | Same boundary as Bing grounding; external_web_access can be disabled. |
+| Limitations | Requires Foundry User role; domain restriction needs a toolbox and project connection. |
+| Fallback | Offline: cite a stored, approved public document instead. |
+| Deprecation / replacement | — |
+
+## Microsoft Purview
+
+<a id="purview-data-quality"></a>
+
+### Data quality supported sources (Microsoft Purview Unified Catalog)
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/purview/unified-catalog-data-quality-supported-sources-file-formats |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-08 |
+| Last updated | 2026-04-09 |
+| Status | UNKNOWN/NEEDS VALIDATION |
+| Associated patterns | P14 |
+| Key architecture statement | Purview data quality supports profiling and scans for Fabric lakehouse Delta and Parquet tables. |
+| Implementation relevance | Data-quality question: governed, catalog-level rules. |
+| Security implications | Governance team owns rules and scores. |
+| Limitations | Capability-level status not stated; Iceberg is preview. |
+| Fallback | Local data-quality report. |
+| Deprecation / replacement | — |
 
 ## Model Context Protocol
 
@@ -912,6 +1199,25 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Respects the caller's permissions and row-level security; read-only. |
 | Limitations | One query and one table per call; at most 100,000 rows or 1,000,000 values; models with live AAS connections unsupported. |
 | Fallback | Local DuckDB measure evaluation (LOCAL). |
+| Deprecation / replacement | — |
+
+<a id="powerbi-subscription-summaries"></a>
+
+### Create report subscriptions with Copilot summaries
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/power-bi/create-reports/copilot-summaries-in-subscriptions |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-08 |
+| Last updated | 2026-07-06 |
+| Status | PREVIEW |
+| Associated patterns | P12 |
+| Key architecture statement | Standard Power BI email subscriptions can include an AI-generated summary of the report. |
+| Implementation relevance | Monthly insights: the low-code option. |
+| Security implications | Uses Copilot in Fabric under capacity rules. |
+| Limitations | Preview; standard subscriptions only. |
+| Fallback | Scheduled email subscription without summary (GA). |
 | Deprecation / replacement | — |
 
 ## Toolchain

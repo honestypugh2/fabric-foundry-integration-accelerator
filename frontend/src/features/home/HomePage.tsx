@@ -1,3 +1,4 @@
+import { TalkTracks } from "../demo/TalkTracks";
 import { Link } from "react-router";
 import { useCompleteness } from "../../api/hooks";
 import { usePageTitle } from "../../app/usePageTitle";
@@ -33,6 +34,7 @@ export function HomePage() {
   return (
     <>
       <h1>Fabric Foundry Integration Accelerator</h1>
+      <TalkTracks />
       <section aria-labelledby="principles-heading">
         <h2 id="principles-heading">The central lesson</h2>
         <ul className="principles">

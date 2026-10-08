@@ -3,6 +3,7 @@ import { useDemoStatus, useRunDemo } from "../../api/hooks";
 import { usePageTitle } from "../../app/usePageTitle";
 import { Badge } from "../../components/Badge";
 import { QueryState } from "../../components/QueryState";
+import { TalkTracks } from "./TalkTracks";
 
 export function DemoPage() {
   usePageTitle("Demo");
@@ -11,6 +12,7 @@ export function DemoPage() {
   return (
     <>
       <h1>Demo mode</h1>
+      <TalkTracks />
       <section aria-labelledby="readiness-heading">
         <h2 id="readiness-heading">Readiness</h2>
         <QueryState label="demo readiness" {...status}>

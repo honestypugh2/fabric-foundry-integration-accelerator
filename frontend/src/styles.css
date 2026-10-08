@@ -1081,3 +1081,43 @@ main:has(.studio) {
       stroke-width 150ms ease;
   }
 }
+
+/* ------------------------------------------------------------------ talk tracks */
+.talk-tracks {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+}
+
+.talk-tracks__item {
+  border: 1px solid var(--color-border);
+  border-top: 4px solid var(--color-accent);
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: var(--color-surface);
+}
+
+.talk-tracks__item p {
+  margin: 0.35rem 0;
+}
+
+.talk-tracks__guide {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.talk-tracks__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.talk-tracks__links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.75rem !important;
+}

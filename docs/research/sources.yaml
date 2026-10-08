@@ -527,6 +527,214 @@ sources:
     security_implications: Central policy enforcement point for tool access.
     limitations: Tools only (no resources or prompts); not supported in APIM workspaces.
     fallback: Local policy simulation.
+  - id: foundry-bing-grounding
+    title: "Use Grounding with Bing Search tools with the agents API"
+    url: https://learn.microsoft.com/azure/foundry/agents/how-to/tools/bing-tools
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-08
+    last_updated_date: 2026-08-27
+    technology: Microsoft Foundry
+    associated_patterns: [P06, P14]
+    status: GA
+    key_architecture_statement: "Grounding with Bing Search returns public web search results with citations; Bing Custom Search (preview) restricts results to configured domains."
+    implementation_relevance: "Answers the external-data question: search grounding with citations, not crawling or scraping."
+    security_implications: "Queries and the resource key leave the Azure compliance and geo boundary; Bing terms of use and use-and-display requirements apply; the Data Protection Addendum does not apply."
+    limitations: "Separate Bing resource and per-transaction billing; results must show website and Bing query URLs."
+    fallback: "Curated public data loaded into Fabric through a reviewed pipeline."
+  - id: foundry-web-search
+    title: "Use web search tool in Foundry Agent Service"
+    url: https://learn.microsoft.com/azure/foundry/agents/how-to/tools/web-search
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-08
+    last_updated_date: 2026-09-11
+    technology: Microsoft Foundry
+    associated_patterns: [P06, P14]
+    status: GA
+    key_architecture_statement: "The web search tool grounds agents in current web results through Grounding with Bing; domain-restricted search uses a Bing Custom Search connection."
+    implementation_relevance: "Code-first example for the market-context agent."
+    security_implications: "Same boundary as Bing grounding; external_web_access can be disabled."
+    limitations: "Requires Foundry User role; domain restriction needs a toolbox and project connection."
+    fallback: "Offline: cite a stored, approved public document instead."
+  - id: foundry-toolbox
+    title: "What is Toolbox in Microsoft Foundry?"
+    url: https://learn.microsoft.com/azure/foundry/agents/concepts/toolbox-overview
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-08
+    last_updated_date: 2026-07-31
+    technology: Microsoft Foundry
+    associated_patterns: [P06, P09]
+    status: GA
+    key_architecture_statement: "Lists Foundry tools: MCP, web search, Azure AI Search, code interpreter, file search, OpenAPI, A2A, browser automation, Fabric IQ, Work IQ, SharePoint, Fabric data agent, Azure Functions, Grounding with Bing."
+    implementation_relevance: "Catalog for the connecting-data segment."
+    security_implications: "Each tool has its own identity and data-handling model; curate tools once and reuse them."
+    limitations: "Some tools are direct-only (Fabric data agent, SharePoint, Bing)."
+    fallback: "Local MCP tools in ffia-local."
+  - id: foundry-agent-identity
+    title: "Agent identity concepts in Microsoft Foundry"
+    url: https://learn.microsoft.com/azure/foundry/agents/concepts/agent-identity
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-08
+    last_updated_date: 2026-09-24
+    technology: Microsoft Foundry
+    associated_patterns: [P14]
+    status: GA
+    key_architecture_statement: "Foundry integrates with Microsoft Entra Agent ID, provisioning agent identities that are governed, authenticated and authorized like other Entra identities."
+    implementation_relevance: "Security segment: who the agent is."
+    security_implications: "Grant agent identities least-privilege RBAC on target resources."
+    limitations: "Tools such as the Fabric data agent use the end user's identity instead."
+    fallback: "Local process identity (offline)."
+  - id: foundry-private-networking
+    title: "Set up private networking for Foundry Agent Service"
+    url: https://learn.microsoft.com/azure/foundry/agents/how-to/virtual-networks
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-08
+    last_updated_date: 2026-08-27
+    technology: Microsoft Foundry
+    associated_patterns: [P14]
+    status: GA
+    key_architecture_statement: "Standard agent setup supports subnet injection and private resource access, with bring-your-own Storage, Azure AI Search and Cosmos DB so agent data stays in your tenant."
+    implementation_relevance: "Security segment: network isolation and data residency."
+    security_implications: "Private endpoints and BYO resources keep agent state in the customer's tenant."
+    limitations: "Bing grounding still leaves the boundary by design."
+    fallback: "Basic setup for demos."
+  - id: foundry-agent-faq
+    title: "Foundry Agent Service FAQ (pricing)"
+    url: https://learn.microsoft.com/azure/foundry/agents/faq
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-08
+    technology: Microsoft Foundry
+    associated_patterns: [P06]
+    status: GA
+    key_architecture_statement: "There is no separate Foundry license; Agent Service orchestration is not separately charged; you pay for model tokens and specific tools."
+    implementation_relevance: "Licensing question."
+    security_implications: "Cost governance through quotas, budgets and an AI gateway."
+    limitations: "Tool charges (Bing grounding, file search storage, code interpreter sessions) vary by region."
+    fallback: "Offline demo costs nothing."
+  - id: foundry-routines
+    title: "Routines in Foundry Agent Service"
+    url: https://learn.microsoft.com/azure/foundry/agents/concepts/routines
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-08
+    last_updated_date: 2026-09-24
+    technology: Microsoft Foundry
+    associated_patterns: [P06]
+    status: UNKNOWN/NEEDS VALIDATION
+    key_architecture_statement: "Project-native triggers (schedule or cron, plus event triggers) invoke an agent without external orchestration."
+    implementation_relevance: "Monthly insights: a Foundry-native schedule option."
+    security_implications: "Runs under the configured identity; review what it can reach."
+    limitations: "Status not stated on the page; minimum 5-minute interval."
+    fallback: "Logic Apps Recurrence trigger (GA)."
+  - id: logic-apps-foundry-agents
+    title: "Automate Microsoft Foundry agents with workflows in Azure Logic Apps"
+    url: https://learn.microsoft.com/azure/logic-apps/automate-foundry-agents-with-workflows
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-08
+    last_updated_date: 2026-08-13
+    technology: Azure Logic Apps
+    associated_patterns: [P06]
+    status: PREVIEW
+    key_architecture_statement: "Standard Logic Apps workflows can call Foundry agents; combine with the Recurrence trigger and Teams/Outlook connectors."
+    implementation_relevance: "Monthly insights: schedule and deliver."
+    security_implications: "Connections use managed identity; scope mailbox and Teams permissions."
+    limitations: "Preview; Standard tier."
+    fallback: "Azure Functions timer trigger (GA) calling the Foundry SDK."
+  - id: semantic-link-validate
+    title: "Detect, explore and validate functional dependencies in your data"
+    url: https://learn.microsoft.com/fabric/data-science/semantic-link-validate-data
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-08
+    last_updated_date: 2026-03-03
+    technology: Microsoft Fabric
+    associated_patterns: [P10, P12]
+    status: GA
+    key_architecture_statement: "Semantic Link functions such as find_dependencies and list_relationship_violations validate data against a semantic model's relationships."
+    implementation_relevance: "Data-quality question: detect issues behind a semantic model."
+    security_implications: "Runs in Fabric notebooks with the user's permissions."
+    limitations: "Detection only; fixes happen upstream."
+    fallback: "Local DuckDB data-quality flags (ffia mfg quality)."
+  - id: mlv-data-quality
+    title: "Data quality in materialized lake views"
+    url: https://learn.microsoft.com/fabric/data-engineering/materialized-lake-views/data-quality
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-08
+    last_updated_date: 2026-03-18
+    technology: Microsoft Fabric
+    associated_patterns: [P10]
+    status: GA
+    key_architecture_statement: "Materialized lake views support CONSTRAINT ... CHECK rules that drop or fail rows on mismatch."
+    implementation_relevance: "Data-quality question: enforce rules in Silver."
+    security_implications: "Rules run in the lakehouse under workspace permissions."
+    limitations: "Spark SQL only."
+    fallback: "Local Silver data-quality flags."
+  - id: purview-data-quality
+    title: "Data quality supported sources (Microsoft Purview Unified Catalog)"
+    url: https://learn.microsoft.com/purview/unified-catalog-data-quality-supported-sources-file-formats
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-08
+    last_updated_date: 2026-04-09
+    technology: Microsoft Purview
+    associated_patterns: [P14]
+    status: UNKNOWN/NEEDS VALIDATION
+    key_architecture_statement: "Purview data quality supports profiling and scans for Fabric lakehouse Delta and Parquet tables."
+    implementation_relevance: "Data-quality question: governed, catalog-level rules."
+    security_implications: "Governance team owns rules and scores."
+    limitations: "Capability-level status not stated; Iceberg is preview."
+    fallback: "Local data-quality report."
+  - id: foundry-human-in-the-loop
+    title: "Add a human-in-the-loop approval step"
+    url: https://learn.microsoft.com/azure/foundry/agents/how-to/add-human-in-the-loop
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-08
+    last_updated_date: 2026-08-05
+    technology: Microsoft Foundry
+    associated_patterns: [P08]
+    status: PREVIEW
+    key_architecture_statement: "Pause an agent workflow until a person approves, then resume."
+    implementation_relevance: "Data-quality fixes need approval."
+    security_implications: "Approval is a control, not a replacement for authorization."
+    limitations: "Preview."
+    fallback: "Accelerator change flow: plan, approve, execute, verify."
+  - id: agent-365
+    title: "Overview of Microsoft Agent 365"
+    url: https://learn.microsoft.com/microsoft-agent-365/overview
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-08
+    technology: Microsoft Agent 365
+    associated_patterns: [P14]
+    status: GA
+    key_architecture_statement: "A governance and security control plane for AI agents: registry, Entra-based access, Purview and Defender integration; generally available since May 1, 2026, licensed per user."
+    implementation_relevance: "Governance and licensing questions at enterprise scale."
+    security_implications: "Central inventory and policy for agents."
+    limitations: "Per-user licensing; works best with Microsoft 365 E5."
+    fallback: "Not used in the offline demo."
+  - id: fabric-activator
+    title: "What is Fabric Activator?"
+    url: https://learn.microsoft.com/fabric/real-time-intelligence/data-activator/activator-introduction
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-08
+    last_updated_date: 2026-04-17
+    technology: Microsoft Fabric
+    associated_patterns: [P07]
+    status: GA
+    key_architecture_statement: "No-code rules on semantic models and eventstreams trigger email, Teams messages, pipelines or Power Automate flows."
+    implementation_relevance: "Monthly insights alternative: threshold alerts between briefs."
+    security_implications: "Rules run under the creator's permissions."
+    limitations: "Event-driven, not calendar-driven."
+    fallback: "Local brief only."
+  - id: powerbi-subscription-summaries
+    title: "Create report subscriptions with Copilot summaries"
+    url: https://learn.microsoft.com/power-bi/create-reports/copilot-summaries-in-subscriptions
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-08
+    last_updated_date: 2026-07-06
+    technology: Power BI
+    associated_patterns: [P12]
+    status: PREVIEW
+    key_architecture_statement: "Standard Power BI email subscriptions can include an AI-generated summary of the report."
+    implementation_relevance: "Monthly insights: the low-code option."
+    security_implications: "Uses Copilot in Fabric under capacity rules."
+    limitations: "Preview; standard subscriptions only."
+    fallback: "Scheduled email subscription without summary (GA)."
   # ------------------------------------------------------------------ Developer experience
   - id: skills-for-fabric
     title: Skills for Fabric overview

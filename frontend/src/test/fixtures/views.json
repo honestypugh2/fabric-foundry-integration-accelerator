@@ -53,6 +53,22 @@
     "title": "MCP topology for Fabric data engineering"
   },
   {
+    "doc": null,
+    "id": "mfg-01",
+    "kind": "reference",
+    "pattern_ids": [
+      "P01",
+      "P06",
+      "P08",
+      "P10",
+      "P12",
+      "P14",
+      "P16"
+    ],
+    "summary": "A manufacturer's sales data lands in a Fabric lakehouse and a governed semantic model. A read-only Fabric data agent answers questions under the user's own permissions. Foundry agents reason over those answers, add allow-listed public web context, write monthly briefs for each business team, and propose data-quality fixes that a person approves and a Fabric pipeline applies upstream.",
+    "title": "MFG-01: Foundry agents + Fabric for sales insights"
+  },
+  {
     "doc": "production-architecture",
     "id": "production",
     "kind": "reference",

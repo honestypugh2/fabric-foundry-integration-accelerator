@@ -1,0 +1,81 @@
+{
+  "profile": "mfg-sales-v1",
+  "generator_version": "1",
+  "synthetic_notice": "SYNTHETIC DATA. Fictional manufacturer, customers, products and people generated for education. Not real sales data.",
+  "observation_month": "2026-09-01",
+  "row_counts": {
+    "plants": 4,
+    "business_teams": 4,
+    "products": 60,
+    "customers": 140,
+    "sales_orders": 5523,
+    "sales_targets": 84
+  },
+  "data_quality": {
+    "duplicate_order_lines": 12,
+    "orphan_product_ids": 9,
+    "negative_quantity_shipped": 7,
+    "unit_price_outliers": 5,
+    "future_order_dates": 3,
+    "shipped_without_ship_date": 8,
+    "ship_before_order": 4,
+    "missing_customer_region": 4,
+    "nonstandard_region_labels": 6
+  },
+  "clean_order_lines": 5311,
+  "observation_month_revenue": 509726.22,
+  "team_briefs": {
+    "T-STRMET": {
+      "team_name": "Structural & Metals",
+      "revenue": 132524.66,
+      "revenue_previous_month": 106796.34,
+      "revenue_same_month_last_year": 108685.64,
+      "mom_change_pct": 24.1,
+      "yoy_change_pct": 21.9,
+      "target": 122042.15,
+      "target_attainment_pct": 108.6,
+      "gross_margin_pct": 27.9,
+      "top_growing_product": "P-STR-004",
+      "data_quality_issues_in_month": 0
+    },
+    "T-ENC": {
+      "team_name": "Enclosures",
+      "revenue": 88207.09,
+      "revenue_previous_month": 56623.73,
+      "revenue_same_month_last_year": 55662.83,
+      "mom_change_pct": 55.8,
+      "yoy_change_pct": 58.5,
+      "target": 61634.21,
+      "target_attainment_pct": 143.1,
+      "gross_margin_pct": 31.6,
+      "top_growing_product": "P-ENC-012",
+      "data_quality_issues_in_month": 0
+    },
+    "T-HWFAB": {
+      "team_name": "Hardware & Fabrication",
+      "revenue": 288994.48,
+      "revenue_previous_month": 279113.64,
+      "revenue_same_month_last_year": 167344.69,
+      "mom_change_pct": 3.5,
+      "yoy_change_pct": 72.7,
+      "target": 271028.66,
+      "target_attainment_pct": 106.6,
+      "gross_margin_pct": 20.9,
+      "top_growing_product": "P-FAB-009",
+      "data_quality_issues_in_month": 0
+    },
+    "T-KEY": {
+      "team_name": "Key Accounts",
+      "revenue": 76765.17,
+      "revenue_previous_month": 54953.45,
+      "revenue_same_month_last_year": 25024.62,
+      "mom_change_pct": 39.7,
+      "yoy_change_pct": 206.8,
+      "target": 65259.34,
+      "target_attainment_pct": 117.6,
+      "gross_margin_pct": 18.8,
+      "top_growing_product": "P-FAB-004",
+      "data_quality_issues_in_month": 0
+    }
+  }
+}

@@ -73,6 +73,8 @@ ignore = [
 # Reproducible pseudo-randomness for synthetic teaching data, never for security.
 "src/fabric_foundry_accelerator/synthetic/generator.py" = ["S311"]
 "src/fabric_foundry_accelerator/recovery/scenario.py" = ["S311"]
+# Synthetic generator: reproducible randomness; SQL is built only from module constants.
+"src/fabric_foundry_accelerator/synthetic/manufacturing.py" = ["S311", "S608", "PLR0912", "PLR0915"]
 # Fault injector methods must match the FabricProvider port signature but ignore their inputs.
 "src/fabric_foundry_accelerator/providers/fabric/outage.py" = ["ARG002"]
 "src/fabric_foundry_accelerator/providers/fabric/live.py" = ["ARG002"]

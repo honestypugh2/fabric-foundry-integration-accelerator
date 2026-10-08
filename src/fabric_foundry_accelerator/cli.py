@@ -11,7 +11,7 @@ from pathlib import Path
 
 from fabric_foundry_accelerator import __version__
 from fabric_foundry_accelerator.education import commands as education_commands
-from fabric_foundry_accelerator.education import diagram_docs
+from fabric_foundry_accelerator.education import diagram_docs, talktrack_commands
 from fabric_foundry_accelerator.mcp import profile_commands
 from fabric_foundry_accelerator.observability.logging import configure_logging
 from fabric_foundry_accelerator.privacy.leak_scan import (
@@ -33,7 +33,7 @@ from fabric_foundry_accelerator.services import commands as runtime_commands
 from fabric_foundry_accelerator.services import fabric_commands
 from fabric_foundry_accelerator.skills import commands as skills_commands
 from fabric_foundry_accelerator.synthetic import commands as data_commands
-from fabric_foundry_accelerator.synthetic import notebook_commands
+from fabric_foundry_accelerator.synthetic import mfg_commands, notebook_commands
 
 
 def _out(message: str) -> None:
@@ -127,6 +127,8 @@ def build_parser() -> argparse.ArgumentParser:
     profile_commands.register(sub)
     notebook_commands.register(sub)
     skills_commands.register(sub)
+    talktrack_commands.register(sub)
+    mfg_commands.register(sub)
     return parser
 
 

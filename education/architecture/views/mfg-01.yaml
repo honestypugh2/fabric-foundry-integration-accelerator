@@ -1,0 +1,90 @@
+# MFG-01: Foundry agents over governed Fabric sales data (manufacturing, synthetic).
+# Customer-neutral. Every Microsoft component's status is cited in docs/research/sources.yaml.
+id: mfg-01
+title: "MFG-01: Foundry agents + Fabric for sales insights"
+kind: reference
+summary: >-
+  A manufacturer's sales data lands in a Fabric lakehouse and a governed semantic model. A
+  read-only Fabric data agent answers questions under the user's own permissions. Foundry agents
+  reason over those answers, add allow-listed public web context, write monthly briefs for each
+  business team, and propose data-quality fixes that a person approves and a Fabric pipeline
+  applies upstream.
+cue: >-
+  Build it left to right. Fabric owns the data and its meaning. Foundry owns reasoning, tools and
+  orchestration. External web data enters only through a grounding tool you allow-list. Authority
+  stays with Entra identity, guardrails and a human approval. Evidence comes from tracing and
+  evaluations.
+columns: 7
+rows: 5
+aligned_to: [foundry-fabric-tool, fabric-data-agent, foundry-agent-service, baseline-foundry-chat, caf-agent-data-architecture, ai-agent-orchestration, fabric-medallion, foundry-evaluators, apim-mcp]
+pattern_ids: [P01, P06, P08, P10, P12, P14, P16]
+steps:
+  - {id: data, label: "1 Governed data", cue: "Fabric first: sales lands in a lakehouse, is cleaned in Silver, and gets business meaning in a semantic model. The Fabric data agent answers questions over it, read-only."}
+  - {id: agent, label: "2 Foundry agent", cue: "A Foundry agent calls the Fabric data agent as a tool. It runs under the user's identity, so Fabric permissions and row-level security still apply."}
+  - {id: external, label: "3 External data", cue: "Public web context comes through a grounding tool restricted to allow-listed domains. Queries leave the Azure compliance boundary, so keep sensitive data out of them."}
+  - {id: schedule, label: "4 Monthly insights", cue: "A schedule starts the agent once a month per team focus area and delivers the brief to Teams or Outlook."}
+  - {id: governance, label: "5 Govern and prove", cue: "Identity, guardrails, human approval for any data fix, and tracing plus evaluations for evidence."}
+zones:
+  - {id: fabric-zone, label: "Microsoft Fabric - governed data", kind: fabric, col: 0, row: 0, cols: 2, rows: 5}
+  - {id: foundry-zone, label: "Microsoft Foundry - reasoning and orchestration", kind: foundry, col: 2, row: 0, cols: 3, rows: 5, step: agent}
+  - {id: external-zone, label: "Outside the tenant", kind: optional, col: 5, row: 2, cols: 1, rows: 3, step: external}
+nodes:
+  - {id: sales-sources, label: "ERP sales extracts", sublabel: "Orders, customers, products", kind: data, state: documented, col: 0, row: 0, step: data, summary: "Six synthetic CSV extracts (orders, customers, products, plants, teams, targets) with deliberate data-quality issues."}
+  - {id: lakehouse, label: "Lakehouse", sublabel: "Bronze, Silver, Gold (Delta)", kind: fabric, state: documented, col: 0, row: 1, step: data, sources: [fabric-medallion], summary: "Bronze keeps raw values; Silver applies types and data-quality flags; Gold serves clean, booked revenue."}
+  - {id: dq-checks, label: "Data-quality checks", sublabel: "Notebook, Semantic Link, MLV rules", kind: fabric, state: documented, col: 0, row: 2, step: data, summary: "Detect duplicates, orphan keys, bad prices, invalid dates and unmapped regions upstream, where they can be fixed."}
+  - {id: fix-pipeline, label: "Fix pipeline (Silver)", sublabel: "Applies approved corrections", kind: fabric, state: documented, col: 0, row: 3, step: governance, summary: "A reviewed notebook or pipeline applies an approved correction in Silver, then the semantic model refreshes. Nothing edits the model's data directly."}
+  - {id: semantic-model, label: "Sales semantic model", sublabel: "Governed measures (Direct Lake)", kind: fabric, state: documented, col: 1, row: 1, step: data, icon: power_platform/PowerBI, sources: [fabric-medallion], summary: "Business definitions live here: revenue, margin, target attainment, by team focus area."}
+  - {id: data-agent, label: "Fabric data agent", sublabel: "Read-only NL2DAX / NL2SQL", kind: fabric, state: documented, col: 1, row: 2, step: data, sources: [fabric-data-agent], summary: "GA. Answers questions over the lakehouse and semantic model with the caller's permissions (RLS/CLS apply). It never writes data."}
+  - {id: entra, label: "Entra ID + Agent ID", sublabel: "User identity, agent identity", kind: identity, state: documented, col: 2, row: 0, step: governance, icon: other/Entra_Identity, summary: "Users sign in with Entra ID; the Fabric tool passes their identity through (on-behalf-of). Foundry agents get managed Entra agent identities."}
+  - {id: models, label: "Foundry Models", sublabel: "Model deployment (Data Zone)", kind: foundry, state: documented, col: 3, row: 0, step: agent, icon: ai_machine_learning/Foundry_Models, sources: [foundry-overview], summary: "Pay-per-token model deployment. Data Zone deployments keep processing in the chosen geography."}
+  - {id: insights-agent, label: "Sales insights agent", sublabel: "Foundry Agent Service", kind: foundry, state: documented, col: 2, row: 2, step: agent, icon: ai_machine_learning/Foundry_Agent_Service, sources: [foundry-agent-service, foundry-fabric-tool], summary: "Answers questions and writes team briefs. Uses the Fabric data agent tool (preview) for numbers, never its own guesses."}
+  - {id: dq-agent, label: "Data-quality agent", sublabel: "Explains and proposes fixes", kind: foundry, state: documented, col: 2, row: 3, step: governance, icon: ai_machine_learning/Foundry_Agent_Service, summary: "Reads data-quality findings, explains impact on the business numbers, and proposes a correction plan. It cannot change data."}
+  - {id: market-agent, label: "Market context agent", sublabel: "Public web, allow-listed", kind: foundry, state: documented, col: 3, row: 3, step: external, icon: ai_machine_learning/Foundry_Agent_Service, summary: "Summarizes public information (for example published price lists or press releases) from allow-listed domains, with citations."}
+  - {id: orchestrator, label: "Workflow / orchestrator", sublabel: "Agents in sequence", kind: foundry, state: documented, col: 3, row: 2, step: schedule, sources: [ai-agent-orchestration, agent-framework], summary: "Runs the monthly sequence: numbers from the insights agent, context from the market agent, then a reviewed brief. Built as a Foundry workflow or with Microsoft Agent Framework in code."}
+  - {id: guardrails, label: "Guardrails", sublabel: "Content safety, Prompt Shields", kind: policy, state: documented, col: 4, row: 1, step: governance, summary: "Filters harmful content and detects prompt-injection attempts, including instructions hidden in web pages a tool returns."}
+  - {id: tracing, label: "Tracing + evaluations", sublabel: "Application Insights, evaluators", kind: evidence, state: documented, col: 4, row: 3, step: governance, icon: devops/Application_Insights, sources: [foundry-evaluators], summary: "Every run is traced. Evaluators score groundedness and task adherence; numbers are reconciled with the baseline."}
+  - {id: approval, label: "Human approval", sublabel: "Data steward approves fixes", kind: policy, state: documented, col: 1, row: 3, step: governance, summary: "Models propose; a data steward approves. Only then does the fix pipeline run."}
+  - {id: scheduler, label: "Schedule + delivery", sublabel: "Logic Apps or Foundry routine", kind: service, state: documented, col: 4, row: 2, step: schedule, icon: general/Workflow, summary: "A monthly recurrence starts the run; Teams and Outlook connectors deliver the brief. Calling a Foundry agent from Logic Apps is in preview."}
+  - {id: web-grounding, label: "Web grounding (Bing)", sublabel: "Custom Search: allowed domains", kind: external, state: documented, col: 5, row: 3, step: external, summary: "Grounding with Bing Search returns search results with citations. Queries leave the Azure compliance boundary and follow Bing's terms of use."}
+  - {id: public-web, label: "Public websites", sublabel: "Competitor and market pages", kind: external, state: documented, col: 5, row: 4, step: external, summary: "Public pages are search results, not a data feed. Respect site terms; never send confidential data in a query."}
+  - {id: business-teams, label: "Business teams", sublabel: "Monthly brief in Teams/Outlook", kind: person, state: documented, col: 6, row: 2, step: schedule, icon: identity/Users, summary: "Each team gets its own focus area: product lines or a customer segment."}
+  - {id: users, label: "Analysts and leaders", sublabel: "Ask questions", kind: person, state: documented, col: 6, row: 0, step: agent, icon: identity/Users, summary: "Ask ad-hoc questions through a Foundry-powered app, Teams or Copilot Studio."}
+edges:
+  - {id: src-to-lh, source: sales-sources, target: lakehouse, label: "Land", kind: data}
+  - {id: lh-to-sm, source: lakehouse, target: semantic-model, label: "Gold", kind: data}
+  - {id: lh-to-dq, source: lakehouse, target: dq-checks, label: "Check", kind: data}
+  - {id: sm-to-da, source: semantic-model, target: data-agent, label: "NL2DAX", kind: context}
+  - {id: agent-to-da, source: insights-agent, target: data-agent, label: "Fabric tool", kind: access, step: agent}
+  - {id: agent-to-models, source: insights-agent, target: models, label: "Reason", kind: reasoning, step: agent}
+  - {id: users-to-agent, source: users, target: models, label: "Ask", kind: access, step: agent}
+  - {id: market-to-web, source: market-agent, target: web-grounding, label: "Search", kind: access, step: external}
+  - {id: web-to-public, source: web-grounding, target: public-web, label: "Results", kind: context, step: external}
+  - {id: orch-to-agent, source: orchestrator, target: insights-agent, label: "Numbers", kind: reasoning, step: schedule}
+  - {id: orch-to-market, source: orchestrator, target: market-agent, label: "Context", kind: reasoning, step: external}
+  - {id: sched-to-orch, source: scheduler, target: orchestrator, label: "Monthly", kind: config, step: schedule}
+  - {id: sched-to-teams, source: scheduler, target: business-teams, label: "Deliver brief", kind: evidence, step: schedule}
+  - {id: guard-to-models, source: guardrails, target: models, label: "Filter", kind: authority, step: governance}
+  - {id: dq-to-dqagent, source: dq-checks, target: dq-agent, label: "Findings", kind: context, step: governance}
+  - {id: dqagent-to-approval, source: dq-agent, target: approval, label: "Proposed fix", kind: change, step: governance}
+  - {id: approval-to-fix, source: approval, target: fix-pipeline, label: "Approved", kind: authority, step: governance}
+  - {id: fix-to-lh, source: fix-pipeline, target: lakehouse, label: "Correct Silver", kind: change, step: governance}
+  - {id: entra-to-agent, source: entra, target: insights-agent, label: "On-behalf-of", kind: authority, step: governance}
+  - {id: orch-to-trace, source: orchestrator, target: tracing, label: "Trace", kind: evidence, step: governance}
+bands:
+  - {id: identity-band, kind: identity, step: governance, text: "Identity: the Fabric data agent tool passes the signed-in user's identity (on-behalf-of); service principals are not supported for this tool. Fabric permissions and row-level security decide what the agent sees."}
+  - {id: network-band, kind: network, step: external, text: "Boundary: web grounding queries leave the Azure compliance and geo boundary and follow Bing's terms. Restrict domains, keep confidential data out of queries, and show citations."}
+  - {id: policy-band, kind: policy, step: governance, text: "Authority: the data agent is read-only. Agents propose data fixes; a data steward approves; a Fabric pipeline corrects Silver upstream, never the report."}
+  - {id: evidence-band, kind: evidence, step: governance, text: "Evidence: every run is traced and evaluated; brief numbers reconcile with the governed baseline (synthetic demonstration data)."}
+traces:
+  - id: monthly-brief
+    title: Monthly team brief
+    summary: On the first business day, each business team receives a brief on its focus area, built from governed Fabric numbers.
+    label: PLANNED FLOW
+    steps:
+      - {node: scheduler, say: "A monthly recurrence starts the run for each team's focus area."}
+      - {node: orchestrator, edge: sched-to-orch, say: "The workflow asks the insights agent for the team's numbers."}
+      - {node: insights-agent, edge: orch-to-agent, say: "The insights agent calls the Fabric data agent tool under the delegated user identity."}
+      - {node: data-agent, edge: agent-to-da, say: "The data agent answers from the governed semantic model, read-only."}
+      - {node: market-agent, edge: orch-to-market, say: "Optionally, the market agent adds cited public context from allow-listed domains."}
+      - {node: tracing, edge: orch-to-trace, say: "The run is traced and evaluated for groundedness."}
+      - {node: business-teams, edge: sched-to-teams, say: "The brief is delivered to the team in Teams or Outlook."}

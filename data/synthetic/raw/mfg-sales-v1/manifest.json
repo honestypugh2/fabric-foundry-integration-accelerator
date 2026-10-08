@@ -1,0 +1,25 @@
+{
+  "profile": "mfg-sales-v1",
+  "generator_version": "1",
+  "synthetic_notice": "SYNTHETIC DATA. Fictional manufacturer, customers, products and people generated for education. Not real sales data.",
+  "observation_month": "2026-09-01",
+  "injected_quality_issues": {
+    "duplicate_order_lines": 12,
+    "orphan_product_ids": 9,
+    "negative_quantity_shipped": 7,
+    "unit_price_outliers": 5,
+    "missing_customer_region": 4,
+    "nonstandard_region_labels": 6,
+    "future_order_dates": 3,
+    "shipped_without_ship_date": 8,
+    "ship_before_order": 4
+  },
+  "files": {
+    "plants.csv": "218ac8974047eb75dc04ae4691c1e931ef4975b07e9d60661aeba6afdad50289",
+    "business_teams.csv": "cfcc1c10e8059e5991a326323cea03c67413970faab4d32109ed241644cbcc49",
+    "products.csv": "66182207855b05438cc846b2e29106bdc651683de123c1558b7e463ccd6a451b",
+    "customers.csv": "6f491b2ca9e2312614f2d73f16a40c2d62a3c53874c0244a25f36c23bc12b3da",
+    "sales_orders.csv": "f0a6a3b59274db9fa5d4ccb42d2585b58efd338ed7c92ae39397c970215cf011",
+    "sales_targets.csv": "04825de40419216a9d73fd4b50d606bf5818f32878efb9b89f06f307362e9d75"
+  }
+}

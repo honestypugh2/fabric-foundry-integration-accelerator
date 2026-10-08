@@ -1,6 +1,6 @@
 {
   "cloud_operation_performed": false,
-  "correlation_id": "b331f540ec744c8ebafe9181dc80ecae",
+  "correlation_id": "bddf8a84323d438ebcf27e673e78fa1e",
   "data": [
     {
       "columns": [
@@ -1347,5 +1347,5 @@
   "selected_provider": "Local Fabric Educational Provider",
   "simulation_notice": "LOCAL educational analog over synthetic Parquet data. No Microsoft Fabric, OneLake or Power BI operation was performed.",
   "teaching_objective": "See the medallion layers: Bronze preserves, Silver conforms, Gold serves.",
-  "timestamp": "2026-10-08T02:30:55.202758Z"
+  "timestamp": "2026-10-08T12:34:16.219004Z"
 }

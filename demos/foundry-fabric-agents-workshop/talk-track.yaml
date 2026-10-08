@@ -1,0 +1,464 @@
+id: foundry-fabric-agents-workshop
+title: "Foundry + Fabric agent workshop: from governed sales data to insights and action"
+subtitle: >-
+  A 60-minute workshop for a manufacturing customer: Microsoft Foundry capabilities and how they
+  work with Microsoft Fabric, approaches for building and orchestrating agents, connecting internal
+  and external data, security and governance, and the customer's own use cases. Every segment has a
+  portal path, a code-first VS Code path and an offline path.
+eyebrow: "Guide 2 · Manufacturing (synthetic) · Foundry Agent Workshop"
+audience: "Business and IT leaders, data and analytics team, architects"
+duration_minutes: 60
+summary: |
+  **Scenario.** "Fabrikam Industrial", a fictional manufacturer, sells five product lines through four regions. Business teams own focus areas (product lines or the Key Account segment). Sales data lands in Fabric with real-world problems: duplicate lines, retired product codes, prices entered per box, unmapped regions. All data is synthetic.
+
+  **What we show.** A Fabric data agent answers governed questions over the sales semantic model. A Foundry agent uses it as a tool, adds cited public context, writes a monthly brief for each team, and explains data-quality issues while a person approves any fix. The same flow runs three ways:
+
+  - **Live (Azure connected):** Foundry portal, Fabric portal, and Python in VS Code against the demo tenant.
+  - **Hybrid:** live portals plus the local accelerator app for architecture and evidence.
+  - **Offline:** the accelerator app and `ffia mfg` commands on synthetic data. Every result says LOCAL.
+
+  **The one-line architecture.** Fabric provides governed data and meaning. Foundry provides reasoning, tools and orchestration. Entra identity, guardrails and human approval provide authority. Tracing and evaluations provide evidence.
+objectives:
+  - "Explain what Microsoft Foundry is (models, Agent Service, tools, evaluations, guardrails) and how it relates to Microsoft Fabric (data, semantic models, the Fabric data agent)."
+  - "Compare ways to build and orchestrate agents: portal prompt agents, workflows, code with the Foundry SDK or Microsoft Agent Framework, and Copilot Studio."
+  - "Connect internal data (Fabric, SharePoint, AI Search, APIs, MCP) and external data (web grounding) and state the security trade-offs of each."
+  - "Answer the five customer questions: Foundry + Fabric demo, competitor web data, monthly insights, data quality, and licensing."
+  - "Identify two or three of their own use cases and the pattern that fits each."
+entry_points:
+  - id: app
+    name: Accelerator web app
+    where: "http://localhost:5173 (run: make run) · /architecture/mfg-01 · /patterns · /demo"
+    purpose: "Architecture diagrams you can step through, the pattern catalog, and evidence. Works offline."
+  - id: foundry
+    name: Microsoft Foundry portal
+    where: "https://ai.azure.com → your project (new Foundry experience)"
+    purpose: "Models, agents, the agent playground, tools (Fabric data agent, web search), tracing and evaluations."
+  - id: fabric
+    name: Microsoft Fabric portal
+    where: "https://app.fabric.microsoft.com → workspace ffia-dev"
+    purpose: "Lakehouse, semantic model and the Fabric data agent; capacity and admin settings."
+  - id: vscode
+    name: VS Code (code-first)
+    where: "VS Code → demos/foundry-fabric-agents-workshop/code/ · Microsoft Foundry extension · GitHub Copilot agent mode"
+    purpose: "Build the same agent in Python with the Foundry SDK; Copilot explains and edits the code."
+  - id: terminal
+    name: Terminal
+    where: "VS Code integrated terminal in the repository (source .venv/bin/activate)"
+    purpose: "Readiness checks and the offline commands: ffia mfg brief, ffia mfg quality."
+  - id: talk
+    name: Conversation
+    where: "Whiteboard or the architecture page"
+    purpose: "Discussion with the customer; no system involved."
+prerequisites:
+  - title: "Choose the mode (decide 30 minutes before)"
+    items:
+      - "**Offline (always works):** `make demo-prep && make run`. Every demo step has an offline fallback, labeled LOCAL."
+      - "**Live:** Foundry project with a model deployment, the F capacity resumed, a Fabric data agent published over the sales lakehouse and model, and a Foundry project connection to it. See the morning runbook in `demos/MORNING-RUNBOOK.md`."
+      - "**Hybrid:** live portals for Foundry and Fabric, the local app for architecture and evidence."
+  - title: "Live environment (demo tenant)"
+    items:
+      - "Resume the Fabric capacity (F8) and confirm `ffia fabric readiness` says YES."
+      - "Fabric workspace `ffia-dev` with lakehouse `mfg_lakehouse`, the six synthetic CSVs loaded as tables, a semantic model, and data agent `mfg-sales-data-agent` (published)."
+      - "Tenant setting **Users can use Copilot and other features powered by Azure OpenAI** is on (the data agent needs it)."
+      - "Foundry project in the same tenant, a model deployment, and a project connection named in `FABRIC_CONNECTION_NAME` that points to the data agent."
+      - "You are signed in as a user who can read the data agent's sources; the tool uses your identity."
+  - title: "Browser tabs (open before the session)"
+    items:
+      - "Tab 1: app `/architecture/mfg-01` (level L200). Tab 2: app `/patterns`."
+      - "Tab 3: Foundry portal, project overview. Tab 4: Foundry agent playground for `sales-insights-agent`."
+      - "Tab 5: Fabric portal, workspace `ffia-dev`, the data agent. Tab 6: this handout."
+  - title: "VS Code"
+    items:
+      - "Open the repository; terminal in `.venv`. Open `demos/foundry-fabric-agents-workshop/code/fabric_sales_agent.py`."
+      - "Environment variables set: `FOUNDRY_PROJECT_ENDPOINT`, `FOUNDRY_MODEL_DEPLOYMENT`, `FABRIC_CONNECTION_NAME`. Never show their values on screen."
+      - "Run `ffia mfg brief --team T-ENC` once so the output is cached in the terminal history."
+architecture:
+  - view: mfg-01
+    caption: "The workshop architecture. Fabric owns governed data and meaning; Foundry owns reasoning and orchestration; web data enters only through grounding; identity, guardrails and approval hold authority; tracing and evaluations prove what happened. Step through it in the app at `/architecture/mfg-01`."
+  - view: reference
+    caption: "The general Fabric + Foundry reference architecture this workshop specializes. Aligned to the Azure Architecture Center baseline Foundry chat architecture and the Cloud Adoption Framework data architecture for AI agents."
+patterns: [P01, P06, P04, P08, P10, P12, P14, P15, P16]
+parts:
+  - id: foundry-and-fabric
+    title: "Foundry capabilities and its relationship to Fabric"
+    minutes: 10
+    goal: "Establish the mental model: Fabric is where governed data and meaning live; Foundry is where agents reason and act."
+    steps:
+      - title: "Open with the business problem"
+        entry: talk
+        path: "Whiteboard, or app → Home"
+        label: DISCUSSION
+        say:
+          - "\"Your teams want answers from sales data without waiting for a report, and they want to know what happened last month in their own focus area. You also asked about public market data, data quality, and cost. We'll answer each one with something you can see.\""
+          - "\"Three ideas to hold onto. Fabric holds your governed data and its business meaning. Foundry turns that into reasoning and action. And authority always stays with your identity, your policies and a person's approval, never with the AI.\""
+      - title: "Step through the architecture"
+        entry: app
+        path: "App → Architecture → MFG-01 → step buttons 1 → 5 → Trace a request"
+        label: LOCAL
+        say:
+          - "\"Step 1 is Fabric: sales lands in a lakehouse, is cleaned in Silver, and gets business meaning in a semantic model. The Fabric data agent answers questions over that model. It is read-only.\""
+          - "\"Step 2 is Foundry: an agent calls the Fabric data agent as a tool, under the signed-in user's identity. So if you can't see a region's numbers, neither can the agent.\""
+          - "\"Steps 3 to 5 are external data, the monthly schedule, and governance. Trace a request shows the monthly brief end to end, hop by hop.\""
+        show:
+          - "Click each step button; the diagram builds one layer at a time."
+          - "Click **Trace a request** and narrate the numbered hops."
+          - "Click the **Fabric data agent** box: the side panel shows status (GA) and what it owns."
+        check: "The audience can say which side owns data (Fabric) and which owns reasoning (Foundry)."
+      - title: "Tour Foundry: what is in the box"
+        entry: foundry
+        path: "ai.azure.com → project → Overview, then Models, Agents, Tools, Evaluation, Tracing"
+        label: LIVE
+        say:
+          - "\"Microsoft Foundry is the platform for building AI apps and agents. One project gives you a model catalog with more than ten thousand models, the Agent Service to run agents, a tool catalog, guardrails, tracing and evaluations.\""
+          - "\"There is no separate Foundry license. You pay for what you use: model tokens and a few metered tools. We'll come back to licensing.\""
+        show:
+          - "Models: the deployed model and its deployment type (Data Zone keeps processing in the US data zone)."
+          - "Agents: `sales-insights-agent` and its tools."
+          - "Tools: Fabric data agent, web search, Azure AI Search, SharePoint, MCP, OpenAPI, code interpreter."
+        fallback: "Offline: app → Patterns → P06 and the reference architecture; say the portal tour is DOCUMENTED, not live."
+      - title: "Tour Fabric: the governed side"
+        entry: fabric
+        path: "app.fabric.microsoft.com → workspace ffia-dev → mfg_lakehouse, semantic model, mfg-sales-data-agent"
+        label: LIVE
+        say:
+          - "\"Here is the Fabric side: the lakehouse tables, the semantic model with the business measures, and the data agent. The data agent turns a question into SQL or DAX, runs it with your permissions, and never writes data.\""
+        show:
+          - "Lakehouse tables: sales_orders, customers, products, business_teams, sales_targets, plants."
+          - "Data agent → ask: \"What was booked revenue by product line last month?\""
+        fallback: "Offline: terminal `ffia mfg brief` shows the same numbers, labeled LOCAL."
+  - id: build-and-orchestrate
+    title: "Approaches for building and orchestrating agents (Foundry + Fabric demo)"
+    minutes: 12
+    goal: "Answer \"Can we see Foundry and Fabric working together?\" twice: no-code in the portal and code-first in VS Code."
+    steps:
+      - title: "Portal: a prompt agent with the Fabric data agent tool"
+        entry: foundry
+        path: "Foundry portal → Agents → sales-insights-agent → Tools → Fabric data agent (preview) → Playground"
+        label: LIVE
+        say:
+          - "\"This is the no-code path. The agent has instructions, a model, and one tool: our Fabric data agent. The tool is in preview; the Fabric data agent itself is generally available.\""
+          - "\"Watch the run: the agent decides it needs numbers, calls Fabric, and Fabric answers under my identity.\""
+        show:
+          - "Ask: \"Which product line grew fastest in September compared with August, and by how much?\""
+          - "Open the run details or trace: the Fabric tool call, the generated query, the answer."
+        check: "The answer names Enclosures (about +56% month over month on the synthetic data) and cites the measure."
+        fallback: "Offline: `ffia mfg brief --team T-ENC` (LOCAL). Say: the portal flow is the same agent and tool; we are showing the numbers it would read."
+      - title: "Code-first: the same agent in Python"
+        entry: vscode
+        path: "VS Code → demos/foundry-fabric-agents-workshop/code/fabric_sales_agent.py"
+        label: LIVE
+        say:
+          - "\"Same agent, as code. `AIProjectClient` connects to the project; `create_version` defines the agent with the Fabric tool; the responses API runs it. This is how you put agents in source control and CI/CD.\""
+          - "\"GitHub Copilot is open on the side. Ask it to explain the file or add the monthly brief loop; it reads our repository instructions first.\""
+        code: |
+          python demos/foundry-fabric-agents-workshop/code/fabric_sales_agent.py \
+            "Which product line grew fastest last month, and by how much?"
+        show:
+          - "The `MicrosoftFabricPreviewTool` block and the instruction \"never estimate numbers\"."
+          - "The terminal output labeled [LIVE]."
+        check: "Same answer as the portal: the agent and the governed data are the same."
+        fallback: "Offline: open the file and walk through it; run `ffia mfg brief`. Label the code walkthrough REQUIRES TENANT VALIDATION."
+      - title: "Orchestration options"
+        entry: app
+        path: "App → Architecture → MFG-01, step 4 (Monthly insights) → Workflow / orchestrator box"
+        label: DOCUMENTED
+        say:
+          - "\"When one agent isn't enough, orchestrate. Common patterns: sequential (numbers, then context, then writing), concurrent (several analyses at once), handoff (route to a specialist), group chat, and magentic (a manager plans for many agents).\""
+          - "\"You can build them as a Foundry workflow in the portal, in code with Microsoft Agent Framework, or in Copilot Studio when the experience lives in Teams and Microsoft 365. Start with one agent and a tool; add orchestration only when the task needs it.\""
+        show:
+          - "The orchestrator box and its edges to the insights and market agents."
+          - "App → Patterns → P06 (enterprise agent) and P13 (multi-domain is not multi-agent)."
+  - id: connect-data
+    title: "Connecting internal and external data sources"
+    minutes: 10
+    goal: "Show the tool catalog, then answer the competitor web-data question with the security trade-offs."
+    steps:
+      - title: "Internal data: which tool for which source"
+        entry: foundry
+        path: "Foundry portal → Tools (or Toolbox) catalog"
+        label: DOCUMENTED
+        say:
+          - "\"Structured data in Fabric: the Fabric data agent tool. Documents in SharePoint: the SharePoint tool. Your own indexes: Azure AI Search. Your systems: OpenAPI, Azure Functions, Logic Apps, or any MCP server. Each tool runs with a defined identity: some pass the user through, some use the agent's own Entra identity.\""
+          - "\"Prefer governed paths. For sales numbers, go through the Fabric data agent and the semantic model, not raw tables, so everyone gets the same definition of revenue.\""
+        show:
+          - "Tool list: Fabric data agent, SharePoint, Azure AI Search, MCP, OpenAPI, Azure Functions, web search, code interpreter, file search."
+      - title: "External data: web grounding, live"
+        entry: vscode
+        path: "VS Code → code/market_context_agent.py → run"
+        label: LIVE
+        say:
+          - "\"Foundry can add public web context through Grounding with Bing. It's search with citations, not a crawler and not a copy of someone's website.\""
+          - "\"Notice what leaves your tenant: the query. Microsoft documents that Bing grounding data flows outside the Azure compliance and geo boundary and follows Bing's terms. So the rule is simple: never put internal numbers or customer names in a query, restrict domains with Bing Custom Search, and show the citations.\""
+        code: python demos/foundry-fabric-agents-workshop/code/market_context_agent.py
+        show:
+          - "The answer and its citation URLs."
+          - "Architecture: the **Outside the tenant** zone and the boundary band."
+        fallback: "Offline: show the MFG-01 external zone and the Q&A answer below; label DOCUMENTED."
+      - title: "Answer: \"Could we pull competitor data from their website?\""
+        entry: talk
+        path: "Q&A section of this handout (featured question 2)"
+        label: DISCUSSION
+        say:
+          - "\"Short answer: Foundry can find and summarize publicly available information with citations, such as a published price list or a press release. It is not a scraping tool, and the right answer depends on the site's terms and your legal team.\""
+          - "\"The security concerns are the boundary, prompt injection from web content, and data leakage in queries. We'll walk the controls in the governance part.\""
+  - id: use-cases
+    title: "Monthly insights and data quality"
+    minutes: 12
+    goal: "Answer questions 3 and 4 with working output."
+    steps:
+      - title: "Monthly insights for each business team"
+        entry: vscode
+        path: "VS Code → code/monthly_brief.py → run (live) · Terminal → ffia mfg brief (offline)"
+        label: LIVE
+        say:
+          - "\"Yes, Foundry can do this. Each team has a focus area. Once a month, a schedule asks the agent for that team's numbers from Fabric, the agent writes three insights and one action, and the brief goes to Teams or Outlook.\""
+          - "\"Schedule options: a Logic Apps Recurrence trigger calling the Foundry agent (the agent action is preview), an Azure Functions timer, or Foundry routines. Delivery: the Teams and Outlook connectors.\""
+        code: |
+          python demos/foundry-fabric-agents-workshop/code/monthly_brief.py
+          # offline equivalent (LOCAL, synthetic):
+          ffia mfg brief
+        show:
+          - "Enclosures: booked revenue up about 56% month over month and 143% of target (synthetic)."
+          - "Key Accounts: up about 40% month over month; Hardware & Fabrication: flat month over month, well up year over year."
+          - "MFG-01 trace: Schedule → Workflow → Insights agent → Fabric data agent → Tracing → Business teams."
+        check: "Each brief's numbers match `ffia mfg brief` (the governed baseline)."
+        fallback: "Offline: `ffia mfg brief` prints all four briefs, labeled LOCAL."
+      - title: "Data quality: detect, explain, approve, fix upstream"
+        entry: terminal
+        path: "Terminal → ffia mfg quality · Fabric portal → data agent questions"
+        label: LOCAL
+        say:
+          - "\"Can Foundry find data-quality issues? It can help find and explain them, and propose fixes. It should not silently change your data.\""
+          - "\"Here are nine kinds of issues in this synthetic data: 12 duplicate lines, 9 retired product codes, 7 negative shipped quantities, 5 prices entered per box, unmapped regions and impossible dates. Detection runs in Fabric (a notebook with Semantic Link, or lake view rules). The Fabric data agent is read-only, so it can answer \"how many orders have no ship date?\", but it cannot fix them.\""
+          - "\"A data-quality agent explains the business impact and proposes a fix. A data steward approves it. A Fabric pipeline applies it in the Silver layer, and the semantic model refreshes. You fix the data upstream, not in the report.\""
+        code: ffia mfg quality
+        show:
+          - "Each finding with its proposed correction."
+          - "MFG-01 step 5: Data-quality checks → Data-quality agent → Human approval → Fix pipeline → Lakehouse."
+        check: "Every injected issue is detected exactly (counts match the generator's manifest)."
+        fallback: "This step is offline by design; in the live Fabric portal ask the data agent: \"How many shipped order lines have no ship date?\""
+  - id: security-governance
+    title: "Security, governance and licensing"
+    minutes: 8
+    goal: "Walk the controls layer by layer and answer the licensing question plainly."
+    steps:
+      - title: "Security and governance, layer by layer"
+        entry: app
+        path: "App → Architecture → MFG-01 step 5 (bands) · Patterns → P14, P15"
+        label: DOCUMENTED
+        say:
+          - "\"Identity: users sign in with Entra ID. The Fabric tool uses the user's identity, so row-level security applies. Agents get their own Entra Agent IDs with least-privilege roles.\""
+          - "\"Network and data: the standard agent setup brings your own storage, search and Cosmos DB, with private networking, so agent data stays in your tenant.\""
+          - "\"Content: guardrails filter harmful content, and Prompt Shields detect injection attempts, including instructions hidden in web pages that a tool returns.\""
+          - "\"Control: models propose, people approve, and the data agent is read-only. An AI gateway in API Management can add central sign-in, quotas and logging for models and MCP tools.\""
+          - "\"Evidence: tracing in Application Insights and evaluators for groundedness and task adherence. At enterprise scale, Microsoft Agent 365 adds an agent registry and policies.\""
+        show:
+          - "The four bands under the MFG-01 diagram: identity, boundary, authority, evidence."
+          - "Foundry portal → Tracing for the run we just did (live)."
+      - title: "Licensing in one slide"
+        entry: talk
+        path: "Q&A section (featured question 5)"
+        label: DOCUMENTED
+        say:
+          - "\"There is no Foundry license to buy. Foundry is pay-as-you-go Azure consumption: model tokens, plus some tools such as Bing grounding, file search storage and code interpreter sessions. The agent runtime itself isn't charged separately.\""
+          - "\"Fabric is capacity-based: an F SKU, pay-as-you-go or reserved. The data agent runs on that capacity and needs F2 or higher. Users of a Copilot Studio or Microsoft 365 Copilot experience may need those licenses; a custom app does not.\""
+  - id: customer-use-cases
+    title: "Your use cases and next steps"
+    minutes: 8
+    goal: "Turn the demo into two or three candidate use cases with a pattern and a first step each."
+    steps:
+      - title: "Discovery: map their ideas to patterns"
+        entry: talk
+        path: "App → Patterns → filter by signal; whiteboard"
+        label: DISCUSSION
+        say:
+          - "\"Let's map your ideas. For each one: who asks, what data answers it, how often, and what action follows.\""
+          - "\"Typical manufacturing starters: monthly sales and margin briefs by team (P01 + P06), quote and order-status assistant over ERP data (P06 with an API tool), data-quality triage for sales and product master data (P08 + P10), and market and pricing watch from allow-listed public sources (P06 with web grounding).\""
+        show:
+          - "Pattern cards: P01, P06, P08, P10, P12, P14."
+      - title: "Agree the first step"
+        entry: talk
+        path: "Options table in this handout"
+        label: DISCUSSION
+        say:
+          - "\"Proposed next step: a two-week pilot on one team's monthly brief, in a dev workspace, with the data agent over your existing sales semantic model, and an evaluation set of twenty real questions with known answers.\""
+qa:
+  - featured: true
+    label: LIVE
+    q: "Can we see a demo of Foundry + Fabric working together?"
+    sources: [foundry-fabric-tool, fabric-data-agent, foundry-agent-service]
+    a: |
+      Yes, in three ways (Part B). Each one uses the same Foundry agent and the same Fabric data agent.
+
+      - **Portal:** a Foundry prompt agent with the Fabric data agent tool answers "Which product line grew fastest last month?" The run details show the Fabric call and the answer.
+      - **Code-first:** `fabric_sales_agent.py` creates the same agent with the Foundry SDK and runs it from VS Code.
+      - **Offline:** `ffia mfg brief` prints the governed numbers the agent reads, labeled LOCAL.
+
+      How it works: the Fabric data agent (GA) turns a question into SQL or DAX over the lakehouse and semantic model, runs it with the user's permissions, and never writes data. The Foundry tool that calls it is in **preview**. It uses the signed-in user's identity (on-behalf-of); service principals aren't supported for it. The data agent and Foundry project must be in the same tenant, and the data sources on same-region capacities.
+  - featured: true
+    label: DOCUMENTED
+    q: "Foundry can add external data. Could we use it to pull publicly available data from a competitor's website? What security concerns should we know?"
+    sources: [foundry-bing-grounding, foundry-web-search, foundry-toolbox]
+    a: |
+      **What it does.** Grounding with Bing Search and the web search tool let an agent search the public web and answer with citations. That suits questions like "summarize this month's public news on steel prices" or "what did competitors announce publicly". It is search grounding, not a crawler: it does not download or mirror a website. Bing Custom Search (preview) restricts results to domains you allow-list. A browser automation tool exists too, but driving a competitor's site with it raises the same legal questions as scraping.
+
+      **Is it allowed?** Public does not mean free to reuse. Respect each site's terms of use and robots rules, and involve your legal team. Microsoft requires you to display the website and Bing query URLs with grounded answers (Bing use-and-display requirements).
+
+      **Security concerns and controls:**
+
+      - **Data leaves the boundary:** the query the agent sends, with the resource key, goes outside the Azure compliance and geo boundary, under Bing's terms. The Data Protection Addendum doesn't apply. Never put internal numbers, customer names or plans in a query; instruct the agent and test for it.
+      - **Prompt injection:** web pages can hide instructions. Use guardrails and Prompt Shields, keep web-grounded agents separate from agents that can act, and never let web content trigger a write.
+      - **Accuracy and attribution:** require citations, show sources, and keep a person in the loop for decisions.
+      - **Scope:** restrict domains with Bing Custom Search, or disable live web access where it isn't needed.
+      - **Cost:** Bing grounding is a separate resource billed per transaction.
+
+      **Alternative for sensitive use:** have analysts curate approved public documents (price lists, filings) into Fabric through a reviewed pipeline, and let agents use only that governed copy.
+  - featured: true
+    label: LOCAL
+    q: "Could Foundry monitor sales data and send business teams monthly insights on their focus areas?"
+    sources: [logic-apps-foundry-agents, foundry-routines, fabric-activator, powerbi-subscription-summaries, foundry-fabric-tool]
+    a: |
+      Yes. This is a strong first use case. The pattern (MFG-01, step 4):
+
+      1. **Focus areas** live as data, in a business-teams table: team, product lines or segment, recipients.
+      2. **Schedule:** once a month, a Logic Apps Recurrence trigger (GA) runs a workflow that calls the Foundry agent (the Logic Apps agent action is preview). Alternatives: an Azure Functions timer running the Foundry SDK (GA), or Foundry routines.
+      3. **Numbers:** the agent asks the Fabric data agent for each team's revenue, month-over-month and year-over-year change, target attainment, margin and top movers, under a delegated identity.
+      4. **Insight:** the agent writes three insights and one action, flags data-quality issues that affect the numbers, and passes guardrails.
+      5. **Delivery:** the Teams or Outlook connector sends the brief; every run is traced.
+
+      On the synthetic data, Enclosures is 143% of target with bookings up about 56% month over month. Run `ffia mfg brief` to see all four briefs.
+
+      **Simpler options:**
+
+      - Power BI subscriptions with Copilot summaries (preview), when a report summary is enough.
+      - Fabric Activator alerts (GA), for threshold events between monthly briefs.
+
+      **Watch for:**
+
+      - Use a dedicated identity design for unattended runs, because the Fabric tool needs a user identity.
+      - Test the brief against known answers before it goes out.
+      - Start with one team.
+  - featured: true
+    label: LOCAL
+    q: "Can Foundry identify data-quality issues within Fabric semantic models and help clean or correct the underlying data?"
+    sources: [fabric-data-agent, semantic-link-validate, mlv-data-quality, purview-data-quality, foundry-human-in-the-loop]
+    a: |
+      **Identify: yes, with the right tools.**
+
+      - The Fabric data agent can answer data-quality questions ("how many shipped lines have no ship date?") because it queries the data. But it is strictly **read-only**: it never creates, updates or deletes data.
+      - Systematic detection belongs in Fabric:
+        - Semantic Link in a notebook (`list_relationship_violations`, `find_dependencies`) checks data against the model's relationships.
+        - Materialized lake view constraints enforce rules in Silver.
+        - Microsoft Purview data quality scans profile lakehouse tables.
+
+      **Help clean: yes, with approval.** A Foundry agent can read the findings, explain the business impact ("these 5 lines inflate September revenue"), and propose a correction. A data steward approves it (Foundry supports a human-in-the-loop approval step, in preview). A reviewed Fabric notebook or pipeline then applies the fix in the Silver layer, and the semantic model refreshes.
+
+      **Don't** let an agent edit the semantic model's data or silently change records. Fix it upstream, with an audit trail.
+
+      **In this demo:** `ffia mfg quality` finds all nine injected issue types, with exact counts and a proposed correction for each (LOCAL).
+  - featured: true
+    label: DOCUMENTED
+    q: "What is the licensing structure for Foundry?"
+    sources: [foundry-agent-faq, fabric-trial, agent-365]
+    a: |
+      **There is no separate Foundry license.** Foundry is pay-as-you-go Azure consumption on your subscription.
+
+      - **Models:** priced per million input and output tokens. Deployment types are Global, Data Zone or regional Standard (pay per token), Provisioned throughput (reserved capacity), and Batch (discounted).
+      - **Agent Service:** the agent runtime is not charged separately; you pay for the model tokens it uses.
+      - **Tools with their own meters:**
+        - Grounding with Bing (per transaction, separate resource);
+        - file search (vector storage);
+        - code interpreter (sessions);
+        - Azure AI Search (its own resource).
+      - **Safety and evaluations:** content safety is billed per record; evaluations consume model tokens.
+      - **Partner models** (for example Llama or Mistral) are billed through Azure Marketplace.
+
+      **Fabric** is separate and capacity-based: an F SKU, pay-as-you-go (can be paused) or reserved with a discount. The Fabric data agent and Copilot in Fabric run on that capacity and need F2 or higher.
+
+      **Who uses it changes the license:**
+
+      - A custom app or Teams bot built on Foundry needs no per-user AI license.
+      - Copilot Studio uses Copilot Credits.
+      - Microsoft 365 Copilot experiences need Microsoft 365 Copilot licenses.
+      - Microsoft Agent 365 (GA) is licensed per user for agent governance.
+
+      Exact prices vary by region and change; we'll share a cost estimate from the Azure pricing calculator for your volumes.
+  - label: DOCUMENTED
+    q: "What's the difference between Foundry, Copilot Studio and Microsoft 365 Copilot?"
+    sources: [foundry-overview, foundry-agent-service]
+    a: |
+      - **Microsoft 365 Copilot** is the ready-made assistant in Microsoft 365 apps.
+      - **Copilot Studio** is low-code: build agents that live in Teams and Microsoft 365, with connectors and Copilot Credits.
+      - **Foundry** is pro-code and enterprise: any model, full control of tools, identity, networking, evaluations and deployment, billed by consumption.
+
+      They connect. A Foundry agent can be published to Teams or Microsoft 365, and the Fabric data agent is available in all three.
+  - label: DOCUMENTED
+    q: "Which agent-building approach should we start with?"
+    sources: [foundry-agent-service, agent-framework, ai-agent-orchestration]
+    a: |
+      Start with a **portal prompt agent** plus one tool (the Fabric data agent) to prove value in days. Move to **code** (Foundry SDK or Microsoft Agent Framework) when you need source control, tests and CI/CD. Use **workflows** or multi-agent orchestration only when one agent with tools can't do the job. Use **Copilot Studio** when the experience must live in Teams and makers will own it.
+  - label: DOCUMENTED
+    q: "Does the agent see data the user isn't allowed to see?"
+    sources: [foundry-fabric-tool, fabric-data-agent]
+    a: |
+      No. The Fabric data agent uses the user's credentials, and row-level and column-level security still apply. The Foundry tool passes the user's identity (on-behalf-of).
+  - label: DOCUMENTED
+    q: "Where is our data stored and processed?"
+    sources: [foundry-private-networking, foundry-bing-grounding]
+    a: |
+      - Your Fabric data stays in Fabric.
+      - With the standard agent setup, agent state (threads, files, vectors) is stored in your own Storage, AI Search and Cosmos DB, with private networking.
+      - Model processing follows the deployment type you choose; Data Zone keeps processing in, for example, the US data zone.
+      - The exception is Bing grounding, which leaves the Azure boundary by design.
+  - label: DOCUMENTED
+    q: "How do we know the agent's answers are right?"
+    sources: [foundry-evaluators]
+    a: |
+      Build an evaluation set of real questions with known answers. Run Foundry evaluators for groundedness, relevance and task adherence before every change. Reconcile numbers with the semantic model. Trace every run in Application Insights.
+
+      In this demo, every brief number reconciles with the governed baseline (`ffia mfg brief`).
+  - label: DOCUMENTED
+    q: "Can agents take actions, like updating a forecast or creating a ticket?"
+    sources: [foundry-human-in-the-loop, foundry-toolbox]
+    a: |
+      Yes, through tools: OpenAPI, Azure Functions, Logic Apps or MCP. Treat every write as a governed change:
+
+      - least-privilege identity;
+      - a human approval step for anything material;
+      - logging.
+
+      Read-only first, then actions with approval.
+options:
+  - decision: "Where agents get sales numbers"
+    options: "Fabric data agent tool · direct SQL endpoint · semantic model through MCP"
+    recommendation: "Fabric data agent over the semantic model: governed definitions, user identity, read-only."
+  - decision: "How to build"
+    options: "Portal prompt agent · Foundry SDK or Agent Framework in code · Copilot Studio"
+    recommendation: "Portal for the pilot; code for production with source control and evaluations."
+  - decision: "Monthly schedule and delivery"
+    options: "Logic Apps Recurrence + Foundry agent action (preview) · Azure Functions timer + SDK (GA) · Foundry routines · Power BI subscription with Copilot summary (preview)"
+    recommendation: "Azure Functions or Logic Apps with Teams/Outlook delivery; Power BI subscriptions when a report summary is enough."
+  - decision: "External web data"
+    options: "Grounding with Bing · Bing Custom Search (allow-listed domains) · curated public documents in Fabric"
+    recommendation: "Custom Search with allow-listed domains for exploration; curated documents in Fabric for anything used in decisions."
+  - decision: "Data-quality fixes"
+    options: "Agent edits data directly · agent proposes, person approves, pipeline fixes Silver"
+    recommendation: "Always propose → approve → fix upstream in Silver; the data agent stays read-only."
+reset:
+  - "Delete test threads from the agent playground if you shared the screen with real names (this demo uses synthetic data only)."
+  - "Pause the Fabric capacity when the session ends (see `docs/operations/fabric-tenant-readiness.md`)."
+  - "If anything live fails, switch to the offline path for that step; every step lists it. Say the label out loud."
+  - "Regenerate this handout after edits: `ffia talktracks render`."
+mapping:
+  - need: "Architecture you can step through"
+    asset: "`education/architecture/views/mfg-01.yaml` → app `/architecture/mfg-01` and `docs/architecture/diagrams/mfg-01.drawio`"
+  - need: "Synthetic manufacturing data and baseline"
+    asset: "`data/synthetic/raw/mfg-sales-v1/`, `data/synthetic/expected/mfg-sales-v1.json`"
+  - need: "Offline demo commands"
+    asset: "`ffia mfg brief`, `ffia mfg quality`"
+  - need: "Code-first samples"
+    asset: "`demos/foundry-fabric-agents-workshop/code/`"
+  - need: "Patterns"
+    asset: "`education/patterns/catalog.yaml` (P01, P06, P08, P10, P12, P14, P15, P16)"
+  - need: "Sources for every claim"
+    asset: "`docs/research/sources.yaml` → `docs/research/source-validation.md`"

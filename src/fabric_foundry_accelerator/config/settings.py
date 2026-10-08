@@ -34,6 +34,7 @@ class Settings(BaseSettings):
     allow_live_mutation: bool = False
     fabric_live: bool = False
     definitions_root: Path = Path("fabric/workspace")
+    demos_root: Path = Path("demos")
     simulate_fabric_outage: bool = False
     cors_origins: tuple[str, ...] = ("http://localhost:5173",)
     log_json: bool = False

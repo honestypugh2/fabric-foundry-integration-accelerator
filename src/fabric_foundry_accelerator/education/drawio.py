@@ -29,7 +29,7 @@ from fabric_foundry_accelerator.education.layout import (
 ICON = 36
 
 # Fills follow the brand families used across Azure Architecture Center diagrams.
-_KIND_STYLE: dict[str, tuple[str, str]] = {
+KIND_STYLE: dict[str, tuple[str, str]] = {
     "fabric": ("#E3F4F1", "#117865"),
     "data": ("#E3F4F1", "#117865"),
     "foundry": ("#F0EAFB", "#5C2D91"),
@@ -47,7 +47,7 @@ _KIND_STYLE: dict[str, tuple[str, str]] = {
     "service": ("#E8F1FB", "#0078D4"),
     "external": ("#FFFFFF", "#5E5E5E"),
 }
-_ZONE_STROKE: dict[str, str] = {
+ZONE_STROKE: dict[str, str] = {
     "fabric": "#117865",
     "foundry": "#5C2D91",
     "tenant": "#0078D4",
@@ -56,14 +56,14 @@ _ZONE_STROKE: dict[str, str] = {
     "optional": "#8A8886",
     "offline": "#8A5300",
 }
-_EDGE_STROKE: dict[str, str] = {
+EDGE_STROKE: dict[str, str] = {
     "authority": "#8A5300",
     "evidence": "#107C10",
     "change": "#A4262C",
     "fallback": "#5E5E5E",
     "config": "#8A8886",
 }
-_BAND_FILL: dict[str, str] = {
+BAND_FILL: dict[str, str] = {
     "identity": "#E8F1FB",
     "policy": "#FFF8E1",
     "evidence": "#E9F5EA",
@@ -103,7 +103,7 @@ def _node_cell(prefix: str, node: DiagramNode, box: Box) -> str:
 
     Edges attach to the card, never to the icon, so arrows don't cross labels.
     """
-    fill, stroke = _KIND_STYLE[node.kind]
+    fill, stroke = KIND_STYLE[node.kind]
     dashed = "dashed=1;" if node.state in ("planned", "preview", "optional") else ""
     card_id = f"{prefix}n-{node.id}"
     if node.icon:
@@ -133,7 +133,7 @@ def _node_cell(prefix: str, node: DiagramNode, box: Box) -> str:
 
 
 def _edge_cell(prefix: str, edge: DiagramEdge, path: EdgePath) -> str:
-    stroke = _EDGE_STROKE.get(edge.kind, "#505050")
+    stroke = EDGE_STROKE.get(edge.kind, "#505050")
     dashed = "dashed=1;" if edge.planned or edge.kind == "fallback" else ""
     style = (
         "edgeStyle=none;rounded=1;html=1;endArrow=block;endFill=1;jumpStyle=arc;"
@@ -192,7 +192,7 @@ def _page(view: DiagramView, layout: ViewLayout, index: int, name: str, upto: st
         if not visible(zone.step, view.steps, upto):
             continue
         box = layout.zones[zone.id]
-        stroke = _ZONE_STROKE[zone.kind]
+        stroke = ZONE_STROKE[zone.kind]
         dashed = (
             "dashed=1;" if zone.kind in ("optional", "offline") else "dashed=1;dashPattern=8 4;"
         )
@@ -216,7 +216,7 @@ def _page(view: DiagramView, layout: ViewLayout, index: int, name: str, upto: st
         cells.append(
             f'<mxCell id="{prefix}band-{band.id}" value={quoteattr(escape(band.text))} '
             f'style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;fontSize=11;'
-            f'fillColor={_BAND_FILL[band.kind]};strokeColor=none;" vertex="1" parent="1">'
+            f'fillColor={BAND_FILL[band.kind]};strokeColor=none;" vertex="1" parent="1">'
             f'<mxGeometry x="{LEFT - 14}" y="{y:g}" width="{width - 2 * LEFT + 28:g}" height="{BAND_H:g}" '
             'as="geometry"/></mxCell>'
         )

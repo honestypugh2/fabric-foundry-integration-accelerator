@@ -1,0 +1,379 @@
+id: fabric-copilot-level-up
+title: "Leveling up Fabric data engineering with GitHub Copilot"
+subtitle: >-
+  What GitHub Copilot actually does for a Fabric data engineer, what Fabric MCP and Fabric Skills
+  are, how Power BI and Foundry fit, and how a team climbs from assisted coding to governed
+  change. Stepped through real architecture diagrams, in the web app, VS Code and the portals.
+eyebrow: "Guide 1 · Healthcare medallion lab HC-01 (synthetic) · GitHub Copilot + Fabric"
+guide: hc-01-fabric-mcp-powerbi-medallion-lab
+audience: "Data engineering and platform leads, architects, analytics engineers"
+duration_minutes: 60
+summary: |
+  **Scenario.** A healthcare analytics team builds a medallion lakehouse (Bronze, Silver, Gold), a semantic model and a report from seven synthetic CSV sources (guide HC-01). We show how GitHub Copilot changes that work, and how to keep it safe.
+
+  **Three building blocks, in one sentence each:**
+
+  - **GitHub Copilot** is the agent that plans, writes code, runs commands and calls tools, under your identity and your approvals.
+  - **Fabric MCP** gives the agent hands: tools to read and change Fabric through a standard protocol.
+  - **Fabric Skills** give it know-how: Microsoft-authored procedures for medallion design, Spark, semantic models and reports.
+
+  **Modes.** Offline (the accelerator app and local MCP server, labeled LOCAL), live read-only against the demo tenant (labeled LIVE), and governed change (plans that a person approves).
+objectives:
+  - "Explain what GitHub Copilot is doing at each step: reading instructions, planning, editing, calling MCP tools and skills, and asking for approval."
+  - "Explain Fabric MCP (servers, tools, read-only profiles) and Fabric Skills (procedures that call Fabric directly) and why they need different controls."
+  - "Show how Power BI fits: the semantic model holds business meaning; DAX checks prove the numbers."
+  - "Climb the L1 → L6 maturity ladder and choose the next level for their team."
+  - "See Foundry and GitHub Copilot together: Copilot builds and explains a Foundry agent in code."
+entry_points:
+  - id: app
+    name: Accelerator web app
+    where: "http://localhost:5173 (make run) · /architecture · /learn · /labs · /guides"
+    purpose: "Architecture diagrams to step through, lessons at Executive to L400, the HC-01 guide runner. Works offline."
+  - id: vscode
+    name: VS Code + GitHub Copilot (agent mode)
+    where: "VS Code → this repository → Chat (agent mode); a second window for the live lab folder"
+    purpose: "Copilot reading AGENTS.md, using skills and calling MCP tools with approvals."
+  - id: fabric
+    name: Microsoft Fabric portal
+    where: "https://app.fabric.microsoft.com → workspace ffia-dev"
+    purpose: "Confirm what live tools read; admin and capacity settings."
+  - id: foundry
+    name: Microsoft Foundry portal
+    where: "https://ai.azure.com → project"
+    purpose: "The Foundry agent that Copilot builds in code."
+  - id: terminal
+    name: Terminal
+    where: "VS Code terminal in the repository (.venv active)"
+    purpose: "ffia commands: readiness, MCP profiles, skills, notebooks."
+  - id: talk
+    name: Conversation
+    where: "Whiteboard or the architecture page"
+    purpose: "Discussion; no system involved."
+prerequisites:
+  - title: "Choose the mode"
+    items:
+      - "**Offline (always works):** `make demo-prep && make run`. Every live step has an offline fallback."
+      - "**Live read-only:** resume the F capacity; `ffia fabric readiness` says YES; render the read-only Fabric MCP profile into a scratch lab folder (below)."
+      - "**Foundry segment (optional live):** a Foundry project and model deployment; otherwise show the code and label it REQUIRES TENANT VALIDATION."
+  - title: "Setup commands (30 minutes before)"
+    items:
+      - "`az login --tenant <DEMO_TENANT_ID>` then `ffia fabric readiness`."
+      - "`make demo-prep` (clears the dev-server cache and runs every offline check), `ffia skills install && ffia skills status`, `make run`."
+      - "Live lab folder: `mkdir -p ~/hc-01-lab/.vscode && ffia mcp render fabric-readonly --client vscode --output ~/hc-01-lab/.vscode/mcp.json`; open it in a second VS Code window and start the server once (MCP: List Servers)."
+      - "In the repository window: Chat → agent mode; confirm `ffia-local` and `microsoft-learn` tools, and the skills list (Chat → Configure Skills)."
+  - title: "Browser tabs"
+    items:
+      - "Tab 1: `/architecture/reference`. Tab 2: `/architecture/mcp-topology`. Tab 3: `/architecture/agentic-de`. Tab 4: `/architecture/hc-01`."
+      - "Tab 5: `/learn/fabric-mcp-landscape`. Tab 6: `/learn/fabric-skills`. Tab 7: `/labs/lab-copilot-maturity-ladder`. Tab 8: `/guides/hc-01-fabric-mcp-powerbi-medallion-lab`."
+      - "Tab 9: Fabric portal, workspace ffia-dev. Tab 10: this handout."
+architecture:
+  - view: agentic-de
+    caption: "The level-up map: five columns (knowledge, harness, execution, authority, evidence) filled one maturity level at a time, from L1 assisted coding to L6 parallel agents. Step through L1 → L6 in the app."
+  - view: mcp-topology
+    caption: "Where MCP sits: every agent harness shares one configuration and one set of instructions; each job uses the narrowest server: documentation tools for how, read-only tools for what is, and the approved change flow for change it."
+  - view: hc-01
+    caption: "The HC-01 lab end to end: Copilot with Fabric MCP lands data, reviewed notebooks build Bronze/Silver/Gold on Fabric Spark, a Direct Lake semantic model is edited with Power BI Modeling MCP and skills, and DAX checks reconcile with the baseline."
+  - view: reference
+    caption: "The Fabric + Foundry reference architecture this sits in: Fabric provides governed context, Foundry reasons and acts, MCP is access (not authority), identity and policy decide, evidence proves."
+patterns: [P19, P09, P20, P10, P12, P08, P06]
+parts:
+  - id: opening
+    title: "Why this matters, and the reference architecture"
+    minutes: 6
+    goal: "Frame the question: faster and safer Fabric data engineering with GitHub Copilot."
+    steps:
+      - title: "The question and the three ideas"
+        entry: app
+        path: "App → Architecture → Fabric + Foundry reference architecture → level Executive → Trace a request"
+        label: LOCAL
+        say:
+          - "\"Today's question: how do we make Fabric data engineering faster and safer with GitHub Copilot? Three ideas. Fabric holds the governed context. Agents, Copilot included, turn context into work. MCP gives an agent hands, not authority. Your identity, your policies and a person's approval give authority.\""
+          - "\"Everything is labeled. LOCAL ran on this laptop on synthetic data. LIVE read our demo tenant. I'll say which.\""
+        show:
+          - "Click the build steps one by one, then **Trace a request**."
+  - id: what-is-copilot
+    title: "What GitHub Copilot is, and what it is actually doing"
+    minutes: 10
+    goal: "Demystify the agent loop: instructions → plan → tools → approval → result."
+    steps:
+      - title: "One agent, many places"
+        entry: app
+        path: "App → Learn → GitHub Copilot surfaces (L200)"
+        label: DOCUMENTED
+        say:
+          - "\"GitHub Copilot is one agent runtime that shows up in VS Code agent mode, the Copilot CLI, the cloud agent that turns an issue into a pull request, pull-request code review, and the Copilot SDK inside your own apps. They all read the same repository files.\""
+      - title: "Watch the agent loop live in VS Code"
+        entry: vscode
+        path: "VS Code → Chat (agent mode) → prompt P-COP-1 from prompts/github-copilot/fabric-level-up.md"
+        label: LOCAL
+        say:
+          - "\"Here is what Copilot is doing, step by step. First it reads our instructions: `AGENTS.md` says synthetic data only, read-only by default, label every result. Then it plans. Then it reads files. Then it may call a tool, and it asks me before anything that runs.\""
+          - "\"Copilot isn't magic and it isn't the authority. It's an agent working under my identity, with the tools and rules we give it.\""
+        show:
+          - "Open `AGENTS.md` and `.github/copilot-instructions.md` side by side."
+          - "Ask P-COP-1: explain the Silver encounters transform and its data-quality flags; then show the Spark SQL in `fabric/workspace/MCP_02_Silver.Notebook`."
+          - "Point at the tool-call approvals in the chat."
+        check: "The audience can name the loop: instructions, plan, read, tool call with approval, answer."
+      - title: "Copilot reads data through MCP (offline)"
+        entry: vscode
+        path: "VS Code → Chat → prompt P-COP-2 (ffia-local → inspect_medallion_architecture)"
+        label: LOCAL
+        say:
+          - "\"Now it calls an MCP tool: our local educational server. It returns 24 tables with row counts, and the result is labeled LOCAL with no cloud call. Same mechanics as Fabric MCP, without a tenant.\""
+        check: "24 tables (7 Bronze, 7 Silver, 10 Gold), cloud_operation_performed: false."
+  - id: fabric-mcp
+    title: "Fabric MCP: the agent's hands"
+    minutes: 10
+    goal: "Explain the MCP family, why a full server is never exposed, and show a live read-only call."
+    steps:
+      - title: "Step through the MCP topology"
+        entry: app
+        path: "App → Architecture → MCP topology → Direct → + Gateway → Trace a request"
+        label: LOCAL
+        say:
+          - "\"'Fabric MCP' is a family. There's the local Fabric MCP server we use today, Fabric IQ MCP (read-only), the Data Warehouse MCP server (preview), and Power BI Modeling MCP. Pick the narrowest server for the job.\""
+          - "\"The local server version 1.4.0 has 48 tools. 22 can write and 5 are destructive. So you don't connect it and hope.\""
+      - title: "Profiles: least privilege, checked in CI"
+        entry: terminal
+        path: "Terminal → ffia mcp profiles; config/mcp/profiles.yaml"
+        label: LOCAL
+        code: |
+          ffia mcp profiles
+          ffia mcp check
+        say:
+          - "\"Six profiles: offline (the default), docs-only, read-only (16 metadata tools), approval-gated authoring, the HC-01 lab profile, and a Power BI sandbox. The read-only profile starts the server with `--read-only` and an explicit allow-list. CI fails if anyone adds a write tool or unpins a version.\""
+      - title: "Live: Copilot calls Fabric MCP read-only"
+        entry: vscode
+        path: "Second VS Code window (~/hc-01-lab) → Chat → prompt P-MCP-1, then P-MCP-2"
+        label: LIVE
+        say:
+          - "\"Provider: Fabric MCP server 1.4.0, profile fabric-readonly, tool `core_search-catalog`. It found our workspace under my identity. If I can't see it, neither can the agent.\""
+          - "\"Now I ask it to create a lakehouse. It can't: the write tool doesn't exist in this profile, and the server itself refuses it.\""
+        check: "P-MCP-1 finds ffia-dev (LIVE); P-MCP-2 reports no create tool."
+        fallback: "Offline: repository window, prompt P-MCP-3. The plan comes back BLOCKED: live mutation disabled, approval required, MCP cannot approve."
+  - id: fabric-skills
+    title: "Fabric Skills: the agent's know-how"
+    minutes: 8
+    goal: "Explain skills vs MCP and show the hardening."
+    steps:
+      - title: "Skills vs MCP"
+        entry: app
+        path: "App → Learn → Fabric Skills (L200) · Architecture → agentic-de → L3 Skilled"
+        label: DOCUMENTED
+        say:
+          - "\"MCP gives tools. A skill gives a procedure: Markdown instructions such as 'how to build a medallion architecture in Fabric'. Microsoft publishes them as open source, `microsoft/skills-for-fabric`.\""
+          - "\"Key point: skills don't go through MCP. They tell the agent to call Fabric's REST API with `az rest`, including POST and DELETE. Your MCP allow-list doesn't cover them.\""
+      - title: "Hardened skills in this repository"
+        entry: terminal
+        path: "Terminal → ffia skills status; config/skills/fabric-skills.lock.yaml; .vscode/settings.json"
+        label: LOCAL
+        code: |
+          ffia skills status
+          grep -A4 autoApprove .vscode/settings.json
+        say:
+          - "\"So we pin a release (v0.3.18) and verify its archive hash. We install a curated four skills, not all 25. We drop the bundle's MCP configuration, which grants every tool and runs @latest. And VS Code and Claude Code both require approval for every `az rest`.\""
+      - title: "Copilot uses a skill"
+        entry: vscode
+        path: "VS Code → Chat → prompt P-SKILL-1 (e2e-medallion-architecture, no Fabric calls)"
+        label: LOCAL
+        say:
+          - "\"Watch Copilot pick the skill and follow its procedure to plan the medallion design, then compare it with our reference build. Our own skill, `ffia-governed-fabric-change`, decides whether a change may happen and what evidence it needs.\""
+        check: "The plan matches the reference layers and counts; any az rest proposal asks for approval."
+  - id: power-bi
+    title: "Power BI: business meaning and proof"
+    minutes: 6
+    goal: "Show where the semantic model fits and how numbers are proven."
+    steps:
+      - title: "The semantic model holds the meaning"
+        entry: app
+        path: "App → Architecture → HC-01 → semantic model, DAX checks and report steps · Learn → Power BI agentic tooling"
+        label: DOCUMENTED
+        say:
+          - "\"Business definitions live in the semantic model, not in prompts. Copilot edits the model through Power BI Modeling MCP with the semantic-model-authoring skill, on a local PBIP copy first, and builds reports with the powerbi-report-cli skill.\""
+      - title: "Prove the numbers"
+        entry: vscode
+        path: "VS Code → Chat → prompt P-PBI-1 (ffia-local → evaluate_against_baseline)"
+        label: LOCAL
+        say:
+          - "\"23 governed measures, 23 match the baseline. Readmissions: 35 of 211, synthetic. Against a live model, the same check runs through the Execute Queries API.\""
+        check: "23/23 passed, label LOCAL."
+  - id: level-up
+    title: "How to level up with GitHub Copilot (L1 → L6)"
+    minutes: 10
+    goal: "The centerpiece: what each level adds, what it unlocks, and the control that keeps it safe."
+    steps:
+      - title: "Climb the ladder on the diagram"
+        entry: app
+        path: "App → Architecture → Leveling up Fabric data engineering → L1 … L6 → Trace a request"
+        label: LOCAL
+        say:
+          - "\"L1 Assisted: Copilot in the editor, Fabric items synced to Git as files. Control: code review.\""
+          - "\"L2 Grounded: repository instructions and documentation MCP, so it uses real APIs instead of plausible guesses.\""
+          - "\"L3 Skilled: pinned, curated Fabric Skills plus your own skills. Control: approval for az rest.\""
+          - "\"L4 Connected: read-only Fabric MCP against a dev workspace, so the agent checks its assumptions against reality.\""
+          - "\"L5 Governed change: plans, approvals, pull requests, a scoped writer and evidence. Agents contribute changes that ship.\""
+          - "\"L6 Parallel: many sessions or cloud agents on scoped tasks, with budgets and PR review. Still preview-heavy.\""
+          - "\"Skills make the agent competent, MCP makes it capable, the harness makes it productive, identity and approval make it safe, and evidence makes it trustworthy.\""
+      - title: "Governed change, rehearsed"
+        entry: app
+        path: "App → Guides → HC-01 → step 04 → Rehearse this write (plan → approve → execute → audit)"
+        label: SIMULATED
+        say:
+          - "\"This is L5. The agent proposes; a different person approves; the scoped writer executes; we verify and audit. Here it's simulated, and it's labeled that way.\""
+      - title: "Reference notebooks: generated, not hand-typed"
+        entry: terminal
+        path: "Terminal → ls fabric/workspace; ffia notebooks check"
+        label: LOCAL
+        say:
+          - "\"Three Fabric notebooks, Bronze, Silver and Gold, generated from the same SQL as our local build. They passed all 85 checks on Spark 3.5, the version Fabric runs, locally. Running them in Fabric is the next tenant validation.\""
+  - id: foundry-copilot
+    title: "Foundry and GitHub Copilot together"
+    minutes: 6
+    goal: "Show Copilot building and explaining a Foundry agent that uses Fabric data."
+    steps:
+      - title: "Copilot builds a Foundry agent in code"
+        entry: vscode
+        path: "VS Code → demos/foundry-fabric-agents-workshop/code/fabric_sales_agent.py → Chat: explain and extend"
+        label: REQUIRES TENANT VALIDATION
+        say:
+          - "\"Copilot also builds agents. This file creates a Foundry agent with the Fabric data agent tool: the agent answers questions over governed Fabric data under the user's identity.\""
+          - "\"Ask Copilot to explain the file, then to add a monthly brief loop. It reads our instructions and keeps IDs out of the code.\""
+        code: python demos/foundry-fabric-agents-workshop/code/fabric_sales_agent.py
+        show:
+          - "Prompt: \"Explain what this agent can and cannot do, and where authority comes from.\""
+        fallback: "Without a Foundry project, walk through the code only and label it REQUIRES TENANT VALIDATION; Guide 2 covers Foundry live."
+      - title: "Where it runs: the Foundry portal"
+        entry: foundry
+        path: "ai.azure.com → project → Agents → sales-insights-agent → Playground"
+        label: LIVE
+        say:
+          - "\"The agent Copilot wrote shows up here, with its tools, traces and evaluations. Copilot built it; Foundry runs and governs it; Fabric supplies the data.\""
+        fallback: "Offline: App → Architecture → MFG-01 (Foundry + Fabric)."
+  - id: options-close
+    title: "Options and next steps"
+    minutes: 4
+    goal: "Leave with a decision table and a first step."
+    steps:
+      - title: "Options and the first step"
+        entry: talk
+        path: "Options table in this handout"
+        label: DISCUSSION
+        say:
+          - "\"Pick one team and one pipeline. Climb L1 to L4 in a dev workspace, measure with the lab scorecard, then pilot L5 with pull requests and a deployment pipeline.\""
+qa:
+  - featured: true
+    label: LOCAL
+    q: "What exactly is GitHub Copilot doing in this demo?"
+    a: |
+      In VS Code agent mode it:
+
+      - reads the repository instructions (`AGENTS.md`, `.github/copilot-instructions.md`);
+      - plans;
+      - reads and edits files;
+      - runs commands;
+      - calls MCP tools and skills, asking you to approve tool calls and commands.
+
+      In the demo it explains a Spark transform, reads the medallion layers through MCP, plans with a Fabric skill, and proposes a governed change that comes back blocked until a person approves it. It always acts under your identity.
+  - featured: true
+    label: LIVE
+    q: "What is Fabric MCP, and can the agent delete things?"
+    sources: [fabric-mcp-local, fabric-mcp-servers-list]
+    a: |
+      Fabric MCP is a family of MCP servers:
+
+      - **Local Fabric MCP server** (GA): docs, OneLake, item and Data Factory tools.
+      - **Fabric IQ MCP** (GA): read-only.
+      - **Data Warehouse MCP** (preview).
+      - **Power BI Modeling MCP.**
+
+      The local server 1.4.0 has 48 tools: 22 can write and 5 are destructive. So we never expose it whole:
+
+      - Read-only profiles start it with `--read-only` and an allow-list.
+      - Write tools appear only in opt-in profiles with per-call approval.
+      - CI checks the rules.
+
+      We saw the server refuse a write tool live.
+  - featured: true
+    label: LOCAL
+    q: "What are Fabric Skills, and how are they different from MCP?"
+    sources: [skills-for-fabric]
+    a: |
+      Skills are Microsoft-authored procedures (open source, `microsoft/skills-for-fabric`) for things like medallion design, Spark, semantic models and reports.
+
+      Unlike MCP, they tell the agent to call Fabric's REST API directly with `az rest`, outside MCP allow-lists. So pin and verify them, install only what you need, drop the bundled wildcard MCP configuration, and require approval for every `az rest`.
+  - featured: true
+    label: DOCUMENTED
+    q: "How do we level up our team with GitHub Copilot?"
+    a: |
+      Climb one level at a time and measure each climb:
+
+      1. **L1:** Copilot in the editor, with Fabric items in Git.
+      2. **L2:** repository instructions and documentation MCP.
+      3. **L3:** pinned skills.
+      4. **L4:** read-only Fabric MCP.
+      5. **L5:** governed change through plans, approvals and pull requests.
+      6. **L6:** parallel agents, only for scoped work.
+
+      The lab `/labs/lab-copilot-maturity-ladder` has a scorecard.
+  - label: DOCUMENTED
+    q: "Where does Power BI fit?"
+    sources: [powerbi-authoring-mcp, powerbi-execute-queries]
+    a: |
+      Business definitions live in the semantic model.
+
+      - Copilot edits it through Power BI Modeling MCP with the semantic-model-authoring skill, on a local PBIP copy first.
+      - Every measure is reconciled with DAX against a governed baseline: 23 of 23 locally; live through the Execute Queries API.
+  - label: DOCUMENTED
+    q: "How is GitHub Copilot different from Copilot in Fabric?"
+    a: |
+      They work in different places and complement each other:
+
+      - **Copilot in Fabric** works inside the Fabric portal and runs on your Fabric capacity.
+      - **GitHub Copilot** works in developer tools on code and Git-synced Fabric items, with MCP and skills.
+
+      Fabric Git integration connects the two.
+  - label: DOCUMENTED
+    q: "Can Copilot write to production?"
+    a: |
+      Not in this design:
+
+      - Agents work against a dev workspace.
+      - Production changes arrive through pull requests and deployment pipelines.
+      - Live writes need a scoped writer, policy approval and a second person.
+      - An approved live write is never silently replaced with a simulation.
+  - label: DOCUMENTED
+    q: "How does this compare with Claude Code?"
+    a: |
+      Both read the same repository files: `CLAUDE.md` imports `AGENTS.md`, and the `.mcp.json` and `.claude/skills` are shared. They differ in permission modes, hooks and admin controls.
+
+      A same-task evaluation is scheduled as a follow-up.
+options:
+  - decision: "Harness"
+    options: "VS Code agent mode · Copilot CLI · cloud agent · Claude Code"
+    recommendation: "VS Code or CLI for interactive work under your identity; cloud agent only with read-only tools and PR review."
+  - decision: "MCP topology"
+    options: "Direct to servers · through an API Management gateway"
+    recommendation: "Direct with pinned profiles; add a gateway when many teams share servers."
+  - decision: "Skills"
+    options: "Upstream plugin install · pinned, curated install"
+    recommendation: "Pinned and curated, with approval on az rest."
+  - decision: "How changes land"
+    options: "MCP write tool with approval · scoped writer · Git PR + deployment pipeline"
+    recommendation: "PR and pipeline for production; approval-gated MCP tools for dev labs only."
+reset:
+  - "Close the scratch lab folder; nothing was written to the tenant."
+  - "Pause the Fabric capacity if not needed."
+  - "If anything live fails, use the step's offline fallback and say the label."
+mapping:
+  - need: "Architecture diagrams to step through"
+    asset: "`education/architecture/views/*.yaml` → app `/architecture`, `docs/architecture/diagrams/*.drawio`"
+  - need: "Prompts used in the demo"
+    asset: "`prompts/github-copilot/fabric-level-up.md`"
+  - need: "MCP profiles"
+    asset: "`config/mcp/profiles.yaml`, `ffia mcp render|check`"
+  - need: "Skills"
+    asset: "`config/skills/fabric-skills.lock.yaml`, `ffia skills install|status|check`, `.claude/skills/ffia-governed-fabric-change`"
+  - need: "Reference notebooks"
+    asset: "`fabric/workspace/MCP_0x_*.Notebook`, `ffia notebooks render|check`"
+  - need: "Guide"
+    asset: "`guides/hc-01-fabric-mcp-powerbi-medallion-lab/` and app `/guides`"

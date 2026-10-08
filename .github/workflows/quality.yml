@@ -60,6 +60,8 @@ jobs:
         run: ffia notebooks check
       - name: Vendored skills are pinned, git-ignored and approval-gated
         run: ffia skills check
+      - name: Talk-track handouts match their YAML
+        run: ffia talktracks check
       - name: Offline demo release gate
         run: ffia demo check --no-azure-cli && ffia demo offline
       - name: Build distribution

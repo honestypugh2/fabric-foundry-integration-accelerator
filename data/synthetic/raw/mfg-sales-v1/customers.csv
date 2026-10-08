@@ -1,0 +1,141 @@
+customer_id,customer_name,segment,region,country
+C-0001,Atlas Fabricators 001,Distributor,North America West,US
+C-0002,Tri-County Distribution 002,Distributor,International,CA
+C-0003,Northgate Supply 003,OEM,Central,US
+C-0004,Riverbend Equipment 004,Contractor,North America East,US
+C-0005,Northgate Fabricators 005,OEM,North America West,US
+C-0006,Cedar Equipment 006,Distributor,North America East,US
+C-0007,Atlas Systems 007,Distributor,North America West,US
+C-0008,Harbor Distribution 008,Distributor,North America West,US
+C-0009,Beacon Distribution 009,Distributor,North America East,US
+C-0010,Prairie Equipment 010,Key Account,North America East,US
+C-0011,Northgate Distribution 011,OEM,North America East,US
+C-0012,Lakeside Systems 012,OEM,North America East,US
+C-0013,Westfield Works 013,Distributor,Central,US
+C-0014,Silverleaf Builders 014,Contractor,Central,US
+C-0015,Redline Equipment 015,Distributor,Central,US
+C-0016,Redline Contractors 016,OEM,North America West,US
+C-0017,Westfield Systems 017,OEM,North America East,US
+C-0018,Redline Systems 018,OEM,North America West,US
+C-0019,Granite Fabricators 019,OEM,Central,US
+C-0020,Lakeside Fabricators 020,Distributor,Central,US
+C-0021,Beacon Industrial 021,OEM,Central,US
+C-0022,Summit Works 022,OEM,International,CA
+C-0023,Prairie Systems 023,Distributor,Central,US
+C-0024,Prairie Supply 024,Contractor,North America East,US
+C-0025,Westfield Works 025,OEM,North America East,US
+C-0026,Atlas Industrial 026,Distributor,North America East,US
+C-0027,Northgate Supply 027,OEM,North America West,US
+C-0028,Tri-County Works 028,Distributor,North America East,US
+C-0029,Harbor Distribution 029,Contractor,North America East,US
+C-0030,Beacon Partners 030,OEM,North America West,US
+C-0031,Westfield Supply 031,OEM,International,AU
+C-0032,Northgate Equipment 032,OEM,Central,US
+C-0033,Tri-County Builders 033,Distributor,North America West,US
+C-0034,Lakeside Equipment 034,Distributor,North America East,US
+C-0035,Summit Industrial 035,Distributor,Central,US
+C-0036,Northgate Equipment 036,Contractor,North America East,US
+C-0037,Silverleaf Equipment 037,Distributor,,US
+C-0038,Ironwood Partners 038,OEM,Central,US
+C-0039,Atlas Industrial 039,Distributor,North America West,US
+C-0040,Atlas Builders 040,Contractor,CENTRAL ,US
+C-0041,Pioneer Builders 041,Distributor,North America East,US
+C-0042,Summit Works 042,OEM,North America West,US
+C-0043,Northgate Builders 043,OEM,North America East,US
+C-0044,Riverbend Contractors 044,Distributor,North America East,US
+C-0045,Redline Contractors 045,Distributor,North America East,US
+C-0046,Westfield Supply 046,OEM,International,CA
+C-0047,Prairie Fabricators 047,OEM,North America East,US
+C-0048,Prairie Equipment 048,Key Account,North America West,US
+C-0049,Tri-County Equipment 049,Distributor,Central,US
+C-0050,Summit Supply 050,Contractor,North America East,US
+C-0051,Northgate Industrial 051,Contractor,Central,US
+C-0052,Harbor Systems 052,OEM,Central,US
+C-0053,Prairie Partners 053,OEM,International,AU
+C-0054,Summit Works 054,Contractor,,US
+C-0055,Northgate Systems 055,Distributor,Central,US
+C-0056,Lakeside Builders 056,OEM,North America East,US
+C-0057,Beacon Contractors 057,OEM,North America East,US
+C-0058,Cedar Fabricators 058,Contractor,North America West,US
+C-0059,Cedar Fabricators 059,OEM,North America East,US
+C-0060,Westfield Builders 060,Contractor,North America West,US
+C-0061,Ironwood Fabricators 061,Contractor,North America West,US
+C-0062,Ironwood Equipment 062,Contractor,North America East,US
+C-0063,Northgate Industrial 063,OEM,North America East,US
+C-0064,Ironwood Works 064,OEM,North America East,US
+C-0065,Lakeside Equipment 065,Distributor,North America West,US
+C-0066,Lakeside Systems 066,Key Account,North America East,US
+C-0067,Westfield Partners 067,Contractor,International,AU
+C-0068,Cedar Fabricators 068,Distributor,,AU
+C-0069,Ironwood Supply 069,Contractor,Central,US
+C-0070,Silverleaf Fabricators 070,Distributor,North America West,US
+C-0071,Cedar Supply 071,Distributor,Central,US
+C-0072,Silverleaf Industrial 072,Distributor,International,AU
+C-0073,Prairie Contractors 073,Distributor,Central,US
+C-0074,Ironwood Partners 074,Distributor,Central,US
+C-0075,Silverleaf Fabricators 075,Distributor,,US
+C-0076,Lakeside Partners 076,Key Account,North America West,US
+C-0077,Summit Distribution 077,Distributor,Central,US
+C-0078,Harbor Partners 078,Contractor,North America East,US
+C-0079,Lakeside Supply 079,OEM,North America East,US
+C-0080,Granite Systems 080,Distributor,Central,US
+C-0081,Harbor Distribution 081,OEM,North America West,US
+C-0082,Prairie Systems 082,Distributor,Central,US
+C-0083,Pioneer Builders 083,Distributor,N. America East,US
+C-0084,Granite Equipment 084,Contractor,North America West,US
+C-0085,Pioneer Distribution 085,OEM,North America East,US
+C-0086,Harbor Builders 086,Distributor,North America West,US
+C-0087,Riverbend Works 087,Key Account,North America East,US
+C-0088,Westfield Builders 088,Contractor,North America East,US
+C-0089,Riverbend Contractors 089,Contractor,North America East,US
+C-0090,Cedar Builders 090,Key Account,Central,US
+C-0091,Silverleaf Equipment 091,OEM,North America East,US
+C-0092,Beacon Contractors 092,Distributor,North America West,US
+C-0093,Riverbend Supply 093,Distributor,North America East,US
+C-0094,Tri-County Partners 094,Distributor,North America East,US
+C-0095,Harbor Supply 095,Distributor,North America East,US
+C-0096,Granite Builders 096,Contractor,NA West,US
+C-0097,Riverbend Systems 097,Distributor,North America East,US
+C-0098,Silverleaf Supply 098,OEM,International,MX
+C-0099,Cedar Contractors 099,Key Account,International,CA
+C-0100,Ironwood Works 100,Distributor,North America East,US
+C-0101,Cedar Equipment 101,Key Account,Central,US
+C-0102,Prairie Distribution 102,Distributor,Central,US
+C-0103,Redline Fabricators 103,OEM,International,MX
+C-0104,Lakeside Fabricators 104,OEM,Central,US
+C-0105,Prairie Equipment 105,Distributor,north america west,US
+C-0106,Lakeside Industrial 106,Contractor,North America East,US
+C-0107,Beacon Fabricators 107,OEM,Central,US
+C-0108,Silverleaf Equipment 108,Distributor,NA-East,US
+C-0109,Lakeside Industrial 109,Distributor,North America East,US
+C-0110,Beacon Partners 110,Distributor,Intl,CA
+C-0111,Westfield Supply 111,Distributor,North America East,US
+C-0112,Harbor Fabricators 112,Contractor,North America West,US
+C-0113,Northgate Supply 113,Distributor,North America East,US
+C-0114,Silverleaf Fabricators 114,Distributor,North America East,US
+C-0115,Westfield Industrial 115,OEM,North America West,US
+C-0116,Beacon Fabricators 116,Key Account,North America East,US
+C-0117,Ironwood Works 117,OEM,North America West,US
+C-0118,Northgate Distribution 118,Distributor,International,MX
+C-0119,Redline Industrial 119,OEM,North America West,US
+C-0120,Cedar Supply 120,OEM,North America West,US
+C-0121,Pioneer Builders 121,OEM,Central,US
+C-0122,Prairie Systems 122,Contractor,Central,US
+C-0123,Silverleaf Distribution 123,OEM,Central,US
+C-0124,Cedar Partners 124,Key Account,North America East,US
+C-0125,Silverleaf Partners 125,OEM,North America East,US
+C-0126,Cedar Partners 126,Distributor,North America West,US
+C-0127,Summit Works 127,Key Account,North America West,US
+C-0128,Riverbend Industrial 128,Distributor,North America East,US
+C-0129,Lakeside Builders 129,Distributor,Central,US
+C-0130,Granite Works 130,Contractor,North America West,US
+C-0131,Tri-County Contractors 131,OEM,North America West,US
+C-0132,Ironwood Works 132,Distributor,Central,US
+C-0133,Prairie Industrial 133,Distributor,North America West,US
+C-0134,Ironwood Systems 134,Distributor,International,AU
+C-0135,Prairie Fabricators 135,Distributor,Central,US
+C-0136,Northgate Fabricators 136,Distributor,Central,US
+C-0137,Silverleaf Partners 137,Distributor,Central,US
+C-0138,Atlas Equipment 138,Distributor,North America West,US
+C-0139,Ironwood Works 139,Distributor,International,AU
+C-0140,Prairie Builders 140,OEM,North America East,US

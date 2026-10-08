@@ -96,7 +96,7 @@ build: ## Build Python distribution and frontend bundle
 	cd $(FRONTEND) && npm run build
 
 validate: lint typecheck test-cov data-check privacy-scan build security ## Full local validation (CI equivalent)
-	$(ACTIVATE) && ffia sources check && ffia schemas check && ffia education check && ffia diagrams check && ffia mcp check && ffia notebooks check && ffia skills check && ffia demo offline >/dev/null && echo "offline demo: PASSED"
+	$(ACTIVATE) && ffia sources check && ffia schemas check && ffia education check && ffia diagrams check && ffia mcp check && ffia notebooks check && ffia skills check && ffia talktracks check && ffia demo offline >/dev/null && echo "offline demo: PASSED"
 	@echo "validate: all checks passed"
 
 clean: ## Remove build, cache and coverage artifacts (keeps .venv and node_modules)

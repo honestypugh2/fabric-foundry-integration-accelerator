@@ -1,0 +1,61 @@
+product_id,product_name,product_line,product_line_name,unit_of_measure,list_price,standard_cost
+P-STR-001,Beam STR-001,STR,Structural Products,EA,374.72,256.97
+P-STR-002,Column STR-002,STR,Structural Products,EA,659.46,445.01
+P-STR-003,Truss STR-003,STR,Structural Products,EA,288.42,203.29
+P-STR-004,Brace STR-004,STR,Structural Products,EA,382.35,268.44
+P-STR-005,Frame STR-005,STR,Structural Products,EA,343.81,228.26
+P-STR-006,Purlin STR-006,STR,Structural Products,EA,565.80,371.97
+P-STR-007,Beam STR-007,STR,Structural Products,EA,405.13,272.20
+P-STR-008,Column STR-008,STR,Structural Products,EA,671.21,442.75
+P-STR-009,Truss STR-009,STR,Structural Products,EA,291.33,207.47
+P-STR-010,Brace STR-010,STR,Structural Products,EA,373.88,262.05
+P-STR-011,Frame STR-011,STR,Structural Products,EA,459.42,332.47
+P-STR-012,Purlin STR-012,STR,Structural Products,EA,276.43,196.44
+P-MET-001,Bracket MET-001,MET,Metal Components,EA,64.41,46.97
+P-MET-002,Plate MET-002,MET,Metal Components,EA,88.26,64.94
+P-MET-003,Channel MET-003,MET,Metal Components,EA,114.79,82.27
+P-MET-004,Angle MET-004,MET,Metal Components,EA,90.24,62.93
+P-MET-005,Clip MET-005,MET,Metal Components,EA,126.93,94.19
+P-MET-006,Bar MET-006,MET,Metal Components,EA,84.90,64.46
+P-MET-007,Bracket MET-007,MET,Metal Components,EA,132.18,93.31
+P-MET-008,Plate MET-008,MET,Metal Components,EA,82.90,57.52
+P-MET-009,Channel MET-009,MET,Metal Components,EA,130.93,90.97
+P-MET-010,Angle MET-010,MET,Metal Components,EA,97.68,67.94
+P-MET-011,Clip MET-011,MET,Metal Components,EA,106.50,79.81
+P-MET-012,Bar MET-012,MET,Metal Components,EA,64.89,48.83
+P-ENC-001,Cabinet ENC-001,ENC,Enclosures,EA,167.03,107.83
+P-ENC-002,Housing ENC-002,ENC,Enclosures,EA,350.78,232.47
+P-ENC-003,Panel Box ENC-003,ENC,Enclosures,EA,269.54,179.85
+P-ENC-004,Junction Box ENC-004,ENC,Enclosures,EA,233.71,157.66
+P-ENC-005,Rack ENC-005,ENC,Enclosures,EA,186.10,124.20
+P-ENC-006,Shroud ENC-006,ENC,Enclosures,EA,250.35,158.51
+P-ENC-007,Cabinet ENC-007,ENC,Enclosures,EA,357.43,235.55
+P-ENC-008,Housing ENC-008,ENC,Enclosures,EA,277.01,175.87
+P-ENC-009,Panel Box ENC-009,ENC,Enclosures,EA,191.15,129.88
+P-ENC-010,Junction Box ENC-010,ENC,Enclosures,EA,219.80,143.67
+P-ENC-011,Rack ENC-011,ENC,Enclosures,EA,225.19,145.89
+P-ENC-012,Shroud ENC-012,ENC,Enclosures,EA,347.19,219.64
+P-FAS-001,Anchor FAS-001,FAS,Fasteners & Hardware,EA,25.99,15.69
+P-FAS-002,Bolt Kit FAS-002,FAS,Fasteners & Hardware,EA,20.38,11.59
+P-FAS-003,Screw Pack FAS-003,FAS,Fasteners & Hardware,EA,11.53,6.54
+P-FAS-004,Rivet Pack FAS-004,FAS,Fasteners & Hardware,EA,20.08,11.11
+P-FAS-005,Washer Set FAS-005,FAS,Fasteners & Hardware,EA,12.59,7.26
+P-FAS-006,Hinge FAS-006,FAS,Fasteners & Hardware,EA,18.31,10.32
+P-FAS-007,Anchor FAS-007,FAS,Fasteners & Hardware,EA,17.46,9.77
+P-FAS-008,Bolt Kit FAS-008,FAS,Fasteners & Hardware,EA,28.44,16.02
+P-FAS-009,Screw Pack FAS-009,FAS,Fasteners & Hardware,EA,27.77,16.90
+P-FAS-010,Rivet Pack FAS-010,FAS,Fasteners & Hardware,EA,18.24,10.48
+P-FAS-011,Washer Set FAS-011,FAS,Fasteners & Hardware,EA,28.27,16.08
+P-FAS-012,Hinge FAS-012,FAS,Fasteners & Hardware,EA,24.10,14.31
+P-FAB-001,Weldment FAB-001,FAB,Custom Fabrication,EA,2013.68,1475.21
+P-FAB-002,Assembly FAB-002,FAB,Custom Fabrication,EA,1075.47,844.68
+P-FAB-003,Skid FAB-003,FAB,Custom Fabrication,EA,1820.67,1402.85
+P-FAB-004,Platform FAB-004,FAB,Custom Fabrication,EA,1295.33,965.10
+P-FAB-005,Guard FAB-005,FAB,Custom Fabrication,EA,1705.85,1237.63
+P-FAB-006,Stand FAB-006,FAB,Custom Fabrication,EA,1180.78,910.02
+P-FAB-007,Weldment FAB-007,FAB,Custom Fabrication,EA,1049.03,762.79
+P-FAB-008,Assembly FAB-008,FAB,Custom Fabrication,EA,1419.67,1025.46
+P-FAB-009,Skid FAB-009,FAB,Custom Fabrication,EA,2044.73,1607.73
+P-FAB-010,Platform FAB-010,FAB,Custom Fabrication,EA,1645.85,1259.79
+P-FAB-011,Guard FAB-011,FAB,Custom Fabrication,EA,2044.50,1585.06
+P-FAB-012,Stand FAB-012,FAB,Custom Fabrication,EA,1171.12,887.11
