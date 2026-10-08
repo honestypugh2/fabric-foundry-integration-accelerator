@@ -180,6 +180,7 @@ details.qa .ans{display:block}
 </ul>
 <h3>Live environment (demo tenant)</h3><ul>
 <li>Resume the Fabric capacity (F8) and confirm <code>ffia fabric readiness</code> says YES.</li>
+<li>Confirm <code>ffia foundry readiness</code> says YES: resource, project, model deployment, agent and Fabric connection (read-only).</li>
 <li>Fabric workspace <code>ffia-dev</code> with lakehouse <code>mfg_lakehouse</code>, the six synthetic CSVs loaded as tables, a semantic model, and data agent <code>mfg-sales-data-agent</code> (published).</li>
 <li>Tenant setting <strong>Users can use Copilot and other features powered by Azure OpenAI</strong> is on (the data agent needs it).</li>
 <li>Foundry project in the same tenant, a model deployment, and a project connection named in <code>FABRIC_CONNECTION_NAME</code> that points to the data agent.</li>
@@ -273,6 +274,7 @@ details.qa .ans{display:block}
 <li>The Published state.</li>
 </ul></div>
 <div class="chk"><span class="lbl">Checkpoint</span>The data agent answers "booked revenue by product line in September 2026" in Fabric.</div>
+<div class="fb"><span class="lbl">Fallback</span>Offline: show MFG-01 step 1 and <code>ffia mfg brief</code>; describe the data agent setup from this step's notes (DOCUMENTED).</div>
 </div></article>
 <section class="part-band" id="build-and-orchestrate"><h2>Part B · Approaches for building and orchestrating agents (Foundry + Fabric demo) · 12 min</h2><p>Answer "Can we see Foundry and Fabric working together?" twice: no-code in the portal and code-first in VS Code.</p></section>
 <article class="step"><div class="step-h"><span class="step-n">6</span><span class="step-t">Set it up (2): Foundry project, model and Fabric connection</span><span class="entry-tag">Microsoft Foundry portal</span><span class="chip chip--live">LIVE</span></div><div class="step-b"><div class="path">ai.azure.com → ffia-agents → Models (deployment) → Management center → Connected resources → fabric-mfg-sales</div><div class="says"><span class="lbl">Say</span><p>"On the Foundry side: a Foundry resource and project, one model deployment (Data Zone Standard keeps processing in the US data zone), and the Foundry User role for the people who build agents. Then one connection of type Microsoft Fabric that points at the data agent: its workspace ID and artifact ID come from the data agent's URL."</p><p>"We scripted the Azure parts with the Azure CLI; each was one command. The connection and the data agent were a few clicks in the portals."</p></div>
@@ -287,6 +289,7 @@ az cognitiveservices account deployment create -n &lt;foundry&gt; -g &lt;rg&gt; 
   --model-name &lt;model&gt; --model-version &lt;version&gt; --model-format OpenAI --sku-name DataZoneStandard --sku-capacity 50
 az role assignment create --role &quot;Foundry User&quot; --assignee-object-id &lt;user&gt; --scope &lt;foundry-resource-id&gt;</code></pre>
 <div class="chk"><span class="lbl">Checkpoint</span>The project, deployment and Fabric connection are listed.</div>
+<div class="fb"><span class="lbl">Fallback</span>Offline: walk through the commands in this step and run <code>ffia foundry readiness</code> output from the runbook; label DOCUMENTED.</div>
 </div></article>
 <article class="step"><div class="step-h"><span class="step-n">7</span><span class="step-t">Portal: a prompt agent with the Fabric data agent tool</span><span class="entry-tag">Microsoft Foundry portal</span><span class="chip chip--live">LIVE</span></div><div class="step-b"><div class="path">Foundry portal → Agents → sales-insights-agent → Tools → Fabric data agent (preview) → Playground</div><div class="says"><span class="lbl">Say</span><p>"This is the no-code path. The agent has instructions, a model, and one tool: our Fabric data agent. The tool is in preview; the Fabric data agent itself is generally available."</p><p>"Watch the run: the agent decides it needs numbers, calls Fabric, and Fabric answers under my identity."</p></div>
 <div class="shows"><span class="lbl">Show</span><ul>

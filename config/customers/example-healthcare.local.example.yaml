@@ -7,3 +7,11 @@ workspaces:
     workspace_id: <DEV_WORKSPACE_ID>
     semantic_models:
       hc-lab-7file-v1: <SEMANTIC_MODEL_ID>
+foundry:                      # optional; checked by `ffia foundry readiness`
+  subscription_id: <SUBSCRIPTION_ID>
+  resource_group: <RESOURCE_GROUP>
+  account: <FOUNDRY_RESOURCE_NAME>
+  project: <FOUNDRY_PROJECT_NAME>
+  model_deployments: [<MODEL_DEPLOYMENT_NAME>]
+  agents: [sales-insights-agent]
+  fabric_connection: <FABRIC_CONNECTION_NAME>

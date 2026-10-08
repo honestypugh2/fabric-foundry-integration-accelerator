@@ -43,6 +43,8 @@ Each step is a cloud write. Plan, approve, execute, verify, audit.
 
 **Status 2026-10-08: B1–B7 completed and verified live** (Enclosures +55.78% and 12 duplicate lines, matching the baseline). Warm up the agent 10 minutes before: the first call took about 2.5 minutes.
 
+**One-command check (read-only):** `ffia foundry readiness` verifies the Foundry resource, project, model deployment, data-plane access, `sales-insights-agent` and the Fabric connection. It reads the `foundry:` section of the git-ignored bindings file. Expect "Foundry ready for agent demos: YES".
+
 **Go/no-go:** if B1–B7 aren't verified 15 minutes before the meeting, run Guide 2 in **hybrid**
 mode: the Foundry portal tour, the code walkthrough labeled REQUIRES TENANT VALIDATION, and
 `ffia mfg brief` / `ffia mfg quality` for the numbers (LOCAL).

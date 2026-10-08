@@ -59,6 +59,7 @@ prerequisites:
   - title: "Live environment (demo tenant)"
     items:
       - "Resume the Fabric capacity (F8) and confirm `ffia fabric readiness` says YES."
+      - "Confirm `ffia foundry readiness` says YES: resource, project, model deployment, agent and Fabric connection (read-only)."
       - "Fabric workspace `ffia-dev` with lakehouse `mfg_lakehouse`, the six synthetic CSVs loaded as tables, a semantic model, and data agent `mfg-sales-data-agent` (published)."
       - "Tenant setting **Users can use Copilot and other features powered by Azure OpenAI** is on (the data agent needs it)."
       - "Foundry project in the same tenant, a model deployment, and a project connection named in `FABRIC_CONNECTION_NAME` that points to the data agent."
@@ -140,6 +141,7 @@ parts:
           - "Agent instructions: the booked-revenue definition and the data-quality instruction."
           - "The Published state."
         check: "The data agent answers \"booked revenue by product line in September 2026\" in Fabric."
+        fallback: "Offline: show MFG-01 step 1 and `ffia mfg brief`; describe the data agent setup from this step's notes (DOCUMENTED)."
   - id: build-and-orchestrate
     title: "Approaches for building and orchestrating agents (Foundry + Fabric demo)"
     minutes: 12
@@ -163,6 +165,7 @@ parts:
           - "Models: the deployment and its deployment type."
           - "Connected resources: `fabric-mfg-sales` of type Microsoft Fabric (don't open the IDs on screen)."
         check: "The project, deployment and Fabric connection are listed."
+        fallback: "Offline: walk through the commands in this step and run `ffia foundry readiness` output from the runbook; label DOCUMENTED."
       - title: "Portal: a prompt agent with the Fabric data agent tool"
         entry: foundry
         path: "Foundry portal → Agents → sales-insights-agent → Tools → Fabric data agent (preview) → Playground"

@@ -32,6 +32,20 @@ class WorkspaceBinding(BaseModel):
         return self
 
 
+class FoundryBinding(BaseModel):
+    """A Microsoft Foundry resource and project in the presenter's demo subscription."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    subscription_id: str = Field(pattern=GUID_PATTERN)
+    resource_group: str = Field(min_length=1, max_length=90)
+    account: str = Field(pattern=r"^[A-Za-z0-9][A-Za-z0-9-]{1,62}$")
+    project: str = Field(pattern=r"^[A-Za-z0-9][A-Za-z0-9-]{1,62}$")
+    model_deployments: tuple[str, ...] = ()
+    agents: tuple[str, ...] = ()
+    fabric_connection: str | None = None
+
+
 class TenantBindings(BaseModel):
     """``<overlay>.local.yaml``."""
 
@@ -39,6 +53,7 @@ class TenantBindings(BaseModel):
 
     tenant_id: str = Field(pattern=GUID_PATTERN)
     workspaces: dict[str, WorkspaceBinding] = Field(default_factory=dict[str, WorkspaceBinding])
+    foundry: FoundryBinding | None = None
 
     def workspace_id(self, alias: str) -> str | None:
         """Return the workspace ID for an alias, if bound."""

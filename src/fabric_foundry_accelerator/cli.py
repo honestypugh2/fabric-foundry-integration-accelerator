@@ -30,7 +30,7 @@ from fabric_foundry_accelerator.research.sources import (
     render_markdown,
 )
 from fabric_foundry_accelerator.services import commands as runtime_commands
-from fabric_foundry_accelerator.services import fabric_commands
+from fabric_foundry_accelerator.services import fabric_commands, foundry_commands
 from fabric_foundry_accelerator.skills import commands as skills_commands
 from fabric_foundry_accelerator.synthetic import commands as data_commands
 from fabric_foundry_accelerator.synthetic import mfg_commands, notebook_commands
@@ -129,6 +129,7 @@ def build_parser() -> argparse.ArgumentParser:
     skills_commands.register(sub)
     talktrack_commands.register(sub)
     mfg_commands.register(sub)
+    foundry_commands.register(sub)
     return parser
 
 
