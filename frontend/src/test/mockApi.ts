@@ -34,7 +34,8 @@ function urlOf(input: RequestInfo | URL): string {
 
 /**
  * Replaces `fetch` with a router keyed by "METHOD /path". Values are JSON bodies, `Response`
- * objects, or handlers receiving the parsed request body. Unknown routes return 404.
+ * objects, or handlers receiving the parsed request body (optionally returning a promise).
+ * Unknown routes return 404.
  */
 export function mockApi(routes: Routes) {
   const calls: ApiCall[] = [];
@@ -49,7 +50,10 @@ export function mockApi(routes: Routes) {
       return Promise.resolve(problem(404, "UnknownResourceError", `no mock for ${method} ${path}`));
     }
     const result = isHandler(route) ? route(body, call) : route;
-    return Promise.resolve(result instanceof Response ? result : respond(200, result));
+    // Handlers may return a promise to hold a request open (e.g. to observe a pending state).
+    return Promise.resolve(result).then((value: unknown) =>
+      value instanceof Response ? value : respond(200, value),
+    );
   });
   vi.stubGlobal("fetch", fetchMock);
   return { calls, fetchMock };

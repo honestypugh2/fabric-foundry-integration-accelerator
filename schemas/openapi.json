@@ -173,6 +173,56 @@
         "title": "AgentEvalReport",
         "type": "object"
       },
+      "AgentProfile": {
+        "additionalProperties": false,
+        "description": "What the UI needs to ask an agent: who answers and which questions are evaluated.",
+        "properties": {
+          "agent": {
+            "title": "Agent",
+            "type": "string"
+          },
+          "dataset_profile": {
+            "title": "Dataset Profile",
+            "type": "string"
+          },
+          "live_provider": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Live Provider"
+          },
+          "local_provider": {
+            "title": "Local Provider",
+            "type": "string"
+          },
+          "suggested_questions": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Suggested Questions",
+            "type": "array"
+          },
+          "suite": {
+            "title": "Suite",
+            "type": "string"
+          }
+        },
+        "required": [
+          "agent",
+          "suite",
+          "dataset_profile",
+          "local_provider",
+          "live_provider",
+          "suggested_questions"
+        ],
+        "title": "AgentProfile",
+        "type": "object"
+      },
       "AgentQuestion": {
         "additionalProperties": false,
         "description": "A question for a named agent.",
@@ -4885,6 +4935,49 @@
           }
         },
         "summary": "Evaluate Agent",
+        "tags": [
+          "agents"
+        ]
+      }
+    },
+    "/api/v1/agents/{agent}": {
+      "get": {
+        "description": "Who answers for an agent and the questions its evaluation suite covers.",
+        "operationId": "get_agent_api_v1_agents__agent__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "agent",
+            "required": true,
+            "schema": {
+              "title": "Agent",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentProfile"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Agent",
         "tags": [
           "agents"
         ]

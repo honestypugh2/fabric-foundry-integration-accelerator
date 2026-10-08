@@ -1,3 +1,7 @@
+import agentAnswer from "./fixtures/agent-answer.json";
+import agentEval from "./fixtures/agent-eval.json";
+import agentProfile from "./fixtures/agent-profile.json";
+import agentUnsupported from "./fixtures/agent-unsupported.json";
 import approval from "./fixtures/approval.json";
 import architecture from "./fixtures/architecture.json";
 import audit from "./fixtures/audit.json";
@@ -33,6 +37,10 @@ import type { Routes } from "./mockApi";
 
 /** Real control-plane responses exported by `python -m tests.contract.export_frontend_fixtures`. */
 export const fixtures = {
+  agentAnswer,
+  agentEval,
+  agentProfile,
+  agentUnsupported,
   approval,
   architecture,
   audit,
@@ -108,4 +116,7 @@ export const defaultRoutes: Routes = {
   "GET /api/v1/education/views/system": viewSystem,
   "GET /api/v1/education/views/system/runtime": viewSystemRuntime,
   "GET /api/v1/education/views/hc-01": viewHc01,
+  "GET /api/v1/agents/sales-insights-agent": agentProfile,
+  "POST /api/v1/agents/ask": agentAnswer,
+  "POST /api/v1/agents/evaluate": agentEval,
 };

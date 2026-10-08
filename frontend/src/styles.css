@@ -307,8 +307,33 @@ button:disabled {
 }
 
 input,
-select {
+select,
+textarea {
   font: inherit;
+}
+
+.agent-form {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 48rem;
+}
+
+.agent-form textarea {
+  padding: 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.375rem;
+}
+
+.agent-form button {
+  justify-self: start;
+}
+
+.suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  list-style: none;
 }
 
 .lead {

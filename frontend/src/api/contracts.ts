@@ -649,6 +649,52 @@ export const viewRuntimeSchema = z.object({
 export type ViewRuntime = z.output<typeof viewRuntimeSchema>;
 export type NodeRuntime = ViewRuntime["nodes"][number];
 
+// ------------------------------------------------------------------ agents
+export const agentProfileSchema = z.object({
+  agent: z.string(),
+  suite: z.string(),
+  dataset_profile: z.string(),
+  local_provider: z.string(),
+  live_provider: z.string().nullable(),
+  suggested_questions: z.array(z.string()),
+});
+export type AgentProfile = z.output<typeof agentProfileSchema>;
+
+export const agentAnswerSchema = z.object({
+  agent: z.string(),
+  question: z.string(),
+  answer: z.string(),
+  tool_calls: z.array(z.object({ name: z.string(), summary: z.string() })),
+  grounded: z.boolean(),
+  supported_questions: z.array(z.string()),
+});
+export type AgentAnswer = z.output<typeof agentAnswerSchema>;
+
+export const agentEvalReportSchema = z.object({
+  evaluation_id: z.string(),
+  suite: z.string(),
+  provider: z.string(),
+  labels: z.array(z.string()),
+  compared: z.number(),
+  passed: z.number(),
+  pass_rate: z.number(),
+  gate_passed: z.boolean(),
+  status: z.enum(["PASSED", "FAILED"]),
+  cases: z.array(
+    z.object({
+      id: z.string(),
+      question: z.string(),
+      passed: z.boolean(),
+      grounded: z.boolean(),
+      missing: z.array(z.string()),
+      label: z.string(),
+      answer_excerpt: z.string(),
+      tools: z.array(z.string()),
+    }),
+  ),
+});
+export type AgentEvalReport = z.output<typeof agentEvalReportSchema>;
+
 /** Compile-time drift detection between the backend contract and the UI's views. */
 export const contractChecks = {
   runtimeStatus: true satisfies Conforms<G.RuntimeStatus, RuntimeStatus>,
@@ -681,4 +727,7 @@ export const contractChecks = {
   viewSummary: true satisfies Conforms<G.ViewSummary, ViewSummary>,
   renderedView: true satisfies Conforms<G.RenderedView, RenderedView>,
   viewRuntime: true satisfies Conforms<G.ViewRuntime, ViewRuntime>,
+  agentProfile: true satisfies Conforms<G.AgentProfile, AgentProfile>,
+  agentAnswer: true satisfies Conforms<G.AgentAnswer, AgentAnswer>,
+  agentEvalReport: true satisfies Conforms<G.AgentEvalReport, AgentEvalReport>,
 } as const;

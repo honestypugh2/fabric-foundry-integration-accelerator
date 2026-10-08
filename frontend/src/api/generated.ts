@@ -36,6 +36,16 @@ export interface AgentEvalReport {
   readonly cases: readonly AgentCaseResult[];
 }
 
+/** What the UI needs to ask an agent: who answers and which questions are evaluated. */
+export interface AgentProfile {
+  readonly agent: string;
+  readonly suite: string;
+  readonly dataset_profile: string;
+  readonly local_provider: string;
+  readonly live_provider: string | null;
+  readonly suggested_questions: readonly string[];
+}
+
 /** A question for a named agent. */
 export interface AgentQuestion {
   readonly agent?: string;

@@ -37,6 +37,9 @@ const GuideRunnerPage = lazy(() =>
 const DataPage = lazy(() =>
   import("../features/data/DataPage").then((m) => ({ default: m.DataPage })),
 );
+const AgentPage = lazy(() =>
+  import("../features/agents/AgentPage").then((m) => ({ default: m.AgentPage })),
+);
 const DemoPage = lazy(() =>
   import("../features/demo/DemoPage").then((m) => ({ default: m.DemoPage })),
 );
@@ -153,6 +156,14 @@ export function App() {
           element={
             <Page>
               <DataPage />
+            </Page>
+          }
+        />
+        <Route
+          path="agent"
+          element={
+            <Page>
+              <AgentPage />
             </Page>
           }
         />

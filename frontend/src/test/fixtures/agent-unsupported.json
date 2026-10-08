@@ -1,0 +1,29 @@
+{
+  "cloud_operation_performed": false,
+  "correlation_id": "fe64a9e1c3ec4ae58f19340a55813219",
+  "data": {
+    "agent": "sales-insights-agent",
+    "answer": "This offline agent answers only allow-listed questions over synthetic data. Try one of the supported questions, or switch to the live Foundry agent.",
+    "grounded": false,
+    "question": "Tell me a joke about steel beams.",
+    "supported_questions": [
+      "Which product line grew fastest last month?",
+      "What was total booked revenue last month?",
+      "How many duplicate order lines are there?",
+      "What data-quality issues are there?",
+      "Write the monthly brief for the Enclosures team."
+    ],
+    "tool_calls": []
+  },
+  "equivalent_fabric_service": "Foundry agent with the Fabric data agent tool (offline analog)",
+  "evidence": [],
+  "execution_label": "LOCAL",
+  "fallback_reason": null,
+  "fallback_used": false,
+  "operating_mode": "OFFLINE",
+  "requested_provider": "Local sales agent (deterministic, synthetic)",
+  "selected_provider": "Local sales agent (deterministic, synthetic)",
+  "simulation_notice": "LOCAL deterministic agent over synthetic data. No Foundry or Fabric call was made.",
+  "teaching_objective": "Numbers come from a governed data tool, never from the model.",
+  "timestamp": "2026-10-08T17:16:19.518314Z"
+}

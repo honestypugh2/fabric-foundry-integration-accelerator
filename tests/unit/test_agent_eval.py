@@ -122,6 +122,12 @@ def test_api_and_cli(
         assert body["gate_passed"] is True and body["passed"] == 5
         assert client.post("/api/v1/agents/evaluate", params={"suite": "nope"}).status_code == 404
         assert client.post("/api/v1/agents/evaluate", params={"suite": "Bad Id"}).status_code == 422
+        profile = client.get("/api/v1/agents/sales-insights-agent").json()
+        assert profile["agent"] == "sales-insights-agent"
+        assert profile["live_provider"] is None
+        assert profile["suggested_questions"][0] == "Which product line grew fastest last month?"
+        assert len(profile["suggested_questions"]) == 5
+        assert client.get("/api/v1/agents/nope").status_code == 404
     monkeypatch.chdir(REPO_ROOT)
     monkeypatch.setenv("FFIA_AUDIT_PATH", "")
     assert main(["agents", "eval"]) == 0

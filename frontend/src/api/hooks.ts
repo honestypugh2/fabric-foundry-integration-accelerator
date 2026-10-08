@@ -2,6 +2,9 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { z } from "zod";
 import { api } from "./client";
 import {
+  agentAnswerSchema,
+  agentEvalReportSchema,
+  agentProfileSchema,
   approvalSchema,
   architectureSchema,
   auditRecordSchema,
@@ -318,6 +321,32 @@ export function useAudit(correlationId: string | null) {
         `/api/v1/audit/${encodeURIComponent(correlationId ?? "")}`,
         z.array(auditRecordSchema),
         signal,
+      ),
+  });
+}
+
+export function useAgentProfile(agent: string) {
+  return useQuery({
+    queryKey: ["agent", agent],
+    queryFn: ({ signal }) =>
+      api.get(`/api/v1/agents/${encodeURIComponent(agent)}`, agentProfileSchema, signal),
+  });
+}
+
+export function useAskAgent(agent: string) {
+  return useMutation({
+    mutationFn: (question: string) =>
+      api.post("/api/v1/agents/ask", envelopeSchema(agentAnswerSchema), { agent, question }),
+  });
+}
+
+export function useAgentEvaluation(suite: string) {
+  return useMutation({
+    mutationFn: () =>
+      api.post(
+        `/api/v1/agents/evaluate?suite=${encodeURIComponent(suite)}`,
+        agentEvalReportSchema,
+        undefined,
       ),
   });
 }

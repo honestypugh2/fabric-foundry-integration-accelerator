@@ -57,6 +57,7 @@ def main() -> None:
                 "view-system": "/api/v1/education/views/system",
                 "view-hc01": "/api/v1/education/views/hc-01",
                 "view-system-runtime": "/api/v1/education/views/system/runtime",
+                "agent-profile": "/api/v1/agents/sales-insights-agent",
             }
             for name, path in gets.items():
                 response = client.get(path)
@@ -135,6 +136,14 @@ def main() -> None:
             )
             _write("audit", client.get(f"/api/v1/audit/{plan['correlation_id']}").json())
             _write("demo-run", client.post("/api/v1/demo/run").json())
+            for name, question in {
+                "agent-answer": "Which product line grew fastest last month?",
+                "agent-unsupported": "Tell me a joke about steel beams.",
+            }.items():
+                response = client.post("/api/v1/agents/ask", json={"question": question})
+                response.raise_for_status()
+                _write(name, response.json())
+            _write("agent-eval", client.post("/api/v1/agents/evaluate").json())
     print(f"exported fixtures to {FIXTURES}")  # noqa: T201
 
 

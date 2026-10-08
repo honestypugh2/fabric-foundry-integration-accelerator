@@ -1,0 +1,34 @@
+{
+  "cloud_operation_performed": false,
+  "correlation_id": "88f57f301144466d9c7287648b3d607b",
+  "data": {
+    "agent": "sales-insights-agent",
+    "answer": "**Enclosures (ENC) grew fastest**: booked revenue up 55.78% in September 2026 versus August 2026 ($56,623.73 \u2192 $88,207.09).",
+    "grounded": true,
+    "question": "Which product line grew fastest last month?",
+    "supported_questions": [
+      "Which product line grew fastest last month?",
+      "What was total booked revenue last month?",
+      "How many duplicate order lines are there?",
+      "What data-quality issues are there?",
+      "Write the monthly brief for the Enclosures team."
+    ],
+    "tool_calls": [
+      {
+        "name": "local_sales_query",
+        "summary": "SQL over the local gold_sales table (DuckDB)"
+      }
+    ]
+  },
+  "equivalent_fabric_service": "Foundry agent with the Fabric data agent tool (offline analog)",
+  "evidence": [],
+  "execution_label": "LOCAL",
+  "fallback_reason": null,
+  "fallback_used": false,
+  "operating_mode": "OFFLINE",
+  "requested_provider": "Local sales agent (deterministic, synthetic)",
+  "selected_provider": "Local sales agent (deterministic, synthetic)",
+  "simulation_notice": "LOCAL deterministic agent over synthetic data. No Foundry or Fabric call was made.",
+  "teaching_objective": "Numbers come from a governed data tool, never from the model.",
+  "timestamp": "2026-10-08T17:16:19.514788Z"
+}

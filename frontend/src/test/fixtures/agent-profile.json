@@ -1,0 +1,14 @@
+{
+  "agent": "sales-insights-agent",
+  "dataset_profile": "mfg-sales-v1",
+  "live_provider": null,
+  "local_provider": "Local sales agent (deterministic, synthetic)",
+  "suggested_questions": [
+    "Which product line grew fastest last month?",
+    "What was total booked revenue last month?",
+    "How many duplicate order lines are there?",
+    "Write the monthly brief for the Enclosures team.",
+    "Tell me a joke about steel beams."
+  ],
+  "suite": "sales-insights-agent"
+}

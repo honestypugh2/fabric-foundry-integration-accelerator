@@ -16,8 +16,8 @@ make run          # API on :8000 and the Vite dev server on :5173 (proxying /api
 | `api/contracts.ts` | Zod views of each response, with compile-time `contractChecks` against the generated types |
 | `api/hooks.ts` | TanStack Query hooks, one per endpoint |
 | `app/` | Routes (lazy-loaded pages), layout, learning-level context, page titles, local progress |
-| `components/` | Status bar, level switcher, badges, query states, sanitized Markdown, copyable prompts |
-| `features/` | `home`, `architecture`, `patterns`, `learn`, `labs`, `guides`, `data`, `demo` |
+| `components/` | Status bar, level switcher, badges, provenance, query states, sanitized Markdown, copyable prompts |
+| `features/` | `home`, `architecture`, `patterns`, `learn`, `labs`, `guides`, `data`, `agents`, `demo` |
 | `test/` | Fetch mock, fixtures exported from the real API, render helper |
 
 ## Pages
@@ -31,6 +31,7 @@ make run          # API on :8000 and the Vite dev server on :5173 (proxying /api
 | `/labs`, `/labs/:id` | Eleven-stage labs with commands and local progress |
 | `/guides`, `/guides/:id/:step` | **Guide runner** (HC-01): provider/server/tool, Copilot and Claude Code prompts, checkpoint, evidence checklist, "not evidence", offline equivalent, where the step happens on the HC-01 diagram, and rehearsal of the step's governed write |
 | `/data` | Lakehouse tables and previews through the router, and evaluation against the baseline |
+| `/agent` | **Sales insights agent** (Guide MFG-01): ask through the agent router, see the execution label, provider, fallback, grounding and tool calls, and run the evaluation suite. Suggested questions come from `config/evaluations/<suite>.yaml`. LOCAL offline; the live Foundry agent (PREVIEW tool) only with `FFIA_FOUNDRY_LIVE=1`. |
 | `/demo` | Readiness probes and the ten-act offline demo |
 
 ## Rules

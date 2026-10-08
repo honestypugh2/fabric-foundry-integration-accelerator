@@ -13,7 +13,13 @@ from fabric_foundry_accelerator.education.drawio import render_drawio
 from fabric_foundry_accelerator.education.guides import GuideStep, UseCaseGuide
 from fabric_foundry_accelerator.education.layout import ViewLayout, compute_layout
 from fabric_foundry_accelerator.education.lessons import ArchitectureMap, CompletenessReport, Lab
-from fabric_foundry_accelerator.evaluation.agent_eval import AgentEvalReport, load_suite, run_suite
+from fabric_foundry_accelerator.evaluation.agent_eval import (
+    AgentEvalReport,
+    AgentProfile,
+    agent_profile,
+    load_suite,
+    run_suite,
+)
 from fabric_foundry_accelerator.models.changes import (
     Approval,
     ApprovalRequest,
@@ -244,6 +250,17 @@ async def fabric_read(
 
 
 # ------------------------------------------------------------------ agents
+@router.get("/api/v1/agents/{agent}", tags=["agents"])
+def get_agent(agent: str, container: ContainerDep) -> AgentProfile:
+    """Who answers for an agent and the questions its evaluation suite covers."""
+    live = container.agents.live
+    return agent_profile(
+        load_suite(container.settings.config_root, agent),
+        local_provider=container.agents.local.name,
+        live_provider=None if live is None else live.name,
+    )
+
+
 @router.post("/api/v1/agents/ask", tags=["agents"])
 async def ask_agent(
     body: Annotated[AgentQuestion, Body()],

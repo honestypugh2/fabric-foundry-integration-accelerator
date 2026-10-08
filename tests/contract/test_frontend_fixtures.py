@@ -6,10 +6,12 @@ from pathlib import Path
 import pytest
 from pydantic import TypeAdapter
 
+from fabric_foundry_accelerator.agents.port import AgentAnswer
 from fabric_foundry_accelerator.api.routes import RenderedView, SelectionSignal, ViewSummary
 from fabric_foundry_accelerator.audit.store import AuditRecord
 from fabric_foundry_accelerator.education.guides import UseCaseGuide
 from fabric_foundry_accelerator.education.lessons import ArchitectureMap, CompletenessReport, Lab
+from fabric_foundry_accelerator.evaluation.agent_eval import AgentEvalReport, AgentProfile
 from fabric_foundry_accelerator.models.changes import Approval, ExecutionResult, ProposedChange
 from fabric_foundry_accelerator.models.execution import ExecutionEnvelope
 from fabric_foundry_accelerator.patterns.catalog import ArchitecturePattern, Recommendation
@@ -65,6 +67,10 @@ CONTRACTS: dict[str, object] = {
     "approval": Approval,
     "execution": ExecutionEnvelope[ExecutionResult],
     "audit": list[AuditRecord],
+    "agent-profile": AgentProfile,
+    "agent-answer": ExecutionEnvelope[AgentAnswer],
+    "agent-unsupported": ExecutionEnvelope[AgentAnswer],
+    "agent-eval": AgentEvalReport,
 }
 
 

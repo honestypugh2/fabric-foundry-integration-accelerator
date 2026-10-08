@@ -1,23 +1,9 @@
 import { useId, useState } from "react";
 import { describeError } from "../../api/client";
-import type { EnvelopeMeta } from "../../api/contracts";
 import { useEvaluation, useLakehouses, usePreview, useProfiles, useTables } from "../../api/hooks";
 import { usePageTitle } from "../../app/usePageTitle";
-import { Badge } from "../../components/Badge";
+import { Provenance } from "../../components/Provenance";
 import { QueryState } from "../../components/QueryState";
-
-function Provenance({ envelope }: { readonly envelope: EnvelopeMeta }) {
-  return (
-    <p className="provenance">
-      <Badge value={envelope.execution_label} /> served by {envelope.selected_provider}
-      {envelope.fallback_used && envelope.fallback_reason
-        ? ` (fallback: ${envelope.fallback_reason})`
-        : ""}
-      . Equivalent Fabric service: {envelope.equivalent_fabric_service}.
-      {envelope.simulation_notice ? ` ${envelope.simulation_notice}` : ""}
-    </p>
-  );
-}
 
 function TableExplorer({ lakehouseId }: { readonly lakehouseId: string }) {
   const tables = useTables(lakehouseId);

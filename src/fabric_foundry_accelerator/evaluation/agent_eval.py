@@ -80,6 +80,33 @@ class AgentEvalReport(BaseModel):
     cases: tuple[AgentCaseResult, ...]
 
 
+class AgentProfile(BaseModel):
+    """What the UI needs to ask an agent: who answers and which questions are evaluated."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    agent: str
+    suite: str
+    dataset_profile: str
+    local_provider: str
+    live_provider: str | None
+    suggested_questions: tuple[str, ...]
+
+
+def agent_profile(
+    suite: AgentEvalSuite, *, local_provider: str, live_provider: str | None
+) -> AgentProfile:
+    """Describe an agent from its evaluation suite, so suggestions are the evaluated questions."""
+    return AgentProfile(
+        agent=suite.agent,
+        suite=suite.id,
+        dataset_profile=suite.profile,
+        local_provider=local_provider,
+        live_provider=live_provider,
+        suggested_questions=tuple(case.question for case in suite.cases),
+    )
+
+
 def load_suite(config_root: Path, suite_id: str) -> AgentEvalSuite:
     """Load an evaluation suite by id.
 
