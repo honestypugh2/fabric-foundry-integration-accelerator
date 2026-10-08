@@ -4,6 +4,8 @@ import agentProfile from "./fixtures/agent-profile.json";
 import agentUnsupported from "./fixtures/agent-unsupported.json";
 import agentWorkflow from "./fixtures/agent-workflow.json";
 import approval from "./fixtures/approval.json";
+import bakeoffScorecard from "./fixtures/bakeoff-scorecard.json";
+import bakeoffTasks from "./fixtures/bakeoff-tasks.json";
 import architecture from "./fixtures/architecture.json";
 import audit from "./fixtures/audit.json";
 import checkGrade from "./fixtures/check-grade.json";
@@ -46,6 +48,8 @@ export const fixtures = {
   agentUnsupported,
   agentWorkflow,
   approval,
+  bakeoffScorecard,
+  bakeoffTasks,
   architecture,
   audit,
   checkGrade,
@@ -127,4 +131,6 @@ export const defaultRoutes: Routes = {
   "POST /api/v1/agents/evaluate": agentEval,
   "POST /api/v1/agents/workflows/monthly-insights": agentWorkflow,
   "POST /api/v1/knowledge/search": knowledgeUnavailable,
+  "GET /api/v1/bakeoff/tasks": bakeoffTasks,
+  "GET /api/v1/bakeoff/scorecard": bakeoffScorecard,
 };

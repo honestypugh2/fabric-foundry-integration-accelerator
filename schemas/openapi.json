@@ -805,6 +805,84 @@
         "title": "AuditRecord",
         "type": "object"
       },
+      "BakeoffTask": {
+        "additionalProperties": false,
+        "description": "One task: what the agent is asked, how the sandbox is prepared, and how it is graded.",
+        "properties": {
+          "allowed_changes": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Allowed Changes",
+            "type": "array"
+          },
+          "checks": {
+            "items": {
+              "enum": [
+                "design_valid",
+                "build_matches_baseline",
+                "plan_not_executed",
+                "scope"
+              ],
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Checks",
+            "type": "array"
+          },
+          "id": {
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "title": "Id",
+            "type": "string"
+          },
+          "prompt": {
+            "minLength": 40,
+            "title": "Prompt",
+            "type": "string"
+          },
+          "setup": {
+            "discriminator": {
+              "mapping": {
+                "none": "#/components/schemas/NoSetup",
+                "remove": "#/components/schemas/RemoveFile",
+                "replace": "#/components/schemas/ReplaceText"
+              },
+              "propertyName": "kind"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/NoSetup"
+              },
+              {
+                "$ref": "#/components/schemas/RemoveFile"
+              },
+              {
+                "$ref": "#/components/schemas/ReplaceText"
+              }
+            ],
+            "title": "Setup"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "summary",
+          "setup",
+          "allowed_changes",
+          "checks",
+          "prompt"
+        ],
+        "title": "BakeoffTask",
+        "type": "object"
+      },
       "Box": {
         "additionalProperties": false,
         "description": "A rectangle in diagram coordinates.",
@@ -966,6 +1044,31 @@
         ],
         "title": "ChangeStatus",
         "type": "string"
+      },
+      "Check": {
+        "additionalProperties": false,
+        "description": "One deterministic check.",
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "passed": {
+            "title": "Passed",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "name",
+          "passed",
+          "detail"
+        ],
+        "title": "Check",
+        "type": "object"
       },
       "CheckAnswer": {
         "additionalProperties": false,
@@ -2605,6 +2708,52 @@
         "title": "GetSemanticModel",
         "type": "object"
       },
+      "GradeReport": {
+        "additionalProperties": false,
+        "description": "All checks for one task in one sandbox.",
+        "properties": {
+          "changed_files": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Changed Files",
+            "type": "array"
+          },
+          "checks": {
+            "items": {
+              "$ref": "#/components/schemas/Check"
+            },
+            "title": "Checks",
+            "type": "array"
+          },
+          "commit": {
+            "title": "Commit",
+            "type": "string"
+          },
+          "passed": {
+            "title": "Passed",
+            "type": "boolean"
+          },
+          "prompt_sha256": {
+            "title": "Prompt Sha256",
+            "type": "string"
+          },
+          "task": {
+            "title": "Task",
+            "type": "string"
+          }
+        },
+        "required": [
+          "task",
+          "commit",
+          "prompt_sha256",
+          "checks",
+          "changed_files",
+          "passed"
+        ],
+        "title": "GradeReport",
+        "type": "object"
+      },
       "GuideProvenance": {
         "additionalProperties": false,
         "description": "Sanitized provenance. Never names, titles, authors, identifiers or URLs.",
@@ -2773,6 +2922,26 @@
           }
         },
         "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "HarnessInfo": {
+        "additionalProperties": false,
+        "description": "The agent harness that ran the task.",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "version"
+        ],
+        "title": "HarnessInfo",
         "type": "object"
       },
       "Health": {
@@ -3665,6 +3834,22 @@
         "title": "MonthlyInsightsRun",
         "type": "object"
       },
+      "NoSetup": {
+        "additionalProperties": false,
+        "description": "Leave the sandbox as committed.",
+        "properties": {
+          "kind": {
+            "const": "none",
+            "title": "Kind",
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind"
+        ],
+        "title": "NoSetup",
+        "type": "object"
+      },
       "NodeRuntime": {
         "additionalProperties": false,
         "description": "The live state of one diagram node.",
@@ -4271,6 +4456,27 @@
         "title": "Rehearsal",
         "type": "object"
       },
+      "RemoveFile": {
+        "additionalProperties": false,
+        "description": "Delete one SQL file (relative to ``sql_root``).",
+        "properties": {
+          "kind": {
+            "const": "remove",
+            "title": "Kind",
+            "type": "string"
+          },
+          "path": {
+            "title": "Path",
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind",
+          "path"
+        ],
+        "title": "RemoveFile",
+        "type": "object"
+      },
       "RenderedView": {
         "description": "A view with the shared layout used by both the app and the draw.io files.",
         "properties": {
@@ -4286,6 +4492,38 @@
           "layout"
         ],
         "title": "RenderedView",
+        "type": "object"
+      },
+      "ReplaceText": {
+        "additionalProperties": false,
+        "description": "Inject a bug: replace exactly one occurrence of ``find`` in one SQL file.",
+        "properties": {
+          "find": {
+            "minLength": 1,
+            "title": "Find",
+            "type": "string"
+          },
+          "kind": {
+            "const": "replace",
+            "title": "Kind",
+            "type": "string"
+          },
+          "path": {
+            "title": "Path",
+            "type": "string"
+          },
+          "replace": {
+            "title": "Replace",
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind",
+          "path",
+          "find",
+          "replace"
+        ],
+        "title": "ReplaceText",
         "type": "object"
       },
       "RouteDecision": {
@@ -4380,6 +4618,187 @@
         "title": "RouteDecision",
         "type": "object"
       },
+      "RunRecord": {
+        "additionalProperties": false,
+        "description": "One recorded run of one task in one harness with one model.",
+        "properties": {
+          "duration_seconds": {
+            "minimum": 0.0,
+            "title": "Duration Seconds",
+            "type": "number"
+          },
+          "grade": {
+            "$ref": "#/components/schemas/GradeReport"
+          },
+          "harness": {
+            "$ref": "#/components/schemas/HarnessInfo"
+          },
+          "label": {
+            "const": "LIVE",
+            "title": "Label",
+            "type": "string"
+          },
+          "model": {
+            "title": "Model",
+            "type": "string"
+          },
+          "notes": {
+            "default": "",
+            "title": "Notes",
+            "type": "string"
+          },
+          "prompt_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Prompt Sha256",
+            "type": "string"
+          },
+          "recorded_on": {
+            "format": "date",
+            "title": "Recorded On",
+            "type": "string"
+          },
+          "repo_commit": {
+            "pattern": "^[0-9a-f]{7,40}$",
+            "title": "Repo Commit",
+            "type": "string"
+          },
+          "run_id": {
+            "maxLength": 96,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "title": "Run Id",
+            "type": "string"
+          },
+          "safety": {
+            "$ref": "#/components/schemas/Safety"
+          },
+          "schema_version": {
+            "const": 1,
+            "title": "Schema Version",
+            "type": "integer"
+          },
+          "task": {
+            "title": "Task",
+            "type": "string"
+          },
+          "transcript": {
+            "items": {
+              "$ref": "#/components/schemas/TranscriptEvent"
+            },
+            "minItems": 1,
+            "title": "Transcript",
+            "type": "array"
+          },
+          "usage": {
+            "$ref": "#/components/schemas/Usage",
+            "default": {}
+          }
+        },
+        "required": [
+          "schema_version",
+          "run_id",
+          "recorded_on",
+          "label",
+          "harness",
+          "model",
+          "task",
+          "prompt_sha256",
+          "repo_commit",
+          "duration_seconds",
+          "grade",
+          "safety",
+          "transcript"
+        ],
+        "title": "RunRecord",
+        "type": "object"
+      },
+      "RunSummary": {
+        "additionalProperties": false,
+        "description": "One row of the run list.",
+        "properties": {
+          "approvals_requested": {
+            "title": "Approvals Requested",
+            "type": "integer"
+          },
+          "checks": {
+            "title": "Checks",
+            "type": "integer"
+          },
+          "checks_passed": {
+            "title": "Checks Passed",
+            "type": "integer"
+          },
+          "current_prompt": {
+            "title": "Current Prompt",
+            "type": "boolean"
+          },
+          "denied_tool_calls": {
+            "title": "Denied Tool Calls",
+            "type": "integer"
+          },
+          "duration_seconds": {
+            "title": "Duration Seconds",
+            "type": "number"
+          },
+          "harness": {
+            "title": "Harness",
+            "type": "string"
+          },
+          "model": {
+            "title": "Model",
+            "type": "string"
+          },
+          "passed": {
+            "title": "Passed",
+            "type": "boolean"
+          },
+          "premium_requests": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Premium Requests"
+          },
+          "recorded_on": {
+            "format": "date",
+            "title": "Recorded On",
+            "type": "string"
+          },
+          "run_id": {
+            "title": "Run Id",
+            "type": "string"
+          },
+          "task": {
+            "title": "Task",
+            "type": "string"
+          },
+          "unsafe_attempts": {
+            "title": "Unsafe Attempts",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "run_id",
+          "recorded_on",
+          "harness",
+          "model",
+          "task",
+          "passed",
+          "checks_passed",
+          "checks",
+          "duration_seconds",
+          "approvals_requested",
+          "denied_tool_calls",
+          "unsafe_attempts",
+          "premium_requests",
+          "current_prompt"
+        ],
+        "title": "RunSummary",
+        "type": "object"
+      },
       "RuntimeStatus": {
         "additionalProperties": false,
         "description": "Execution state shown everywhere (never implies a live connection that does not exist).",
@@ -4469,6 +4888,34 @@
         "title": "RuntimeStatus",
         "type": "object"
       },
+      "Safety": {
+        "additionalProperties": false,
+        "description": "Counts taken from the transcript.",
+        "properties": {
+          "approvals_requested": {
+            "minimum": 0.0,
+            "title": "Approvals Requested",
+            "type": "integer"
+          },
+          "denied_tool_calls": {
+            "minimum": 0.0,
+            "title": "Denied Tool Calls",
+            "type": "integer"
+          },
+          "unsafe_attempts": {
+            "minimum": 0.0,
+            "title": "Unsafe Attempts",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "approvals_requested",
+          "denied_tool_calls",
+          "unsafe_attempts"
+        ],
+        "title": "Safety",
+        "type": "object"
+      },
       "ScaleEstimate": {
         "additionalProperties": false,
         "description": "Extrapolated sizes for the conceptual table. Estimates, not measurements.",
@@ -4507,6 +4954,116 @@
           "note"
         ],
         "title": "ScaleEstimate",
+        "type": "object"
+      },
+      "Scorecard": {
+        "additionalProperties": false,
+        "description": "Every recorded run and the per-harness, per-model aggregates.",
+        "properties": {
+          "label": {
+            "enum": [
+              "LIVE",
+              "UNAVAILABLE"
+            ],
+            "title": "Label",
+            "type": "string"
+          },
+          "note": {
+            "title": "Note",
+            "type": "string"
+          },
+          "rows": {
+            "items": {
+              "$ref": "#/components/schemas/ScorecardRow"
+            },
+            "title": "Rows",
+            "type": "array"
+          },
+          "runs": {
+            "items": {
+              "$ref": "#/components/schemas/RunSummary"
+            },
+            "title": "Runs",
+            "type": "array"
+          },
+          "task_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Task Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "label",
+          "note",
+          "task_ids",
+          "rows",
+          "runs"
+        ],
+        "title": "Scorecard",
+        "type": "object"
+      },
+      "ScorecardRow": {
+        "additionalProperties": false,
+        "description": "Aggregates for one harness and model.",
+        "properties": {
+          "approvals_requested": {
+            "title": "Approvals Requested",
+            "type": "integer"
+          },
+          "denied_tool_calls": {
+            "title": "Denied Tool Calls",
+            "type": "integer"
+          },
+          "harness": {
+            "title": "Harness",
+            "type": "string"
+          },
+          "median_duration_seconds": {
+            "title": "Median Duration Seconds",
+            "type": "number"
+          },
+          "model": {
+            "title": "Model",
+            "type": "string"
+          },
+          "premium_requests": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Premium Requests"
+          },
+          "runs": {
+            "title": "Runs",
+            "type": "integer"
+          },
+          "tasks_passed": {
+            "title": "Tasks Passed",
+            "type": "integer"
+          },
+          "unsafe_attempts": {
+            "title": "Unsafe Attempts",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "harness",
+          "model",
+          "runs",
+          "tasks_passed",
+          "median_duration_seconds",
+          "approvals_requested",
+          "denied_tool_calls",
+          "unsafe_attempts",
+          "premium_requests"
+        ],
+        "title": "ScorecardRow",
         "type": "object"
       },
       "SelectionSignal": {
@@ -4697,6 +5254,41 @@
           "truncated"
         ],
         "title": "TablePreview",
+        "type": "object"
+      },
+      "TaskSet": {
+        "additionalProperties": false,
+        "description": "``config/bakeoff/tasks.yaml``.",
+        "properties": {
+          "profile": {
+            "title": "Profile",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": 1,
+            "title": "Schema Version",
+            "type": "integer"
+          },
+          "sql_root": {
+            "title": "Sql Root",
+            "type": "string"
+          },
+          "tasks": {
+            "items": {
+              "$ref": "#/components/schemas/BakeoffTask"
+            },
+            "minItems": 1,
+            "title": "Tasks",
+            "type": "array"
+          }
+        },
+        "required": [
+          "schema_version",
+          "profile",
+          "sql_root",
+          "tasks"
+        ],
+        "title": "TaskSet",
         "type": "object"
       },
       "TeamBriefDraft": {
@@ -4936,6 +5528,54 @@
         "title": "TraceStep",
         "type": "object"
       },
+      "TranscriptEvent": {
+        "additionalProperties": false,
+        "description": "One sanitized step of a recorded run.",
+        "properties": {
+          "kind": {
+            "enum": [
+              "prompt",
+              "message",
+              "tool_call",
+              "tool_result",
+              "approval_requested",
+              "denied",
+              "command"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "summary": {
+            "maxLength": 2000,
+            "title": "Summary",
+            "type": "string"
+          },
+          "t": {
+            "description": "seconds since the run started",
+            "minimum": 0.0,
+            "title": "T",
+            "type": "number"
+          }
+        },
+        "required": [
+          "t",
+          "kind",
+          "summary"
+        ],
+        "title": "TranscriptEvent",
+        "type": "object"
+      },
       "TryIt": {
         "additionalProperties": false,
         "description": "An offline command the learner can run, and the label its result carries.",
@@ -4966,6 +5606,47 @@
           "result_label"
         ],
         "title": "TryIt",
+        "type": "object"
+      },
+      "Usage": {
+        "additionalProperties": false,
+        "description": "What the harness reported; ``None`` when it did not show it.",
+        "properties": {
+          "input_tokens": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Input Tokens"
+          },
+          "output_tokens": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Output Tokens"
+          },
+          "premium_requests": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Premium Requests"
+          }
+        },
+        "title": "Usage",
         "type": "object"
       },
       "UseCaseGuide": {
@@ -5586,6 +6267,93 @@
         "summary": "Get Audit",
         "tags": [
           "audit"
+        ]
+      }
+    },
+    "/api/v1/bakeoff/runs/{run_id}": {
+      "get": {
+        "description": "One recorded run with its sanitized transcript.",
+        "operationId": "bakeoff_run_api_v1_bakeoff_runs__run_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "run_id",
+            "required": true,
+            "schema": {
+              "title": "Run Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RunRecord"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Bakeoff Run",
+        "tags": [
+          "bakeoff"
+        ]
+      }
+    },
+    "/api/v1/bakeoff/scorecard": {
+      "get": {
+        "description": "Recorded runs and per-harness, per-model aggregates (UNAVAILABLE when none).",
+        "operationId": "bakeoff_scorecard_api_v1_bakeoff_scorecard_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scorecard"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Bakeoff Scorecard",
+        "tags": [
+          "bakeoff"
+        ]
+      }
+    },
+    "/api/v1/bakeoff/tasks": {
+      "get": {
+        "description": "The bake-off tasks with their exact prompts and checks.",
+        "operationId": "bakeoff_tasks_api_v1_bakeoff_tasks_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskSet"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Bakeoff Tasks",
+        "tags": [
+          "bakeoff"
         ]
       }
     },

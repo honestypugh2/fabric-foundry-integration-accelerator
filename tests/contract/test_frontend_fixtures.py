@@ -10,6 +10,8 @@ from fabric_foundry_accelerator.agents.port import AgentAnswer
 from fabric_foundry_accelerator.agents.workflows import MonthlyInsightsRun
 from fabric_foundry_accelerator.api.routes import RenderedView, SelectionSignal, ViewSummary
 from fabric_foundry_accelerator.audit.store import AuditRecord
+from fabric_foundry_accelerator.bakeoff.runs import Scorecard
+from fabric_foundry_accelerator.bakeoff.tasks import TaskSet
 from fabric_foundry_accelerator.education.guides import UseCaseGuide
 from fabric_foundry_accelerator.education.lessons import ArchitectureMap, CompletenessReport, Lab
 from fabric_foundry_accelerator.evaluation.agent_eval import AgentEvalReport, AgentProfile
@@ -74,6 +76,8 @@ CONTRACTS: dict[str, object] = {
     "agent-unsupported": ExecutionEnvelope[AgentAnswer],
     "agent-eval": AgentEvalReport,
     "agent-workflow": MonthlyInsightsRun,
+    "bakeoff-tasks": TaskSet,
+    "bakeoff-scorecard": Scorecard,
     "knowledge-unavailable": ExecutionEnvelope[KnowledgeResult],
     "knowledge-simulated": ExecutionEnvelope[KnowledgeResult],
 }

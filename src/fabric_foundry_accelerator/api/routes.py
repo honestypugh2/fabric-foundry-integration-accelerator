@@ -14,6 +14,15 @@ from fabric_foundry_accelerator.agents.workflows import (
     run_monthly_insights,
 )
 from fabric_foundry_accelerator.audit.store import AuditRecord
+from fabric_foundry_accelerator.bakeoff.runs import (
+    REPLAYS_DIR,
+    RunRecord,
+    Scorecard,
+    get_run,
+    load_runs,
+    scorecard,
+)
+from fabric_foundry_accelerator.bakeoff.tasks import TaskSet, load_tasks
 from fabric_foundry_accelerator.education.diagrams import DiagramView
 from fabric_foundry_accelerator.education.drawio import render_drawio
 from fabric_foundry_accelerator.education.guides import GuideStep, UseCaseGuide
@@ -319,6 +328,26 @@ def search_knowledge_base(
         mode=container.environment.mode,
         correlation_id=correlation_id,
     )
+
+
+# ------------------------------------------------------------------ bake-off
+@router.get("/api/v1/bakeoff/tasks", tags=["bakeoff"])
+def bakeoff_tasks(container: ContainerDep) -> TaskSet:
+    """The bake-off tasks with their exact prompts and checks."""
+    return load_tasks(container.settings.config_root)
+
+
+@router.get("/api/v1/bakeoff/scorecard", tags=["bakeoff"])
+def bakeoff_scorecard(container: ContainerDep) -> Scorecard:
+    """Recorded runs and per-harness, per-model aggregates (UNAVAILABLE when none)."""
+    settings = container.settings
+    return scorecard(load_tasks(settings.config_root), load_runs(settings.demos_root / REPLAYS_DIR))
+
+
+@router.get("/api/v1/bakeoff/runs/{run_id}", tags=["bakeoff"])
+def bakeoff_run(run_id: str, container: ContainerDep) -> RunRecord:
+    """One recorded run with its sanitized transcript."""
+    return get_run(container.settings.demos_root / REPLAYS_DIR, run_id)
 
 
 @router.post("/api/v1/plans", tags=["changes"])

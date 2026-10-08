@@ -159,6 +159,17 @@ export interface AuditRecord {
   readonly details?: Readonly<Record<string, string | number | boolean | null>>;
 }
 
+/** One task: what the agent is asked, how the sandbox is prepared, and how it is graded. */
+export interface BakeoffTask {
+  readonly id: string;
+  readonly title: string;
+  readonly summary: string;
+  readonly setup: NoSetup | RemoveFile | ReplaceText;
+  readonly allowed_changes: readonly string[];
+  readonly checks: readonly ("design_valid" | "build_matches_baseline" | "plan_not_executed" | "scope")[];
+  readonly prompt: string;
+}
+
 /** A rectangle in diagram coordinates. */
 export interface Box {
   readonly x: number;
@@ -199,6 +210,13 @@ export interface ChangeRequest {
 
 /** Lifecycle of a change. */
 export type ChangeStatus = "PROPOSED" | "BLOCKED" | "APPROVED" | "REJECTED" | "EXECUTED" | "VERIFIED" | "FAILED";
+
+/** One deterministic check. */
+export interface Check {
+  readonly name: string;
+  readonly passed: boolean;
+  readonly detail: string;
+}
 
 /** A learner's answer to one knowledge check. */
 export interface CheckAnswer {
@@ -521,6 +539,16 @@ export interface GetSemanticModel {
   readonly semantic_model_id: string;
 }
 
+/** All checks for one task in one sandbox. */
+export interface GradeReport {
+  readonly task: string;
+  readonly commit: string;
+  readonly prompt_sha256: string;
+  readonly checks: readonly Check[];
+  readonly changed_files: readonly string[];
+  readonly passed: boolean;
+}
+
 /** Sanitized provenance. Never names, titles, authors, identifiers or URLs. */
 export interface GuideProvenance {
   readonly derived_from: "customer engagement guide (sanitized)" | "original";
@@ -553,6 +581,12 @@ export interface GuideStep {
 /** HTTPValidationError */
 export interface HTTPValidationError {
   readonly detail?: readonly ValidationError[];
+}
+
+/** The agent harness that ran the task. */
+export interface HarnessInfo {
+  readonly name: string;
+  readonly version: string;
 }
 
 /** Liveness. */
@@ -729,6 +763,11 @@ export interface MonthlyInsightsRun {
   readonly synthetic_notice: string;
 }
 
+/** Leave the sandbox as committed. */
+export interface NoSetup {
+  readonly kind: "none";
+}
+
 /** The live state of one diagram node. */
 export interface NodeRuntime {
   readonly node: string;
@@ -860,10 +899,24 @@ export interface Rehearsal {
   readonly note?: string;
 }
 
+/** Delete one SQL file (relative to ``sql_root``). */
+export interface RemoveFile {
+  readonly kind: "remove";
+  readonly path: string;
+}
+
 /** A view with the shared layout used by both the app and the draw.io files. */
 export interface RenderedView {
   readonly view: DiagramView;
   readonly layout: ViewLayout;
+}
+
+/** Inject a bug: replace exactly one occurrence of ``find`` in one SQL file. */
+export interface ReplaceText {
+  readonly kind: "replace";
+  readonly path: string;
+  readonly find: string;
+  readonly replace: string;
 }
 
 /** Why a request went where it went. */
@@ -880,6 +933,43 @@ export interface RouteDecision {
   readonly failure_reason?: string | null;
   readonly fallback_reason?: string | null;
   readonly breaker_state?: BreakerState | null;
+}
+
+/** One recorded run of one task in one harness with one model. */
+export interface RunRecord {
+  readonly schema_version: 1;
+  readonly run_id: string;
+  readonly recorded_on: string;
+  readonly label: "LIVE";
+  readonly harness: HarnessInfo;
+  readonly model: string;
+  readonly task: string;
+  readonly prompt_sha256: string;
+  readonly repo_commit: string;
+  readonly duration_seconds: number;
+  readonly grade: GradeReport;
+  readonly safety: Safety;
+  readonly usage?: Usage;
+  readonly transcript: readonly TranscriptEvent[];
+  readonly notes?: string;
+}
+
+/** One row of the run list. */
+export interface RunSummary {
+  readonly run_id: string;
+  readonly recorded_on: string;
+  readonly harness: string;
+  readonly model: string;
+  readonly task: string;
+  readonly passed: boolean;
+  readonly checks_passed: number;
+  readonly checks: number;
+  readonly duration_seconds: number;
+  readonly approvals_requested: number;
+  readonly denied_tool_calls: number;
+  readonly unsafe_attempts: number;
+  readonly premium_requests: number | null;
+  readonly current_prompt: boolean;
 }
 
 /** Execution state shown everywhere (never implies a live connection that does not exist). */
@@ -899,6 +989,13 @@ export interface RuntimeStatus {
   readonly built_profiles: readonly string[];
 }
 
+/** Counts taken from the transcript. */
+export interface Safety {
+  readonly approvals_requested: number;
+  readonly denied_tool_calls: number;
+  readonly unsafe_attempts: number;
+}
+
 /** Extrapolated sizes for the conceptual table. Estimates, not measurements. */
 export interface ScaleEstimate {
   readonly local_rows: number;
@@ -907,6 +1004,28 @@ export interface ScaleEstimate {
   readonly estimated_snapshot_gib: number;
   readonly estimated_daily_change_rows: number;
   readonly note: string;
+}
+
+/** Every recorded run and the per-harness, per-model aggregates. */
+export interface Scorecard {
+  readonly label: "LIVE" | "UNAVAILABLE";
+  readonly note: string;
+  readonly task_ids: readonly string[];
+  readonly rows: readonly ScorecardRow[];
+  readonly runs: readonly RunSummary[];
+}
+
+/** Aggregates for one harness and model. */
+export interface ScorecardRow {
+  readonly harness: string;
+  readonly model: string;
+  readonly runs: number;
+  readonly tasks_passed: number;
+  readonly median_duration_seconds: number;
+  readonly approvals_requested: number;
+  readonly denied_tool_calls: number;
+  readonly unsafe_attempts: number;
+  readonly premium_requests: number | null;
 }
 
 /** One need from the pattern-selection vocabulary. */
@@ -945,6 +1064,14 @@ export interface TablePreview {
   readonly rows: readonly (Readonly<Record<string, string | number | boolean | null>>)[];
   readonly total_rows: number;
   readonly truncated: boolean;
+}
+
+/** ``config/bakeoff/tasks.yaml``. */
+export interface TaskSet {
+  readonly schema_version: 1;
+  readonly profile: string;
+  readonly sql_root: string;
+  readonly tasks: readonly BakeoffTask[];
 }
 
 /** One team's draft brief and the gate's verdict. */
@@ -997,11 +1124,26 @@ export interface TraceStep {
   readonly note?: string;
 }
 
+/** One sanitized step of a recorded run. */
+export interface TranscriptEvent {
+  readonly t: number;
+  readonly kind: "prompt" | "message" | "tool_call" | "tool_result" | "approval_requested" | "denied" | "command";
+  readonly name?: string | null;
+  readonly summary: string;
+}
+
 /** An offline command the learner can run, and the label its result carries. */
 export interface TryIt {
   readonly label: string;
   readonly command: string;
   readonly result_label: "LOCAL" | "SIMULATED" | "HYBRID" | "PREVIEW" | "UNAVAILABLE";
+}
+
+/** What the harness reported; ``None`` when it did not show it. */
+export interface Usage {
+  readonly premium_requests?: number | null;
+  readonly input_tokens?: number | null;
+  readonly output_tokens?: number | null;
 }
 
 /** A Use-Case Guide (``guides/<id>/guide.yaml``). */

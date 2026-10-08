@@ -11,6 +11,7 @@ const NAV: readonly { readonly to: string; readonly label: string }[] = [
   { to: "/guides", label: "Guides" },
   { to: "/data", label: "Data" },
   { to: "/agent", label: "Agent" },
+  { to: "/bakeoff", label: "Bake-off" },
   { to: "/demo", label: "Demo" },
 ];
 

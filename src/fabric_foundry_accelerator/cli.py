@@ -11,6 +11,7 @@ from pathlib import Path
 
 from fabric_foundry_accelerator import __version__
 from fabric_foundry_accelerator.agents import commands as agent_commands
+from fabric_foundry_accelerator.bakeoff import commands as bakeoff_commands
 from fabric_foundry_accelerator.education import commands as education_commands
 from fabric_foundry_accelerator.education import diagram_docs, talktrack_commands
 from fabric_foundry_accelerator.knowledge import commands as knowledge_commands
@@ -134,6 +135,7 @@ def build_parser() -> argparse.ArgumentParser:
     foundry_commands.register(sub)
     agent_commands.register(sub)
     knowledge_commands.register(sub)
+    bakeoff_commands.register(sub)
     return parser
 
 

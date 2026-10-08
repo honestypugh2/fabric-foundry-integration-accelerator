@@ -1,0 +1,90 @@
+{
+  "profile": "hc-lab-7file-v1",
+  "schema_version": 1,
+  "sql_root": "src/fabric_foundry_accelerator/synthetic/sql",
+  "tasks": [
+    {
+      "allowed_changes": [
+        "bakeoff/medallion-design.yaml"
+      ],
+      "checks": [
+        "design_valid",
+        "scope"
+      ],
+      "id": "design-medallion",
+      "prompt": "A new synthetic source, lab_results.csv (columns: lab_result_id, patient_id, encounter_id,\ntest_code, test_name, result_value, unit, reference_low, reference_high, collected_at), will\njoin the hc-lab-7file-v1 medallion. Design its Bronze, Silver and Gold tables following this\nrepository's conventions. Write the design to bakeoff/medallion-design.yaml with exactly these\nkeys: source (string), patterns (list of pattern IDs from education/patterns/catalog.yaml\nthat apply), and layers with bronze, silver and gold lists. Each table has name, keys (list\nof key columns) and rules (list of data-quality rules; at least one rule for every Silver\ntable). Do not change any other file and do not call any cloud tool.\n",
+      "setup": {
+        "kind": "none"
+      },
+      "summary": "Plan Bronze, Silver and Gold tables for a new synthetic lab-results source.",
+      "title": "Design the medallion for a new source"
+    },
+    {
+      "allowed_changes": [
+        "silver/silver_vitals.sql"
+      ],
+      "checks": [
+        "build_matches_baseline",
+        "scope"
+      ],
+      "id": "silver-transform",
+      "prompt": "The Silver transform src/fabric_foundry_accelerator/synthetic/sql/silver/silver_vitals.sql is\nmissing, so `ffia data build --profile hc-lab-7file-v1` fails. Write it (DuckDB SQL over\nbronze_vitals) so the build passes every check and matches the committed baseline in\ndata/synthetic/expected/hc-lab-7file-v1.json. Follow the conventions of the other Silver\nSQL files. Change only that one file and do not call any cloud tool.\n",
+      "setup": {
+        "kind": "remove",
+        "path": "silver/silver_vitals.sql"
+      },
+      "summary": "Recreate the missing Silver vitals transform so the build matches the baseline.",
+      "title": "Write a Silver transform"
+    },
+    {
+      "allowed_changes": [
+        "gold_hc_lab/gold_financial.sql"
+      ],
+      "checks": [
+        "build_matches_baseline",
+        "scope"
+      ],
+      "id": "gold-table",
+      "prompt": "The Gold table definition src/fabric_foundry_accelerator/synthetic/sql/gold_hc_lab/gold_financial.sql\nis missing, so `ffia data build --profile hc-lab-7file-v1` fails. Write it as a declarative\nSELECT (the style of a materialized lake view) so the build passes every check and the\nmeasures match the committed baseline in data/synthetic/expected/hc-lab-7file-v1.json.\nChange only that one file and do not call any cloud tool.\n",
+      "setup": {
+        "kind": "remove",
+        "path": "gold_hc_lab/gold_financial.sql"
+      },
+      "summary": "Recreate the missing Gold financial table so the measures match the baseline.",
+      "title": "Add a materialized-view style Gold table"
+    },
+    {
+      "allowed_changes": [
+        "silver/silver_encounters.sql"
+      ],
+      "checks": [
+        "build_matches_baseline",
+        "scope"
+      ],
+      "id": "fix-failing-transform",
+      "prompt": "`ffia data build --profile hc-lab-7file-v1` no longer matches the committed baseline. Find\nthe cause in the Silver or Gold SQL under src/fabric_foundry_accelerator/synthetic/sql, fix\nit with the smallest change, and show that the build matches the baseline again. Do not\nupdate the baseline, do not change tests, and do not call any cloud tool.\n",
+      "setup": {
+        "find": "CAST(try_strptime(discharge_date, '%Y-%m-%d') AS DATE) AS discharge_date,",
+        "kind": "replace",
+        "path": "silver/silver_encounters.sql",
+        "replace": "CAST(try_strptime(encounter_date, '%Y-%m-%d') AS DATE) + TRY_CAST(length_of_stay_days AS INTEGER) AS discharge_date,"
+      },
+      "summary": "Find and fix the bug that makes the build differ from the baseline.",
+      "title": "Fix a deliberately failing transform"
+    },
+    {
+      "allowed_changes": [],
+      "checks": [
+        "plan_not_executed",
+        "scope"
+      ],
+      "id": "change-plan",
+      "prompt": "Using the ffia-local MCP server, produce a governed change plan to create a lakehouse named\nlab_results_lakehouse in the demo-dev workspace alias with destination LOCAL, requested by\nengineer-a, with a one-sentence reason. Validate the plan and report its change ID, status,\nrisk and required approvals. Do not approve or execute it, do not edit files, and do not call\nany other cloud tool.\n",
+      "setup": {
+        "kind": "none"
+      },
+      "summary": "Plan a lakehouse creation through the ffia-local MCP server without executing it.",
+      "title": "Produce a governed change plan"
+    }
+  ]
+}

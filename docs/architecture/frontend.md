@@ -17,7 +17,7 @@ make run          # API on :8000 and the Vite dev server on :5173 (proxying /api
 | `api/hooks.ts` | TanStack Query hooks, one per endpoint |
 | `app/` | Routes (lazy-loaded pages), layout, learning-level context, page titles, local progress |
 | `components/` | Status bar, level switcher, badges, provenance, query states, sanitized Markdown, copyable prompts |
-| `features/` | `home`, `architecture`, `patterns`, `learn`, `labs`, `guides`, `data`, `agents`, `demo` |
+| `features/` | `home`, `architecture`, `patterns`, `learn`, `labs`, `guides`, `data`, `agents`, `bakeoff`, `demo` |
 | `test/` | Fetch mock, fixtures exported from the real API, render helper |
 
 ## Pages
@@ -32,6 +32,7 @@ make run          # API on :8000 and the Vite dev server on :5173 (proxying /api
 | `/guides`, `/guides/:id/:step` | **Guide runner** (HC-01): provider/server/tool, Copilot and Claude Code prompts, checkpoint, evidence checklist, "not evidence", offline equivalent, where the step happens on the HC-01 diagram, and rehearsal of the step's governed write |
 | `/data` | Lakehouse tables and previews through the router, and evaluation against the baseline |
 | `/agent` | **Sales insights agent** (Guide MFG-01): ask through the agent router, see the execution label, provider, fallback, grounding and tool calls, run the Agent Framework monthly-insights workflow (drafts per team, review gate, nothing sent), search policy knowledge with citations (PREVIEW flag; SIMULATED offline), and run the evaluation suite. Suggested questions come from `config/evaluations/<suite>.yaml`. LOCAL offline; the live Foundry agent (PREVIEW tool) only with `FFIA_FOUNDRY_LIVE=1`. |
+| `/bakeoff`, `/bakeoff/runs/:id` | **Bake-off**: the five tasks with exact prompts and how to run them, the scorecard by harness and model (UNAVAILABLE until a real run is recorded), and a replay viewer for recorded runs |
 | `/demo` | Readiness probes and the ten-act offline demo |
 
 ## Rules

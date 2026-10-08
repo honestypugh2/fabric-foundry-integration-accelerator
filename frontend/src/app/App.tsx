@@ -40,6 +40,12 @@ const DataPage = lazy(() =>
 const AgentPage = lazy(() =>
   import("../features/agents/AgentPage").then((m) => ({ default: m.AgentPage })),
 );
+const BakeoffPage = lazy(() =>
+  import("../features/bakeoff/BakeoffPage").then((m) => ({ default: m.BakeoffPage })),
+);
+const BakeoffRunPage = lazy(() =>
+  import("../features/bakeoff/BakeoffPage").then((m) => ({ default: m.BakeoffRunPage })),
+);
 const DemoPage = lazy(() =>
   import("../features/demo/DemoPage").then((m) => ({ default: m.DemoPage })),
 );
@@ -164,6 +170,22 @@ export function App() {
           element={
             <Page>
               <AgentPage />
+            </Page>
+          }
+        />
+        <Route
+          path="bakeoff"
+          element={
+            <Page>
+              <BakeoffPage />
+            </Page>
+          }
+        />
+        <Route
+          path="bakeoff/runs/:runId"
+          element={
+            <Page>
+              <BakeoffRunPage />
             </Page>
           }
         />

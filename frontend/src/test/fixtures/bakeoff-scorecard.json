@@ -1,0 +1,13 @@
+{
+  "label": "UNAVAILABLE",
+  "note": "No recorded runs yet. Run a task with `ffia bakeoff prepare`, your harness and `ffia bakeoff grade`, then record it. Nothing here is simulated.",
+  "rows": [],
+  "runs": [],
+  "task_ids": [
+    "design-medallion",
+    "silver-transform",
+    "gold-table",
+    "fix-failing-transform",
+    "change-plan"
+  ]
+}

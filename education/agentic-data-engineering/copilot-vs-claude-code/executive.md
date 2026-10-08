@@ -27,8 +27,9 @@ app (parallel worktree sessions) is a **technical preview** as of October 2026.
 
 ## How we will decide with evidence
 
-A bake-off arrives in Phase 7: the **same five data-engineering tasks** on synthetic data in both
-harnesses, scored on time, steps, approvals requested, checks passed, unsafe actions blocked and
+The bake-off runs the **same five data-engineering tasks** on synthetic data in every harness and
+model (`ffia bakeoff`; GitHub Copilot with several models, Claude Code when someone records it),
+scored on time, steps, approvals requested, checks passed, unsafe actions blocked and
 evidence completeness. Results will be published as dated **observations about this
 repository**, with model and versions recorded — not as product claims.
 

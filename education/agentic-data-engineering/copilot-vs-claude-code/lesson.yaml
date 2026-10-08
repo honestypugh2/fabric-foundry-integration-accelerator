@@ -5,8 +5,8 @@ summary: >-
   An honest, evidence-labeled comparison of two generally available agent harnesses for Fabric data
   engineering. Both read the same repository instructions, skills and MCP configuration in this
   accelerator; they differ in permission models, enforcement hooks, parallelism, GitHub integration
-  and admin planes. A same-task bake-off (arriving in Phase 7) records observations, not product
-  claims.
+  and admin planes. A same-task bake-off (`ffia bakeoff`, the app's Bake-off page) records observations, not
+  product claims.
 status: GA
 pattern_ids: [P19, P20, P23]
 learning_objectives:

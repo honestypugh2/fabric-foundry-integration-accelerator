@@ -58,6 +58,8 @@ def main() -> None:
                 "view-hc01": "/api/v1/education/views/hc-01",
                 "view-system-runtime": "/api/v1/education/views/system/runtime",
                 "agent-profile": "/api/v1/agents/sales-insights-agent",
+                "bakeoff-tasks": "/api/v1/bakeoff/tasks",
+                "bakeoff-scorecard": "/api/v1/bakeoff/scorecard",
             }
             for name, path in gets.items():
                 response = client.get(path)

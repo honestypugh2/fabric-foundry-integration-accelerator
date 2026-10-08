@@ -169,7 +169,7 @@ steps:
       prompt as the Copilot step, word for word. Approve tool calls when prompted. Fill a second
       scorecard row set and compare - same tools, same labels, same stopping point? Differences
       are observations about this run (model, version, prompt), not product claims; the formal
-      bake-off arrives in Phase 7.
+      bake-off is `ffia bakeoff prepare|grade` with the same five tasks for every harness.
     commands:
       - "claude --permission-mode plan"
     expected: The same tool calls and LOCAL envelopes, ending at a PROPOSED plan that a human must approve.

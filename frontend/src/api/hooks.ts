@@ -6,6 +6,9 @@ import {
   agentEvalReportSchema,
   agentProfileSchema,
   approvalSchema,
+  bakeoffTasksSchema,
+  runRecordSchema,
+  scorecardSchema,
   knowledgeResultSchema,
   monthlyInsightsRunSchema,
   architectureSchema,
@@ -367,5 +370,27 @@ export function useKnowledgeSearch() {
         question,
         top: 3,
       }),
+  });
+}
+
+export function useBakeoffTasks() {
+  return useQuery({
+    queryKey: ["bakeoff", "tasks"],
+    queryFn: ({ signal }) => api.get("/api/v1/bakeoff/tasks", bakeoffTasksSchema, signal),
+  });
+}
+
+export function useScorecard() {
+  return useQuery({
+    queryKey: ["bakeoff", "scorecard"],
+    queryFn: ({ signal }) => api.get("/api/v1/bakeoff/scorecard", scorecardSchema, signal),
+  });
+}
+
+export function useBakeoffRun(runId: string) {
+  return useQuery({
+    queryKey: ["bakeoff", "run", runId],
+    queryFn: ({ signal }) =>
+      api.get(`/api/v1/bakeoff/runs/${encodeURIComponent(runId)}`, runRecordSchema, signal),
   });
 }

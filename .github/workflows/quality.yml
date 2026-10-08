@@ -62,6 +62,8 @@ jobs:
         run: ffia skills check
       - name: Talk-track handouts match their YAML
         run: ffia talktracks check
+      - name: Bake-off tasks and recorded replays are valid
+        run: ffia bakeoff check
       - name: Offline demo release gate
         run: ffia demo check --no-azure-cli && ffia demo offline
       - name: Build distribution
