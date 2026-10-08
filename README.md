@@ -27,20 +27,21 @@ Customize it · Productionize it — in one project, with **synthetic data only*
 | 3 | Application control plane (FastAPI, FastMCP, providers, router, circuit breaker, approvals, audit) | ✅ Complete |
 | 4 | Interactive educational application (explorers, learning paths, labs, guides, demo mode) | ✅ Complete |
 | 5 | Fabric integration (live read-only provider, gated writer, MCP profiles, skills, reference notebooks) | ✅ Complete |
-| 6 | Foundry integration (Agent Service, Agent Framework, Data Agent, Fabric IQ/Foundry IQ, evaluation) | Planned |
+| 6 | Foundry integration (agent port, LOCAL + Foundry agents, evaluation, tracing, Agent Framework workflow; Foundry IQ remaining) | 🚧 In progress |
 | 7 | GitHub Copilot + Claude Code (skills, prompt packs, bake-off) | Planned |
 | 8 | Security, CI/CD and production readiness | Planned |
 | 9 | Final validation | Planned |
 
-Use-Case Guides: **HC-01** (Fabric MCP + Power BI medallion lab, healthcare, synthetic) is the
-first guide. More guides follow under `guides/`.
+Use-Case Guides under `guides/`: **HC-01** (Fabric MCP + Power BI medallion lab, healthcare,
+synthetic) and **MFG-01** (Foundry + Fabric sales insights, manufacturing, synthetic).
 
 Workshop talk tracks (presenter scripts with portal, VS Code, web app and offline paths, generated
 from YAML with `ffia talktracks render`, also linked from the app's Demo page):
 
 - **Guide 1:** [Leveling up Fabric data engineering with GitHub Copilot](demos/fabric-copilot-level-up/index.html)
 - **Guide 2:** [Foundry + Fabric agent workshop](demos/foundry-fabric-agents-workshop/index.html)
-  (manufacturing, synthetic; offline commands `ffia mfg brief` and `ffia mfg quality`)
+  (manufacturing, synthetic; offline commands `ffia mfg brief`, `ffia mfg quality`,
+  `ffia agents ask|eval|workflow`, and the app's Agent page)
 - Morning setup: [demos/MORNING-RUNBOOK.md](demos/MORNING-RUNBOOK.md)
 
 ## Quick start

@@ -57,7 +57,9 @@ are optional. They are never simulated as the real service. `make validate` runs
 
 ## Revisit trigger
 
-- Phase 6 makes act 6 available locally through an offline Foundry simulation.
+- ~~Phase 6 makes act 6 available locally through an offline Foundry simulation.~~ Done in Phase 6,
+  without simulating Foundry: act 6 runs the deterministic LOCAL agent, labeled LOCAL, and is
+  required ([ADR-0013](ADR-0013-foundry-agents-evaluation-tracing.md)).
 
 ## Authoritative references
 

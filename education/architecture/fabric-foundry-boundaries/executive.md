@@ -36,8 +36,9 @@ MCP server - are **GA**. Fabric IQ, ontology and the Foundry Fabric data agent t
 ## How this accelerator stays honest
 
 Every result is labeled (LIVE, HYBRID, LOCAL, SIMULATED, PREVIEW or UNAVAILABLE), and the full
-demo runs offline. When something is not built yet - Foundry arrives in Phase 6 - the demo says
-UNAVAILABLE instead of pretending.
+demo runs offline. Offline, the agent step is answered by a deterministic local agent over
+synthetic data and labeled LOCAL - it is never presented as Foundry. The live Foundry path is
+opt-in, and anything not yet validated in a tenant is labeled as such instead of pretending.
 
 **Decision for leaders:** which identities hold authority for which actions, and who is
 accountable for approving them.

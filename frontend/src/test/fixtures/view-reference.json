@@ -1312,7 +1312,7 @@
           {
             "edge": null,
             "node": "evaluation",
-            "note": "Offline, Act 6 of the demo is UNAVAILABLE until Phase 6 - nothing is simulated as Foundry.",
+            "note": "Offline, Act 6 runs the deterministic LOCAL agent and the agent evaluation suite checks grounding and baseline values. Nothing is simulated as Foundry.",
             "say": "Evaluations score groundedness and correctness against expected answers."
           }
         ],

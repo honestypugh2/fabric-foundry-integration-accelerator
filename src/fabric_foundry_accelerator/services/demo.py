@@ -334,8 +334,8 @@ async def run_offline_demo(container: Container, *, work_dir: Path) -> OfflineDe
             passed=len(container.catalog.patterns) >= 24 and bool(container.guides),
             label="LOCAL",
             summary=(
-                f"{len(container.catalog.patterns)} patterns and {len(container.guides)} guide(s) loaded; "
-                "level content arrives in Phase 4."
+                f"{len(container.catalog.patterns)} patterns, {len(container.guides)} guide(s) and "
+                f"{len(container.education.library.lessons)} lessons (Executive to L400) loaded."
             ),
         )
     )

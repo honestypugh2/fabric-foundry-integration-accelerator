@@ -97,7 +97,7 @@
         "executive": "Where business reasoning, orchestration and evaluation of AI agents is run and governed.",
         "l100": "Hosts agents that use tools and knowledge to answer questions and propose actions.",
         "l200": "Owns reasoning and orchestration; consumes Fabric context; never performs authoritative writes directly.",
-        "l300": "Arrives in Phase 6 through the Foundry project SDK and Agent Framework adapters.",
+        "l300": "FoundryAgentProvider calls an existing agent version through the project Responses API (opt-in, FFIA_FOUNDRY_LIVE=1); ffia agents ask routes it.",
         "l400": "Tool calls can require approval; the Fabric data agent tool is preview and uses on-behalf-of identity."
       },
       "does_not_own": [
@@ -107,7 +107,7 @@
       "id": "foundry-agent",
       "layer": "reasoning",
       "name": "Foundry Agent Service",
-      "offline_equivalent": "Shown as UNAVAILABLE in the offline demo until Phase 6 adds a labeled local equivalent.",
+      "offline_equivalent": "LocalSalesAgent, a deterministic LOCAL agent over synthetic sales data (a grounded-tool analog, not a model and not a Foundry simulation).",
       "owns": [
         "Reasoning",
         "Orchestration",
@@ -129,7 +129,7 @@
         "executive": "The open-source framework teams use to build and test agents consistently.",
         "l100": "A library for building agents and multi-agent workflows in Python and .NET.",
         "l200": "Runs locally or against Foundry; supports workflows, tools and human-in-the-loop steps.",
-        "l300": "Arrives in Phase 6 with a deterministic local client for offline tests.",
+        "l300": "The monthly-insights workflow fans out one draft per team to the routed agent, then a deterministic review gate holds ungrounded drafts.",
         "l400": "Approval-required functions pause execution until a human decision is recorded."
       },
       "does_not_own": [
@@ -138,7 +138,7 @@
       "id": "agent-framework",
       "layer": "reasoning",
       "name": "Microsoft Agent Framework",
-      "offline_equivalent": "Deterministic local client (Phase 6).",
+      "offline_equivalent": "The same workflow runs offline over the LOCAL agent; delivery to teams is never performed.",
       "owns": [
         "Agent runtime",
         "Workflows"
@@ -148,7 +148,8 @@
         "P08"
       ],
       "sources": [
-        "agent-framework"
+        "agent-framework",
+        "agent-framework-workflows"
       ],
       "status": "GA"
     },
@@ -299,7 +300,7 @@
         "executive": "Lets people ask questions of governed data in plain language, within their permissions.",
         "l100": "A curated agent that answers questions over selected Fabric data.",
         "l200": "Uses the end user's identity; Fabric permissions decide what is visible.",
-        "l300": "Called from Foundry through a preview tool or MCP endpoint (Phase 6).",
+        "l300": "Called from Foundry through the preview Fabric data agent tool; answers that used it are labeled PREVIEW.",
         "l400": "On-behalf-of only; one data agent per Foundry agent; same-region constraints apply."
       },
       "does_not_own": [
@@ -504,7 +505,7 @@
         "executive": "Measured quality instead of impressions.",
         "l100": "Checks answers and numbers against expected results.",
         "l200": "Deterministic baselines for data; model-graded evaluators for language quality.",
-        "l300": "POST /api/v1/evaluations/run compares measures with data/synthetic/expected.",
+        "l300": "POST /api/v1/evaluations/run compares measures with data/synthetic/expected; ffia agents eval grades agent answers for grounding.",
         "l400": "Thresholds come from the overlay; evaluation gates the offline demo."
       },
       "does_not_own": [
@@ -530,7 +531,7 @@
         "executive": "Visibility into what agents did, how long it took and what it cost.",
         "l100": "Logs and traces that show each step.",
         "l200": "Structured logs with correlation IDs locally; traces in a monitoring service in production.",
-        "l300": "Structured, redacted logs today; OpenTelemetry tracing arrives in Phase 6.",
+        "l300": "An OpenTelemetry span ffia.agent.ask per routed ask (no question text); Application Insights export is opt-in.",
         "l400": "Never log tokens; correlate spans with audit records."
       },
       "does_not_own": [
@@ -539,7 +540,7 @@
       "id": "observability",
       "layer": "evidence",
       "name": "Observability and tracing",
-      "offline_equivalent": "Console and JSONL logs.",
+      "offline_equivalent": "Console and JSONL logs; agent spans are created locally and exported only when configured.",
       "owns": [
         "Telemetry"
       ],
@@ -547,7 +548,8 @@
         "P16"
       ],
       "sources": [
-        "baseline-foundry-chat"
+        "baseline-foundry-chat",
+        "azure-monitor-opentelemetry"
       ],
       "status": "GA"
     },

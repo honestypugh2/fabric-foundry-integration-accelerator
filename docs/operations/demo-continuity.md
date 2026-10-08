@@ -35,7 +35,7 @@ probe and `--json` for machine-readable output.
 | 3 | A real MCP protocol call to the local educational server | LOCAL |
 | 4 | Architecture pattern recommendation | LOCAL |
 | 5 | Agentic change: plan, refused self-approval, approval, execute, verify, duplicate blocked, LIVE refused without redirect | SIMULATED |
-| 6 | Foundry agent over governed context (Phase 6). Shown honestly as not yet available. | UNAVAILABLE (optional) |
+| 6 | Agent over governed data: the LOCAL sales agent answers from a governed data tool, never from the model (the offline analog of a Foundry agent with the Fabric data agent tool) | LOCAL |
 | 7 | Failure: simulated Fabric outage, circuit breaker, labeled fallback | LOCAL / HYBRID |
 | 8 | Open Mirroring recovery drill | SIMULATED |
 | 9 | Education: Executive → L400 path | LOCAL |

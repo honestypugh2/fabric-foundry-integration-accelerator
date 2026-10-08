@@ -21,8 +21,8 @@ production one.
 | Foundry core evaluators (quality, safety, tool usage) | GA |
 | Several agent behavior evaluators and AI red teaming | **PREVIEW** |
 | Foundry tracing with OpenTelemetry | GA |
-| This accelerator's baseline evaluator and audit trail | **SIMULATED LOCALLY** (labeled `LOCAL`) |
-| Agent tracing in this accelerator | Arrives in Phase 6 |
+| This accelerator's baseline evaluator, agent evaluation and audit trail | **SIMULATED LOCALLY** (labeled `LOCAL`) |
+| Agent tracing in this accelerator | One OpenTelemetry span per agent ask; export to Application Insights is opt-in and **REQUIRES TENANT VALIDATION** |
 
 **Decision for leaders:** which thresholds block a release, who owns each baseline, and who may
 change them. Evaluation that does not block anything is only a report.

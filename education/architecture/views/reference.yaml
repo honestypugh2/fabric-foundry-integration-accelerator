@@ -108,7 +108,7 @@ traces:
       - {node: semantic-model, edge: agent-to-model, say: "The data agent answers from the semantic model's governed measures."}
       - {node: onelake, edge: model-to-lake, say: "Direct Lake reads Gold tables in OneLake. Fabric permissions filter what this user may see."}
       - {node: foundry-agent, say: "The agent composes the answer with its sources."}
-      - {node: evaluation, say: "Evaluations score groundedness and correctness against expected answers.", note: "Offline, Act 6 of the demo is UNAVAILABLE until Phase 6 - nothing is simulated as Foundry."}
+      - {node: evaluation, say: "Evaluations score groundedness and correctness against expected answers.", note: "Offline, Act 6 runs the deterministic LOCAL agent and the agent evaluation suite checks grounding and baseline values. Nothing is simulated as Foundry."}
   - id: governed-action
     title: Make a governed change
     summary: An agent proposes a change; policy validates, a person approves, and only the scoped writer executes.

@@ -46,8 +46,11 @@ evidence:
     sources: [mcp-specification]
   - statement: In this repository the boundary is enforced in code - ffia-local has no approve or execute tool, writes need a separate human approval, and every result carries an execution label.
     category: SIMULATED LOCALLY
-  - statement: Foundry providers are not implemented yet; the offline demo reports the Foundry act as UNAVAILABLE rather than simulating it. They arrive in Phase 6.
+  - statement: Offline, the agent act runs a deterministic local agent over synthetic sales data, labeled LOCAL; it answers through a governed data tool, is not a language model and is never presented as Foundry.
     category: SIMULATED LOCALLY
+  - statement: The routed path to a live Foundry agent (opt-in), live agent evaluation and Application Insights trace export must be validated in your tenant.
+    category: REQUIRES TENANT VALIDATION
+    sources: [foundry-agent-service, azure-monitor-opentelemetry]
   - statement: Whether a specific tenant's identities, role assignments and data agent permissions produce the same boundaries must be checked in that tenant.
     category: REQUIRES TENANT VALIDATION
   - statement: Keep authoritative writes in the business system behind a narrowly scoped writer identity, and treat agent output as a proposal.

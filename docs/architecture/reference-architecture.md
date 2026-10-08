@@ -106,7 +106,7 @@ Solid boxes are implemented here or documented by Microsoft; dashed boxes are pl
 5. The data agent answers from the semantic model's governed measures.
 6. Direct Lake reads Gold tables in OneLake. Fabric permissions filter what this user may see.
 7. The agent composes the answer with its sources.
-8. Evaluations score groundedness and correctness against expected answers. Offline, Act 6 of the demo is UNAVAILABLE until Phase 6 - nothing is simulated as Foundry.
+8. Evaluations score groundedness and correctness against expected answers. Offline, Act 6 runs the deterministic LOCAL agent and the agent evaluation suite checks grounding and baseline values. Nothing is simulated as Foundry.
 
 ### Flow: Make a governed change
 

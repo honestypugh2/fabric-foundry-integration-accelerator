@@ -11,7 +11,7 @@ learning_objectives:
   - Trace one request through context, reasoning, access, authority, action and evidence.
   - Assign each responsibility to the right layer (Fabric, Foundry, MCP, Entra and policy, business system).
   - Separate the GA building blocks from the preview dependencies and plan a path that does not need the previews.
-  - Run the parts of the pattern that exist offline in this repository and explain honestly which parts arrive later.
+  - Run the parts of the pattern that exist offline in this repository and explain honestly which parts still need tenant validation or arrive later.
 prerequisites: [fabric-foundry-boundaries]
 concepts:
   - term: Governed context
@@ -37,8 +37,11 @@ evidence:
   - statement: Core Foundry evaluators (for example groundedness, relevance and tool call accuracy) are GA; several agent evaluators are in preview.
     category: DOCUMENTED BEHAVIOR
     sources: [foundry-evaluators]
-  - statement: Governed reads, local evaluation against a baseline, the change flow and audit run offline today; the Foundry agent act of the offline demo reports UNAVAILABLE until Phase 6.
+  - statement: Governed reads, local evaluation against a baseline, the change flow and audit run offline today; the agent act of the offline demo runs a deterministic local agent labeled LOCAL, which answers through a governed data tool and is not presented as Foundry.
     category: SIMULATED LOCALLY
+  - statement: The routed path to a live Foundry agent, live agent evaluation and the monthly-insights workflow over the live agent are implemented but opt-in and have not been validated end to end.
+    category: REQUIRES TENANT VALIDATION
+    sources: [foundry-agent-service, agent-framework-workflows]
   - statement: Whether passthrough, row-level security and tool approval behave as documented must be confirmed in your own tenant with your own roles before go-live.
     category: REQUIRES TENANT VALIDATION
     sources: [foundry-fabric-tool, fabric-rest-identity]
@@ -48,7 +51,7 @@ try_it:
   - label: Run the ten-act offline demo and read acts 2, 3, 5, 6 and 10
     command: ffia demo offline
     result_label: SIMULATED
-  - label: See which providers are configured (Foundry is reported as not available)
+  - label: See which providers are configured (offline, foundry_agent is the Local sales agent)
     command: curl -s localhost:8000/api/v1/runtime/providers
     result_label: LOCAL
   - label: Evaluate the synthetic semantic model against the committed baseline
@@ -58,12 +61,12 @@ copilot_prompt: >-
   Using the ffia-local MCP server, call get_architecture_pattern for P06 and get_runtime_status.
   Then draw a text diagram of the P06 request path (context, reasoning, access, authority, action,
   evidence) and mark each hop as available offline, available opt-in but requiring tenant
-  validation, arriving in Phase 6, or PREVIEW. Do not
+  validation, arriving in a later phase, or PREVIEW. Do not
   claim that any Foundry or Fabric call ran.
 claude_code_prompt: >-
   Read education/patterns/catalog.yaml (P06 and P08) and src/fabric_foundry_accelerator/services/demo.py.
-  Explain which acts of the offline demo implement parts of P06, why act 6 is UNAVAILABLE, and
-  what a Phase 6 Foundry provider would need to add without breaking the offline release gate.
+  Explain which acts of the offline demo implement parts of P06, why act 6 is labeled LOCAL rather
+  than Foundry, and how the opt-in Foundry provider is routed without breaking the offline release gate.
 production_notes:
   - Use user identity passthrough for Fabric reads so row-level security and workspace roles apply to the person asking, not to the agent.
   - Give the agent its own Entra identity for tracing and tool calls, and keep it read-only; authoritative writes go through P08 with a separate scoped writer.

@@ -1448,6 +1448,7 @@
             "anyOf": [
               {
                 "enum": [
+                  "agents",
                   "api",
                   "mcp",
                   "fabric-local",
@@ -3415,6 +3416,7 @@
         "properties": {
           "binding": {
             "enum": [
+              "agents",
               "api",
               "mcp",
               "fabric-local",

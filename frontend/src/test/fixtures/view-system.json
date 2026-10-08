@@ -18,6 +18,73 @@
           ]
         ]
       },
+      "agents-to-data": {
+        "label_at": [
+          1430.0,
+          432.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            1430.0,
+            330.0
+          ],
+          [
+            1430.0,
+            534.0
+          ]
+        ]
+      },
+      "agents-to-foundry": {
+        "label_at": [
+          1560.0,
+          292.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            1520.0,
+            292.0
+          ],
+          [
+            1600.0,
+            292.0
+          ]
+        ]
+      },
+      "api-to-agents": {
+        "label_at": [
+          1033.3333333333333,
+          222.0
+        ],
+        "label_fraction": 0.49099099099099097,
+        "points": [
+          [
+            740.0,
+            292.0
+          ],
+          [
+            766.6666666666666,
+            292.0
+          ],
+          [
+            766.6666666666666,
+            222.0
+          ],
+          [
+            1300.0,
+            222.0
+          ],
+          [
+            1300.0,
+            292.0
+          ],
+          [
+            1340.0,
+            292.0
+          ]
+        ]
+      },
       "api-to-changes": {
         "label_at": [
           766.6666666666666,
@@ -82,39 +149,6 @@
           [
             820.0,
             432.0
-          ]
-        ]
-      },
-      "api-to-foundry": {
-        "label_at": [
-          1170.0,
-          222.0
-        ],
-        "label_fraction": 0.49999999999999994,
-        "points": [
-          [
-            740.0,
-            292.0
-          ],
-          [
-            766.6666666666666,
-            292.0
-          ],
-          [
-            766.6666666666666,
-            222.0
-          ],
-          [
-            1573.3333333333333,
-            222.0
-          ],
-          [
-            1573.3333333333333,
-            292.0
-          ],
-          [
-            1600.0,
-            292.0
           ]
         ]
       },
@@ -314,10 +348,10 @@
       },
       "router-to-live": {
         "label_at": [
-          1293.3333333333335,
+          1300.0,
           502.0
         ],
-        "label_fraction": 0.490990990990991,
+        "label_fraction": 0.5,
         "points": [
           [
             1000.0,
@@ -332,11 +366,11 @@
             502.0
           ],
           [
-            1546.6666666666667,
+            1560.0,
             502.0
           ],
           [
-            1546.6666666666667,
+            1560.0,
             572.0
           ],
           [
@@ -366,6 +400,12 @@
     "grid_bottom": 950.0,
     "height": 1030.0,
     "nodes": {
+      "agents": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 1340.0,
+        "y": 254.0
+      },
       "api": {
         "h": 76.0,
         "w": 180.0,
@@ -611,11 +651,29 @@
         "target": "fabric-live"
       },
       {
-        "id": "api-to-foundry",
+        "id": "api-to-agents",
         "kind": "reasoning",
-        "label": "Agents (Phase 6)",
-        "planned": true,
+        "label": "Ask, evaluate, workflow",
+        "planned": false,
         "source": "api",
+        "step": null,
+        "target": "agents"
+      },
+      {
+        "id": "agents-to-data",
+        "kind": "data",
+        "label": "LOCAL agent queries",
+        "planned": false,
+        "source": "agents",
+        "step": null,
+        "target": "synthetic-data"
+      },
+      {
+        "id": "agents-to-foundry",
+        "kind": "reasoning",
+        "label": "Responses API (opt-in)",
+        "planned": false,
+        "source": "agents",
         "step": null,
         "target": "foundry"
       },
@@ -948,20 +1006,38 @@
         "width": 1.0
       },
       {
+        "col": 5.0,
+        "component": null,
+        "icon": null,
+        "id": "agents",
+        "kind": "service",
+        "label": "Agent service",
+        "phase": null,
+        "repo_path": "src/fabric_foundry_accelerator/agents",
+        "row": 1.0,
+        "runtime": "agents",
+        "sources": [],
+        "state": "implemented",
+        "step": null,
+        "sublabel": "Router, LOCAL agent, eval, workflow",
+        "summary": "Asks the sales agent through the provider router: the deterministic LOCAL agent offline, the live Foundry agent when opted in. Also runs the agent evaluation suite and the Agent Framework monthly-insights workflow (drafts only; nothing is sent).",
+        "width": 1.0
+      },
+      {
         "col": 6.0,
         "component": "foundry-agent",
         "icon": "ai_machine_learning/Foundry_Agent_Service",
         "id": "foundry",
         "kind": "foundry",
         "label": "Foundry Agent Service",
-        "phase": 6,
-        "repo_path": null,
+        "phase": null,
+        "repo_path": "src/fabric_foundry_accelerator/agents/foundry.py",
         "row": 1.0,
         "runtime": "foundry",
         "sources": [],
-        "state": "planned",
+        "state": "tenant-validation",
         "step": null,
-        "sublabel": "Agents and evaluation",
+        "sublabel": "Agents (live, opt-in)",
         "summary": "",
         "width": 1.0
       },
@@ -1147,7 +1223,7 @@
         "cols": 1.0,
         "id": "cloud",
         "kind": "tenant",
-        "label": "Microsoft cloud (later phases)",
+        "label": "Microsoft cloud (opt-in)",
         "row": 0.0,
         "rows": 6.0,
         "step": null

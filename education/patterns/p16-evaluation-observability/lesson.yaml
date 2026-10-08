@@ -12,7 +12,7 @@ learning_objectives:
   - Explain how correlation IDs, audit records and execution labels form an evidence trail.
   - Run the baseline evaluation and read its gate result through REST and MCP.
   - Configure an evaluation gate with overlay evaluation_thresholds.
-  - Identify what tracing adds in Phase 6 and what remains a production gap.
+  - Identify what agent evaluation and tracing add today and what remains a production gap.
 prerequisites: [p10-medallion-ai]
 concepts:
   - term: Deterministic evaluation
@@ -38,6 +38,11 @@ evidence:
   - statement: Agent Framework emits OpenTelemetry traces, and Foundry tracing builds on Application Insights.
     category: DOCUMENTED BEHAVIOR
     sources: [agent-framework, foundry-overview]
+  - statement: Agent evaluation runs five synthetic cases that each check grounding and the expected baseline values with a minimum pass rate of 1.0; the local agent passes all five in CI, labeled LOCAL.
+    category: SIMULATED LOCALLY
+  - statement: Each routed agent ask emits an OpenTelemetry span with the label, provider, fallback, tools and grounding but never the question text; export to Application Insights is opt-in and has not been validated.
+    category: REQUIRES TENANT VALIDATION
+    sources: [azure-monitor-opentelemetry]
   - statement: Values copied from a live DAX query and submitted for evaluation are labeled caller-supplied with REQUIRES TENANT VALIDATION evidence, because the accelerator did not retrieve them.
     category: REQUIRES TENANT VALIDATION
   - statement: Preview agent evaluators should inform, not solely gate, a production release until they are GA and calibrated on your own data.
@@ -51,6 +56,9 @@ try_it:
     result_label: LOCAL
   - label: Read the audit trail for a correlation ID
     command: curl -s localhost:8000/api/v1/audit/<correlation_id>
+    result_label: LOCAL
+  - label: Evaluate the local agent for grounding and baseline values
+    command: ffia agents eval
     result_label: LOCAL
   - label: Run the ten-act release gate (act 10 shows evaluation and audit evidence)
     command: ffia demo offline
@@ -71,6 +79,6 @@ production_notes:
   - Propagate one correlation ID across API, agent, MCP and provider calls and into traces so a single answer can be reconstructed.
   - Send audit records to an append-only store outside the application and never log tokens or secrets.
   - Treat execution labels as evidence; reject any result whose label disagrees with what actually ran.
-sources: [foundry-evaluators, agent-framework, foundry-overview]
+sources: [foundry-evaluators, agent-framework, foundry-overview, azure-monitor-opentelemetry]
 related_labs: [lab-resilience-break-it]
 related_guides: [hc-01-fabric-mcp-powerbi-medallion-lab]

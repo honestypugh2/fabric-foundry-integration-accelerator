@@ -82,6 +82,12 @@ def _fabric_local(container: Container, status: RuntimeStatus) -> Overlay:
     return "ACTIVE", "LOCAL", f"{role} provider; profiles: {', '.join(status.built_profiles)}."
 
 
+def _agents(container: Container, __: RuntimeStatus) -> Overlay:
+    live = container.agents.live
+    route = "LOCAL agent answers offline" if live is None else f"routes to {live.name}"
+    return "ACTIVE", "LOCAL", f"{container.environment.name} policy; {route}."
+
+
 def _foundry(container: Container, __: RuntimeStatus) -> Overlay:
     live = container.agents.live
     if live is None:
@@ -123,6 +129,7 @@ def _evaluation(_: Container, __: RuntimeStatus) -> Overlay:
 
 
 _BINDINGS: dict[RuntimeBinding, Callable[[Container, RuntimeStatus], Overlay]] = {
+    "agents": _agents,
     "api": _api,
     "mcp": _mcp,
     "fabric-local": _fabric_local,

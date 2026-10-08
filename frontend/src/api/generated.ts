@@ -306,7 +306,7 @@ export interface DiagramNode {
   readonly summary?: string;
   readonly repo_path?: string | null;
   readonly phase?: number | null;
-  readonly runtime?: "api" | "mcp" | "fabric-local" | "fabric-live" | "foundry" | "changes" | "audit" | "education" | "evaluation" | "router" | null;
+  readonly runtime?: "agents" | "api" | "mcp" | "fabric-local" | "fabric-live" | "foundry" | "changes" | "audit" | "education" | "evaluation" | "router" | null;
   readonly icon?: string | null;
   readonly sources?: readonly string[];
 }
@@ -677,7 +677,7 @@ export interface MonthlyInsightsRun {
 /** The live state of one diagram node. */
 export interface NodeRuntime {
   readonly node: string;
-  readonly binding: "api" | "mcp" | "fabric-local" | "fabric-live" | "foundry" | "changes" | "audit" | "education" | "evaluation" | "router";
+  readonly binding: "agents" | "api" | "mcp" | "fabric-local" | "fabric-live" | "foundry" | "changes" | "audit" | "education" | "evaluation" | "router";
   readonly status: "ACTIVE" | "READY" | "DEGRADED" | "UNAVAILABLE" | "NOT CONFIGURED";
   readonly label: string;
   readonly detail: string;

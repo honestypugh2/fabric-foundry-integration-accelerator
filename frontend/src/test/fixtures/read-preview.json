@@ -1,6 +1,6 @@
 {
   "cloud_operation_performed": false,
-  "correlation_id": "97dad311086f41f1a00128ddcbebb12d",
+  "correlation_id": "fdcc0067acd94fdaa0f85a33a31992bd",
   "data": {
     "columns": [
       {
@@ -138,5 +138,5 @@
   "selected_provider": "Local Fabric Educational Provider",
   "simulation_notice": "LOCAL educational analog over synthetic Parquet data. No Microsoft Fabric, OneLake or Power BI operation was performed.",
   "teaching_objective": "Inspect governed data safely: bounded, read-only, catalogued tables only.",
-  "timestamp": "2026-10-08T17:31:01.964350Z"
+  "timestamp": "2026-10-08T18:12:26.283373Z"
 }

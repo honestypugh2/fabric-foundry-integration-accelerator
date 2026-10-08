@@ -506,6 +506,7 @@ const nodeState = z.enum([
   "optional",
 ]);
 const runtimeBinding = z.enum([
+  "agents",
   "api",
   "mcp",
   "fabric-local",

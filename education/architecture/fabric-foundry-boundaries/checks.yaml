@@ -39,13 +39,13 @@ checks:
     explanation: Business systems remain the authority for transactional writes. Analytics provides context; it does not become the record.
   - id: l300-foundry-act
     level: l300
-    question: In `ffia demo offline`, what label does the Foundry act report today, and why?
+    question: In `ffia demo offline`, what label does the agent act report, and why?
     choices:
       - SIMULATED, because the demo fakes a Foundry agent locally
       - LIVE, because the demo calls Foundry when credentials exist
-      - UNAVAILABLE, because Foundry providers arrive in Phase 6 and nothing is simulated as Foundry
+      - LOCAL, because a deterministic local agent answers from synthetic governed data and is never presented as Foundry
     answer: 2
-    explanation: The accelerator never pretends a capability exists. Missing providers are reported as UNAVAILABLE.
+    explanation: The offline demo never calls a cloud service. Act 6 runs a deterministic local agent through a governed data tool and labels it LOCAL; the live Foundry agent is opt-in and labeled LIVE or PREVIEW only when it actually ran.
   - id: l400-confused-deputy
     level: l400
     question: An agent's managed identity has Contributor on the workspace and answers questions for many users. What is the main risk?

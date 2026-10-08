@@ -470,7 +470,8 @@ def test_doc_block_reports_repository_status(make_container: Callable[..., Conta
     registry = load_registry(REPO_ROOT / "docs" / "research" / "sources.yaml")
     block = render_block(library.view("system"), library, registry)
     assert "| FastAPI control plane | Implemented in this repository |" in block
-    assert "| Foundry Agent Service | Planned (Phase 6) |" in block
+    assert "| Foundry Agent Service | Requires tenant validation |" in block
+    assert "| Agent service | Implemented in this repository |" in block
 
 
 # ------------------------------------------------------------------ runtime overlay, guides, API
@@ -486,6 +487,8 @@ def test_runtime_overlay_never_claims_unconfigured_services(
         and overlay["fabric-live"].status == "NOT CONFIGURED"
     )
     assert overlay["local-provider"].status == "ACTIVE" and overlay["api"].status == "ACTIVE"
+    assert overlay["agents"].status == "ACTIVE"
+    assert "LOCAL agent answers offline" in overlay["agents"].detail
     outage = make_container(environment="hybrid", simulate_fabric_outage=True)
     degraded = {
         n.node: n

@@ -31,5 +31,6 @@ The pattern is therefore **MIXED**: a production design can be built on GA parts
 preview tools added behind a feature flag when they reach GA.
 
 > In this accelerator the offline demo runs the context, access, approval and evidence parts
-> **SIMULATED LOCALLY**. The Foundry agent itself arrives in Phase 6; until then the demo reports
-> it as **UNAVAILABLE** rather than pretending.
+> **SIMULATED LOCALLY**. The agent step is answered by a deterministic local agent over synthetic
+> sales data, labeled **LOCAL** - a teaching analog, not a language model and never presented as
+> Foundry. A live Foundry agent is opt-in; the routed live path still **REQUIRES TENANT VALIDATION**.

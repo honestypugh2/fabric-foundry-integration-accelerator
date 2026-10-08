@@ -51,6 +51,7 @@ EdgeKind = Literal[
 ZoneKind = Literal["local", "tenant", "fabric", "foundry", "github", "optional", "offline"]
 BandKind = Literal["identity", "policy", "evidence", "failure", "network"]
 RuntimeBinding = Literal[
+    "agents",
     "api",
     "mcp",
     "fabric-local",

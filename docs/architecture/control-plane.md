@@ -8,8 +8,9 @@ Status: **SIMULATED LOCALLY** by default. An opt-in live Fabric provider and a g
 exist (`FFIA_FABRIC_LIVE=1` plus a git-ignored bindings file; see
 [ADR-0012](../decisions/ADR-0012-live-fabric-integration.md)). Live reads of workspaces and items
 through the router are **VERIFIED LIVE** in a demo tenant (HYBRID mode, no fallback). DAX
-reconciliation, throttling and the scoped writer remain **REQUIRES TENANT VALIDATION**. Foundry
-arrives in Phase 6.
+reconciliation, throttling and the scoped writer remain **REQUIRES TENANT VALIDATION**. Foundry agents sit behind the same router (capability
+`foundry_agent`): a deterministic LOCAL agent offline, the live Foundry agent only when opted in
+(`FFIA_FOUNDRY_LIVE=1`; see [ADR-0013](../decisions/ADR-0013-foundry-agents-evaluation-tracing.md)).
 
 ## Components
 

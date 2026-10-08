@@ -33,9 +33,10 @@ flowchart LR
     audit["Audit log<br/><small>data/runtime/audit.jsonl</small>"]
     local_provider["Local Fabric provider<br/><small>DuckDB over Parquet</small>"]
     synthetic_data["Synthetic medallion data<br/><small>data/synthetic</small>"]
+    agents["Agent service<br/><small>Router, LOCAL agent, eval, workflow</small>"]
   end
-  subgraph cloud["Microsoft cloud (later phases)"]
-    foundry["Foundry Agent Service · planned<br/><small>Agents and evaluation</small>"]
+  subgraph cloud["Microsoft cloud (opt-in)"]
+    foundry["Foundry Agent Service · tenant<br/><small>Agents (live, opt-in)</small>"]
     fabric_live["Fabric REST and MCP · tenant<br/><small>Live, read-only first</small>"]
   end
   web_app -->|/api requests| vite_proxy
@@ -50,15 +51,16 @@ flowchart LR
   router -.->|LOCAL read or fallback| local_provider
   local_provider -->|Query Parquet| synthetic_data
   router -->|LIVE read (opt-in)| fabric_live
-  api -.->|Agents (Phase 6)| foundry
+  api -->|Ask, evaluate, workflow| agents
+  agents -->|LOCAL agent queries| synthetic_data
+  agents -->|Responses API (opt-in)| foundry
   coding_agent -->|Loads| mcp_config
   mcp_config -->|Starts over stdio| ffia_local
   mcp_config -->|Docs over HTTPS| learn_mcp
   ffia_local -->|Read tools| router
   class learn_mcp documented
-  class web_app,coding_agent,vite_proxy,mcp_config,api,ffia_local,changes,education,evaluation,router,policies,content,audit,local_provider,synthetic_data implemented
-  class foundry planned
-  class fabric_live tenant_validation
+  class web_app,coding_agent,vite_proxy,mcp_config,api,ffia_local,changes,education,evaluation,router,policies,content,audit,local_provider,synthetic_data,agents implemented
+  class foundry,fabric_live tenant_validation
   classDef implemented stroke-width:2px
   classDef planned stroke-dasharray: 6 4
   classDef preview stroke-dasharray: 2 3
@@ -122,7 +124,8 @@ Solid boxes are implemented here or documented by Microsoft; dashed boxes are pl
 | Audit log | Implemented in this repository | Records share a correlation ID across plan, approval, execution and tool calls. | `src/fabric_foundry_accelerator/audit/store.py` |
 | Local Fabric provider | Implemented in this repository | Read-only, allow-listed operations over synthetic Parquet; never presented as Fabric. | `src/fabric_foundry_accelerator/providers/fabric/local.py` |
 | Synthetic medallion data | Implemented in this repository | Generated synthetic CSVs, built Bronze, Silver and Gold Parquet, semantic model contracts and expected baselines. No real data. | `data/synthetic` |
-| Foundry Agent Service | Planned (Phase 6) | Owns reasoning and orchestration; consumes Fabric context; never performs authoritative writes directly. | - |
+| Agent service | Implemented in this repository | Asks the sales agent through the provider router: the deterministic LOCAL agent offline, the live Foundry agent when opted in. Also runs the agent evaluation suite and the Agent Framework monthly-insights workflow (drafts only; nothing is sent). | `src/fabric_foundry_accelerator/agents` |
+| Foundry Agent Service | Requires tenant validation | Owns reasoning and orchestration; consumes Fabric context; never performs authoritative writes directly. | `src/fabric_foundry_accelerator/agents/foundry.py` |
 | Fabric REST and MCP | Requires tenant validation | Pick the narrowest server; they run with the caller's Fabric permissions; status differs by server. | `src/fabric_foundry_accelerator/providers/fabric/live.py` |
 
 ### Aligned to

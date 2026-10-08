@@ -108,7 +108,9 @@ describe("architecture studio", () => {
     expect(within(inspector).getByText("src/fabric_foundry_accelerator/api")).toBeInTheDocument();
     await userEvent.click(screen.getByRole("checkbox", { name: "Live runtime state" }));
     expect(
-      within(canvas()).getByRole("button", { name: /^Foundry Agent Service\. Planned · Phase 6$/ }),
+      within(canvas()).getByRole("button", {
+        name: /^Foundry Agent Service\. Requires tenant validation$/,
+      }),
     ).toBeInTheDocument();
     await userEvent.click(screen.getByRole("checkbox", { name: "Status labels" }));
   });

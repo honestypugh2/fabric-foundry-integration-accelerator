@@ -42,10 +42,10 @@ checks:
     question: What does act 6 of `ffia demo offline` report today?
     choices:
       - SIMULATED, with a mocked Foundry answer
-      - UNAVAILABLE, because the Foundry provider arrives in Phase 6
+      - LOCAL, from a deterministic local agent that answers through a governed data tool
       - LIVE, using the presenter's Foundry project
     answer: 1
-    explanation: The repository never simulates Foundry as if it ran; the act is optional, reports UNAVAILABLE and does not block the release gate.
+    explanation: Act 6 is required and runs a deterministic local agent over synthetic data; it is labeled LOCAL, records the tool call and grounding, and is never presented as Foundry.
   - id: l400-fallback
     level: l400
     question: A live Fabric read fails three times and the breaker opens. What may the agent show?
