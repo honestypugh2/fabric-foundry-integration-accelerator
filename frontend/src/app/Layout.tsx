@@ -20,22 +20,36 @@ export function Layout() {
         Skip to main content
       </a>
       <header className="app-header">
-        <div className="app-header__title">
-          <p className="app-header__eyebrow">Reference architecture · Pattern catalog · Workshop</p>
-          <p className="app-header__name">Fabric Foundry Integration Accelerator</p>
+        <div className="app-header__inner">
+          <div className="app-header__top">
+            <NavLink
+              to="/"
+              end
+              className="brand"
+              aria-label="Fabric Foundry Integration Accelerator, home"
+            >
+              <span className="brand__mark" aria-hidden="true">
+                FF
+              </span>
+              <span className="brand__text">
+                <span className="brand__name">Fabric Foundry Integration Accelerator</span>
+                <span className="brand__tagline">Reference architecture · Patterns · Workshop</span>
+              </span>
+            </NavLink>
+            <LevelSwitcher />
+          </div>
+          <nav aria-label="Primary" className="app-nav">
+            <ul>
+              {NAV.map((item) => (
+                <li key={item.to}>
+                  <NavLink to={item.to} end={item.to === "/"}>
+                    {item.label}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
-        <LevelSwitcher />
-        <nav aria-label="Primary">
-          <ul>
-            {NAV.map((item) => (
-              <li key={item.to}>
-                <NavLink to={item.to} end={item.to === "/"}>
-                  {item.label}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        </nav>
       </header>
       <main id="main" tabIndex={-1}>
         <Outlet />
