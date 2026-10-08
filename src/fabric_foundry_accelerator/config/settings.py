@@ -7,7 +7,7 @@ files themselves hold only aliases.
 
 from pathlib import Path
 
-from pydantic import Field, field_validator
+from pydantic import Field, SecretStr, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -34,6 +34,8 @@ class Settings(BaseSettings):
     allow_live_mutation: bool = False
     fabric_live: bool = False
     foundry_live: bool = False
+    # Opt-in Application Insights export; keep it in the git-ignored .env.local, never in the repo.
+    applicationinsights_connection_string: SecretStr | None = None
     definitions_root: Path = Path("fabric/workspace")
     demos_root: Path = Path("demos")
     simulate_fabric_outage: bool = False

@@ -23,6 +23,7 @@ from fabric_foundry_accelerator.education.lessons import (
 from fabric_foundry_accelerator.models.changes import ChangeRequest, ProposedChange
 from fabric_foundry_accelerator.models.semantic import SemanticModel
 from fabric_foundry_accelerator.observability.logging import configure_logging
+from fabric_foundry_accelerator.observability.tracing import configure_tracing
 from fabric_foundry_accelerator.patterns.catalog import PatternCatalog
 from fabric_foundry_accelerator.policies.engine import ToolManifest, WritePolicy
 from fabric_foundry_accelerator.services.container import build_container
@@ -104,6 +105,7 @@ def _cmd_serve_api(args: argparse.Namespace) -> int:
 
     settings = Settings()
     configure_logging(level=settings.log_level, json=settings.log_json)
+    sys.stderr.write(configure_tracing(settings.applicationinsights_connection_string) + "\n")
     uvicorn.run(
         create_app(build_container(settings)), host=args.host, port=args.port, log_level="info"
     )

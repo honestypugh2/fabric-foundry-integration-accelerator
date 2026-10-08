@@ -7,11 +7,14 @@ import sys
 from fabric_foundry_accelerator.agents.port import AgentQuestion
 from fabric_foundry_accelerator.config.settings import Settings
 from fabric_foundry_accelerator.evaluation.agent_eval import load_suite, run_suite
+from fabric_foundry_accelerator.observability.tracing import configure_tracing
 from fabric_foundry_accelerator.services.container import build_container
 
 
 def _cmd_ask(args: argparse.Namespace) -> int:
-    container = build_container(Settings())
+    settings = Settings()
+    configure_tracing(settings.applicationinsights_connection_string)
+    container = build_container(settings)
     question = AgentQuestion(agent=args.agent, question=" ".join(args.question))
     envelope = asyncio.run(container.agents.ask(question))
     if args.json:
@@ -35,6 +38,7 @@ def _cmd_ask(args: argparse.Namespace) -> int:
 
 def _cmd_eval(args: argparse.Namespace) -> int:
     settings = Settings()
+    configure_tracing(settings.applicationinsights_connection_string)
     container = build_container(settings)
     suite = load_suite(settings.config_root, args.suite)
     report = asyncio.run(run_suite(container.agents, suite))
