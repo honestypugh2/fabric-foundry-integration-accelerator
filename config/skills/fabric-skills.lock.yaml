@@ -1,0 +1,29 @@
+# Pinned, curated third-party agent skills. `ffia skills install` downloads exactly this archive,
+# verifies its SHA-256, and extracts only the listed skills and support folders into git-ignored
+# paths under .claude/ (the project skill folder VS Code Copilot and Claude Code both read).
+#
+# Hardening (why this is not the upstream install):
+# - pinned release tag and archive hash, never `main` or @latest;
+# - a curated subset for the HC-01 medallion lab, not all 25 skills;
+# - the bundle's .mcp.json is never installed: it grants `tools: ["*"]` and runs
+#   @microsoft/powerbi-modeling-mcp@latest. Use `ffia mcp render <profile>` instead;
+# - skills drive `az rest` calls (including POST and DELETE) outside MCP, so .vscode/settings.json
+#   and .claude/settings.json require approval for every `az rest` command.
+source: microsoft/skills-for-fabric
+license: MIT
+tag: v0.3.18
+published: "2026-09-25"
+archive_url: https://codeload.github.com/microsoft/skills-for-fabric/tar.gz/refs/tags/v0.3.18
+archive_prefix: skills-for-fabric-0.3.18
+sha256: 3f3b8aeb86a966bdea9a9f5671a607c6c13d84bb0b123151d0229ae8fb0f4bd9
+install_root: .claude
+skills:
+  - name: e2e-medallion-architecture
+    why: Plans Bronze/Silver/Gold layers, Spark tuning and the Direct Lake handoff (HC-01 steps 07-10).
+  - name: spark-cli
+    why: Notebook cell code, notebook runs and failed-run triage on Fabric Spark (HC-01 steps 08-10).
+  - name: semantic-model-authoring
+    why: Semantic model tables, relationships, measures and DAX (HC-01 steps 11-13).
+  - name: powerbi-report-cli
+    why: Report planning, PBIR/PBIP edits and publishing (HC-01 step 14).
+support_dirs: [common]

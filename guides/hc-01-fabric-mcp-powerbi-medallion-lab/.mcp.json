@@ -1,0 +1,28 @@
+{
+  "mcpServers": {
+    "fabric-mcp": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@microsoft/fabric-mcp@1.4.0",
+        "server",
+        "start",
+        "--tool",
+        "docs_item-definitions",
+        "--tool",
+        "core_search-catalog",
+        "--tool",
+        "onelake_list-items",
+        "--tool",
+        "onelake_list-files",
+        "--tool",
+        "core_create-item",
+        "--tool",
+        "onelake_create-directory",
+        "--tool",
+        "onelake_upload-file"
+      ]
+    }
+  }
+}

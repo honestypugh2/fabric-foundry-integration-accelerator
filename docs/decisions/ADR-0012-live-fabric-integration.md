@@ -17,8 +17,8 @@ the authority rules. Four facts shaped it:
 
   Live code therefore had to be built and proven offline, with tenant runs left as
   REQUIRES TENANT VALIDATION.
-- **Fabric MCP 1.4.0 is no longer docs-only.** Its own `tools list` shows 48 tools: 19 can write
-  and 6 are destructive. `datafactory_execute-query` is flagged read-only but runs arbitrary M
+- **Fabric MCP 1.4.0 is no longer docs-only.** Its own `tools list` shows 48 tools: 22 can write
+  and 5 are destructive. `datafactory_execute-query` is flagged read-only but runs arbitrary M
   queries, and `onelake_download-file` copies data out of OneLake.
 - **Fabric REST has no row preview or model-definition read.** The Lakehouse List Tables API is
   preview.

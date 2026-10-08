@@ -25,7 +25,7 @@ describe("guide runner", () => {
     expect(
       await screen.findByRole("heading", { level: 2, name: `Step 2: ${step?.title ?? ""}` }),
     ).toBeInTheDocument();
-    expect(screen.getByText("onelake_list-workspaces")).toBeInTheDocument();
+    expect(screen.getAllByText(/core_search-catalog/).length).toBeGreaterThan(0);
     expect(screen.getByText(/^Use exactly this tool\./)).toBeInTheDocument();
     expect(screen.getByText(step?.copilot_prompt ?? "")).toBeInTheDocument();
     expect(screen.getByText(step?.claude_code_prompt ?? "")).toBeInTheDocument();

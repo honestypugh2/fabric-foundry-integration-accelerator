@@ -28,3 +28,16 @@ cd ~/hc-01-lab/data/raw && sha256sum -c SHA256SUMS
 | Step lookup | `GET /api/v1/guides/hc-01-fabric-mcp-powerbi-medallion-lab/steps/{step_id}` or the `get_guide_step` tool on `ffia-local` | Read-only. LOCAL label. |
 | Governed write rehearsal | `POST /api/v1/plans` → `/approvals` → `/fabric/change` with `destination: LOCAL` | SIMULATED. Rehearses the lakehouse, notebook, upload, model and report writes without a tenant. |
 | Baseline check | `POST /api/v1/evaluations/run` or the `evaluate_against_baseline` tool | Compares the measures with `data/synthetic/expected/hc-lab-7file-v1.json` |
+
+## Available now (Phase 5)
+
+| Asset | Where | Notes |
+|---|---|---|
+| Guide-scoped agent files | `AGENTS.md`, `CLAUDE.md`, `.mcp.json` in this folder | `.mcp.json` is the rendered `hc01-lab` profile: only the Fabric MCP tools steps 02–05 name, writes approved per call |
+| VS Code MCP config | `ffia mcp render hc01-lab --client vscode --output <LAB_PATH>/.vscode/mcp.json` | Checked against the pinned Fabric MCP 1.4.0 tool catalog |
+| Fabric and Power BI skills | `ffia skills install` | `skills-for-fabric` v0.3.18, SHA-256 verified, 4 curated skills; `az rest` needs approval |
+| Reference notebooks | `fabric/workspace/MCP_01_Bronze.Notebook` … `MCP_03_Gold.Notebook` | Fabric Git format; 85/85 checks pass on local Spark 3.5.9 (LOCAL). Running in Fabric requires tenant validation |
+| Tenant readiness | `ffia fabric readiness` | Read-only; see `docs/operations/fabric-tenant-readiness.md` |
+
+Step 02 uses `core_search-catalog` and `onelake_list-items`: in a demo tenant with Fabric MCP 1.4.0,
+`onelake_list-workspaces` returned an empty list while workspace-scoped calls worked.

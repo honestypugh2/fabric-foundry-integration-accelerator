@@ -27,6 +27,9 @@ BASE: dict[str, Any] = yaml.safe_load(
 
 def test_committed_profiles_and_project_file_are_valid() -> None:
     assert check_profiles(CONFIG_ROOT, REPO_ROOT) == []
+    lab = load_profiles(CONFIG_ROOT).profiles["hc01-lab"]
+    assert lab.approval == "per-call" and not lab.default
+    assert [e.tool for e in lab.servers["fabric-mcp"].allow_destructive] == ["onelake_upload-file"]
     profiles = load_profiles(CONFIG_ROOT)
     assert profiles.default_profile() == "offline"
     assert not profiles.profiles["offline"].writes
@@ -71,6 +74,13 @@ def _write(
     if project is None:
         project = render(load_profiles(CONFIG_ROOT), "offline", "claude")
     (tmp_path / ".mcp.json").write_text(json.dumps(project), encoding="utf-8")
+    committed = load_profiles(CONFIG_ROOT)
+    for target in committed.rendered_files:
+        path = tmp_path / target.path
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(
+            json.dumps(render(committed, target.profile, target.client)), encoding="utf-8"
+        )
     return config, tmp_path
 
 
@@ -119,6 +129,22 @@ def _readonly_tools(*tools: str) -> Mutation:
             "destructive tool",
         ),
         (_set("profiles.fabric-authoring-gated.approval", "none"), "per-call approval"),
+        (
+            _set(
+                "profiles.fabric-authoring-gated.servers.fabric-mcp.allow_destructive",
+                [{"tool": "onelake_delete-file", "reason": "a long enough reason for the test"}],
+            ),
+            "not allow-listed",
+        ),
+        (_set("profiles.hc01-lab.approval", "none"), "destructive exceptions need"),
+        (
+            _set("profiles.hc01-lab.servers.fabric-mcp.allow_destructive", []),
+            "destructive tool 'onelake_upload-file'",
+        ),
+        (
+            _set("rendered_files", [{"path": "x.json", "profile": "nope", "client": "claude"}]),
+            "unknown profile",
+        ),
         (_set("profiles.fabric-readonly.servers.fabric-mcp.read_only", None), "declare read_only"),
         (_set("profiles.fabric-docs.servers.nope", {}), "unknown server"),
         (_set("profiles.offline.servers.ffia-local", {"tools": ["x"]}), "no pinned catalog"),
@@ -147,6 +173,17 @@ def test_stale_project_file_is_reported(tmp_path: Path) -> None:
     errors = check_profiles(*_write(tmp_path, copy.deepcopy(BASE), project={"mcpServers": {}}))
     assert errors == [
         ".mcp.json is stale; run `ffia mcp render offline --client claude --output .mcp.json`"
+    ]
+
+
+def test_stale_guide_file_is_reported(tmp_path: Path) -> None:
+    config, root = _write(tmp_path, copy.deepcopy(BASE))
+    guide = root / "guides" / "hc-01-fabric-mcp-powerbi-medallion-lab" / ".mcp.json"
+    guide.write_text("{}", encoding="utf-8")
+    assert check_profiles(config, root) == [
+        "guides/hc-01-fabric-mcp-powerbi-medallion-lab/.mcp.json is stale; run "
+        "`ffia mcp render hc01-lab --client claude --output "
+        "guides/hc-01-fabric-mcp-powerbi-medallion-lab/.mcp.json`"
     ]
 
 

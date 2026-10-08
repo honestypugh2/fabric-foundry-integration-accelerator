@@ -127,3 +127,35 @@ profiles:
     servers:
       powerbi-modeling-mcp:
         read_only: false
+
+  hc01-lab:
+    title: HC-01 lab — Fabric MCP for the live medallion lab (approval-gated)
+    purpose: >-
+      The exact Fabric MCP tools HC-01 steps 02-05 name: find the workspace, list items and files,
+      create the lakehouse and Files/raw, upload the seven synthetic CSVs. Use only against a
+      dedicated dev workspace. Every write needs a person to approve the call.
+    execution_label: LIVE
+    approval: per-call
+    requires: [dedicated dev workspace, explicit human approval for each write call, the guide's duplicate and empty-folder checks]
+    servers:
+      fabric-mcp:
+        read_only: false
+        tools:
+          - docs_item-definitions
+          - core_search-catalog
+          - onelake_list-items
+          - onelake_list-files
+          - core_create-item
+          - onelake_create-directory
+          - onelake_upload-file
+        allow_destructive:
+          - tool: onelake_upload-file
+            reason: >-
+              Marked destructive because it can overwrite a file. HC-01 step 05 lists Files/raw first,
+              stops if it is not empty, and uploads with overwrite set to false.
+
+# Committed client configurations that must equal a rendered profile (checked by `ffia mcp check`).
+rendered_files:
+  - path: guides/hc-01-fabric-mcp-powerbi-medallion-lab/.mcp.json
+    profile: hc01-lab
+    client: claude

@@ -1,6 +1,6 @@
 {
   "cloud_operation_performed": false,
-  "correlation_id": "3095f0f267cf4601bbed8e11aacde11e",
+  "correlation_id": "46cc18b463ba47ff9010556a4db5cb93",
   "data": {
     "compared": 23,
     "comparisons": [
@@ -166,7 +166,7 @@
         "passed": true
       }
     ],
-    "evaluation_id": "e7d7d7da5ad74837a2887e2160af8905",
+    "evaluation_id": "9c809294dee24f8089838401ccd77777",
     "gate_passed": true,
     "missing_measures": [],
     "observed_label": "LOCAL",
@@ -193,5 +193,5 @@
   "selected_provider": "Baseline Evaluator",
   "simulation_notice": "Evaluation computed locally from committed expected results.",
   "teaching_objective": "Prove numbers, not appearance: compare every measure with the expected baseline.",
-  "timestamp": "2026-10-08T00:28:04.488576Z"
+  "timestamp": "2026-10-08T02:30:55.305198Z"
 }

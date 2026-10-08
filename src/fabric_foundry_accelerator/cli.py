@@ -31,6 +31,7 @@ from fabric_foundry_accelerator.research.sources import (
 )
 from fabric_foundry_accelerator.services import commands as runtime_commands
 from fabric_foundry_accelerator.services import fabric_commands
+from fabric_foundry_accelerator.skills import commands as skills_commands
 from fabric_foundry_accelerator.synthetic import commands as data_commands
 from fabric_foundry_accelerator.synthetic import notebook_commands
 
@@ -125,6 +126,7 @@ def build_parser() -> argparse.ArgumentParser:
     fabric_commands.register(sub)
     profile_commands.register(sub)
     notebook_commands.register(sub)
+    skills_commands.register(sub)
     return parser
 
 

@@ -47,6 +47,15 @@ class ServerSpec(BaseModel):
     catalog: str | None = None
 
 
+class DestructiveException(BaseModel):
+    """A destructive tool a profile exposes on purpose, with the reason and the guard."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    tool: str
+    reason: str = Field(min_length=20)
+
+
 class ProfileServer(BaseModel):
     """How a profile uses one server."""
 
@@ -54,6 +63,7 @@ class ProfileServer(BaseModel):
 
     read_only: bool | None = None
     tools: tuple[str, ...] = ()
+    allow_destructive: tuple[DestructiveException, ...] = ()
 
 
 class Profile(BaseModel):
@@ -84,6 +94,16 @@ class Exclusion(BaseModel):
     reason: str
 
 
+class RenderedFile(BaseModel):
+    """A committed client configuration that must equal a rendered profile (besides .mcp.json)."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    path: str
+    profile: str
+    client: McpClient
+
+
 class McpProfiles(BaseModel):
     """``config/mcp/profiles.yaml``."""
 
@@ -93,6 +113,7 @@ class McpProfiles(BaseModel):
     servers: dict[str, ServerSpec]
     never_read_only: tuple[Exclusion, ...] = ()
     profiles: dict[str, Profile]
+    rendered_files: tuple[RenderedFile, ...] = ()
 
     def default_profile(self) -> str:
         """Return the name of the default profile."""
@@ -205,6 +226,25 @@ def _check_server(name: str, spec: ServerSpec) -> list[str]:
     return errors
 
 
+def _check_tools(
+    where: str,
+    usage: ProfileServer,
+    catalog: ToolCatalog,
+    excluded: set[str],
+    allowed_destructive: set[str],
+) -> list[str]:
+    errors: list[str] = []
+    for tool in usage.tools:
+        entry = catalog.get(tool)
+        if entry is None:
+            errors.append(f"{where}: {tool!r} is not in {catalog.package}@{catalog.version}")
+        elif usage.read_only and (not entry.read_only or tool in excluded):
+            errors.append(f"{where}: {tool!r} is not allowed in a read-only profile")
+        elif entry.destructive and tool not in allowed_destructive:
+            errors.append(f"{where}: destructive tool {tool!r} is never exposed")
+    return errors
+
+
 def _check_usage(
     profiles: McpProfiles,
     profile_name: str,
@@ -221,20 +261,22 @@ def _check_usage(
     excluded = {e.name for e in profiles.never_read_only}
     if spec.package and usage.read_only is None:
         errors.append(f"{where}: declare read_only true or false for external servers")
+    allowed_destructive = {e.tool for e in usage.allow_destructive}
+    if allowed_destructive - set(usage.tools):
+        errors.append(f"{where}: allow_destructive names tools that are not allow-listed")
+    if allowed_destructive and (
+        usage.read_only or profile.approval != "per-call" or profile.default
+    ):
+        errors.append(
+            f"{where}: destructive exceptions need an opt-in, write-capable profile with per-call approval"
+        )
     if usage.tools:
         catalog = catalogs.get(server_name)
         if catalog is None:
             return [*errors, f"{where}: tools are listed but the server has no pinned catalog"]
         if len(set(usage.tools)) != len(usage.tools):
             errors.append(f"{where}: duplicate tools")
-        for tool in usage.tools:
-            entry = catalog.get(tool)
-            if entry is None:
-                errors.append(f"{where}: {tool!r} is not in {spec.package}@{spec.version}")
-            elif usage.read_only and (not entry.read_only or tool in excluded):
-                errors.append(f"{where}: {tool!r} is not allowed in a read-only profile")
-            elif entry.destructive:
-                errors.append(f"{where}: destructive tool {tool!r} is never exposed")
+        errors += _check_tools(where, usage, catalog, excluded, allowed_destructive)
     elif server_name in catalogs:
         errors.append(f"{where}: list the allowed tools explicitly")
     if usage.read_only is False and (profile.approval != "per-call" or profile.default):
@@ -267,11 +309,19 @@ def check_profiles(config_root: Path, repo_root: Path) -> list[str]:
     for profile_name, profile in profiles.profiles.items():
         for server_name, usage in profile.servers.items():
             errors += _check_usage(profiles, profile_name, profile, server_name, usage, catalogs)
-    project = repo_root / PROJECT_MCP_FILE
-    expected = render(profiles, default, "claude")
-    if not project.is_file() or json.loads(project.read_text(encoding="utf-8")) != expected:
-        errors.append(
-            f"{PROJECT_MCP_FILE} is stale; run "
-            f"`ffia mcp render {default} --client claude --output {PROJECT_MCP_FILE}`"
-        )
+    targets = [
+        RenderedFile(path=PROJECT_MCP_FILE, profile=default, client="claude"),
+        *profiles.rendered_files,
+    ]
+    for target in targets:
+        if target.profile not in profiles.profiles:
+            errors.append(f"{target.path}: unknown profile {target.profile!r}")
+            continue
+        path = repo_root / target.path
+        expected = render(profiles, target.profile, target.client)
+        if not path.is_file() or json.loads(path.read_text(encoding="utf-8")) != expected:
+            errors.append(
+                f"{target.path} is stale; run "
+                f"`ffia mcp render {target.profile} --client {target.client} --output {target.path}`"
+            )
     return errors

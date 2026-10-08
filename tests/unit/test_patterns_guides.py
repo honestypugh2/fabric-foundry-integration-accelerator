@@ -69,7 +69,11 @@ def test_hc01_guide_loads_with_safe_step_rules(catalog: PatternCatalog) -> None:
     assert all(
         s.copilot_prompt and s.claude_code_prompt and s.offline_equivalent for s in guide.steps
     )
-    assert guide.step("02-verify-tenant-anchor").tool_path.tools == ("onelake_list-workspaces",)
+    # onelake_list-workspaces returned an empty list in a demo tenant; catalog search is reliable.
+    assert guide.step("02-verify-tenant-anchor").tool_path.tools == (
+        "core_search-catalog",
+        "onelake_list-items",
+    )
     assert not guide.step("02-verify-tenant-anchor").tool_path.substitution_allowed
     with pytest.raises(KeyError):
         guide.step("99-missing")
@@ -136,3 +140,16 @@ def test_guide_model_rules() -> None:
         UseCaseGuide.model_validate({**template, "dataset_profile": "nope"})
     with pytest.raises(ValidationError, match="duplicate step ids"):
         UseCaseGuide.model_validate({**template, "steps": [step, step]})
+
+
+def test_hc01_fabric_mcp_tools_are_allow_listed_in_its_profile(catalog: PatternCatalog) -> None:
+    from fabric_foundry_accelerator.mcp.profiles import load_profiles  # noqa: PLC0415
+
+    guide = load_guides(REPO_ROOT / "guides", catalog)[HC_01]
+    allowed = set(
+        load_profiles(REPO_ROOT / "config").profiles["hc01-lab"].servers["fabric-mcp"].tools
+    )
+    named = {
+        t for s in guide.steps if s.tool_path.server == "fabric-mcp" for t in s.tool_path.tools
+    }
+    assert named and named <= allowed, named - allowed

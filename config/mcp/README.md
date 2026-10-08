@@ -18,7 +18,7 @@ ffia mcp check                                          # runs in make validate 
 ```
 
 - [`catalog/fabric-mcp-1.4.0.yaml`](catalog/fabric-mcp-1.4.0.yaml) lists every tool of the pinned
-  server (48 tools; 19 write, 6 destructive), captured with the server's own `tools list`.
+  server (48 tools; 22 write, 5 destructive), captured with the server's own `tools list`.
   Re-capture it whenever the pin changes.
 - Read-only profiles never include `datafactory_execute-query` (arbitrary M queries) or
   `onelake_download-file` (copies data out), even though the server marks them read-only.

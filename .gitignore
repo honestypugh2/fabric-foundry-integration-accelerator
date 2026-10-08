@@ -199,3 +199,10 @@ Thumbs.db
 # Local app runtime (pids/logs) from scripts/app.sh
 .run/
 
+# Vendored third-party agent skills: installed by `ffia skills install` from a pinned, hashed
+# release (config/skills/fabric-skills.lock.yaml). Never committed.
+.claude/skills/e2e-medallion-architecture/
+.claude/skills/spark-cli/
+.claude/skills/semantic-model-authoring/
+.claude/skills/powerbi-report-cli/
+.claude/common/

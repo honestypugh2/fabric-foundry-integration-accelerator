@@ -16,7 +16,7 @@ endef
 
 .PHONY: help setup setup-backend setup-frontend format lint typecheck test test-cov \
 	security sbom privacy-scan sources schemas diagrams education-check fixtures build validate clean data data-check recovery-demo \
-	run-api run-mcp run-frontend run demo-check demo demo-live demo-hybrid demo-offline
+	run-api run-mcp run-frontend run demo-check demo-prep demo demo-live demo-hybrid demo-offline
 
 help: ## Show available targets
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  %-16s %s\n", $$1, $$2}'
@@ -96,7 +96,7 @@ build: ## Build Python distribution and frontend bundle
 	cd $(FRONTEND) && npm run build
 
 validate: lint typecheck test-cov data-check privacy-scan build security ## Full local validation (CI equivalent)
-	$(ACTIVATE) && ffia sources check && ffia schemas check && ffia education check && ffia diagrams check && ffia mcp check && ffia notebooks check && ffia demo offline >/dev/null && echo "offline demo: PASSED"
+	$(ACTIVATE) && ffia sources check && ffia schemas check && ffia education check && ffia diagrams check && ffia mcp check && ffia notebooks check && ffia skills check && ffia demo offline >/dev/null && echo "offline demo: PASSED"
 	@echo "validate: all checks passed"
 
 clean: ## Remove build, cache and coverage artifacts (keeps .venv and node_modules)
@@ -132,6 +132,10 @@ demo-live: ## Run the demo against configured live services (read-only by defaul
 
 demo-hybrid: ## Run the demo with available live services and local fallbacks
 	$(call pending,6)
+
+demo-prep: ## Before presenting: clear the dev-server cache and run every offline demo check
+	rm -rf $(FRONTEND)/node_modules/.vite
+	$(ACTIVATE) && ffia demo check --no-azure-cli && ffia mcp check && ffia notebooks check && ffia skills check && ffia demo offline >/dev/null && echo "demo-prep: ready (offline path verified)"
 
 demo-offline: ## Run the ten-act demo with no cloud access (release gate)
 	$(ACTIVATE) && ffia demo offline

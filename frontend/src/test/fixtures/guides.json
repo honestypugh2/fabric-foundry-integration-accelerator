@@ -24,7 +24,8 @@
       "For steps assigned to Fabric MCP, call that server's tool directly. Do not substitute REST, Azure CLI or a skill that calls APIs. If the tool is unavailable, report the limitation and stop.",
       "Check for an existing item before creating one, and before retrying any write.",
       "Never print tokens or enable token-bearing debug output.",
-      "Use exact workspace, lakehouse and model IDs (kept in local notes only) for every write."
+      "Use exact workspace, lakehouse and model IDs (kept in local notes only) for every write.",
+      "Use the guide's Fabric MCP profile hc01-lab (this folder's .mcp.json; for VS Code run ffia mcp render hc01-lab --client vscode --output <LAB_PATH>/.vscode/mcp.json). It exposes only the tools steps 02-05 name, and every write needs approval."
     ],
     "os_constraints": [
       "Power BI Desktop preview and publish steps need Windows. Other steps run on Windows, macOS or Linux."
@@ -85,18 +86,20 @@
       },
       {
         "approval_required": false,
-        "checkpoint": "The known workspace ID appears in the actual MCP response.",
-        "claude_code_prompt": "Using the fabric MCP server from .mcp.json, call onelake_list-workspaces and confirm workspace ID <KNOWN_WORKSPACE_ID> is present with its exact name. Show the raw tool call and result. Stop if it is missing. No REST or CLI fallback.",
-        "copilot_prompt": "Call the Fabric MCP onelake_list-workspaces tool directly. Look for workspace ID <KNOWN_WORKSPACE_ID> and report its exact returned name, following continuation pages if any. Show the invocation and result. If the ID is missing or the tool cannot be called, stop. Do not create anything and do not fall back to REST or the CLI.",
+        "checkpoint": "The known workspace ID appears in the actual MCP response and a workspace-scoped call succeeds.",
+        "claude_code_prompt": "Using the fabric-mcp server from this guide's .mcp.json, call core_search-catalog for <WORKSPACE_NAME>, then onelake_list-items with the returned workspace ID. Show the raw tool calls and results. Stop if the workspace is missing. No REST or CLI fallback.",
+        "copilot_prompt": "Call the Fabric MCP core_search-catalog tool directly with search text <WORKSPACE_NAME> and report the returned workspace ID and exact name. Then call onelake_list-items with that workspace ID and confirm the call succeeds. Show both invocations and results. If the workspace is not found or a tool cannot be called, stop. Do not create anything and do not fall back to REST or the CLI.",
         "diagram_focus": [
           "copilot",
           "fabric-mcp"
         ],
         "evidence_required": [
-          "The real tool invocation and its response containing the known workspace ID."
+          "The real core_search-catalog invocation and its response containing the known workspace ID.",
+          "A successful onelake_list-items call for that workspace ID."
         ],
         "failure_modes": [
-          "The MCP server picks a different credential than the Azure CLI (see troubleshooting)."
+          "The MCP server picks a different credential than the Azure CLI (see troubleshooting).",
+          "onelake_list-workspaces can return an empty list (observed with Fabric MCP 1.4.0 in a demo tenant) even though workspace-scoped calls work. Do not treat an empty list as a wrong tenant; use core_search-catalog."
         ],
         "id": "02-verify-tenant-anchor",
         "not_evidence": [
@@ -113,7 +116,8 @@
           "server": "fabric-mcp",
           "substitution_allowed": false,
           "tools": [
-            "onelake_list-workspaces"
+            "core_search-catalog",
+            "onelake_list-items"
           ]
         },
         "writes": false
@@ -121,14 +125,14 @@
       {
         "approval_required": true,
         "checkpoint": "The empty workspace exists on the intended capacity and appears in the MCP listing.",
-        "claude_code_prompt": "Repeat the onelake_list-workspaces check for the new workspace ID <WORKSPACE_ID>. Read-only.",
-        "copilot_prompt": "I created a new blank workspace in the portal. Repeat the step 02 read-only check with the new workspace ID <WORKSPACE_ID> and confirm it appears. Do not create anything.",
+        "claude_code_prompt": "Repeat the step 02 check (core_search-catalog, then onelake_list-items) for <WORKSPACE_ID>. Read-only.",
+        "copilot_prompt": "I created a new blank workspace in the portal. Repeat the step 02 read-only check (core_search-catalog, then onelake_list-items) for the new workspace <WORKSPACE_ID> and confirm it appears and is empty. Do not create anything.",
         "diagram_focus": [
           "workspace",
           "approval"
         ],
         "evidence_required": [
-          "Workspace ID copied from the portal and confirmed by onelake_list-workspaces."
+          "Workspace ID copied from the portal and confirmed by core_search-catalog and onelake_list-items."
         ],
         "failure_modes": [
           "Workspace assigned to the wrong capacity."
@@ -194,8 +198,8 @@
       {
         "approval_required": true,
         "checkpoint": "Files/raw contains exactly the seven CSVs and every remote size matches its local file.",
-        "claude_code_prompt": "Upload the seven CSVs to Files/raw in lakehouse <LAKEHOUSE_ID> with onelake_upload-file, then list them with onelake_list-files and compare sizes. Stop on any failure. No tables.",
-        "copilot_prompt": "First check the seven CSVs under <PROJECT_PATH>/data/raw. Using Fabric MCP, create Files/raw in lakehouse <LAKEHOUSE_ID> and upload each CSV with onelake_upload-file using its local-file-path parameter. List Files/raw with onelake_list-files and compare every remote byte size with the local file. If a call fails or the tool has no local-file-path parameter, stop. Do not create tables.",
+        "claude_code_prompt": "List Files/raw in <LAKEHOUSE_ID> and stop if it is not empty; then upload the seven CSVs with onelake_upload-file (overwrite false), list them with onelake_list-files and compare sizes. Stop on any failure. No tables.",
+        "copilot_prompt": "First check the seven CSVs under <PROJECT_PATH>/data/raw. Using Fabric MCP, list Files/raw in lakehouse <LAKEHOUSE_ID> with onelake_list-files; if it already contains any file, stop and report it. Otherwise create Files/raw with onelake_create-directory and upload each CSV with onelake_upload-file using its local-file-path parameter and overwrite set to false. List Files/raw again and compare every remote byte size with the local file. If a call fails or the tool has no local-file-path parameter, stop. Do not create tables.",
         "diagram_focus": [
           "lab-data",
           "lakehouse",
@@ -225,8 +229,9 @@
           "server": "fabric-mcp",
           "substitution_allowed": false,
           "tools": [
-            "onelake_upload-file",
-            "onelake_list-files"
+            "onelake_list-files",
+            "onelake_create-directory",
+            "onelake_upload-file"
           ]
         },
         "writes": true
@@ -700,9 +705,9 @@
         "version": "1.0.0"
       },
       {
-        "install": "Add microsoft/skills-for-fabric to chat.plugins.marketplaces, then enable the powerbi-authoring plugin",
-        "name": "Power BI authoring skills",
-        "purpose": "semantic-model-authoring and report planning/design/authoring/management workflows",
+        "install": "From the accelerator repository: ffia skills install (pinned, SHA-256 verified, curated; the bundle's wildcard MCP config is not installed)",
+        "name": "Fabric and Power BI authoring skills",
+        "purpose": "e2e-medallion-architecture, spark-cli, semantic-model-authoring and powerbi-report-cli workflows",
         "required": true,
         "status": "OSS",
         "version": "v0.3.18"
