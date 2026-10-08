@@ -122,7 +122,10 @@ available.
   [`config/mcp/profiles.yaml`](config/mcp/profiles.yaml). It starts the **real Fabric MCP server**
   (`@microsoft/fabric-mcp` 1.4.0, read-only, metadata only; LIVE once you `az login` to your demo
   tenant), Microsoft Learn, and the local educational server **`ffia-local` as the labeled
-  fallback** when Fabric MCP is unavailable. Fabric Skills install with `ffia skills install`. Opt-in Fabric MCP and Power BI Modeling
+  fallback** when Fabric MCP is unavailable. Fabric Skills install with `ffia skills install`.
+- [`config/harness/policy.yaml`](config/harness/policy.yaml) is one permission policy rendered
+  for Claude Code (`.claude/settings.json`, with an enforced `ffia harness guard` hook), Copilot CLI
+  (`--allow-tool`/`--deny-tool`) and VS Code (`chat.tools.terminal.autoApprove`). Opt-in Fabric MCP and Power BI Modeling
   MCP profiles are rendered per client with `ffia mcp render <profile> --client vscode|claude|copilot-cli`.
 
 ## Operating modes

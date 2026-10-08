@@ -28,6 +28,6 @@
   "chat.tools.terminal.autoApprove": {
     "/^az\\s+rest\\b/": false,
     "/^az\\s+fabric\\b/": false,
-    "/^fab\\s/": false
+    "/^fab\\b/": false
   }
 }

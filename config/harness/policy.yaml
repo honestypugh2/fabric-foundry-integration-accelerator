@@ -1,0 +1,49 @@
+# Harness permission policy: one source for GitHub Copilot (CLI and VS Code) and Claude Code.
+#
+# `ffia harness render <profile> --client claude|copilot-cli|vscode` produces each client's
+# settings; `ffia harness check` keeps the committed files equal to the render (make validate).
+# Shell rules are command prefixes (words). Deny always wins over allow and ask in every client.
+# Claude Code additionally runs `ffia harness guard` as a PreToolUse hook: an enforced block for
+# patterns a prefix rule cannot express (Azure writes, token printing, force-push, rm -rf on /).
+schema_version: 1
+profiles:
+  repo:
+    description: >-
+      Everyday work in this repository. Skills may call Fabric with `az rest`, but a person approves
+      every such command. Destructive Fabric MCP tools and secret files are denied. File edits are
+      not pre-approved here; only the sandboxed bake-off profile pre-approves them.
+    write: false
+    shell:
+      allow: []
+      ask: ["az rest", "az fabric", "fab"]
+      deny: []
+    read_deny: [".env", ".env.*", "**/*.local.yaml", "**/*.local.json"]
+    mcp:
+      allow: [ffia-local, microsoft-learn]
+      deny:
+        - fabric-mcp:onelake_delete-file
+        - fabric-mcp:onelake_delete-directory
+        - fabric-mcp:onelake_delete-shortcut
+        - fabric-mcp:onelake_delete-data-access-role
+        - fabric-mcp:onelake_modify-immutability-policy
+    guard: true
+  bakeoff:
+    description: >-
+      Every bake-off run, so every model gets identical permissions. File edits, read-only shell,
+      the repository CLI and Python are allowed; cloud CLIs, network tools, package installs, pushes
+      and deletes are denied.
+    write: true
+    shell:
+      allow: [ffia, uv run, python, pytest, ls, cat, grep, rg, sed, head, tail, find, wc, diff, git diff, git status, git log]
+      ask: []
+      deny: [az, azd, fab, curl, wget, git push, gh, npm, npx, pip, uv add, uv pip, sudo, rm, ssh, scp]
+    read_deny: [".env", ".env.*", "**/*.local.yaml", "**/*.local.json"]
+    mcp:
+      allow: [ffia-local]
+      deny:
+        - fabric-mcp:core_create-item
+        - fabric-mcp:onelake_create-directory
+        - fabric-mcp:onelake_upload-file
+        - fabric-mcp:onelake_delete-file
+        - fabric-mcp:onelake_delete-directory
+    guard: true

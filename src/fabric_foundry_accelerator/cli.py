@@ -14,6 +14,7 @@ from fabric_foundry_accelerator.agents import commands as agent_commands
 from fabric_foundry_accelerator.bakeoff import commands as bakeoff_commands
 from fabric_foundry_accelerator.education import commands as education_commands
 from fabric_foundry_accelerator.education import diagram_docs, talktrack_commands
+from fabric_foundry_accelerator.harness import commands as harness_commands
 from fabric_foundry_accelerator.knowledge import commands as knowledge_commands
 from fabric_foundry_accelerator.mcp import profile_commands
 from fabric_foundry_accelerator.observability.logging import configure_logging
@@ -136,6 +137,7 @@ def build_parser() -> argparse.ArgumentParser:
     agent_commands.register(sub)
     knowledge_commands.register(sub)
     bakeoff_commands.register(sub)
+    harness_commands.register(sub)
     return parser
 
 

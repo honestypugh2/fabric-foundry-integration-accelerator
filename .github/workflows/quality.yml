@@ -64,6 +64,8 @@ jobs:
         run: ffia talktracks check
       - name: Bake-off tasks and recorded replays are valid
         run: ffia bakeoff check
+      - name: Harness permissions match the policy (Claude Code, VS Code)
+        run: ffia harness check
       - name: Offline demo release gate
         run: ffia demo check --no-azure-cli && ffia demo offline
       - name: Build distribution
