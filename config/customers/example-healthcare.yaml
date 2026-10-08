@@ -30,6 +30,7 @@ preview_feature_flags:
   foundry_fabric_data_agent_tool: false
   data_warehouse_mcp: false
   powerbi_hosted_authoring_mcp: false
+  foundry_iq_knowledge: false
 learning_modules: [architecture, medallion, fabric-mcp, copilot, claude-code, recovery, evaluation]
 demo_sequence: [why, data, mcp, patterns, agentic-change, foundry, failure, recovery, education, proof]
 synthetic_dataset: core-healthcare-v1

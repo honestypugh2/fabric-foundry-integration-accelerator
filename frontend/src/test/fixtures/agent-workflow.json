@@ -4,7 +4,7 @@
   "drafts": [
     {
       "answer": "**Enclosures**, September 2026: booked revenue $88,207.09 (+55.8% vs last month, +58.5% vs last year), 143.1% of target, gross margin 31.6%. Top growing product: P-ENC-012. Synthetic demonstration data.",
-      "correlation_id": "447d00b819cf4e4ebc3fd140a64ab406",
+      "correlation_id": "28ca34cac16e42ecbde04f2d7799522f",
       "expected": [
         "88207.09",
         "143.1"
@@ -22,7 +22,7 @@
     },
     {
       "answer": "**Hardware & Fabrication**, September 2026: booked revenue $288,994.48 (+3.5% vs last month, +72.7% vs last year), 106.6% of target, gross margin 20.9%. Top growing product: P-FAB-009. Synthetic demonstration data.",
-      "correlation_id": "8fc45f6a644c417ba4dc3abe758a30a1",
+      "correlation_id": "b03234479dbf4e56b8357a831c13067b",
       "expected": [
         "288994.48",
         "106.6"
@@ -40,7 +40,7 @@
     },
     {
       "answer": "**Key Accounts**, September 2026: booked revenue $76,765.17 (+39.7% vs last month, +206.8% vs last year), 117.6% of target, gross margin 18.8%. Top growing product: P-FAB-004. Synthetic demonstration data.",
-      "correlation_id": "fc2da382924043f6950cea52ee5a8dd0",
+      "correlation_id": "4a4746597a294368a7e15b32792153b6",
       "expected": [
         "76765.17",
         "117.6"
@@ -58,7 +58,7 @@
     },
     {
       "answer": "**Structural & Metals**, September 2026: booked revenue $132,524.66 (+24.1% vs last month, +21.9% vs last year), 108.6% of target, gross margin 27.9%. Top growing product: P-STR-004. Synthetic demonstration data.",
-      "correlation_id": "797261acdb914eef929b0940d5aca5bf",
+      "correlation_id": "962ace8f8a244d00ac30993046e95ce9",
       "expected": [
         "132524.66",
         "108.6"
@@ -82,7 +82,7 @@
   ],
   "observation_month": "2026-09-01",
   "ready": 4,
-  "run_id": "04525df7a3b84b4782b07446146fc742",
+  "run_id": "a80dec5dc05f4eaaaf4885b54dce9ec9",
   "steps": [
     "select: choose the business teams for this run",
     "draft: one executor per team asks the agent for its brief (fan-out, concurrent)",

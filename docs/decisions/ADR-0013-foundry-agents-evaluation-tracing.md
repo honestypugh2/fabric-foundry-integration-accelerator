@@ -65,11 +65,16 @@ Option 3.
 
   **Delivery is not performed.** Sending briefs is a governed write (PLAN → APPROVE → EXECUTE →
   AUDIT).
-- **Surfaces.** CLI: `ffia agents ask|eval|workflow`. API:
+- **Knowledge (preview).** Foundry IQ is partly preview, so it sits behind the overlay flag
+  `foundry_iq_knowledge` (off). `FFIA_PREVIEW_FEATURES` turns flags on for one process only.
+  Flag off: `UNAVAILABLE`. Flag on: a local keyword retriever over synthetic policy documents
+  returns cited sections, labeled `SIMULATED`. No live Foundry IQ adapter is built.
+- **Surfaces.** CLI: `ffia agents ask|eval|workflow`, `ffia knowledge search`. API:
   - `GET /api/v1/agents/{agent}`;
   - `POST /api/v1/agents/ask`;
   - `POST /api/v1/agents/evaluate`;
-  - `POST /api/v1/agents/workflows/monthly-insights`.
+  - `POST /api/v1/agents/workflows/monthly-insights`;
+  - `POST /api/v1/knowledge/search`.
 
   The `/agent` page shows the label, provider, fallback, grounding and tool calls for every
   answer.
@@ -97,7 +102,8 @@ Option 3.
     ffia agents ask …`);
   - `ffia agents eval` against the live agent;
   - the workflow over the live agent;
-  - Application Insights export.
+  - Application Insights export;
+  - a live Foundry IQ knowledge base over OneLake (not built).
 
   Each needs the Fabric capacity running, which has a cost.
 
@@ -148,5 +154,5 @@ boundary now describe the implemented agent, evaluation, tracing and workflow, w
 ## Authoritative references
 
 `foundry-agent-service`, `foundry-fabric-tool`, `foundry-evaluators`, `agent-framework`,
-`agent-framework-workflows`, `azure-monitor-opentelemetry`, `foundry-human-in-the-loop`
+`agent-framework-workflows`, `azure-monitor-opentelemetry`, `foundry-human-in-the-loop`, `foundry-iq`
 (see `docs/research/sources.yaml`).

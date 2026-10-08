@@ -45,6 +45,7 @@ types are generated from it (`ffia schemas export`). See [frontend.md](frontend.
 | Recovery | `POST /api/v1/recovery/drill` |
 | Evaluation | `POST /api/v1/evaluations/run` |
 | Agents | `GET /api/v1/agents/{agent}` (providers and evaluated questions), `POST /api/v1/agents/ask`, `POST /api/v1/agents/evaluate` (`?suite=`), `POST /api/v1/agents/workflows/monthly-insights` (Agent Framework workflow; drafts only, nothing is sent) |
+| Knowledge | `POST /api/v1/knowledge/search` (Foundry IQ analog: UNAVAILABLE unless the `foundry_iq_knowledge` preview flag is on, then SIMULATED with citations) |
 | Audit | `GET /api/v1/audit/{correlation_id}` |
 | Demo and data | `GET /api/v1/demo/status`, `POST /api/v1/demo/run`, `GET /api/v1/profiles` |
 | Education | `GET /api/v1/education/lessons` (`?area=`, `?pattern_id=`), `GET /api/v1/education/lessons/{id}` (answers withheld), `POST /api/v1/education/lessons/{id}/checks/{check_id}`, `GET /api/v1/education/labs`, `GET /api/v1/education/labs/{id}`, `GET /api/v1/education/architecture`, `GET /api/v1/education/completeness` |

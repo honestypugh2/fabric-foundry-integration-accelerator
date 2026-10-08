@@ -139,6 +139,50 @@ describe("agent page", () => {
     expect(await screen.findByText("bad team (HTTP 422)")).toBeInTheDocument();
   });
 
+  it("reports knowledge search as unavailable while the preview flag is off", async () => {
+    mockApi(defaultRoutes);
+    renderApp("/agent");
+    await userEvent.click(
+      await screen.findByRole("button", { name: "Are briefs sent automatically?" }),
+    );
+    const passages = await screen.findByRole("region", { name: "Passages" });
+    expect(within(passages).getByText("UNAVAILABLE")).toBeInTheDocument();
+    expect(
+      within(passages).getByText(/FFIA_PREVIEW_FEATURES=foundry_iq_knowledge/),
+    ).toBeInTheDocument();
+    expect(within(passages).queryByRole("listitem")).not.toBeInTheDocument();
+  });
+
+  it("shows cited passages from the simulated knowledge base", async () => {
+    const { calls } = mockApi({
+      ...defaultRoutes,
+      "POST /api/v1/knowledge/search": fixtures.knowledgeSimulated,
+    });
+    renderApp("/agent");
+    await userEvent.type(await screen.findByLabelText("Policy question"), "  fix data?  ");
+    await userEvent.click(screen.getByRole("button", { name: "Search knowledge" }));
+    const passages = await screen.findByRole("region", { name: "Passages" });
+    expect(calls.at(-1)?.body).toEqual({ question: "fix data?", top: 3 });
+    expect(within(passages).getByText("SIMULATED")).toBeInTheDocument();
+    expect(within(passages).getAllByRole("listitem")).toHaveLength(
+      fixtures.knowledgeSimulated.data.passages.length,
+    );
+    const first = fixtures.knowledgeSimulated.data.passages[0];
+    expect(within(passages).getByText(first?.citation.path ?? "")).toBeInTheDocument();
+  });
+
+  it("shows a knowledge search error", async () => {
+    mockApi({
+      ...defaultRoutes,
+      "POST /api/v1/knowledge/search": problem(503, "ProviderUnavailableError", "no documents"),
+    });
+    renderApp("/agent");
+    await userEvent.click(
+      await screen.findByRole("button", { name: "Can we scrape a competitor's website?" }),
+    );
+    expect(await screen.findByText("no documents (HTTP 503)")).toBeInTheDocument();
+  });
+
   it("shows ask and evaluation errors", async () => {
     mockApi({
       ...defaultRoutes,
@@ -167,6 +211,8 @@ describe("agent page", () => {
     await screen.findByRole("table", { name: /Agent evaluation cases/ });
     await userEvent.click(screen.getByRole("button", { name: "Run monthly insights workflow" }));
     await screen.findByText(/ready for approval, /);
+    await userEvent.click(screen.getByRole("button", { name: "Are briefs sent automatically?" }));
+    await screen.findByRole("region", { name: "Passages" });
     expect((await axe.run(container)).violations).toEqual([]);
   });
 });

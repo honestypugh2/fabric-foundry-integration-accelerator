@@ -5,6 +5,7 @@ import {
   useAgentEvaluation,
   useAgentProfile,
   useAskAgent,
+  useKnowledgeSearch,
   useMonthlyInsights,
 } from "../../api/hooks";
 import { usePageTitle } from "../../app/usePageTitle";
@@ -212,6 +213,95 @@ function MonthlyInsights() {
   );
 }
 
+const KNOWLEDGE_SUGGESTIONS = [
+  "Can agents fix data quality issues in the source?",
+  "Can we scrape a competitor's website?",
+  "Are briefs sent automatically?",
+];
+
+function Knowledge() {
+  const search = useKnowledgeSearch();
+  const [question, setQuestion] = useState("");
+  const questionId = useId();
+  const result = search.data;
+  return (
+    <section aria-labelledby="knowledge-heading">
+      <h2 id="knowledge-heading">
+        Knowledge with citations <Badge value="PREVIEW" kind="status" />
+      </h2>
+      <p>
+        Policy questions are answered from documents, with a citation for every passage: the Foundry
+        IQ pattern. Offline, a local retriever over synthetic policy documents simulates it, and
+        only when the preview flag is on. Numbers still come from the governed sales model.
+      </p>
+      <form
+        className="agent-form"
+        onSubmit={(event) => {
+          event.preventDefault();
+          if (question.trim().length > 0) {
+            search.mutate(question.trim());
+          }
+        }}
+      >
+        <label htmlFor={questionId}>Policy question</label>
+        <textarea
+          id={questionId}
+          rows={2}
+          maxLength={500}
+          value={question}
+          onChange={(event) => {
+            setQuestion(event.target.value);
+          }}
+        />
+        <button type="submit" disabled={search.isPending || question.trim().length < 3}>
+          Search knowledge
+        </button>
+      </form>
+      <ul className="suggestions" aria-label="Suggested policy questions">
+        {KNOWLEDGE_SUGGESTIONS.map((suggestion) => (
+          <li key={suggestion}>
+            <button
+              type="button"
+              disabled={search.isPending}
+              onClick={() => {
+                setQuestion(suggestion);
+                search.mutate(suggestion);
+              }}
+            >
+              {suggestion}
+            </button>
+          </li>
+        ))}
+      </ul>
+      {search.error ? (
+        <p className="notice notice--error" role="alert">
+          {describeError(search.error)}
+        </p>
+      ) : null}
+      {result ? (
+        <section aria-labelledby="passages-heading">
+          <h3 id="passages-heading">Passages</h3>
+          <Provenance envelope={result} />
+          {result.data.passages.length === 0 ? null : (
+            <ol>
+              {result.data.passages.map((passage) => (
+                <li key={`${passage.citation.document}#${passage.citation.section}`}>
+                  <blockquote>{passage.text}</blockquote>
+                  <p className="meta">
+                    Source: {passage.citation.title}, section &ldquo;{passage.citation.section}
+                    &rdquo; (<code>{passage.citation.path}</code>)
+                  </p>
+                </li>
+              ))}
+            </ol>
+          )}
+          <p className={result.data.enabled ? "meta" : "notice"}>{result.data.note}</p>
+        </section>
+      ) : null}
+    </section>
+  );
+}
+
 function EvaluateAgent({ profile }: { readonly profile: AgentProfile }) {
   const evaluation = useAgentEvaluation(profile.suite);
   const report = evaluation.data;
@@ -324,6 +414,7 @@ export function AgentPage() {
             </dl>
             <AskAgent profile={data} />
             <MonthlyInsights />
+            <Knowledge />
             <EvaluateAgent profile={data} />
           </>
         )}

@@ -1053,6 +1053,36 @@
         "title": "CheckResult",
         "type": "object"
       },
+      "Citation": {
+        "additionalProperties": false,
+        "description": "Where a passage came from.",
+        "properties": {
+          "document": {
+            "title": "Document",
+            "type": "string"
+          },
+          "path": {
+            "title": "Path",
+            "type": "string"
+          },
+          "section": {
+            "title": "Section",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "document",
+          "title",
+          "section",
+          "path"
+        ],
+        "title": "Citation",
+        "type": "object"
+      },
       "ColumnInfo": {
         "additionalProperties": false,
         "description": "A column name and type.",
@@ -2223,6 +2253,97 @@
         "title": "ExecutionEnvelope[AgentAnswer]",
         "type": "object"
       },
+      "ExecutionEnvelope_KnowledgeResult_": {
+        "additionalProperties": false,
+        "properties": {
+          "cloud_operation_performed": {
+            "title": "Cloud Operation Performed",
+            "type": "boolean"
+          },
+          "correlation_id": {
+            "pattern": "^[0-9a-f]{32}$",
+            "title": "Correlation Id",
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/KnowledgeResult"
+          },
+          "equivalent_fabric_service": {
+            "title": "Equivalent Fabric Service",
+            "type": "string"
+          },
+          "evidence": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/Evidence"
+            },
+            "title": "Evidence",
+            "type": "array"
+          },
+          "execution_label": {
+            "$ref": "#/components/schemas/ExecutionLabel"
+          },
+          "fallback_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fallback Reason"
+          },
+          "fallback_used": {
+            "default": false,
+            "title": "Fallback Used",
+            "type": "boolean"
+          },
+          "operating_mode": {
+            "$ref": "#/components/schemas/OperatingMode"
+          },
+          "requested_provider": {
+            "title": "Requested Provider",
+            "type": "string"
+          },
+          "selected_provider": {
+            "title": "Selected Provider",
+            "type": "string"
+          },
+          "simulation_notice": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Simulation Notice"
+          },
+          "teaching_objective": {
+            "title": "Teaching Objective",
+            "type": "string"
+          },
+          "timestamp": {
+            "format": "date-time",
+            "title": "Timestamp",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operating_mode",
+          "execution_label",
+          "requested_provider",
+          "selected_provider",
+          "cloud_operation_performed",
+          "equivalent_fabric_service",
+          "teaching_objective",
+          "data"
+        ],
+        "title": "ExecutionEnvelope[KnowledgeResult]",
+        "type": "object"
+      },
       "ExecutionEnvelope_object_": {
         "additionalProperties": false,
         "properties": {
@@ -2643,6 +2764,73 @@
           "description"
         ],
         "title": "ItemInfo",
+        "type": "object"
+      },
+      "KnowledgeQuery": {
+        "additionalProperties": false,
+        "description": "A question for the knowledge base.",
+        "properties": {
+          "question": {
+            "maxLength": 500,
+            "minLength": 3,
+            "title": "Question",
+            "type": "string"
+          },
+          "top": {
+            "default": 3,
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Top",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "question"
+        ],
+        "title": "KnowledgeQuery",
+        "type": "object"
+      },
+      "KnowledgeResult": {
+        "additionalProperties": false,
+        "description": "Passages for a question, or why retrieval is unavailable.",
+        "properties": {
+          "enabled": {
+            "title": "Enabled",
+            "type": "boolean"
+          },
+          "knowledge_base": {
+            "title": "Knowledge Base",
+            "type": "string"
+          },
+          "note": {
+            "title": "Note",
+            "type": "string"
+          },
+          "passages": {
+            "items": {
+              "$ref": "#/components/schemas/Passage"
+            },
+            "title": "Passages",
+            "type": "array"
+          },
+          "preview_flag": {
+            "title": "Preview Flag",
+            "type": "string"
+          },
+          "question": {
+            "title": "Question",
+            "type": "string"
+          }
+        },
+        "required": [
+          "knowledge_base",
+          "question",
+          "preview_flag",
+          "enabled",
+          "passages",
+          "note"
+        ],
+        "title": "KnowledgeResult",
         "type": "object"
       },
       "Lab": {
@@ -3519,6 +3707,30 @@
         ],
         "title": "OperatingMode",
         "type": "string"
+      },
+      "Passage": {
+        "additionalProperties": false,
+        "description": "One retrieved section and its score.",
+        "properties": {
+          "citation": {
+            "$ref": "#/components/schemas/Citation"
+          },
+          "score": {
+            "title": "Score",
+            "type": "number"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text",
+          "score",
+          "citation"
+        ],
+        "title": "Passage",
+        "type": "object"
       },
       "ProposedChange": {
         "additionalProperties": false,
@@ -6075,6 +6287,48 @@
         "summary": "Get Guide Step",
         "tags": [
           "guides"
+        ]
+      }
+    },
+    "/api/v1/knowledge/search": {
+      "post": {
+        "description": "Cited passages from the synthetic knowledge base (Foundry IQ analog, PREVIEW flag).",
+        "operationId": "search_knowledge_base_api_v1_knowledge_search_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KnowledgeQuery"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExecutionEnvelope_KnowledgeResult_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Search Knowledge Base",
+        "tags": [
+          "knowledge"
         ]
       }
     },

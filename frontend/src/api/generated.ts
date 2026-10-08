@@ -225,6 +225,14 @@ export interface CheckResult {
   readonly category?: EvidenceCategory;
 }
 
+/** Where a passage came from. */
+export interface Citation {
+  readonly document: string;
+  readonly title: string;
+  readonly section: string;
+  readonly path: string;
+}
+
 /** A column name and type. */
 export interface ColumnInfo {
   readonly name: string;
@@ -439,6 +447,24 @@ export interface ExecutionEnvelope_AgentAnswer_ {
   readonly evidence?: readonly Evidence[];
 }
 
+/** ExecutionEnvelope[KnowledgeResult] */
+export interface ExecutionEnvelope_KnowledgeResult_ {
+  readonly operating_mode: OperatingMode;
+  readonly execution_label: ExecutionLabel;
+  readonly requested_provider: string;
+  readonly selected_provider: string;
+  readonly cloud_operation_performed: boolean;
+  readonly equivalent_fabric_service: string;
+  readonly teaching_objective: string;
+  readonly data: KnowledgeResult;
+  readonly correlation_id?: string;
+  readonly timestamp?: string;
+  readonly fallback_used?: boolean;
+  readonly fallback_reason?: string | null;
+  readonly simulation_notice?: string | null;
+  readonly evidence?: readonly Evidence[];
+}
+
 /** ExecutionEnvelope[object] */
 export interface ExecutionEnvelope_object_ {
   readonly operating_mode: OperatingMode;
@@ -529,6 +555,22 @@ export interface ItemInfo {
   readonly type: "Lakehouse" | "SemanticModel";
   readonly workspace_id: string;
   readonly description: string;
+}
+
+/** A question for the knowledge base. */
+export interface KnowledgeQuery {
+  readonly question: string;
+  readonly top?: number;
+}
+
+/** Passages for a question, or why retrieval is unavailable. */
+export interface KnowledgeResult {
+  readonly knowledge_base: string;
+  readonly question: string;
+  readonly preview_flag: string;
+  readonly enabled: boolean;
+  readonly passages: readonly Passage[];
+  readonly note: string;
 }
 
 /** ``education/labs/<id>/lab.yaml``. */
@@ -695,6 +737,13 @@ export interface OfflineDemoReport {
 
 /** How the system as a whole is running. */
 export type OperatingMode = "LIVE" | "HYBRID" | "OFFLINE";
+
+/** One retrieved section and its score. */
+export interface Passage {
+  readonly text: string;
+  readonly score: number;
+  readonly citation: Citation;
+}
 
 /** A validated change plan. Nothing has executed. */
 export interface ProposedChange {

@@ -14,7 +14,7 @@ declares:
 | `fabric_workspace_aliases`, `foundry_project_aliases` | Aliases only. Map them to real IDs in a git-ignored `<alias>.local.yaml`. |
 | `allowed_reads`, `allowed_writes` | Restrict the global policy. They cannot widen it. |
 | `required_approvals` | Approvers and the reason for each write operation |
-| `feature_flags`, `preview_feature_flags` | Preview features default to `false` and are labeled `PREVIEW` |
+| `feature_flags`, `preview_feature_flags` | Preview features default to `false` and are labeled `PREVIEW`. `FFIA_PREVIEW_FEATURES=<flag>[,<flag>]` turns flags on for one process without changing the file; unknown names fail at startup. |
 | `synthetic_dataset`, `guides`, `learning_modules`, `demo_sequence` | What the demo and education surfaces show |
 | `evaluation_thresholds`, `recovery_objectives`, `retention_assumptions`, `compliance_notes` | Evidence gates and assumptions |
 

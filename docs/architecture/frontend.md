@@ -31,7 +31,7 @@ make run          # API on :8000 and the Vite dev server on :5173 (proxying /api
 | `/labs`, `/labs/:id` | Eleven-stage labs with commands and local progress |
 | `/guides`, `/guides/:id/:step` | **Guide runner** (HC-01): provider/server/tool, Copilot and Claude Code prompts, checkpoint, evidence checklist, "not evidence", offline equivalent, where the step happens on the HC-01 diagram, and rehearsal of the step's governed write |
 | `/data` | Lakehouse tables and previews through the router, and evaluation against the baseline |
-| `/agent` | **Sales insights agent** (Guide MFG-01): ask through the agent router, see the execution label, provider, fallback, grounding and tool calls, run the Agent Framework monthly-insights workflow (drafts per team, review gate, nothing sent), and run the evaluation suite. Suggested questions come from `config/evaluations/<suite>.yaml`. LOCAL offline; the live Foundry agent (PREVIEW tool) only with `FFIA_FOUNDRY_LIVE=1`. |
+| `/agent` | **Sales insights agent** (Guide MFG-01): ask through the agent router, see the execution label, provider, fallback, grounding and tool calls, run the Agent Framework monthly-insights workflow (drafts per team, review gate, nothing sent), search policy knowledge with citations (PREVIEW flag; SIMULATED offline), and run the evaluation suite. Suggested questions come from `config/evaluations/<suite>.yaml`. LOCAL offline; the live Foundry agent (PREVIEW tool) only with `FFIA_FOUNDRY_LIVE=1`. |
 | `/demo` | Readiness probes and the ten-act offline demo |
 
 ## Rules

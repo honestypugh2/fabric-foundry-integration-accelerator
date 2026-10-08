@@ -13,6 +13,7 @@ from fabric_foundry_accelerator import __version__
 from fabric_foundry_accelerator.agents import commands as agent_commands
 from fabric_foundry_accelerator.education import commands as education_commands
 from fabric_foundry_accelerator.education import diagram_docs, talktrack_commands
+from fabric_foundry_accelerator.knowledge import commands as knowledge_commands
 from fabric_foundry_accelerator.mcp import profile_commands
 from fabric_foundry_accelerator.observability.logging import configure_logging
 from fabric_foundry_accelerator.privacy.leak_scan import (
@@ -132,6 +133,7 @@ def build_parser() -> argparse.ArgumentParser:
     mfg_commands.register(sub)
     foundry_commands.register(sub)
     agent_commands.register(sub)
+    knowledge_commands.register(sub)
     return parser
 
 

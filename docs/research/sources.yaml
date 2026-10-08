@@ -396,15 +396,15 @@ sources:
     title: What is Foundry IQ?
     url: https://learn.microsoft.com/azure/foundry/agents/concepts/what-is-foundry-iq
     publisher: Microsoft Learn
-    retrieved_date: 2026-10-05
+    retrieved_date: 2026-10-08
     technology: Microsoft Foundry
     associated_patterns: [P04]
     status: PREVIEW
     key_architecture_statement: Knowledge bases built on Azure AI Search agentic retrieval over sources such as Blob, SharePoint, OneLake and web, with citations.
-    implementation_relevance: Unstructured knowledge retrieval (Pattern 4), contrasted with structured Fabric context.
+    implementation_relevance: Unstructured knowledge retrieval (Pattern 4), contrasted with structured Fabric context. Offline analog `ffia knowledge search` behind the preview flag foundry_iq_knowledge (SIMULATED, cited).
     security_implications: OneLake knowledge source indexes with the search service managed identity, not end-user passthrough.
     limitations: Mixed GA/preview by API version; portal experience preview.
-    fallback: Local retrieval over synthetic documents with citations.
+    fallback: Local keyword retrieval over synthetic policy documents with citations (data/synthetic/knowledge).
   - id: agent-framework
     title: Microsoft Agent Framework overview
     url: https://learn.microsoft.com/agent-framework/overview/

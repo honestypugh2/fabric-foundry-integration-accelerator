@@ -90,6 +90,20 @@ class CustomerOverlay(BaseModel):
         """Return the approval rule for an operation, if any."""
         return next((r for r in self.required_approvals if r.operation == operation), None)
 
+    def with_previews(self, names: tuple[str, ...]) -> CustomerOverlay:
+        """Return a copy with the named preview flags turned on.
+
+        Raises:
+            ValueError: a name is not a preview flag of this overlay.
+        """
+        unknown = sorted(set(names) - set(self.preview_feature_flags))
+        if unknown:
+            raise ValueError(
+                f"unknown preview feature(s) {unknown}; known: {sorted(self.preview_feature_flags)}"
+            )
+        flags = {**self.preview_feature_flags, **dict.fromkeys(names, True)}
+        return self.model_copy(update={"preview_feature_flags": flags})
+
     def enabled_previews(self) -> list[str]:
         """Return the names of enabled preview features."""
         return sorted(name for name, enabled in self.preview_feature_flags.items() if enabled)

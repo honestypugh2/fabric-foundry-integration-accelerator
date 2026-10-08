@@ -25,6 +25,12 @@ from fabric_foundry_accelerator.evaluation.agent_eval import (
     load_suite,
     run_suite,
 )
+from fabric_foundry_accelerator.knowledge.local import (
+    PREVIEW_FLAG,
+    KnowledgeQuery,
+    KnowledgeResult,
+    search_knowledge,
+)
 from fabric_foundry_accelerator.models.changes import (
     Approval,
     ApprovalRequest,
@@ -290,6 +296,23 @@ async def run_monthly_insights_workflow(
 ) -> MonthlyInsightsRun:
     """Draft each team's monthly brief through an Agent Framework workflow. Nothing is sent."""
     return await run_monthly_insights(container.agents, container.settings.data_root, body)
+
+
+# ------------------------------------------------------------------ knowledge, preview flag
+@router.post("/api/v1/knowledge/search", tags=["knowledge"])
+def search_knowledge_base(
+    body: Annotated[KnowledgeQuery, Body()],
+    container: ContainerDep,
+    correlation_id: CorrelationDep,
+) -> ExecutionEnvelope[KnowledgeResult]:
+    """Cited passages from the synthetic knowledge base (Foundry IQ analog, PREVIEW flag)."""
+    return search_knowledge(
+        body,
+        data_root=container.settings.data_root,
+        enabled=PREVIEW_FLAG in container.overlay.enabled_previews(),
+        mode=container.environment.mode,
+        correlation_id=correlation_id,
+    )
 
 
 @router.post("/api/v1/plans", tags=["changes"])

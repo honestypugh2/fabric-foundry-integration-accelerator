@@ -156,7 +156,9 @@ def build_container(
     """Build the container from settings and configuration files."""
     settings = settings or Settings()
     environment = load_environment(settings.config_root, settings.environment)
-    overlay = load_overlay(settings.config_root, settings.overlay)
+    overlay = load_overlay(settings.config_root, settings.overlay).with_previews(
+        settings.preview_features
+    )
     built = ensure_data_built(settings) if settings.auto_build_data else []
     if audit is None:
         audit = (

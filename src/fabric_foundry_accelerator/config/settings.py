@@ -6,9 +6,10 @@ files themselves hold only aliases.
 """
 
 from pathlib import Path
+from typing import Annotated
 
 from pydantic import Field, SecretStr, field_validator
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
 
 class Settings(BaseSettings):
@@ -36,12 +37,22 @@ class Settings(BaseSettings):
     foundry_live: bool = False
     # Opt-in Application Insights export; keep it in the git-ignored .env.local, never in the repo.
     applicationinsights_connection_string: SecretStr | None = None
+    # Comma-separated preview flags to turn on for this process only (the overlay stays committed
+    # with every preview off). Unknown names fail at startup.
+    preview_features: Annotated[tuple[str, ...], NoDecode] = ()
     definitions_root: Path = Path("fabric/workspace")
     demos_root: Path = Path("demos")
     simulate_fabric_outage: bool = False
     cors_origins: tuple[str, ...] = ("http://localhost:5173",)
     log_json: bool = False
     log_level: str = Field(default="INFO", pattern=r"^(DEBUG|INFO|WARNING|ERROR)$")
+
+    @field_validator("preview_features", mode="before")
+    @classmethod
+    def _split_flags(cls, value: object) -> object:
+        if isinstance(value, str):
+            return tuple(flag.strip() for flag in value.split(",") if flag.strip())
+        return value
 
     @field_validator("audit_path", "output_root", mode="before")
     @classmethod

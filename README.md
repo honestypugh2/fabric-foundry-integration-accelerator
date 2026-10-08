@@ -27,7 +27,7 @@ Customize it · Productionize it — in one project, with **synthetic data only*
 | 3 | Application control plane (FastAPI, FastMCP, providers, router, circuit breaker, approvals, audit) | ✅ Complete |
 | 4 | Interactive educational application (explorers, learning paths, labs, guides, demo mode) | ✅ Complete |
 | 5 | Fabric integration (live read-only provider, gated writer, MCP profiles, skills, reference notebooks) | ✅ Complete |
-| 6 | Foundry integration (agent port, LOCAL + Foundry agents, evaluation, tracing, Agent Framework workflow; Foundry IQ remaining) | 🚧 In progress |
+| 6 | Foundry integration (agent port, LOCAL + Foundry agents, evaluation, tracing, Agent Framework workflow, Foundry IQ knowledge analog behind a preview flag) | ✅ Complete offline; live router path REQUIRES TENANT VALIDATION |
 | 7 | GitHub Copilot + Claude Code (skills, prompt packs, bake-off) | Planned |
 | 8 | Security, CI/CD and production readiness | Planned |
 | 9 | Final validation | Planned |

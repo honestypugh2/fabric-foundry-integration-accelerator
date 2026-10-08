@@ -37,6 +37,9 @@ evidence:
   - statement: Ontology MCP is in preview and documents limitations such as service-principal authentication.
     category: PREVIEW LIMITATION
     sources: [fabric-iq-ontology]
+  - statement: Foundry IQ knowledge is behind the flag foundry_iq_knowledge. With the flag off, `ffia knowledge search` reports UNAVAILABLE; with FFIA_PREVIEW_FEATURES=foundry_iq_knowledge it runs a local, cited retrieval over synthetic documents labeled SIMULATED.
+    category: SIMULATED LOCALLY
+    sources: [foundry-iq]
   - statement: Preview behavior in a specific tenant (availability, region, limits) must be re-checked before each demo.
     category: REQUIRES TENANT VALIDATION
     sources: [fabric-mcp-servers-list]
@@ -47,7 +50,7 @@ try_it:
     command: ffia demo offline
     result_label: LOCAL
   - label: Read the preview flags in the example overlay
-    command: grep -A6 preview_feature_flags config/customers/example-healthcare.yaml
+    command: grep -A7 preview_feature_flags config/customers/example-healthcare.yaml
     result_label: LOCAL
   - label: Confirm the default MCP profile is LOCAL and read-only
     command: ffia mcp profiles && ffia mcp check
@@ -75,5 +78,6 @@ sources:
   - fabric-iq-ontology
   - fabric-iq-mcp
   - fabric-mcp-servers-list
+  - foundry-iq
 related_labs: [lab-mcp-allow-list]
 related_guides: [hc-01-fabric-mcp-powerbi-medallion-lab]

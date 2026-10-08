@@ -728,6 +728,28 @@ export const monthlyInsightsRunSchema = z.object({
 });
 export type MonthlyInsightsRun = z.output<typeof monthlyInsightsRunSchema>;
 
+// ------------------------------------------------------------------ knowledge (preview flag)
+export const knowledgeResultSchema = z.object({
+  knowledge_base: z.string(),
+  question: z.string(),
+  preview_flag: z.string(),
+  enabled: z.boolean(),
+  passages: z.array(
+    z.object({
+      text: z.string(),
+      score: z.number(),
+      citation: z.object({
+        document: z.string(),
+        title: z.string(),
+        section: z.string(),
+        path: z.string(),
+      }),
+    }),
+  ),
+  note: z.string(),
+});
+export type KnowledgeResult = z.output<typeof knowledgeResultSchema>;
+
 /** Compile-time drift detection between the backend contract and the UI's views. */
 export const contractChecks = {
   runtimeStatus: true satisfies Conforms<G.RuntimeStatus, RuntimeStatus>,
@@ -764,4 +786,5 @@ export const contractChecks = {
   agentAnswer: true satisfies Conforms<G.AgentAnswer, AgentAnswer>,
   agentEvalReport: true satisfies Conforms<G.AgentEvalReport, AgentEvalReport>,
   monthlyInsights: true satisfies Conforms<G.MonthlyInsightsRun, MonthlyInsightsRun>,
+  knowledge: true satisfies Conforms<G.KnowledgeResult, KnowledgeResult>,
 } as const;

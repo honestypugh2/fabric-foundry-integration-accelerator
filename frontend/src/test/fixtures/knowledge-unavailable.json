@@ -1,0 +1,23 @@
+{
+  "cloud_operation_performed": false,
+  "correlation_id": "78062631d8e6418a9fb2455fe2e6a8f6",
+  "data": {
+    "enabled": false,
+    "knowledge_base": "mfg-sales-v1",
+    "note": "Foundry IQ is a preview feature and the flag foundry_iq_knowledge is off. Enable the offline simulation with FFIA_PREVIEW_FEATURES=foundry_iq_knowledge.",
+    "passages": [],
+    "preview_flag": "foundry_iq_knowledge",
+    "question": "Are briefs sent automatically?"
+  },
+  "equivalent_fabric_service": "Foundry IQ knowledge base (Azure AI Search agentic retrieval over OneLake files)",
+  "evidence": [],
+  "execution_label": "UNAVAILABLE",
+  "fallback_reason": null,
+  "fallback_used": false,
+  "operating_mode": "OFFLINE",
+  "requested_provider": "Foundry IQ knowledge base (Azure AI Search agentic retrieval over OneLake files)",
+  "selected_provider": "none",
+  "simulation_notice": null,
+  "teaching_objective": "Documents answer policy questions with citations; numbers come from governed data.",
+  "timestamp": "2026-10-08T18:21:25.111604Z"
+}

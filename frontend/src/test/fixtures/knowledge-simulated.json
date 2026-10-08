@@ -1,0 +1,54 @@
+{
+  "cloud_operation_performed": false,
+  "correlation_id": "117483ac254c444799e74521f6c50599",
+  "data": {
+    "enabled": true,
+    "knowledge_base": "mfg-sales-v1",
+    "note": "Cite the passages; answer numeric questions from the governed sales model.",
+    "passages": [
+      {
+        "citation": {
+          "document": "data-quality-runbook",
+          "path": "data/synthetic/knowledge/mfg-sales-v1/data-quality-runbook.md",
+          "section": "Correction",
+          "title": "Sales data-quality runbook"
+        },
+        "score": 8.9366,
+        "text": "Agents and notebooks may propose a correction, but they never change the source records. A data steward reviews each proposal. Approved fixes are applied in the source system or as a governed Silver rule change through the change flow: plan, approve, execute, verify and audit."
+      },
+      {
+        "citation": {
+          "document": "revenue-recognition",
+          "path": "data/synthetic/knowledge/mfg-sales-v1/revenue-recognition.md",
+          "section": "What counts as booked revenue",
+          "title": "Booked revenue definition"
+        },
+        "score": 3.077,
+        "text": "Booked revenue is the sum of quantity times unit price for order lines in the month they were ordered. Order lines with status Cancelled are excluded. Lines flagged by a data-quality rule are excluded until a data steward resolves them."
+      },
+      {
+        "citation": {
+          "document": "external-data-policy",
+          "path": "data/synthetic/knowledge/mfg-sales-v1/external-data-policy.md",
+          "section": "Handling",
+          "title": "External and public data use policy"
+        },
+        "score": 2.9444,
+        "text": "External content is treated as untrusted input. It is never mixed into governed sales tables, is cited with its source and retrieval date, and is screened for prompt injection before an agent uses it."
+      }
+    ],
+    "preview_flag": "foundry_iq_knowledge",
+    "question": "Can agents fix data quality issues in the source?"
+  },
+  "equivalent_fabric_service": "Foundry IQ knowledge base (Azure AI Search agentic retrieval over OneLake files)",
+  "evidence": [],
+  "execution_label": "SIMULATED",
+  "fallback_reason": null,
+  "fallback_used": false,
+  "operating_mode": "OFFLINE",
+  "requested_provider": "Foundry IQ knowledge base (Azure AI Search agentic retrieval over OneLake files)",
+  "selected_provider": "Local knowledge retriever (keyword scoring, synthetic documents)",
+  "simulation_notice": "SIMULATED Foundry IQ retrieval (PREVIEW feature) over synthetic documents with local keyword scoring. No Foundry, Azure AI Search or OneLake call was made.",
+  "teaching_objective": "Documents answer policy questions with citations; numbers come from governed data.",
+  "timestamp": "2026-10-08T18:21:26.080925Z"
+}

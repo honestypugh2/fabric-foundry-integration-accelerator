@@ -6,6 +6,7 @@ import {
   agentEvalReportSchema,
   agentProfileSchema,
   approvalSchema,
+  knowledgeResultSchema,
   monthlyInsightsRunSchema,
   architectureSchema,
   auditRecordSchema,
@@ -356,5 +357,15 @@ export function useMonthlyInsights() {
   return useMutation({
     mutationFn: () =>
       api.post("/api/v1/agents/workflows/monthly-insights", monthlyInsightsRunSchema, {}),
+  });
+}
+
+export function useKnowledgeSearch() {
+  return useMutation({
+    mutationFn: (question: string) =>
+      api.post("/api/v1/knowledge/search", envelopeSchema(knowledgeResultSchema), {
+        question,
+        top: 3,
+      }),
   });
 }

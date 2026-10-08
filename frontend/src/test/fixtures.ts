@@ -15,6 +15,8 @@ import execution from "./fixtures/execution.json";
 import guideHc01 from "./fixtures/guide-hc01.json";
 import guides from "./fixtures/guides.json";
 import labGovernedChange from "./fixtures/lab-governed-change.json";
+import knowledgeSimulated from "./fixtures/knowledge-simulated.json";
+import knowledgeUnavailable from "./fixtures/knowledge-unavailable.json";
 import labs from "./fixtures/labs.json";
 import lessonP08 from "./fixtures/lesson-p08.json";
 import lessons from "./fixtures/lessons.json";
@@ -54,6 +56,8 @@ export const fixtures = {
   execution,
   guideHc01,
   guides,
+  knowledgeSimulated,
+  knowledgeUnavailable,
   labGovernedChange,
   labs,
   lessonP08,
@@ -122,4 +126,5 @@ export const defaultRoutes: Routes = {
   "POST /api/v1/agents/ask": agentAnswer,
   "POST /api/v1/agents/evaluate": agentEval,
   "POST /api/v1/agents/workflows/monthly-insights": agentWorkflow,
+  "POST /api/v1/knowledge/search": knowledgeUnavailable,
 };

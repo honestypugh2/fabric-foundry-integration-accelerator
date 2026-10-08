@@ -56,7 +56,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Microsoft Foundry | [Built-in evaluators in Microsoft Foundry](#foundry-evaluators) | GA | 2026-10-05 |
 | Microsoft Foundry | [Use the Microsoft Fabric data agent tool in Foundry Agent Service](#foundry-fabric-tool) | PREVIEW | 2026-10-05 |
 | Microsoft Foundry | [Add a human-in-the-loop approval step](#foundry-human-in-the-loop) | PREVIEW | 2026-10-08 |
-| Microsoft Foundry | [What is Foundry IQ?](#foundry-iq) | PREVIEW | 2026-10-05 |
+| Microsoft Foundry | [What is Foundry IQ?](#foundry-iq) | PREVIEW | 2026-10-08 |
 | Microsoft Foundry | [Govern MCP tools by using an AI gateway (Microsoft Foundry)](#foundry-mcp-governance) | PREVIEW | 2026-10-07 |
 | Microsoft Foundry | [What is Microsoft Foundry?](#foundry-overview) | GA | 2026-10-05 |
 | Microsoft Foundry | [Set up private networking for Foundry Agent Service](#foundry-private-networking) | GA | 2026-10-08 |
@@ -960,15 +960,15 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 |---|---|
 | URL | https://learn.microsoft.com/azure/foundry/agents/concepts/what-is-foundry-iq |
 | Publisher | Microsoft Learn |
-| Retrieved | 2026-10-05 |
+| Retrieved | 2026-10-08 |
 | Last updated | — |
 | Status | PREVIEW |
 | Associated patterns | P04 |
 | Key architecture statement | Knowledge bases built on Azure AI Search agentic retrieval over sources such as Blob, SharePoint, OneLake and web, with citations. |
-| Implementation relevance | Unstructured knowledge retrieval (Pattern 4), contrasted with structured Fabric context. |
+| Implementation relevance | Unstructured knowledge retrieval (Pattern 4), contrasted with structured Fabric context. Offline analog `ffia knowledge search` behind the preview flag foundry_iq_knowledge (SIMULATED, cited). |
 | Security implications | OneLake knowledge source indexes with the search service managed identity, not end-user passthrough. |
 | Limitations | Mixed GA/preview by API version; portal experience preview. |
-| Fallback | Local retrieval over synthetic documents with citations. |
+| Fallback | Local keyword retrieval over synthetic policy documents with citations (data/synthetic/knowledge). |
 | Deprecation / replacement | — |
 
 <a id="foundry-mcp-governance"></a>

@@ -145,8 +145,25 @@ def main() -> None:
                 _write(name, response.json())
             _write("agent-eval", client.post("/api/v1/agents/evaluate").json())
             _write(
+                "knowledge-unavailable",
+                client.post(
+                    "/api/v1/knowledge/search", json={"question": "Are briefs sent automatically?"}
+                ).json(),
+            )
+            _write(
                 "agent-workflow",
                 client.post("/api/v1/agents/workflows/monthly-insights", json={}).json(),
+            )
+        preview = Settings(
+            audit_path=None, runtime_root=Path(runtime), preview_features=("foundry_iq_knowledge",)
+        )
+        with TestClient(create_app(build_container(preview))) as client:
+            _write(
+                "knowledge-simulated",
+                client.post(
+                    "/api/v1/knowledge/search",
+                    json={"question": "Can agents fix data quality issues in the source?"},
+                ).json(),
             )
     print(f"exported fixtures to {FIXTURES}")  # noqa: T201
 
