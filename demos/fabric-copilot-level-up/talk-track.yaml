@@ -142,6 +142,20 @@ parts:
           ffia mcp check
         say:
           - "\"Six profiles: offline (the default), docs-only, read-only (16 metadata tools), approval-gated authoring, the HC-01 lab profile, and a Power BI sandbox. The read-only profile starts the server with `--read-only` and an explicit allow-list. CI fails if anyone adds a write tool or unpins a version.\""
+      - title: "Set it up: one command per client"
+        entry: terminal
+        path: "Terminal → ffia mcp render; open the generated file"
+        label: LOCAL
+        code: |
+          ffia mcp render fabric-readonly --client vscode --output ~/hc-01-lab/.vscode/mcp.json
+          ffia mcp render fabric-readonly --client claude        # Claude Code: project .mcp.json
+          ffia mcp render fabric-readonly --client copilot-cli   # ~/.copilot/mcp-config.json
+        say:
+          - "\"Setting it up is one command. It writes the client's MCP file with the server pinned to `@microsoft/fabric-mcp@1.4.0`, started with `--read-only` and an explicit `--tool` list. Then MCP: List Servers → Start in VS Code. Sign in first with `az login --tenant`; the server uses your identity.\""
+        show:
+          - "The generated `.vscode/mcp.json`: pinned version, `--read-only`, 16 `--tool` entries."
+          - "VS Code → MCP: List Servers → fabric-mcp → Running; the chat tool picker lists its tools."
+        check: "The server is running and only the allow-listed tools appear."
       - title: "Live: Copilot calls Fabric MCP read-only"
         entry: vscode
         path: "Second VS Code window (~/hc-01-lab) → Chat → prompt P-MCP-1, then P-MCP-2"
@@ -163,6 +177,18 @@ parts:
         say:
           - "\"MCP gives tools. A skill gives a procedure: Markdown instructions such as 'how to build a medallion architecture in Fabric'. Microsoft publishes them as open source, `microsoft/skills-for-fabric`.\""
           - "\"Key point: skills don't go through MCP. They tell the agent to call Fabric's REST API with `az rest`, including POST and DELETE. Your MCP allow-list doesn't cover them.\""
+      - title: "Set it up: install pinned skills"
+        entry: terminal
+        path: "Terminal → ffia skills install; VS Code → Chat → Configure Skills"
+        label: LOCAL
+        code: |
+          ffia skills install      # downloads skills-for-fabric v0.3.18, verifies SHA-256, installs 4 skills
+          ffia skills status
+          ls .claude/skills         # read by VS Code Copilot and Claude Code
+        say:
+          - "\"Setup: one command downloads a pinned release, checks its hash, and installs four curated skills into `.claude/skills`, the folder both GitHub Copilot and Claude Code read. The upstream way is the plugin marketplace (`/plugin marketplace add microsoft/skills-for-fabric` in Copilot CLI, `claude plugin marketplace add` in Claude Code). It installs everything at the latest release, so review it first.\""
+        show:
+          - "Chat → Configure Skills: the four Fabric skills plus `ffia-governed-fabric-change`."
       - title: "Hardened skills in this repository"
         entry: terminal
         path: "Terminal → ffia skills status; config/skills/fabric-skills.lock.yaml; .vscode/settings.json"
@@ -250,10 +276,22 @@ parts:
           - "\"The agent Copilot wrote shows up here, with its tools, traces and evaluations. Copilot built it; Foundry runs and governs it; Fabric supplies the data.\""
         fallback: "Offline: App → Architecture → MFG-01 (Foundry + Fabric)."
   - id: options-close
-    title: "Options and next steps"
+    title: "Claude Code, options and next steps"
     minutes: 4
-    goal: "Leave with a decision table and a first step."
+    goal: "Show that the same governance carries over to Claude Code, then leave with a decision table and a first step."
     steps:
+      - title: "Same rules, different harness: Claude Code"
+        entry: app
+        path: "App → Learn → GitHub Copilot and Claude Code; VS Code → CLAUDE.md, .mcp.json, .claude/skills"
+        label: DOCUMENTED
+        say:
+          - "\"Claude Code reads the same three things: `CLAUDE.md` imports `AGENTS.md`, the project `.mcp.json` holds the same servers (render it with `--client claude`), and `.claude/skills` holds the same skills. Switching harness doesn't change governance.\""
+          - "\"They differ in permission modes, hooks, plan mode and admin controls. Pick on governance and workflow, not reputation.\""
+          - "\"How we'll evaluate: the same HC-01 Bronze notebook task in both, scored on one rubric: row counts match the baseline for all seven tables, no write without approval, every result labeled, correct tool use, time, and corrections needed. That scored run is our follow-up session.\""
+        show:
+          - "`CLAUDE.md` (one line: `@AGENTS.md`), `.mcp.json`, and the `.claude/skills/` folder side by side."
+          - "The comparison table in the lesson at L200."
+        fallback: "Claude Code isn't installed on the presenter machine; this segment is a walkthrough, labeled DOCUMENTED."
       - title: "Options and the first step"
         entry: talk
         path: "Options table in this handout"
