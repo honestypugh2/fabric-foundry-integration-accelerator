@@ -6,6 +6,7 @@ subtitle: >-
   and external data, security and governance, and the customer's own use cases. Every segment has a
   portal path, a code-first VS Code path and an offline path.
 eyebrow: "Guide 2 · Manufacturing (synthetic) · Foundry Agent Workshop"
+guide: mfg-01-foundry-fabric-sales-insights
 audience: "Business and IT leaders, data and analytics team, architects"
 duration_minutes: 60
 summary: |

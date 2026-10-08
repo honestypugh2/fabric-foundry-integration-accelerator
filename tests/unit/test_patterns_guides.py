@@ -62,7 +62,7 @@ def test_pattern_validation() -> None:
 
 def test_hc01_guide_loads_with_safe_step_rules(catalog: PatternCatalog) -> None:
     guides = load_guides(REPO_ROOT / "guides", catalog)
-    assert list(guides) == [HC_01]
+    assert list(guides) == [HC_01, "mfg-01-foundry-fabric-sales-insights"]
     guide = guides[HC_01]
     assert guide.dataset_profile == "hc-lab-7file-v1"
     assert all(s.approval_required for s in guide.steps if s.writes)

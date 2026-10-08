@@ -1,0 +1,179 @@
+# Use-Case Guide MFG-01 (sanitized, synthetic). Derived from a customer workshop request and
+# re-expressed in our own words. No customer identity, people, titles, identifiers or URLs.
+# Placeholders in <ANGLE_BRACKETS> are filled in locally and never committed.
+id: mfg-01-foundry-fabric-sales-insights
+title: "MFG-01: Foundry agents + Fabric for sales insights (manufacturing, synthetic)"
+industry: Manufacturing
+scenario: Give business teams governed answers and monthly briefs on their sales focus areas, and triage data quality, with Foundry agents over Fabric.
+summary: >-
+  A fictional manufacturer's sales lands in a Fabric lakehouse. A read-only Fabric data agent answers
+  governed questions. A Foundry agent uses it as a tool to answer questions and write monthly team
+  briefs, adds cited public context through web grounding, and explains data-quality issues while a
+  data steward approves any fix applied upstream in Silver. Portal, code-first and offline paths.
+version: 1.0.0
+status: validated-live
+provenance:
+  derived_from: customer engagement guide (sanitized)
+  sanitized_on: 2026-10-08
+  denylist_ref: config/privacy/denylist.yaml
+patterns: [P01, P06, P08, P10, P14, P16]
+maturity_levels: [L2, L4, L5]
+harnesses: [copilot-vscode, copilot-cli, claude-code]
+operating_rules:
+  - Submit one prompt at a time and stop at its checkpoint.
+  - Before each cloud operation, state the provider, server and actual tool used.
+  - Numbers come from the Fabric data agent tool, never from the model's own estimate.
+  - The Fabric data agent is read-only; agents propose data fixes and a data steward approves them.
+  - Never put internal figures, customer names or plans in a web search query.
+  - Keep tenant, workspace, connection and agent IDs in environment variables or local notes only.
+tools:
+  - {name: Microsoft Foundry portal, purpose: "Project, model deployment, agents, tools, tracing, evaluations", status: GA, install: "https://ai.azure.com with an account that has the Foundry User role on the project"}
+  - {name: Fabric data agent, purpose: Read-only NL2SQL/NL2DAX answers over the sales lakehouse, status: GA, install: Fabric portal → New item → Data agent (F2+ capacity; Copilot/Azure OpenAI tenant setting on)}
+  - {name: Fabric data agent tool in Foundry Agent Service, purpose: Call the data agent from a Foundry agent under the user's identity, status: PREVIEW, install: Foundry project connection of type Microsoft Fabric (workspace ID + artifact ID)}
+  - {name: Foundry SDK for Python (azure-ai-projects), purpose: Code-first agents, version: 2.8.0, status: GA, install: "uv pip install azure-ai-projects azure-identity (in a separate virtual environment)"}
+  - {name: Web search tool (Grounding with Bing), purpose: Cited public market context, status: GA, install: Foundry tool catalog; Bing Custom Search connection for allow-listed domains, required: false}
+  - {name: VS Code with GitHub Copilot (agent mode), purpose: Explain and extend the agent code, status: GA, install: Install VS Code and the GitHub Copilot Chat extension}
+  - {name: Azure CLI, purpose: Sign in to the intended tenant (DefaultAzureCredential / AzureCliCredential), status: GA, install: Install the Azure CLI and run az login --tenant <TENANT_ID>}
+tenant_settings:
+  - A Fabric F2+ capacity (or P1+) for the lakehouse and the data agent.
+  - "Users can use Copilot and other features powered by Azure OpenAI (required by the data agent)."
+  - Fabric data agent, its data sources and the Foundry project in the same tenant; data sources on same-region capacities.
+dataset_profile: mfg-sales-v1
+expected_baseline: data/synthetic/expected/mfg-sales-v1.json
+diagram: mfg-01
+steps:
+  - id: 01-explore-architecture
+    diagram_focus: [lakehouse, semantic-model, data-agent, insights-agent]
+    title: Explore the architecture
+    objective: Understand who owns data (Fabric), reasoning (Foundry) and authority (identity, guardrails, approval).
+    copilot_prompt: >-
+      Read education/architecture/views/mfg-01.yaml and explain, in plain language, what Fabric owns, what
+      Foundry owns, and where authority and evidence come from. Do not call any cloud tool.
+    claude_code_prompt: >-
+      Read education/architecture/views/mfg-01.yaml and summarize the ownership boundaries and the monthly
+      brief trace. No cloud calls.
+    tool_path: {provider: Local editor, tools: []}
+    writes: false
+    approval_required: false
+    checkpoint: The learner can state the three boundaries and the five steps of the diagram.
+    evidence_required:
+      - A summary that names the Fabric data agent as read-only and the human approval for data fixes.
+    offline_equivalent: Step through the diagram in the app.
+    offline_command: "make run  # then open /architecture/mfg-01"
+  - id: 02-land-data
+    diagram_focus: [sales-sources, lakehouse]
+    title: Land the synthetic sales data in a lakehouse
+    objective: Create the lakehouse, upload the six CSVs and load them as Delta tables.
+    copilot_prompt: >-
+      Check the six CSVs in data/synthetic/raw/mfg-sales-v1 against SHA256SUMS. Then propose (do not run) the
+      steps to create lakehouse mfg_lakehouse in workspace <WORKSPACE_NAME>, upload the CSVs to Files/raw
+      after confirming it is empty, and load each as a Delta table. Name the provider and tool for each step.
+    claude_code_prompt: >-
+      Verify the six CSVs with sha256sum -c SHA256SUMS, then propose the create, upload and load steps with
+      provider and tool names. Do not run them.
+    tool_path: {provider: Fabric REST API and OneLake (or the Fabric portal), tools: [create lakehouse, OneLake upload, Load Table]}
+    writes: true
+    approval_required: true
+    rehearsal: {operation: create_lakehouse, item_type: Lakehouse, item_name: mfg_lakehouse}
+    checkpoint: Six Delta tables exist with the row counts in the expected baseline.
+    evidence_required:
+      - The table list and row counts compared with data/synthetic/expected/mfg-sales-v1.json.
+    not_evidence:
+      - Matching file sizes prove transfer length, not table contents.
+    offline_equivalent: Build the local tables and see the counts.
+    offline_command: "ffia mfg quality"
+  - id: 03-data-agent
+    diagram_focus: [data-agent, semantic-model]
+    title: Create and publish the Fabric data agent
+    objective: Ground a read-only data agent on the six tables with business instructions.
+    copilot_prompt: >-
+      Draft data agent instructions for the mfg-sales-v1 tables: the booked revenue definition, product line
+      codes, team focus areas, and an instruction to report data-quality problems. Keep it under 150 words.
+    claude_code_prompt: Draft the same data agent instructions (booked revenue, product lines, focus areas, report data-quality issues).
+    tool_path: {provider: Fabric portal (manual), tools: [Data agent]}
+    writes: true
+    approval_required: true
+    checkpoint: The data agent answers "booked revenue by product line in September 2026" and is published.
+    evidence_required:
+      - The data agent's answer for Enclosures in September 2026 matches the baseline brief.
+    offline_equivalent: Read the same numbers locally.
+    offline_command: "ffia mfg brief --team T-ENC"
+  - id: 04-foundry-agent
+    diagram_focus: [insights-agent, data-agent, models, entra]
+    title: Build the Foundry agent with the Fabric tool (portal and code)
+    objective: Create sales-insights-agent with the Fabric data agent tool and ask a governed question.
+    copilot_prompt: >-
+      Open demos/foundry-fabric-agents-workshop/code/fabric_sales_agent.py. Explain what the agent can and
+      cannot do, where its identity comes from, and why it must not estimate numbers. Then run it with the
+      question "Which product line grew fastest last month?" and report the tools used. Do not print IDs.
+    claude_code_prompt: >-
+      Explain fabric_sales_agent.py (tool, identity, limits), then run it and report the answer and the tool
+      calls. Keep IDs out of the output.
+    tool_path: {provider: Foundry Agent Service, tools: [agents.create_version, responses.create, fabric_dataagent_preview]}
+    writes: true
+    approval_required: true
+    checkpoint: The answer names Enclosures, +55.78% ($56,623.73 → $88,207.09), with a Fabric tool call in the run.
+    evidence_required:
+      - The run's tool calls include fabric_dataagent_preview_call, and the numbers match the baseline.
+    not_evidence:
+      - A fluent answer without a Fabric tool call is not grounded.
+    offline_equivalent: Show the governed numbers locally.
+    offline_command: "ffia mfg brief --team T-ENC"
+    failure_modes:
+      - The first call can take about 2.5 minutes; warm up before a live session.
+      - Service principals are not supported for the Fabric tool; sign in as a user.
+  - id: 05-web-context
+    diagram_focus: [market-agent, web-grounding, public-web]
+    title: Add cited public context, safely
+    objective: Use web grounding for public market context and understand the boundary.
+    copilot_prompt: >-
+      Read demos/foundry-fabric-agents-workshop/code/market_context_agent.py. List the security concerns of web
+      grounding (compliance boundary, prompt injection, query leakage, site terms) and the control for each.
+      Do not run it unless web search is enabled in the project.
+    claude_code_prompt: List the web grounding risks and controls from market_context_agent.py; run only if web search is enabled.
+    tool_path: {provider: Foundry Agent Service, tools: [web search (Grounding with Bing)]}
+    writes: false
+    approval_required: false
+    checkpoint: Every web-grounded answer shows citations, and no internal data appears in queries.
+    evidence_required:
+      - Citation URLs in the answer, and the agent instructions that forbid internal data in queries.
+    not_evidence:
+      - Search results are not a licensed data feed.
+    offline_equivalent: Review the boundary band in the MFG-01 diagram and the Q&A answer.
+    offline_command: "make run  # /architecture/mfg-01, step 3"
+  - id: 06-monthly-brief
+    diagram_focus: [scheduler, orchestrator, insights-agent, business-teams]
+    title: Generate monthly briefs per business team
+    objective: Produce one brief per focus area and plan the schedule and delivery.
+    copilot_prompt: >-
+      Run demos/foundry-fabric-agents-workshop/code/monthly_brief.py and compare each team's numbers with
+      ffia mfg brief --json. Then propose a schedule (Logic Apps Recurrence or Azure Functions timer) and Teams
+      delivery, naming preview pieces.
+    claude_code_prompt: Run monthly_brief.py, reconcile with ffia mfg brief --json, and propose schedule and delivery options.
+    tool_path: {provider: Foundry Agent Service, tools: [responses.create, fabric_dataagent_preview]}
+    writes: false
+    approval_required: false
+    checkpoint: Every brief's revenue, attainment and margin match the baseline.
+    evidence_required:
+      - A reconciliation table of agent numbers against ffia mfg brief --json.
+    offline_equivalent: Print all four briefs locally.
+    offline_command: "ffia mfg brief"
+  - id: 07-data-quality
+    diagram_focus: [dq-checks, dq-agent, approval, fix-pipeline]
+    title: Triage data quality and propose fixes
+    objective: Detect, explain and propose corrections; approve and fix upstream in Silver.
+    copilot_prompt: >-
+      Run ffia mfg quality. For each finding, explain the business impact on booked revenue and propose a
+      Silver-layer correction for a data steward. Ask the live agent how many duplicate order lines exist and
+      compare. Do not change any data.
+    claude_code_prompt: Run ffia mfg quality, explain impact and propose Silver fixes; compare duplicates with the live agent. No changes.
+    tool_path: {provider: Local CLI and Foundry Agent Service, tools: [ffia mfg quality, fabric_dataagent_preview]}
+    writes: false
+    approval_required: false
+    checkpoint: All nine injected issue types are detected with exact counts; the agent's duplicate count is 12.
+    evidence_required:
+      - The data-quality report and the live agent's duplicate answer.
+    not_evidence:
+      - An agent saying data is clean does not prove it; the checks do.
+    offline_equivalent: The data-quality report is offline by design.
+    offline_command: "ffia mfg quality"

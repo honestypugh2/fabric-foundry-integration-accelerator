@@ -13,6 +13,7 @@ import yaml
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from fabric_foundry_accelerator.patterns.catalog import PatternCatalog
+from fabric_foundry_accelerator.synthetic.manufacturing import MFG_PROFILES
 from fabric_foundry_accelerator.synthetic.profiles import PROFILES
 
 Harness = Literal[
@@ -126,7 +127,7 @@ class UseCaseGuide(BaseModel):
 
     @model_validator(mode="after")
     def _check(self) -> Self:
-        if self.dataset_profile not in PROFILES:
+        if self.dataset_profile not in PROFILES and self.dataset_profile not in MFG_PROFILES:
             raise ValueError(f"unknown dataset_profile {self.dataset_profile!r}")
         ids = [s.id for s in self.steps]
         if len(set(ids)) != len(ids):
