@@ -62,5 +62,5 @@ FFIA_ENVIRONMENT=hybrid FFIA_SIMULATE_FABRIC_OUTAGE=1 ffia demo offline
 | Statement | Category |
 |---|---|
 | Fallback labeling, the breaker and write refusal | SIMULATED LOCALLY (tests in `tests/unit/test_router.py`, offline demo act 7) |
-| Live Fabric REST or MCP failure modes and throttling | REQUIRES TENANT VALIDATION (Phase 5) |
+| Live Fabric REST or MCP failure modes and throttling | REQUIRES TENANT VALIDATION: the REST client's 429 `Retry-After`, timeout and error mapping are tested with mocked HTTP (`tests/unit/test_fabric_live.py`) |
 | Retry budgets for production | PRODUCTION RECOMMENDATION: tune per API from observed throttling responses |

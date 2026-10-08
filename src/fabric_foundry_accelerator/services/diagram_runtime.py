@@ -13,6 +13,7 @@ from pydantic import BaseModel, ConfigDict
 from fabric_foundry_accelerator.education.diagrams import DiagramView, RuntimeBinding
 from fabric_foundry_accelerator.fallback.circuit_breaker import BreakerState
 from fabric_foundry_accelerator.models.execution import OperatingMode, utc_now
+from fabric_foundry_accelerator.providers.fabric.live import NOT_CONFIGURED_NOTE
 from fabric_foundry_accelerator.services.container import Container
 from fabric_foundry_accelerator.services.runtime import RuntimeStatus, runtime_status
 
@@ -45,7 +46,11 @@ class ViewRuntime(BaseModel):
 def _fabric_live(container: Container, status: RuntimeStatus) -> tuple[NodeStatus, str, str]:
     live = container.fabric.live
     if live is None:
-        return "NOT CONFIGURED", "UNAVAILABLE", "No live Fabric provider in this build (Phase 5)."
+        return (
+            "NOT CONFIGURED",
+            "UNAVAILABLE",
+            NOT_CONFIGURED_NOTE,
+        )
     breaker = next((b for b in status.breakers if b.name == "fabric_data"), None)
     if "simulated outage" in live.name:
         state = breaker.state.value if breaker else "CLOSED"
@@ -56,7 +61,7 @@ def _fabric_live(container: Container, status: RuntimeStatus) -> tuple[NodeStatu
             "LIVE",
             f"Breaker {breaker.state.value}: reads use the approved fallback.",
         )
-    return "READY", "LIVE", live.name
+    return "READY", "LIVE", f"{live.name}: configured (calls are made on demand, not probed here)."
 
 
 Overlay = tuple[NodeStatus, str, str]

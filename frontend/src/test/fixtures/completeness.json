@@ -1,6 +1,6 @@
 {
-  "answered": 24,
-  "coverage": 0.8,
+  "answered": 25,
+  "coverage": 0.8333,
   "items": [
     {
       "answered": true,
@@ -215,10 +215,12 @@
       "question": "How does a Foundry agent use Fabric data under the user's identity?"
     },
     {
-      "answered": false,
-      "answered_by": [],
+      "answered": true,
+      "answered_by": [
+        "preview-isolation"
+      ],
       "id": "Q24",
-      "planned_phase": 5,
+      "planned_phase": null,
       "question": "How are preview features isolated from the default experience?"
     },
     {

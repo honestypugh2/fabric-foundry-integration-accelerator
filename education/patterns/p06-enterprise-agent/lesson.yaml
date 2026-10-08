@@ -57,7 +57,8 @@ try_it:
 copilot_prompt: >-
   Using the ffia-local MCP server, call get_architecture_pattern for P06 and get_runtime_status.
   Then draw a text diagram of the P06 request path (context, reasoning, access, authority, action,
-  evidence) and mark each hop as available offline, arriving in Phase 5 or 6, or PREVIEW. Do not
+  evidence) and mark each hop as available offline, available opt-in but requiring tenant
+  validation, arriving in Phase 6, or PREVIEW. Do not
   claim that any Foundry or Fabric call ran.
 claude_code_prompt: >-
   Read education/patterns/catalog.yaml (P06 and P08) and src/fabric_foundry_accelerator/services/demo.py.

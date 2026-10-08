@@ -52,7 +52,8 @@
         "REQUIRES TENANT VALIDATION",
         "ASSUMPTION",
         "PRODUCTION RECOMMENDATION",
-        "PREVIEW LIMITATION"
+        "PREVIEW LIMITATION",
+        "VERIFIED LIVE"
       ],
       "title": "EvidenceCategory",
       "type": "string"

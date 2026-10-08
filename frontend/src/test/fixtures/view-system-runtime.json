@@ -30,7 +30,7 @@
     },
     {
       "binding": "education",
-      "detail": "14 lessons, 7 architecture views.",
+      "detail": "15 lessons, 7 architecture views.",
       "label": "LOCAL",
       "node": "education",
       "status": "ACTIVE"
@@ -72,13 +72,13 @@
     },
     {
       "binding": "fabric-live",
-      "detail": "No live Fabric provider in this build (Phase 5).",
+      "detail": "No live Fabric provider configured. Opt in with FFIA_FABRIC_LIVE=1, a hybrid or live environment and the local bindings file; check the tenant with `ffia fabric readiness`.",
       "label": "UNAVAILABLE",
       "node": "fabric-live",
       "status": "NOT CONFIGURED"
     }
   ],
-  "observed_at": "2026-10-07T23:08:05.030885+00:00",
+  "observed_at": "2026-10-08T00:28:04.296507+00:00",
   "operating_mode": "OFFLINE",
   "view_id": "system"
 }

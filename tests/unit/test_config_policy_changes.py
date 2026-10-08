@@ -190,12 +190,12 @@ def _approve(service: ChangeService, change_id: str, approver: str = "bob") -> s
     ).approval_id
 
 
-def test_full_local_flow_is_simulated_verified_and_audited() -> None:
+async def test_full_local_flow_is_simulated_verified_and_audited() -> None:
     service, audit = _service()
     plan = service.plan(_request(), correlation_id="c" * 32)
     assert plan.status is ChangeStatus.PROPOSED and plan.precondition.passed
     approval_id = _approve(service, plan.change_id)
-    envelope = service.execute(
+    envelope = await service.execute(
         ExecuteRequest(change_id=plan.change_id, approval_id=approval_id, executed_by="writer")
     )
     assert envelope.execution_label is ExecutionLabel.SIMULATED
@@ -207,7 +207,7 @@ def test_full_local_flow_is_simulated_verified_and_audited() -> None:
     assert len(service.plans()) == 1
 
 
-def test_separation_of_duties_and_rejection() -> None:
+async def test_separation_of_duties_and_rejection() -> None:
     service, audit = _service()
     plan = service.plan(_request())
     with pytest.raises(ApprovalError, match="separation of duties"):
@@ -227,43 +227,43 @@ def test_separation_of_duties_and_rejection() -> None:
     with pytest.raises(ApprovalError, match="only PROPOSED"):
         _approve(service, plan.change_id)
     with pytest.raises(ApprovalError, match="rejected"):
-        service.execute(
+        await service.execute(
             ExecuteRequest(
                 change_id=plan.change_id, approval_id=rejection.approval_id, executed_by="w"
             )
         )
 
 
-def test_approval_expires() -> None:
+async def test_approval_expires() -> None:
     clock = Clock()
     service, _ = _service(clock=clock)
     plan = service.plan(_request())
     approval_id = _approve(service, plan.change_id)
     clock.now += timedelta(minutes=31)
     with pytest.raises(ApprovalError, match="expired"):
-        service.execute(
+        await service.execute(
             ExecuteRequest(change_id=plan.change_id, approval_id=approval_id, executed_by="w")
         )
 
 
-def test_approval_is_bound_to_its_change_and_executes_once() -> None:
+async def test_approval_is_bound_to_its_change_and_executes_once() -> None:
     service, _ = _service()
     first, second = service.plan(_request(name="a")), service.plan(_request(name="b"))
     approval_id = _approve(service, first.change_id)
     with pytest.raises(ApprovalError, match="not found for this change"):
-        service.execute(
+        await service.execute(
             ExecuteRequest(change_id=second.change_id, approval_id=approval_id, executed_by="w")
         )
-    service.execute(
+    await service.execute(
         ExecuteRequest(change_id=first.change_id, approval_id=approval_id, executed_by="w")
     )
     with pytest.raises(ApprovalError, match="cannot execute again"):
-        service.execute(
+        await service.execute(
             ExecuteRequest(change_id=first.change_id, approval_id=approval_id, executed_by="w")
         )
 
 
-def test_destination_hash_mismatch_is_refused() -> None:
+async def test_destination_hash_mismatch_is_refused() -> None:
     service, _ = _service()
     plan = service.plan(_request())
     approval_id = _approve(service, plan.change_id)
@@ -276,35 +276,35 @@ def test_destination_hash_mismatch_is_refused() -> None:
     # Simulates storage tampering between approval and execution.
     service._plans[plan.change_id] = tampered  # pyright: ignore[reportPrivateUsage]
     with pytest.raises(ApprovalError, match="different target"):
-        service.execute(
+        await service.execute(
             ExecuteRequest(change_id=plan.change_id, approval_id=approval_id, executed_by="w")
         )
 
 
-def test_duplicates_are_blocked_and_preconditions_rechecked_at_execution() -> None:
+async def test_duplicates_are_blocked_and_preconditions_rechecked_at_execution() -> None:
     service, _ = _service()
     first, racing = service.plan(_request()), service.plan(_request())
     first_approval, racing_approval = (
         _approve(service, first.change_id),
         _approve(service, racing.change_id),
     )
-    service.execute(
+    await service.execute(
         ExecuteRequest(change_id=first.change_id, approval_id=first_approval, executed_by="w")
     )
     assert service.plan(_request()).status is ChangeStatus.BLOCKED
     with pytest.raises(ApprovalError, match="precondition failed at execution time"):
-        service.execute(
+        await service.execute(
             ExecuteRequest(change_id=racing.change_id, approval_id=racing_approval, executed_by="w")
         )
     assert service.get_plan(racing.change_id).status is ChangeStatus.FAILED
 
 
-def test_updates_require_an_existing_target_and_delete_removes_it() -> None:
+async def test_updates_require_an_existing_target_and_delete_removes_it() -> None:
     service, _ = _service()
     assert service.plan(_request("upload_files")).status is ChangeStatus.BLOCKED
     service.workspace.apply("create_lakehouse", _request().target)
     upload = service.plan(_request("upload_files"))
-    service.execute(
+    await service.execute(
         ExecuteRequest(
             change_id=upload.change_id,
             approval_id=_approve(service, upload.change_id),
@@ -326,7 +326,7 @@ def test_updates_require_an_existing_target_and_delete_removes_it() -> None:
     )
     delete = deleting.plan(_request("delete_item"))
     assert delete.reversible is False and delete.risk == "high"
-    result = deleting.execute(
+    result = await deleting.execute(
         ExecuteRequest(
             change_id=delete.change_id,
             approval_id=_approve(deleting, delete.change_id),
@@ -336,14 +336,14 @@ def test_updates_require_an_existing_target_and_delete_removes_it() -> None:
     assert result.data.verification.passed and not service.workspace.exists(_request().target)
 
 
-def test_approved_live_change_is_never_redirected_to_local() -> None:
+async def test_approved_live_change_is_never_redirected_to_local() -> None:
     service, audit = _service(allow_live=True)
     plan = service.plan(_request(destination="LIVE"))
     assert plan.status is ChangeStatus.PROPOSED
     assert plan.precondition.category is EvidenceCategory.REQUIRES_TENANT_VALIDATION
     approval_id = _approve(service, plan.change_id)
     with pytest.raises(LiveWriteUnavailableError, match="NOT redirected to LOCAL"):
-        service.execute(
+        await service.execute(
             ExecuteRequest(change_id=plan.change_id, approval_id=approval_id, executed_by="w")
         )
     assert service.workspace.items() == []

@@ -17,5 +17,6 @@ Authoritative references.
 | [0009](ADR-0009-frontend-architecture.md) | Frontend architecture and typed API contracts |
 | [0010](ADR-0010-education-content-as-data.md) | Education content as validated data, with a completeness gate |
 | [0011](ADR-0011-architecture-diagrams-as-code.md) | Architecture diagrams as code (draw.io, Azure Architecture Center style) |
+| [0012](ADR-0012-live-fabric-integration.md) | Live Fabric integration: read-only provider, gated scoped writer, MCP profiles as code, reference notebooks |
 
 More ADRs are added in Phases 4–8.

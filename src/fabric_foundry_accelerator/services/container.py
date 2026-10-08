@@ -7,6 +7,12 @@ from dataclasses import dataclass, field
 from datetime import datetime
 
 from fabric_foundry_accelerator.audit.store import AuditStore, InMemoryAuditStore, JsonlAuditStore
+from fabric_foundry_accelerator.config.bindings import (
+    BindingsError,
+    TenantBindings,
+    bindings_path,
+    load_bindings,
+)
 from fabric_foundry_accelerator.config.environment import EnvironmentConfiguration, load_environment
 from fabric_foundry_accelerator.config.overlay import CustomerOverlay, load_overlay
 from fabric_foundry_accelerator.config.settings import Settings
@@ -26,10 +32,14 @@ from fabric_foundry_accelerator.policies.engine import (
     load_tool_manifest,
     load_write_policy,
 )
+from fabric_foundry_accelerator.providers.fabric.auth import AzureCliTokenProvider
+from fabric_foundry_accelerator.providers.fabric.live import LiveFabricProvider
 from fabric_foundry_accelerator.providers.fabric.local import LocalFabricProvider
 from fabric_foundry_accelerator.providers.fabric.outage import SimulatedOutageFabricProvider
 from fabric_foundry_accelerator.providers.fabric.port import FabricProvider
+from fabric_foundry_accelerator.providers.fabric.rest import FabricRestClient
 from fabric_foundry_accelerator.providers.fabric.routed import RoutedFabricProvider
+from fabric_foundry_accelerator.providers.fabric.writer import FabricScopedWriter
 from fabric_foundry_accelerator.research.sources import load_registry
 from fabric_foundry_accelerator.services.changes import ChangeService
 from fabric_foundry_accelerator.services.education import EducationService
@@ -56,6 +66,7 @@ class Container:
     evaluation: EvaluationService
     catalog: PatternCatalog
     guides: dict[str, UseCaseGuide]
+    bindings: TenantBindings | None
     education: EducationService
     built_profiles: list[str] = field(default_factory=list[str])
 
@@ -82,11 +93,31 @@ def ensure_data_built(settings: Settings) -> list[str]:
     return built
 
 
+def _live_client(
+    settings: Settings,
+    mode: OperatingMode,
+    bindings: TenantBindings | None,
+    injected: FabricRestClient | None,
+) -> FabricRestClient | None:
+    """Return a live client only when live access is explicitly enabled and fully configured."""
+    if not settings.fabric_live:
+        return None
+    if mode is OperatingMode.OFFLINE:
+        raise BindingsError("FFIA_FABRIC_LIVE=1 needs FFIA_ENVIRONMENT=hybrid or live")
+    if bindings is None:
+        raise BindingsError(
+            f"FFIA_FABRIC_LIVE=1 needs {bindings_path(settings.config_root, settings.overlay)} "
+            "(git-ignored); copy the .local.example.yaml next to it"
+        )
+    return injected or FabricRestClient(AzureCliTokenProvider(bindings.tenant_id))
+
+
 def build_container(
     settings: Settings | None = None,
     *,
     audit: AuditStore | None = None,
     live_fabric: FabricProvider | None = None,
+    fabric_client: FabricRestClient | None = None,
     clock: Callable[[], float] = time.monotonic,
     sleep: Callable[[float], Awaitable[None]] = asyncio.sleep,
     wall_clock: Callable[[], datetime] = utc_now,
@@ -107,8 +138,19 @@ def build_container(
     local = LocalFabricProvider(
         settings.data_root, output_root=settings.lakehouse_root, mode=local_mode
     )
+    bindings = load_bindings(settings.config_root, settings.overlay)
+    client = _live_client(settings, environment.mode, bindings, fabric_client)
     live = live_fabric or (
         SimulatedOutageFabricProvider() if settings.simulate_fabric_outage else None
+    )
+    if live is None and client is not None and bindings is not None:
+        live = LiveFabricProvider(
+            client, bindings, data_root=settings.data_root, mode=environment.mode
+        )
+    writer = (
+        FabricScopedWriter(client, bindings, definitions_root=settings.definitions_root)
+        if client is not None and bindings is not None and settings.allow_live_mutation
+        else None
     )
     fabric = RoutedFabricProvider(router, local=local, live=live)
     write_policy = load_write_policy(settings.config_root)
@@ -119,6 +161,7 @@ def build_container(
         mode=environment.mode,
         allow_live_mutation=settings.allow_live_mutation,
         clock=wall_clock,
+        live_writer=writer,
     )
     catalog = load_catalog(settings.education_root)
     guides = load_guides(settings.guides_root, catalog)
@@ -152,6 +195,7 @@ def build_container(
         ),
         catalog=catalog,
         guides=guides,
+        bindings=bindings,
         education=EducationService(library),
         built_profiles=built,
     )

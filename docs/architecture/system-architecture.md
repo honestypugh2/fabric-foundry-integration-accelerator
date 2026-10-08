@@ -36,7 +36,7 @@ flowchart LR
   end
   subgraph cloud["Microsoft cloud (later phases)"]
     foundry["Foundry Agent Service · planned<br/><small>Agents and evaluation</small>"]
-    fabric_live["Fabric REST and MCP · planned<br/><small>Live, read-only first</small>"]
+    fabric_live["Fabric REST and MCP · tenant<br/><small>Live, read-only first</small>"]
   end
   web_app -->|/api requests| vite_proxy
   vite_proxy -->|Same-origin proxy| api
@@ -49,7 +49,7 @@ flowchart LR
   evaluation -->|Evidence| audit
   router -.->|LOCAL read or fallback| local_provider
   local_provider -->|Query Parquet| synthetic_data
-  router -.->|LIVE read (Phase 5)| fabric_live
+  router -->|LIVE read (opt-in)| fabric_live
   api -.->|Agents (Phase 6)| foundry
   coding_agent -->|Loads| mcp_config
   mcp_config -->|Starts over stdio| ffia_local
@@ -57,7 +57,8 @@ flowchart LR
   ffia_local -->|Read tools| router
   class learn_mcp documented
   class web_app,coding_agent,vite_proxy,mcp_config,api,ffia_local,changes,education,evaluation,router,policies,content,audit,local_provider,synthetic_data implemented
-  class foundry,fabric_live planned
+  class foundry planned
+  class fabric_live tenant_validation
   classDef implemented stroke-width:2px
   classDef planned stroke-dasharray: 6 4
   classDef preview stroke-dasharray: 2 3
@@ -122,7 +123,7 @@ Solid boxes are implemented here or documented by Microsoft; dashed boxes are pl
 | Local Fabric provider | Implemented in this repository | Read-only, allow-listed operations over synthetic Parquet; never presented as Fabric. | `src/fabric_foundry_accelerator/providers/fabric/local.py` |
 | Synthetic medallion data | Implemented in this repository | Generated synthetic CSVs, built Bronze, Silver and Gold Parquet, semantic model contracts and expected baselines. No real data. | `data/synthetic` |
 | Foundry Agent Service | Planned (Phase 6) | Owns reasoning and orchestration; consumes Fabric context; never performs authoritative writes directly. | - |
-| Fabric REST and MCP | Planned (Phase 5) | Pick the narrowest server; they run with the caller's Fabric permissions; status differs by server. | - |
+| Fabric REST and MCP | Requires tenant validation | Pick the narrowest server; they run with the caller's Fabric permissions; status differs by server. | `src/fabric_foundry_accelerator/providers/fabric/live.py` |
 
 ### Aligned to
 

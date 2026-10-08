@@ -119,7 +119,7 @@ Solid boxes are implemented here or documented by Microsoft; dashed boxes are pl
 | Claude Code | Microsoft-documented | Anthropic's agentic CLI. In this repository CLAUDE.md imports AGENTS.md and the same .mcp.json and .claude/skills are shared. | - |
 | AGENTS.md and instructions | Implemented in this repository | The single source of truth for every coding agent - rules, commands, safety and evidence requirements. | `AGENTS.md` |
 | Skills | Microsoft-documented | Skills are knowledge, not execution; they drive REST, SQL, KQL or PySpark under the user's identity. | - |
-| .mcp.json | Implemented in this repository | The portable MCP configuration. Today it lists Microsoft Learn and ffia-local; Fabric MCP profiles are added as opt-in examples in Phase 5. | `.mcp.json` |
+| .mcp.json | Implemented in this repository | The project MCP configuration, rendered from config/mcp/profiles.yaml (default profile: Microsoft Learn and ffia-local). Opt-in Fabric MCP profiles are rendered per client with `ffia mcp render`; `ffia mcp check` keeps them pinned and least-privilege. | `.mcp.json` |
 | API Management | Optional | Adds authentication, rate limits, logging and policies in front of MCP servers and model endpoints. | - |
 | Microsoft Learn MCP | Microsoft-documented | Public documentation search and fetch. Answers how questions without any tenant access. | - |
 | Fabric MCP Server (local) | Microsoft-documented | Local server with documentation and item-definition tools that work without a tenant, plus OneLake and core item tools that run with your Fabric permissions. Some tools can write. | - |
@@ -131,7 +131,7 @@ Solid boxes are implemented here or documented by Microsoft; dashed boxes are pl
 | OneLake and items | Microsoft-documented | Lakehouses in OneLake hold each layer; notebooks transform; tests check row counts and baselines. | - |
 | Semantic models | Microsoft-documented | Direct Lake reads Gold Delta tables; measures are the governed definitions agents should reuse. | - |
 | Warehouse or SQL endpoint | Microsoft-documented | Fabric Data Warehouse or a lakehouse SQL analytics endpoint. | - |
-| PBIP / TMDL in Git | Planned (Phase 5) | Power BI project files under version control, so model changes are diffs that can be reviewed before publication. | - |
+| PBIP / TMDL in Git | Planned (Phase 7) | Power BI project files under version control, so model changes are diffs that can be reviewed before publication. | - |
 | Synthetic local data | Implemented in this repository | Read-only, allow-listed operations over synthetic Parquet; never presented as Fabric. | - |
 | Entra ID | Microsoft-documented | User, approver and writer are different identities; agents act on behalf of users or as scoped identities. | - |
 | Approved change flow | Implemented in this repository | Separation of duties, expiry and destination binding protect the decision. | - |

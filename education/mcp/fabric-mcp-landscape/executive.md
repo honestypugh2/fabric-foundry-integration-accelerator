@@ -35,4 +35,6 @@ accelerator's default is read-only, with writes in a separate, opt-in, approval-
 ## A note on this accelerator
 
 The accelerator ships its own small MCP server, `ffia-local`, for offline teaching. It is
-**not** a Fabric MCP server and never touches Fabric. Fabric MCP profiles arrive in Phase 5.
+**not** a Fabric MCP server and never touches Fabric. It is the default `offline` profile.
+Read-only Fabric profiles now exist as pinned, checked configuration; using them against a real
+Fabric environment still requires validation in a tenant.

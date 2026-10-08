@@ -60,6 +60,22 @@
     "title": "Fabric + Foundry: who owns what"
   },
   {
+    "area": "architecture",
+    "id": "preview-isolation",
+    "pattern_ids": [
+      "P09"
+    ],
+    "related_guides": [
+      "hc-01-fabric-mcp-powerbi-medallion-lab"
+    ],
+    "related_labs": [
+      "lab-mcp-allow-list"
+    ],
+    "status": "LOCAL",
+    "summary": "Several Fabric and Power BI capabilities this accelerator teaches are in preview (Fabric IQ ontology, the Data Warehouse MCP server, hosted Power BI authoring MCP, the Foundry Fabric data agent tool, even some REST endpoints). Preview features can change or disappear, so they stay behind flags that are off by default, carry a PREVIEW label wherever they appear, have an offline simulation, and are never required by the default demo.",
+    "title": "Preview isolation: keeping preview features out of the default experience"
+  },
+  {
     "area": "copilot",
     "id": "copilot-surfaces",
     "pattern_ids": [

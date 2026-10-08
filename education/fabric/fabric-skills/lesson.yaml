@@ -44,7 +44,7 @@ evidence:
   - statement: Fabric REST calls made by skills through the Azure CLI run under the signed-in identity and are limited by that identity's permissions.
     category: DOCUMENTED FABRIC BEHAVIOR
     sources: [fabric-rest-identity]
-  - statement: The accelerator does not install Fabric Skills; the hardened MCP profile arrives in Phase 5 and the offline lessons show only the decision model.
+  - statement: The accelerator does not install Fabric Skills; its hardening is the profile approach - replace the bundled MCP configuration with `ffia mcp render fabric-readonly` (read-only by default) and keep fabric-authoring-gated as a separate opt-in profile, which `ffia mcp check` enforces.
     category: SIMULATED LOCALLY
   - statement: Whether a given skill behaves correctly against your workspace, capacity and item types must be validated in a dev workspace.
     category: REQUIRES TENANT VALIDATION

@@ -268,9 +268,11 @@ def approve(body: ApprovalRequest, container: ContainerDep) -> Approval:
 
 
 @router.post("/api/v1/fabric/change", tags=["changes"])
-def execute_change(body: ExecuteRequest, container: ContainerDep) -> ExecutionEnvelope[object]:
+async def execute_change(
+    body: ExecuteRequest, container: ContainerDep
+) -> ExecutionEnvelope[object]:
     """Execute an approved change. LIVE changes are never redirected to LOCAL."""
-    result = container.changes.execute(body)
+    result = await container.changes.execute(body)
     return ExecutionEnvelope[object].model_validate(result.model_dump())
 
 

@@ -39,6 +39,7 @@ from fabric_foundry_accelerator.models.execution import (
 )
 from fabric_foundry_accelerator.policies.engine import WritePolicy, evaluate_write
 from fabric_foundry_accelerator.providers.errors import ProviderError, UnknownResourceError
+from fabric_foundry_accelerator.providers.fabric.writer import LiveWriter
 
 CREATE_OPERATIONS = frozenset(
     {"create_lakehouse", "create_notebook", "create_semantic_model", "publish_report"}
@@ -109,8 +110,9 @@ class ChangeService:
         allow_live_mutation: bool,
         workspace: SimulatedWorkspace | None = None,
         clock: Callable[[], datetime] = utc_now,
+        live_writer: LiveWriter | None = None,
     ) -> None:
-        """Create the service. There is no live writer in this phase."""
+        """Create the service. ``live_writer`` is injected only when live mutation is configured."""
         self._policy = policy
         self._overlay = overlay
         self._audit = audit
@@ -118,6 +120,7 @@ class ChangeService:
         self._allow_live = allow_live_mutation
         self.workspace = workspace or SimulatedWorkspace()
         self._clock = clock
+        self._live_writer = live_writer
         self._plans: dict[str, ProposedChange] = {}
         self._approvals: dict[str, Approval] = {}
 
@@ -279,10 +282,23 @@ class ChangeService:
         return approval
 
     # ------------------------------------------------------------------ execute
-    def execute(self, request: ExecuteRequest) -> ExecutionEnvelope[ExecutionResult]:
+    @property
+    def live_writer(self) -> LiveWriter | None:
+        """The injected live writer, if any."""
+        return self._live_writer
+
+    async def execute(self, request: ExecuteRequest) -> ExecutionEnvelope[ExecutionResult]:
         """Execute an approved change and verify it."""
         plan = self.get_plan(request.change_id)
         approval = self._valid_approval(plan, request.approval_id)
+        writer = self._live_writer
+        if (
+            plan.target.destination == "LIVE"
+            and self._allow_live
+            and writer
+            and writer.supports(plan.operation)
+        ):
+            return await self._execute_live(plan, approval, request.executed_by, writer)
         if plan.target.destination == "LIVE":
             self._record(
                 plan,
@@ -347,6 +363,68 @@ class ChangeService:
             simulation_notice=SIMULATION_NOTICE,
             correlation_id=plan.correlation_id,
             data=result,
+        )
+
+    async def _execute_live(
+        self, plan: ProposedChange, approval: Approval, actor: str, writer: LiveWriter
+    ) -> ExecutionEnvelope[ExecutionResult]:
+        precheck = await writer.precheck(plan)
+        if not precheck.passed:
+            self._plans[plan.change_id] = plan.model_copy(update={"status": ChangeStatus.FAILED})
+            self._record(
+                plan,
+                actor=actor,
+                action="execute",
+                success=False,
+                approval_id=approval.approval_id,
+                label=ExecutionLabel.LIVE,
+                details={"outcome": f"live precondition failed: {precheck.detail}"},
+            )
+            raise ApprovalError(f"live precondition failed at execution time: {precheck.detail}")
+        try:
+            item_id = await writer.execute(plan)
+        # Controlled boundary: any writer failure must be audited before it propagates unchanged.
+        except Exception as error:
+            self._plans[plan.change_id] = plan.model_copy(update={"status": ChangeStatus.FAILED})
+            self._record(
+                plan,
+                actor=actor,
+                action="execute",
+                success=False,
+                approval_id=approval.approval_id,
+                label=ExecutionLabel.LIVE,
+                details={"outcome": f"live write failed: {type(error).__name__}"},
+            )
+            raise
+        verification = await writer.verify(plan, item_id)
+        status = ChangeStatus.VERIFIED if verification.passed else ChangeStatus.FAILED
+        self._plans[plan.change_id] = plan.model_copy(update={"status": status})
+        self._record(
+            plan,
+            actor=actor,
+            action="execute",
+            success=verification.passed,
+            approval_id=approval.approval_id,
+            label=ExecutionLabel.LIVE,
+            details={"item_id": item_id, "writer": writer.name},
+        )
+        return ExecutionEnvelope[ExecutionResult](
+            operating_mode=self._mode,
+            execution_label=ExecutionLabel.LIVE,
+            requested_provider=writer.name,
+            selected_provider=writer.name,
+            cloud_operation_performed=True,
+            equivalent_fabric_service=f"Fabric REST: {plan.operation} ({plan.target.item_type})",
+            teaching_objective="An approved, destination-bound change executed by the scoped writer, then verified.",
+            correlation_id=plan.correlation_id,
+            data=ExecutionResult(
+                change_id=plan.change_id,
+                approval_id=approval.approval_id,
+                status=status,
+                execution_label=ExecutionLabel.LIVE,
+                verification=verification,
+                rollback=plan.rollback,
+            ),
         )
 
     def _valid_approval(self, plan: ProposedChange, approval_id: str) -> Approval:

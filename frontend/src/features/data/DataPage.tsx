@@ -46,7 +46,9 @@ function TableExplorer({ lakehouseId }: { readonly lakehouseId: string }) {
                     <td>
                       <code>{info.name}</code>
                     </td>
-                    <td>{info.row_count.toLocaleString()}</td>
+                    <td>
+                      {info.row_count === null ? "Not reported" : info.row_count.toLocaleString()}
+                    </td>
                     <td>
                       <button
                         type="button"

@@ -159,8 +159,9 @@ steps:
       MCP unit tests, which prove: only manifest tools are exposed and none can authorize, disabled
       tools are not registered, unimplemented entries fail fast, rate limits are enforced and
       errors are audited. Then compare with the real Fabric MCP servers in the
-      fabric-mcp-landscape lesson: pinned profiles and a hardened, read-only overlay for bundled
-      skill configurations arrive in Phase 5.
+      fabric-mcp-landscape lesson and the pinned profiles in `config/mcp/profiles.yaml`
+      (`ffia mcp profiles`): read-only by default, with a rendered profile replacing bundled
+      skill configurations.
     commands:
       - pytest tests/unit/test_mcp_server.py -q
       - cat config/mcp/README.md

@@ -22,22 +22,22 @@ nodes:
   - {id: caller, label: "Caller", sublabel: "App, MCP tool or demo", kind: client, state: implemented, col: 0, row: 1, icon: general/Browser, summary: "Any consumer of the control plane - the web app, an ffia-local tool or the offline demo."}
   - {id: router, label: "Provider router", sublabel: "Per-capability policy", kind: service, state: implemented, col: 1, row: 1, component: provider-router, repo_path: src/fabric_foundry_accelerator/fallback/router.py, runtime: router}
   - {id: breaker, label: "Circuit breaker", sublabel: "CLOSED, OPEN, HALF_OPEN", kind: policy, state: implemented, col: 2, row: 0, repo_path: src/fabric_foundry_accelerator/fallback/circuit_breaker.py, summary: "Opens after three consecutive failures and skips the live call; after the reset timeout one trial call decides whether it closes again."}
-  - {id: live, label: "LIVE Fabric provider", sublabel: "Timeout + bounded retries", kind: fabric, state: planned, phase: 5, col: 3, row: 0, component: fabric-mcp, runtime: fabric-live}
+  - {id: live, label: "LIVE Fabric provider", sublabel: "Timeout + bounded retries", repo_path: src/fabric_foundry_accelerator/providers/fabric/live.py, kind: fabric, state: tenant-validation, col: 3, row: 0, component: fabric-mcp, runtime: fabric-live}
   - {id: fallback-policy, label: "Fallback policy", sublabel: "config/environments", kind: policy, state: implemented, col: 2, row: 2, repo_path: config/policies/fallback.yaml, summary: "Which capabilities may fall back in each environment. Unknown resources and invalid requests are client errors and never fall back."}
   - {id: local, label: "Local Fabric provider", sublabel: "Approved equivalent", kind: local, state: implemented, col: 3, row: 2, component: local-fabric-provider, runtime: fabric-local}
   - {id: envelope, label: "Labeled result", sublabel: "LIVE / LOCAL in HYBRID mode / UNAVAILABLE", kind: evidence, state: implemented, col: 4, row: 1, repo_path: src/fabric_foundry_accelerator/models/execution.py, summary: "Every result is an execution envelope with a label, the requested and selected provider, fallback_used and the reason. Non-cloud labels cannot claim a cloud operation."}
   - {id: audit, icon: general/File, label: "Audit and route decisions", kind: evidence, state: implemented, col: 5, row: 1, component: audit-store, runtime: audit}
   - {id: write-request, label: "Approved LIVE write", sublabel: "Plan + approval", kind: policy, state: implemented, col: 0, row: 4, component: human-approval}
-  - {id: live-writer, label: "Live writer", sublabel: "Authorized, narrowly scoped", kind: policy, state: planned, phase: 5, col: 2, row: 4, component: scoped-writer}
+  - {id: live-writer, label: "Live writer", sublabel: "Authorized, narrowly scoped", repo_path: src/fabric_foundry_accelerator/providers/fabric/writer.py, kind: policy, state: tenant-validation, col: 2, row: 4, component: scoped-writer}
   - {id: simulated-workspace, label: "Simulated workspace", sublabel: "LOCAL rehearsals only", kind: local, state: implemented, col: 2, row: 3, repo_path: src/fabric_foundry_accelerator/services/changes.py, summary: "Where LOCAL plans execute, labeled SIMULATED. An approved LIVE change is never redirected here."}
   - {id: unavailable, label: "UNAVAILABLE (HTTP 409)", sublabel: "Plan again - nothing redirected", kind: evidence, state: implemented, col: 4, row: 4, summary: "When no authorized live writer exists the result is UNAVAILABLE with redirected_to_local false, and the attempt is audited."}
 edges:
   - {id: caller-router, source: caller, target: router, label: "Typed read", kind: access}
   - {id: router-breaker, source: router, target: breaker, label: "Allowed?", kind: authority}
-  - {id: breaker-live, source: breaker, target: live, label: "Try LIVE", kind: access, planned: true}
+  - {id: breaker-live, source: breaker, target: live, label: "Try LIVE", kind: access}
   - {id: router-policy, source: router, target: fallback-policy, label: "On failure", kind: fallback}
   - {id: policy-local, source: fallback-policy, target: local, label: "Approved fallback", kind: fallback}
-  - {id: live-envelope, source: live, target: envelope, label: "LIVE", kind: evidence, planned: true}
+  - {id: live-envelope, source: live, target: envelope, label: "LIVE", kind: evidence}
   - {id: local-envelope, source: local, target: envelope, label: "LOCAL (HYBRID mode, reason)", kind: evidence}
   - {id: envelope-audit, source: envelope, target: audit, kind: evidence}
   - {id: write-writer, source: write-request, target: live-writer, label: "Execute", kind: change}

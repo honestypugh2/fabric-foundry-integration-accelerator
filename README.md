@@ -110,7 +110,9 @@ available.
   Copilot.
 - The root [`.mcp.json`](.mcp.json) is the portable MCP configuration shared by VS Code, Copilot
   CLI and Claude Code. It contains the Microsoft Learn documentation server and the local
-  educational server `ffia-local`. The Fabric MCP profiles are added in Phase 5.
+  educational server `ffia-local`, rendered from the default profile in
+  [`config/mcp/profiles.yaml`](config/mcp/profiles.yaml). Opt-in Fabric MCP and Power BI Modeling
+  MCP profiles are rendered per client with `ffia mcp render <profile> --client vscode|claude|copilot-cli`.
 
 ## Operating modes
 

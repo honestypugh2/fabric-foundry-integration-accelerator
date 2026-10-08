@@ -27,6 +27,7 @@ from fabric_foundry_accelerator.models.execution import (
     new_correlation_id,
 )
 from fabric_foundry_accelerator.patterns.catalog import recommend
+from fabric_foundry_accelerator.providers.fabric.live import NOT_CONFIGURED_NOTE
 from fabric_foundry_accelerator.providers.fabric.outage import SimulatedOutageFabricProvider
 from fabric_foundry_accelerator.providers.fabric.routed import RoutedFabricProvider
 from fabric_foundry_accelerator.recovery.scenario import (
@@ -125,7 +126,7 @@ async def demo_check(container: Container, *, azure_probe: bool = True) -> DemoC
         CheckLine(
             component="Fabric API",
             status="NOT CONFIGURED" if live is None else live.kind,
-            detail=live.note if live else "No live Fabric provider in this build (Phase 5).",
+            detail=live.note if live else NOT_CONFIGURED_NOTE,
         ),
         CheckLine(
             component="Fabric MCP",
@@ -409,7 +410,7 @@ async def _agentic_change_act(container: Container, tracker: _Tracker) -> DemoSt
         )
     )
     executed = tracker.add(
-        container.changes.execute(
+        await container.changes.execute(
             ExecuteRequest(
                 change_id=plan.change_id,
                 approval_id=approval.approval_id,
@@ -450,7 +451,7 @@ async def _agentic_change_act(container: Container, tracker: _Tracker) -> DemoSt
         )
     )
     try:
-        live_service.execute(
+        await live_service.execute(
             ExecuteRequest(
                 change_id=live_plan.change_id,
                 approval_id=live_approval.approval_id,

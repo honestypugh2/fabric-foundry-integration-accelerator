@@ -114,6 +114,102 @@ sources:
     security_implications: Service-principal access requires an admin tenant switch; least-privilege workspace roles apply.
     limitations: Per-API identity support varies; long-running operations require polling.
     fallback: Local Fabric provider.
+  - id: fabric-notebook-definition
+    title: Notebook definition (Fabric REST API item definitions)
+    url: https://learn.microsoft.com/rest/api/fabric/articles/item-management/definitions/notebook-definition
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-07
+    last_updated_date: 2025-07-02
+    technology: Microsoft Fabric
+    associated_patterns: [P10, P20]
+    status: GA
+    key_architecture_statement: Notebook definitions use the fabricGitSource (default) or ipynb format; a PySpark notebook is one notebook-content.py part plus an optional .platform part, each InlineBase64.
+    implementation_relevance: Format of the committed reference notebooks under fabric/workspace/ and of the scoped writer's create-notebook request.
+    security_implications: A definition is code that runs with the caller's Spark identity; only reviewed, committed definitions are published.
+    limitations: The default lakehouse binding lives in notebook metadata; the reference notebooks leave it empty so no IDs are committed.
+    fallback: Local rendering and a local Spark 3.5 run of the same notebook code.
+  - id: fabric-create-lakehouse
+    title: Items - Create Lakehouse (Fabric REST API)
+    url: https://learn.microsoft.com/rest/api/fabric/lakehouse/items/create-lakehouse
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-07
+    last_updated_date: 2026-10-05
+    technology: Microsoft Fabric
+    associated_patterns: [P08, P20]
+    status: GA
+    key_architecture_statement: Creates a lakehouse in a workspace; supports long-running operations; requires a contributor workspace role and Lakehouse.ReadWrite.All or Item.ReadWrite.All.
+    implementation_relevance: One of the two operations of the gated scoped writer (create_lakehouse), with live duplicate re-check and verification.
+    security_implications: Contributor role is broader than the single operation; the accelerator narrows it with policy, approval and a bound dev workspace.
+    limitations: Display names must be unique per workspace and type; 202 responses must be polled.
+    fallback: LOCAL simulated change flow; LIVE requests are refused, never redirected, without a writer.
+  - id: fabric-lakehouse-list-tables
+    title: Tables - List Tables (Fabric REST API, Lakehouse)
+    url: https://learn.microsoft.com/rest/api/fabric/lakehouse/tables/list-tables
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-07
+    technology: Microsoft Fabric
+    associated_patterns: [P10]
+    status: PREVIEW
+    key_architecture_statement: Lists lakehouse tables in a data array with continuationToken pagination; documented as preview and not recommended for production.
+    implementation_relevance: Live provider's list_tables; row counts and columns are not part of the response.
+    security_implications: Requires Lakehouse.Read.All or Lakehouse.ReadWrite.All.
+    limitations: Preview API; schema-enabled lakehouses are not supported (use the Fabric MCP onelake_list-tables tool).
+    fallback: Local lakehouse tables (LOCAL) in HYBRID mode.
+  - id: fabric-admin-tenant-settings
+    title: Tenants - List Tenant Settings (Fabric Admin REST API)
+    url: https://learn.microsoft.com/rest/api/fabric/admin/tenants/list-tenant-settings
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-07
+    technology: Microsoft Fabric
+    associated_patterns: [P09]
+    status: GA
+    key_architecture_statement: Returns tenant settings (settingName, title, enabled, security groups) in a value array with continuation; requires Tenant.Read.All and a Fabric administrator.
+    implementation_relevance: ffia fabric readiness reads it to confirm the settings the labs rely on, matching by name or portal title.
+    security_implications: Admin-only read; non-admins get a SKIPPED readiness check rather than a guess.
+    limitations: Setting names are not published as a stable catalog; titles can change.
+    fallback: Manual confirmation in the Fabric admin portal.
+  - id: powerbi-execute-queries
+    title: Datasets - Execute Queries In Group (Power BI REST API)
+    url: https://learn.microsoft.com/rest/api/power-bi/datasets/execute-queries-in-group
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-07
+    last_updated_date: 2025-02-05
+    technology: Power BI
+    associated_patterns: [P10, P12]
+    status: GA
+    key_architecture_statement: Runs one DAX query per call against a semantic model; needs the Dataset Execute Queries REST API tenant setting and dataset read and build permissions.
+    implementation_relevance: Live provider evaluates each governed measure with EVALUATE ROW to reconcile the live model with the baseline.
+    security_implications: Respects the caller's permissions and row-level security; read-only.
+    limitations: One query and one table per call; at most 100,000 rows or 1,000,000 values; models with live AAS connections unsupported.
+    fallback: Local DuckDB measure evaluation (LOCAL).
+  - id: fabric-runtime-1-3
+    title: Runtime 1.3 in Fabric
+    url: https://learn.microsoft.com/fabric/data-engineering/runtime-1-3
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-07
+    last_updated_date: 2026-09-18
+    technology: Microsoft Fabric
+    associated_patterns: [P10]
+    status: GA
+    key_architecture_statement: Runtime 1.3 runs Apache Spark 3.5, Java 11, Scala 2.12, Python 3.11 and Delta Lake 3.2.
+    implementation_relevance: The reference notebooks are verified locally on Apache Spark 3.5.9 (Java 17), the same Spark line as Runtime 1.3.
+    security_implications: Notebook code runs with the caller's identity on the workspace capacity.
+    limitations: A local Spark run is LOCAL evidence only; Delta, OneLake paths and capacity behavior require tenant validation.
+    fallback: Local DuckDB build of the same SQL.
+  - id: fabric-trial
+    title: Fabric trial capacity
+    url: https://learn.microsoft.com/fabric/fundamentals/fabric-trial
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-07
+    last_updated_date: 2026-09-29
+    technology: Microsoft Fabric
+    associated_patterns: [P10]
+    status: GA
+    key_architecture_statement: A Fabric trial capacity gives free access for 60 days to most Fabric workloads; it is started from the account manager in the Fabric portal.
+    implementation_relevance: Fastest path to make a demo tenant ready for the live labs (see docs/operations/fabric-tenant-readiness.md).
+    security_implications: Trial capacity is per user; assign a dedicated dev workspace to it.
+    limitations: Time-limited; some features and regions differ from paid F SKUs.
+    fallback: An F2+ capacity in an Azure subscription of the tenant.
   - id: fabric-ai-functions
     title: AI functions in Fabric
     url: https://learn.microsoft.com/fabric/data-science/ai-functions/overview

@@ -23,14 +23,20 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Fabric IQ and Data Agents | [Ontology overview (Fabric IQ)](#fabric-iq-ontology) | PREVIEW | 2026-10-05 |
 | Fabric IQ and Data Agents | [What is Fabric IQ?](#fabric-iq-overview) | PREVIEW | 2026-10-05 |
 | Microsoft Agent Framework | [Microsoft Agent Framework overview](#agent-framework) | GA | 2026-10-05 |
+| Microsoft Fabric | [Tenants - List Tenant Settings (Fabric Admin REST API)](#fabric-admin-tenant-settings) | GA | 2026-10-07 |
 | Microsoft Fabric | [AI functions in Fabric](#fabric-ai-functions) | GA | 2026-10-05 |
+| Microsoft Fabric | [Items - Create Lakehouse (Fabric REST API)](#fabric-create-lakehouse) | GA | 2026-10-07 |
 | Microsoft Fabric | [Microsoft Fabric deployment patterns](#fabric-deployment-patterns) | GUIDANCE | 2026-10-05 |
 | Microsoft Fabric | [Direct Lake overview](#fabric-direct-lake) | GA | 2026-10-05 |
 | Microsoft Fabric | [Fabric Git integration overview](#fabric-git-integration) | GA | 2026-10-05 |
+| Microsoft Fabric | [Tables - List Tables (Fabric REST API, Lakehouse)](#fabric-lakehouse-list-tables) | PREVIEW | 2026-10-07 |
 | Microsoft Fabric | [Implement medallion lakehouse architecture in Microsoft Fabric](#fabric-medallion) | GUIDANCE | 2026-10-05 |
+| Microsoft Fabric | [Notebook definition (Fabric REST API item definitions)](#fabric-notebook-definition) | GA | 2026-10-07 |
 | Microsoft Fabric | [Open mirroring landing zone requirements and format](#fabric-open-mirroring-format) | GA | 2026-10-07 |
 | Microsoft Fabric | [What is Microsoft Fabric?](#fabric-overview) | GA | 2026-10-05 |
 | Microsoft Fabric | [Fabric REST API identity support](#fabric-rest-identity) | GA | 2026-10-05 |
+| Microsoft Fabric | [Runtime 1.3 in Fabric](#fabric-runtime-1-3) | GA | 2026-10-07 |
+| Microsoft Fabric | [Fabric trial capacity](#fabric-trial) | GA | 2026-10-07 |
 | Microsoft Fabric | [Azure Well-Architected Framework service guide for Microsoft Fabric](#fabric-waf) | GUIDANCE | 2026-10-05 |
 | Microsoft Fabric and Microsoft Foundry | [Data architecture for AI agents across your organization](#caf-agent-data-architecture) | GUIDANCE | 2026-10-07 |
 | Microsoft Foundry | [Baseline Microsoft Foundry chat reference architecture](#baseline-foundry-chat) | GUIDANCE | 2026-10-05 |
@@ -48,6 +54,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Model Context Protocol | [Choose a Microsoft Fabric MCP server](#fabric-mcp-servers-list) | GUIDANCE | 2026-10-05 |
 | Model Context Protocol | [Model Context Protocol specification versioning](#mcp-specification) | GA | 2026-10-05 |
 | Model Context Protocol | [Power BI Authoring (Modeling) MCP server](#powerbi-authoring-mcp) | GA | 2026-10-05 |
+| Power BI | [Datasets - Execute Queries In Group (Power BI REST API)](#powerbi-execute-queries) | GA | 2026-10-07 |
 | Toolchain | [Node.js release schedule](#node-release-schedule) | GA | 2026-10-05 |
 | Toolchain | [Status of Python versions](#python-lifecycle) | GA | 2026-10-05 |
 
@@ -291,6 +298,25 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 
 ## Microsoft Fabric
 
+<a id="fabric-admin-tenant-settings"></a>
+
+### Tenants - List Tenant Settings (Fabric Admin REST API)
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/rest/api/fabric/admin/tenants/list-tenant-settings |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-07 |
+| Last updated | — |
+| Status | GA |
+| Associated patterns | P09 |
+| Key architecture statement | Returns tenant settings (settingName, title, enabled, security groups) in a value array with continuation; requires Tenant.Read.All and a Fabric administrator. |
+| Implementation relevance | ffia fabric readiness reads it to confirm the settings the labs rely on, matching by name or portal title. |
+| Security implications | Admin-only read; non-admins get a SKIPPED readiness check rather than a guess. |
+| Limitations | Setting names are not published as a stable catalog; titles can change. |
+| Fallback | Manual confirmation in the Fabric admin portal. |
+| Deprecation / replacement | — |
+
 <a id="fabric-ai-functions"></a>
 
 ### AI functions in Fabric
@@ -308,6 +334,25 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Requires tenant switches for Copilot/Azure OpenAI; prompts and data are not logged per documentation. |
 | Limitations | Requires paid capacity (F2 or higher). |
 | Fallback | Deterministic local enrichment, labeled SIMULATED. |
+| Deprecation / replacement | — |
+
+<a id="fabric-create-lakehouse"></a>
+
+### Items - Create Lakehouse (Fabric REST API)
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/rest/api/fabric/lakehouse/items/create-lakehouse |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-07 |
+| Last updated | 2026-10-05 |
+| Status | GA |
+| Associated patterns | P08, P20 |
+| Key architecture statement | Creates a lakehouse in a workspace; supports long-running operations; requires a contributor workspace role and Lakehouse.ReadWrite.All or Item.ReadWrite.All. |
+| Implementation relevance | One of the two operations of the gated scoped writer (create_lakehouse), with live duplicate re-check and verification. |
+| Security implications | Contributor role is broader than the single operation; the accelerator narrows it with policy, approval and a bound dev workspace. |
+| Limitations | Display names must be unique per workspace and type; 202 responses must be polled. |
+| Fallback | LOCAL simulated change flow; LIVE requests are refused, never redirected, without a writer. |
 | Deprecation / replacement | — |
 
 <a id="fabric-deployment-patterns"></a>
@@ -367,6 +412,25 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Fallback | Local fabric/workspace definitions and dry-run deployment plans. |
 | Deprecation / replacement | — |
 
+<a id="fabric-lakehouse-list-tables"></a>
+
+### Tables - List Tables (Fabric REST API, Lakehouse)
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/rest/api/fabric/lakehouse/tables/list-tables |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-07 |
+| Last updated | — |
+| Status | PREVIEW |
+| Associated patterns | P10 |
+| Key architecture statement | Lists lakehouse tables in a data array with continuationToken pagination; documented as preview and not recommended for production. |
+| Implementation relevance | Live provider's list_tables; row counts and columns are not part of the response. |
+| Security implications | Requires Lakehouse.Read.All or Lakehouse.ReadWrite.All. |
+| Limitations | Preview API; schema-enabled lakehouses are not supported (use the Fabric MCP onelake_list-tables tool). |
+| Fallback | Local lakehouse tables (LOCAL) in HYBRID mode. |
+| Deprecation / replacement | — |
+
 <a id="fabric-medallion"></a>
 
 ### Implement medallion lakehouse architecture in Microsoft Fabric
@@ -384,6 +448,25 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Layer separation supports least-privilege access (e.g., analysts read gold only). |
 | Limitations | Guidance, not an enforced product feature. |
 | Fallback | Local medallion pipeline over Parquet/DuckDB. |
+| Deprecation / replacement | — |
+
+<a id="fabric-notebook-definition"></a>
+
+### Notebook definition (Fabric REST API item definitions)
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/rest/api/fabric/articles/item-management/definitions/notebook-definition |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-07 |
+| Last updated | 2025-07-02 |
+| Status | GA |
+| Associated patterns | P10, P20 |
+| Key architecture statement | Notebook definitions use the fabricGitSource (default) or ipynb format; a PySpark notebook is one notebook-content.py part plus an optional .platform part, each InlineBase64. |
+| Implementation relevance | Format of the committed reference notebooks under fabric/workspace/ and of the scoped writer's create-notebook request. |
+| Security implications | A definition is code that runs with the caller's Spark identity; only reviewed, committed definitions are published. |
+| Limitations | The default lakehouse binding lives in notebook metadata; the reference notebooks leave it empty so no IDs are committed. |
+| Fallback | Local rendering and a local Spark 3.5 run of the same notebook code. |
 | Deprecation / replacement | — |
 
 <a id="fabric-open-mirroring-format"></a>
@@ -441,6 +524,44 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Service-principal access requires an admin tenant switch; least-privilege workspace roles apply. |
 | Limitations | Per-API identity support varies; long-running operations require polling. |
 | Fallback | Local Fabric provider. |
+| Deprecation / replacement | — |
+
+<a id="fabric-runtime-1-3"></a>
+
+### Runtime 1.3 in Fabric
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/fabric/data-engineering/runtime-1-3 |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-07 |
+| Last updated | 2026-09-18 |
+| Status | GA |
+| Associated patterns | P10 |
+| Key architecture statement | Runtime 1.3 runs Apache Spark 3.5, Java 11, Scala 2.12, Python 3.11 and Delta Lake 3.2. |
+| Implementation relevance | The reference notebooks are verified locally on Apache Spark 3.5.9 (Java 17), the same Spark line as Runtime 1.3. |
+| Security implications | Notebook code runs with the caller's identity on the workspace capacity. |
+| Limitations | A local Spark run is LOCAL evidence only; Delta, OneLake paths and capacity behavior require tenant validation. |
+| Fallback | Local DuckDB build of the same SQL. |
+| Deprecation / replacement | — |
+
+<a id="fabric-trial"></a>
+
+### Fabric trial capacity
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/fabric/fundamentals/fabric-trial |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-07 |
+| Last updated | 2026-09-29 |
+| Status | GA |
+| Associated patterns | P10 |
+| Key architecture statement | A Fabric trial capacity gives free access for 60 days to most Fabric workloads; it is started from the account manager in the Fabric portal. |
+| Implementation relevance | Fastest path to make a demo tenant ready for the live labs (see docs/operations/fabric-tenant-readiness.md). |
+| Security implications | Trial capacity is per user; assign a dedicated dev workspace to it. |
+| Limitations | Time-limited; some features and regions differ from paid F SKUs. |
+| Fallback | An F2+ capacity in an Azure subscription of the tenant. |
 | Deprecation / replacement | — |
 
 <a id="fabric-waf"></a>
@@ -770,6 +891,27 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Read/write; back up models first; metadata may appear in chat logs. |
 | Limitations | Hosted deployment is preview; local deployment reaches Power BI Desktop (Windows) and PBIP files. |
 | Fallback | Reference TMDL and local PBIR validation. |
+| Deprecation / replacement | — |
+
+## Power BI
+
+<a id="powerbi-execute-queries"></a>
+
+### Datasets - Execute Queries In Group (Power BI REST API)
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/rest/api/power-bi/datasets/execute-queries-in-group |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-07 |
+| Last updated | 2025-02-05 |
+| Status | GA |
+| Associated patterns | P10, P12 |
+| Key architecture statement | Runs one DAX query per call against a semantic model; needs the Dataset Execute Queries REST API tenant setting and dataset read and build permissions. |
+| Implementation relevance | Live provider evaluates each governed measure with EVALUATE ROW to reconcile the live model with the baseline. |
+| Security implications | Respects the caller's permissions and row-level security; read-only. |
+| Limitations | One query and one table per call; at most 100,000 rows or 1,000,000 values; models with live AAS connections unsupported. |
+| Fallback | Local DuckDB measure evaluation (LOCAL). |
 | Deprecation / replacement | — |
 
 ## Toolchain

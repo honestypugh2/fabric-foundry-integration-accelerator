@@ -39,7 +39,7 @@ evidence:
   - statement: Fabric AI functions (for example classify, extract and summarize) can enrich DataFrames and require a paid capacity and the tenant setting for Copilot and Azure OpenAI.
     category: DOCUMENTED FABRIC BEHAVIOR
     sources: [fabric-ai-functions]
-  - statement: The reference DAX in the semantic model contract matches the local SQL measures only after it is evaluated in a tenant (Phase 5).
+  - statement: The reference DAX in the semantic model contract matches the local SQL measures only after it is evaluated in a tenant, for example through the opt-in LiveFabricProvider (Power BI executeQueries), which has been tested only with mocked HTTP.
     category: REQUIRES TENANT VALIDATION
   - statement: AI may draft transformations, but a change to Silver or Gold logic should merge only when the build checks and the expected baseline pass.
     category: PRODUCTION RECOMMENDATION

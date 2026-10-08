@@ -54,6 +54,10 @@ jobs:
         run: ffia education check
       - name: Architecture diagrams (draw.io and docs) are current
         run: ffia diagrams check
+      - name: MCP profiles are pinned, least-privilege and current
+        run: ffia mcp check
+      - name: Fabric reference notebooks match the medallion SQL
+        run: ffia notebooks check
       - name: Offline demo release gate
         run: ffia demo check --no-azure-cli && ffia demo offline
       - name: Build distribution

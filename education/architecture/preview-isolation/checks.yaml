@@ -1,0 +1,46 @@
+checks:
+  - id: exec-preview-risk
+    level: executive
+    question: What is the main risk of building a business process on a preview feature?
+    choices:
+      - It costs more than a GA feature
+      - Its behavior, limits or availability can change without a support commitment
+      - It cannot be used with Microsoft Fabric
+    answer: 1
+    explanation: Preview features carry no GA support commitment and can change, so they must not be a hidden dependency.
+  - id: l100-default-flags
+    level: l100
+    question: In the example overlay, what is the default value of every preview feature flag?
+    choices:
+      - true, so learners see everything
+      - false, so the default experience needs no preview feature
+      - Unset, decided at runtime
+    answer: 1
+    explanation: All preview flags are false; enabling one is an explicit, reviewed change.
+  - id: l200-label
+    level: l200
+    question: The live provider lists lakehouse tables through a preview REST API. Which label does the result carry?
+    choices:
+      - LIVE, because the call reached the tenant
+      - PREVIEW, with cloud_operation_performed true
+      - SIMULATED, because preview APIs are not real
+    answer: 1
+    explanation: The call is real, but the result depends on a preview contract, so it is labeled PREVIEW.
+  - id: l300-mcp-check
+    level: l300
+    question: Someone adds a write-capable preview MCP server to the default profile. What stops it?
+    choices:
+      - Nothing; the client will ask for approval later
+      - ffia mcp check fails because the default profile must be LOCAL and read-only
+      - The MCP server refuses to start
+    answer: 1
+    explanation: The profile check runs in make validate and CI and rejects a default profile that writes or is not LOCAL.
+  - id: l400-promotion
+    level: l400
+    question: Which promotion path keeps the default experience stable when a preview feature reaches GA?
+    choices:
+      - Enable the flag in every environment at once and remove the simulation
+      - Update the source status, enable the flag in one environment through review, keep the simulation, then widen
+      - Hard-code the feature on and delete the flag
+    answer: 1
+    explanation: Promote through reviewed configuration, one environment at a time, keeping the offline fallback.

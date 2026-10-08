@@ -59,6 +59,7 @@ destinations:
   LIVE:
     allowed: true
     note: >-
-      Requires FFIA_ALLOW_LIVE_MUTATION=1 and human approval. Execution also needs an authorized,
-      narrowly scoped live writer (not implemented before Phase 5): until then an approved LIVE
-      change returns UNAVAILABLE. An approved LIVE change is never redirected to LOCAL.
+      Requires FFIA_ALLOW_LIVE_MUTATION=1 and human approval. Execution also needs the scoped live
+      writer (create_lakehouse and create_notebook only; FFIA_FABRIC_LIVE=1 and a bound workspace).
+      Without it an approved LIVE change returns UNAVAILABLE. An approved LIVE change is never
+      redirected to LOCAL.

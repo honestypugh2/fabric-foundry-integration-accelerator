@@ -1,0 +1,79 @@
+id: preview-isolation
+area: architecture
+title: "Preview isolation: keeping preview features out of the default experience"
+summary: >-
+  Several Fabric and Power BI capabilities this accelerator teaches are in preview (Fabric IQ
+  ontology, the Data Warehouse MCP server, hosted Power BI authoring MCP, the Foundry Fabric data
+  agent tool, even some REST endpoints). Preview features can change or disappear, so they stay
+  behind flags that are off by default, carry a PREVIEW label wherever they appear, have an offline
+  simulation, and are never required by the default demo.
+status: LOCAL
+pattern_ids: [P09]
+learning_objectives:
+  - Explain why a preview feature must never be a dependency of the default demo or a production path.
+  - Locate the four places preview status is enforced in this repository - overlay flags, labels, MCP profiles and pattern recommendations.
+  - Read a result envelope and tell a LIVE call to a preview API from a GA call.
+  - Design a rollout that promotes a preview feature to GA without changing the default experience first.
+concepts:
+  - term: Preview feature flag
+    definition: An entry under preview_feature_flags in the customer overlay. Every flag is false by default; enabling one is an explicit, reviewed change.
+  - term: PREVIEW label
+    definition: The execution label for results that depend on a preview capability. It appears in API envelopes, the UI, diagrams and lessons, even when the call itself is live.
+  - term: Default profile
+    definition: The MCP profile rendered into the project .mcp.json. It must be LOCAL and read-only; `ffia mcp check` fails otherwise.
+  - term: Offline simulation
+    definition: A LOCAL or SIMULATED equivalent that teaches the same idea without the preview service, so the lesson still works when the service is unavailable.
+evidence:
+  - statement: The example overlay ships with every preview flag off, and a unit test fails if any is enabled.
+    category: SIMULATED LOCALLY
+  - statement: The default MCP profile is LOCAL and read-only, and no preview MCP server (Fabric IQ, Data Warehouse, hosted Power BI authoring) appears in any committed profile.
+    category: SIMULATED LOCALLY
+  - statement: The Lakehouse List Tables REST API is documented as preview, so the live provider labels its results PREVIEW with cloud_operation_performed true.
+    category: PREVIEW LIMITATION
+    sources: [fabric-lakehouse-list-tables]
+  - statement: The Data Warehouse MCP server and hosted Power BI authoring MCP are documented as preview.
+    category: PREVIEW LIMITATION
+    sources: [fabric-dw-mcp, powerbi-authoring-mcp]
+  - statement: Ontology MCP is in preview and documents limitations such as service-principal authentication.
+    category: PREVIEW LIMITATION
+    sources: [fabric-iq-ontology]
+  - statement: Preview behavior in a specific tenant (availability, region, limits) must be re-checked before each demo.
+    category: REQUIRES TENANT VALIDATION
+    sources: [fabric-mcp-servers-list]
+  - statement: Promote a preview feature only through a reviewed change that flips its flag in one environment first, with the offline simulation kept as the fallback.
+    category: PRODUCTION RECOMMENDATION
+try_it:
+  - label: See which preview features are enabled (none by default)
+    command: ffia demo offline
+    result_label: LOCAL
+  - label: Read the preview flags in the example overlay
+    command: grep -A6 preview_feature_flags config/customers/example-healthcare.yaml
+    result_label: LOCAL
+  - label: Confirm the default MCP profile is LOCAL and read-only
+    command: ffia mcp profiles && ffia mcp check
+    result_label: LOCAL
+copilot_prompt: >-
+  Without calling any cloud tool, find every place this repository decides whether a preview
+  feature is used: preview_feature_flags in config/customers, the PREVIEW execution label in
+  src/fabric_foundry_accelerator, pattern recommendations that exclude PREVIEW patterns, and the
+  MCP profile check. Summarize them as a table (mechanism, file, what it blocks) and name one gap.
+claude_code_prompt: >-
+  Read config/customers/example-healthcare.yaml, config/mcp/profiles.yaml and
+  src/fabric_foundry_accelerator/mcp/profiles.py. Explain how a preview MCP server would be added
+  without changing the default experience, and which check would fail if someone added it to the
+  default profile. Do not edit any file.
+production_notes:
+  - Keep preview flags per environment; enable in dev first, never directly in production.
+  - Label preview results in every surface (API, UI, logs, evidence) so nobody mistakes preview behavior for a GA contract.
+  - Keep an offline simulation for every preview feature so demos and training survive service changes.
+  - Re-check preview status in the source registry before each release; update the label when a feature reaches GA.
+  - Track preview APIs used by live code (for example Lakehouse List Tables) and plan a GA replacement.
+sources:
+  - fabric-lakehouse-list-tables
+  - fabric-dw-mcp
+  - powerbi-authoring-mcp
+  - fabric-iq-ontology
+  - fabric-iq-mcp
+  - fabric-mcp-servers-list
+related_labs: [lab-mcp-allow-list]
+related_guides: [hc-01-fabric-mcp-powerbi-medallion-lab]

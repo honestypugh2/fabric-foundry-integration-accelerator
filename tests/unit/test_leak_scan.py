@@ -64,6 +64,9 @@ def test_finding_detail_never_contains_matched_value() -> None:
 
 def test_guid_detection_allows_nil_guid() -> None:
     assert _kinds(f"workspace {SAMPLE_GUID}") == [FindingKind.GUID]
+    assert _kinds("synthetic 00000000-0000-0000-0000-00000000a001") == []
+    not_synthetic = "00000000-0000-0000-" + "0001-00000000a001"  # built so this file stays clean
+    assert _kinds(f"not synthetic {not_synthetic}") == [FindingKind.GUID]
     assert _kinds("placeholder 00000000-0000-0000-0000-000000000000") == []
 
 

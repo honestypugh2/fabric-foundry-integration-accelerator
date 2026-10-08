@@ -1,0 +1,144 @@
+# ADR-0012: Live Fabric integration — read-only provider, gated scoped writer, MCP profiles as code, reference notebooks
+
+- Status: Accepted
+- Date: 2026-10-07
+- Supersedes the Phase 5 follow-ups in ADR-0003, ADR-0005, ADR-0006 and ADR-0007
+
+## Context
+
+Phase 5 connects the accelerator to a real Fabric tenant without weakening the offline default or
+the authority rules. Four facts shaped it:
+
+- **The presenter's demo tenant was not Fabric-ready on build day.** `ffia fabric readiness`
+  found:
+  - `401 UserNotLicensed` from the Fabric API;
+  - no Fabric capacity;
+  - the `Microsoft.Fabric` resource provider not registered.
+
+  Live code therefore had to be built and proven offline, with tenant runs left as
+  REQUIRES TENANT VALIDATION.
+- **Fabric MCP 1.4.0 is no longer docs-only.** Its own `tools list` shows 48 tools: 19 can write
+  and 6 are destructive. `datafactory_execute-query` is flagged read-only but runs arbitrary M
+  queries, and `onelake_download-file` copies data out of OneLake.
+- **Fabric REST has no row preview or model-definition read.** The Lakehouse List Tables API is
+  preview.
+- **The medallion SQL targets DuckDB.** No local Spark was available until a user-space JDK 17
+  and PySpark 3.5.9 were installed outside the project.
+
+## Options
+
+1. Use the Fabric MCP server as the live provider.
+2. Use a thin, typed Fabric REST client as the live provider. The Fabric MCP server is offered to
+   harnesses through pinned, allow-listed profiles.
+3. Hand-write Spark notebooks.
+4. Generate notebooks from the same SQL the offline build runs.
+
+## Decision
+
+Options 2 and 4.
+
+- **`LiveFabricProvider`** reads over the Fabric REST API and Power BI `executeQueries` (DAX):
+  - Results are labeled LIVE, or PREVIEW for preview APIs, with `cloud_operation_performed: true`.
+  - Row previews and model definitions raise clear errors instead of being faked.
+  - The client has bounded `Retry-After` handling, long-running-operation polling and
+    continuation-token pagination.
+  - Errors map to router classes: 404 never falls back, 401/429/5xx/timeout may fall back for
+    reads in HYBRID mode, and writes never fall back.
+  - Tokens come from `az` for one pinned tenant, with a 30-second process timeout.
+- **Explicit opt-in.** Live reads need all of:
+  - `FFIA_FABRIC_LIVE=1`;
+  - a hybrid or live environment;
+  - the git-ignored `config/customers/<overlay>.local.yaml` bindings file, which pins the tenant
+    and workspace IDs.
+- **`FabricScopedWriter`** supports only `create_lakehouse` and `create_notebook`.
+  - It runs only after policy allows the change, a different person approves it,
+    `FFIA_ALLOW_LIVE_MUTATION=1` is set, and the workspace alias is bound.
+  - It re-checks duplicates live before writing and verifies after writing, with VERIFIED LIVE
+    evidence.
+  - It audits failures and re-raises them.
+  - Notebooks are created only from committed definitions.
+  - The writer is tested with mocks only. It has never run against a tenant, and it never runs
+    without a person approving the plan.
+- **`ffia fabric readiness`.** Read-only tenant checks, each with a remediation.
+- **MCP profiles as code.** `config/mcp/profiles.yaml` holds five profiles and a pinned tool
+  catalog, rendered per client with `ffia mcp render` for VS Code (`servers`), Claude Code
+  (`mcpServers`) and Copilot CLI (`mcpServers`, `type: local`, `tools`). `ffia mcp check` (in
+  validate and CI) requires:
+  - exact stable pins;
+  - no `--dangerously-*` and no EULA flags;
+  - read-only profiles use `--read-only` and an explicit allow-list of catalog read tools, minus
+    the query and egress exclusions;
+  - destructive tools are never exposed;
+  - write-capable profiles are opt-in with per-call approval;
+  - the default profile is LOCAL and read-only, and equals the committed `.mcp.json`.
+- **Reference notebooks.**
+  - `ffia notebooks render` writes `MCP_01_Bronze`, `MCP_02_Silver` and `MCP_03_Gold` in Fabric
+    Git source format, using a closed set of DuckDB→Spark rewrites. Any unknown construct fails
+    generation.
+  - `ffia notebooks check` (in validate and CI) keeps them current.
+  - `scripts/verify_spark_notebooks.py` executes the committed notebook code on Apache Spark
+    3.5.9.
+
+## Rationale
+
+- A typed REST client gives deterministic, testable behavior and exact error semantics. An MCP
+  server is a capability surface for agents, not a dependency of domain code.
+- An explicit tool allow-list is enforced by the server itself. We verified this: the rendered
+  profiles expose exactly 6 tools (`fabric-docs`) and 16 tools (`fabric-readonly`), all
+  `readOnlyHint: true`. That is stronger than trusting a client to ignore tools.
+- Generating notebooks from one SQL source prevents drift between the offline and Fabric paths.
+  The local Spark run passed all 85 notebook checks against the committed baseline: row counts,
+  keys, missing dimension keys, diagnostics, reconciliation to the cent, and readmissions of 35 out
+  of 211.
+
+## Trade-offs
+
+- **Live paths are unproven in a tenant.** Throttling, Delta writes, OneLake paths and capacity
+  behavior all require tenant validation.
+- **The rewriter is intentionally small.** New SQL idioms need a rule and a test.
+- **The Bronze reference reads strings, where the lab prompt says `inferSchema`.** This is
+  documented as a comparison point.
+- **List Tables is a preview API.** Its results are labeled PREVIEW.
+
+## Security impact
+
+- No identifiers are committed. Tokens are never logged or returned.
+- Live access is opt-in. Writes need two flags, policy, separation of duties and a bound dev
+  workspace.
+- MCP profiles exclude arbitrary query and data-egress tools from read-only use, and never expose
+  destructive tools.
+
+## Operations impact
+
+- New commands: `ffia fabric readiness`, `ffia mcp profiles|render|check` and
+  `ffia notebooks render|check`.
+- Runbook: [fabric-tenant-readiness.md](../operations/fabric-tenant-readiness.md).
+
+## Offline impact
+
+None on the default experience:
+
+- With `FFIA_FABRIC_LIVE` unset, the container never builds a live client.
+- The default MCP profile is LOCAL.
+- Every live test is skipped unless explicitly enabled.
+
+## Education impact
+
+- The Q24 preview-isolation lesson.
+- Lessons now describe real profiles, the provider, the writer and the notebooks with honest
+  labels.
+- Diagram nodes moved from planned to implemented or tenant-validation.
+
+## Revisit trigger
+
+- A successful tenant run, or a Fabric MCP or Power BI Modeling MCP release. Re-capture the tool
+  catalog and re-pin.
+- A GA replacement for List Tables.
+- A Fabric runtime change to Spark 4.
+
+## Authoritative references
+
+`fabric-rest-identity`, `fabric-notebook-definition`, `fabric-create-lakehouse`,
+`fabric-lakehouse-list-tables`, `fabric-admin-tenant-settings`, `powerbi-execute-queries`,
+`fabric-runtime-1-3`, `fabric-trial`, `fabric-mcp-local`, `powerbi-authoring-mcp`
+(see `docs/research/sources.yaml`).

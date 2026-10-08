@@ -350,7 +350,7 @@ export interface Evidence {
 }
 
 /** How strongly a statement is supported. Used to keep teaching claims honest. */
-export type EvidenceCategory = "SIMULATED LOCALLY" | "DOCUMENTED FABRIC BEHAVIOR" | "DOCUMENTED BEHAVIOR" | "REQUIRES TENANT VALIDATION" | "ASSUMPTION" | "PRODUCTION RECOMMENDATION" | "PREVIEW LIMITATION";
+export type EvidenceCategory = "SIMULATED LOCALLY" | "DOCUMENTED FABRIC BEHAVIOR" | "DOCUMENTED BEHAVIOR" | "REQUIRES TENANT VALIDATION" | "ASSUMPTION" | "PRODUCTION RECOMMENDATION" | "PREVIEW LIMITATION" | "VERIFIED LIVE";
 
 /** A claim with how strongly it is supported (keeps teaching honest). */
 export interface EvidenceClaim {
@@ -777,7 +777,7 @@ export interface SnapshotManifest {
 export interface TableInfo {
   readonly name: string;
   readonly layer: string;
-  readonly row_count: number;
+  readonly row_count: number | null;
   readonly columns: readonly ColumnInfo[];
 }
 

@@ -1,6 +1,6 @@
 {
   "cloud_operation_performed": false,
-  "correlation_id": "551963e5c0d74dcea6b3804e1843b688",
+  "correlation_id": "0cfd1c72dbfa4a5b843ee561d2ad2ee4",
   "data": [
     {
       "description": "Baseline accelerator profile: nine entities (seven sources plus facility and payer masters) feeding a star schema with physical role-playing date dimensions.",
@@ -47,5 +47,5 @@
   "selected_provider": "Local Fabric Educational Provider",
   "simulation_notice": "LOCAL educational analog over synthetic Parquet data. No Microsoft Fabric, OneLake or Power BI operation was performed.",
   "teaching_objective": "Inventory items before choosing which governed context to use.",
-  "timestamp": "2026-10-07T23:08:05.038626Z"
+  "timestamp": "2026-10-08T00:28:04.303337Z"
 }

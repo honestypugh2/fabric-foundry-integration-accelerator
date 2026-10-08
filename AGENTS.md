@@ -62,6 +62,9 @@ uv sync --frozen            # install exactly what uv.lock specifies
 | Education content | `ffia education check` · frontend fixtures: `make fixtures` (after API model changes) |
 | Architecture diagrams | Edit `education/architecture/views/*.yaml`, then `ffia diagrams render` · `ffia diagrams check` |
 | Run the app | `make run` (API on :8000 + frontend on :5173) |
+| MCP profiles | Edit `config/mcp/profiles.yaml`, then `ffia mcp check` · `ffia mcp render <profile> --client vscode\|claude\|copilot-cli` |
+| Fabric reference notebooks | `ffia notebooks render` (after SQL changes) · `ffia notebooks check` · optional local Spark run: `scripts/verify_spark_notebooks.py` |
+| Live Fabric (opt-in, read-only) | `ffia fabric readiness` · `FFIA_FABRIC_LIVE=1` + `config/customers/<overlay>.local.yaml` · `pytest -m live` |
 | Source registry | `ffia sources render` (after editing `sources.yaml`) · `ffia sources check` |
 | Synthetic data | `ffia data generate --check` · `ffia data build` (Bronze → Silver → Gold + baseline) · `ffia data export --profile <id> --dest <dir>` |
 | Recovery drill | `ffia recovery run` (Open Mirroring snapshot + replay, SIMULATED) |

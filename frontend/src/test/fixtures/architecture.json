@@ -157,7 +157,7 @@
         "executive": "A standard way for agents to reach Fabric capabilities; it does not decide who may do what.",
         "l100": "Several MCP servers expose Fabric docs, OneLake, items, SQL, DAX and authoring tools to agents.",
         "l200": "Pick the narrowest server; they run with the caller's Fabric permissions; status differs by server.",
-        "l300": "Fabric MCP profiles arrive in Phase 5; today the local docs server and Microsoft Learn are the safe defaults.",
+        "l300": "Pinned profiles live in config/mcp/profiles.yaml; offline (Microsoft Learn + ffia-local) is the default, fabric-docs and fabric-readonly are read-only, and authoring is a separate opt-in profile.",
         "l400": "Do not conflate servers; pin versions; read-only allow-lists by default; writes go through the change flow."
       },
       "does_not_own": [

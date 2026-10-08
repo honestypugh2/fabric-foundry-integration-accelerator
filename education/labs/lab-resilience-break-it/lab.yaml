@@ -129,7 +129,7 @@ steps:
     expected: >-
       The LIVE read returns 503. The router tests pass, covering breaker transitions, fallback with a
       reason, client errors without fallback, timeouts and UNAVAILABLE. Live Fabric throttling and
-      failure behavior still requires tenant validation in Phase 5.
+      failure behavior still requires tenant validation.
     evidence_category: REQUIRES TENANT VALIDATION
   - stage: TRY WITH COPILOT
     title: Ask GitHub Copilot to explain the route decisions

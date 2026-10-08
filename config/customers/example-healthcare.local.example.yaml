@@ -1,0 +1,9 @@
+# Copy to example-healthcare.local.yaml (git-ignored) and fill in your own demo-tenant values.
+# Never commit real tenant, workspace or item identifiers. The placeholders below are not GUIDs,
+# so this example file is never loaded by accident.
+tenant_id: <TENANT_ID>
+workspaces:
+  demo-dev:
+    workspace_id: <DEV_WORKSPACE_ID>
+    semantic_models:
+      hc-lab-7file-v1: <SEMANTIC_MODEL_ID>

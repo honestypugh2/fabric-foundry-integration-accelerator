@@ -32,7 +32,7 @@ evidence:
     category: SIMULATED LOCALLY
   - statement: The simulated Fabric outage is a training fault injector that never contacts any service and is reported as FAULT-INJECTION, not as a live provider.
     category: SIMULATED LOCALLY
-  - statement: Live Fabric REST and Fabric MCP failure modes, throttling responses and latency under load are validated when live read-only providers arrive in Phase 5.
+  - statement: Live Fabric REST and Fabric MCP failure modes, throttling responses and latency under load have not been observed; the opt-in LiveFabricProvider is tested only with mocked HTTP, so they must be validated in a dev workspace.
     category: REQUIRES TENANT VALIDATION
   - statement: The Azure Well-Architected service guide for Microsoft Fabric includes reliability recommendations for designing Fabric workloads.
     category: DOCUMENTED FABRIC BEHAVIOR

@@ -15,9 +15,11 @@ classifiers = [
 # Exact pins only. Each dependency is added in the phase that first uses it
 # (see docs/research/source-validation.md and the Phase 0 dependency plan).
 dependencies = [
+    "azure-identity==1.26.0",
     "duckdb==1.5.6",
     "fastapi==0.142.2",
     "fastmcp==4.0.11",
+    "httpx==0.28.1",
     "pydantic==2.13.5",
     "pydantic-settings==2.15.0",
     "pyyaml==6.0.3",
@@ -32,7 +34,6 @@ ffia = "fabric_foundry_accelerator.cli:main"
 [dependency-groups]
 dev = [
     "cyclonedx-bom==7.5.0",
-    "httpx==0.28.1",
     "pip-audit==2.10.1",
     "pyright==1.1.414",
     "pytest==9.1.1",
@@ -74,6 +75,7 @@ ignore = [
 "src/fabric_foundry_accelerator/recovery/scenario.py" = ["S311"]
 # Fault injector methods must match the FabricProvider port signature but ignore their inputs.
 "src/fabric_foundry_accelerator/providers/fabric/outage.py" = ["ARG002"]
+"src/fabric_foundry_accelerator/providers/fabric/live.py" = ["ARG002"]
 
 [tool.ruff.lint.pycodestyle]
 # The formatter targets 100 columns; long human-readable messages may run to 120.

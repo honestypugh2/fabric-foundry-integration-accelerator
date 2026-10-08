@@ -27,5 +27,7 @@ that no pipeline change ships unless it reproduces that baseline.
 ## Status
 
 Medallion lakehouses, Direct Lake and Fabric AI functions are **GA** as of October 2026. In this
-accelerator the medallion runs **SIMULATED LOCALLY** over synthetic data; live Fabric notebooks
-arrive in Phase 5. All metrics are synthetic demonstrations, not clinical measures.
+accelerator the medallion runs **SIMULATED LOCALLY** over synthetic data. Reference Fabric
+notebooks generated from the same logic reproduce the expected results on a local Spark engine;
+running them in Fabric still requires validation in a tenant. All metrics are synthetic
+demonstrations, not clinical measures.

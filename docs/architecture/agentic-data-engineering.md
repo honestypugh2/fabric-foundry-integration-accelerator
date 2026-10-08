@@ -41,15 +41,15 @@ flowchart LR
     l1_exec["Git-synced Fabric items<br/><small>notebook-content.py, TMDL</small>"]
     l2_exec["Documentation MCP tools<br/><small>Microsoft Learn, Fabric docs tools</small>"]
     l3_exec["Skill dry run<br/><small>Against the local provider</small>"]
-    l4_exec["Read-only remote MCP · planned<br/><small>Fabric IQ, OneLake read</small>"]
+    l4_exec["Read-only Fabric MCP · tenant<br/><small>OneLake metadata, read-only</small>"]
     l5_exec["Plan, approve, execute<br/><small>Scoped writer or deployment pipeline</small>"]
     l6_exec["Parallel pull requests · PREVIEW"]
   end
   subgraph authority["AUTHORITY - who may do it"]
     l1_auth["Code review<br/><small>You decide</small>"]
     l2_auth["Pinned tool versions"]
-    l3_auth["Hardened MCP overlay · planned<br/><small>Dev workspace, read-only default</small>"]
-    l4_auth["Read-only allow-list · planned<br/><small>Pinned workspace and tenant</small>"]
+    l3_auth["Hardened MCP overlay<br/><small>Dev workspace, read-only default</small>"]
+    l4_auth["Read-only allow-list · tenant<br/><small>Pinned workspace and tenant</small>"]
     l5_auth["Approvals and branch protection<br/><small>Not the requester</small>"]
     l6_auth["Sandboxes and budgets · PREVIEW<br/><small>Firewall, allow-lists</small>"]
   end
@@ -86,10 +86,10 @@ flowchart LR
   l6_exec --> l6_auth
   l6_auth --> l6_evidence
   class l1_know,l1_harness,l1_exec,l1_auth,l1_evidence,l2_harness,l2_exec,l2_evidence,l3_know,l3_harness,l4_harness,l5_harness documented
-  class l2_know,l2_auth,l3_exec,l4_evidence,l5_know,l5_exec,l5_auth,l5_evidence implemented
-  class l3_auth,l3_evidence,l4_exec,l4_auth,l6_know planned
+  class l2_know,l2_auth,l3_exec,l3_auth,l4_evidence,l5_know,l5_exec,l5_auth,l5_evidence implemented
+  class l3_evidence,l6_know planned
   class l6_harness,l6_exec,l6_auth,l6_evidence preview
-  class l4_know tenant_validation
+  class l4_know,l4_exec,l4_auth tenant_validation
   classDef implemented stroke-width:2px
   classDef planned stroke-dasharray: 6 4
   classDef preview stroke-dasharray: 2 3
@@ -128,12 +128,12 @@ Solid boxes are implemented here or documented by Microsoft; dashed boxes are pl
 | Fabric Skills | Microsoft-documented | Skills are knowledge, not execution; they drive REST, SQL, KQL or PySpark under the user's identity. | - |
 | Plugins and skills loaded | Microsoft-documented | Skills are installed through the plugin marketplace and loaded on demand when a task matches. | - |
 | Skill dry run | Implemented in this repository | Read-only, allow-listed operations over synthetic Parquet; never presented as Fabric. | - |
-| Hardened MCP overlay | Planned (Phase 5) | The bundled skill configuration allows broad tools. A hardened overlay keeps read-only defaults and a separate opt-in authoring profile. | - |
+| Hardened MCP overlay | Implemented in this repository | MCP profiles as code: read-only defaults with explicit tool allow-lists, a separate opt-in authoring profile with per-call approval, and a check that rejects unpinned servers, write tools in read-only profiles and arbitrary query or data-egress tools. | `config/mcp/profiles.yaml` |
 | Skill named in the audit | Planned (Phase 7) | Each call records which skill drove it, so reviewers can trace procedure to outcome. | - |
 | Workspace context | Requires tenant validation | What the agent learns by inspecting the actual workspace. Must be validated in your tenant. | - |
 | Same harness | Microsoft-documented | The same agent, now with read-only access to a real workspace. | - |
-| Read-only remote MCP | Planned (Phase 5) | Pick the narrowest server; they run with the caller's Fabric permissions; status differs by server. | - |
-| Read-only allow-list | Planned (Phase 5) | Only read tools are allowed, and the workspace and tenant are pinned so the agent cannot wander. | - |
+| Read-only Fabric MCP | Requires tenant validation | Pick the narrowest server; they run with the caller's Fabric permissions; status differs by server. | `config/mcp/profiles.yaml` |
+| Read-only allow-list | Requires tenant validation | Only read tools are allowed, and the workspace and tenant are pinned so the agent cannot wander. | `config/mcp/profiles.yaml` |
 | Correlation and request IDs | Implemented in this repository | Records share a correlation ID across plan, approval, execution and tool calls. | - |
 | Change templates | Implemented in this repository | Policy defines each operation's risk, validation and rollback, so every plan is complete. | `config/policies/writes.yaml` |
 | Cloud agent pull requests | Microsoft-documented | Well-scoped issues become pull requests that humans review. | - |

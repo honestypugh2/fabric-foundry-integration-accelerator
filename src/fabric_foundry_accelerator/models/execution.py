@@ -49,6 +49,7 @@ class EvidenceCategory(StrEnum):
     ASSUMPTION = "ASSUMPTION"
     PRODUCTION_RECOMMENDATION = "PRODUCTION RECOMMENDATION"
     PREVIEW_LIMITATION = "PREVIEW LIMITATION"
+    VERIFIED_LIVE = "VERIFIED LIVE"  # observed in the tenant by this run, not just documented
 
 
 class Evidence(BaseModel):

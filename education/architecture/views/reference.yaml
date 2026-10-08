@@ -63,7 +63,7 @@ nodes:
   - {id: entra, icon: other/Entra_Identity, label: "Entra ID", sublabel: "Who is asking", kind: identity, state: documented, col: 1, row: 5, step: authority, component: entra-identity}
   - {id: policy, icon: general/Workflow, label: "Deterministic policy", sublabel: "Validate the proposal", kind: policy, state: implemented, col: 2, row: 5, step: authority, component: policy-engine, repo_path: config/policies/writes.yaml}
   - {id: approval, label: "Human approval", sublabel: "Not the requester", kind: policy, state: implemented, col: 3, row: 5, step: authority, component: human-approval, repo_path: src/fabric_foundry_accelerator/services/changes.py}
-  - {id: scoped-writer, label: "Scoped writer", sublabel: "Only the approved change", kind: policy, state: planned, phase: 5, col: 4, row: 5, step: authority, component: scoped-writer}
+  - {id: scoped-writer, label: "Scoped writer", sublabel: "Only the approved change", repo_path: src/fabric_foundry_accelerator/providers/fabric/writer.py, kind: policy, state: tenant-validation, col: 4, row: 5, step: authority, component: scoped-writer}
   - {id: system-of-record, label: "Fabric item or system of record", sublabel: "Verified after the write", kind: external, state: documented, col: 5, row: 5, step: authority, summary: "The target of an approved change. The writer verifies the result against it, and the audit trail records the outcome."}
   # Evidence
   - {id: observability, icon: devops/Application_Insights, label: "Tracing and monitoring", sublabel: "Correlation IDs", kind: evidence, state: documented, col: 1, row: 6, step: evidence, component: observability}

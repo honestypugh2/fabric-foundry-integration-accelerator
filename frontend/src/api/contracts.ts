@@ -46,6 +46,7 @@ const evidenceCategory = z.enum([
   "ASSUMPTION",
   "PRODUCTION RECOMMENDATION",
   "PREVIEW LIMITATION",
+  "VERIFIED LIVE",
 ]);
 const changeStatus = z.enum([
   "PROPOSED",
@@ -308,7 +309,7 @@ const columnSchema = z.object({ name: z.string(), data_type: z.string() });
 export const tableInfoSchema = z.object({
   name: z.string(),
   layer: z.string(),
-  row_count: z.number(),
+  row_count: z.number().nullable(),
   columns: z.array(columnSchema),
 });
 export type TableInfo = z.output<typeof tableInfoSchema>;

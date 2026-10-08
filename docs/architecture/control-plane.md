@@ -4,8 +4,10 @@ The control plane gives the frontend, the coding agents and the demo one governe
 synthetic Fabric context, propose changes, approve them and see evidence. It is offline-first: it
 starts and passes its release gate with no Azure configuration.
 
-Status: **SIMULATED LOCALLY**. Phase 3 has no live Fabric or Foundry provider. LIVE reads arrive in
-Phase 5 and Foundry in Phase 6.
+Status: **SIMULATED LOCALLY** by default. An opt-in live Fabric provider and a gated scoped writer
+exist (`FFIA_FABRIC_LIVE=1` plus a git-ignored bindings file; see
+[ADR-0012](../decisions/ADR-0012-live-fabric-integration.md)) and are **REQUIRES TENANT
+VALIDATION**: tested with mocked HTTP, not yet run against a tenant. Foundry arrives in Phase 6.
 
 ## Components
 

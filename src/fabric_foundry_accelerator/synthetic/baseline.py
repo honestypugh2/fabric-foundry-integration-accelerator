@@ -31,7 +31,7 @@ from fabric_foundry_accelerator.synthetic.profiles import DatasetProfile, GoldMo
 
 FLOAT_TOLERANCE = 1e-6
 
-_FACT_TABLES: dict[GoldModel, tuple[str, str]] = {
+FACT_TABLES: dict[GoldModel, tuple[str, str]] = {
     "hc_lab": ("gold_encounter_summary", "gold_financial"),
     "core_star": ("fact_encounter", "fact_claim"),
 }
@@ -64,7 +64,7 @@ def compute_baseline(
     counts: dict[str, dict[str, int]] = {
         "raw": {f.name.removesuffix(".csv"): f.rows for f in manifest.files}
     }
-    encounters, claims = _FACT_TABLES[profile.gold_model]
+    encounters, claims = FACT_TABLES[profile.gold_model]
     with open_lakehouse(output_root, profile.id) as con:
         for layer, table, _ in lakehouse_tables(output_root, profile.id):
             row = con.execute(f'SELECT count(*) FROM "{table}"').fetchone()  # noqa: S608 - table names come from persisted file names validated at build

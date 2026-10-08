@@ -7,7 +7,7 @@
     },
     {
       "component": "Fabric API",
-      "detail": "No live Fabric provider is configured in this build (added in Phase 5).",
+      "detail": "No live Fabric provider configured. Opt in with FFIA_FABRIC_LIVE=1, a hybrid or live environment and the local bindings file; check the tenant with `ffia fabric readiness`.",
       "status": "NOT AVAILABLE"
     },
     {

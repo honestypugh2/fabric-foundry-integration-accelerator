@@ -32,6 +32,8 @@ class Settings(BaseSettings):
     auto_build_data: bool = True
     demo_check_azure_cli: bool = True
     allow_live_mutation: bool = False
+    fabric_live: bool = False
+    definitions_root: Path = Path("fabric/workspace")
     simulate_fabric_outage: bool = False
     cors_origins: tuple[str, ...] = ("http://localhost:5173",)
     log_json: bool = False

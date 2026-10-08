@@ -180,7 +180,8 @@ steps:
       Against a real tenant, climb in a dedicated dev workspace as a non-admin user with Contributor
       rights only. Replace the Skills for Fabric bundled MCP configuration with a hardened overlay -
       read-only tools by default, authoring and SQL servers in a separate opt-in profile, versions
-      pinned (arrives in Phase 5). Pin the skills to a release tag and review changes before each
+      pinned (render it with `ffia mcp render fabric-readonly` and keep `fabric-authoring-gated`
+      opt-in). Pin the skills to a release tag and review changes before each
       bump. Make L5 the path for every change - Fabric Git integration or an approved scoped writer,
       branch protection, CODEOWNERS on instruction files and required CI checks. Give the cloud
       agent only read-only or offline MCP tools. Never use Autopilot or bypass modes outside a

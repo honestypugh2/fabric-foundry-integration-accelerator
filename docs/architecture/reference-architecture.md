@@ -46,7 +46,7 @@ flowchart LR
     entra["Entra ID<br/><small>Who is asking</small>"]
     policy["Deterministic policy<br/><small>Validate the proposal</small>"]
     approval["Human approval<br/><small>Not the requester</small>"]
-    scoped_writer["Scoped writer · planned<br/><small>Only the approved change</small>"]
+    scoped_writer["Scoped writer · tenant<br/><small>Only the approved change</small>"]
     system_of_record["Fabric item or system of record<br/><small>Verified after the write</small>"]
   end
   subgraph evidence_zone["Evidence"]
@@ -83,8 +83,8 @@ flowchart LR
   class business_users,engineers,agent_app,coding_agents,foundry_models,foundry_agent,agent_framework,fabric_mcp,data_agent,semantic_model,onelake,open_mirroring,source_systems,entra,system_of_record,observability documented
   class policy,approval,evaluation,audit implemented
   class apim_gateway optional
-  class scoped_writer planned
   class foundry_iq,fabric_iq preview
+  class scoped_writer tenant_validation
   classDef implemented stroke-width:2px
   classDef planned stroke-dasharray: 6 4
   classDef preview stroke-dasharray: 2 3
@@ -153,7 +153,7 @@ Solid boxes are implemented here or documented by Microsoft; dashed boxes are pl
 | Entra ID | Microsoft-documented | User, approver and writer are different identities; agents act on behalf of users or as scoped identities. | - |
 | Deterministic policy | Implemented in this repository | Policy files define operations, risk and rollback; overlays can narrow but not remove approval. | `config/policies/writes.yaml` |
 | Human approval | Implemented in this repository | Separation of duties, expiry and destination binding protect the decision. | `src/fabric_foundry_accelerator/services/changes.py` |
-| Scoped writer | Planned (Phase 5) | Least-privilege identity bound to specific targets; LIVE writes are never redirected to LOCAL. | - |
+| Scoped writer | Requires tenant validation | Least-privilege identity bound to specific targets; LIVE writes are never redirected to LOCAL. | `src/fabric_foundry_accelerator/providers/fabric/writer.py` |
 | Fabric item or system of record | Microsoft-documented | The target of an approved change. The writer verifies the result against it, and the audit trail records the outcome. | - |
 | Tracing and monitoring | Microsoft-documented | Structured logs with correlation IDs locally; traces in a monitoring service in production. | - |
 | Evaluation | Implemented in this repository | Deterministic baselines for data; model-graded evaluators for language quality. | `src/fabric_foundry_accelerator/services/evaluation.py` |

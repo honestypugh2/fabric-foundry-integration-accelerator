@@ -30,5 +30,5 @@ environment — and the rule that writes and approvals never do.
 ## Status
 
 The router, breaker and labeled fallback are **SIMULATED LOCALLY** and proven by the offline
-release gate (`ffia demo offline`). Live Fabric failure behavior is validated when live read-only
-providers arrive in Phase 5.
+release gate (`ffia demo offline`). A live, read-only Fabric connection now exists as an opt-in,
+but how real Fabric behaves under failure and throttling still requires validation in a tenant.

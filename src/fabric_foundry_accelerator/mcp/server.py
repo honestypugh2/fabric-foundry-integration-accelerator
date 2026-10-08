@@ -190,7 +190,7 @@ def build_tools(container: Container) -> dict[str, Callable[..., Awaitable[JsonD
     async def inspect_medallion_architecture(profile: str = "hc-lab-7file-v1") -> JsonDict:
         """List Bronze, Silver and Gold tables with row counts."""
         envelope = await fabric.list_tables(f"local-lh-{_profile(profile)}")
-        layers: dict[str, dict[str, int]] = {}
+        layers: dict[str, dict[str, int | None]] = {}
         for table in envelope.data:
             layers.setdefault(table.layer, {})[table.name] = table.row_count
         summary = envelope.model_copy(update={"data": layers})

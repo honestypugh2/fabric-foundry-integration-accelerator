@@ -1,0 +1,129 @@
+# MCP profiles: the single source for every MCP client configuration in this repository.
+#
+# MCP standardizes capability access; it does not grant authority. Each profile is the narrowest
+# tool set for one job. Render a profile for a client with `ffia mcp render <profile> --client X`;
+# `ffia mcp check` validates pins, allow-lists and safety rules (it runs in `make validate`).
+#
+# External servers are pinned to exact stable versions. Write-capable tools never appear in a
+# read-only profile, and tools that run arbitrary queries or copy data out are excluded everywhere
+# except where a profile explicitly documents why.
+schema_version: 1
+
+servers:
+  microsoft-learn:
+    transport: http
+    url: https://learn.microsoft.com/api/mcp
+    description: Public Microsoft Learn documentation search (no tenant access).
+  ffia-local:
+    transport: stdio
+    command: uv
+    args: [run, --frozen, ffia, serve, mcp]
+    description: This repository's typed, allow-listed educational MCP server (offline).
+  fabric-mcp:
+    transport: stdio
+    package: "@microsoft/fabric-mcp"
+    version: "1.4.0"
+    args: [server, start]
+    catalog: catalog/fabric-mcp-1.4.0.yaml
+    description: >-
+      Microsoft Fabric MCP server (local). Docs tools run offline; OneLake, Core and Data Factory
+      tools call the tenant as the signed-in user.
+  powerbi-modeling-mcp:
+    transport: stdio
+    package: "@microsoft/powerbi-modeling-mcp"
+    version: "1.0.0"
+    args: [--start]
+    description: >-
+      Power BI Modeling (authoring) MCP server (local). It has no read-only switch, so it is used
+      only against local PBIP/TMDL sandbox copies. A person accepts its EULA; configs never do.
+
+# Tools excluded from read-only profiles even when the server marks them read-only.
+never_read_only:
+  - name: datafactory_execute-query
+    reason: runs arbitrary M (Power Query) queries; the repository never exposes arbitrary query tools
+  - name: onelake_download-file
+    reason: copies lakehouse data out of OneLake; read-only profiles stay at metadata
+
+profiles:
+  offline:
+    title: Offline teaching (default)
+    purpose: The default demo. Documentation plus this repository's local MCP server; no tenant.
+    execution_label: LOCAL
+    default: true
+    servers:
+      microsoft-learn: {}
+      ffia-local: {}
+
+  fabric-docs:
+    title: Fabric MCP — docs only ("how")
+    purpose: >-
+      Fabric API specs, item-definition schemas, examples and best practices. Runs locally and never
+      connects to a Fabric environment.
+    execution_label: LOCAL
+    servers:
+      microsoft-learn: {}
+      fabric-mcp:
+        read_only: true
+        tools:
+          - docs_list-item-types
+          - docs_item-api-spec
+          - docs_platform-api-spec
+          - docs_item-definitions
+          - docs_best-practices
+          - docs_api-examples
+
+  fabric-readonly:
+    title: Fabric MCP — tenant metadata, read-only ("what is")
+    purpose: >-
+      Discover workspaces, items, tables, shortcuts and pipelines in the signed-in user's tenant.
+      Metadata only: no data download, no query execution, no writes.
+    execution_label: LIVE
+    requires: [az login --tenant <demo tenant>, Fabric license and capacity (ffia fabric readiness)]
+    servers:
+      fabric-mcp:
+        read_only: true
+        tools:
+          - docs_item-definitions
+          - docs_best-practices
+          - core_search-catalog
+          - onelake_list-workspaces
+          - onelake_list-items
+          - onelake_list-files
+          - onelake_get-table-config
+          - onelake_list-table-namespaces
+          - onelake_get-table-namespace
+          - onelake_list-tables
+          - onelake_get-table
+          - onelake_list-shortcuts
+          - onelake_get-shortcut
+          - datafactory_list-pipelines
+          - datafactory_get-pipeline
+          - datafactory_list-dataflows
+
+  fabric-authoring-gated:
+    title: Fabric MCP — create item, approval-gated ("change it")
+    purpose: >-
+      Teaches why an MCP write tool is not authority. Exposes exactly one additive tool. The
+      client must ask a person before every call; prefer the repository's PLAN → APPROVE → EXECUTE
+      change flow, which re-checks duplicates and audits.
+    execution_label: LIVE
+    approval: per-call
+    requires: [dedicated dev workspace, explicit human approval for each call]
+    servers:
+      fabric-mcp:
+        read_only: false
+        tools:
+          - core_search-catalog
+          - core_create-item
+
+  powerbi-modeling-sandbox:
+    title: Power BI Modeling MCP — local PBIP sandbox
+    purpose: >-
+      Author a copy of the synthetic semantic model in local PBIP/TMDL files, review the diff in
+      Git, then publish through the approved change flow. Never pointed at a shared workspace.
+    execution_label: LOCAL
+    approval: per-call
+    requires: [a person accepts the Power BI Modeling MCP EULA, a local PBIP copy under a sandbox folder]
+    servers:
+      powerbi-modeling-mcp:
+        read_only: false

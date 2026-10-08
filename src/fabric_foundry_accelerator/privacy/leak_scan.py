@@ -43,6 +43,9 @@ GUID_RE = re.compile(
     r"\b[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\b"
 )
 ALLOWED_GUIDS = frozenset({"00000000-0000-0000-0000-000000000000"})
+# Synthetic fixture identifiers: the first four groups are zero. Real tenant, workspace and item
+# IDs are random v4 GUIDs and never have this shape.
+SYNTHETIC_GUID_PREFIX = "00000000-0000-0000-0000-"
 
 EMAIL_RE = re.compile(r"\b[A-Za-z0-9._%+-]+@([A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,})\b")
 ALLOWED_EMAIL_DOMAINS = frozenset(
@@ -238,6 +241,7 @@ def _scan_line(line: str, *, path: str, number: int, denylist: Denylist | None) 
         Finding(path, number, FindingKind.GUID, "GUID-formatted identifier")
         for match in GUID_RE.finditer(line)
         if match.group(0).lower() not in ALLOWED_GUIDS
+        and not match.group(0).lower().startswith(SYNTHETIC_GUID_PREFIX)
     )
     found.extend(
         Finding(path, number, FindingKind.SECRET, f"possible {label}")

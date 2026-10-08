@@ -3,7 +3,7 @@
 Domain services depend on this protocol only. Implementations:
 
 * ``LocalFabricProvider`` (this phase): synthetic Parquet + DuckDB, labeled LOCAL.
-* A live adapter (Phase 5): Fabric REST / Fabric MCP, labeled LIVE, read-only by default.
+* A live adapter: Fabric REST (``live.LiveFabricProvider``), labeled LIVE, read-only, opt-in.
 
 The port exposes no free-form SQL, no arbitrary file access and no write operations. Changes
 to Fabric go through the approval flow, not through this read port.
@@ -60,7 +60,8 @@ class TableInfo(BaseModel):
 
     name: str
     layer: str
-    row_count: int
+    # None when the source cannot report it cheaply (the Fabric REST table list has no counts).
+    row_count: int | None
     columns: tuple[ColumnInfo, ...]
 
 

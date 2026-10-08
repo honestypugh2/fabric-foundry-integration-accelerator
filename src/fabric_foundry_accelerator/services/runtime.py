@@ -7,6 +7,7 @@ from pydantic import BaseModel, ConfigDict
 from fabric_foundry_accelerator.fallback.circuit_breaker import BreakerStatus
 from fabric_foundry_accelerator.fallback.router import RouteDecision
 from fabric_foundry_accelerator.models.execution import OperatingMode
+from fabric_foundry_accelerator.providers.fabric.live import NOT_CONFIGURED_NOTE
 from fabric_foundry_accelerator.services.container import Container
 from fabric_foundry_accelerator.synthetic.medallion import lakehouse_tables
 from fabric_foundry_accelerator.synthetic.profiles import PROFILES
@@ -83,7 +84,7 @@ def provider_statuses(container: Container) -> tuple[ProviderStatus, ...]:
                 kind="NOT AVAILABLE",
                 configured=False,
                 ready=False,
-                note="No live Fabric provider is configured in this build (added in Phase 5).",
+                note=NOT_CONFIGURED_NOTE,
             )
         )
     statuses.append(
@@ -102,8 +103,11 @@ def provider_statuses(container: Container) -> tuple[ProviderStatus, ...]:
 def runtime_status(container: Container) -> RuntimeStatus:
     """Return the current runtime status."""
     settings = container.settings
+    writer = container.changes.live_writer
     live_writes = (
-        "LIVE writes enabled by flag but no live writer exists"
+        f"LIVE writes after approval by the {writer.name} (create_lakehouse, create_notebook only)"
+        if writer is not None and settings.allow_live_mutation
+        else "LIVE writes enabled by flag but no live writer is configured"
         if settings.allow_live_mutation
         else "LIVE writes disabled"
     )
@@ -118,7 +122,11 @@ def runtime_status(container: Container) -> RuntimeStatus:
         ),
         agent_provider="Not available (Phase 6)",
         mcp=f"Local server ready: {len(container.tool_manifest.enabled())} allow-listed tools",
-        identity="Local process (no cloud identity in use)",
+        identity=(
+            "Azure CLI user, delegated, pinned to the bound tenant"
+            if container.bindings is not None and container.settings.fabric_live
+            else "Local process (no cloud identity in use)"
+        ),
         write_mode=f"Approval required; LOCAL executions are SIMULATED; {live_writes}",
         preview_features=tuple(container.overlay.enabled_previews()),
         providers=provider_statuses(container),

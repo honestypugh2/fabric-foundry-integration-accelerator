@@ -34,7 +34,7 @@ nodes:
   - {id: local-provider, label: "Local Fabric provider", sublabel: "DuckDB over Parquet", kind: local, state: implemented, col: 4, row: 3, component: local-fabric-provider, repo_path: src/fabric_foundry_accelerator/providers/fabric/local.py, runtime: fabric-local}
   - {id: synthetic-data, icon: general/Folder_Blank, label: "Synthetic medallion data", sublabel: "data/synthetic", kind: data, state: implemented, col: 5, row: 3, repo_path: data/synthetic, summary: "Generated synthetic CSVs, built Bronze, Silver and Gold Parquet, semantic model contracts and expected baselines. No real data."}
   - {id: foundry, icon: ai_machine_learning/Foundry_Agent_Service, label: "Foundry Agent Service", sublabel: "Agents and evaluation", kind: foundry, state: planned, phase: 6, col: 6, row: 1, component: foundry-agent, runtime: foundry}
-  - {id: fabric-live, label: "Fabric REST and MCP", sublabel: "Live, read-only first", kind: fabric, state: planned, phase: 5, col: 6, row: 3, component: fabric-mcp, runtime: fabric-live}
+  - {id: fabric-live, label: "Fabric REST and MCP", sublabel: "Live, read-only first", repo_path: src/fabric_foundry_accelerator/providers/fabric/live.py, kind: fabric, state: tenant-validation, col: 6, row: 3, component: fabric-mcp, runtime: fabric-live}
 edges:
   - {id: app-to-proxy, source: web-app, target: vite-proxy, label: "/api requests", kind: access}
   - {id: proxy-to-api, source: vite-proxy, target: api, label: "Same-origin proxy", kind: access}
@@ -47,7 +47,7 @@ edges:
   - {id: evaluation-to-audit, source: evaluation, target: audit, label: "Evidence", kind: evidence}
   - {id: router-to-local, source: router, target: local-provider, label: "LOCAL read or fallback", kind: fallback}
   - {id: local-to-data, source: local-provider, target: synthetic-data, label: "Query Parquet", kind: data}
-  - {id: router-to-live, source: router, target: fabric-live, label: "LIVE read (Phase 5)", kind: access, planned: true}
+  - {id: router-to-live, source: router, target: fabric-live, label: "LIVE read (opt-in)", kind: access}
   - {id: api-to-foundry, source: api, target: foundry, label: "Agents (Phase 6)", kind: reasoning, planned: true}
   - {id: agent-to-config, source: coding-agent, target: mcp-config, label: "Loads", kind: config}
   - {id: config-to-ffia, source: mcp-config, target: ffia-local, label: "Starts over stdio", kind: access}
