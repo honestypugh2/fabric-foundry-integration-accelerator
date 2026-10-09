@@ -67,7 +67,7 @@ diagrams: ## Render draw.io files and the generated diagram blocks in docs/archi
 	$(ACTIVATE) && ffia diagrams render
 
 education-check: ## Validate lessons, labs, the architecture map and the completeness gate
-	$(ACTIVATE) && ffia education check
+	$(ACTIVATE) && ffia education check --min-coverage 1.0
 
 fixtures: ## Re-export frontend test fixtures from the real API (after model or content changes)
 	$(ACTIVATE) && python -m tests.contract.export_frontend_fixtures
@@ -82,21 +82,23 @@ recovery-demo: ## Run the Open Mirroring snapshot + incremental + restore drill 
 	$(ACTIVATE) && ffia recovery run
 
 security: privacy-scan ## Dependency vulnerability audit (fails on HIGH/CRITICAL) + privacy scan
-	$(ACTIVATE) && uv export --quiet --frozen --all-groups --no-emit-project --no-hashes -o /tmp/ffia-requirements-audit.txt \
-		&& pip-audit -r /tmp/ffia-requirements-audit.txt --no-deps --disable-pip --progress-spinner off
+	$(ACTIVATE) && audit_requirements=$$(mktemp) && trap 'rm -f "$$audit_requirements"' EXIT \
+		&& uv export --quiet --frozen --all-groups --no-emit-project --no-hashes -o "$$audit_requirements" \
+		&& pip-audit -r "$$audit_requirements" --no-deps --disable-pip --progress-spinner off
 	cd $(FRONTEND) && npm audit --audit-level=high
 
 sbom: ## Generate CycloneDX SBOMs for Python and frontend into sbom/
 	mkdir -p sbom
 	$(ACTIVATE) && cyclonedx-py environment --pyproject pyproject.toml --of JSON -o sbom/python.cdx.json $(VENV)/bin/python
-	cd $(FRONTEND) && npm sbom --sbom-format cyclonedx --omit dev > ../sbom/frontend.cdx.json
+	cd $(FRONTEND) && npm sbom --sbom-format cyclonedx > ../sbom/frontend.cdx.json
+	$(ACTIVATE) && python -m fabric_foundry_accelerator.sbom
 
 build: ## Build Python distribution and frontend bundle
 	$(ACTIVATE) && uv build
 	cd $(FRONTEND) && npm run build
 
-validate: lint typecheck test-cov data-check privacy-scan build security ## Full local validation (CI equivalent)
-	$(ACTIVATE) && ffia sources check && ffia schemas check && ffia education check && ffia diagrams check && ffia mcp check && ffia notebooks check && ffia skills check && ffia talktracks check && ffia bakeoff check && ffia harness check && ffia demo offline >/dev/null && echo "offline demo: PASSED"
+validate: lint typecheck test-cov data-check privacy-scan build security sbom ## Full local validation (CI equivalent)
+	$(ACTIVATE) && ffia sources check && ffia schemas check && ffia education check --min-coverage 1.0 && ffia diagrams check && ffia mcp check && ffia notebooks check && ffia skills check && ffia talktracks check && ffia prompts check && ffia bakeoff check && ffia harness check && FFIA_ENVIRONMENT=offline FFIA_FABRIC_LIVE=0 FFIA_FOUNDRY_LIVE=0 ffia agents eval --suite sales-insights-agent && ffia demo offline >/dev/null && echo "offline demo: PASSED"
 	@echo "validate: all checks passed"
 
 clean: ## Remove build, cache and coverage artifacts (keeps .venv and node_modules)

@@ -23,11 +23,13 @@ Rules (enforced by `education/lessons.py`; JSON Schemas are in `schemas/`):
   index.
 - **Evidence:** every claim carries an evidence category (`SIMULATED LOCALLY`,
   `DOCUMENTED FABRIC BEHAVIOR`, `DOCUMENTED BEHAVIOR`, `REQUIRES TENANT VALIDATION`,
-  `ASSUMPTION`, `PRODUCTION RECOMMENDATION`, `PREVIEW LIMITATION`).
+  `ASSUMPTION`, `PRODUCTION RECOMMENDATION`, `PREVIEW LIMITATION`, `VERIFIED LIVE`).
 - **References:** sources must exist in `docs/research/sources.yaml`. Pattern, lab, guide and
   prerequisite references must exist.
 - **Content:** customer-neutral and synthetic only, with no clinical advice. Run
   `ffia privacy scan`.
 
-After changing content, run `make education-check`. Run `make fixtures` when API models change;
-it re-exports the frontend test fixtures.
+After changing content, run `make education-check` (all 30 completeness questions must be
+answered). Refresh affected frontend fixtures after API model or content changes.
+The production-readiness lesson covers customization, threats, secrets, Git/CI releases and
+cost controls at all five levels; tenant-specific production checks remain explicitly unverified.

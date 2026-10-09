@@ -1,0 +1,63 @@
+id: production-readiness
+area: security
+title: "Customize, secure and release the accelerator"
+summary: >-
+  Extend the neutral baseline through synthetic overlays, model trust boundaries, protect secrets,
+  gate changes through Git and deterministic evaluation, and control cost without confusing
+  local evidence with production readiness.
+status: LOCAL
+learning_objectives:
+  - Customize an industry scenario without changing baseline policy or committing customer identity.
+  - Trace tool-access threats and separate implemented controls from required production controls.
+  - Explain the offline evaluation, privacy, dependency and release gates.
+  - Distinguish usage controls and budgets from guaranteed spending ceilings.
+prerequisites: [p08-human-in-the-loop, p16-evaluation-observability]
+concepts:
+  - term: Overlay
+    definition: A synthetic configuration that narrows policy and selects a dataset, guides and flags; real bindings live only in ignored local files.
+  - term: Trust boundary
+    definition: A transition between components with different authority, such as untrusted tool output entering an agent or a proposal reaching a scoped writer.
+  - term: Release gate
+    definition: A deterministic check that must pass before reviewed artifacts become eligible for publication.
+  - term: Cost control
+    definition: Quotas, bounded calls, budgets and operating schedules reduce usage; an ingestion cap is not a guaranteed spending limit.
+evidence:
+  - statement: The repository validates synthetic overlays, uses ignored live bindings, privacy scans and offline baseline evaluation; MCP cannot approve or execute changes.
+    category: SIMULATED LOCALLY
+  - statement: CodeQL supports push, pull request and scheduled scanning; configured workflows are not proof that a scan completed.
+    category: DOCUMENTED BEHAVIOR
+    sources: [github-codeql-configuration]
+  - statement: The educational API and local JSONL audit must be replaced or hardened for authenticated multi-user production use.
+    category: PRODUCTION RECOMMENDATION
+  - statement: RLS/OLS, least-privilege identities, telemetry, quotas and cost alerts require tenant-specific evidence before go-live.
+    category: REQUIRES TENANT VALIDATION
+    sources: [fabric-rest-identity, fabric-waf]
+try_it:
+  - label: Check synthetic privacy boundaries
+    command: ffia privacy scan
+    result_label: LOCAL
+  - label: Evaluate five local baseline cases
+    command: FFIA_ENVIRONMENT=offline FFIA_FABRIC_LIVE=0 FFIA_FOUNDRY_LIVE=0 ffia agents eval
+    result_label: LOCAL
+  - label: Verify generated permissions and prompt packs
+    command: ffia harness check && ffia prompts check
+    result_label: LOCAL
+copilot_prompt: >-
+  Read docs/customization/customer-overlay.md, docs/security/threat-model.md and
+  docs/operations/release-validation.md. Plan a synthetic industry overlay and trace one agent
+  request across context, tool, approval, writer and audit boundaries. Name the required release
+  checks, missing tenant tests and cost controls. Do not edit files, call cloud tools or approve writes.
+claude_code_prompt: >-
+  DOCUMENTED ONLY. Inspect the overlay schema, harness policy and release workflows. Explain how
+  a new synthetic scenario remains offline-first, why a client hook is not a sandbox, how secrets
+  stay outside Git, and why a passing evaluation does not authorize a live mutation. Do not execute
+  cloud operations or claim Claude Code was evaluated.
+production_notes:
+  - Require authenticated approvers and a separate least-privilege writer before network exposure.
+  - Protect branches with required quality and CodeQL checks and review actual security alerts.
+  - Review SBOMs, license obligations and checksums; no automatic cloud deployment or publication.
+  - Test access-denial cases, injection resistance, recovery, telemetry and budget alerts in the target tenant.
+  - Keep previews opt-in and always identify LOCAL, SIMULATED, LIVE and recorded evidence accurately.
+sources: [github-codeql-configuration, fabric-waf, fabric-rest-identity, foundry-mcp-governance]
+related_labs: [lab-governed-change]
+related_guides: [hc-01-fabric-mcp-powerbi-medallion-lab, mfg-01-foundry-fabric-sales-insights]

@@ -1,0 +1,44 @@
+checks:
+  - id: executive-release-claim
+    level: executive
+    question: What does a passing offline demo establish?
+    choices:
+      - Local behavior works against the synthetic baseline, not production certification
+      - All tenant access policies are correct
+      - An agent can now authorize writes
+    answer: 0
+    explanation: Production identity, access, operations and security need separate tenant evidence.
+  - id: l100-secret-location
+    level: l100
+    question: Where do real credentials and tenant bindings belong?
+    choices:
+      - In generated prompt packs
+      - In ignored local configuration or managed secret storage
+      - In frontend environment variables shipped to users
+    answer: 1
+    explanation: Neither Git nor the browser should receive credentials or real environment bindings.
+  - id: l200-overlay-policy
+    level: l200
+    question: What can a synthetic overlay do to baseline policy?
+    choices:
+      - Remove human approval for convenient demos
+      - Expand globally denied writes
+      - Narrow permitted operations and select guides/data
+    answer: 2
+    explanation: Overlays add a scenario without widening authority or removing approval.
+  - id: l300-fallback-evaluation
+    level: l300
+    question: A requested provider fails but LOCAL fallback answers correctly. Does its evaluation pass?
+    choices:
+      - Yes, correctness alone proves the requested provider worked
+      - No, a fallback is not evidence of that provider's execution
+    answer: 1
+    explanation: The gate rejects fallback cases so simulation cannot substitute for requested evidence.
+  - id: l400-cost-guarantee
+    level: l400
+    question: Which statement correctly describes an ingestion cap?
+    choices:
+      - It guarantees the total Foundry/Fabric bill cannot exceed a fixed amount
+      - It is one usage control, not a guaranteed total spending limit
+    answer: 1
+    explanation: Costs include other services and dimensions; budgets, quotas, monitoring and operating schedules are also needed.

@@ -35,7 +35,7 @@
       "lab-copilot-maturity-ladder"
     ],
     "status": "GA",
-    "summary": "An honest, evidence-labeled comparison of two generally available agent harnesses for Fabric data engineering. Both read the same repository instructions, skills and MCP configuration in this accelerator; they differ in permission models, enforcement hooks, parallelism, GitHub integration and admin planes. A same-task bake-off (`ffia bakeoff`, the app's Bake-off page) records observations, not product claims.",
+    "summary": "An honest, evidence-labeled comparison of two generally available agent harnesses for Fabric data engineering. Both read the same repository instructions, skills and MCP configuration in this accelerator; they differ in permission models, enforcement hooks, parallelism, GitHub integration and admin planes. Claude Code is DOCUMENTED ONLY here. The recorded bake-off (`ffia bakeoff`, the app's Bake-off page) compares Claude and GPT models inside Copilot CLI, not Copilot versus Claude Code; these are dated observations, not product claims.",
     "title": "GitHub Copilot and Claude Code for Fabric data engineering"
   },
   {
@@ -250,5 +250,20 @@
     "status": "GA",
     "summary": "A provider router with per-capability timeouts, bounded retries with jitter and circuit breakers keeps demos and operations alive. Reads may fall back to an approved local equivalent, visibly labeled HYBRID with a reason. Writes and client errors never fall back.",
     "title": "P17: LIVE / HYBRID / OFFLINE resilience"
+  },
+  {
+    "area": "security",
+    "id": "production-readiness",
+    "pattern_ids": [],
+    "related_guides": [
+      "hc-01-fabric-mcp-powerbi-medallion-lab",
+      "mfg-01-foundry-fabric-sales-insights"
+    ],
+    "related_labs": [
+      "lab-governed-change"
+    ],
+    "status": "LOCAL",
+    "summary": "Extend the neutral baseline through synthetic overlays, model trust boundaries, protect secrets, gate changes through Git and deterministic evaluation, and control cost without confusing local evidence with production readiness.",
+    "title": "Customize, secure and release the accelerator"
   }
 ]

@@ -13,7 +13,7 @@ from fabric_foundry_accelerator import __version__
 from fabric_foundry_accelerator.agents import commands as agent_commands
 from fabric_foundry_accelerator.bakeoff import commands as bakeoff_commands
 from fabric_foundry_accelerator.education import commands as education_commands
-from fabric_foundry_accelerator.education import diagram_docs, talktrack_commands
+from fabric_foundry_accelerator.education import diagram_docs, prompt_commands, talktrack_commands
 from fabric_foundry_accelerator.harness import commands as harness_commands
 from fabric_foundry_accelerator.knowledge import commands as knowledge_commands
 from fabric_foundry_accelerator.mcp import profile_commands
@@ -132,6 +132,7 @@ def build_parser() -> argparse.ArgumentParser:
     notebook_commands.register(sub)
     skills_commands.register(sub)
     talktrack_commands.register(sub)
+    prompt_commands.register(sub)
     mfg_commands.register(sub)
     foundry_commands.register(sub)
     agent_commands.register(sub)

@@ -1,0 +1,61 @@
+name: release artifacts
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  quality:
+    uses: ./.github/workflows/quality.yml
+    permissions:
+      contents: read
+  codeql:
+    uses: ./.github/workflows/codeql.yml
+    permissions:
+      contents: read
+      security-events: write
+  artifacts:
+    needs: [quality, codeql]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    env:
+      FFIA_ENVIRONMENT: offline
+      FFIA_FABRIC_LIVE: "0"
+      FFIA_FOUNDRY_LIVE: "0"
+      FFIA_APPLICATIONINSIGHTS_CONNECTION_STRING: ""
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+        with:
+          version: "0.12.23"
+          python-version: "3.14"
+          activate-environment: true
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "24"
+      - name: Install from lockfiles
+        run: uv sync --frozen && npm ci --prefix frontend
+      - name: Build distributions and SBOMs
+        run: make build sbom
+      - name: Package frontend and checksum artifacts
+        run: |
+          tar -czf dist/frontend.tar.gz -C frontend/dist .
+          sha256sum dist/* sbom/*.json > release-SHA256SUMS.txt
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ffia-release-${{ github.sha }}
+          if-no-files-found: error
+          retention-days: 14
+          path: |
+            dist/
+            sbom/
+            release-SHA256SUMS.txt

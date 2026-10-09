@@ -27,9 +27,9 @@ questions:
   - {id: Q22, question: "What is the end-to-end Fabric + Foundry enterprise agent pattern?", answered_by: [p06-enterprise-agent]}
   - {id: Q23, question: "How does a Foundry agent use Fabric data under the user's identity?", answered_by: [p06-enterprise-agent]}
   - {id: Q24, question: "How are preview features isolated from the default experience?", answered_by: [preview-isolation]}
-  - {id: Q25, question: "How is the accelerator customized for another customer or industry?", planned_phase: 7}
-  - {id: Q26, question: "What is the threat model for agents with tool access?", planned_phase: 8}
-  - {id: Q27, question: "How are secrets and environment identifiers kept out of the repository?", planned_phase: 8}
-  - {id: Q28, question: "How do changes move from development to production through Git and CI/CD?", planned_phase: 7}
-  - {id: Q29, question: "How are cost and usage of models and tools controlled?", planned_phase: 8}
+  - {id: Q25, question: "How is the accelerator customized for another customer or industry?", answered_by: [production-readiness]}
+  - {id: Q26, question: "What is the threat model for agents with tool access?", answered_by: [production-readiness]}
+  - {id: Q27, question: "How are secrets and environment identifiers kept out of the repository?", answered_by: [production-readiness]}
+  - {id: Q28, question: "How do changes move from development to production through Git and CI/CD?", answered_by: [production-readiness]}
+  - {id: Q29, question: "How are cost and usage of models and tools controlled?", answered_by: [production-readiness]}
   - {id: Q30, question: "How is the architecture demonstrated when no cloud service is available?", answered_by: [p17-resilience]}

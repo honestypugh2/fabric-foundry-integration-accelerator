@@ -5,8 +5,9 @@ summary: >-
   An honest, evidence-labeled comparison of two generally available agent harnesses for Fabric data
   engineering. Both read the same repository instructions, skills and MCP configuration in this
   accelerator; they differ in permission models, enforcement hooks, parallelism, GitHub integration
-  and admin planes. A same-task bake-off (`ffia bakeoff`, the app's Bake-off page) records observations, not
-  product claims.
+  and admin planes. Claude Code is DOCUMENTED ONLY here. The recorded bake-off (`ffia bakeoff`,
+  the app's Bake-off page) compares Claude and GPT models inside Copilot CLI, not Copilot versus
+  Claude Code; these are dated observations, not product claims.
 status: GA
 pattern_ids: [P19, P20, P23]
 learning_objectives:
@@ -27,7 +28,7 @@ concepts:
   - term: Agent HQ
     definition: GitHub capability that lets third-party coding agents such as Claude work on issues and pull requests inside GitHub under a Copilot subscription.
   - term: Bake-off
-    definition: The same five data-engineering tasks run in both harnesses and scored on the same scorecard.
+    definition: Five identical synthetic tasks scored with the same rubric; recorded runs currently compare two models in Copilot CLI. A cross-harness Claude Code run is documented-only.
 evidence:
   - statement: GitHub Copilot reads repository instructions, path-specific instructions and AGENTS.md; the cloud agent and code review also recognize CLAUDE.md.
     category: DOCUMENTED BEHAVIOR
@@ -53,6 +54,8 @@ evidence:
     category: PREVIEW LIMITATION
   - statement: Bake-off scores will vary with model, prompt and task; they describe this repository's synthetic tasks, not the products in general.
     category: ASSUMPTION
+  - statement: Ten recorded LIVE Copilot CLI runs cover five tasks each with Claude Sonnet 5.5 and GPT 6.1 Sol; both passed 5/5. No Claude Code authentication or execution was performed. Replaying these records offline is not a new live run.
+    category: VERIFIED LIVE
   - statement: Organizations that use both harnesses must configure two separate admin planes (GitHub enterprise policies and Claude managed settings).
     category: PRODUCTION RECOMMENDATION
 try_it:
@@ -68,7 +71,8 @@ copilot_prompt: >-
   tool you would call, which ones need my approval and what evidence each produces. Do not edit
   files yet." Record the steps and approvals for the bake-off scorecard.
 claude_code_prompt: >-
-  Start Claude Code with --permission-mode plan and ask: "Using the rules imported from AGENTS.md
+  DOCUMENTED ONLY; no execution is claimed. For a future approved comparison, start Claude Code
+  with --permission-mode plan and ask: "Using the rules imported from AGENTS.md
   and the ffia-local MCP server, plan how you would add a data-quality check for null discharge
   dates in silver_encounters. List every tool you would call, which ones need my approval and what
   evidence each produces. Do not edit files yet." Compare the plan with the Copilot run.
@@ -76,7 +80,7 @@ production_notes:
   - Keep one source of truth — AGENTS.md — and import it from CLAUDE.md; do not fork rules per tool.
   - Put repository skills in .claude/skills/ so both harnesses load them.
   - Configure the GitHub MCP allow-list and Claude managed settings separately; they do not share policy.
-  - Never use Autopilot or bypassPermissions outside a sandbox with synthetic data.
+  - Never use bypassPermissions in this accelerator. Do not use Autopilot for unapproved cloud writes.
   - Use headless runs in CI as an additional reviewer, never the only reviewer of high-risk changes.
   - Publish bake-off results as dated observations with the model, versions and prompts used.
 sources:

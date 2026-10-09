@@ -5,6 +5,7 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
+  workflow_call:
 
 permissions:
   contents: read
@@ -16,6 +17,10 @@ concurrency:
 env:
   UV_VERSION: "0.12.23"
   PYTHON_VERSION: "3.14"
+  FFIA_ENVIRONMENT: offline
+  FFIA_FABRIC_LIVE: "0"
+  FFIA_FOUNDRY_LIVE: "0"
+  FFIA_APPLICATIONINSIGHTS_CONNECTION_STRING: ""
 
 jobs:
   backend:
@@ -51,7 +56,7 @@ jobs:
       - name: JSON Schemas match the models
         run: ffia schemas check
       - name: Education content and completeness gate
-        run: ffia education check
+        run: ffia education check --min-coverage 1.0
       - name: Architecture diagrams (draw.io and docs) are current
         run: ffia diagrams check
       - name: MCP profiles are pinned, least-privilege and current
@@ -62,12 +67,16 @@ jobs:
         run: ffia skills check
       - name: Talk-track handouts match their YAML
         run: ffia talktracks check
+      - name: Portable prompt packs match their structured sources
+        run: ffia prompts check
       - name: Bake-off tasks and recorded replays are valid
         run: ffia bakeoff check
       - name: Harness permissions match the policy (Claude Code, VS Code)
         run: ffia harness check
       - name: Offline demo release gate
         run: ffia demo check --no-azure-cli && ffia demo offline
+      - name: Deterministic agent evaluation release gate
+        run: ffia agents eval --suite sales-insights-agent
       - name: Build distribution
         run: uv build
 

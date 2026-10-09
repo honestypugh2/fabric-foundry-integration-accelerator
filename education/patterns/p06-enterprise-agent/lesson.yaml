@@ -39,9 +39,11 @@ evidence:
     sources: [foundry-evaluators]
   - statement: Governed reads, local evaluation against a baseline, the change flow and audit run offline today; the agent act of the offline demo runs a deterministic local agent labeled LOCAL, which answers through a governed data tool and is not presented as Foundry.
     category: SIMULATED LOCALLY
-  - statement: The routed path to a live Foundry agent, live agent evaluation and the monthly-insights workflow over the live agent are implemented but opt-in and have not been validated end to end.
-    category: REQUIRES TENANT VALIDATION
+  - statement: On 2026-10-08, the routed live Foundry agent passed 5/5 baseline cases with zero fallbacks in the demo tenant. A live single-team monthly-insights draft was held by the exact-cent review gate; nothing was delivered. These dated observations do not validate another tenant or production delivery.
+    category: VERIFIED LIVE
     sources: [foundry-agent-service, agent-framework-workflows]
+  - statement: On 2026-10-09, an approved synthetic client span was observed in Application Insights. This verifies client telemetry ingestion, not server-side agent tracing. A new agent trace still requires an approved run and query verification.
+    category: VERIFIED LIVE
   - statement: Whether passthrough, row-level security and tool approval behave as documented must be confirmed in your own tenant with your own roles before go-live.
     category: REQUIRES TENANT VALIDATION
     sources: [foundry-fabric-tool, fabric-rest-identity]

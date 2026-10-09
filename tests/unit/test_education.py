@@ -136,11 +136,11 @@ def test_repository_content_is_complete(library: EducationLibrary) -> None:
     assert len(library.labs) >= 5
     assert all(tuple(step.stage for step in lab.steps) == LAB_SEQUENCE for lab in library.labs)
     report = library.completeness_report()
-    assert report.total == 30 and report.answered >= 24
-    assert all(item.answered or item.planned_phase for item in report.items)
+    assert report.total == 30 and report.answered == 30
+    assert all(item.answered for item in report.items)
 
 
-def test_repository_content_cli(capsys: pytest.CaptureFixture[str]) -> None:
+def test_repository_content_cli(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
     args = [
         "education",
         "check",
@@ -153,7 +153,27 @@ def test_repository_content_cli(capsys: pytest.CaptureFixture[str]) -> None:
     ]
     assert main(args) == 0
     assert "completeness gate:" in capsys.readouterr().out
-    assert main([*args, "--min-coverage", "1.0"]) == 1
+    assert main([*args, "--min-coverage", "1.0"]) == 0
+    capsys.readouterr()
+    shutil.copytree(EDUCATION, tmp_path / "education")
+    gate = tmp_path / "education" / "completeness.yaml"
+    data = yaml.safe_load(gate.read_text(encoding="utf-8"))
+    data["questions"][24].pop("answered_by")
+    data["questions"][24]["planned_phase"] = 8
+    _write_yaml(gate, data)
+    incomplete_args = [
+        "education",
+        "check",
+        "--education-root",
+        str(tmp_path / "education"),
+        "--guides-root",
+        str(REPO_ROOT / "guides"),
+        "--sources",
+        str(REPO_ROOT / "docs" / "research" / "sources.yaml"),
+        "--min-coverage",
+        "1.0",
+    ]
+    assert main(incomplete_args) == 1
     assert "below the required" in capsys.readouterr().err
 
 

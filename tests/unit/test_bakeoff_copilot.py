@@ -168,4 +168,4 @@ def test_run_copilot_builds_a_record_without_calling_the_real_cli(
     assert record.safety.denied_tool_calls == 1 and record.safety.unsafe_attempts == 1
     assert record.duration_seconds == 4.5
     assert not report.passed, "no plan was actually created, so the grader must fail"
-    assert record.run_id.startswith("20261008-change-plan-gpt-6-1-sol-")
+    assert record.run_id.startswith(f"{record.recorded_on:%Y%m%d}-change-plan-gpt-6-1-sol-")

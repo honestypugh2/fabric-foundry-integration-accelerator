@@ -1,6 +1,6 @@
 {
-  "answered": 25,
-  "coverage": 0.8333,
+  "answered": 30,
+  "coverage": 1.0,
   "items": [
     {
       "answered": true,
@@ -224,38 +224,48 @@
       "question": "How are preview features isolated from the default experience?"
     },
     {
-      "answered": false,
-      "answered_by": [],
+      "answered": true,
+      "answered_by": [
+        "production-readiness"
+      ],
       "id": "Q25",
-      "planned_phase": 7,
+      "planned_phase": null,
       "question": "How is the accelerator customized for another customer or industry?"
     },
     {
-      "answered": false,
-      "answered_by": [],
+      "answered": true,
+      "answered_by": [
+        "production-readiness"
+      ],
       "id": "Q26",
-      "planned_phase": 8,
+      "planned_phase": null,
       "question": "What is the threat model for agents with tool access?"
     },
     {
-      "answered": false,
-      "answered_by": [],
+      "answered": true,
+      "answered_by": [
+        "production-readiness"
+      ],
       "id": "Q27",
-      "planned_phase": 8,
+      "planned_phase": null,
       "question": "How are secrets and environment identifiers kept out of the repository?"
     },
     {
-      "answered": false,
-      "answered_by": [],
+      "answered": true,
+      "answered_by": [
+        "production-readiness"
+      ],
       "id": "Q28",
-      "planned_phase": 7,
+      "planned_phase": null,
       "question": "How do changes move from development to production through Git and CI/CD?"
     },
     {
-      "answered": false,
-      "answered_by": [],
+      "answered": true,
+      "answered_by": [
+        "production-readiness"
+      ],
       "id": "Q29",
-      "planned_phase": 8,
+      "planned_phase": null,
       "question": "How are cost and usage of models and tools controlled?"
     },
     {

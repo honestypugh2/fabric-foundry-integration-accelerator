@@ -24,6 +24,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Fabric IQ and Data Agents | [Fabric data agent concepts](#fabric-data-agent) | GA | 2026-10-05 |
 | Fabric IQ and Data Agents | [Ontology overview (Fabric IQ)](#fabric-iq-ontology) | PREVIEW | 2026-10-05 |
 | Fabric IQ and Data Agents | [What is Fabric IQ?](#fabric-iq-overview) | PREVIEW | 2026-10-05 |
+| GitHub CodeQL | [Workflow configuration options for code scanning](#github-codeql-configuration) | GUIDANCE | 2026-10-09 |
 | Microsoft Agent 365 | [Overview of Microsoft Agent 365](#agent-365) | GA | 2026-10-08 |
 | Microsoft Agent Framework | [Microsoft Agent Framework overview](#agent-framework) | GA | 2026-10-08 |
 | Microsoft Agent Framework | [Microsoft Agent Framework workflow capabilities](#agent-framework-workflows) | GA | 2026-10-08 |
@@ -332,6 +333,27 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Identity-delegated access; same-tenant requirements for Foundry integration. |
 | Limitations | Preview; behavior may change. |
 | Fallback | Local semantic YAML (ontology analog). |
+| Deprecation / replacement | — |
+
+## GitHub CodeQL
+
+<a id="github-codeql-configuration"></a>
+
+### Workflow configuration options for code scanning
+
+| Field | Value |
+|---|---|
+| URL | https://docs.github.com/en/code-security/reference/code-scanning/workflow-configuration-options |
+| Publisher | GitHub Docs |
+| Retrieved | 2026-10-09 |
+| Last updated | — |
+| Status | GUIDANCE |
+| Associated patterns | P08, P09 |
+| Key architecture statement | Advanced code scanning workflows support push, pull request and scheduled analysis with language-specific configuration. |
+| Implementation relevance | Two-language CodeQL workflow complements deterministic offline quality and evaluation release gates. |
+| Security implications | Scope security-events write to analysis jobs and protect publication through reviewed release artifacts. |
+| Limitations | Workflow configuration is not evidence of a completed scan or zero alerts; repository code-scanning availability and branch protections need operator verification. |
+| Fallback | Local lint, strict types, tests, dependency audits and privacy scan; not equivalent to CodeQL. |
 | Deprecation / replacement | — |
 
 ## Microsoft Agent 365

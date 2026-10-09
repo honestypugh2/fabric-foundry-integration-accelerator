@@ -27,10 +27,10 @@ Customize it · Productionize it — in one project, with **synthetic data only*
 | 3 | Application control plane (FastAPI, FastMCP, providers, router, circuit breaker, approvals, audit) | ✅ Complete |
 | 4 | Interactive educational application (explorers, learning paths, labs, guides, demo mode) | ✅ Complete |
 | 5 | Fabric integration (live read-only provider, gated writer, MCP profiles, skills, reference notebooks) | ✅ Complete |
-| 6 | Foundry integration (agent port, LOCAL + Foundry agents, evaluation, tracing, Agent Framework workflow, Foundry IQ knowledge analog behind a preview flag) | ✅ Complete; live router path, live eval (5/5) and workflow VERIFIED LIVE (App Insights export pending) |
-| 7 | GitHub Copilot + Claude Code (skills, prompt packs, bake-off) | Planned |
-| 8 | Security, CI/CD and production readiness | Planned |
-| 9 | Final validation | Planned |
+| 6 | Foundry integration (agent port, LOCAL + Foundry agents, evaluation, tracing, Agent Framework workflow, Foundry IQ knowledge analog behind a preview flag) | ✅ Complete; dated live eval 5/5, live draft held by review gate; client telemetry ingestion verified, new server-side tracing still requires tenant verification |
+| 7 | GitHub Copilot + Claude Code (skills, prompt packs, bake-off) | ✅ Complete; ten recorded Copilot CLI model runs; Claude Code DOCUMENTED ONLY |
+| 8 | Security, CI/CD and production readiness | ✅ Repository implementation and LOCAL checks complete; CodeQL/release execution and production checklist remain external verification |
+| 9 | Final validation | ✅ LOCAL validation passed on 2026-10-09; 581 Python tests, 81 frontend tests, 30/30 education, offline demo and verified SBOMs |
 
 Use-Case Guides under `guides/`: **HC-01** (Fabric MCP + Power BI medallion lab, healthcare,
 synthetic) and **MFG-01** (Foundry + Fabric sales insights, manufacturing, synthetic).
@@ -43,6 +43,17 @@ from YAML with `ffia talktracks render`, also linked from the app's Demo page):
   (manufacturing, synthetic; offline commands `ffia mfg brief`, `ffia mfg quality`,
   `ffia agents ask|eval|workflow`, and the app's Agent page)
 - Morning setup: [demos/MORNING-RUNBOOK.md](demos/MORNING-RUNBOOK.md)
+
+Both guides also have generated [Copilot](prompts/github-copilot/patterns.md) and
+[Claude Code](prompts/claude-code/patterns.md) prompt packs. The recorded bake-off compares
+Claude and GPT models **inside Copilot CLI**, not Copilot versus Claude Code.
+Replay evidence offline at `/bakeoff`; no new cloud operation occurs during replay.
+
+See [security and threat model](docs/security/README.md),
+[release validation](docs/operations/release-validation.md) and
+[observability evidence](infra/observability/README.md). The education completeness gate covers
+all 30 questions across Executive and L100-L400. Fabric capacity remains paused; new live runs
+need separate approval.
 
 ## Quick start
 

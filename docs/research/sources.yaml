@@ -2,6 +2,19 @@
 # Status vocabulary: GA | PREVIEW | DEPRECATED | UNKNOWN/NEEDS VALIDATION | GUIDANCE | OSS
 version: 1
 sources:
+  - id: github-codeql-configuration
+    title: Workflow configuration options for code scanning
+    url: https://docs.github.com/en/code-security/reference/code-scanning/workflow-configuration-options
+    publisher: GitHub Docs
+    retrieved_date: 2026-10-09
+    technology: GitHub CodeQL
+    associated_patterns: [P08, P09]
+    status: GUIDANCE
+    key_architecture_statement: Advanced code scanning workflows support push, pull request and scheduled analysis with language-specific configuration.
+    implementation_relevance: Two-language CodeQL workflow complements deterministic offline quality and evaluation release gates.
+    security_implications: Scope security-events write to analysis jobs and protect publication through reviewed release artifacts.
+    limitations: Workflow configuration is not evidence of a completed scan or zero alerts; repository code-scanning availability and branch protections need operator verification.
+    fallback: Local lint, strict types, tests, dependency audits and privacy scan; not equivalent to CodeQL.
   # ------------------------------------------------------------------ Fabric foundation
   - id: fabric-overview
     title: What is Microsoft Fabric?

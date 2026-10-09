@@ -20,4 +20,5 @@ Authoritative references.
 | [0012](ADR-0012-live-fabric-integration.md) | Live Fabric integration: read-only provider, gated scoped writer, MCP profiles as code, reference notebooks |
 | [0013](ADR-0013-foundry-agents-evaluation-tracing.md) | Foundry agents behind a provider port, deterministic agent evaluation, opt-in tracing, Agent Framework workflows |
 
-More ADRs are added in Phases 7–8.
+| [0014](ADR-0014-harness-bakeoff-and-prompt-packs.md) | Governed harnesses, generated prompt packs and documented-only Claude Code |
+| [0015](ADR-0015-release-security-gates.md) | Offline evaluation/security gates and human-reviewed release artifacts |
