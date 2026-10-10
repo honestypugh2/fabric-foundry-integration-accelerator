@@ -73,14 +73,14 @@ def provider_statuses(container: Container) -> tuple[ProviderStatus, ...]:
                 ready=not injected and container.router.breaker("fabric_data").allow(),
                 note="Training fault injector: every call fails."
                 if injected
-                else "Live Fabric provider.",
+                else "Live Fabric provider configured; health is not probed here. Inspect route evidence.",
             )
         )
     else:
         statuses.append(
             ProviderStatus(
                 capability="fabric_data",
-                name="Fabric REST / Fabric MCP (live)",
+                name="Fabric REST (application provider)",
                 kind="NOT AVAILABLE",
                 configured=False,
                 ready=False,
@@ -105,7 +105,7 @@ def provider_statuses(container: Container) -> tuple[ProviderStatus, ...]:
             kind="LIVE" if live_agent else "NOT AVAILABLE",
             configured=live_agent is not None,
             ready=live_agent is not None,
-            note="Calls an existing Foundry agent (opt-in)."
+            note="Existing Foundry agent configured; health is not probed here. Inspect route evidence."
             if live_agent
             else "Opt in with FFIA_FOUNDRY_LIVE=1, a hybrid or live environment and a `foundry:` binding; "
             "check with `ffia foundry readiness`.",
@@ -141,8 +141,9 @@ def runtime_status(container: Container) -> RuntimeStatus:
         ),
         mcp=f"Local server ready: {len(container.tool_manifest.enabled())} allow-listed tools",
         identity=(
-            "Azure CLI user, delegated, pinned to the bound tenant"
-            if container.bindings is not None and container.settings.fabric_live
+            "Azure CLI user, delegated, pinned to the bound tenant (configured, not probed here)"
+            if container.bindings is not None
+            and (container.settings.fabric_live or container.settings.foundry_live)
             else "Local process (no cloud identity in use)"
         ),
         write_mode=f"Approval required; LOCAL executions are SIMULATED; {live_writes}",

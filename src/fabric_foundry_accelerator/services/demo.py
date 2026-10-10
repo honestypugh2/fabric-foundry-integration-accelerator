@@ -12,6 +12,7 @@ from pydantic import BaseModel, ConfigDict
 
 from fabric_foundry_accelerator.agents.port import AgentQuestion
 from fabric_foundry_accelerator.config.environment import load_environment
+from fabric_foundry_accelerator.evaluation.agent_eval import load_suite, run_suite
 from fabric_foundry_accelerator.fallback.router import ProviderRouter
 from fabric_foundry_accelerator.mcp.server import build_mcp_server
 from fabric_foundry_accelerator.models.changes import (
@@ -28,6 +29,7 @@ from fabric_foundry_accelerator.models.execution import (
     new_correlation_id,
 )
 from fabric_foundry_accelerator.patterns.catalog import recommend
+from fabric_foundry_accelerator.providers.errors import ProviderError
 from fabric_foundry_accelerator.providers.fabric.live import NOT_CONFIGURED_NOTE
 from fabric_foundry_accelerator.providers.fabric.outage import SimulatedOutageFabricProvider
 from fabric_foundry_accelerator.providers.fabric.routed import RoutedFabricProvider
@@ -174,10 +176,11 @@ async def demo_check(container: Container, *, azure_probe: bool = True) -> DemoC
     live_ready = live is not None and live.ready
     mode = OperatingMode.HYBRID if live_ready else OperatingMode.OFFLINE
     reason = (
-        "A live Fabric provider is healthy; reads use it with LOCAL fallback."
+        "A live Fabric provider is configured; reads prefer it with LOCAL fallback. "
+        "Health is not probed here; inspect readiness and actual route evidence."
         if live_ready
         else (
-            "No live provider is configured and healthy; OFFLINE runs everything locally with honest labels."
+            "No available live Fabric provider is configured; OFFLINE runs locally with honest labels."
         )
     )
     return DemoCheckReport(lines=lines, recommended_mode=mode, reason=reason)
@@ -209,6 +212,86 @@ class OfflineDemoReport(BaseModel):
     label_counts: dict[str, int]
     live_operations: int
     cloud_operations: int
+
+
+class ConnectedDemoReport(BaseModel):
+    """Bounded read demo; successful fallback is not a verified live path."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    operating_mode: OperatingMode
+    passed: bool
+    live_verified: bool
+    steps: tuple[DemoStep, ...]
+
+
+async def run_connected_demo(container: Container) -> ConnectedDemoReport:
+    """List workspaces and evaluate one synthetic question; never create or update Fabric items."""
+    if container.mode is OperatingMode.OFFLINE:
+        raise ValueError("Connected demos require HYBRID or LIVE mode")
+    steps: list[DemoStep] = []
+    try:
+        result = await container.fabric.list_workspaces()
+    except ProviderError:
+        steps.append(
+            DemoStep(
+                act=1,
+                title="Application Fabric read (REST, not MCP)",
+                required=True,
+                passed=False,
+                label="UNAVAILABLE",
+                summary="Fabric read unavailable; no substitute tool ran.",
+            )
+        )
+    else:
+        steps.append(
+            DemoStep(
+                act=1,
+                title="Application Fabric read (REST, not MCP)",
+                required=True,
+                passed=True,
+                label=result.execution_label.value,
+                summary=f"{len(result.data)} workspace(s); {result.selected_provider}.",
+                evidence=(result.fallback_reason,) if result.fallback_reason else (),
+            )
+        )
+    suite = load_suite(container.settings.config_root, "sales-insights-agent")
+    try:
+        report = await run_suite(
+            container.agents, suite.model_copy(update={"cases": suite.cases[:1]})
+        )
+    except ProviderError:
+        steps.append(
+            DemoStep(
+                act=2,
+                title="Foundry synthetic question (Responses SDK)",
+                required=True,
+                passed=False,
+                label="UNAVAILABLE",
+                summary="Agent unavailable; no local write or delivery occurred.",
+            )
+        )
+    else:
+        case = report.cases[0]
+        steps.append(
+            DemoStep(
+                act=2,
+                title="Foundry synthetic question (Responses SDK)",
+                required=True,
+                passed=report.gate_passed,
+                label=case.label,
+                summary=f"{report.passed}/{report.compared} baseline checks passed; "
+                f"grounded={case.grounded}; fallback={case.fallback_used}.",
+                evidence=case.tools,
+            )
+        )
+    passed = all(step.passed for step in steps)
+    return ConnectedDemoReport(
+        operating_mode=container.mode,
+        passed=passed,
+        live_verified=passed and all(step.label in ("LIVE", "PREVIEW") for step in steps),
+        steps=tuple(steps),
+    )
 
 
 class _Tracker:

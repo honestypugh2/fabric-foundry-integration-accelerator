@@ -36,12 +36,31 @@ export function StatusBar() {
     <footer className="status-bar" aria-label="Execution status">
       <dl>
         {items.map((item) => (
-          <div key={item.label} className="status-bar__item">
+          <div key={item.label} className="status-bar__item" data-field={item.label}>
             <dt>{item.label}</dt>
-            <dd>{item.value}</dd>
+            <dd title={item.value}>{item.value}</dd>
           </div>
         ))}
       </dl>
+      <details>
+        <summary>Configuration, not execution · inspect full state and evidence limits</summary>
+        <ul>
+          {items.map((item) => (
+            <li key={item.label}>
+              {item.label}: {item.value}
+            </li>
+          ))}
+        </ul>
+        <p className="meta">
+          Configuration is not execution evidence. Inspect each result's label and fallback reason;
+          live writes never redirect.
+        </p>
+        {status.data?.providers.map((provider) => (
+          <p className="meta" key={`${provider.capability}:${provider.name}:${provider.kind}`}>
+            {provider.capability}: {provider.name} · {provider.kind} · {provider.note}
+          </p>
+        ))}
+      </details>
     </footer>
   );
 }

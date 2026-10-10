@@ -39,6 +39,55 @@
     "title": "GitHub Copilot and Claude Code for Fabric data engineering"
   },
   {
+    "area": "agentic-data-engineering",
+    "id": "spec-driven-delivery",
+    "pattern_ids": [
+      "P20",
+      "P25"
+    ],
+    "related_guides": [],
+    "related_labs": [],
+    "status": "LOCAL",
+    "summary": "Turn a PoC outcome into explicit requirements, a governed plan, dependency-ordered tasks and independent verification without confusing a specification with authority.",
+    "title": "P25: Spec-driven delivery with optional Spec Kit"
+  },
+  {
+    "area": "architecture",
+    "id": "agent-research-foundations",
+    "pattern_ids": [
+      "P01",
+      "P04",
+      "P06",
+      "P08",
+      "P09",
+      "P16",
+      "P19"
+    ],
+    "related_guides": [
+      "hc-01-fabric-mcp-powerbi-medallion-lab",
+      "mfg-01-foundry-fabric-sales-insights"
+    ],
+    "related_labs": [],
+    "status": "LOCAL",
+    "summary": "Connect attention, retrieval and action-observation loops to today's assistants, then test their limits through controlled synthetic experiments.",
+    "title": "From language models to grounded, tool-using agents"
+  },
+  {
+    "area": "architecture",
+    "id": "domain-and-agent-composition",
+    "pattern_ids": [
+      "P02",
+      "P13"
+    ],
+    "related_guides": [
+      "mfg-01-foundry-fabric-sales-insights"
+    ],
+    "related_labs": [],
+    "status": "MIXED",
+    "summary": "Distinguish data ownership, routing and agent lifecycle boundaries before introducing a coordinator or preview Fabric IQ integration.",
+    "title": "Many domains, only as many agents as needed"
+  },
+  {
     "area": "architecture",
     "id": "fabric-foundry-boundaries",
     "pattern_ids": [
@@ -58,6 +107,24 @@
     "status": "MIXED",
     "summary": "The central lesson of the accelerator. Fabric provides governed business context, Foundry turns that context into reasoning, orchestration, evaluation and action, MCP standardizes capability access without granting authority, Entra identity and policy decide authority, and business systems stay the authority for transactional writes. Evidence and offline resilience keep the whole story honest and teachable.",
     "title": "Fabric + Foundry: who owns what"
+  },
+  {
+    "area": "architecture",
+    "id": "governed-data-foundations",
+    "pattern_ids": [
+      "P01",
+      "P03",
+      "P10",
+      "P12"
+    ],
+    "related_guides": [
+      "hc-01-fabric-mcp-powerbi-medallion-lab",
+      "mfg-01-foundry-fabric-sales-insights"
+    ],
+    "related_labs": [],
+    "status": "LOCAL",
+    "summary": "Learn the data independence, grain, keys, relational operations and semantic contracts that make modern Fabric context trustworthy.",
+    "title": "From relations to governed lakehouse context"
   },
   {
     "area": "architecture",
@@ -93,6 +160,22 @@
     "status": "MIXED",
     "summary": "GitHub Copilot reaches data engineers through several surfaces that share one agent runtime \u2014 VS Code agent mode, Copilot CLI, the Copilot app (technical preview), the Copilot cloud agent and the Copilot SDK. Each fits different steps of the Fabric data-engineering lifecycle, and all of them are steered by the same repository instruction files, skills and MCP configuration.",
     "title": "GitHub Copilot surfaces for data engineers"
+  },
+  {
+    "area": "fabric",
+    "id": "enrichment-and-event-context",
+    "pattern_ids": [
+      "P05",
+      "P07"
+    ],
+    "related_guides": [
+      "hc-01-fabric-mcp-powerbi-medallion-lab",
+      "mfg-01-foundry-fabric-sales-insights"
+    ],
+    "related_labs": [],
+    "status": "MIXED",
+    "summary": "Compare durable AI enrichment with operational event triage using quality contracts, idempotency, event time and reviewed actions.",
+    "title": "Batch enrichment and timely event context"
   },
   {
     "area": "fabric",
@@ -254,7 +337,11 @@
   {
     "area": "security",
     "id": "production-readiness",
-    "pattern_ids": [],
+    "pattern_ids": [
+      "P14",
+      "P15",
+      "P18"
+    ],
     "related_guides": [
       "hc-01-fabric-mcp-powerbi-medallion-lab",
       "mfg-01-foundry-fabric-sales-insights"

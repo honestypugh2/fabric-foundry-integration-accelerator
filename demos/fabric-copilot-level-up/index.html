@@ -176,7 +176,8 @@ details.qa .ans{display:block}
 <div class="card entry"><h3>Conversation</h3><p class="where">Whiteboard or the architecture page</p><p>Discussion; no system involved.</p></div>
 </div><h2 id="prep">Prerequisites and preparation</h2>
 <h3>Choose the mode</h3><ul>
-<li><strong>Offline (always works):</strong> <code>make demo-prep &amp;&amp; make run</code>. Every live step has an offline fallback.</li>
+<li><strong>Offline (always works):</strong> <code>make demo-prep &amp;&amp; make run API_ARGS=--offline</code>. Every live step has a labeled offline equivalent; failed live writes stop.</li>
+<li><strong>Normal app startup:</strong> <code>make run</code> reads the ignored <code>.env</code> and starts both guides live-first in HYBRID mode. Inspect result labels; configured providers are not execution evidence.</li>
 <li><strong>Live read-only:</strong> resume the F capacity; <code>ffia fabric readiness</code> says YES; render the read-only Fabric MCP profile into a scratch lab folder (below).</li>
 <li><strong>Foundry segment (optional live):</strong> a Foundry project and model deployment; otherwise show the code and label it REQUIRES TENANT VALIDATION.</li>
 </ul>

@@ -9,6 +9,8 @@ the same `AGENTS.md`, skills and `.mcp.json`. Each job uses the narrowest server
 
 ## Architecture
 
+![Agent harnesses, MCP servers and authority boundaries, exported by draw.io Desktop](diagrams/mcp-topology.png)
+
 <!-- BEGIN GENERATED DIAGRAM: run `ffia diagrams render`; do not edit by hand -->
 
 > Generated from [`education/architecture/views/mcp-topology.yaml`](../../education/architecture/views/mcp-topology.yaml). Edit the YAML, then run `ffia diagrams render`.

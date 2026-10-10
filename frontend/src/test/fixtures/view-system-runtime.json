@@ -30,7 +30,7 @@
     },
     {
       "binding": "education",
-      "detail": "15 lessons, 8 architecture views.",
+      "detail": "21 lessons, 10 architecture views.",
       "label": "LOCAL",
       "node": "education",
       "status": "ACTIVE"
@@ -85,7 +85,7 @@
       "status": "NOT CONFIGURED"
     }
   ],
-  "observed_at": "2026-10-08T23:26:13.335233+00:00",
+  "observed_at": "2026-10-10T01:35:26.285630+00:00",
   "operating_mode": "OFFLINE",
   "view_id": "system"
 }

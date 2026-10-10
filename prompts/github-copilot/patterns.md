@@ -245,3 +245,13 @@ Source: [catalog](../../education/patterns/catalog.yaml).
 ```text
 Read the catalog entry for P24: Embedded data-engineering assistant. Explain this scenario: An internal app embeds an agent runtime that calls Fabric tools under app identity or on behalf of the user. Trace Fabric's role (Governed context and approved write targets.), Foundry's role (Agent runtime, evaluation and tracing.), and MCP's role (Typed tools with allow-lists.). Identify the authority boundary: On-behalf-of user identity plus approvals. Plan the offline demonstration: Local providers and deterministic agent. Name any preview dependencies and propose the smallest validation check. Do not edit files, call cloud tools, or claim an operation ran.
 ```
+
+## P25: Spec-driven Fabric and Foundry delivery
+
+Status: GA. Offline equivalent: Review a synthetic use-case specification, map requirements to tests and run existing offline gates.
+
+Source: [catalog](../../education/patterns/catalog.yaml).
+
+```text
+Read the catalog entry for P25: Spec-driven Fabric and Foundry delivery. Explain this scenario: A reviewed specification connects business outcomes, architecture, implementation tasks and measurable verification before a PoC changes a workspace. Trace Fabric's role (Supplies governed data contracts and explicit workspace acceptance criteria.), Foundry's role (Supplies reasoning and evaluation requirements; it does not define deployment authority.), and MCP's role (Tools may collect read-only facts and evidence; no specification grants tool authorization.). Identify the authority boundary: Repository policy, human review and the existing governed change flow remain authoritative. Plan the offline demonstration: Review a synthetic use-case specification, map requirements to tests and run existing offline gates. Name any preview dependencies and propose the smallest validation check. Do not edit files, call cloud tools, or claim an operation ran.
+```

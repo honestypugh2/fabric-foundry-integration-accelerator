@@ -1,40 +1,62 @@
 import { TalkTracks } from "../demo/TalkTracks";
 import { Link } from "react-router";
-import { useCompleteness } from "../../api/hooks";
+import { useCompleteness, useWorkshop } from "../../api/hooks";
 import { usePageTitle } from "../../app/usePageTitle";
 import { QueryState } from "../../components/QueryState";
 import { principles } from "../../content/principles";
-
-const START: readonly { readonly to: string; readonly title: string; readonly text: string }[] = [
-  {
-    to: "/guides/hc-01-fabric-mcp-powerbi-medallion-lab",
-    title: "Run Guide HC-01",
-    text: "Fabric MCP + Power BI medallion lab with GitHub Copilot or Claude Code, step by step.",
-  },
-  {
-    to: "/architecture/reference",
-    title: "Explore the architecture",
-    text: "Interactive diagrams: build them layer by layer, trace a request, see live runtime state.",
-  },
-  {
-    to: "/learn/copilot-maturity-ladder",
-    title: "Level up with GitHub Copilot",
-    text: "From assisted coding to governed change: the Fabric data-engineering maturity ladder.",
-  },
-  {
-    to: "/demo",
-    title: "Run the offline demo",
-    text: "Ten acts, honestly labeled, with no cloud access required.",
-  },
-];
+import { Journeys } from "../workshop/Journeys";
 
 export function HomePage() {
   usePageTitle("Home");
   const completeness = useCompleteness();
+  const workshop = useWorkshop();
   return (
     <>
-      <h1>Fabric Foundry Integration Accelerator</h1>
-      <TalkTracks />
+      <QueryState label="workshop" {...workshop}>
+        {(data) => (
+          <>
+            <section className="workshop-hero" aria-labelledby="workshop-heading">
+              <div>
+                <p className="eyebrow">Fabric + Foundry · a build-and-learn workshop</p>
+                <h1 id="workshop-heading">{data.content.title}</h1>
+                <p className="lead">{data.content.summary}</p>
+                <div className="hero-actions">
+                  <Link className="button-link" to="/use-cases">
+                    Build a use case
+                  </Link>
+                  <Link to="/learn">Understand the foundations</Link>
+                </div>
+              </div>
+              <ol className="hero-loop" aria-label="Workshop cycle">
+                <li>
+                  <span>01</span>
+                  <strong>Understand</strong>
+                  <small>Foundations and assumptions</small>
+                </li>
+                <li>
+                  <span>02</span>
+                  <strong>Build</strong>
+                  <small>Bounded, governed workflows</small>
+                </li>
+                <li>
+                  <span>03</span>
+                  <strong>Inspect</strong>
+                  <small>Evidence and failure modes</small>
+                </li>
+                <li>
+                  <span>04</span>
+                  <strong>Investigate</strong>
+                  <small>Experiment, compare, improve</small>
+                </li>
+              </ol>
+            </section>
+            <section aria-labelledby="paths-heading">
+              <h2 id="paths-heading">Choose your learning journey</h2>
+              <Journeys workshop={data} />
+            </section>
+          </>
+        )}
+      </QueryState>
       <section aria-labelledby="principles-heading">
         <h2 id="principles-heading">The central lesson</h2>
         <ul className="principles">
@@ -43,52 +65,58 @@ export function HomePage() {
           ))}
         </ul>
       </section>
-      <section aria-labelledby="start-heading">
-        <h2 id="start-heading">Start here</h2>
-        <ul className="cards">
-          {START.map((item) => (
-            <li key={item.to} className="card">
-              <h3>
-                <Link to={item.to}>{item.title}</Link>
-              </h3>
-              <p>{item.text}</p>
-            </li>
-          ))}
-        </ul>
+      <section className="callout" aria-labelledby="present-heading">
+        <h2 id="present-heading">Present, build or explore</h2>
+        <p>
+          Use Cases connect business outcomes to concepts and checkpoints. Labs rehearse safely.
+          Evidence separates documented behavior from actual execution.
+        </p>
+        <TalkTracks />
+        <Link to="/labs">Open hands-on labs</Link>
+        {" · "}
+        <Link to="/evidence">Inspect evidence</Link>
       </section>
-      <section aria-labelledby="completeness-heading">
-        <h2 id="completeness-heading">Architecture completeness</h2>
-        <QueryState label="completeness" {...completeness}>
-          {(report) => (
-            <>
-              <p>
-                <strong>
-                  {report.answered} of {report.total}
-                </strong>{" "}
-                architecture questions are answered at every level (Executive to L400).
-              </p>
-              <progress max={report.total} value={report.answered} aria-label="Questions answered">
-                {Math.round(report.coverage * 100)}%
-              </progress>
-              <details>
-                <summary>Questions still planned</summary>
-                <ul>
-                  {report.items
-                    .filter((item) => !item.answered)
-                    .map((item) => (
-                      <li key={item.id}>
-                        {item.id}: {item.question}{" "}
-                        {item.planned_phase === null ? null : (
-                          <span>(Phase {item.planned_phase})</span>
-                        )}
-                      </li>
-                    ))}
-                </ul>
-              </details>
-            </>
-          )}
-        </QueryState>
-      </section>
+      <details>
+        <summary>Architecture coverage—not workshop or live certification</summary>
+        <section aria-labelledby="completeness-heading">
+          <h2 id="completeness-heading">Architecture completeness</h2>
+          <QueryState label="completeness" {...completeness}>
+            {(report) => (
+              <>
+                <p>
+                  <strong>
+                    {report.answered} of {report.total}
+                  </strong>{" "}
+                  architecture questions have linked content at every level. Presence is not a
+                  measure of teaching quality or live certification.
+                </p>
+                <progress
+                  max={report.total}
+                  value={report.answered}
+                  aria-label="Questions answered"
+                >
+                  {Math.round(report.coverage * 100)}%
+                </progress>
+                <details>
+                  <summary>Questions still planned</summary>
+                  <ul>
+                    {report.items
+                      .filter((item) => !item.answered)
+                      .map((item) => (
+                        <li key={item.id}>
+                          {item.id}: {item.question}{" "}
+                          {item.planned_phase === null ? null : (
+                            <span>(Phase {item.planned_phase})</span>
+                          )}
+                        </li>
+                      ))}
+                  </ul>
+                </details>
+              </>
+            )}
+          </QueryState>
+        </section>
+      </details>
     </>
   );
 }

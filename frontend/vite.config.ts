@@ -1,5 +1,6 @@
 import react from "@vitejs/plugin-react";
-import { loadEnv, type Plugin } from "vite";
+import { resolve } from "node:path";
+import { loadEnv, searchForWorkspaceRoot, type Plugin } from "vite";
 import { defineConfig } from "vitest/config";
 
 /**
@@ -40,6 +41,18 @@ export default defineConfig(({ mode }) => ({
   server: {
     port: 5173,
     strictPort: true,
+    fs: {
+      allow: [
+        searchForWorkspaceRoot(process.cwd()),
+        ...["../docs/operations/phase-verification.md", "../infra/observability/README.md"].flatMap(
+          (path) => {
+            const file = resolve(process.cwd(), path);
+            // Vite checks both the file and the query-suffixed asset module ID.
+            return [file, `${file}?url`];
+          },
+        ),
+      ],
+    },
     // Same-origin calls to the local control plane during development (`make run-api`).
     proxy: {
       "/api": "http://127.0.0.1:8000",
@@ -51,6 +64,7 @@ export default defineConfig(({ mode }) => ({
     sourcemap: true,
   },
   test: {
+    maxWorkers: 2,
     environment: "jsdom",
     globals: true,
     setupFiles: ["./src/test/setup.ts"],

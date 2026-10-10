@@ -6,7 +6,7 @@ import { mockApi, problem } from "../../test/mockApi";
 import { renderApp } from "../../test/render";
 
 const guide = fixtures.guideHc01;
-const GUIDE_URL = `/guides/${guide.id}`;
+const GUIDE_URL = `/use-cases/${guide.id}`;
 
 describe("guide runner", () => {
   it("lists guides", async () => {
@@ -32,6 +32,9 @@ describe("guide runner", () => {
     expect(screen.getByText(step?.copilot_prompt ?? "")).toBeInTheDocument();
     expect(screen.getByText(step?.claude_code_prompt ?? "")).toBeInTheDocument();
     expect(screen.getByText(/does not change anything/)).toBeInTheDocument();
+    expect(screen.getByText(/Both guides share the application runtime/)).toHaveTextContent(
+      /write rehearsals remain SIMULATED/,
+    );
     const evidence = screen.getByRole("checkbox", { name: step?.evidence_required[0] ?? "" });
     await userEvent.click(evidence);
     expect(evidence).toBeChecked();

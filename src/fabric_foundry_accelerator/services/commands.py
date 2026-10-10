@@ -11,7 +11,7 @@ from pydantic import BaseModel
 from fabric_foundry_accelerator.audit.store import AuditRecord
 from fabric_foundry_accelerator.config.environment import EnvironmentConfiguration
 from fabric_foundry_accelerator.config.overlay import CustomerOverlay
-from fabric_foundry_accelerator.config.settings import Settings
+from fabric_foundry_accelerator.config.settings import ApiSettings, Settings
 from fabric_foundry_accelerator.education.guides import UseCaseGuide
 from fabric_foundry_accelerator.education.lessons import (
     ArchitectureMap,
@@ -27,7 +27,11 @@ from fabric_foundry_accelerator.observability.tracing import configure_tracing
 from fabric_foundry_accelerator.patterns.catalog import PatternCatalog
 from fabric_foundry_accelerator.policies.engine import ToolManifest, WritePolicy
 from fabric_foundry_accelerator.services.container import build_container
-from fabric_foundry_accelerator.services.demo import demo_check, run_offline_demo
+from fabric_foundry_accelerator.services.demo import (
+    demo_check,
+    run_connected_demo,
+    run_offline_demo,
+)
 
 SCHEMA_MODELS: dict[str, type[BaseModel]] = {
     "customer-overlay": CustomerOverlay,
@@ -74,11 +78,16 @@ def _cmd_demo_check(args: argparse.Namespace) -> int:
 
 
 def _cmd_demo_offline(args: argparse.Namespace) -> int:
-    container = build_container(Settings())
+    container = build_container(
+        Settings(
+            environment="offline", fabric_live=False, foundry_live=False, allow_live_mutation=False
+        )
+    )
     report = asyncio.run(run_offline_demo(container, work_dir=Path(args.work_dir)))
     if args.json:
         _out(report.model_dump_json(indent=2))
         return 0 if report.passed else 1
+
     _out(
         f"OFFLINE DEMO ({report.operating_mode}) - every result is labeled; nothing is presented as a cloud operation."
     )
@@ -98,12 +107,45 @@ def _cmd_demo_offline(args: argparse.Namespace) -> int:
     return 0 if report.passed else 1
 
 
+def _cmd_demo_connected(args: argparse.Namespace) -> int:
+    settings = ApiSettings(
+        environment=args.demo_command,
+        fabric_live=True,
+        foundry_live=True,
+        allow_live_mutation=False,
+    )
+    configure_logging(level=settings.log_level, json=settings.log_json)
+    _err(
+        "Provider/server/tools: application Fabric REST list_workspaces; "
+        "Foundry project's Responses SDK, one synthetic evaluation question (not MCP). "
+        "No Fabric write or message delivery; model usage may incur cost."
+    )
+    report = asyncio.run(run_connected_demo(build_container(settings)))
+    if args.json:
+        _out(report.model_dump_json(indent=2))
+    else:
+        for step in report.steps:
+            _out(
+                f"[{'PASS' if step.passed else 'FAIL'}] [{step.label}] {step.title}: {step.summary}"
+            )
+            for evidence in step.evidence:
+                _out(f"  {evidence}")
+        _out(f"Demo passed: {report.passed}; live path verified: {report.live_verified}")
+    return 0 if report.passed else 1
+
+
 def _cmd_serve_api(args: argparse.Namespace) -> int:
     import uvicorn  # noqa: PLC0415 - server dependency only needed for this command
 
     from fabric_foundry_accelerator.api.app import create_app  # noqa: PLC0415
 
-    settings = Settings()
+    settings = (
+        Settings(
+            environment="offline", fabric_live=False, foundry_live=False, allow_live_mutation=False
+        )
+        if args.offline
+        else ApiSettings()
+    )
     configure_logging(level=settings.log_level, json=settings.log_json)
     sys.stderr.write(configure_tracing(settings.applicationinsights_connection_string) + "\n")
     uvicorn.run(
@@ -115,7 +157,9 @@ def _cmd_serve_api(args: argparse.Namespace) -> int:
 def _cmd_serve_mcp(_: argparse.Namespace) -> int:
     from fabric_foundry_accelerator.mcp.server import build_mcp_server  # noqa: PLC0415
 
-    settings = Settings()
+    settings = Settings(
+        environment="offline", fabric_live=False, foundry_live=False, allow_live_mutation=False
+    )
     configure_logging(level=settings.log_level, json=True)
     build_mcp_server(build_container(settings)).run(transport="stdio", show_banner=False)
     return 0
@@ -182,12 +226,21 @@ def register(subparsers: argparse._SubParsersAction[argparse.ArgumentParser]) ->
     offline.add_argument("--json", action="store_true")
     offline.add_argument("--work-dir", default="data/runtime/demo")
     offline.set_defaults(func=_cmd_demo_offline)
+    for mode in ("live", "hybrid"):
+        connected = demo_sub.add_parser(
+            mode, help="bounded Fabric read + one synthetic agent question"
+        )
+        connected.add_argument("--json", action="store_true")
+        connected.set_defaults(func=_cmd_demo_connected)
 
     serve = subparsers.add_parser("serve", help="run the API or the local MCP server")
     serve_sub = serve.add_subparsers(dest="serve_command", required=True)
     api = serve_sub.add_parser("api", help="FastAPI control plane (loopback by default)")
     api.add_argument("--host", default="127.0.0.1")
     api.add_argument("--port", type=int, default=8000)
+    api.add_argument(
+        "--offline", action="store_true", help="disable cloud providers for both guides"
+    )
     api.set_defaults(func=_cmd_serve_api)
     serve_sub.add_parser("mcp", help="local educational MCP server over stdio").set_defaults(
         func=_cmd_serve_mcp

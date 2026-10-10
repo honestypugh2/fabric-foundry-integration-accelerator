@@ -26,11 +26,11 @@ Customize it · Productionize it — in one project, with **synthetic data only*
 | 2 | Offline-first data foundation (synthetic medallion, recovery fixtures, Local Fabric Provider, dataset profiles) | ✅ Complete |
 | 3 | Application control plane (FastAPI, FastMCP, providers, router, circuit breaker, approvals, audit) | ✅ Complete |
 | 4 | Interactive educational application (explorers, learning paths, labs, guides, demo mode) | ✅ Complete |
-| 5 | Fabric integration (live read-only provider, gated writer, MCP profiles, skills, reference notebooks) | ✅ Complete |
+| 5 | Fabric integration (live read-only provider, gated writer, MCP profiles, skills, reference notebooks) | Implemented; external Core/IQ MCP integrations are profiles/documentation, not additional in-process adapters. Fresh Guide 1 MCP/Power BI execution requires its assigned tools. |
 | 6 | Foundry integration (agent port, LOCAL + Foundry agents, evaluation, tracing, Agent Framework workflow, Foundry IQ knowledge analog behind a preview flag) | ✅ Complete; dated live eval 5/5, live draft held by review gate; client telemetry ingestion verified, new server-side tracing still requires tenant verification |
 | 7 | GitHub Copilot + Claude Code (skills, prompt packs, bake-off) | ✅ Complete; ten recorded Copilot CLI model runs; Claude Code DOCUMENTED ONLY |
 | 8 | Security, CI/CD and production readiness | ✅ Repository implementation and LOCAL checks complete; CodeQL/release execution and production checklist remain external verification |
-| 9 | Final validation | ✅ LOCAL validation passed on 2026-10-09; 581 Python tests, 81 frontend tests, 30/30 education, offline demo and verified SBOMs |
+| 9 | Final validation | ✅ LOCAL workshop regression checks passed on 2026-10-09; latest full Python suite 616 passed, frontend suite 99 passed, 30/30 education and zero-cloud offline demo. GitHub and production checks remain separate. |
 
 Use-Case Guides under `guides/`: **HC-01** (Fabric MCP + Power BI medallion lab, healthcare,
 synthetic) and **MFG-01** (Foundry + Fabric sales insights, manufacturing, synthetic).
@@ -52,8 +52,49 @@ Replay evidence offline at `/bakeoff`; no new cloud operation occurs during repl
 See [security and threat model](docs/security/README.md),
 [release validation](docs/operations/release-validation.md) and
 [observability evidence](infra/observability/README.md). The education completeness gate covers
-all 30 questions across Executive and L100-L400. Fabric capacity remains paused; new live runs
-need separate approval.
+all 30 questions across Executive and L100-L400. See the
+[phase verification and current live evidence](docs/operations/phase-verification.md).
+Capacity activation starts billing and remains an explicit human operation.
+
+## Build-and-learn workshop
+
+The app's primary navigation is **Workshop, Learn, Use Cases, Patterns and Evidence**.
+Architecture, labs, data exploration, the agent sandbox and recorded bake-off remain available
+as workshop tools. `/use-cases` is canonical; existing `/guides` deep links still work.
+
+- **Breadth:** four outcome-led journeys and 25 patterns, all linked to five-level teaching.
+- **Depth:** 21 lessons, Executive through L400, with 130 knowledge checks and five labs.
+- **Practice:** what, why, when, when not, implementation, expected results and recovery.
+- **Applied research:** fundamentals, conceptual evolution, falsifiable hypotheses, controlled
+  experiments, independent baselines, metrics, sources and limitations. Experiments are proposed
+  studies, not fabricated findings or productivity claims.
+- **Use cases:** a visible business-to-build progression explains how Copilot, repository
+  grounding, Fabric Skills and Fabric MCP improve engineering, and how Fabric context supports
+  Foundry sales reasoning and reviewed proposals.
+- **Evidence:** OFFLINE/HYBRID/LIVE options, existing Azure/Fabric resource checks, actual recorded
+  operations and downloadable public verification records disclose their exact scope.
+  Local interface images are separate from cloud-operation evidence.
+  The coverage matrix exposes missing labs and recorded evidence; teaching is not live certification.
+
+### App preview
+
+Captured from the running app on **2026-10-09**. These are **LOCAL interface captures**
+of synthetic workshop content. The HYBRID status bar shows configuration, not proof of a
+new Fabric, Foundry or MCP operation.
+
+![Current workshop entry and outcome-led learning journeys](docs/architecture/screenshots/app-current-workshop.png)
+
+![Current Evidence page with local, live-first and strict-live choices](docs/architecture/screenshots/app-current-evidence.png)
+
+See the [current Learn page image](docs/architecture/screenshots/app-current-learn.png)
+and the [documented screenshot gallery](docs/operations/workshop-learning.md#current-app-captures).
+
+See [workshop learning and research](docs/operations/workshop-learning.md),
+[reusable use-case onboarding](docs/operations/use-case-onboarding.md),
+[the two integration paths](docs/architecture/integration-paths.md) and
+[actual draw.io PNG exports](docs/architecture/diagrams/README.md).
+Spec-driven delivery is optional: the repository Skill and P25 explain when to use it;
+upstream Spec Kit is not installed or required for the default demo.
 
 ## Quick start
 
@@ -76,6 +117,10 @@ uv sync --frozen
 # Frontend
 cd frontend && npm ci && cd ..
 
+# Fresh clone only: use .env for Azure, Fabric and Foundry variables.
+# Do not overwrite an existing populated .env. See the environment configuration guide below.
+test -f .env || cp .env.example .env
+
 # Validate everything (lint, types, tests + coverage, privacy scan, build, dependency audit)
 make validate
 ```
@@ -87,25 +132,30 @@ make data            # build Bronze/Silver/Gold for every profile and validate a
 make recovery-demo   # Open Mirroring snapshot + incremental + restore drill (SIMULATED)
 ```
 
-Run the control plane and the demo (still offline, labeled LOCAL or SIMULATED):
+Run the control plane live-first; offline demos remain explicitly offline:
 
 ```bash
 make demo-check      # probe Fabric, Foundry, MCP, dataset, API and frontend; recommend a mode
 make demo-offline    # ten-act release gate (must print "Release gate: PASSED")
-make run-api         # FastAPI control plane on http://127.0.0.1:8000 (OpenAPI at /docs)
+make run-api         # live-first HYBRID API on http://127.0.0.1:8000 (OpenAPI at /docs)
 make run-mcp         # local educational MCP server (stdio), also registered in .mcp.json as ffia-local
-make run             # API + educational app on http://localhost:5173 (Guide HC-01 runner at /guides)
+make run             # both guides at /guides; live-first HYBRID with labeled LOCAL read fallback
+make run API_ARGS=--offline  # both guides offline; no cloud providers
 ```
 
 Architecture diagrams (draw.io, Azure Architecture Center style, generated from YAML) are in
 [`docs/architecture`](docs/architecture/README.md) and interactive in the app at `/architecture`.
+Start with the [graphical repository map and guide screenshots](docs/architecture/repository-map.md)
+and [environment configuration](docs/operations/environment-configuration.md).
 
 See [control plane](docs/architecture/control-plane.md), [frontend](docs/architecture/frontend.md),
 [resilience](docs/architecture/resilience.md), [demo continuity](docs/operations/demo-continuity.md)
 and [learning paths](docs/education/learning-paths.md).
 
-Run `make help` for every target. Targets for later phases print the phase in which they become
-available.
+`make demo-live` and `make demo-hybrid` now run a bounded application Fabric read and one
+synthetic Foundry question. They incur model usage, never create Fabric items, and do not
+substitute for Guide 1's assigned MCP tools. A fallback cannot pass the live evaluation gate.
+Run `make help` for every target.
 
 ## Repository map
 

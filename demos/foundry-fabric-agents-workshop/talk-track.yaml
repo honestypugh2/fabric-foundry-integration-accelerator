@@ -15,7 +15,7 @@ summary: |
   **What we show.** A Fabric data agent answers governed questions over the sales semantic model. A Foundry agent uses it as a tool, adds cited public context, writes a monthly brief for each team, and explains data-quality issues while a person approves any fix. The same flow runs three ways:
 
   - **Live (Azure connected):** Foundry portal, Fabric portal, and Python in VS Code against the demo tenant.
-  - **Hybrid:** live portals plus the local accelerator app for architecture and evidence.
+  - **Hybrid (normal app startup):** `make run` uses `.env` for live-first Azure reads and agent calls, with explicit LOCAL read fallback. Portals remain a separate walkthrough.
   - **Offline:** the accelerator app and `ffia mfg` commands on synthetic data. Every result says LOCAL.
 
   **The one-line architecture.** Fabric provides governed data and meaning. Foundry provides reasoning, tools and orchestration. Entra identity, guardrails and human approval provide authority. Tracing and evaluations provide evidence.
@@ -53,7 +53,7 @@ entry_points:
 prerequisites:
   - title: "Choose the mode (decide 30 minutes before)"
     items:
-      - "**Offline (always works):** `make demo-prep && make run`. Every demo step has an offline fallback, labeled LOCAL."
+      - "**Offline (always works):** `make demo-prep && make run API_ARGS=--offline`. Every demo step has a labeled offline equivalent."
       - "**Live:** Foundry project with a model deployment, the F capacity resumed, a Fabric data agent published over the sales lakehouse and model, and a Foundry project connection to it. See the morning runbook in `demos/MORNING-RUNBOOK.md`."
       - "**Hybrid:** live portals for Foundry and Fabric, the local app for architecture and evidence."
   - title: "Live environment (demo tenant)"
@@ -72,7 +72,7 @@ prerequisites:
   - title: "VS Code"
     items:
       - "Open the repository; terminal in `.venv`. Open `demos/foundry-fabric-agents-workshop/code/fabric_sales_agent.py`."
-      - "Environment variables set: `FOUNDRY_PROJECT_ENDPOINT`, `FOUNDRY_MODEL_DEPLOYMENT`, `FABRIC_CONNECTION_NAME`. Never show their values on screen."
+      - "Ignored `.env` populated with Azure identity/scope, Fabric bindings and `FOUNDRY_PROJECT_ENDPOINT`, `FOUNDRY_MODEL_DEPLOYMENT`, `FABRIC_CONNECTION_NAME`. Both the app and code-first script load it; never show values on screen. The script creates an agent version and needs separate write approval; `make demo-live` calls the existing agent instead."
       - "Run `ffia mfg brief --team T-ENC` once so the output is cached in the terminal history."
       - "**Warm up the live agent 10 minutes before:** ask `sales-insights-agent` one question in the Foundry playground. The first Fabric tool call can take about 2.5 minutes; later calls take about 30 seconds."
 architecture:

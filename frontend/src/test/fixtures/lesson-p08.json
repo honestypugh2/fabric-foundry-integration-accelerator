@@ -154,6 +154,61 @@
   ],
   "status": "GA",
   "summary": "Models propose, deterministic logic validates, policy constrains, a human approves and only a narrowly scoped writer changes anything. Every step leaves evidence.",
+  "teaching": {
+    "diagram": "system",
+    "expected_result": "The audit distinguishes planning from authorization and observed execution.",
+    "failure_and_recovery": "Expired or wrong-target approval is refused; a missing live writer returns UNAVAILABLE without redirecting.",
+    "how": [
+      "Propose the exact target and destination.",
+      "Validate duplicates and policy.",
+      "Obtain separate approval.",
+      "Execute through the authorized writer and verify the result."
+    ],
+    "lesson_id": "p08-human-in-the-loop",
+    "research": {
+      "baseline": "The healthy deterministic response and the repository's approval and fallback invariants.",
+      "evolution": [
+        "Single dependencies expose callers directly to failures.",
+        "Routing introduces bounded retries and failure state.",
+        "Explicit fallback preserves a permitted read experience.",
+        "Governed writes bind approval to the exact destination and never redirect."
+      ],
+      "experiment": "Run the same synthetic read and write-plan cases with healthy, unavailable and invalid-input conditions. Inspect labels, fallback reasons, audit events and refusal behavior. Keep requests and policy fixed.",
+      "foundations": [
+        {
+          "application": "Use timeouts, bounded retries, circuit breakers and explicit unavailable or permitted fallback results.",
+          "explanation": "A dependency failure should have a bounded blast radius and a defined caller-visible outcome.",
+          "idea": "Failure containment"
+        },
+        {
+          "application": "An available local answer cannot certify live execution; a successful write cannot establish that it was authorized.",
+          "explanation": "Availability, correctness and authorization are separate properties and cannot substitute for each other.",
+          "idea": "Independent safety properties"
+        }
+      ],
+      "hypothesis": "Explicit fallback policy preserves permitted read continuity without mislabeling execution or redirecting a live write.",
+      "limitations": [
+        "Fault injection is not a real tenant outage or recovery drill.",
+        "Successful offline tests do not establish production network or identity configuration."
+      ],
+      "metrics": [
+        "Expected refusals",
+        "Correct execution labels",
+        "Recovery behavior",
+        "Unauthorized redirects"
+      ],
+      "question": "Does destination-bound approval block an unauthorized change after planning?",
+      "sources": [
+        "fabric-waf",
+        "foundry-agent-service",
+        "fabric-rest-identity"
+      ]
+    },
+    "what": "A governed action separates proposed intent, deterministic validation, human approval and scoped execution.",
+    "when": "Use the flow for high-impact, destructive, regulated or difficult-to-reverse operations.",
+    "when_not": "Do not add a mutation approval ceremony to a harmless read that policy already permits.",
+    "why": "Neither model intent nor MCP access proves that a user may perform a consequential change."
+  },
   "title": "P08: Human-in-the-loop governed action",
   "try_it": [
     {

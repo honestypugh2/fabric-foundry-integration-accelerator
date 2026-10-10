@@ -1,6 +1,6 @@
-"""Typed runtime settings (environment variables prefixed ``FFIA_`` plus optional ``.env.local``).
+"""Typed runtime settings (``FFIA_`` variables, ``.env`` and optional ``.env.local`` overrides).
 
-Real tenant, workspace or item identifiers never belong in committed files; ``.env.local`` is
+Real tenant, workspace or item identifiers never belong in committed files; both environment files are
 git-ignored. Settings select configuration by *name* (environment, overlay); the configuration
 files themselves hold only aliases.
 """
@@ -16,7 +16,11 @@ class Settings(BaseSettings):
     """Process-wide settings."""
 
     model_config = SettingsConfigDict(
-        env_prefix="FFIA_", env_file=".env.local", env_file_encoding="utf-8", extra="ignore"
+        env_prefix="FFIA_",
+        env_file=(".env", ".env.local"),
+        env_file_encoding="utf-8",
+        extra="ignore",
+        populate_by_name=True,
     )
 
     environment: str = Field(default="offline", pattern=r"^[a-z][a-z0-9-]*$")
@@ -35,6 +39,38 @@ class Settings(BaseSettings):
     allow_live_mutation: bool = False
     fabric_live: bool = False
     foundry_live: bool = False
+    azure_tenant_id: SecretStr | None = Field(default=None, validation_alias="AZURE_TENANT_ID")
+    azure_subscription_id: SecretStr | None = Field(
+        default=None, validation_alias="AZURE_SUBSCRIPTION_ID"
+    )
+    azure_resource_group: SecretStr | None = Field(
+        default=None, validation_alias="AZURE_RESOURCE_GROUP"
+    )
+    fabric_workspace_id: SecretStr | None = Field(
+        default=None, validation_alias="FABRIC_WORKSPACE_ID"
+    )
+    fabric_workspace_alias: str = Field(
+        default="demo-dev", validation_alias="FABRIC_WORKSPACE_ALIAS"
+    )
+    fabric_workspaces: SecretStr | None = Field(default=None, validation_alias="FABRIC_WORKSPACES")
+    fabric_connection_name: SecretStr | None = Field(
+        default=None, validation_alias="FABRIC_CONNECTION_NAME"
+    )
+    foundry_resource_name: SecretStr | None = Field(
+        default=None, validation_alias="FOUNDRY_RESOURCE_NAME"
+    )
+    foundry_project_name: SecretStr | None = Field(
+        default=None, validation_alias="FOUNDRY_PROJECT_NAME"
+    )
+    foundry_project_endpoint: SecretStr | None = Field(
+        default=None, validation_alias="FOUNDRY_PROJECT_ENDPOINT"
+    )
+    foundry_model_deployment: SecretStr | None = Field(
+        default=None, validation_alias="FOUNDRY_MODEL_DEPLOYMENT"
+    )
+    foundry_agent_names: SecretStr | None = Field(
+        default=None, validation_alias="FOUNDRY_AGENT_NAMES"
+    )
     # Opt-in Application Insights export; keep it in the git-ignored .env.local, never in the repo.
     applicationinsights_connection_string: SecretStr | None = None
     # Comma-separated preview flags to turn on for this process only (the overlay stays committed
@@ -64,3 +100,11 @@ class Settings(BaseSettings):
     def lakehouse_root(self) -> Path:
         """Return where built Parquet layers live."""
         return self.output_root or self.data_root
+
+
+class ApiSettings(Settings):
+    """Interactive app defaults; CLI demos and tests retain explicit offline settings."""
+
+    environment: str = Field(default="hybrid", pattern=r"^[a-z][a-z0-9-]*$")
+    fabric_live: bool = True
+    foundry_live: bool = True

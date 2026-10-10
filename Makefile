@@ -107,8 +107,10 @@ clean: ## Remove build, cache and coverage artifacts (keeps .venv and node_modul
 	find . -name __pycache__ -type d -prune -not -path './.venv/*' -exec rm -rf {} +
 
 # ---------------------------------------------------------------- run (later phases)
-run-api: ## Run the FastAPI control plane on http://127.0.0.1:8000 (docs at /docs)
-	$(ACTIVATE) && ffia serve api
+API_ARGS ?=
+
+run-api: ## Run the live-first HYBRID API; API_ARGS=--offline disables cloud access
+	$(ACTIVATE) && ffia serve api $(API_ARGS)
 
 run-mcp: ## Run the local FastMCP educational server (stdio)
 	$(ACTIVATE) && ffia serve mcp
@@ -116,9 +118,9 @@ run-mcp: ## Run the local FastMCP educational server (stdio)
 run-frontend: ## Run the frontend dev server
 	cd $(FRONTEND) && npm run dev
 
-run: ## Run the API and the frontend together (agents start the stdio MCP server from .mcp.json)
+run: ## Run both guides live-first with labeled read fallback; API_ARGS=--offline stays offline
 	@trap 'kill 0' INT TERM EXIT; \
-	($(ACTIVATE) && ffia serve api) & \
+	($(ACTIVATE) && ffia serve api $(API_ARGS)) & \
 	(cd $(FRONTEND) && npm run dev) & \
 	wait
 
@@ -126,14 +128,14 @@ run: ## Run the API and the frontend together (agents start the stdio MCP server
 demo-check: ## Probe Fabric, Foundry, MCP, local dataset, API and frontend; recommend a mode
 	$(ACTIVATE) && ffia demo check
 
-demo: ## Check readiness, then run the offline demo (LIVE and HYBRID demos arrive in Phase 6)
+demo: ## Check readiness, then run the offline release-gate demo
 	$(ACTIVATE) && ffia demo check && ffia demo offline
 
-demo-live: ## Run the demo against configured live services (read-only by default)
-	$(call pending,6)
+demo-live: ## Strict live read + one synthetic agent question (usage cost; no Fabric writes)
+	$(ACTIVATE) && ffia demo live
 
-demo-hybrid: ## Run the demo with available live services and local fallbacks
-	$(call pending,6)
+demo-hybrid: ## Live-first read + one synthetic question, with labeled local read fallback
+	$(ACTIVATE) && ffia demo hybrid
 
 demo-prep: ## Before presenting: clear the dev-server cache and run every offline demo check
 	rm -rf $(FRONTEND)/node_modules/.vite

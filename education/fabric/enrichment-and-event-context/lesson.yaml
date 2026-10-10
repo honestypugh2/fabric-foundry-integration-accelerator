@@ -1,0 +1,25 @@
+id: enrichment-and-event-context
+area: fabric
+title: "Batch enrichment and timely event context"
+summary: Compare durable AI enrichment with operational event triage using quality contracts, idempotency, event time and reviewed actions.
+status: MIXED
+pattern_ids: [P05, P07]
+learning_objectives:
+  - Distinguish persisted batch enrichment from an interactive or event-driven agent.
+  - Explain quality, replay, late events and idempotency requirements.
+  - Design independent evaluation without treating a deterministic mock as model performance.
+prerequisites: [governed-data-foundations, agent-research-foundations]
+concepts:
+  - {term: Enrichment contract, definition: "Versioned input, output and quality rules for a derived field stored with provenance."}
+  - {term: Idempotency, definition: "Reprocessing the same identified input does not duplicate its authoritative effect."}
+  - {term: Event time, definition: "When an event occurred, which can differ from when a processor received it."}
+evidence:
+  - {statement: "Fabric AI functions support enrichment; operational Fabric patterns can use streaming context. Tenant execution remains separate from this educational design.", category: DOCUMENTED BEHAVIOR, sources: [fabric-ai-functions, fabric-overview]}
+  - {statement: "The classification and out-of-order replay comparisons below are proposed experiments, not verified live pipelines.", category: ASSUMPTION}
+copilot_prompt: Design a synthetic batch enrichment contract and event replay test. Name deterministic rules that should remain outside a model and keep all actions as reviewed proposals.
+claude_code_prompt: DOCUMENTED ONLY. Read AGENTS.md. Compare batch enrichment with event triage, then propose LOCAL quality and replay tests without running a notebook or provisioning resources.
+production_notes:
+  - Persist model and prompt version, source provenance and rejected outputs when enriching data.
+  - Bound context age, retries and duplicate processing; consequential actions require separate approval.
+sources: [fabric-ai-functions, fabric-overview, fabric-medallion]
+related_guides: [hc-01-fabric-mcp-powerbi-medallion-lab, mfg-01-foundry-fabric-sales-insights]

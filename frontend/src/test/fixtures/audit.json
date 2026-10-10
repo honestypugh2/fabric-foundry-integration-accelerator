@@ -3,11 +3,11 @@
     "action": "change:plan",
     "actor": "engineer-a",
     "approval_id": null,
-    "audit_id": "9fb2a7c8304d4907bd79ede086865161",
+    "audit_id": "998ef6f410e44dfa88930d1c336d8771",
     "capability": "fabric_change",
-    "change_id": "0865c08cb0594b3b9d1c7900104c9b57",
+    "change_id": "dc72409be5a644ff9f5aeaff6a28d365",
     "cloud_operation_performed": false,
-    "correlation_id": "26afd51e9e9947b88d6ce94c1f3df161",
+    "correlation_id": "362531c1b48f46b9a3b083667f8808f7",
     "details": {
       "destination": "LOCAL",
       "item_name": "healthcare_lakehouse",
@@ -24,18 +24,18 @@
     "requested_provider": "Simulated Workspace (LOCAL)",
     "selected_provider": "Simulated Workspace (LOCAL)",
     "success": true,
-    "timestamp": "2026-10-08T23:26:13.532637Z",
+    "timestamp": "2026-10-10T01:35:26.476541Z",
     "tool": null
   },
   {
     "action": "change:approve:APPROVED",
     "actor": "approver-b",
-    "approval_id": "bac35232b4d14d549c34326c65543119",
-    "audit_id": "d64393e9fc074dfdbe1b509799390c5f",
+    "approval_id": "115c99ba3dd84d31b28d556ecaa4336f",
+    "audit_id": "55180bb3e4f947cfadba62e1f40ca7ae",
     "capability": "fabric_change",
-    "change_id": "0865c08cb0594b3b9d1c7900104c9b57",
+    "change_id": "dc72409be5a644ff9f5aeaff6a28d365",
     "cloud_operation_performed": false,
-    "correlation_id": "26afd51e9e9947b88d6ce94c1f3df161",
+    "correlation_id": "362531c1b48f46b9a3b083667f8808f7",
     "details": {
       "destination": "LOCAL",
       "item_name": "healthcare_lakehouse",
@@ -52,18 +52,18 @@
     "requested_provider": "Simulated Workspace (LOCAL)",
     "selected_provider": "Simulated Workspace (LOCAL)",
     "success": true,
-    "timestamp": "2026-10-08T23:26:13.535705Z",
+    "timestamp": "2026-10-10T01:35:26.479054Z",
     "tool": null
   },
   {
     "action": "change:execute",
     "actor": "scoped-writer",
-    "approval_id": "bac35232b4d14d549c34326c65543119",
-    "audit_id": "61c41653d8534c288ece10249dcc9273",
+    "approval_id": "115c99ba3dd84d31b28d556ecaa4336f",
+    "audit_id": "104ec68de38f49ca8c7bc9d42f1bf374",
     "capability": "fabric_change",
-    "change_id": "0865c08cb0594b3b9d1c7900104c9b57",
+    "change_id": "dc72409be5a644ff9f5aeaff6a28d365",
     "cloud_operation_performed": false,
-    "correlation_id": "26afd51e9e9947b88d6ce94c1f3df161",
+    "correlation_id": "362531c1b48f46b9a3b083667f8808f7",
     "details": {
       "destination": "LOCAL",
       "item_name": "healthcare_lakehouse",
@@ -80,7 +80,7 @@
     "requested_provider": "Simulated Workspace (LOCAL)",
     "selected_provider": "Simulated Workspace (LOCAL)",
     "success": true,
-    "timestamp": "2026-10-08T23:26:13.537483Z",
+    "timestamp": "2026-10-10T01:35:26.481382Z",
     "tool": null
   }
 ]

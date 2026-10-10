@@ -1,0 +1,26 @@
+id: spec-driven-delivery
+area: agentic-data-engineering
+title: "P25: Spec-driven delivery with optional Spec Kit"
+summary: Turn a PoC outcome into explicit requirements, a governed plan, dependency-ordered tasks and independent verification without confusing a specification with authority.
+status: LOCAL
+pattern_ids: [P20, P25]
+learning_objectives:
+  - Decide when specification-driven work is useful and when a small repair does not need it.
+  - Trace a business requirement through design, tests, evidence and convergence.
+  - Explain why generated agent instructions cannot supersede repository or cloud policy.
+concepts:
+  - {term: Specification, definition: "A reviewable account of desired behavior, exclusions and observable acceptance criteria."}
+  - {term: Traceability, definition: "A link from a requirement to implementation tasks, tests and retained evidence."}
+  - {term: Convergence, definition: "Comparing implemented behavior with the specification and recording remaining gaps."}
+evidence:
+  - {statement: "The current Spec Kit quickstart uses separate speckit-hyphen Skills and finishes with converge.", category: DOCUMENTED BEHAVIOR, sources: [spec-kit-quickstart]}
+  - {statement: "This repository supplies a local spec-driven-delivery procedure; upstream CLI installation and generated integration are optional and not claimed as executed.", category: DOCUMENTED BEHAVIOR}
+try_it:
+  - {label: Validate existing synthetic educational contracts, command: ffia education check, result_label: LOCAL}
+copilot_prompt: Use the spec-driven-delivery skill to specify a new synthetic use case with measurable outcomes, read-only defaults, offline behavior and tests. Stop before implementation and cloud writes.
+claude_code_prompt: Read AGENTS.md and use spec-driven-delivery to review the same specification. Find ambiguous requirements and missing verification without changing cloud resources.
+production_notes:
+  - Review generated instructions in scratch space before adding an upstream integration.
+  - Keep the tool optional, version-pinned and outside application runtime dependencies.
+  - A reviewed spec does not approve a live mutation.
+sources: [spec-kit-quickstart]

@@ -1,6 +1,6 @@
 {
   "cloud_operation_performed": false,
-  "correlation_id": "bd748af25f5042c2b4f61599c7f4677d",
+  "correlation_id": "f69c14e541154002a58438e1ea137e87",
   "data": {
     "enabled": true,
     "knowledge_base": "mfg-sales-v1",
@@ -50,5 +50,5 @@
   "selected_provider": "Local knowledge retriever (keyword scoring, synthetic documents)",
   "simulation_notice": "SIMULATED Foundry IQ retrieval (PREVIEW feature) over synthetic documents with local keyword scoring. No Foundry, Azure AI Search or OneLake call was made.",
   "teaching_objective": "Documents answer policy questions with citations; numbers come from governed data.",
-  "timestamp": "2026-10-08T23:26:24.211698Z"
+  "timestamp": "2026-10-10T01:35:36.961620Z"
 }

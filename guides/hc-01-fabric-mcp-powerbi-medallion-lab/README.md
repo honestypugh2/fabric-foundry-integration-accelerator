@@ -4,6 +4,15 @@ VS Code + GitHub Copilot agent mode with the local Fabric MCP server, remote Fab
 
 Populated in: Phase 2-7.
 
+## Architecture
+
+![Fabric MCP and Power BI medallion use case, exported by draw.io Desktop](../../docs/architecture/diagrams/hc-01.png)
+
+[Editable draw.io source](../../docs/architecture/diagrams/hc-01.drawio) /
+[step-by-step architecture explanation](../../docs/architecture/hc-01-architecture.md).
+This is the intended workflow, not evidence that tenant writes ran. Claude Code remains
+DOCUMENTED ONLY in the bake-off; its alternate prompts are available for each step.
+
 ## Available now (Phase 2)
 
 | Asset | Where | Notes |

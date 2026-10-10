@@ -12,13 +12,13 @@ describe("app shell", () => {
     mockApi(defaultRoutes);
     renderApp("/");
     expect(
-      screen.getByRole("heading", { level: 1, name: "Fabric Foundry Integration Accelerator" }),
+      await screen.findByRole("heading", { level: 1, name: fixtures.workshop.content.title }),
     ).toBeInTheDocument();
     const lesson = screen.getByRole("region", { name: "The central lesson" });
     expect(within(lesson).getAllByRole("listitem")).toHaveLength(principles.length);
-    expect(screen.getByRole("link", { name: "Run Guide HC-01" })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: "Build a use case" })).toHaveAttribute(
       "href",
-      "/guides/hc-01-fabric-mcp-powerbi-medallion-lab",
+      "/use-cases",
     );
     expect(
       await screen.findByText(
@@ -40,6 +40,19 @@ describe("app shell", () => {
       fixtures.runtimeStatus.write_mode,
     );
     expect(within(status).getByText("Learning level").nextSibling).toHaveTextContent("L100");
+    for (const label of [
+      "Operating mode",
+      "Data provider",
+      "Agent provider",
+      "MCP",
+      "Identity",
+      "Write mode",
+      "Learning level",
+      "Preview features",
+    ]) {
+      expect(within(status).getByText(label)).toBeVisible();
+    }
+    expect(within(status).getByText("Write mode").closest("details")).toBeNull();
   });
 
   it("lists enabled preview features", async () => {
@@ -65,7 +78,7 @@ describe("app shell", () => {
         "Not reachable: nothing is live",
       );
     });
-    expect(await screen.findByText("Control plane not reachable")).toBeInTheDocument();
+    expect(await screen.findAllByText("Control plane not reachable")).toHaveLength(2);
   });
 
   it("persists the learning level chosen in the header", async () => {

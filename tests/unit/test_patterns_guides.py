@@ -31,8 +31,8 @@ def catalog() -> PatternCatalog:
     return load_catalog(REPO_ROOT / "education")
 
 
-def test_catalog_has_24_patterns_with_valid_sources(catalog: PatternCatalog) -> None:
-    assert [p.id for p in catalog.patterns] == [f"P{i:02d}" for i in range(1, 25)]
+def test_catalog_has_25_patterns_with_valid_sources(catalog: PatternCatalog) -> None:
+    assert [p.id for p in catalog.patterns] == [f"P{i:02d}" for i in range(1, 26)]
     assert (
         catalog.check_sources(load_registry(REPO_ROOT / "docs" / "research" / "sources.yaml")) == []
     )

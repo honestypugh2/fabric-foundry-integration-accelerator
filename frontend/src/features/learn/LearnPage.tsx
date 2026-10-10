@@ -1,7 +1,8 @@
 import { Link } from "react-router";
 import type { LessonSummary } from "../../api/contracts";
-import { useLessons } from "../../api/hooks";
+import { useLessons, useWorkshop } from "../../api/hooks";
 import { usePageTitle } from "../../app/usePageTitle";
+import { usePageAnchor } from "../../app/usePageAnchor";
 import { Badge } from "../../components/Badge";
 import { QueryState } from "../../components/QueryState";
 
@@ -26,13 +27,46 @@ function groupByArea(lessons: readonly LessonSummary[]): [string, LessonSummary[
 export function LearnPage() {
   usePageTitle("Learn");
   const lessons = useLessons();
+  const workshop = useWorkshop();
+  usePageAnchor(workshop.isSuccess);
   return (
     <>
-      <h1>Learning paths</h1>
+      <header className="page-intro">
+        <p className="eyebrow">Breadth first · depth when you need it</p>
+        <h1>Understand. Build. Investigate.</h1>
+        <p className="lead">
+          Learn the what, why, when and how. Then investigate the foundations, theory and evidence
+          behind today's data and agent workflows.
+        </p>
+      </header>
       <p>
-        Every lesson teaches five levels: Executive, L100, L200, L300 and L400. Pick your level in
-        the header; lessons, the architecture explorer and labs follow it.
+        Every lesson has Executive through L400 explanations. The research lens adds hypotheses,
+        controlled experiments, independent baselines and limitations—not unsupported product
+        claims.
       </p>
+      <QueryState label="learning journeys" {...workshop}>
+        {(data) => (
+          <div className="learning-paths">
+            {data.content.journeys.map((journey) => (
+              <section key={journey.id} id={`path-${journey.id}`} className="card">
+                <p className="eyebrow">Estimated {journey.duration_minutes} minutes</p>
+                <h2>{journey.title}</h2>
+                <p>{journey.summary}</p>
+                <ol>
+                  {journey.lesson_ids.map((id) => (
+                    <li key={id}>
+                      <Link to={`/learn/${id}`}>
+                        {lessons.data?.find((item) => item.id === id)?.title ?? id}
+                      </Link>
+                    </li>
+                  ))}
+                </ol>
+              </section>
+            ))}
+          </div>
+        )}
+      </QueryState>
+      <h2>Explore the full concept library</h2>
       <QueryState label="lessons" {...lessons}>
         {(all) =>
           groupByArea(all).map(([area, items]) => (

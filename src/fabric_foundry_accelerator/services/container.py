@@ -33,6 +33,7 @@ from fabric_foundry_accelerator.education.lessons import (
 from fabric_foundry_accelerator.fallback.router import ProviderRouter
 from fabric_foundry_accelerator.models.execution import OperatingMode, utc_now
 from fabric_foundry_accelerator.models.semantic import load_semantic_model
+from fabric_foundry_accelerator.observability.logging import get_logger
 from fabric_foundry_accelerator.patterns.catalog import PatternCatalog, load_catalog
 from fabric_foundry_accelerator.policies.engine import (
     ToolManifest,
@@ -115,6 +116,12 @@ def _live_client(
     if mode is OperatingMode.OFFLINE:
         raise BindingsError("FFIA_FABRIC_LIVE=1 needs FFIA_ENVIRONMENT=hybrid or live")
     if bindings is None:
+        if mode is OperatingMode.HYBRID and not settings.allow_live_mutation:
+            get_logger(__name__).warning(
+                "fabric_live_not_configured",
+                reason="Missing local tenant bindings; HYBRID reads use labeled LOCAL fallback.",
+            )
+            return None
         raise BindingsError(
             f"FFIA_FABRIC_LIVE=1 needs {bindings_path(settings.config_root, settings.overlay)} "
             "(git-ignored); copy the .local.example.yaml next to it"
@@ -135,14 +142,21 @@ def _live_agent(
     if mode is OperatingMode.OFFLINE:
         raise BindingsError("FFIA_FOUNDRY_LIVE=1 needs FFIA_ENVIRONMENT=hybrid or live")
     if bindings is None or bindings.foundry is None:
+        if mode is OperatingMode.HYBRID and not settings.allow_live_mutation:
+            get_logger(__name__).warning(
+                "foundry_live_not_configured",
+                reason="Missing Foundry binding; HYBRID reads use labeled LOCAL fallback.",
+            )
+            return None
         raise BindingsError(
             f"FFIA_FOUNDRY_LIVE=1 needs a `foundry:` section in "
             f"{bindings_path(settings.config_root, settings.overlay)} (git-ignored)"
         )
     # End the HTTP call shortly before the router gives up, so an abandoned call frees the lock.
     router_timeout = environment.policy("foundry_agent").timeout_seconds
+    endpoint = project_endpoint(bindings.foundry)
     client = injected or SdkResponsesClient(
-        project_endpoint(bindings.foundry),
+        endpoint,
         bindings.tenant_id,
         request_timeout=max(1.0, router_timeout - 10),
     )
@@ -178,7 +192,7 @@ def build_container(
     local = LocalFabricProvider(
         settings.data_root, output_root=settings.lakehouse_root, mode=local_mode
     )
-    bindings = load_bindings(settings.config_root, settings.overlay)
+    bindings = load_bindings(settings.config_root, settings.overlay, settings=settings)
     client = _live_client(settings, environment.mode, bindings, fabric_client)
     live = live_fabric or (
         SimulatedOutageFabricProvider() if settings.simulate_fabric_outage else None
@@ -210,11 +224,12 @@ def build_container(
     )
     catalog = load_catalog(settings.education_root)
     guides = load_guides(settings.guides_root, catalog)
+    registry = load_registry(settings.sources_path)
     library = load_education(
         settings.education_root,
         EducationReferences(
             pattern_ids=frozenset(p.id for p in catalog.patterns),
-            source_ids=frozenset(s.id for s in load_registry(settings.sources_path).sources),
+            source_ids=frozenset(s.id for s in registry.sources),
             guide_ids=frozenset(guides),
         ),
     )
@@ -242,6 +257,6 @@ def build_container(
         catalog=catalog,
         guides=guides,
         bindings=bindings,
-        education=EducationService(library),
+        education=EducationService(library, catalog=catalog, guides=guides, registry=registry),
         built_profiles=built,
     )

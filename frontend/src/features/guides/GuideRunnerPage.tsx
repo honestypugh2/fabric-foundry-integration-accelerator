@@ -9,6 +9,7 @@ import { QueryState } from "../../components/QueryState";
 import { DiagramCanvas } from "../architecture/DiagramCanvas";
 import { useView } from "../../api/hooks";
 import { ChangeRehearsal } from "./ChangeRehearsal";
+import { UseCaseOverview } from "./UseCaseOverview";
 
 function StepDiagram({
   viewId,
@@ -191,11 +192,11 @@ function StepView({ guide, step }: { readonly guide: Guide; readonly step: Guide
 
       <nav aria-label="Step navigation" className="pager">
         {previous ? (
-          <Link to={`/guides/${guide.id}/${previous.id}`}>Previous: {previous.title}</Link>
+          <Link to={`/use-cases/${guide.id}/${previous.id}`}>Previous: {previous.title}</Link>
         ) : (
           <span />
         )}
-        {next ? <Link to={`/guides/${guide.id}/${next.id}`}>Next: {next.title}</Link> : null}
+        {next ? <Link to={`/use-cases/${guide.id}/${next.id}`}>Next: {next.title}</Link> : null}
       </nav>
     </article>
   );
@@ -214,6 +215,19 @@ function GuideView({
     <>
       <h1>{guide.title}</h1>
       <p className="lead">{guide.summary}</p>
+      {!stepId ? (
+        <UseCaseOverview guide={guide} />
+      ) : (
+        <p>
+          <Link to={`/use-cases/${guide.id}`}>Return to business outcome and learning path</Link>
+        </p>
+      )}
+      <p className="notice">
+        Both guides share the application runtime shown in the status bar. Normal startup is
+        live-first HYBRID: eligible reads use Azure first and disclose any LOCAL fallback. A
+        configured provider or a checked checkpoint is not proof of a live operation. Guide-specific
+        MCP tools remain mandatory; write rehearsals remain SIMULATED.
+      </p>
       <p className="meta">
         <Badge value={guide.status} kind="guide" /> Dataset profile{" "}
         <code>{guide.dataset_profile}</code> · patterns{" "}
@@ -271,7 +285,7 @@ function GuideView({
             {guide.steps.map((s) => (
               <li key={s.id}>
                 <Link
-                  to={`/guides/${guide.id}/${s.id}`}
+                  to={`/use-cases/${guide.id}/${s.id}`}
                   aria-current={s.id === step?.id ? "step" : undefined}
                 >
                   {s.title}
@@ -302,7 +316,7 @@ function GuideView({
 
 export function GuideRunnerPage() {
   const { guideId = "", stepId } = useParams();
-  usePageTitle("Guide");
+  usePageTitle("Use Case");
   const guide = useGuide(guideId);
   return (
     <QueryState label="the guide" {...guide}>

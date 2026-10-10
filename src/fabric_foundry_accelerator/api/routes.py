@@ -74,6 +74,7 @@ from fabric_foundry_accelerator.services.education import (
     LabSummary,
     LessonSummary,
     LessonView,
+    WorkshopView,
 )
 from fabric_foundry_accelerator.services.evaluation import EvaluationRequest
 from fabric_foundry_accelerator.services.fabric_reads import FabricReadRequest, execute_read
@@ -437,6 +438,12 @@ async def run_demo(container: ContainerDep, correlation_id: CorrelationDep) -> O
 
 
 # ------------------------------------------------------------------ education
+@router.get("/api/v1/education/workshop", tags=["education"])
+def get_workshop(container: ContainerDep) -> WorkshopView:
+    """LOCAL instructional journeys, reading references and pattern coverage."""
+    return container.education.workshop()
+
+
 @router.get("/api/v1/education/lessons", tags=["education"])
 def list_lessons(
     container: ContainerDep, area: str | None = None, pattern_id: str | None = None

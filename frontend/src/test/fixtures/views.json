@@ -30,6 +30,19 @@
     "title": "HC-01: Fabric MCP + Power BI medallion lab"
   },
   {
+    "doc": "integration-paths",
+    "id": "integration-paths",
+    "kind": "reference",
+    "pattern_ids": [
+      "P06",
+      "P09",
+      "P17",
+      "P19"
+    ],
+    "summary": "Two separate paths: coding harnesses use the real Fabric MCP tools; the application uses REST and SDK providers. Evidence cannot be exchanged between them.",
+    "title": "Fabric MCP workflow and application provider workflow"
+  },
+  {
     "doc": "live-vs-offline",
     "id": "live-vs-offline",
     "kind": "resilience",
@@ -113,5 +126,19 @@
     ],
     "summary": "How the educational app, the control plane, the local MCP server, the providers, policies, data and audit log fit together in this repository, and which parts are live right now.",
     "title": "This accelerator at run time"
+  },
+  {
+    "doc": "learning-foundations",
+    "id": "theory-to-tools",
+    "kind": "reference",
+    "pattern_ids": [
+      "P01",
+      "P06",
+      "P10",
+      "P12",
+      "P16"
+    ],
+    "summary": "A focused conceptual map: define meaning, prepare context, expose a stable contract, reason within boundaries and verify independently.",
+    "title": "From data meaning to trustworthy answers"
   }
 ]

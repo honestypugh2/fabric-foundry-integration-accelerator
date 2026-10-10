@@ -200,6 +200,15 @@ export interface Capability {
   readonly served_by: string;
 }
 
+/** A before/after capability, its control and measurable evidence. */
+export interface CapabilityStage {
+  readonly title: string;
+  readonly task: string;
+  readonly capability: string;
+  readonly control: string;
+  readonly evidence: string;
+}
+
 /** A request to plan a change (from a person, an agent or an MCP tool). */
 export interface ChangeRequest {
   readonly operation: string;
@@ -443,6 +452,23 @@ export interface EvidenceClaim {
   readonly sources?: readonly string[];
 }
 
+/** Historical evidence with explicit scope; never a current health probe. */
+export interface EvidenceEntry {
+  readonly id: string;
+  readonly category?: "DEPLOYMENT" | "OPERATION" | "INTERFACE";
+  readonly title: string;
+  readonly recorded_on: string;
+  readonly label: ExecutionLabel;
+  readonly provider: string;
+  readonly server: string;
+  readonly tool: string;
+  readonly scope: string;
+  readonly limitations: readonly string[];
+  readonly pattern_ids: readonly string[];
+  readonly screenshot?: string | null;
+  readonly verification_record?: string | null;
+}
+
 /** A request to execute an approved plan. */
 export interface ExecuteRequest {
   readonly change_id: string;
@@ -507,6 +533,18 @@ export interface ExecutionEnvelope_object_ {
 /** How a single result was produced. */
 export type ExecutionLabel = "LIVE" | "HYBRID" | "LOCAL" | "SIMULATED" | "MOCKED" | "PREVIEW" | "UNAVAILABLE";
 
+/** Authored operating choices; commands are instructions, not automatic execution. */
+export interface ExecutionPath {
+  readonly mode: "OFFLINE" | "HYBRID" | "LIVE";
+  readonly title: string;
+  readonly description: string;
+  readonly results: string;
+  readonly fallback: string;
+  readonly prerequisites: readonly string[];
+  readonly commands: readonly string[];
+  readonly safety: string;
+}
+
 /** What happened when an approved change was executed and verified. */
 export interface ExecutionResult {
   readonly change_id: string;
@@ -531,6 +569,13 @@ export interface Fallback {
   readonly tools: readonly string[];
   readonly label: "LOCAL" | "SIMULATED";
   readonly note?: string;
+}
+
+/** An underlying idea and its modern application, not a product lineage claim. */
+export interface Foundation {
+  readonly idea: string;
+  readonly explanation: string;
+  readonly application: string;
 }
 
 /** Return a semantic model. */
@@ -655,6 +700,29 @@ export interface LabSummary {
   readonly lessons: readonly string[];
 }
 
+/** The what/why/when/how contract, independent of the learner's depth. */
+export interface LearningBrief {
+  readonly lesson_id: string;
+  readonly what: string;
+  readonly why: string;
+  readonly when: string;
+  readonly when_not: string;
+  readonly how: readonly string[];
+  readonly expected_result: string;
+  readonly failure_and_recovery: string;
+  readonly diagram?: string | null;
+  readonly research: ResearchLens;
+}
+
+/** A deliberate sequence; durations are estimates, not observed task timings. */
+export interface LearningJourney {
+  readonly id: string;
+  readonly title: string;
+  readonly summary: string;
+  readonly duration_minutes: number;
+  readonly lesson_ids: readonly string[];
+}
+
 /** A lesson in a list. */
 export interface LessonSummary {
   readonly id: string;
@@ -688,6 +756,7 @@ export interface LessonView {
   readonly sources: readonly string[];
   readonly levels: readonly LevelBody[];
   readonly checks: readonly PublicCheck[];
+  readonly teaching?: LearningBrief | null;
 }
 
 /** The Markdown body of one level. */
@@ -797,6 +866,18 @@ export interface Passage {
   readonly citation: Citation;
 }
 
+/** Coverage presence, not certification of an entire pattern. */
+export interface PatternCoverage {
+  readonly pattern_id: string;
+  readonly name: string;
+  readonly lesson_ids: readonly string[];
+  readonly lab_ids: readonly string[];
+  readonly guide_ids: readonly string[];
+  readonly diagram_ids: readonly string[];
+  readonly evidence_ids: readonly string[];
+  readonly default_demo_path: string;
+}
+
 /** A validated change plan. Nothing has executed. */
 export interface ProposedChange {
   readonly change_id?: string;
@@ -850,6 +931,14 @@ export interface ReadTable {
 export interface Readiness {
   readonly ready: boolean;
   readonly checks: Readonly<Record<string, boolean>>;
+}
+
+/** Resolved public reading; the source registry remains authoritative. */
+export interface ReadingSource {
+  readonly id: string;
+  readonly title: string;
+  readonly url: string;
+  readonly publisher: string;
 }
 
 /** Needs from the selection vocabulary. */
@@ -917,6 +1006,19 @@ export interface ReplaceText {
   readonly path: string;
   readonly find: string;
   readonly replace: string;
+}
+
+/** A falsifiable, reproducible exercise grounded in theory. */
+export interface ResearchLens {
+  readonly question: string;
+  readonly foundations: readonly Foundation[];
+  readonly evolution: readonly string[];
+  readonly hypothesis: string;
+  readonly experiment: string;
+  readonly baseline: string;
+  readonly metrics: readonly string[];
+  readonly limitations: readonly string[];
+  readonly sources: readonly string[];
 }
 
 /** Why a request went where it went. */
@@ -1169,6 +1271,19 @@ export interface UseCaseGuide {
   readonly steps: readonly GuideStep[];
 }
 
+/** Business-to-build framing, keyed by the existing use-case registry. */
+export interface UseCaseStory {
+  readonly guide_id: string;
+  readonly problem: string;
+  readonly audience: string;
+  readonly outcomes: readonly string[];
+  readonly lesson_ids: readonly string[];
+  readonly stages: readonly CapabilityStage[];
+  readonly questions?: readonly string[];
+  readonly production_gaps: readonly string[];
+  readonly presenter_path: string;
+}
+
 /** ValidationError */
 export interface ValidationError {
   readonly loc: readonly (string | number)[];
@@ -1204,6 +1319,27 @@ export interface ViewSummary {
   readonly summary: string;
   readonly doc: string | null;
   readonly pattern_ids: readonly string[];
+}
+
+/** ``education/workshop.yaml``; all instructional copy stays outside React. */
+export interface WorkshopContent {
+  readonly version: 1;
+  readonly title: string;
+  readonly summary: string;
+  readonly execution_summary: string;
+  readonly execution_paths: readonly ExecutionPath[];
+  readonly journeys: readonly LearningJourney[];
+  readonly briefs: readonly LearningBrief[];
+  readonly use_cases: readonly UseCaseStory[];
+  readonly evidence: readonly EvidenceEntry[];
+}
+
+/** Workshop journeys, verified references and honest breadth coverage. */
+export interface WorkshopView {
+  readonly label?: "LOCAL";
+  readonly content: WorkshopContent;
+  readonly sources: readonly ReadingSource[];
+  readonly coverage: readonly PatternCoverage[];
 }
 
 /** A workspace visible to the provider. */

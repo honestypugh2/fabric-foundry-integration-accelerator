@@ -1,0 +1,25 @@
+id: domain-and-agent-composition
+area: architecture
+title: "Many domains, only as many agents as needed"
+summary: Distinguish data ownership, routing and agent lifecycle boundaries before introducing a coordinator or preview Fabric IQ integration.
+status: MIXED
+pattern_ids: [P02, P13]
+learning_objectives:
+  - Separate a business domain from an independently governed agent.
+  - Compare deterministic routing, one agent with bounded tools and multiple agents.
+  - Design cross-domain access and routing tests without mistaking simulation for Fabric IQ.
+prerequisites: [agent-research-foundations, fabric-foundry-boundaries]
+concepts:
+  - {term: Domain boundary, definition: "A boundary around vocabulary, data ownership and permitted disclosure."}
+  - {term: Agent boundary, definition: "An independently managed context, tool set, policy, owner or lifecycle."}
+  - {term: Routing contract, definition: "A testable rule for selecting permitted context and refusing ambiguous or unauthorized requests."}
+evidence:
+  - {statement: "The catalogue distinguishes preview multi-domain Fabric IQ integration from the general agent-boundary design principle.", category: DOCUMENTED BEHAVIOR, sources: [fabric-iq-overview, agent-framework]}
+  - {statement: "The experiment below is a proposed synthetic routing study, not an implemented live multi-agent workflow.", category: ASSUMPTION}
+copilot_prompt: Compare one agent with bounded domain tools against separate agents for two fictional domains. Propose held-out routing and denial tests before introducing orchestration.
+claude_code_prompt: DOCUMENTED ONLY. Read AGENTS.md and compare domain, tool and agent boundaries. Propose a synthetic routing experiment without calling cloud tools.
+production_notes:
+  - Enforce each domain's authorization after routing; a coordinator must not widen access.
+  - Keep Fabric IQ preview opt-in and preserve a non-preview default workshop.
+sources: [fabric-iq-overview, fabric-data-agent, agent-framework]
+related_guides: [mfg-01-foundry-fabric-sales-insights]

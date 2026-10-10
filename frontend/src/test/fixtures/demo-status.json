@@ -32,7 +32,7 @@
     },
     {
       "component": "API",
-      "detail": "42 API paths (in-process check)",
+      "detail": "43 API paths (in-process check)",
       "status": "READY"
     },
     {
@@ -46,6 +46,6 @@
       "status": "READY"
     }
   ],
-  "reason": "No live provider is configured and healthy; OFFLINE runs everything locally with honest labels.",
+  "reason": "No available live Fabric provider is configured; OFFLINE runs locally with honest labels.",
   "recommended_mode": "OFFLINE"
 }

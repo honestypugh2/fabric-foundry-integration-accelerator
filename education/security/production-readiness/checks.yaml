@@ -1,4 +1,9 @@
 checks:
+  - {id: executive-gateway, level: executive, question: "When does a central gateway justify its overhead?", choices: [Shared consumers need common governance, Every small prototype needs one, It grants backend authority], answer: 0, explanation: "Shared quotas and tool governance can justify a gateway; backend authorization remains independent."}
+  - {id: l100-private-network, level: l100, question: "What does a private endpoint not establish?", choices: [A network path restriction, Permission to disclose governed data, A connectivity boundary], answer: 1, explanation: "Networking and data authorization are different controls."}
+  - {id: l200-gateway-auth, level: l200, question: "What must follow successful gateway authentication?", choices: [Skipping all permission checks, Backend authorization for the requested scope, Automatic human approval], answer: 1, explanation: "Gateway authentication is not upstream data authorization."}
+  - {id: l300-gateway-evidence, level: l300, question: "What does a local quota test prove?", choices: [The local policy contract, A live APIM policy was deployed, The total bill is capped], answer: 0, explanation: "Applied tenant policy and financial controls need separate evidence."}
+  - {id: l400-overlay-authority, level: l400, question: "How may scenario configuration affect global authority?", choices: [Widen it for convenience, Narrow it while retaining restrictions, Replace human approval with a prompt], answer: 1, explanation: "Reuse must preserve baseline authority and approval constraints."}
   - id: executive-release-claim
     level: executive
     question: What does a passing offline demo establish?

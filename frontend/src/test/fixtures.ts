@@ -38,6 +38,7 @@ import viewReference from "./fixtures/view-reference.json";
 import viewSystemRuntime from "./fixtures/view-system-runtime.json";
 import viewSystem from "./fixtures/view-system.json";
 import views from "./fixtures/views.json";
+import workshop from "./fixtures/workshop.json";
 import type { Routes } from "./mockApi";
 
 /** Real control-plane responses exported by `python -m tests.contract.export_frontend_fixtures`. */
@@ -82,6 +83,7 @@ export const fixtures = {
   viewSystem,
   viewSystemRuntime,
   views,
+  workshop,
 } as const;
 
 const READS: Readonly<Record<string, unknown>> = {
@@ -109,6 +111,7 @@ export const defaultRoutes: Routes = {
   "GET /api/v1/guides": guides,
   "GET /api/v1/guides/hc-01-fabric-mcp-powerbi-medallion-lab": guideHc01,
   "GET /api/v1/education/lessons": lessons,
+  "GET /api/v1/education/workshop": workshop,
   "GET /api/v1/education/lessons/p08-human-in-the-loop": lessonP08,
   "GET /api/v1/education/labs": labs,
   "GET /api/v1/education/labs/lab-governed-change": labGovernedChange,

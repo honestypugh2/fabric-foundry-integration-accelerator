@@ -10,10 +10,15 @@ section B need the presenter's explicit approval before they run.
 cd fabric-foundry-integration-accelerator && source .venv/bin/activate
 make demo-prep          # clears the dev-server cache, runs every offline check
 ffia skills status      # four pinned skills (run `ffia skills install` if missing)
-make run                # app on http://localhost:5173 → Demo → Workshop talk tracks
+make run                # .env-backed, live-first HYBRID app → Demo → Workshop talk tracks
+# For an entirely offline presentation: make run API_ARGS=--offline
 ```
 
 Open the handouts from the app's **Demo** page, or directly:
+
+Configure the ignored root `.env` using [environment configuration](../docs/operations/environment-configuration.md).
+It holds the Azure, Fabric and Foundry variables; `.env.local` is an optional override.
+Never open either private environment file on a shared screen.
 
 - Guide 1: `demos/fabric-copilot-level-up/index.html`
 - Guide 2: `demos/foundry-fabric-agents-workshop/index.html`

@@ -54,21 +54,21 @@
       },
       "api-to-agents": {
         "label_at": [
-          1033.3333333333333,
+          1030.0,
           222.0
         ],
-        "label_fraction": 0.49099099099099097,
+        "label_fraction": 0.4864864864864865,
         "points": [
           [
             740.0,
             292.0
           ],
           [
-            766.6666666666666,
+            760.0,
             292.0
           ],
           [
-            766.6666666666666,
+            760.0,
             222.0
           ],
           [
@@ -87,21 +87,21 @@
       },
       "api-to-changes": {
         "label_at": [
-          766.6666666666666,
+          760.0,
           222.0
         ],
-        "label_fraction": 0.4393939393939392,
+        "label_fraction": 0.4090909090909091,
         "points": [
           [
             740.0,
             292.0
           ],
           [
-            766.6666666666666,
+            760.0,
             292.0
           ],
           [
-            766.6666666666666,
+            760.0,
             152.0
           ],
           [
@@ -129,21 +129,21 @@
       },
       "api-to-evaluation": {
         "label_at": [
-          766.6666666666666,
-          362.0
+          790.0,
+          432.0
         ],
-        "label_fraction": 0.4393939393939392,
+        "label_fraction": 0.8636363636363636,
         "points": [
           [
             740.0,
             292.0
           ],
           [
-            766.6666666666666,
+            760.0,
             292.0
           ],
           [
-            766.6666666666666,
+            760.0,
             432.0
           ],
           [
@@ -154,21 +154,21 @@
       },
       "api-to-router": {
         "label_at": [
-          766.6666666666666,
+          760.0,
           432.0
         ],
-        "label_fraction": 0.46296296296296285,
+        "label_fraction": 0.4444444444444444,
         "points": [
           [
             740.0,
             292.0
           ],
           [
-            766.6666666666666,
+            760.0,
             292.0
           ],
           [
-            766.6666666666666,
+            760.0,
             572.0
           ],
           [
@@ -208,6 +208,39 @@
           [
             1080.0,
             152.0
+          ]
+        ]
+      },
+      "config-to-fabric-mcp": {
+        "label_at": [
+          650.0,
+          642.0
+        ],
+        "label_fraction": 0.5,
+        "points": [
+          [
+            480.0,
+            712.0
+          ],
+          [
+            520.0,
+            712.0
+          ],
+          [
+            520.0,
+            642.0
+          ],
+          [
+            780.0,
+            642.0
+          ],
+          [
+            780.0,
+            712.0
+          ],
+          [
+            820.0,
+            712.0
           ]
         ]
       },
@@ -289,21 +322,21 @@
       },
       "ffia-to-router": {
         "label_at": [
-          793.3333333333334,
+          800.0,
           642.0
         ],
-        "label_fraction": 0.5606060606060608,
+        "label_fraction": 0.5909090909090909,
         "points": [
           [
             740.0,
             712.0
           ],
           [
-            793.3333333333334,
+            800.0,
             712.0
           ],
           [
-            793.3333333333334,
+            800.0,
             572.0
           ],
           [
@@ -454,6 +487,12 @@
         "x": 1600.0,
         "y": 534.0
       },
+      "fabric-mcp": {
+        "h": 76.0,
+        "w": 180.0,
+        "x": 820.0,
+        "y": 674.0
+      },
       "ffia-local": {
         "h": 76.0,
         "w": 180.0,
@@ -539,7 +578,7 @@
     ],
     "bands": [],
     "columns": 7,
-    "cue": "This is the system you are using. Turn on the runtime overlay: every box that is green is answering right now; grey boxes arrive in later phases and are never faked.",
+    "cue": "This is the system you are using. Interactive startup is live-first HYBRID with labeled LOCAL read fallback. The runtime overlay separates configured providers from observed calls; green configuration is not proof of cloud execution. Offline demos stay offline.",
     "doc": "system-architecture",
     "edges": [
       {
@@ -644,7 +683,7 @@
       {
         "id": "router-to-live",
         "kind": "access",
-        "label": "LIVE read (opt-in)",
+        "label": "LIVE read first",
         "planned": false,
         "source": "router",
         "step": null,
@@ -671,7 +710,7 @@
       {
         "id": "agents-to-foundry",
         "kind": "reasoning",
-        "label": "Responses API (opt-in)",
+        "label": "Responses SDK, live-first",
         "planned": false,
         "source": "agents",
         "step": null,
@@ -694,6 +733,15 @@
         "source": "mcp-config",
         "step": null,
         "target": "ffia-local"
+      },
+      {
+        "id": "config-to-fabric-mcp",
+        "kind": "access",
+        "label": "Real MCP tools first",
+        "planned": false,
+        "source": "mcp-config",
+        "step": null,
+        "target": "fabric-mcp"
       },
       {
         "id": "config-to-learn",
@@ -785,8 +833,8 @@
         "sources": [],
         "state": "implemented",
         "step": null,
-        "sublabel": "Shared by every harness",
-        "summary": "The portable MCP configuration read by VS Code, Copilot CLI and Claude Code. It lists Microsoft Learn and the local ffia-local server.",
+        "sublabel": "Fabric-first, LOCAL fallback",
+        "summary": "VS Code, Copilot CLI and documented-only Claude Code share the pinned Fabric MCP server, Microsoft Learn and ffia-local. These external tool paths are separate from the application's REST provider.",
         "width": 1.0
       },
       {
@@ -1037,7 +1085,7 @@
         "sources": [],
         "state": "tenant-validation",
         "step": null,
-        "sublabel": "Agents (live, opt-in)",
+        "sublabel": "SDK, existing agent, live-first",
         "summary": "",
         "width": 1.0
       },
@@ -1047,7 +1095,7 @@
         "icon": null,
         "id": "fabric-live",
         "kind": "fabric",
-        "label": "Fabric REST and MCP",
+        "label": "Fabric application provider",
         "phase": null,
         "repo_path": "src/fabric_foundry_accelerator/providers/fabric/live.py",
         "row": 3.0,
@@ -1055,8 +1103,26 @@
         "sources": [],
         "state": "tenant-validation",
         "step": null,
-        "sublabel": "Live, read-only first",
+        "sublabel": "REST reads, live-first",
         "summary": "",
+        "width": 1.0
+      },
+      {
+        "col": 3.0,
+        "component": null,
+        "icon": null,
+        "id": "fabric-mcp",
+        "kind": "mcp",
+        "label": "Fabric MCP server",
+        "phase": null,
+        "repo_path": "config/mcp/profiles.yaml",
+        "row": 4.0,
+        "runtime": null,
+        "sources": [],
+        "state": "tenant-validation",
+        "step": null,
+        "sublabel": "Guide 1 tool path",
+        "summary": "The coding harness calls the actual pinned Fabric MCP tools. If unavailable, announce it and use only the guide's named ffia-local read fallback or SIMULATED write rehearsal. The application REST provider is not MCP evidence.",
         "width": 1.0
       }
     ],
@@ -1223,7 +1289,7 @@
         "cols": 1.0,
         "id": "cloud",
         "kind": "tenant",
-        "label": "Microsoft cloud (opt-in)",
+        "label": "Microsoft cloud (live-first app)",
         "row": 0.0,
         "rows": 6.0,
         "step": null

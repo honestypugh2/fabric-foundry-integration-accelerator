@@ -37,10 +37,18 @@ import {
   viewRuntimeSchema,
   viewSummarySchema,
   workspaceSchema,
+  workshopSchema,
   type Rehearsal,
 } from "./contracts";
 
 const RUNTIME_REFRESH_MS = 15_000;
+
+export function useWorkshop() {
+  return useQuery({
+    queryKey: ["workshop"],
+    queryFn: ({ signal }) => api.get("/api/v1/education/workshop", workshopSchema, signal),
+  });
+}
 
 export function useRuntimeStatus() {
   return useQuery({

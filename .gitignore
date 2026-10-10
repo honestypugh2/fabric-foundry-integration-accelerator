@@ -196,6 +196,10 @@ Thumbs.db
 
 # Ad-hoc Copilot Studio evaluation exports at repo root; kept local
 /*.csv
+
+# Local educational codebase walkthrough and its editable diagrams/PNG exports
+/docs/local/codebase-learning/
+
 # Local app runtime (pids/logs) from scripts/app.sh
 .run/
 

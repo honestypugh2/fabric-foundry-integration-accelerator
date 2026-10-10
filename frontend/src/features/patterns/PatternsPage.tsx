@@ -6,6 +6,7 @@ import { usePatterns, useRecommend, useSelectionSignals } from "../../api/hooks"
 import { usePageTitle } from "../../app/usePageTitle";
 import { Badge } from "../../components/Badge";
 import { QueryState } from "../../components/QueryState";
+import { PatternCoverage } from "./PatternCoverage";
 
 const MAX_COMPARE = 3;
 const STATUSES = ["ALL", "GA", "MIXED", "PREVIEW"] as const;
@@ -214,6 +215,7 @@ export function PatternsPage() {
         }}
       </QueryState>
       <Selector />
+      <PatternCoverage />
     </>
   );
 }

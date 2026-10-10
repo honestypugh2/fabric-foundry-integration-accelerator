@@ -13,6 +13,8 @@ the perimeter, with no network isolation. The basic tier is explicitly not for p
 
 ## Architecture
 
+![Production deployment recommendation, exported by draw.io Desktop; not deployed by this repository](diagrams/production.png)
+
 <!-- BEGIN GENERATED DIAGRAM: run `ffia diagrams render`; do not edit by hand -->
 
 > Generated from [`education/architecture/views/production.yaml`](../../education/architecture/views/production.yaml). Edit the YAML, then run `ffia diagrams render`.

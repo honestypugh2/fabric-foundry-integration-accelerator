@@ -5,6 +5,8 @@ highlights its part of this diagram.
 
 ## Architecture
 
+![Fabric MCP and Power BI medallion use-case architecture, exported by draw.io Desktop](diagrams/hc-01.png)
+
 <!-- BEGIN GENERATED DIAGRAM: run `ffia diagrams render`; do not edit by hand -->
 
 > Generated from [`education/architecture/views/hc-01.yaml`](../../education/architecture/views/hc-01.yaml). Edit the YAML, then run `ffia diagrams render`.

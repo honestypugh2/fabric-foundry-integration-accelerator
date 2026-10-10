@@ -22,3 +22,12 @@ a maximum bill. Copilot subscriptions, model consumption and Fabric capacity are
 
 Ask the owner to show actual results, remaining tenant checks and rollback plans before go-live.
 Claude Code is documented-only; recorded Copilot model comparisons do not evaluate that product.
+
+## Three reusable production patterns
+
+P14 secures the deployment through appropriate network isolation, identity and protected secrets.
+P15 introduces an API Management gateway when multiple consumers need shared quotas, routing or
+tool governance; it adds cost and latency and is not automatically necessary for a single app.
+The backend must still authorize access after gateway authentication. P18 reuses the same core
+through overlays rather than customer-specific forks. Each pattern needs its own evidence:
+access-denial tests, observed gateway policy results and an overlay that cannot widen authority.

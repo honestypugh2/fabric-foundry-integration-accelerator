@@ -17,6 +17,7 @@
     "L5"
   ],
   "operating_rules": [
+    "Normal app startup (`make run`) is live-first HYBRID for both guides, with explicit LOCAL read fallback. For an entirely offline presentation use `make run API_ARGS=--offline`. Configured providers are not proof of live execution; inspect result labels and evidence.",
     "Submit one prompt at a time and stop at its checkpoint.",
     "Propose first, review, then apply. Authoring and execution are separate prompts.",
     "Before each cloud operation, state the provider, server and actual tool used.",

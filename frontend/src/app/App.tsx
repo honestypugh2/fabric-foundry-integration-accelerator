@@ -1,5 +1,5 @@
 import { lazy, Suspense, type ReactNode } from "react";
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes, useLocation } from "react-router";
 import { HomePage } from "../features/home/HomePage";
 import { Layout } from "./Layout";
 import { NotFoundPage } from "./NotFoundPage";
@@ -49,6 +49,19 @@ const BakeoffRunPage = lazy(() =>
 const DemoPage = lazy(() =>
   import("../features/demo/DemoPage").then((m) => ({ default: m.DemoPage })),
 );
+const EvidencePage = lazy(() =>
+  import("../features/workshop/EvidencePage").then((m) => ({ default: m.EvidencePage })),
+);
+
+function LegacyGuideRedirect() {
+  const location = useLocation();
+  return (
+    <Navigate
+      replace
+      to={`${location.pathname.replace(/^\/guides(?=\/|$)/, "/use-cases")}${location.search}${location.hash}`}
+    />
+  );
+}
 
 function Page({ children }: { readonly children: ReactNode }) {
   return (
@@ -134,7 +147,7 @@ export function App() {
           }
         />
         <Route
-          path="guides"
+          path="use-cases"
           element={
             <Page>
               <GuidesPage />
@@ -142,7 +155,7 @@ export function App() {
           }
         />
         <Route
-          path="guides/:guideId"
+          path="use-cases/:guideId"
           element={
             <Page>
               <GuideRunnerPage />
@@ -150,10 +163,19 @@ export function App() {
           }
         />
         <Route
-          path="guides/:guideId/:stepId"
+          path="use-cases/:guideId/:stepId"
           element={
             <Page>
               <GuideRunnerPage />
+            </Page>
+          }
+        />
+        <Route path="guides/*" element={<LegacyGuideRedirect />} />
+        <Route
+          path="evidence"
+          element={
+            <Page>
+              <EvidencePage />
             </Page>
           }
         />

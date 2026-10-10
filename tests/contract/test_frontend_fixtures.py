@@ -32,6 +32,7 @@ from fabric_foundry_accelerator.services.education import (
     LabSummary,
     LessonSummary,
     LessonView,
+    WorkshopView,
 )
 from fabric_foundry_accelerator.services.evaluation import EvaluationResult
 from fabric_foundry_accelerator.services.runtime import RuntimeStatus
@@ -49,6 +50,7 @@ CONTRACTS: dict[str, object] = {
     "guides": list[UseCaseGuide],
     "guide-hc01": UseCaseGuide,
     "lessons": list[LessonSummary],
+    "workshop": WorkshopView,
     "lesson-p08": LessonView,
     "check-grade": CheckGrade,
     "labs": list[LabSummary],

@@ -11,7 +11,7 @@ from fabric_foundry_accelerator.services.foundry_readiness import FoundryReadine
 
 def _cmd_readiness(args: argparse.Namespace) -> int:
     settings = Settings()
-    bindings = load_bindings(settings.config_root, settings.overlay)
+    bindings = load_bindings(settings.config_root, settings.overlay, settings=settings)
     if bindings is None or bindings.foundry is None:
         sys.stderr.write(
             "No Foundry binding. Add a `foundry:` section to "

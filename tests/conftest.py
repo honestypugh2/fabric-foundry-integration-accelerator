@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 from fabric_foundry_accelerator.audit.store import InMemoryAuditStore
-from fabric_foundry_accelerator.config.settings import Settings
+from fabric_foundry_accelerator.config.settings import ApiSettings, Settings
 from fabric_foundry_accelerator.services.container import Container, build_container
 from fabric_foundry_accelerator.synthetic.paths import DEFAULT_DATA_ROOT
 from fabric_foundry_accelerator.synthetic.pipeline import ValidationReport, build_and_validate
@@ -15,6 +15,28 @@ from fabric_foundry_accelerator.synthetic.profiles import PROFILES
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DATA_ROOT = REPO_ROOT / DEFAULT_DATA_ROOT
+
+
+@pytest.fixture(autouse=True)
+def offline_test_environment(
+    request: pytest.FixtureRequest, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Keep a presenter's live environment file from enabling cloud access in offline tests."""
+    if "live" in request.keywords:
+        return
+    monkeypatch.setitem(Settings.model_config, "env_file", None)
+    monkeypatch.setitem(ApiSettings.model_config, "env_file", None)
+    for field in Settings.model_fields.values():
+        if isinstance(field.validation_alias, str):
+            monkeypatch.delenv(field.validation_alias, raising=False)
+    for name, value in (
+        ("ENVIRONMENT", "offline"),
+        ("FABRIC_LIVE", "0"),
+        ("FOUNDRY_LIVE", "0"),
+        ("ALLOW_LIVE_MUTATION", "0"),
+        ("APPLICATIONINSIGHTS_CONNECTION_STRING", ""),
+    ):
+        monkeypatch.setenv(f"FFIA_{name}", value)
 
 
 @pytest.fixture(scope="session")

@@ -1,0 +1,35 @@
+id: theory-to-tools
+title: From data meaning to trustworthy answers
+kind: reference
+summary: "A focused conceptual map: define meaning, prepare context, expose a stable contract, reason within boundaries and verify independently."
+cue: "Explain the idea at each box before naming a product. These are conceptual connections, not a claim of direct product lineage."
+columns: 5
+rows: 1
+doc: learning-foundations
+aligned_to: [research-relational-model, research-rag, research-react, fabric-medallion]
+pattern_ids: [P01, P06, P10, P12, P16]
+nodes:
+  - {id: meaning, label: Meaning first, sublabel: "Grain, keys, measure population", kind: data, state: documented, col: 0, row: 0, summary: "Relational abstractions define what a record and operation mean, independently of physical representation."}
+  - {id: layers, label: Prepare context, sublabel: "Bronze, Silver, Gold", kind: fabric, state: documented, col: 1, row: 0, summary: "Preserve provenance, apply reviewed quality rules and create reproducible serving data."}
+  - {id: contract, label: Governed contract, sublabel: "Measures and permitted context", kind: fabric, state: documented, col: 2, row: 0, summary: "Reusable semantic meaning and identity determine the context a consumer may use."}
+  - {id: reasoning, label: Bounded reasoning, sublabel: "Model + context + tool observations", kind: foundry, state: documented, col: 3, row: 0, summary: "Retrieved or queried context and observed tool results support reasoning, but do not guarantee correctness."}
+  - {id: verify, label: Independent verification, sublabel: "Baseline, failures, limitations", kind: evidence, state: implemented, col: 4, row: 0, summary: "Compare answers with deterministic synthetic expected results and retain adverse cases."}
+edges:
+  - {id: meaning-layers, source: meaning, target: layers, label: Define, kind: context}
+  - {id: layers-contract, source: layers, target: contract, label: Reconcile, kind: context}
+  - {id: contract-reasoning, source: contract, target: reasoning, label: Ground, kind: context}
+  - {id: reasoning-verify, source: reasoning, target: verify, label: Test, kind: evidence}
+bands:
+  - {id: boundary, kind: policy, text: "Meaning, model output and tool access are not authority. Identity, deterministic policy and separate approval govern consequential changes."}
+  - {id: research, kind: evidence, text: "Applied research: ask a bounded question, state a falsifiable hypothesis, control variables, measure against an independent baseline and disclose limitations."}
+traces:
+  - id: meaning-to-verification
+    title: Trace the idea before naming the tool
+    summary: A LOCAL explanation of conceptual connections, not a cloud operation or product lineage claim.
+    label: LOCAL
+    steps:
+      - {node: meaning, say: "Agree on grain, keys and the measure population."}
+      - {node: layers, edge: meaning-layers, say: "Prepare reproducible context while preserving source provenance."}
+      - {node: contract, edge: layers-contract, say: "Expose stable meaning under the caller's permitted scope."}
+      - {node: reasoning, edge: contract-reasoning, say: "Reason over returned context and actual tool observations."}
+      - {node: verify, edge: reasoning-verify, say: "Check independently and retain failures and limitations."}

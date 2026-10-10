@@ -362,3 +362,18 @@ patterns:
     offline_equivalent: Local providers and deterministic agent.
     selection_signals: [embedded-assistant]
     sources: [agent-framework, foundry-agent-service]
+  - id: P25
+    name: Spec-driven Fabric and Foundry delivery
+    summary: A reviewed specification connects business outcomes, architecture, implementation tasks and measurable verification before a PoC changes a workspace.
+    status: GA
+    preview_dependencies: []
+    default_demo_path: DOCUMENTATION
+    when_to_use: New use cases or cross-layer changes with ambiguous requirements, contracts and governance decisions.
+    when_not_to_use: A typo, narrow repair with a clear reproduction, or an ordinary demo run with an existing approved plan.
+    fabric_role: Supplies governed data contracts and explicit workspace acceptance criteria.
+    foundry_role: Supplies reasoning and evaluation requirements; it does not define deployment authority.
+    mcp_role: Tools may collect read-only facts and evidence; no specification grants tool authorization.
+    authority: Repository policy, human review and the existing governed change flow remain authoritative.
+    offline_equivalent: Review a synthetic use-case specification, map requirements to tests and run existing offline gates.
+    selection_signals: [reviewable-change-ci-cd, multi-customer-reuse]
+    sources: [spec-kit-quickstart]

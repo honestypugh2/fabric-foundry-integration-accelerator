@@ -35,7 +35,15 @@ def main() -> None:
     """Export every fixture the frontend tests use."""
     FIXTURES.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory() as runtime:
-        settings = Settings(audit_path=None, runtime_root=Path(runtime))
+        settings = Settings(
+            _env_file=None,  # pyright: ignore[reportCallIssue]
+            environment="offline",
+            fabric_live=False,
+            foundry_live=False,
+            allow_live_mutation=False,
+            audit_path=None,
+            runtime_root=Path(runtime),
+        )
         with TestClient(create_app(build_container(settings))) as client:
             gets = {
                 "runtime-status": "/api/v1/runtime/status",
@@ -46,6 +54,7 @@ def main() -> None:
                 "guides": "/api/v1/guides",
                 "guide-hc01": f"/api/v1/guides/{GUIDE}",
                 "lessons": "/api/v1/education/lessons",
+                "workshop": "/api/v1/education/workshop",
                 "lesson-p08": f"/api/v1/education/lessons/{LESSON}",
                 "labs": "/api/v1/education/labs",
                 "lab-governed-change": "/api/v1/education/labs/lab-governed-change",
@@ -156,9 +165,7 @@ def main() -> None:
                 "agent-workflow",
                 client.post("/api/v1/agents/workflows/monthly-insights", json={}).json(),
             )
-        preview = Settings(
-            audit_path=None, runtime_root=Path(runtime), preview_features=("foundry_iq_knowledge",)
-        )
+        preview = settings.model_copy(update={"preview_features": ("foundry_iq_knowledge",)})
         with TestClient(create_app(build_container(preview))) as client:
             _write(
                 "knowledge-simulated",

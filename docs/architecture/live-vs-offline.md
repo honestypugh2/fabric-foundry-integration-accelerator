@@ -10,6 +10,8 @@ The configuration and mechanics are described in [resilience.md](resilience.md).
 
 ## Architecture
 
+![Live-first reads, explicit fallback and gated writes, exported by draw.io Desktop](diagrams/live-vs-offline.png)
+
 <!-- BEGIN GENERATED DIAGRAM: run `ffia diagrams render`; do not edit by hand -->
 
 > Generated from [`education/architecture/views/live-vs-offline.yaml`](../../education/architecture/views/live-vs-offline.yaml). Edit the YAML, then run `ffia diagrams render`.

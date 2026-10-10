@@ -2,6 +2,71 @@
 # Status vocabulary: GA | PREVIEW | DEPRECATED | UNKNOWN/NEEDS VALIDATION | GUIDANCE | OSS
 version: 1
 sources:
+  - id: research-relational-model
+    title: A relational model of data for large shared data banks
+    url: https://research.ibm.com/publications/a-relational-model-of-data-for-large-shared-data-banks
+    publisher: IBM Research / ACM
+    retrieved_date: 2026-10-09
+    technology: Relational data foundations
+    associated_patterns: [P10, P12]
+    status: GUIDANCE
+    key_architecture_statement: Relations and data independence separate a logical data model from physical representation.
+    implementation_relevance: Teaches keys, grain, relational operations and stable business meaning before modern lakehouse and semantic-model implementation.
+    security_implications: Logical abstraction does not replace access control or disclose permitted data automatically.
+    limitations: Foundational research, not a Fabric implementation specification or evidence of product lineage.
+    fallback: Reproducible synthetic SQL and semantic-model exercises.
+  - id: research-transformers
+    title: Attention Is All You Need
+    url: https://arxiv.org/abs/1706.03762
+    publisher: arXiv
+    retrieved_date: 2026-10-09
+    technology: Transformer foundations
+    associated_patterns: [P06, P19]
+    status: GUIDANCE
+    key_architecture_statement: The Transformer uses attention mechanisms to model sequence relationships without the recurrent architecture used in earlier sequence models.
+    implementation_relevance: Distinguishes learned next-token behavior from retrieval, deterministic calculation, tool execution and authority.
+    security_implications: Fluent output is not evidence of factual accuracy, tool execution or authorization.
+    limitations: Original translation experiments do not establish the behavior or performance of today's proprietary models.
+    fallback: Conceptual teaching and bounded synthetic prompt experiments; no model training required.
+  - id: research-rag
+    title: Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks
+    url: https://arxiv.org/abs/2005.11401
+    publisher: arXiv
+    retrieved_date: 2026-10-09
+    technology: Retrieval and grounding foundations
+    associated_patterns: [P01, P04, P06]
+    status: GUIDANCE
+    key_architecture_statement: Retrieval combines external non-parametric information with a generative model rather than relying only on information encoded in model weights.
+    implementation_relevance: Teaches why evidence selection, source relevance and separate numeric baselines matter for grounded answers.
+    security_implications: Retrieved content is untrusted input and must not grant permissions or override instructions.
+    limitations: Governed structured queries and Fabric data agents are not automatically the original RAG architecture; retrieval can be irrelevant or incomplete.
+    fallback: Synthetic retrieved context compared with deterministic reference answers.
+  - id: research-react
+    title: "ReAct: Synergizing Reasoning and Acting in Language Models"
+    url: https://arxiv.org/abs/2210.03629
+    publisher: arXiv
+    retrieved_date: 2026-10-09
+    technology: Tool-using agent foundations
+    associated_patterns: [P06, P08, P09, P19]
+    status: GUIDANCE
+    key_architecture_statement: Interleaving reasoning and environment actions can support task solving with external observations.
+    implementation_relevance: Teaches the distinction between a proposed action, an actual tool invocation and an observed result.
+    security_implications: Tool availability is not authority; constrain actions with deterministic validation and approval.
+    limitations: Research task results are not a Copilot or Foundry benchmark; tool loops can still make unsafe or incorrect choices.
+    fallback: Read-only synthetic agent exercises and labeled execution traces.
+  - id: spec-kit-quickstart
+    title: Spec-Driven Development Quickstart
+    url: https://github.github.io/spec-kit/quickstart.html
+    publisher: GitHub Spec Kit
+    retrieved_date: 2026-10-09
+    technology: Spec-driven engineering
+    associated_patterns: [P20, P25]
+    status: OSS
+    key_architecture_statement: A specification-led workflow connects constitution, requirements, planning, tasks, implementation and convergence; current skills use the speckit-hyphen invocation form.
+    implementation_relevance: Optional engineering pattern for new use cases and cross-layer changes; specify-cli 1.1.3 was verified through PyPI metadata without installation.
+    security_implications: Generated instructions must preserve repository policy; requirements and agent implementation do not authorize live writes.
+    limitations: Tool integration requires scratch initialization and review before adoption; active feature selection is independent of checking out a Git branch.
+    fallback: Use the repository's spec-driven-delivery skill with reviewed requirements and existing test gates, explicitly without claiming Spec Kit CLI execution.
   - id: github-codeql-configuration
     title: Workflow configuration options for code scanning
     url: https://docs.github.com/en/code-security/reference/code-scanning/workflow-configuration-options

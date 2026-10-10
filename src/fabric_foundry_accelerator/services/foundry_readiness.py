@@ -45,7 +45,7 @@ class FoundryReport(BaseModel):
 
 def project_endpoint(binding: FoundryBinding) -> str:
     """The Foundry project endpoint (no secrets; derived from resource and project names)."""
-    return f"https://{binding.account}.services.ai.azure.com/api/projects/{binding.project}"
+    return binding.endpoint
 
 
 class FoundryReadiness:

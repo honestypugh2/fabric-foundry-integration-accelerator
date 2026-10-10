@@ -540,5 +540,27 @@
     "summary": "An internal app embeds an agent runtime that calls Fabric tools under app identity or on behalf of the user.",
     "when_not_to_use": "When an existing developer tool suffices.",
     "when_to_use": "A product experience for many users."
+  },
+  {
+    "authority": "Repository policy, human review and the existing governed change flow remain authoritative.",
+    "default_demo_path": "DOCUMENTATION",
+    "fabric_role": "Supplies governed data contracts and explicit workspace acceptance criteria.",
+    "foundry_role": "Supplies reasoning and evaluation requirements; it does not define deployment authority.",
+    "id": "P25",
+    "mcp_role": "Tools may collect read-only facts and evidence; no specification grants tool authorization.",
+    "name": "Spec-driven Fabric and Foundry delivery",
+    "offline_equivalent": "Review a synthetic use-case specification, map requirements to tests and run existing offline gates.",
+    "preview_dependencies": [],
+    "selection_signals": [
+      "reviewable-change-ci-cd",
+      "multi-customer-reuse"
+    ],
+    "sources": [
+      "spec-kit-quickstart"
+    ],
+    "status": "GA",
+    "summary": "A reviewed specification connects business outcomes, architecture, implementation tasks and measurable verification before a PoC changes a workspace.",
+    "when_not_to_use": "A typo, narrow repair with a clear reproduction, or an ordinary demo run with an existing approved plan.",
+    "when_to_use": "New use cases or cross-layer changes with ambiguous requirements, contracts and governance decisions."
   }
 ]

@@ -16,6 +16,8 @@ This architecture shows how Microsoft Fabric and Microsoft Foundry divide the wo
 
 ## Architecture
 
+![Fabric and Foundry reference architecture, exported by draw.io Desktop](diagrams/reference.png)
+
 <!-- BEGIN GENERATED DIAGRAM: run `ffia diagrams render`; do not edit by hand -->
 
 > Generated from [`education/architecture/views/reference.yaml`](../../education/architecture/views/reference.yaml). Edit the YAML, then run `ffia diagrams render`.

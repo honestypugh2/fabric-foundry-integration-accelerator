@@ -73,8 +73,13 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Model Context Protocol | [Power BI Authoring (Modeling) MCP server](#powerbi-authoring-mcp) | GA | 2026-10-05 |
 | Power BI | [Datasets - Execute Queries In Group (Power BI REST API)](#powerbi-execute-queries) | GA | 2026-10-07 |
 | Power BI | [Create report subscriptions with Copilot summaries](#powerbi-subscription-summaries) | PREVIEW | 2026-10-08 |
+| Relational data foundations | [A relational model of data for large shared data banks](#research-relational-model) | GUIDANCE | 2026-10-09 |
+| Retrieval and grounding foundations | [Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks](#research-rag) | GUIDANCE | 2026-10-09 |
+| Spec-driven engineering | [Spec-Driven Development Quickstart](#spec-kit-quickstart) | OSS | 2026-10-09 |
+| Tool-using agent foundations | [ReAct: Synergizing Reasoning and Acting in Language Models](#research-react) | GUIDANCE | 2026-10-09 |
 | Toolchain | [Node.js release schedule](#node-release-schedule) | GA | 2026-10-05 |
 | Toolchain | [Status of Python versions](#python-lifecycle) | GA | 2026-10-05 |
+| Transformer foundations | [Attention Is All You Need](#research-transformers) | GUIDANCE | 2026-10-09 |
 
 ## AI agents
 
@@ -1284,6 +1289,90 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Fallback | Scheduled email subscription without summary (GA). |
 | Deprecation / replacement | — |
 
+## Relational data foundations
+
+<a id="research-relational-model"></a>
+
+### A relational model of data for large shared data banks
+
+| Field | Value |
+|---|---|
+| URL | https://research.ibm.com/publications/a-relational-model-of-data-for-large-shared-data-banks |
+| Publisher | IBM Research / ACM |
+| Retrieved | 2026-10-09 |
+| Last updated | — |
+| Status | GUIDANCE |
+| Associated patterns | P10, P12 |
+| Key architecture statement | Relations and data independence separate a logical data model from physical representation. |
+| Implementation relevance | Teaches keys, grain, relational operations and stable business meaning before modern lakehouse and semantic-model implementation. |
+| Security implications | Logical abstraction does not replace access control or disclose permitted data automatically. |
+| Limitations | Foundational research, not a Fabric implementation specification or evidence of product lineage. |
+| Fallback | Reproducible synthetic SQL and semantic-model exercises. |
+| Deprecation / replacement | — |
+
+## Retrieval and grounding foundations
+
+<a id="research-rag"></a>
+
+### Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks
+
+| Field | Value |
+|---|---|
+| URL | https://arxiv.org/abs/2005.11401 |
+| Publisher | arXiv |
+| Retrieved | 2026-10-09 |
+| Last updated | — |
+| Status | GUIDANCE |
+| Associated patterns | P01, P04, P06 |
+| Key architecture statement | Retrieval combines external non-parametric information with a generative model rather than relying only on information encoded in model weights. |
+| Implementation relevance | Teaches why evidence selection, source relevance and separate numeric baselines matter for grounded answers. |
+| Security implications | Retrieved content is untrusted input and must not grant permissions or override instructions. |
+| Limitations | Governed structured queries and Fabric data agents are not automatically the original RAG architecture; retrieval can be irrelevant or incomplete. |
+| Fallback | Synthetic retrieved context compared with deterministic reference answers. |
+| Deprecation / replacement | — |
+
+## Spec-driven engineering
+
+<a id="spec-kit-quickstart"></a>
+
+### Spec-Driven Development Quickstart
+
+| Field | Value |
+|---|---|
+| URL | https://github.github.io/spec-kit/quickstart.html |
+| Publisher | GitHub Spec Kit |
+| Retrieved | 2026-10-09 |
+| Last updated | — |
+| Status | OSS |
+| Associated patterns | P20, P25 |
+| Key architecture statement | A specification-led workflow connects constitution, requirements, planning, tasks, implementation and convergence; current skills use the speckit-hyphen invocation form. |
+| Implementation relevance | Optional engineering pattern for new use cases and cross-layer changes; specify-cli 1.1.3 was verified through PyPI metadata without installation. |
+| Security implications | Generated instructions must preserve repository policy; requirements and agent implementation do not authorize live writes. |
+| Limitations | Tool integration requires scratch initialization and review before adoption; active feature selection is independent of checking out a Git branch. |
+| Fallback | Use the repository's spec-driven-delivery skill with reviewed requirements and existing test gates, explicitly without claiming Spec Kit CLI execution. |
+| Deprecation / replacement | — |
+
+## Tool-using agent foundations
+
+<a id="research-react"></a>
+
+### ReAct: Synergizing Reasoning and Acting in Language Models
+
+| Field | Value |
+|---|---|
+| URL | https://arxiv.org/abs/2210.03629 |
+| Publisher | arXiv |
+| Retrieved | 2026-10-09 |
+| Last updated | — |
+| Status | GUIDANCE |
+| Associated patterns | P06, P08, P09, P19 |
+| Key architecture statement | Interleaving reasoning and environment actions can support task solving with external observations. |
+| Implementation relevance | Teaches the distinction between a proposed action, an actual tool invocation and an observed result. |
+| Security implications | Tool availability is not authority; constrain actions with deterministic validation and approval. |
+| Limitations | Research task results are not a Copilot or Foundry benchmark; tool loops can still make unsafe or incorrect choices. |
+| Fallback | Read-only synthetic agent exercises and labeled execution traces. |
+| Deprecation / replacement | — |
+
 ## Toolchain
 
 <a id="node-release-schedule"></a>
@@ -1322,4 +1411,25 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Bugfix-supported runtime receives timely fixes. |
 | Limitations | Some Fabric tools (fabric-cicd, ms-fabric-cli, fabric-data-agent-sdk) declare Python below 3.14 and run as isolated tools. |
 | Fallback | Python 3.13 validated as an alternative. |
+| Deprecation / replacement | — |
+
+## Transformer foundations
+
+<a id="research-transformers"></a>
+
+### Attention Is All You Need
+
+| Field | Value |
+|---|---|
+| URL | https://arxiv.org/abs/1706.03762 |
+| Publisher | arXiv |
+| Retrieved | 2026-10-09 |
+| Last updated | — |
+| Status | GUIDANCE |
+| Associated patterns | P06, P19 |
+| Key architecture statement | The Transformer uses attention mechanisms to model sequence relationships without the recurrent architecture used in earlier sequence models. |
+| Implementation relevance | Distinguishes learned next-token behavior from retrieval, deterministic calculation, tool execution and authority. |
+| Security implications | Fluent output is not evidence of factual accuracy, tool execution or authorization. |
+| Limitations | Original translation experiments do not establish the behavior or performance of today's proprietary models. |
+| Fallback | Conceptual teaching and bounded synthetic prompt experiments; no model training required. |
 | Deprecation / replacement | — |

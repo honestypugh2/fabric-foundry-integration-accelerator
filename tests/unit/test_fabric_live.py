@@ -676,7 +676,7 @@ def test_live_client_requires_explicit_opt_in_mode_and_bindings(
     with pytest.raises(BindingsError, match="FFIA_ENVIRONMENT"):
         build_container(make_settings(fabric_live=True))
     with pytest.raises(BindingsError, match=r"local\.yaml"):
-        build_container(make_settings(fabric_live=True, environment="hybrid"))
+        build_container(make_settings(fabric_live=True, environment="live"))
 
 
 def test_container_wires_live_provider_and_writer_from_bindings(

@@ -68,7 +68,7 @@ def test_runtime_providers_capabilities_profiles(client: TestClient) -> None:
 
 
 def test_patterns_and_guides(client: TestClient) -> None:
-    assert len(client.get("/api/v1/patterns").json()) == 24
+    assert len(client.get("/api/v1/patterns").json()) == 25
     assert client.get("/api/v1/patterns/P08").json()["name"].startswith("Human-in-the-loop")
     assert client.get("/api/v1/patterns/P99").status_code == 404
     ranked = client.post(

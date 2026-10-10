@@ -52,7 +52,8 @@ entry_points:
 prerequisites:
   - title: "Choose the mode"
     items:
-      - "**Offline (always works):** `make demo-prep && make run`. Every live step has an offline fallback."
+      - "**Offline (always works):** `make demo-prep && make run API_ARGS=--offline`. Every live step has a labeled offline equivalent; failed live writes stop."
+      - "**Normal app startup:** `make run` reads the ignored `.env` and starts both guides live-first in HYBRID mode. Inspect result labels; configured providers are not execution evidence."
       - "**Live read-only:** resume the F capacity; `ffia fabric readiness` says YES; render the read-only Fabric MCP profile into a scratch lab folder (below)."
       - "**Foundry segment (optional live):** a Foundry project and model deployment; otherwise show the code and label it REQUIRES TENANT VALIDATION."
   - title: "Setup commands (30 minutes before)"

@@ -1,0 +1,64 @@
+id: integration-paths
+title: Fabric MCP workflow and application provider workflow
+kind: reference
+summary: "Two separate paths: coding harnesses use the real Fabric MCP tools; the application uses REST and SDK providers. Evidence cannot be exchanged between them."
+cue: "Trace one row at a time. Running the Microsoft MCP server locally does not mean using the synthetic ffia-local server."
+columns: 5
+rows: 3
+doc: integration-paths
+aligned_to: [fabric-mcp-local, foundry-agent-service, fabric-rest-identity]
+pattern_ids: [P06, P09, P17, P19]
+zones:
+  - {id: coding, label: Coding workflow - Fabric MCP first, kind: local, col: 0, row: 0, cols: 5, rows: 1}
+  - {id: application, label: Application workflow - not Fabric MCP, kind: local, col: 0, row: 2, cols: 5, rows: 1}
+nodes:
+  - {id: harness, label: Copilot / Claude, sublabel: "Instructions and Skills", kind: client, state: documented, col: 0, row: 0, summary: "The coding harness proposes artifacts and invokes the designated tool under review. Claude remains documented-only in the bake-off."}
+  - {id: mcp, label: Real Fabric MCP, sublabel: "Pinned narrow tools", kind: mcp, state: documented, col: 1, row: 0, summary: "The Microsoft server can run locally and access live Fabric. Profile configuration does not prove tool execution."}
+  - {id: fabric, label: Permitted Fabric read, sublabel: "Caller identity and permissions", kind: fabric, state: tenant-validation, col: 2, row: 0, summary: "An actual tool invocation obtains observed context when available."}
+  - {id: fallback, label: Named ffia-local fallback, sublabel: "Disclosed LOCAL read only", kind: local, state: implemented, col: 3, row: 0, summary: "Offer only after reporting primary-tool unavailability. A failed live write stops; a rehearsal is separately SIMULATED."}
+  - {id: tool-proof, label: Tool provenance, sublabel: "Server, operation, label", kind: evidence, state: implemented, col: 4, row: 0, summary: "Retain actual tool results and limitations. Do not infer execution from configuration."}
+  - {id: browser, label: Workshop UI, sublabel: "React application", kind: client, state: implemented, col: 0, row: 2, summary: "The browser uses the typed application API without holding cloud credentials."}
+  - {id: api, label: FastAPI services, sublabel: "Typed boundaries", kind: service, state: implemented, col: 1, row: 2, summary: "Routes call services; domain logic lives behind provider ports."}
+  - {id: router, label: Provider router, sublabel: "Live-first eligible reads", kind: service, state: implemented, col: 2, row: 2, summary: "Apply bounded retries, circuit breaker and approved fallback policy."}
+  - {id: providers, label: REST / Foundry SDK, sublabel: "Actual application providers", kind: foundry, state: tenant-validation, col: 3, row: 2, summary: "The application path calls Fabric REST and Foundry SDK adapters, not the guide's Fabric MCP tools."}
+  - {id: app-proof, label: Labeled app result, sublabel: "Routing and operation evidence", kind: evidence, state: implemented, col: 4, row: 2, summary: "An application LIVE or PREVIEW result certifies only its bounded observed operation, never an MCP call or publication."}
+edges:
+  - {id: harness-mcp, source: harness, target: mcp, label: Invoke, kind: access}
+  - {id: mcp-fabric, source: mcp, target: fabric, label: Read, kind: access}
+  - {id: fabric-proof, source: fabric, target: tool-proof, label: Observed result, kind: evidence}
+  - {id: mcp-fallback, source: mcp, target: fallback, label: If unavailable, kind: fallback}
+  - {id: fallback-proof, source: fallback, target: tool-proof, label: LOCAL + reason, kind: evidence}
+  - {id: browser-api, source: browser, target: api, label: API, kind: access}
+  - {id: api-router, source: api, target: router, label: Route, kind: access}
+  - {id: router-provider, source: router, target: providers, label: Eligible read, kind: access}
+  - {id: provider-proof, source: providers, target: app-proof, label: Verify, kind: evidence}
+bands:
+  - {id: authority, kind: policy, text: "Both paths: read-only by default. Writes need exact-target validation and human approval; a failed LIVE write never becomes a LOCAL write."}
+traces:
+  - id: coding-path
+    title: Coding harness uses Fabric MCP
+    summary: LOCAL explanation of the assigned tool path; this trace does not invoke its tools.
+    label: LOCAL
+    steps:
+      - {node: harness, say: "Instructions and Skills guide artifact preparation and reviewed tool use."}
+      - {node: mcp, edge: harness-mcp, say: "Discover and invoke the designated real Fabric MCP tool."}
+      - {node: fabric, edge: mcp-fabric, say: "Caller identity and permissions constrain the read."}
+      - {node: tool-proof, edge: fabric-proof, say: "Record actual server, operation, result label and limitations."}
+  - id: named-fallback
+    title: Unavailable MCP read has a named fallback
+    summary: LOCAL explanation of disclosed read fallback, never write redirection.
+    label: LOCAL
+    steps:
+      - {node: mcp, say: "Report the primary tool's unavailability explicitly."}
+      - {node: fallback, edge: mcp-fallback, say: "Offer only the designated ffia-local read equivalent."}
+      - {node: tool-proof, edge: fallback-proof, say: "Label the result LOCAL and preserve the fallback reason."}
+  - id: application-path
+    title: Application uses REST and SDK providers
+    summary: LOCAL explanation of application routing, not proof of an MCP invocation.
+    label: LOCAL
+    steps:
+      - {node: browser, say: "The browser calls the typed application API."}
+      - {node: api, edge: browser-api, say: "Services own domain behavior and depend on provider ports."}
+      - {node: router, edge: api-router, say: "Select an eligible read under the live-first policy."}
+      - {node: providers, edge: router-provider, say: "Fabric REST or Foundry SDK performs the bounded operation."}
+      - {node: app-proof, edge: provider-proof, say: "Retain routing and execution evidence without claiming MCP certification."}

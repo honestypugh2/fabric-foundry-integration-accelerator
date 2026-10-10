@@ -1,7 +1,7 @@
 :root {
   color-scheme: light dark;
   --color-fg: #1b1b1f;
-  --color-bg: #ffffff;
+  --color-bg: #f8fafc;
   --color-muted: #4a4a55;
   --color-accent: #0b5cad;
   --color-surface: #f3f4f7;
@@ -41,7 +41,7 @@ html {
 
 body {
   margin: 0;
-  padding-bottom: 6rem;
+  padding-bottom: 9rem;
 }
 
 .skip-link {
@@ -62,6 +62,241 @@ main {
   max-width: 80rem;
   margin: 0 auto;
   padding: 1.5rem;
+}
+
+/* Workshop surfaces keep the dense engineering tools available without making them the entry point. */
+.workshop-tools {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1.5rem;
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.8rem;
+}
+
+.workshop-tools a {
+  color: var(--color-muted);
+  text-decoration: none;
+}
+
+.workshop-hero {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+  margin: 1rem 0 3rem;
+  border: 1px solid var(--color-border);
+  border-radius: 1.5rem;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--k-fabric) 8%, var(--color-bg)),
+    color-mix(in srgb, var(--k-foundry) 8%, var(--color-bg))
+  );
+}
+
+.workshop-hero h1 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  max-width: 18ch;
+}
+
+.eyebrow {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 750;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  margin-block: 1.5rem;
+}
+
+.button-link {
+  display: inline-block;
+  padding: 0.8rem 1.25rem;
+  border-radius: 0.65rem;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.hero-loop {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+}
+
+.hero-loop li {
+  display: grid;
+  gap: 0.5rem;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.hero-loop span {
+  color: var(--color-accent);
+  font-size: 1.5rem;
+  font-weight: 750;
+}
+
+.hero-loop small,
+.architecture-image figcaption {
+  color: var(--color-muted);
+}
+
+.page-intro {
+  padding-block: 1.5rem 1rem;
+  max-width: 65rem;
+}
+
+.page-intro h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+}
+
+.journey-card {
+  border-top: 3px solid var(--color-accent);
+}
+
+.journey-card h2 {
+  font-size: 1.3rem;
+}
+
+.callout {
+  padding: 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  background: var(--color-surface);
+  margin-block: 1.5rem;
+}
+
+.foundation-grid,
+.learning-paths,
+.evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-block: 1.5rem;
+}
+
+.learning-paths section,
+.evidence-grid article,
+.capability-stages li {
+  min-width: 0;
+}
+
+.learning-contract {
+  margin-block: 2rem;
+  border-block: 1px solid var(--color-border);
+  padding-block: 1.5rem;
+}
+
+.learning-mode {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.learning-mode button[aria-pressed="true"] {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.architecture-image {
+  margin: 2rem 0;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  background: #ffffff;
+}
+
+.architecture-image img,
+.evidence-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.architecture-image figcaption {
+  background: var(--color-bg);
+  padding: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.evolution-timeline {
+  border-left: 3px solid var(--color-accent);
+  padding-left: 2rem;
+}
+
+.evolution-timeline li {
+  padding: 0.5rem;
+}
+
+.capability-stages {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  padding-left: 1.5rem;
+  margin-block: 2rem;
+}
+
+.capability-stages li::marker {
+  color: var(--color-accent);
+  font-weight: 750;
+}
+
+.coverage-link {
+  display: block;
+  margin-block: 0.35rem;
+  overflow-wrap: anywhere;
+}
+
+.status-bar details {
+  padding: 0.5rem 1rem;
+  max-height: 45vh;
+  overflow: auto;
+}
+
+.status-bar summary {
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 650;
+}
+
+.status-bar .meta {
+  margin: 0.5rem 1rem;
+}
+
+@media (max-width: 50rem) {
+  .workshop-hero,
+  .foundation-grid,
+  .learning-paths,
+  .evidence-grid,
+  .capability-stages {
+    grid-template-columns: 1fr;
+  }
+
+  .workshop-hero {
+    gap: 1rem;
+  }
+
+  .hero-loop {
+    gap: 0.75rem;
+  }
 }
 
 .principles li {
@@ -100,6 +335,46 @@ main {
 
 .status-bar dd {
   margin: 0;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 50rem) {
+  html {
+    scroll-padding-top: 15rem;
+  }
+
+  body {
+    padding-bottom: 21rem;
+  }
+
+  .status-bar dl {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.35rem 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .status-bar__item {
+    display: flex;
+  }
+
+  .status-bar dt {
+    flex: none;
+  }
+
+  .status-bar dd {
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .status-bar__item[data-field="Operating mode"] dd,
+  .status-bar__item[data-field="Write mode"] dd,
+  .status-bar__item[data-field="Preview features"] dd {
+    white-space: normal;
+    overflow: visible;
+  }
 }
 
 /* ------------------------------------------------------------------ layout and navigation */
@@ -390,6 +665,16 @@ textarea {
   background: var(--color-surface);
 }
 
+.cards.execution-path-cards {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 50rem) {
+  .cards.execution-path-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 .card h2,
 .card h3,
 .card__title {
@@ -481,7 +766,7 @@ caption {
 
 .definition-list > div {
   display: grid;
-  grid-template-columns: minmax(8rem, 14rem) 1fr;
+  grid-template-columns: minmax(8rem, 14rem) minmax(0, 1fr);
   gap: 0.5rem;
   padding-block: 0.25rem;
   border-bottom: 1px solid var(--color-border);
@@ -493,6 +778,14 @@ caption {
 
 .definition-list dd {
   margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 50rem) {
+  .definition-list > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 .prompt {
@@ -655,6 +948,21 @@ caption {
 
 .runner__steps a[aria-current="step"] {
   font-weight: 700;
+}
+
+.runner__done {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  min-height: 2rem;
+  margin-inline-start: 0.5rem;
+  vertical-align: middle;
+}
+
+.runner__done input {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .runner__flag {

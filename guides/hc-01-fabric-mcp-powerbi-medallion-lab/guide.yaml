@@ -20,6 +20,7 @@ patterns: [P10, P12, P09, P19, P08, P16]
 maturity_levels: [L1, L2, L3, L4, L5]
 harnesses: [copilot-vscode, copilot-cli, claude-code]
 operating_rules:
+  - "Normal app startup (`make run`) is live-first HYBRID for both guides, with explicit LOCAL read fallback. For an entirely offline presentation use `make run API_ARGS=--offline`. Configured providers are not proof of live execution; inspect result labels and evidence."
   - Submit one prompt at a time and stop at its checkpoint.
   - Propose first, review, then apply. Authoring and execution are separate prompts.
   - Before each cloud operation, state the provider, server and actual tool used.

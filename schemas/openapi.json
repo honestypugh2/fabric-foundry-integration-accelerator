@@ -997,6 +997,41 @@
         "title": "Capability",
         "type": "object"
       },
+      "CapabilityStage": {
+        "additionalProperties": false,
+        "description": "A before/after capability, its control and measurable evidence.",
+        "properties": {
+          "capability": {
+            "title": "Capability",
+            "type": "string"
+          },
+          "control": {
+            "title": "Control",
+            "type": "string"
+          },
+          "evidence": {
+            "title": "Evidence",
+            "type": "string"
+          },
+          "task": {
+            "title": "Task",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "task",
+          "capability",
+          "control",
+          "evidence"
+        ],
+        "title": "CapabilityStage",
+        "type": "object"
+      },
       "ChangeRequest": {
         "additionalProperties": false,
         "description": "A request to plan a change (from a person, an agent or an MCP tool).",
@@ -2253,6 +2288,107 @@
         "title": "EvidenceClaim",
         "type": "object"
       },
+      "EvidenceEntry": {
+        "additionalProperties": false,
+        "description": "Historical evidence with explicit scope; never a current health probe.",
+        "properties": {
+          "category": {
+            "default": "OPERATION",
+            "enum": [
+              "DEPLOYMENT",
+              "OPERATION",
+              "INTERFACE"
+            ],
+            "title": "Category",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "label": {
+            "$ref": "#/components/schemas/ExecutionLabel"
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Limitations",
+            "type": "array"
+          },
+          "pattern_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Pattern Ids",
+            "type": "array"
+          },
+          "provider": {
+            "title": "Provider",
+            "type": "string"
+          },
+          "recorded_on": {
+            "format": "date",
+            "title": "Recorded On",
+            "type": "string"
+          },
+          "scope": {
+            "title": "Scope",
+            "type": "string"
+          },
+          "screenshot": {
+            "anyOf": [
+              {
+                "pattern": "^/workshop-evidence/[a-z0-9-]+\\.png$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Screenshot"
+          },
+          "server": {
+            "title": "Server",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "tool": {
+            "title": "Tool",
+            "type": "string"
+          },
+          "verification_record": {
+            "anyOf": [
+              {
+                "pattern": "^(?:docs|infra)/(?:[a-z0-9-]+/)*[A-Za-z0-9-]+\\.md$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Verification Record"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "recorded_on",
+          "label",
+          "provider",
+          "server",
+          "tool",
+          "scope",
+          "limitations",
+          "pattern_ids"
+        ],
+        "title": "EvidenceEntry",
+        "type": "object"
+      },
       "ExecuteRequest": {
         "additionalProperties": false,
         "description": "A request to execute an approved plan.",
@@ -2567,6 +2703,73 @@
         "title": "ExecutionLabel",
         "type": "string"
       },
+      "ExecutionPath": {
+        "additionalProperties": false,
+        "description": "Authored operating choices; commands are instructions, not automatic execution.",
+        "properties": {
+          "commands": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Commands",
+            "type": "array"
+          },
+          "description": {
+            "minLength": 30,
+            "title": "Description",
+            "type": "string"
+          },
+          "fallback": {
+            "minLength": 20,
+            "title": "Fallback",
+            "type": "string"
+          },
+          "mode": {
+            "enum": [
+              "OFFLINE",
+              "HYBRID",
+              "LIVE"
+            ],
+            "title": "Mode",
+            "type": "string"
+          },
+          "prerequisites": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Prerequisites",
+            "type": "array"
+          },
+          "results": {
+            "minLength": 30,
+            "title": "Results",
+            "type": "string"
+          },
+          "safety": {
+            "minLength": 30,
+            "title": "Safety",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "mode",
+          "title",
+          "description",
+          "results",
+          "fallback",
+          "prerequisites",
+          "commands",
+          "safety"
+        ],
+        "title": "ExecutionPath",
+        "type": "object"
+      },
       "ExecutionResult": {
         "additionalProperties": false,
         "description": "What happened when an approved change was executed and verified.",
@@ -2685,6 +2888,34 @@
           "label"
         ],
         "title": "Fallback",
+        "type": "object"
+      },
+      "Foundation": {
+        "additionalProperties": false,
+        "description": "An underlying idea and its modern application, not a product lineage claim.",
+        "properties": {
+          "application": {
+            "minLength": 30,
+            "title": "Application",
+            "type": "string"
+          },
+          "explanation": {
+            "minLength": 30,
+            "title": "Explanation",
+            "type": "string"
+          },
+          "idea": {
+            "minLength": 10,
+            "title": "Idea",
+            "type": "string"
+          }
+        },
+        "required": [
+          "idea",
+          "explanation",
+          "application"
+        ],
+        "title": "Foundation",
         "type": "object"
       },
       "GetSemanticModel": {
@@ -3286,6 +3517,122 @@
         "title": "LabSummary",
         "type": "object"
       },
+      "LearningBrief": {
+        "additionalProperties": false,
+        "description": "The what/why/when/how contract, independent of the learner's depth.",
+        "properties": {
+          "diagram": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Diagram"
+          },
+          "expected_result": {
+            "minLength": 30,
+            "title": "Expected Result",
+            "type": "string"
+          },
+          "failure_and_recovery": {
+            "minLength": 30,
+            "title": "Failure And Recovery",
+            "type": "string"
+          },
+          "how": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 2,
+            "title": "How",
+            "type": "array"
+          },
+          "lesson_id": {
+            "title": "Lesson Id",
+            "type": "string"
+          },
+          "research": {
+            "$ref": "#/components/schemas/ResearchLens"
+          },
+          "what": {
+            "minLength": 30,
+            "title": "What",
+            "type": "string"
+          },
+          "when": {
+            "minLength": 30,
+            "title": "When",
+            "type": "string"
+          },
+          "when_not": {
+            "minLength": 30,
+            "title": "When Not",
+            "type": "string"
+          },
+          "why": {
+            "minLength": 30,
+            "title": "Why",
+            "type": "string"
+          }
+        },
+        "required": [
+          "lesson_id",
+          "what",
+          "why",
+          "when",
+          "when_not",
+          "how",
+          "expected_result",
+          "failure_and_recovery",
+          "research"
+        ],
+        "title": "LearningBrief",
+        "type": "object"
+      },
+      "LearningJourney": {
+        "additionalProperties": false,
+        "description": "A deliberate sequence; durations are estimates, not observed task timings.",
+        "properties": {
+          "duration_minutes": {
+            "maximum": 480.0,
+            "minimum": 5.0,
+            "title": "Duration Minutes",
+            "type": "integer"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "lesson_ids": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Lesson Ids",
+            "type": "array"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "summary",
+          "duration_minutes",
+          "lesson_ids"
+        ],
+        "title": "LearningJourney",
+        "type": "object"
+      },
       "LessonSummary": {
         "additionalProperties": false,
         "description": "A lesson in a list.",
@@ -3465,6 +3812,16 @@
           "summary": {
             "title": "Summary",
             "type": "string"
+          },
+          "teaching": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LearningBrief"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "title": {
             "title": "Title",
@@ -3984,6 +4341,71 @@
         "title": "Passage",
         "type": "object"
       },
+      "PatternCoverage": {
+        "additionalProperties": false,
+        "description": "Coverage presence, not certification of an entire pattern.",
+        "properties": {
+          "default_demo_path": {
+            "title": "Default Demo Path",
+            "type": "string"
+          },
+          "diagram_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Diagram Ids",
+            "type": "array"
+          },
+          "evidence_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Evidence Ids",
+            "type": "array"
+          },
+          "guide_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Guide Ids",
+            "type": "array"
+          },
+          "lab_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Lab Ids",
+            "type": "array"
+          },
+          "lesson_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Lesson Ids",
+            "type": "array"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "pattern_id": {
+            "title": "Pattern Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "pattern_id",
+          "name",
+          "lesson_ids",
+          "lab_ids",
+          "guide_ids",
+          "diagram_ids",
+          "evidence_ids",
+          "default_demo_path"
+        ],
+        "title": "PatternCoverage",
+        "type": "object"
+      },
       "ProposedChange": {
         "additionalProperties": false,
         "description": "A validated change plan. Nothing has executed.",
@@ -4235,6 +4657,36 @@
           "checks"
         ],
         "title": "Readiness",
+        "type": "object"
+      },
+      "ReadingSource": {
+        "additionalProperties": false,
+        "description": "Resolved public reading; the source registry remains authoritative.",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "publisher": {
+            "title": "Publisher",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "url": {
+            "title": "Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "url",
+          "publisher"
+        ],
+        "title": "ReadingSource",
         "type": "object"
       },
       "RecommendRequest": {
@@ -4524,6 +4976,85 @@
           "replace"
         ],
         "title": "ReplaceText",
+        "type": "object"
+      },
+      "ResearchLens": {
+        "additionalProperties": false,
+        "description": "A falsifiable, reproducible exercise grounded in theory.",
+        "properties": {
+          "baseline": {
+            "minLength": 20,
+            "title": "Baseline",
+            "type": "string"
+          },
+          "evolution": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 2,
+            "title": "Evolution",
+            "type": "array"
+          },
+          "experiment": {
+            "minLength": 50,
+            "title": "Experiment",
+            "type": "string"
+          },
+          "foundations": {
+            "items": {
+              "$ref": "#/components/schemas/Foundation"
+            },
+            "minItems": 2,
+            "title": "Foundations",
+            "type": "array"
+          },
+          "hypothesis": {
+            "minLength": 30,
+            "title": "Hypothesis",
+            "type": "string"
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 2,
+            "title": "Limitations",
+            "type": "array"
+          },
+          "metrics": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 2,
+            "title": "Metrics",
+            "type": "array"
+          },
+          "question": {
+            "minLength": 20,
+            "title": "Question",
+            "type": "string"
+          },
+          "sources": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Sources",
+            "type": "array"
+          }
+        },
+        "required": [
+          "question",
+          "foundations",
+          "evolution",
+          "hypothesis",
+          "experiment",
+          "baseline",
+          "metrics",
+          "limitations",
+          "sources"
+        ],
+        "title": "ResearchLens",
         "type": "object"
       },
       "RouteDecision": {
@@ -5806,6 +6337,81 @@
         "title": "UseCaseGuide",
         "type": "object"
       },
+      "UseCaseStory": {
+        "additionalProperties": false,
+        "description": "Business-to-build framing, keyed by the existing use-case registry.",
+        "properties": {
+          "audience": {
+            "title": "Audience",
+            "type": "string"
+          },
+          "guide_id": {
+            "title": "Guide Id",
+            "type": "string"
+          },
+          "lesson_ids": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Lesson Ids",
+            "type": "array"
+          },
+          "outcomes": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 2,
+            "title": "Outcomes",
+            "type": "array"
+          },
+          "presenter_path": {
+            "pattern": "^/talktracks/[a-z0-9-]+\\.html$",
+            "title": "Presenter Path",
+            "type": "string"
+          },
+          "problem": {
+            "title": "Problem",
+            "type": "string"
+          },
+          "production_gaps": {
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Production Gaps",
+            "type": "array"
+          },
+          "questions": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Questions",
+            "type": "array"
+          },
+          "stages": {
+            "items": {
+              "$ref": "#/components/schemas/CapabilityStage"
+            },
+            "minItems": 2,
+            "title": "Stages",
+            "type": "array"
+          }
+        },
+        "required": [
+          "guide_id",
+          "problem",
+          "audience",
+          "outcomes",
+          "lesson_ids",
+          "stages",
+          "production_gaps",
+          "presenter_path"
+        ],
+        "title": "UseCaseStory",
+        "type": "object"
+      },
       "ValidationError": {
         "properties": {
           "ctx": {
@@ -5974,6 +6580,120 @@
           "pattern_ids"
         ],
         "title": "ViewSummary",
+        "type": "object"
+      },
+      "WorkshopContent": {
+        "additionalProperties": false,
+        "description": "``education/workshop.yaml``; all instructional copy stays outside React.",
+        "properties": {
+          "briefs": {
+            "items": {
+              "$ref": "#/components/schemas/LearningBrief"
+            },
+            "minItems": 1,
+            "title": "Briefs",
+            "type": "array"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/EvidenceEntry"
+            },
+            "minItems": 1,
+            "title": "Evidence",
+            "type": "array"
+          },
+          "execution_paths": {
+            "items": {
+              "$ref": "#/components/schemas/ExecutionPath"
+            },
+            "maxItems": 3,
+            "minItems": 3,
+            "title": "Execution Paths",
+            "type": "array"
+          },
+          "execution_summary": {
+            "minLength": 30,
+            "title": "Execution Summary",
+            "type": "string"
+          },
+          "journeys": {
+            "items": {
+              "$ref": "#/components/schemas/LearningJourney"
+            },
+            "minItems": 2,
+            "title": "Journeys",
+            "type": "array"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "use_cases": {
+            "items": {
+              "$ref": "#/components/schemas/UseCaseStory"
+            },
+            "minItems": 1,
+            "title": "Use Cases",
+            "type": "array"
+          },
+          "version": {
+            "const": 1,
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "version",
+          "title",
+          "summary",
+          "execution_summary",
+          "execution_paths",
+          "journeys",
+          "briefs",
+          "use_cases",
+          "evidence"
+        ],
+        "title": "WorkshopContent",
+        "type": "object"
+      },
+      "WorkshopView": {
+        "additionalProperties": false,
+        "description": "Workshop journeys, verified references and honest breadth coverage.",
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/WorkshopContent"
+          },
+          "coverage": {
+            "items": {
+              "$ref": "#/components/schemas/PatternCoverage"
+            },
+            "title": "Coverage",
+            "type": "array"
+          },
+          "label": {
+            "const": "LOCAL",
+            "default": "LOCAL",
+            "title": "Label",
+            "type": "string"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/ReadingSource"
+            },
+            "title": "Sources",
+            "type": "array"
+          }
+        },
+        "required": [
+          "content",
+          "sources",
+          "coverage"
+        ],
+        "title": "WorkshopView",
         "type": "object"
       },
       "WorkspaceInfo": {
@@ -6863,6 +7583,28 @@
           }
         },
         "summary": "Get View Runtime",
+        "tags": [
+          "education"
+        ]
+      }
+    },
+    "/api/v1/education/workshop": {
+      "get": {
+        "description": "LOCAL instructional journeys, reading references and pattern coverage.",
+        "operationId": "get_workshop_api_v1_education_workshop_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkshopView"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Get Workshop",
         "tags": [
           "education"
         ]

@@ -16,3 +16,13 @@ only; the manufacturer, customers and products are fictional.
 Status: **validated live** on 2026-10-08 in the presenter's demo tenant: steps 02–04 and the
 duplicate check in step 07. Steps 05 and 06 are offline-validated; running them live requires
 tenant validation.
+
+## Architecture
+
+![Foundry agents over governed Fabric sales context, exported by draw.io Desktop](../../docs/architecture/diagrams/mfg-01.png)
+
+[Editable draw.io source](../../docs/architecture/diagrams/mfg-01.drawio) /
+[interactive architecture](http://localhost:5173/architecture/mfg-01).
+This is the intended architecture, not proof that scheduling, delivery or data corrections ran.
+Those operations require their own validation and approval. Claude Code remains DOCUMENTED ONLY
+in the bake-off.

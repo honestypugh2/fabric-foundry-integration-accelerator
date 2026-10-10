@@ -1,0 +1,27 @@
+id: agent-research-foundations
+area: architecture
+title: "From language models to grounded, tool-using agents"
+summary: Connect attention, retrieval and action-observation loops to today's assistants, then test their limits through controlled synthetic experiments.
+status: LOCAL
+pattern_ids: [P01, P04, P06, P08, P09, P16, P19]
+learning_objectives:
+  - Distinguish model prediction, retrieved evidence and executed tool results.
+  - Explain why grounding improves context but does not guarantee truth or authorization.
+  - Design an ablation experiment with a baseline, held-out questions and disclosed limitations.
+concepts:
+  - {term: Attention, definition: "A mechanism for relating positions in a sequence; it is not an evidence-verification or access-control system."}
+  - {term: Retrieval, definition: "Selecting external information for a task; relevance and completeness still need evaluation."}
+  - {term: Action-observation loop, definition: "The harness invokes a tool and feeds its observed result into subsequent processing."}
+  - {term: Ablation, definition: "Removing one component to test its contribution while keeping other conditions fixed."}
+evidence:
+  - {statement: "Transformer, RAG and ReAct research supply useful concepts, not guarantees about a proprietary product's architecture or performance.", category: DOCUMENTED BEHAVIOR, sources: [research-transformers, research-rag, research-react]}
+  - {statement: "The local agent and baseline exercises are deterministic educational analogs, not measurements of model reasoning.", category: SIMULATED LOCALLY}
+try_it:
+  - {label: Inspect the offline context and agent baseline, command: ffia demo offline, result_label: LOCAL}
+copilot_prompt: Explain the model, retrieval, harness and authority boundaries. Design a synthetic ablation experiment without invoking a cloud service or exposing hidden reasoning.
+claude_code_prompt: Read AGENTS.md. Design the same synthetic grounding experiment with identical tasks and evidence requirements. Do not claim a measured bake-off run.
+production_notes:
+  - Evaluate tool selection, numeric correctness, citations, access refusal and fallback separately.
+  - Store observable tool events and results; do not require private chain-of-thought as evidence.
+sources: [research-transformers, research-rag, research-react, foundry-agent-service, fabric-data-agent]
+related_guides: [hc-01-fabric-mcp-powerbi-medallion-lab, mfg-01-foundry-fabric-sales-insights]

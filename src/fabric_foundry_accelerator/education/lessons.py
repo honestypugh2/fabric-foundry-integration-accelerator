@@ -19,6 +19,7 @@ from fabric_foundry_accelerator.education.diagrams import (
     view_reference_errors,
 )
 from fabric_foundry_accelerator.education.guides import UseCaseGuide
+from fabric_foundry_accelerator.education.workshop import WorkshopContent
 from fabric_foundry_accelerator.models.execution import EvidenceCategory
 
 Level = Literal["executive", "l100", "l200", "l300", "l400"]
@@ -392,6 +393,7 @@ class EducationLibrary(BaseModel):
     architecture: ArchitectureMap
     completeness: Completeness
     views: tuple[DiagramView, ...] = ()
+    workshop: WorkshopContent | None = None
 
     def view(self, view_id: str) -> DiagramView:
         """Return an architecture view by ID or raise ``KeyError``."""
@@ -479,8 +481,55 @@ def load_lab(path: Path) -> Lab:
     return lab
 
 
-def _cross_reference_errors(library: EducationLibrary, refs: EducationReferences) -> list[str]:
+def _workshop_reference_errors(library: EducationLibrary, refs: EducationReferences) -> list[str]:
     errors: list[str] = []
+    lesson_ids = {lesson.id for lesson in library.lessons}
+    if library.workshop is not None:
+        workshop = library.workshop
+        brief_ids = {brief.lesson_id for brief in workshop.briefs}
+        errors += [
+            f"workshop: missing instructional brief for {item}"
+            for item in sorted(lesson_ids - brief_ids)
+        ]
+        errors += [f"workshop: unknown lesson {item}" for item in sorted(brief_ids - lesson_ids)]
+        for brief in workshop.briefs:
+            errors += [
+                f"workshop {brief.lesson_id}: unknown source {item}"
+                for item in brief.research.sources
+                if item not in refs.source_ids
+            ]
+            if brief.diagram and brief.diagram not in {view.id for view in library.views}:
+                errors.append(f"workshop {brief.lesson_id}: unknown diagram {brief.diagram}")
+        for journey in workshop.journeys:
+            errors += [
+                f"workshop {journey.id}: unknown lesson {item}"
+                for item in journey.lesson_ids
+                if item not in lesson_ids
+            ]
+        story_ids = {story.guide_id for story in workshop.use_cases}
+        errors += [
+            f"workshop: missing use-case story for {item}"
+            for item in sorted(refs.guide_ids - story_ids)
+        ]
+        for story in workshop.use_cases:
+            if story.guide_id not in refs.guide_ids:
+                errors.append(f"workshop: unknown use case {story.guide_id}")
+            errors += [
+                f"workshop {story.guide_id}: unknown lesson {item}"
+                for item in story.lesson_ids
+                if item not in lesson_ids
+            ]
+        for entry in workshop.evidence:
+            errors += [
+                f"workshop evidence {entry.id}: unknown pattern {item}"
+                for item in entry.pattern_ids
+                if item not in refs.pattern_ids
+            ]
+    return errors
+
+
+def _cross_reference_errors(library: EducationLibrary, refs: EducationReferences) -> list[str]:
+    errors = _workshop_reference_errors(library, refs)
     lesson_ids = {lesson.id for lesson in library.lessons}
     lab_ids = {lab.id for lab in library.labs}
     if len(lesson_ids) != len(library.lessons):
@@ -588,6 +637,11 @@ def load_education(education_root: Path, refs: EducationReferences) -> Education
         ),
         completeness=Completeness.model_validate(_yaml(education_root / "completeness.yaml")),
         views=load_views(education_root / "architecture" / "views"),
+        workshop=(
+            WorkshopContent.model_validate(_yaml(education_root / "workshop.yaml"))
+            if (education_root / "workshop.yaml").is_file()
+            else None
+        ),
     )
     errors = _cross_reference_errors(library, refs)
     if errors:

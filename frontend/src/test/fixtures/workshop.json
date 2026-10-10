@@ -1,0 +1,2181 @@
+{
+  "content": {
+    "briefs": [
+      {
+        "diagram": "theory-to-tools",
+        "expected_result": "The learner can explain an aggregate, reproduce its value and identify a join that would double count.",
+        "failure_and_recovery": "A duplicate key changes the aggregate. Detect it upstream, correct the contract and rebuild rather than patching the report.",
+        "how": [
+          "Define the grain and measure population.",
+          "Validate keys and relationships.",
+          "Build synthetic layers and reconcile against the expected baseline."
+        ],
+        "lesson_id": "governed-data-foundations",
+        "research": {
+          "baseline": "The committed synthetic expected measure and unique-key checks.",
+          "evolution": [
+            "Relational abstractions separate meaning from representation.",
+            "Warehouses organize reusable analytical facts and dimensions.",
+            "Lakehouse layers preserve provenance while preparing serving data.",
+            "Semantic contracts expose governed meaning to reports and agents."
+          ],
+          "experiment": "Use a scratch copy of synthetic facts. Run the baseline query, introduce one duplicate dimension key, and rerun the identical query and key checks. Keep source facts, filters and arithmetic fixed.",
+          "foundations": [
+            {
+              "application": "Keep named business measures and keys stable while changing lakehouse storage or transformation implementation.",
+              "explanation": "The relational model distinguishes logical relations from the physical representation used to store them.",
+              "idea": "Logical data independence"
+            },
+            {
+              "application": "Test uniqueness and relationship cardinality before using Gold totals in a report or agent answer.",
+              "explanation": "A relation represents facts at an agreed grain; a join can multiply matches rather than merely attach a label.",
+              "idea": "Grain and relational operations"
+            }
+          ],
+          "hypothesis": "Validating grain and key uniqueness before aggregation detects a duplicate-sensitive join that a final row-count check misses.",
+          "limitations": [
+            "A synthetic distribution does not establish production scale or skew.",
+            "Correct arithmetic does not establish permitted access."
+          ],
+          "metrics": [
+            "Aggregate difference",
+            "Duplicate keys detected",
+            "Rejected or flagged records"
+          ],
+          "question": "Does an explicit data contract prevent incorrect aggregate interpretation?",
+          "sources": [
+            "research-relational-model",
+            "fabric-medallion",
+            "fabric-direct-lake"
+          ]
+        },
+        "what": "Logical data contracts define grain, keys and business meaning independently of physical storage.",
+        "when": "Use these foundations before building a lakehouse, semantic model, report or structured-data agent.",
+        "when_not": "Do not introduce extra platform layers when a small, well-defined query already meets the need.",
+        "why": "A more fluent agent cannot fix an ambiguous population, duplicate-sensitive join or inconsistent measure."
+      },
+      {
+        "diagram": "theory-to-tools",
+        "expected_result": "The learner can distinguish a proposed action, an invoked tool and a verified outcome.",
+        "failure_and_recovery": "Missing context must cause an explicit limitation or labeled permitted fallback, not an invented factual answer.",
+        "how": [
+          "Identify the model and context boundaries.",
+          "Trace an actual tool event and its returned result.",
+          "Compare a grounded answer with an independent baseline."
+        ],
+        "lesson_id": "agent-research-foundations",
+        "research": {
+          "baseline": "Deterministic synthetic expected answers, not another model's response.",
+          "evolution": [
+            "Sequence models generate from learned patterns and context.",
+            "Retrieval augments model parameters with selected external information.",
+            "Tool loops incorporate observations from an environment.",
+            "Product harnesses add identity",
+            "policies and evaluation around the loop."
+          ],
+          "experiment": "Compare no context, a relevant synthetic context packet and a governed tool result on the same held-out questions. Hold model, prompt and scoring rules fixed; retain failures and execution labels.",
+          "foundations": [
+            {
+              "application": "Do not infer numeric correctness, tool execution or permission from the fluency of an assistant response.",
+              "explanation": "Attention-based sequence modeling supports generation, but does not itself verify external facts or execute operations.",
+              "idea": "Prediction versus evidence"
+            },
+            {
+              "application": "Select relevant context, record actual tool results and score the final answer independently of the model.",
+              "explanation": "RAG studies external retrieved information; ReAct studies interleaving processing with actions and observations.",
+              "idea": "Retrieval and action observations"
+            }
+          ],
+          "hypothesis": "Relevant governed context reduces unsupported numeric claims on a fixed synthetic question set compared with no supplied context.",
+          "limitations": [
+            "The deterministic offline agent cannot measure language-model reasoning.",
+            "Original papers do not prove a proprietary product's architecture or performance."
+          ],
+          "metrics": [
+            "Numeric correctness",
+            "Claim-level source support",
+            "Invalid tool calls",
+            "Latency and cost"
+          ],
+          "question": "When does external governed context improve a bounded agent answer?",
+          "sources": [
+            "research-transformers",
+            "research-rag",
+            "research-react",
+            "foundry-agent-service"
+          ]
+        },
+        "what": "A model, retrieved context, tools and a harness perform different jobs in an agent system.",
+        "when": "Use this foundation before evaluating assistants, selecting grounding methods or connecting tools.",
+        "when_not": "Do not add an agent when a fixed report or deterministic rule already solves the task.",
+        "why": "Separating prediction from observed evidence makes unsupported claims and unsafe actions easier to detect."
+      },
+      {
+        "diagram": "agentic-de",
+        "expected_result": "A before/after scorecard names the added capability, control, test result and actual tool provenance.",
+        "failure_and_recovery": "If a live tool is unavailable, disclose it and use only the named read fallback; stop a failed live write.",
+        "how": [
+          "Choose one Silver transformation task.",
+          "Compare manual and assisted artifacts against the same baseline.",
+          "Add Skills and read-only MCP context.",
+          "Measure correctness and review work before considering governed writes."
+        ],
+        "lesson_id": "copilot-maturity-ladder",
+        "research": {
+          "baseline": "The manual reference artifact and committed deterministic expected outputs.",
+          "evolution": [
+            "Completions assist local edits.",
+            "Repository instructions constrain conventions and contracts.",
+            "Skills provide repeatable domain procedures.",
+            "MCP supplies bounded observed context.",
+            "Governed review ties changes to approvals and verification."
+          ],
+          "experiment": "Run one synthetic transformation task with fixed inputs and scoring under baseline assistance, instructions, a Skill and read-only context. Record model and prompt revisions, failed trials and review corrections.",
+          "foundations": [
+            {
+              "application": "Reconcile candidate Silver transformations and DAX with the same committed synthetic baseline.",
+              "explanation": "A generated artifact must be judged against an independent behavioral contract, not its author's confidence.",
+              "idea": "Independent verification"
+            },
+            {
+              "application": "Compare instructions, Skills and read-only MCP context separately instead of changing all of them and the model at once.",
+              "explanation": "Removing one component while holding other conditions fixed helps isolate its contribution under the tested conditions.",
+              "idea": "Controlled component ablation"
+            }
+          ],
+          "hypothesis": "Adding task-specific context reduces invalid assumptions and reviewer corrections without weakening approval controls.",
+          "limitations": [
+            "Observed timing is task-specific rather than a product benchmark.",
+            "Claude Code remains documented-only unless an actual comparable run is recorded."
+          ],
+          "metrics": [
+            "Checks passed",
+            "Reviewer corrections",
+            "Invalid calls",
+            "Observed elapsed time",
+            "Evidence completeness"
+          ],
+          "question": "Which component of an assisted engineering workflow actually improves the task?",
+          "sources": [
+            "research-react",
+            "copilot-cli-ga",
+            "skills-for-fabric",
+            "fabric-mcp-local"
+          ]
+        },
+        "what": "The L0-L6 ladder adds repository grounding, procedures, connected context and governed change to assisted coding.",
+        "when": "Use the ladder to plan how a Fabric engineering team adopts Copilot on one repeatable task.",
+        "when_not": "Do not interpret a higher rung as permission for autonomous production writes or a guaranteed productivity gain.",
+        "why": "Each added capability introduces a new failure mode and therefore needs a control and observable evidence."
+      },
+      {
+        "diagram": "agentic-de",
+        "expected_result": "The comparison explicitly separates measured observations from documented capabilities.",
+        "failure_and_recovery": "If a harness cannot run, mark it documented-only or unavailable rather than fabricating a score.",
+        "how": [
+          "Inspect the recorded bake-off.",
+          "Identify missing comparable runs.",
+          "Define an identical task and scorecard before any new evaluation."
+        ],
+        "lesson_id": "copilot-vs-claude-code",
+        "research": {
+          "baseline": "The manual reference artifact and committed deterministic expected outputs.",
+          "evolution": [
+            "Completions assist local edits.",
+            "Repository instructions constrain conventions and contracts.",
+            "Skills provide repeatable domain procedures.",
+            "MCP supplies bounded observed context.",
+            "Governed review ties changes to approvals and verification."
+          ],
+          "experiment": "Run one synthetic transformation task with fixed inputs and scoring under baseline assistance, instructions, a Skill and read-only context. Record model and prompt revisions, failed trials and review corrections.",
+          "foundations": [
+            {
+              "application": "Reconcile candidate Silver transformations and DAX with the same committed synthetic baseline.",
+              "explanation": "A generated artifact must be judged against an independent behavioral contract, not its author's confidence.",
+              "idea": "Independent verification"
+            },
+            {
+              "application": "Compare instructions, Skills and read-only MCP context separately instead of changing all of them and the model at once.",
+              "explanation": "Removing one component while holding other conditions fixed helps isolate its contribution under the tested conditions.",
+              "idea": "Controlled component ablation"
+            }
+          ],
+          "hypothesis": "Adding task-specific context reduces invalid assumptions and reviewer corrections without weakening approval controls.",
+          "limitations": [
+            "Observed timing is task-specific rather than a product benchmark.",
+            "Claude Code remains documented-only unless an actual comparable run is recorded."
+          ],
+          "metrics": [
+            "Checks passed",
+            "Reviewer corrections",
+            "Invalid calls",
+            "Observed elapsed time",
+            "Evidence completeness"
+          ],
+          "question": "What would make a Copilot and Claude comparison fair and reproducible?",
+          "sources": [
+            "research-react",
+            "copilot-cli-ga",
+            "skills-for-fabric",
+            "fabric-mcp-local"
+          ]
+        },
+        "what": "A fair harness comparison holds the task, dataset, constraints and scoring rules constant.",
+        "when": "Use the evaluation framework when deciding how a team should use alternative coding harnesses.",
+        "when_not": "Do not claim a winner from unrelated demonstrations, different models or documented-only paths.",
+        "why": "A recorded Copilot result and a documented Claude prompt are different evidence categories."
+      },
+      {
+        "diagram": "mcp-topology",
+        "expected_result": "The learner can explain which surface fits the task and which capability remains preview or documented-only.",
+        "failure_and_recovery": "A missing integration is a disclosed limitation; move to a separately chosen supported workflow, not a mislabeled result.",
+        "how": [
+          "Identify the task and review environment.",
+          "Select the harness and narrow tools.",
+          "Record the actual invocation and artifact diff."
+        ],
+        "lesson_id": "copilot-surfaces",
+        "research": {
+          "baseline": "The manual reference artifact and committed deterministic expected outputs.",
+          "evolution": [
+            "Completions assist local edits.",
+            "Repository instructions constrain conventions and contracts.",
+            "Skills provide repeatable domain procedures.",
+            "MCP supplies bounded observed context.",
+            "Governed review ties changes to approvals and verification."
+          ],
+          "experiment": "Run one synthetic transformation task with fixed inputs and scoring under baseline assistance, instructions, a Skill and read-only context. Record model and prompt revisions, failed trials and review corrections.",
+          "foundations": [
+            {
+              "application": "Reconcile candidate Silver transformations and DAX with the same committed synthetic baseline.",
+              "explanation": "A generated artifact must be judged against an independent behavioral contract, not its author's confidence.",
+              "idea": "Independent verification"
+            },
+            {
+              "application": "Compare instructions, Skills and read-only MCP context separately instead of changing all of them and the model at once.",
+              "explanation": "Removing one component while holding other conditions fixed helps isolate its contribution under the tested conditions.",
+              "idea": "Controlled component ablation"
+            }
+          ],
+          "hypothesis": "Adding task-specific context reduces invalid assumptions and reviewer corrections without weakening approval controls.",
+          "limitations": [
+            "Observed timing is task-specific rather than a product benchmark.",
+            "Claude Code remains documented-only unless an actual comparable run is recorded."
+          ],
+          "metrics": [
+            "Checks passed",
+            "Reviewer corrections",
+            "Invalid calls",
+            "Observed elapsed time",
+            "Evidence completeness"
+          ],
+          "question": "How does the interaction surface affect review quality and reproducibility?",
+          "sources": [
+            "research-react",
+            "copilot-cli-ga",
+            "skills-for-fabric",
+            "fabric-mcp-local"
+          ]
+        },
+        "what": "VS Code, CLI, App and cloud-agent surfaces offer different interaction, review and execution environments.",
+        "when": "Use a surface that matches interactive development, terminal automation or a bounded issue-to-PR task.",
+        "when_not": "Do not treat preview parallel work or a cloud coding agent as a default production deployment mechanism.",
+        "why": "Selecting a surface changes context availability, approval handling and where artifacts are reviewed."
+      },
+      {
+        "diagram": "agentic-de",
+        "expected_result": "A reviewed artifact follows the procedure and its tool calls have explicit labels and provenance.",
+        "failure_and_recovery": "If a Skill names an unavailable tool, stop that step; do not silently substitute a different executor.",
+        "how": [
+          "Install the curated verified bundle using ffia skills install.",
+          "Load the named Skill for the task.",
+          "Review its required tools and proposed actions before execution."
+        ],
+        "lesson_id": "fabric-skills",
+        "research": {
+          "baseline": "The manual reference artifact and committed deterministic expected outputs.",
+          "evolution": [
+            "Completions assist local edits.",
+            "Repository instructions constrain conventions and contracts.",
+            "Skills provide repeatable domain procedures.",
+            "MCP supplies bounded observed context.",
+            "Governed review ties changes to approvals and verification."
+          ],
+          "experiment": "Run one synthetic transformation task with fixed inputs and scoring under baseline assistance, instructions, a Skill and read-only context. Record model and prompt revisions, failed trials and review corrections.",
+          "foundations": [
+            {
+              "application": "Reconcile candidate Silver transformations and DAX with the same committed synthetic baseline.",
+              "explanation": "A generated artifact must be judged against an independent behavioral contract, not its author's confidence.",
+              "idea": "Independent verification"
+            },
+            {
+              "application": "Compare instructions, Skills and read-only MCP context separately instead of changing all of them and the model at once.",
+              "explanation": "Removing one component while holding other conditions fixed helps isolate its contribution under the tested conditions.",
+              "idea": "Controlled component ablation"
+            }
+          ],
+          "hypothesis": "Adding task-specific context reduces invalid assumptions and reviewer corrections without weakening approval controls.",
+          "limitations": [
+            "Observed timing is task-specific rather than a product benchmark.",
+            "Claude Code remains documented-only unless an actual comparable run is recorded."
+          ],
+          "metrics": [
+            "Checks passed",
+            "Reviewer corrections",
+            "Invalid calls",
+            "Observed elapsed time",
+            "Evidence completeness"
+          ],
+          "question": "Does a domain procedure reduce invalid artifacts without increasing unsafe tool use?",
+          "sources": [
+            "research-react",
+            "copilot-cli-ga",
+            "skills-for-fabric",
+            "fabric-mcp-local"
+          ]
+        },
+        "what": "A Skill is versioned procedural guidance loaded by an agent; it is not a cloud operation by itself.",
+        "when": "Use the narrow Skill for medallion planning, Spark work, semantic modeling or report authoring.",
+        "when_not": "Do not assume a Skill grants permissions or automatically invokes Fabric MCP.",
+        "why": "Domain procedures reduce repeated guessing about notebook, model and report workflows."
+      },
+      {
+        "diagram": "integration-paths",
+        "expected_result": "The result records the real tool, execution label and any fallback reason.",
+        "failure_and_recovery": "Read fallback is LOCAL; a failed live write stops and any rehearsal is separately SIMULATED.",
+        "how": [
+          "Review the fabric-first profile.",
+          "Discover the named read-only tool.",
+          "State provider and server before calling it.",
+          "Disclose unavailability before offering the named ffia-local read fallback."
+        ],
+        "lesson_id": "fabric-mcp-landscape",
+        "research": {
+          "baseline": "The manual reference artifact and committed deterministic expected outputs.",
+          "evolution": [
+            "Completions assist local edits.",
+            "Repository instructions constrain conventions and contracts.",
+            "Skills provide repeatable domain procedures.",
+            "MCP supplies bounded observed context.",
+            "Governed review ties changes to approvals and verification."
+          ],
+          "experiment": "Run one synthetic transformation task with fixed inputs and scoring under baseline assistance, instructions, a Skill and read-only context. Record model and prompt revisions, failed trials and review corrections.",
+          "foundations": [
+            {
+              "application": "Reconcile candidate Silver transformations and DAX with the same committed synthetic baseline.",
+              "explanation": "A generated artifact must be judged against an independent behavioral contract, not its author's confidence.",
+              "idea": "Independent verification"
+            },
+            {
+              "application": "Compare instructions, Skills and read-only MCP context separately instead of changing all of them and the model at once.",
+              "explanation": "Removing one component while holding other conditions fixed helps isolate its contribution under the tested conditions.",
+              "idea": "Controlled component ablation"
+            }
+          ],
+          "hypothesis": "Adding task-specific context reduces invalid assumptions and reviewer corrections without weakening approval controls.",
+          "limitations": [
+            "Observed timing is task-specific rather than a product benchmark.",
+            "Claude Code remains documented-only unless an actual comparable run is recorded."
+          ],
+          "metrics": [
+            "Checks passed",
+            "Reviewer corrections",
+            "Invalid calls",
+            "Observed elapsed time",
+            "Evidence completeness"
+          ],
+          "question": "Does bounded live metadata reduce schema assumptions relative to synthetic context?",
+          "sources": [
+            "research-react",
+            "copilot-cli-ga",
+            "skills-for-fabric",
+            "fabric-mcp-local"
+          ]
+        },
+        "what": "Fabric MCP servers expose distinct documentation, item and data capabilities; they are not interchangeable.",
+        "when": "Use Fabric MCP first for the coding workflow and the narrowest permitted tool for each step.",
+        "when_not": "Do not use the application's REST provider as proof that a guide-assigned MCP operation ran.",
+        "why": "The correct server and actual tool call distinguish connected context from local teaching simulation."
+      },
+      {
+        "diagram": "hc-01",
+        "expected_result": "Measures reconcile and publication evidence is recorded separately from local authoring.",
+        "failure_and_recovery": "A mismatched measure requires an upstream contract or DAX correction, not a cosmetic visual workaround.",
+        "how": [
+          "Inspect grain and model relationships.",
+          "Author a reviewed local change.",
+          "Reconcile DAX against Gold.",
+          "Publish only after a separate approved operation."
+        ],
+        "lesson_id": "power-bi-agentic-tooling",
+        "research": {
+          "baseline": "The committed synthetic expected measure and unique-key checks.",
+          "evolution": [
+            "Relational abstractions separate meaning from representation.",
+            "Warehouses organize reusable analytical facts and dimensions.",
+            "Lakehouse layers preserve provenance while preparing serving data.",
+            "Semantic contracts expose governed meaning to reports and agents."
+          ],
+          "experiment": "Use a scratch copy of synthetic facts. Run the baseline query, introduce one duplicate dimension key, and rerun the identical query and key checks. Keep source facts, filters and arithmetic fixed.",
+          "foundations": [
+            {
+              "application": "Keep named business measures and keys stable while changing lakehouse storage or transformation implementation.",
+              "explanation": "The relational model distinguishes logical relations from the physical representation used to store them.",
+              "idea": "Logical data independence"
+            },
+            {
+              "application": "Test uniqueness and relationship cardinality before using Gold totals in a report or agent answer.",
+              "explanation": "A relation represents facts at an agreed grain; a join can multiply matches rather than merely attach a label.",
+              "idea": "Grain and relational operations"
+            }
+          ],
+          "hypothesis": "Validating grain and key uniqueness before aggregation detects a duplicate-sensitive join that a final row-count check misses.",
+          "limitations": [
+            "A synthetic distribution does not establish production scale or skew.",
+            "Correct arithmetic does not establish permitted access."
+          ],
+          "metrics": [
+            "Aggregate difference",
+            "Duplicate keys detected",
+            "Rejected or flagged records"
+          ],
+          "question": "Can independent measure reconciliation detect a convincing but incorrect report?",
+          "sources": [
+            "research-relational-model",
+            "fabric-medallion",
+            "fabric-direct-lake"
+          ]
+        },
+        "what": "Power BI models and reports encode governed measures and visual interpretation, with separate authoring and publication steps.",
+        "when": "Use authoring Skills and the assigned modeling tools when a governed measure or report needs reviewed changes.",
+        "when_not": "Do not regenerate reports when an existing governed report already meets the question.",
+        "why": "A local model or polished visual is not proof of correct DAX or successful publication."
+      },
+      {
+        "diagram": "reference",
+        "expected_result": "The learner can name the owner and authority at every hop of a request.",
+        "failure_and_recovery": "An unauthorized action is refused explicitly; it is not redirected to another identity or destination.",
+        "how": [
+          "Trace context and reasoning separately.",
+          "Identify the system of record.",
+          "Locate permission and approval checks.",
+          "Inspect returned execution evidence."
+        ],
+        "lesson_id": "fabric-foundry-boundaries",
+        "research": {
+          "baseline": "Deterministic synthetic expected answers, not another model's response.",
+          "evolution": [
+            "Sequence models generate from learned patterns and context.",
+            "Retrieval augments model parameters with selected external information.",
+            "Tool loops incorporate observations from an environment.",
+            "Product harnesses add identity",
+            "policies and evaluation around the loop."
+          ],
+          "experiment": "Compare no context, a relevant synthetic context packet and a governed tool result on the same held-out questions. Hold model, prompt and scoring rules fixed; retain failures and execution labels.",
+          "foundations": [
+            {
+              "application": "Do not infer numeric correctness, tool execution or permission from the fluency of an assistant response.",
+              "explanation": "Attention-based sequence modeling supports generation, but does not itself verify external facts or execute operations.",
+              "idea": "Prediction versus evidence"
+            },
+            {
+              "application": "Select relevant context, record actual tool results and score the final answer independently of the model.",
+              "explanation": "RAG studies external retrieved information; ReAct studies interleaving processing with actions and observations.",
+              "idea": "Retrieval and action observations"
+            }
+          ],
+          "hypothesis": "Relevant governed context reduces unsupported numeric claims on a fixed synthetic question set compared with no supplied context.",
+          "limitations": [
+            "The deterministic offline agent cannot measure language-model reasoning.",
+            "Original papers do not prove a proprietary product's architecture or performance."
+          ],
+          "metrics": [
+            "Numeric correctness",
+            "Claim-level source support",
+            "Invalid tool calls",
+            "Latency and cost"
+          ],
+          "question": "Can an architecture boundary prevent reasoning output from becoming unauthorized action?",
+          "sources": [
+            "research-transformers",
+            "research-rag",
+            "research-react",
+            "foundry-agent-service"
+          ]
+        },
+        "what": "Fabric owns governed context; Foundry supplies reasoning and orchestration; identity and policy determine authority.",
+        "when": "Use these boundaries whenever combining data, agents, tools and consequential actions.",
+        "when_not": "Do not add Foundry reasoning to a task that only needs deterministic analytics.",
+        "why": "Clear ownership prevents models, transport protocols and transactional systems from being conflated."
+      },
+      {
+        "diagram": "live-vs-offline",
+        "expected_result": "The stable path works without preview configuration and no simulation is presented as live.",
+        "failure_and_recovery": "Disable the optional feature and use the documented analog without claiming feature certification.",
+        "how": [
+          "Inspect enabled preview flags.",
+          "Compare flagged and unflagged behavior.",
+          "Verify explicit UNAVAILABLE or labeled simulation results."
+        ],
+        "lesson_id": "preview-isolation",
+        "research": {
+          "baseline": "The healthy deterministic response and the repository's approval and fallback invariants.",
+          "evolution": [
+            "Single dependencies expose callers directly to failures.",
+            "Routing introduces bounded retries and failure state.",
+            "Explicit fallback preserves a permitted read experience.",
+            "Governed writes bind approval to the exact destination and never redirect."
+          ],
+          "experiment": "Run the same synthetic read and write-plan cases with healthy, unavailable and invalid-input conditions. Inspect labels, fallback reasons, audit events and refusal behavior. Keep requests and policy fixed.",
+          "foundations": [
+            {
+              "application": "Use timeouts, bounded retries, circuit breakers and explicit unavailable or permitted fallback results.",
+              "explanation": "A dependency failure should have a bounded blast radius and a defined caller-visible outcome.",
+              "idea": "Failure containment"
+            },
+            {
+              "application": "An available local answer cannot certify live execution; a successful write cannot establish that it was authorized.",
+              "explanation": "Availability, correctness and authorization are separate properties and cannot substitute for each other.",
+              "idea": "Independent safety properties"
+            }
+          ],
+          "hypothesis": "Explicit fallback policy preserves permitted read continuity without mislabeling execution or redirecting a live write.",
+          "limitations": [
+            "Fault injection is not a real tenant outage or recovery drill.",
+            "Successful offline tests do not establish production network or identity configuration."
+          ],
+          "metrics": [
+            "Expected refusals",
+            "Correct execution labels",
+            "Recovery behavior",
+            "Unauthorized redirects"
+          ],
+          "question": "Do explicit boundaries preserve correct behavior under an unavailable dependency?",
+          "sources": [
+            "fabric-waf",
+            "foundry-agent-service",
+            "fabric-rest-identity"
+          ]
+        },
+        "what": "Preview integrations are optional dependencies with flags, honest labels and offline analogs.",
+        "when": "Use isolation for Fabric IQ, ontology and other preview-dependent agent paths.",
+        "when_not": "Do not require preview availability to complete the default offline demonstration.",
+        "why": "A default workshop must remain usable when tenant features or preview services are unavailable."
+      },
+      {
+        "diagram": "mfg-01",
+        "expected_result": "The answer is supported by permitted context, reconciled numbers and a clear execution label.",
+        "failure_and_recovery": "Missing or unsupported context leads to refusal or explicit fallback, never invented figures.",
+        "how": [
+          "Choose a bounded sales question.",
+          "Obtain governed Fabric context.",
+          "Inspect the Foundry tool result.",
+          "Evaluate against the baseline before using the answer in a draft."
+        ],
+        "lesson_id": "p06-enterprise-agent",
+        "research": {
+          "baseline": "Deterministic synthetic expected answers, not another model's response.",
+          "evolution": [
+            "Sequence models generate from learned patterns and context.",
+            "Retrieval augments model parameters with selected external information.",
+            "Tool loops incorporate observations from an environment.",
+            "Product harnesses add identity",
+            "policies and evaluation around the loop."
+          ],
+          "experiment": "Compare no context, a relevant synthetic context packet and a governed tool result on the same held-out questions. Hold model, prompt and scoring rules fixed; retain failures and execution labels.",
+          "foundations": [
+            {
+              "application": "Do not infer numeric correctness, tool execution or permission from the fluency of an assistant response.",
+              "explanation": "Attention-based sequence modeling supports generation, but does not itself verify external facts or execute operations.",
+              "idea": "Prediction versus evidence"
+            },
+            {
+              "application": "Select relevant context, record actual tool results and score the final answer independently of the model.",
+              "explanation": "RAG studies external retrieved information; ReAct studies interleaving processing with actions and observations.",
+              "idea": "Retrieval and action observations"
+            }
+          ],
+          "hypothesis": "Relevant governed context reduces unsupported numeric claims on a fixed synthetic question set compared with no supplied context.",
+          "limitations": [
+            "The deterministic offline agent cannot measure language-model reasoning.",
+            "Original papers do not prove a proprietary product's architecture or performance."
+          ],
+          "metrics": [
+            "Numeric correctness",
+            "Claim-level source support",
+            "Invalid tool calls",
+            "Latency and cost"
+          ],
+          "question": "When does external governed context improve a bounded agent answer?",
+          "sources": [
+            "research-transformers",
+            "research-rag",
+            "research-react",
+            "foundry-agent-service"
+          ]
+        },
+        "what": "An enterprise agent combines governed context, bounded reasoning, tools, evaluation and reviewable actions.",
+        "when": "Use this pattern for contextual questions and reviewed proposals across governed business information.",
+        "when_not": "Do not replace a sufficient report or deterministic transaction rule with an unbounded agent.",
+        "why": "Useful business answers need both trustworthy context and explicit limits on what the agent may do."
+      },
+      {
+        "diagram": "system",
+        "expected_result": "The audit distinguishes planning from authorization and observed execution.",
+        "failure_and_recovery": "Expired or wrong-target approval is refused; a missing live writer returns UNAVAILABLE without redirecting.",
+        "how": [
+          "Propose the exact target and destination.",
+          "Validate duplicates and policy.",
+          "Obtain separate approval.",
+          "Execute through the authorized writer and verify the result."
+        ],
+        "lesson_id": "p08-human-in-the-loop",
+        "research": {
+          "baseline": "The healthy deterministic response and the repository's approval and fallback invariants.",
+          "evolution": [
+            "Single dependencies expose callers directly to failures.",
+            "Routing introduces bounded retries and failure state.",
+            "Explicit fallback preserves a permitted read experience.",
+            "Governed writes bind approval to the exact destination and never redirect."
+          ],
+          "experiment": "Run the same synthetic read and write-plan cases with healthy, unavailable and invalid-input conditions. Inspect labels, fallback reasons, audit events and refusal behavior. Keep requests and policy fixed.",
+          "foundations": [
+            {
+              "application": "Use timeouts, bounded retries, circuit breakers and explicit unavailable or permitted fallback results.",
+              "explanation": "A dependency failure should have a bounded blast radius and a defined caller-visible outcome.",
+              "idea": "Failure containment"
+            },
+            {
+              "application": "An available local answer cannot certify live execution; a successful write cannot establish that it was authorized.",
+              "explanation": "Availability, correctness and authorization are separate properties and cannot substitute for each other.",
+              "idea": "Independent safety properties"
+            }
+          ],
+          "hypothesis": "Explicit fallback policy preserves permitted read continuity without mislabeling execution or redirecting a live write.",
+          "limitations": [
+            "Fault injection is not a real tenant outage or recovery drill.",
+            "Successful offline tests do not establish production network or identity configuration."
+          ],
+          "metrics": [
+            "Expected refusals",
+            "Correct execution labels",
+            "Recovery behavior",
+            "Unauthorized redirects"
+          ],
+          "question": "Does destination-bound approval block an unauthorized change after planning?",
+          "sources": [
+            "fabric-waf",
+            "foundry-agent-service",
+            "fabric-rest-identity"
+          ]
+        },
+        "what": "A governed action separates proposed intent, deterministic validation, human approval and scoped execution.",
+        "when": "Use the flow for high-impact, destructive, regulated or difficult-to-reverse operations.",
+        "when_not": "Do not add a mutation approval ceremony to a harmless read that policy already permits.",
+        "why": "Neither model intent nor MCP access proves that a user may perform a consequential change."
+      },
+      {
+        "diagram": "mcp-topology",
+        "expected_result": "The harness can access only the intended capability and retains explicit approval boundaries.",
+        "failure_and_recovery": "A denied tool is not retried through a different transport to bypass policy.",
+        "how": [
+          "Review the allowlist.",
+          "Separate read profiles from authoring profiles.",
+          "Confirm identity and tool provenance.",
+          "Verify refusal of disallowed actions."
+        ],
+        "lesson_id": "p09-governed-mcp",
+        "research": {
+          "baseline": "The healthy deterministic response and the repository's approval and fallback invariants.",
+          "evolution": [
+            "Single dependencies expose callers directly to failures.",
+            "Routing introduces bounded retries and failure state.",
+            "Explicit fallback preserves a permitted read experience.",
+            "Governed writes bind approval to the exact destination and never redirect."
+          ],
+          "experiment": "Run the same synthetic read and write-plan cases with healthy, unavailable and invalid-input conditions. Inspect labels, fallback reasons, audit events and refusal behavior. Keep requests and policy fixed.",
+          "foundations": [
+            {
+              "application": "Use timeouts, bounded retries, circuit breakers and explicit unavailable or permitted fallback results.",
+              "explanation": "A dependency failure should have a bounded blast radius and a defined caller-visible outcome.",
+              "idea": "Failure containment"
+            },
+            {
+              "application": "An available local answer cannot certify live execution; a successful write cannot establish that it was authorized.",
+              "explanation": "Availability, correctness and authorization are separate properties and cannot substitute for each other.",
+              "idea": "Independent safety properties"
+            }
+          ],
+          "hypothesis": "Explicit fallback policy preserves permitted read continuity without mislabeling execution or redirecting a live write.",
+          "limitations": [
+            "Fault injection is not a real tenant outage or recovery drill.",
+            "Successful offline tests do not establish production network or identity configuration."
+          ],
+          "metrics": [
+            "Expected refusals",
+            "Correct execution labels",
+            "Recovery behavior",
+            "Unauthorized redirects"
+          ],
+          "question": "Can a narrow tool interface contain a mistaken or adversarial action request?",
+          "sources": [
+            "fabric-waf",
+            "foundry-agent-service",
+            "fabric-rest-identity"
+          ]
+        },
+        "what": "Governed MCP uses typed narrow tools and identity-aware policy without granting arbitrary execution.",
+        "when": "Use this pattern when multiple agent harnesses need bounded, reusable capability access.",
+        "when_not": "Do not expose unrestricted shell, SQL, filesystem or REST-proxy tools.",
+        "why": "A shared capability interface becomes dangerous if tool access is mistaken for authority."
+      },
+      {
+        "diagram": "hc-01",
+        "expected_result": "Counts, quality diagnostics and measures explain every deliberate change in population.",
+        "failure_and_recovery": "Preserve Bronze and rerun the reviewed transformation rather than manually editing a serving total.",
+        "how": [
+          "Preserve raw values.",
+          "Apply reviewed Silver types and quality rules.",
+          "Build Gold measures.",
+          "Reconcile each layer with synthetic expected outputs."
+        ],
+        "lesson_id": "p10-medallion-ai",
+        "research": {
+          "baseline": "The committed synthetic expected measure and unique-key checks.",
+          "evolution": [
+            "Relational abstractions separate meaning from representation.",
+            "Warehouses organize reusable analytical facts and dimensions.",
+            "Lakehouse layers preserve provenance while preparing serving data.",
+            "Semantic contracts expose governed meaning to reports and agents."
+          ],
+          "experiment": "Use a scratch copy of synthetic facts. Run the baseline query, introduce one duplicate dimension key, and rerun the identical query and key checks. Keep source facts, filters and arithmetic fixed.",
+          "foundations": [
+            {
+              "application": "Keep named business measures and keys stable while changing lakehouse storage or transformation implementation.",
+              "explanation": "The relational model distinguishes logical relations from the physical representation used to store them.",
+              "idea": "Logical data independence"
+            },
+            {
+              "application": "Test uniqueness and relationship cardinality before using Gold totals in a report or agent answer.",
+              "explanation": "A relation represents facts at an agreed grain; a join can multiply matches rather than merely attach a label.",
+              "idea": "Grain and relational operations"
+            }
+          ],
+          "hypothesis": "Validating grain and key uniqueness before aggregation detects a duplicate-sensitive join that a final row-count check misses.",
+          "limitations": [
+            "A synthetic distribution does not establish production scale or skew.",
+            "Correct arithmetic does not establish permitted access."
+          ],
+          "metrics": [
+            "Aggregate difference",
+            "Duplicate keys detected",
+            "Rejected or flagged records"
+          ],
+          "question": "Does an explicit data contract prevent incorrect aggregate interpretation?",
+          "sources": [
+            "research-relational-model",
+            "fabric-medallion",
+            "fabric-direct-lake"
+          ]
+        },
+        "what": "Bronze, Silver and Gold organize provenance, validation and business-ready context.",
+        "when": "Use layers when reusable transformations, lineage and controlled corrections matter.",
+        "when_not": "Do not add layers solely because a diagram looks more complete.",
+        "why": "Agents and reports need reproducible data meaning rather than directly interpreting raw extracts."
+      },
+      {
+        "diagram": "live-vs-offline",
+        "expected_result": "The SIMULATED final state reconciles and replay does not silently apply a change twice.",
+        "failure_and_recovery": "A missing checkpoint requires explicit snapshot or replay recovery, not an assumption that replication is current.",
+        "how": [
+          "Inspect the synthetic snapshot.",
+          "Replay bounded changes.",
+          "Compare final state with the baseline.",
+          "Record checkpoint and duplicate behavior."
+        ],
+        "lesson_id": "p11-mirroring-ai",
+        "research": {
+          "baseline": "The committed synthetic final-state reference, not the replay candidate.",
+          "evolution": [
+            "Single dependencies expose callers directly to failures.",
+            "Routing introduces bounded retries and failure state.",
+            "Explicit fallback preserves a permitted read experience.",
+            "Governed writes bind approval to the exact destination and never redirect."
+          ],
+          "experiment": "Run the synthetic recovery drill, then compare a scratch missing-change and repeated-change replay with the same snapshot and expected final state. Keep source records and transformations fixed.",
+          "foundations": [
+            {
+              "application": "Use timeouts, bounded retries, circuit breakers and explicit unavailable or permitted fallback results.",
+              "explanation": "A dependency failure should have a bounded blast radius and a defined caller-visible outcome.",
+              "idea": "Failure containment"
+            },
+            {
+              "application": "An available local answer cannot certify live execution; a successful write cannot establish that it was authorized.",
+              "explanation": "Availability, correctness and authorization are separate properties and cannot substitute for each other.",
+              "idea": "Independent safety properties"
+            }
+          ],
+          "hypothesis": "A stable checkpoint and idempotent replay reproduce the expected final state; missing or repeated changes without those controls do not.",
+          "limitations": [
+            "Fault injection is not a real tenant outage or recovery drill.",
+            "Successful offline tests do not establish production network or identity configuration."
+          ],
+          "metrics": [
+            "Final-state differences",
+            "Duplicate effects",
+            "Missing changes",
+            "Checkpoint recovery"
+          ],
+          "question": "Does checkpointed replay preserve expected state after an interrupted synthetic stream?",
+          "sources": [
+            "fabric-waf",
+            "foundry-agent-service",
+            "fabric-rest-identity"
+          ]
+        },
+        "what": "Mirroring recovery combines a consistent snapshot with ordered replay of operational changes.",
+        "when": "Use recovery reasoning when operational replication supplies analytics or agent context.",
+        "when_not": "Do not describe the repository's simulated drill as a real Open Mirroring recovery.",
+        "why": "A fresh-looking replica may still omit, duplicate or misorder changes after interruption."
+      },
+      {
+        "diagram": "mfg-01",
+        "expected_result": "Quality, routing and observed execution can be inspected separately.",
+        "failure_and_recovery": "A missing trace remains unverified; a failed baseline blocks certification rather than being averaged away.",
+        "how": [
+          "Define expected answers and adverse cases.",
+          "Run the bounded evaluation.",
+          "Inspect tool events and labels.",
+          "Record failures and unresolved trace gaps."
+        ],
+        "lesson_id": "p16-evaluation-observability",
+        "research": {
+          "baseline": "Deterministic synthetic expected answers, not another model's response.",
+          "evolution": [
+            "Sequence models generate from learned patterns and context.",
+            "Retrieval augments model parameters with selected external information.",
+            "Tool loops incorporate observations from an environment.",
+            "Product harnesses add identity",
+            "policies and evaluation around the loop."
+          ],
+          "experiment": "Compare no context, a relevant synthetic context packet and a governed tool result on the same held-out questions. Hold model, prompt and scoring rules fixed; retain failures and execution labels.",
+          "foundations": [
+            {
+              "application": "Do not infer numeric correctness, tool execution or permission from the fluency of an assistant response.",
+              "explanation": "Attention-based sequence modeling supports generation, but does not itself verify external facts or execute operations.",
+              "idea": "Prediction versus evidence"
+            },
+            {
+              "application": "Select relevant context, record actual tool results and score the final answer independently of the model.",
+              "explanation": "RAG studies external retrieved information; ReAct studies interleaving processing with actions and observations.",
+              "idea": "Retrieval and action observations"
+            }
+          ],
+          "hypothesis": "Relevant governed context reduces unsupported numeric claims on a fixed synthetic question set compared with no supplied context.",
+          "limitations": [
+            "The deterministic offline agent cannot measure language-model reasoning.",
+            "Original papers do not prove a proprietary product's architecture or performance."
+          ],
+          "metrics": [
+            "Numeric correctness",
+            "Claim-level source support",
+            "Invalid tool calls",
+            "Latency and cost"
+          ],
+          "question": "Which independent metrics detect failures that an overall agent score hides?",
+          "sources": [
+            "research-transformers",
+            "research-rag",
+            "research-react",
+            "foundry-agent-service"
+          ]
+        },
+        "what": "Evaluation tests quality; tracing records observable events; neither replaces the other.",
+        "when": "Use independent quality gates and traceable run evidence before presenting or promoting an agent.",
+        "when_not": "Do not use a single aggregate score or a configured monitor as proof of reliable behavior.",
+        "why": "A successful request or telemetry ingestion does not establish answer correctness or server-side trace completeness."
+      },
+      {
+        "diagram": "live-vs-offline",
+        "expected_result": "Fallback is visible, bounded and unable to satisfy a live certification gate.",
+        "failure_and_recovery": "Recover the dependency and inspect routing state; never bypass the failure by changing authority.",
+        "how": [
+          "Run healthy and fault-injected reads.",
+          "Inspect reasons and result labels.",
+          "Check strict-LIVE refusal.",
+          "Verify write destination remains unchanged."
+        ],
+        "lesson_id": "p17-resilience",
+        "research": {
+          "baseline": "The healthy deterministic response and the repository's approval and fallback invariants.",
+          "evolution": [
+            "Single dependencies expose callers directly to failures.",
+            "Routing introduces bounded retries and failure state.",
+            "Explicit fallback preserves a permitted read experience.",
+            "Governed writes bind approval to the exact destination and never redirect."
+          ],
+          "experiment": "Run the same synthetic read and write-plan cases with healthy, unavailable and invalid-input conditions. Inspect labels, fallback reasons, audit events and refusal behavior. Keep requests and policy fixed.",
+          "foundations": [
+            {
+              "application": "Use timeouts, bounded retries, circuit breakers and explicit unavailable or permitted fallback results.",
+              "explanation": "A dependency failure should have a bounded blast radius and a defined caller-visible outcome.",
+              "idea": "Failure containment"
+            },
+            {
+              "application": "An available local answer cannot certify live execution; a successful write cannot establish that it was authorized.",
+              "explanation": "Availability, correctness and authorization are separate properties and cannot substitute for each other.",
+              "idea": "Independent safety properties"
+            }
+          ],
+          "hypothesis": "Explicit fallback policy preserves permitted read continuity without mislabeling execution or redirecting a live write.",
+          "limitations": [
+            "Fault injection is not a real tenant outage or recovery drill.",
+            "Successful offline tests do not establish production network or identity configuration."
+          ],
+          "metrics": [
+            "Expected refusals",
+            "Correct execution labels",
+            "Recovery behavior",
+            "Unauthorized redirects"
+          ],
+          "question": "Do explicit boundaries preserve correct behavior under an unavailable dependency?",
+          "sources": [
+            "fabric-waf",
+            "foundry-agent-service",
+            "fabric-rest-identity"
+          ]
+        },
+        "what": "Resilience uses bounded retry, timeout, breaker state and explicitly permitted read fallback.",
+        "when": "Use the router for eligible reads when cloud context may be slow or unavailable.",
+        "when_not": "Do not retry invalid input or redirect an approved live mutation.",
+        "why": "A workshop can remain usable during outages without misrepresenting local results as live."
+      },
+      {
+        "diagram": "production",
+        "expected_result": "The handoff names verified properties, missing evidence and accountable owners.",
+        "failure_and_recovery": "An unmet gate remains a blocker or explicit scope exclusion, not a success-shaped fallback.",
+        "how": [
+          "Review the threat model and owners.",
+          "Verify identity and permission-negative cases.",
+          "Define rollout and rollback evidence.",
+          "Track incomplete tenant and CI checks explicitly."
+        ],
+        "lesson_id": "production-readiness",
+        "research": {
+          "baseline": "Reviewed access decisions and global authority invariants.",
+          "evolution": [
+            "Single dependencies expose callers directly to failures.",
+            "Routing introduces bounded retries and failure state.",
+            "Explicit fallback preserves a permitted read experience.",
+            "Governed writes bind approval to the exact destination and never redirect."
+          ],
+          "experiment": "Define a synthetic access matrix before testing. Compare allowed and denied requests, gateway acceptance with backend refusal, and narrowing with attempted-widening overlays. Record local contract results separately from any approved tenant validation.",
+          "foundations": [
+            {
+              "application": "Use timeouts, bounded retries, circuit breakers and explicit unavailable or permitted fallback results.",
+              "explanation": "A dependency failure should have a bounded blast radius and a defined caller-visible outcome.",
+              "idea": "Failure containment"
+            },
+            {
+              "application": "An available local answer cannot certify live execution; a successful write cannot establish that it was authorized.",
+              "explanation": "Availability, correctness and authorization are separate properties and cannot substitute for each other.",
+              "idea": "Independent safety properties"
+            }
+          ],
+          "hypothesis": "Independent negative-access, gateway-policy and overlay-restriction tests expose authority gaps that a successful demo request cannot detect.",
+          "limitations": [
+            "Fault injection is not a real tenant outage or recovery drill.",
+            "Successful offline tests do not establish production network or identity configuration."
+          ],
+          "metrics": [
+            "Correct access refusals",
+            "Unauthorized scope expansion",
+            "Gateway policy outcomes",
+            "Added latency"
+          ],
+          "question": "Which prototype observations fail to establish production safety or reliability?",
+          "sources": [
+            "fabric-waf",
+            "fabric-rest-identity",
+            "apim-mcp",
+            "fabric-deployment-patterns"
+          ]
+        },
+        "what": "Production readiness combines identity, networking, data ownership, evaluation, cost and operational recovery.",
+        "when": "Use the checklist when moving a bounded prototype toward an operated service.",
+        "when_not": "Do not mark documented components or deferred GitHub checks as live-verified.",
+        "why": "A passing local demo and an active capacity do not certify a secure reliable deployment."
+      },
+      {
+        "diagram": "reference",
+        "expected_result": "The chosen boundary has a reason, an independent routing baseline and explicit per-domain authorization.",
+        "failure_and_recovery": "Ambiguity requires clarification; denied access must not retry through an administrator or unrestricted domain.",
+        "how": [
+          "Define domain vocabulary and permitted facts.",
+          "Create expected route and denial cases.",
+          "Compare deterministic routing with one bounded agent.",
+          "Add agents only for demonstrated lifecycle or policy differences."
+        ],
+        "lesson_id": "domain-and-agent-composition",
+        "research": {
+          "baseline": "Independently authored expected route and access decisions.",
+          "evolution": [
+            "Sequence models generate from learned patterns and context.",
+            "Retrieval augments model parameters with selected external information.",
+            "Tool loops incorporate observations from an environment.",
+            "Product harnesses add identity",
+            "policies and evaluation around the loop."
+          ],
+          "experiment": "Compare deterministic routing, one bounded agent and a reviewed multi-agent candidate on the same held-out synthetic requests, identities and tools. Stratify ambiguous and denied cases; record failures and overhead.",
+          "foundations": [
+            {
+              "application": "Do not infer numeric correctness, tool execution or permission from the fluency of an assistant response.",
+              "explanation": "Attention-based sequence modeling supports generation, but does not itself verify external facts or execute operations.",
+              "idea": "Prediction versus evidence"
+            },
+            {
+              "application": "Select relevant context, record actual tool results and score the final answer independently of the model.",
+              "explanation": "RAG studies external retrieved information; ReAct studies interleaving processing with actions and observations.",
+              "idea": "Retrieval and action observations"
+            }
+          ],
+          "hypothesis": "For distinct tool and ownership boundaries, a bounded domain arrangement improves route accuracy compared with one unconstrained agent; for simple vocabulary routing it may only add overhead.",
+          "limitations": [
+            "A local router cannot establish language-model routing performance.",
+            "Synthetic tests do not certify preview Fabric IQ identity propagation."
+          ],
+          "metrics": [
+            "Route accuracy",
+            "Unauthorized disclosures",
+            "Unsupported claims",
+            "Tool calls and latency"
+          ],
+          "question": "Does agent decomposition improve domain routing without increasing unauthorized disclosure?",
+          "sources": [
+            "agent-framework",
+            "fabric-iq-overview",
+            "fabric-data-agent"
+          ]
+        },
+        "what": "Domain ownership, bounded tools and independently managed agents are different architectural boundaries.",
+        "when": "Use this comparison when one workflow needs context from several governed business domains.",
+        "when_not": "Do not add a coordinator when a deterministic router or one bounded agent meets the contract.",
+        "why": "Splitting by department alone adds coordination and access risks without proving a benefit."
+      },
+      {
+        "diagram": "reference",
+        "expected_result": "Quality, context age and repeated effects are measured independently; actions remain reviewed proposals.",
+        "failure_and_recovery": "Reject malformed or stale context explicitly and apply bounded retries without duplicate authoritative effects.",
+        "how": [
+          "Define the enrichment schema and independent labels.",
+          "Define event keys and freshness policy.",
+          "Compare candidate output with fixed references.",
+          "Test duplicates and out-of-order replay before considering live execution."
+        ],
+        "lesson_id": "enrichment-and-event-context",
+        "research": {
+          "baseline": "Reviewed synthetic class labels and predefined event-state transitions.",
+          "evolution": [
+            "Batch transformations create reusable derived facts.",
+            "Model enrichment introduces quality and version uncertainty.",
+            "Streams introduce late and duplicate events.",
+            "Agent triage adds proposals without transferring write authority."
+          ],
+          "experiment": "Use fixed synthetic labels and events. Compare candidate enrichment with reviewed labels, then compare ordered, delayed and duplicate replay with independently expected states and proposals. Keep inputs and rules fixed.",
+          "foundations": [
+            {
+              "application": "Persist lineage and evaluate labels independently of the candidate.",
+              "explanation": "An interpreted field depends on its source and transformation version, not merely its output type.",
+              "idea": "Derived data provenance"
+            },
+            {
+              "application": "Define freshness, late-event rules and stable event keys before triage.",
+              "explanation": "Occurrence order can differ from arrival order, and repeated delivery must not repeat an authoritative effect.",
+              "idea": "Temporal state and idempotency"
+            }
+          ],
+          "hypothesis": "Independent labels and duplicate/late-event tests detect incorrect interpretation or repeated effects even when every processing call reports success.",
+          "limitations": [
+            "Deterministic enrichment cannot establish model classification performance.",
+            "Small replay sequences do not establish production throughput or delivery guarantees."
+          ],
+          "metrics": [
+            "Per-category errors",
+            "Rejected malformed outputs",
+            "Stale-context refusals",
+            "Duplicate effects"
+          ],
+          "question": "Do explicit quality and event-time contracts expose errors hidden by successful pipeline completion?",
+          "sources": [
+            "fabric-ai-functions",
+            "fabric-overview",
+            "fabric-medallion"
+          ]
+        },
+        "what": "Batch enrichment stores versioned derived data; event triage uses timely context to propose a response.",
+        "when": "Use enrichment for reusable interpretation and event context when timeliness changes the decision.",
+        "when_not": "Keep deterministic thresholds and calculations outside a model when they already solve the task.",
+        "why": "Model quality and temporal correctness need separate contracts, references and recovery rules."
+      },
+      {
+        "diagram": "agentic-de",
+        "expected_result": "Every promised outcome maps to an observable test, and remaining gaps are recorded.",
+        "failure_and_recovery": "A contradictory specification needs clarification; generated instructions must not overwrite repository authority.",
+        "how": [
+          "Use the repository spec-driven-delivery Skill.",
+          "Specify outcomes and exclusions.",
+          "Review requirement quality and task dependencies.",
+          "Implement reviewed local work and verify convergence.",
+          "Treat any cloud mutation as a separately approved change."
+        ],
+        "lesson_id": "spec-driven-delivery",
+        "research": {
+          "baseline": "The reviewed specification and independent acceptance tests.",
+          "evolution": [
+            "Completions assist local edits.",
+            "Repository instructions constrain conventions and contracts.",
+            "Skills provide repeatable domain procedures.",
+            "MCP supplies bounded observed context.",
+            "Governed review ties changes to approvals and verification."
+          ],
+          "experiment": "Compare a bounded synthetic feature checklist with requirement-to-test traceability on the same candidate implementation. Review omitted adverse cases without changing the acceptance criteria after seeing the result.",
+          "foundations": [
+            {
+              "application": "Reconcile candidate Silver transformations and DAX with the same committed synthetic baseline.",
+              "explanation": "A generated artifact must be judged against an independent behavioral contract, not its author's confidence.",
+              "idea": "Independent verification"
+            },
+            {
+              "application": "Compare instructions, Skills and read-only MCP context separately instead of changing all of them and the model at once.",
+              "explanation": "Removing one component while holding other conditions fixed helps isolate its contribution under the tested conditions.",
+              "idea": "Controlled component ablation"
+            }
+          ],
+          "hypothesis": "Requirements linked to independent tests expose implementation gaps that a task-completion checklist misses.",
+          "limitations": [
+            "Observed timing is task-specific rather than a product benchmark.",
+            "Claude Code remains documented-only unless an actual comparable run is recorded."
+          ],
+          "metrics": [
+            "Checks passed",
+            "Reviewer corrections",
+            "Invalid calls",
+            "Observed elapsed time",
+            "Evidence completeness"
+          ],
+          "question": "Does explicit acceptance traceability reduce missing behavior in a cross-layer prototype?",
+          "sources": [
+            "spec-kit-quickstart",
+            "research-react"
+          ]
+        },
+        "what": "Spec-driven delivery links a user outcome to reviewed requirements, a design, tasks and independent convergence.",
+        "when": "Use the full workflow for a new use case, ambiguous requirements or changes across data, API, UI and governance.",
+        "when_not": "Do not require Spec Kit for a typo, narrow repair or normal execution of an existing demo.",
+        "why": "Cross-layer PoCs fail when a convincing implementation replaces the original acceptance criteria."
+      }
+    ],
+    "evidence": [
+      {
+        "category": "DEPLOYMENT",
+        "id": "fabric-environment",
+        "label": "LIVE",
+        "limitations": [
+          "Recorded state is not current capacity health.",
+          "Resource existence does not prove notebook execution or Power BI publication.",
+          "No resource was created by this verification."
+        ],
+        "pattern_ids": [
+          "P06",
+          "P10",
+          "P14"
+        ],
+        "provider": "Fabric REST readiness provider",
+        "recorded_on": "2026-10-09",
+        "scope": "Read-only verification observed the existing F8 capacity active and the bound development workspace accessible. Fabric hosts governed context for the synthetic use cases.",
+        "screenshot": null,
+        "server": "Bound demo environment",
+        "title": "Fabric capacity and development workspace",
+        "tool": "ffia fabric readiness / metadata GETs",
+        "verification_record": "docs/operations/phase-verification.md"
+      },
+      {
+        "category": "DEPLOYMENT",
+        "id": "foundry-environment",
+        "label": "LIVE",
+        "limitations": [
+          "Readiness GETs are not model inference evidence.",
+          "This does not certify production identity or current service availability.",
+          "No new deployment was performed by these checks."
+        ],
+        "pattern_ids": [
+          "P01",
+          "P06",
+          "P14"
+        ],
+        "provider": "Foundry readiness provider",
+        "recorded_on": "2026-10-09",
+        "scope": "Read-only checks passed for the existing resource, project, model deployment, data plane, agent and Fabric connection. Foundry supplies reasoning and orchestration over governed context.",
+        "screenshot": null,
+        "server": "Bound demo environment",
+        "title": "Foundry project, model deployment and existing agent",
+        "tool": "ffia foundry readiness / metadata GETs",
+        "verification_record": "docs/operations/phase-verification.md"
+      },
+      {
+        "category": "DEPLOYMENT",
+        "id": "azure-observability",
+        "label": "LIVE",
+        "limitations": [
+          "The resources already existed; this session did not deploy replacements.",
+          "Configuration alone does not prove telemetry ingestion.",
+          "An ingestion cap is not a guaranteed total spending limit."
+        ],
+        "pattern_ids": [
+          "P14",
+          "P16"
+        ],
+        "provider": "Azure Resource Manager and Azure Monitor",
+        "recorded_on": "2026-10-09",
+        "scope": "Existing workspace-based monitoring resources were observed with Succeeded provisioning, 30-day retention and a one GB/day ingestion cap. Foundry monitoring connections and allLogs/AllMetrics diagnostics were present.",
+        "screenshot": null,
+        "server": "Existing demo observability resources",
+        "title": "Application Insights and Log Analytics",
+        "tool": "Recorded Azure metadata GETs and az monitor diagnostic-settings list",
+        "verification_record": "infra/observability/README.md"
+      },
+      {
+        "category": "OPERATION",
+        "id": "synthetic-telemetry-ingestion",
+        "label": "LIVE",
+        "limitations": [
+          "The span payload is synthetic; cloud ingestion was LIVE.",
+          "This is client telemetry, not a newly verified Foundry agent trace.",
+          "An initial exporter warning was corrected before ingestion verification."
+        ],
+        "pattern_ids": [
+          "P16"
+        ],
+        "provider": "Azure Monitor OpenTelemetry exporter and Application Insights",
+        "recorded_on": "2026-10-09",
+        "scope": "An aggregate query observed two matching synthetic span records after ingestion delay. This demonstrates actual cloud ingestion, not merely configured monitoring.",
+        "screenshot": null,
+        "server": "Existing demo observability resources",
+        "title": "Verified Azure telemetry ingestion",
+        "tool": "Synthetic client span export and Application Insights aggregate query",
+        "verification_record": "infra/observability/README.md"
+      },
+      {
+        "category": "OPERATION",
+        "id": "fabric-app-read",
+        "label": "LIVE",
+        "limitations": [
+          "Historical observation rather than a current health check.",
+          "Not Fabric MCP invocation or Guide 1 write evidence."
+        ],
+        "pattern_ids": [
+          "P06",
+          "P17"
+        ],
+        "provider": "Fabric REST provider",
+        "recorded_on": "2026-10-09",
+        "scope": "A bounded read returned LIVE with cloud_operation_performed=true and no fallback. See the dated phase-verification document.",
+        "screenshot": null,
+        "server": "Application provider router",
+        "title": "Fabric application read",
+        "tool": "ffia demo live / routed workspace read",
+        "verification_record": "docs/operations/phase-verification.md"
+      },
+      {
+        "category": "OPERATION",
+        "id": "foundry-grounded-answer",
+        "label": "PREVIEW",
+        "limitations": [
+          "The Fabric tool is PREVIEW.",
+          "Not fresh five-case certification or delivery evidence.",
+          "Server-side agent trace ingestion remains unverified."
+        ],
+        "pattern_ids": [
+          "P01",
+          "P06",
+          "P16"
+        ],
+        "provider": "Foundry Responses SDK",
+        "recorded_on": "2026-10-09",
+        "scope": "One bounded synthetic sales question reconciled with the baseline, with a reported Fabric tool call and no fallback.",
+        "screenshot": null,
+        "server": "Existing-agent application adapter",
+        "title": "Grounded synthetic sales answer",
+        "tool": "fabric_dataagent_preview_call",
+        "verification_record": "docs/operations/phase-verification.md"
+      },
+      {
+        "category": "INTERFACE",
+        "id": "guide-one-ui",
+        "label": "LOCAL",
+        "limitations": [
+          "A configured provider is not a verified connection.",
+          "Checkpoint notes are not automatic proof of tool execution."
+        ],
+        "pattern_ids": [
+          "P10",
+          "P19"
+        ],
+        "provider": "Educational frontend",
+        "recorded_on": "2026-10-09",
+        "scope": "Synthetic interface showing HYBRID configuration and procedural content, not cloud execution.",
+        "screenshot": "/workshop-evidence/guide-1-hybrid.png",
+        "server": "Local Vite and FastAPI",
+        "title": "Fabric engineering use-case UI",
+        "tool": "Local browser screenshot",
+        "verification_record": null
+      },
+      {
+        "category": "INTERFACE",
+        "id": "guide-two-ui",
+        "label": "LOCAL",
+        "limitations": [
+          "Not evidence of cloud scheduling or delivery.",
+          "The screenshot predates the workshop redesign."
+        ],
+        "pattern_ids": [
+          "P06",
+          "P08"
+        ],
+        "provider": "Educational frontend",
+        "recorded_on": "2026-10-09",
+        "scope": "Synthetic interface showing the second use case and shared runtime configuration.",
+        "screenshot": "/workshop-evidence/guide-2-hybrid.png",
+        "server": "Local Vite and FastAPI",
+        "title": "Grounded-agent use-case UI",
+        "tool": "Local browser screenshot",
+        "verification_record": null
+      }
+    ],
+    "execution_paths": [
+      {
+        "commands": [
+          "ffia serve api --offline",
+          "ffia demo offline --json"
+        ],
+        "description": "Build and learn with synthetic data and deterministic providers without Azure access.",
+        "fallback": "No live call is attempted, so there is no cloud fallback.",
+        "mode": "OFFLINE",
+        "prerequisites": [
+          "The repository's locked local dependencies and synthetic data."
+        ],
+        "results": "Reads are LOCAL; governed write rehearsals are SIMULATED. Offline does not mean an actual Fabric workspace was changed.",
+        "safety": "No Azure credentials or active Fabric capacity are required. The offline demo must report zero cloud operations.",
+        "title": "Local / offline"
+      },
+      {
+        "commands": [
+          "ffia serve api",
+          "ffia demo hybrid --json"
+        ],
+        "description": "The default application tries eligible live reads first and keeps learning usable through explicitly permitted local read fallback.",
+        "fallback": "Only eligible reads may fall back to LOCAL, with a disclosed reason. An approved LIVE write never redirects.",
+        "mode": "HYBRID",
+        "prerequisites": [
+          "Private Azure/Fabric/Foundry bindings in ignored .env configuration.",
+          "Entra sign-in and required permissions.",
+          "Available capacity and services for the connected path."
+        ],
+        "results": "Each operation reports LIVE, PREVIEW or LOCAL according to what actually ran, with provider and fallback evidence.",
+        "safety": "The connected demo can consume model usage; active Fabric capacity incurs billing. Live mutations remain disabled by default and need separate approval.",
+        "title": "Azure / Fabric live-first"
+      },
+      {
+        "commands": [
+          "ffia demo live --json"
+        ],
+        "description": "Require the connected providers to perform the bounded verification instead of accepting a local answer.",
+        "fallback": "LOCAL fallback cannot satisfy the strict live gate. Unavailable or incorrect connected results fail verification.",
+        "mode": "LIVE",
+        "prerequisites": [
+          "The same private bindings and Entra permissions as the live-first path.",
+          "Available Fabric capacity and the configured existing Foundry agent."
+        ],
+        "results": "The demo checks an actual Fabric read and a baseline-reconciled synthetic Foundry answer; the Fabric agent tool is labeled PREVIEW.",
+        "safety": "This performs a bounded cloud read and model question, not deployment or publication. Model usage and capacity can cost money; consequential writes need a separate approved plan.",
+        "title": "Strict Azure / Fabric live verification"
+      }
+    ],
+    "execution_summary": "You can learn entirely offline, use the live-first application with disclosed read fallback, or require strict connected verification. Running the UI or a server on your computer does not mean its data operations are offline. The application uses Fabric REST and Foundry SDK; coding clients use the separately configured real Fabric MCP server.",
+    "journeys": [
+      {
+        "duration_minutes": 60,
+        "id": "foundations",
+        "lesson_ids": [
+          "governed-data-foundations",
+          "agent-research-foundations",
+          "fabric-foundry-boundaries",
+          "p16-evaluation-observability"
+        ],
+        "summary": "Connect relational data, semantic meaning, language models, retrieval and tool loops to the systems we use today. Read theory, challenge assumptions and design an experiment.",
+        "title": "Understand the foundations"
+      },
+      {
+        "duration_minutes": 90,
+        "id": "engineer",
+        "lesson_ids": [
+          "governed-data-foundations",
+          "copilot-surfaces",
+          "fabric-skills",
+          "fabric-mcp-landscape",
+          "copilot-maturity-ladder",
+          "power-bi-agentic-tooling"
+        ],
+        "summary": "Use Copilot to improve a repeatable data task, add Skills and Fabric MCP, then verify the result rather than trusting a convincing answer.",
+        "title": "Level up Fabric engineering"
+      },
+      {
+        "duration_minutes": 75,
+        "id": "agent",
+        "lesson_ids": [
+          "agent-research-foundations",
+          "domain-and-agent-composition",
+          "p06-enterprise-agent",
+          "p08-human-in-the-loop",
+          "p16-evaluation-observability",
+          "p17-resilience"
+        ],
+        "summary": "Trace a sales question from governed Fabric context to Foundry reasoning, baseline evaluation and a reviewed draft.",
+        "title": "Build a grounded business agent"
+      },
+      {
+        "duration_minutes": 90,
+        "id": "research",
+        "lesson_ids": [
+          "agent-research-foundations",
+          "copilot-vs-claude-code",
+          "spec-driven-delivery",
+          "production-readiness"
+        ],
+        "summary": "Go beyond the walkthrough: form a falsifiable hypothesis, control variables, inspect adverse cases and connect a specification to independent tests.",
+        "title": "Investigate, specify and verify"
+      }
+    ],
+    "summary": "Understand the foundations. Build a bounded use case. Inspect the evidence. Learn why it works, where it fails and what production still requires.",
+    "title": "Build trustworthy data and agent workflows",
+    "use_cases": [
+      {
+        "audience": "Data engineers, analytics engineers and workshop facilitators.",
+        "guide_id": "hc-01-fabric-mcp-powerbi-medallion-lab",
+        "lesson_ids": [
+          "governed-data-foundations",
+          "copilot-surfaces",
+          "fabric-skills",
+          "fabric-mcp-landscape",
+          "copilot-maturity-ladder",
+          "power-bi-agentic-tooling"
+        ],
+        "outcomes": [
+          "Explain how Copilot adds value at each engineering stage.",
+          "Build and reconcile a synthetic medallion and semantic contract.",
+          "Distinguish Skills from MCP execution and retain evidence for every approved operation."
+        ],
+        "presenter_path": "/talktracks/fabric-copilot-level-up.html",
+        "problem": "An engineer needs to turn seven imperfect synthetic extracts into trusted analytics without confusing generated code with correct, authorized Fabric execution.",
+        "production_gaps": [
+          "Fresh complete Guide 1 MCP and Power BI publication evidence remains separate.",
+          "Claude Code is DOCUMENTED ONLY in the bake-off.",
+          "Production identity and deployment gates are not certified by this prototype."
+        ],
+        "questions": [],
+        "stages": [
+          {
+            "capability": "Understand the grain, quality rules and reference result before asking an agent.",
+            "control": "Independent deterministic baseline.",
+            "evidence": "Reference SQL and expected measures.",
+            "task": "Inspect a Silver transformation and its expected counts.",
+            "title": "Manual baseline"
+          },
+          {
+            "capability": "Copilot accelerates authoring and review preparation; the engineer retains judgment.",
+            "control": "Review assumptions and compare outputs.",
+            "evidence": "Artifact diff and test results; no invented time saving.",
+            "task": "Draft and explain a transformation with tests.",
+            "title": "Copilot assistance"
+          },
+          {
+            "capability": "Instructions provide the local architecture and quality contract.",
+            "control": "Strict types and deterministic validation.",
+            "evidence": "Relevant checks and recorded reviewer corrections.",
+            "task": "Apply shared conventions and boundaries.",
+            "title": "Repository grounding"
+          },
+          {
+            "capability": "Skills provide repeatable domain guidance, not permission or automatic execution.",
+            "control": "Curated pinned procedures and separate proposed actions.",
+            "evidence": "Reviewed artifact and named procedure.",
+            "task": "Follow the medallion or Spark procedure.",
+            "title": "Fabric Skills"
+          },
+          {
+            "capability": "The real Fabric MCP tool supplies observed metadata rather than guessed schemas.",
+            "control": "Narrow read tools and disclosed named fallback.",
+            "evidence": "Actual invocation and result label; REST results are not MCP proof.",
+            "task": "Inspect the assigned workspace context.",
+            "title": "Fabric MCP context"
+          },
+          {
+            "capability": "The assigned tool or extension performs the approved operation; Copilot coordinates.",
+            "control": "Duplicate check and exact-target human approval.",
+            "evidence": "Counts and DAX against the baseline plus separate execution and publication evidence.",
+            "task": "Build and reconcile the intended Fabric artifacts.",
+            "title": "Governed execution"
+          }
+        ]
+      },
+      {
+        "audience": "Business analysts, data stewards, agent engineers and workshop facilitators.",
+        "guide_id": "mfg-01-foundry-fabric-sales-insights",
+        "lesson_ids": [
+          "governed-data-foundations",
+          "agent-research-foundations",
+          "p06-enterprise-agent",
+          "p08-human-in-the-loop",
+          "p16-evaluation-observability"
+        ],
+        "outcomes": [
+          "Trace a sales question through Fabric context and Foundry reasoning.",
+          "Reconcile the answer against an independent baseline.",
+          "Produce a reviewed synthetic brief and explain the limits of web context and proposed corrections."
+        ],
+        "presenter_path": "/talktracks/foundry-fabric-agents-workshop.html",
+        "problem": "Business teams need explainable sales insights over governed data, with proposals for quality fixes rather than an agent silently changing records.",
+        "production_gaps": [
+          "Monthly live scheduling and delivery are not verified.",
+          "Web grounding needs licensing and boundary review; never send confidential figures in queries.",
+          "Fresh server-side trace verification remains open.",
+          "Claude Code is DOCUMENTED ONLY."
+        ],
+        "questions": [
+          "How did booked revenue change between the two synthetic periods?",
+          "Which team or product group explains the change?",
+          "How does performance compare with synthetic targets?",
+          "Which data-quality issues could distort the answer?",
+          "What should a reviewed monthly brief explain and what must remain a proposal?"
+        ],
+        "stages": [
+          {
+            "capability": "The analyst defines the population and decision, not just a vague request for insights.",
+            "control": "Agreed measure and independent baseline.",
+            "evidence": "Question and expected synthetic answer.",
+            "task": "Choose one bounded sales question.",
+            "title": "Business question"
+          },
+          {
+            "capability": "Fabric owns the data meaning and access; its data agent is read-only.",
+            "control": "Identity and data permissions.",
+            "evidence": "Actual context result and execution label.",
+            "task": "Obtain permitted structured context.",
+            "title": "Governed Fabric context"
+          },
+          {
+            "capability": "Foundry coordinates tools and reasons over returned context; Copilot helps author and test the integration.",
+            "control": "Bounded tool use and evaluation.",
+            "evidence": "Observed tool event and baseline-reconciled answer.",
+            "task": "Explain the context and its supported conclusion.",
+            "title": "Foundry reasoning"
+          },
+          {
+            "capability": "The workflow produces a reviewable draft, not an automatically delivered business decision.",
+            "control": "Human review and separately approved delivery.",
+            "evidence": "Synthetic draft and quality checks; scheduling is not claimed as executed.",
+            "task": "Draft the monthly team explanation.",
+            "title": "Reviewed brief"
+          },
+          {
+            "capability": "The agent proposes; a steward approves; a scoped Fabric process corrects Silver.",
+            "control": "Exact-target approval and verification.",
+            "evidence": "Quality diagnostics and reviewed plan; no automatic fix.",
+            "task": "Explain an upstream quality issue.",
+            "title": "Proposed data correction"
+          }
+        ]
+      }
+    ],
+    "version": 1
+  },
+  "coverage": [
+    {
+      "default_demo_path": "LOCAL",
+      "diagram_ids": [
+        "mfg-01",
+        "production",
+        "reference",
+        "theory-to-tools"
+      ],
+      "evidence_ids": [
+        "foundry-environment",
+        "foundry-grounded-answer"
+      ],
+      "guide_ids": [
+        "mfg-01-foundry-fabric-sales-insights"
+      ],
+      "lab_ids": [],
+      "lesson_ids": [
+        "agent-research-foundations",
+        "governed-data-foundations"
+      ],
+      "name": "Fabric Data Agent + Foundry",
+      "pattern_id": "P01"
+    },
+    {
+      "default_demo_path": "LOCAL",
+      "diagram_ids": [],
+      "evidence_ids": [],
+      "guide_ids": [],
+      "lab_ids": [],
+      "lesson_ids": [
+        "domain-and-agent-composition"
+      ],
+      "name": "Multiple Fabric Data Agents via Fabric IQ",
+      "pattern_id": "P02"
+    },
+    {
+      "default_demo_path": "LOCAL",
+      "diagram_ids": [],
+      "evidence_ids": [],
+      "guide_ids": [],
+      "lab_ids": [],
+      "lesson_ids": [
+        "governed-data-foundations"
+      ],
+      "name": "Fabric IQ Ontology",
+      "pattern_id": "P03"
+    },
+    {
+      "default_demo_path": "LOCAL",
+      "diagram_ids": [
+        "reference"
+      ],
+      "evidence_ids": [],
+      "guide_ids": [],
+      "lab_ids": [],
+      "lesson_ids": [
+        "agent-research-foundations"
+      ],
+      "name": "OneLake as Foundry knowledge",
+      "pattern_id": "P04"
+    },
+    {
+      "default_demo_path": "LOCAL",
+      "diagram_ids": [],
+      "evidence_ids": [],
+      "guide_ids": [],
+      "lab_ids": [],
+      "lesson_ids": [
+        "enrichment-and-event-context"
+      ],
+      "name": "Foundry tools in Fabric (AI in data engineering)",
+      "pattern_id": "P05"
+    },
+    {
+      "default_demo_path": "HYBRID",
+      "diagram_ids": [
+        "integration-paths",
+        "mfg-01",
+        "production",
+        "reference",
+        "theory-to-tools"
+      ],
+      "evidence_ids": [
+        "fabric-environment",
+        "foundry-environment",
+        "fabric-app-read",
+        "foundry-grounded-answer",
+        "guide-two-ui"
+      ],
+      "guide_ids": [
+        "mfg-01-foundry-fabric-sales-insights"
+      ],
+      "lab_ids": [],
+      "lesson_ids": [
+        "agent-research-foundations",
+        "fabric-foundry-boundaries",
+        "p06-enterprise-agent"
+      ],
+      "name": "Fabric + Foundry enterprise agent (anchor)",
+      "pattern_id": "P06"
+    },
+    {
+      "default_demo_path": "LOCAL",
+      "diagram_ids": [],
+      "evidence_ids": [],
+      "guide_ids": [],
+      "lab_ids": [],
+      "lesson_ids": [
+        "enrichment-and-event-context"
+      ],
+      "name": "Real-time Fabric + Foundry agent",
+      "pattern_id": "P07"
+    },
+    {
+      "default_demo_path": "LOCAL",
+      "diagram_ids": [
+        "hc-01",
+        "live-vs-offline",
+        "mfg-01",
+        "reference",
+        "system"
+      ],
+      "evidence_ids": [
+        "guide-two-ui"
+      ],
+      "guide_ids": [
+        "hc-01-fabric-mcp-powerbi-medallion-lab",
+        "mfg-01-foundry-fabric-sales-insights"
+      ],
+      "lab_ids": [
+        "lab-governed-change"
+      ],
+      "lesson_ids": [
+        "agent-research-foundations",
+        "fabric-foundry-boundaries",
+        "p08-human-in-the-loop"
+      ],
+      "name": "Human-in-the-loop governed action",
+      "pattern_id": "P08"
+    },
+    {
+      "default_demo_path": "LOCAL",
+      "diagram_ids": [
+        "hc-01",
+        "integration-paths",
+        "mcp-topology",
+        "reference",
+        "system"
+      ],
+      "evidence_ids": [],
+      "guide_ids": [
+        "hc-01-fabric-mcp-powerbi-medallion-lab"
+      ],
+      "lab_ids": [
+        "lab-mcp-allow-list"
+      ],
+      "lesson_ids": [
+        "agent-research-foundations",
+        "fabric-foundry-boundaries",
+        "preview-isolation",
+        "fabric-mcp-landscape",
+        "p09-governed-mcp"
+      ],
+      "name": "Governed MCP",
+      "pattern_id": "P09"
+    },
+    {
+      "default_demo_path": "LOCAL",
+      "diagram_ids": [
+        "hc-01",
+        "mfg-01",
+        "reference",
+        "theory-to-tools"
+      ],
+      "evidence_ids": [
+        "fabric-environment",
+        "guide-one-ui"
+      ],
+      "guide_ids": [
+        "hc-01-fabric-mcp-powerbi-medallion-lab",
+        "mfg-01-foundry-fabric-sales-insights"
+      ],
+      "lab_ids": [],
+      "lesson_ids": [
+        "governed-data-foundations",
+        "p10-medallion-ai"
+      ],
+      "name": "Medallion + AI",
+      "pattern_id": "P10"
+    },
+    {
+      "default_demo_path": "LOCAL",
+      "diagram_ids": [
+        "reference"
+      ],
+      "evidence_ids": [],
+      "guide_ids": [],
+      "lab_ids": [
+        "lab-open-mirroring-recovery"
+      ],
+      "lesson_ids": [
+        "p11-mirroring-ai"
+      ],
+      "name": "Mirroring / Open Mirroring + AI",
+      "pattern_id": "P11"
+    },
+    {
+      "default_demo_path": "LOCAL",
+      "diagram_ids": [
+        "hc-01",
+        "mfg-01",
+        "reference",
+        "theory-to-tools"
+      ],
+      "evidence_ids": [],
+      "guide_ids": [
+        "hc-01-fabric-mcp-powerbi-medallion-lab"
+      ],
+      "lab_ids": [],
+      "lesson_ids": [
+        "governed-data-foundations",
+        "power-bi-agentic-tooling"
+      ],
+      "name": "Direct Lake + semantic model + AI",
+      "pattern_id": "P12"
+    },
+    {
+      "default_demo_path": "DOCUMENTATION",
+      "diagram_ids": [],
+      "evidence_ids": [],
+      "guide_ids": [],
+      "lab_ids": [],
+      "lesson_ids": [
+        "domain-and-agent-composition"
+      ],
+      "name": "Multi-domain is not multi-agent",
+      "pattern_id": "P13"
+    },
+    {
+      "default_demo_path": "DOCUMENTATION",
+      "diagram_ids": [
+        "mfg-01",
+        "production"
+      ],
+      "evidence_ids": [
+        "fabric-environment",
+        "foundry-environment",
+        "azure-observability"
+      ],
+      "guide_ids": [
+        "mfg-01-foundry-fabric-sales-insights"
+      ],
+      "lab_ids": [],
+      "lesson_ids": [
+        "production-readiness"
+      ],
+      "name": "Secure enterprise Foundry + Fabric",
+      "pattern_id": "P14"
+    },
+    {
+      "default_demo_path": "DOCUMENTATION",
+      "diagram_ids": [
+        "mcp-topology",
+        "production",
+        "reference"
+      ],
+      "evidence_ids": [],
+      "guide_ids": [],
+      "lab_ids": [],
+      "lesson_ids": [
+        "production-readiness"
+      ],
+      "name": "APIM AI, MCP and tool governance",
+      "pattern_id": "P15"
+    },
+    {
+      "default_demo_path": "LOCAL",
+      "diagram_ids": [
+        "hc-01",
+        "mfg-01",
+        "production",
+        "reference",
+        "system",
+        "theory-to-tools"
+      ],
+      "evidence_ids": [
+        "azure-observability",
+        "synthetic-telemetry-ingestion",
+        "foundry-grounded-answer"
+      ],
+      "guide_ids": [
+        "hc-01-fabric-mcp-powerbi-medallion-lab",
+        "mfg-01-foundry-fabric-sales-insights"
+      ],
+      "lab_ids": [],
+      "lesson_ids": [
+        "agent-research-foundations",
+        "p16-evaluation-observability"
+      ],
+      "name": "Evaluation + observability",
+      "pattern_id": "P16"
+    },
+    {
+      "default_demo_path": "LOCAL",
+      "diagram_ids": [
+        "integration-paths",
+        "live-vs-offline",
+        "system"
+      ],
+      "evidence_ids": [
+        "fabric-app-read"
+      ],
+      "guide_ids": [],
+      "lab_ids": [
+        "lab-resilience-break-it"
+      ],
+      "lesson_ids": [
+        "fabric-foundry-boundaries",
+        "p17-resilience"
+      ],
+      "name": "LIVE / HYBRID / OFFLINE resilience",
+      "pattern_id": "P17"
+    },
+    {
+      "default_demo_path": "LOCAL",
+      "diagram_ids": [],
+      "evidence_ids": [],
+      "guide_ids": [],
+      "lab_ids": [],
+      "lesson_ids": [
+        "production-readiness"
+      ],
+      "name": "Customer overlay",
+      "pattern_id": "P18"
+    },
+    {
+      "default_demo_path": "HYBRID",
+      "diagram_ids": [
+        "agentic-de",
+        "hc-01",
+        "integration-paths",
+        "mcp-topology"
+      ],
+      "evidence_ids": [
+        "guide-one-ui"
+      ],
+      "guide_ids": [
+        "hc-01-fabric-mcp-powerbi-medallion-lab"
+      ],
+      "lab_ids": [
+        "lab-copilot-maturity-ladder"
+      ],
+      "lesson_ids": [
+        "copilot-maturity-ladder",
+        "copilot-vs-claude-code",
+        "agent-research-foundations",
+        "copilot-surfaces",
+        "fabric-skills",
+        "power-bi-agentic-tooling",
+        "fabric-mcp-landscape"
+      ],
+      "name": "Copilot CLI + Fabric Skills + MCP",
+      "pattern_id": "P19"
+    },
+    {
+      "default_demo_path": "LOCAL",
+      "diagram_ids": [
+        "agentic-de"
+      ],
+      "evidence_ids": [],
+      "guide_ids": [],
+      "lab_ids": [
+        "lab-copilot-maturity-ladder"
+      ],
+      "lesson_ids": [
+        "copilot-maturity-ladder",
+        "copilot-vs-claude-code",
+        "spec-driven-delivery",
+        "copilot-surfaces"
+      ],
+      "name": "Repo-first (Git as source of truth)",
+      "pattern_id": "P20"
+    },
+    {
+      "default_demo_path": "DOCUMENTATION",
+      "diagram_ids": [
+        "agentic-de"
+      ],
+      "evidence_ids": [],
+      "guide_ids": [],
+      "lab_ids": [],
+      "lesson_ids": [
+        "copilot-maturity-ladder",
+        "copilot-surfaces"
+      ],
+      "name": "Cloud agent issue to pull request",
+      "pattern_id": "P21"
+    },
+    {
+      "default_demo_path": "DOCUMENTATION",
+      "diagram_ids": [
+        "agentic-de"
+      ],
+      "evidence_ids": [],
+      "guide_ids": [],
+      "lab_ids": [],
+      "lesson_ids": [
+        "copilot-maturity-ladder",
+        "copilot-surfaces"
+      ],
+      "name": "Parallel agentic migration",
+      "pattern_id": "P22"
+    },
+    {
+      "default_demo_path": "DOCUMENTATION",
+      "diagram_ids": [
+        "agentic-de"
+      ],
+      "evidence_ids": [],
+      "guide_ids": [],
+      "lab_ids": [],
+      "lesson_ids": [
+        "copilot-maturity-ladder",
+        "copilot-vs-claude-code"
+      ],
+      "name": "Headless agent review in CI",
+      "pattern_id": "P23"
+    },
+    {
+      "default_demo_path": "DOCUMENTATION",
+      "diagram_ids": [
+        "agentic-de"
+      ],
+      "evidence_ids": [],
+      "guide_ids": [],
+      "lab_ids": [],
+      "lesson_ids": [
+        "copilot-maturity-ladder"
+      ],
+      "name": "Embedded data-engineering assistant",
+      "pattern_id": "P24"
+    },
+    {
+      "default_demo_path": "DOCUMENTATION",
+      "diagram_ids": [],
+      "evidence_ids": [],
+      "guide_ids": [],
+      "lab_ids": [],
+      "lesson_ids": [
+        "spec-driven-delivery"
+      ],
+      "name": "Spec-driven Fabric and Foundry delivery",
+      "pattern_id": "P25"
+    }
+  ],
+  "label": "LOCAL",
+  "sources": [
+    {
+      "id": "research-relational-model",
+      "publisher": "IBM Research / ACM",
+      "title": "A relational model of data for large shared data banks",
+      "url": "https://research.ibm.com/publications/a-relational-model-of-data-for-large-shared-data-banks"
+    },
+    {
+      "id": "research-transformers",
+      "publisher": "arXiv",
+      "title": "Attention Is All You Need",
+      "url": "https://arxiv.org/abs/1706.03762"
+    },
+    {
+      "id": "research-rag",
+      "publisher": "arXiv",
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+      "url": "https://arxiv.org/abs/2005.11401"
+    },
+    {
+      "id": "research-react",
+      "publisher": "arXiv",
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "url": "https://arxiv.org/abs/2210.03629"
+    },
+    {
+      "id": "spec-kit-quickstart",
+      "publisher": "GitHub Spec Kit",
+      "title": "Spec-Driven Development Quickstart",
+      "url": "https://github.github.io/spec-kit/quickstart.html"
+    },
+    {
+      "id": "fabric-overview",
+      "publisher": "Microsoft Learn",
+      "title": "What is Microsoft Fabric?",
+      "url": "https://learn.microsoft.com/fabric/fundamentals/microsoft-fabric-overview"
+    },
+    {
+      "id": "fabric-medallion",
+      "publisher": "Microsoft Learn",
+      "title": "Implement medallion lakehouse architecture in Microsoft Fabric",
+      "url": "https://learn.microsoft.com/fabric/onelake/onelake-medallion-lakehouse-architecture"
+    },
+    {
+      "id": "fabric-waf",
+      "publisher": "Microsoft Learn (Well-Architected Framework)",
+      "title": "Azure Well-Architected Framework service guide for Microsoft Fabric",
+      "url": "https://learn.microsoft.com/azure/well-architected/microsoft-fabric/overview"
+    },
+    {
+      "id": "fabric-deployment-patterns",
+      "publisher": "Azure Architecture Center",
+      "title": "Microsoft Fabric deployment patterns",
+      "url": "https://learn.microsoft.com/azure/architecture/data-guide/technology-choices/fabric-deployment-patterns"
+    },
+    {
+      "id": "fabric-direct-lake",
+      "publisher": "Microsoft Learn",
+      "title": "Direct Lake overview",
+      "url": "https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview"
+    },
+    {
+      "id": "fabric-rest-identity",
+      "publisher": "Microsoft Learn",
+      "title": "Fabric REST API identity support",
+      "url": "https://learn.microsoft.com/rest/api/fabric/articles/identity-support"
+    },
+    {
+      "id": "fabric-ai-functions",
+      "publisher": "Microsoft Learn",
+      "title": "AI functions in Fabric",
+      "url": "https://learn.microsoft.com/fabric/data-science/ai-functions/overview"
+    },
+    {
+      "id": "fabric-data-agent",
+      "publisher": "Microsoft Learn",
+      "title": "Fabric data agent concepts",
+      "url": "https://learn.microsoft.com/fabric/data-science/concept-data-agent"
+    },
+    {
+      "id": "fabric-iq-overview",
+      "publisher": "Microsoft Learn",
+      "title": "What is Fabric IQ?",
+      "url": "https://learn.microsoft.com/fabric/iq/overview"
+    },
+    {
+      "id": "fabric-mcp-local",
+      "publisher": "Microsoft Learn",
+      "title": "Fabric MCP Server (local) tools reference",
+      "url": "https://learn.microsoft.com/rest/api/fabric/articles/mcp-servers/pro-dev-local/tools-local-mcp-server"
+    },
+    {
+      "id": "foundry-agent-service",
+      "publisher": "Microsoft Learn",
+      "title": "Foundry Agent Service overview",
+      "url": "https://learn.microsoft.com/azure/foundry/agents/overview"
+    },
+    {
+      "id": "agent-framework",
+      "publisher": "Microsoft Learn",
+      "title": "Microsoft Agent Framework overview",
+      "url": "https://learn.microsoft.com/agent-framework/overview/"
+    },
+    {
+      "id": "apim-mcp",
+      "publisher": "Microsoft Learn",
+      "title": "Overview of MCP servers in Azure API Management",
+      "url": "https://learn.microsoft.com/azure/api-management/mcp-server-overview"
+    },
+    {
+      "id": "skills-for-fabric",
+      "publisher": "Microsoft Learn",
+      "title": "Skills for Fabric overview",
+      "url": "https://learn.microsoft.com/fabric/fundamentals/skills-for-fabric-overview"
+    },
+    {
+      "id": "copilot-cli-ga",
+      "publisher": "GitHub",
+      "title": "GitHub Copilot CLI is now generally available",
+      "url": "https://github.blog/changelog/2026-02-25-github-copilot-cli-is-now-generally-available/"
+    }
+  ]
+}

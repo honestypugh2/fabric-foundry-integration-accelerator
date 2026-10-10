@@ -12,7 +12,12 @@ from fabric_foundry_accelerator.cli import main
 from fabric_foundry_accelerator.services import commands
 from fabric_foundry_accelerator.services import demo as demo_module
 from fabric_foundry_accelerator.services.container import Container
-from fabric_foundry_accelerator.services.demo import azure_cli_sign_in, demo_check, run_offline_demo
+from fabric_foundry_accelerator.services.demo import (
+    azure_cli_sign_in,
+    demo_check,
+    run_connected_demo,
+    run_offline_demo,
+)
 from fabric_foundry_accelerator.services.evaluation import compare
 
 
@@ -47,6 +52,31 @@ async def test_offline_demo_passes_with_honest_labels(
     assert acts[6].label == "LOCAL" and acts[6].required and acts[6].passed
     assert acts[5].label == "SIMULATED" and acts[8].label == "SIMULATED"
     assert all(step.passed for step in report.steps if step.required)
+
+
+async def test_connected_demo_discloses_unbound_hybrid_fallback(
+    make_container: Callable[..., Container],
+) -> None:
+    report = await run_connected_demo(make_container(environment="hybrid"))
+    assert not report.passed and not report.live_verified
+    assert [step.label for step in report.steps] == ["LOCAL", "LOCAL (fallback)"]
+    assert "fallback=True" in report.steps[1].summary
+    assert report.steps[0].evidence
+
+
+async def test_connected_demo_strict_live_does_not_fall_back(
+    make_container: Callable[..., Container],
+) -> None:
+    report = await run_connected_demo(make_container(environment="live"))
+    assert not report.passed and not report.live_verified
+    assert [step.label for step in report.steps] == ["UNAVAILABLE", "UNAVAILABLE"]
+
+
+async def test_connected_demo_rejects_offline(
+    make_container: Callable[..., Container],
+) -> None:
+    with pytest.raises(ValueError, match="Connected demos"):
+        await run_connected_demo(make_container())
 
 
 @pytest.mark.parametrize(

@@ -20,6 +20,7 @@ patterns: [P01, P06, P08, P10, P14, P16]
 maturity_levels: [L2, L4, L5]
 harnesses: [copilot-vscode, copilot-cli, claude-code]
 operating_rules:
+  - "Normal app startup (`make run`) is live-first HYBRID for both guides, with explicit LOCAL read fallback. For an entirely offline presentation use `make run API_ARGS=--offline`. Configured providers are not proof of live execution; inspect result labels and evidence."
   - Submit one prompt at a time and stop at its checkpoint.
   - Before each cloud operation, state the provider, server and actual tool used.
   - Numbers come from the Fabric data agent tool, never from the model's own estimate.
@@ -59,7 +60,7 @@ steps:
     evidence_required:
       - A summary that names the Fabric data agent as read-only and the human approval for data fixes.
     offline_equivalent: Step through the diagram in the app.
-    offline_command: "make run  # then open /architecture/mfg-01"
+    offline_command: "make run API_ARGS=--offline  # then open /architecture/mfg-01"
   - id: 02-land-data
     diagram_focus: [sales-sources, lakehouse]
     title: Land the synthetic sales data in a lakehouse

@@ -172,7 +172,7 @@ def test_container_live_agent_requires_opt_in_mode_and_binding(
     with pytest.raises(BindingsError, match="FFIA_ENVIRONMENT"):
         build_container(make_settings(foundry_live=True))
     with pytest.raises(BindingsError, match="foundry:"):
-        build_container(make_settings(foundry_live=True, environment="hybrid"))
+        build_container(make_settings(foundry_live=True, environment="live"))
     container = build_container(
         make_settings(
             foundry_live=True, environment="hybrid", config_root=_config_with_foundry(tmp_path)

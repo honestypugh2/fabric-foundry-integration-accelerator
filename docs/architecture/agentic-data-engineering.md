@@ -12,6 +12,8 @@ Claude Code follows the same ladder; see the *Copilot vs Claude Code* lesson.
 
 ## Architecture
 
+![Copilot maturity ladder across knowledge, harness, execution, authority and evidence, exported by draw.io Desktop](diagrams/agentic-de.png)
+
 <!-- BEGIN GENERATED DIAGRAM: run `ffia diagrams render`; do not edit by hand -->
 
 > Generated from [`education/architecture/views/agentic-de.yaml`](../../education/architecture/views/agentic-de.yaml). Edit the YAML, then run `ffia diagrams render`.

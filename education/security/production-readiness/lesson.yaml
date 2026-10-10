@@ -6,6 +6,7 @@ summary: >-
   gate changes through Git and deterministic evaluation, and control cost without confusing
   local evidence with production readiness.
 status: LOCAL
+pattern_ids: [P14, P15, P18]
 learning_objectives:
   - Customize an industry scenario without changing baseline policy or committing customer identity.
   - Trace tool-access threats and separate implemented controls from required production controls.
@@ -58,6 +59,6 @@ production_notes:
   - Review SBOMs, license obligations and checksums; no automatic cloud deployment or publication.
   - Test access-denial cases, injection resistance, recovery, telemetry and budget alerts in the target tenant.
   - Keep previews opt-in and always identify LOCAL, SIMULATED, LIVE and recorded evidence accurately.
-sources: [github-codeql-configuration, fabric-waf, fabric-rest-identity, foundry-mcp-governance]
+sources: [github-codeql-configuration, fabric-waf, fabric-rest-identity, foundry-mcp-governance, baseline-foundry-chat, fabric-deployment-patterns, apim-mcp]
 related_labs: [lab-governed-change]
 related_guides: [hc-01-fabric-mcp-powerbi-medallion-lab, mfg-01-foundry-fabric-sales-insights]

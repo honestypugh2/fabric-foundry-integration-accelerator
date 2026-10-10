@@ -1,0 +1,26 @@
+id: governed-data-foundations
+area: architecture
+title: "From relations to governed lakehouse context"
+summary: Learn the data independence, grain, keys, relational operations and semantic contracts that make modern Fabric context trustworthy.
+status: LOCAL
+pattern_ids: [P01, P03, P10, P12]
+learning_objectives:
+  - Explain how logical meaning differs from physical storage.
+  - Diagnose double counting, missing keys and ambiguous measures before involving a model.
+  - Design an experiment that checks a data contract against a deterministic baseline.
+concepts:
+  - {term: Grain, definition: "What one row represents; joining incompatible grains can multiply a measure."}
+  - {term: Data independence, definition: "A logical interface can remain stable when storage or physical representation changes."}
+  - {term: Semantic contract, definition: "Agreed entities, relationships, units, filters and measure definitions that consumers can test."}
+evidence:
+  - {statement: "The relational model is foundational research about relations and independence from physical representation, not a Fabric product specification.", category: DOCUMENTED BEHAVIOR, sources: [research-relational-model]}
+  - {statement: "This repository builds synthetic medallion layers and compares measures with a deterministic expected baseline.", category: SIMULATED LOCALLY}
+try_it:
+  - {label: Build and verify synthetic layers, command: ffia data build, result_label: LOCAL}
+copilot_prompt: Explain the grain and join keys in the synthetic Gold SQL. Predict a double-counting failure and propose a test before editing anything.
+claude_code_prompt: Read AGENTS.md. Explain the synthetic semantic contract and propose a LOCAL grain-validation experiment. Do not change a workspace.
+production_notes:
+  - Assign business owners to measure definitions, not just technical owners to tables.
+  - Validate row-level access and aggregate disclosure separately from data correctness.
+sources: [research-relational-model, fabric-medallion, fabric-direct-lake]
+related_guides: [hc-01-fabric-mcp-powerbi-medallion-lab, mfg-01-foundry-fabric-sales-insights]

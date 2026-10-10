@@ -21,7 +21,7 @@ def print_report(report: ReadinessReport) -> None:
 
 def _cmd_readiness(args: argparse.Namespace) -> int:
     settings = Settings()
-    bindings = load_bindings(settings.config_root, settings.overlay)
+    bindings = load_bindings(settings.config_root, settings.overlay, settings=settings)
     tenant_id = args.tenant or (bindings.tenant_id if bindings else None)
     if not tenant_id:
         sys.stderr.write(

@@ -6,8 +6,9 @@ summary: >-
   How the educational app, the control plane, the local MCP server, the providers, policies,
   data and audit log fit together in this repository, and which parts are live right now.
 cue: >-
-  This is the system you are using. Turn on the runtime overlay: every box that is green is
-  answering right now; grey boxes arrive in later phases and are never faked.
+  This is the system you are using. Interactive startup is live-first HYBRID with labeled
+  LOCAL read fallback. The runtime overlay separates configured providers from observed
+  calls; green configuration is not proof of cloud execution. Offline demos stay offline.
 columns: 7
 rows: 6
 doc: system-architecture
@@ -15,12 +16,12 @@ aligned_to: [baseline-foundry-chat, fabric-mcp-local, mcp-specification]
 pattern_ids: [P08, P09, P16, P17]
 zones:
   - {id: workstation, label: "Your workstation (offline-capable)", kind: local, col: 0, row: 0, cols: 6, rows: 6}
-  - {id: cloud, label: "Microsoft cloud (opt-in)", kind: tenant, col: 6, row: 0, cols: 1, rows: 6}
+  - {id: cloud, label: "Microsoft cloud (live-first app)", kind: tenant, col: 6, row: 0, cols: 1, rows: 6}
 nodes:
   - {id: web-app, icon: general/Browser, label: "Educational app", sublabel: "React + TypeScript + Vite", kind: client, state: implemented, col: 0, row: 1, component: learner-app, repo_path: frontend/src, runtime: api}
   - {id: coding-agent, icon: general/Code, label: "GitHub Copilot / Claude Code", sublabel: "Reads AGENTS.md", kind: harness, state: implemented, col: 0, row: 4, component: coding-agents, repo_path: AGENTS.md}
   - {id: vite-proxy, label: "Vite dev server", sublabel: "Proxies /api (same origin)", kind: service, state: implemented, col: 1, row: 1, repo_path: frontend/vite.config.ts, summary: "Serves the app on port 5173 and forwards /api to the control plane, so the browser holds no API host or credentials."}
-  - {id: mcp-config, icon: general/File, label: ".mcp.json", sublabel: "Shared by every harness", kind: knowledge, state: implemented, col: 1, row: 4, repo_path: .mcp.json, summary: "The portable MCP configuration read by VS Code, Copilot CLI and Claude Code. It lists Microsoft Learn and the local ffia-local server."}
+  - {id: mcp-config, icon: general/File, label: ".mcp.json", sublabel: "Fabric-first, LOCAL fallback", kind: knowledge, state: implemented, col: 1, row: 4, repo_path: .mcp.json, summary: "VS Code, Copilot CLI and documented-only Claude Code share the pinned Fabric MCP server, Microsoft Learn and ffia-local. These external tool paths are separate from the application's REST provider."}
   - {id: api, label: "FastAPI control plane", sublabel: "Thin routes, correlation IDs", kind: service, state: implemented, col: 2, row: 1, repo_path: src/fabric_foundry_accelerator/api, runtime: api, summary: "The control plane. Routes validate input and call services; errors come back in one problem shape. OpenAPI is exported and the frontend types are generated from it."}
   - {id: ffia-local, label: "ffia-local MCP server", sublabel: "stdio, allow-listed tools", kind: mcp, state: implemented, col: 2, row: 4, component: ffia-local-mcp, repo_path: src/fabric_foundry_accelerator/mcp/server.py, runtime: mcp}
   - {id: learn-mcp, label: "Microsoft Learn MCP", sublabel: "Documentation, no tenant", kind: external, state: documented, col: 2, row: 5, summary: "The public Microsoft Learn MCP server used for how-to questions. It needs network access but no tenant or credentials."}
@@ -34,8 +35,9 @@ nodes:
   - {id: local-provider, label: "Local Fabric provider", sublabel: "DuckDB over Parquet", kind: local, state: implemented, col: 4, row: 3, component: local-fabric-provider, repo_path: src/fabric_foundry_accelerator/providers/fabric/local.py, runtime: fabric-local}
   - {id: synthetic-data, icon: general/Folder_Blank, label: "Synthetic medallion data", sublabel: "data/synthetic", kind: data, state: implemented, col: 5, row: 3, repo_path: data/synthetic, summary: "Generated synthetic CSVs, built Bronze, Silver and Gold Parquet, semantic model contracts and expected baselines. No real data."}
   - {id: agents, label: "Agent service", sublabel: "Router, LOCAL agent, eval, workflow", kind: service, state: implemented, col: 5, row: 1, repo_path: src/fabric_foundry_accelerator/agents, runtime: agents, summary: "Asks the sales agent through the provider router: the deterministic LOCAL agent offline, the live Foundry agent when opted in. Also runs the agent evaluation suite and the Agent Framework monthly-insights workflow (drafts only; nothing is sent)."}
-  - {id: foundry, icon: ai_machine_learning/Foundry_Agent_Service, label: "Foundry Agent Service", sublabel: "Agents (live, opt-in)", kind: foundry, state: tenant-validation, col: 6, row: 1, component: foundry-agent, repo_path: src/fabric_foundry_accelerator/agents/foundry.py, runtime: foundry}
-  - {id: fabric-live, label: "Fabric REST and MCP", sublabel: "Live, read-only first", repo_path: src/fabric_foundry_accelerator/providers/fabric/live.py, kind: fabric, state: tenant-validation, col: 6, row: 3, component: fabric-mcp, runtime: fabric-live}
+  - {id: foundry, icon: ai_machine_learning/Foundry_Agent_Service, label: "Foundry Agent Service", sublabel: "SDK, existing agent, live-first", kind: foundry, state: tenant-validation, col: 6, row: 1, component: foundry-agent, repo_path: src/fabric_foundry_accelerator/agents/foundry.py, runtime: foundry}
+  - {id: fabric-live, label: "Fabric application provider", sublabel: "REST reads, live-first", repo_path: src/fabric_foundry_accelerator/providers/fabric/live.py, kind: fabric, state: tenant-validation, col: 6, row: 3, component: fabric-mcp, runtime: fabric-live}
+  - {id: fabric-mcp, label: "Fabric MCP server", sublabel: "Guide 1 tool path", kind: mcp, state: tenant-validation, col: 3, row: 4, repo_path: config/mcp/profiles.yaml, summary: "The coding harness calls the actual pinned Fabric MCP tools. If unavailable, announce it and use only the guide's named ffia-local read fallback or SIMULATED write rehearsal. The application REST provider is not MCP evidence."}
 edges:
   - {id: app-to-proxy, source: web-app, target: vite-proxy, label: "/api requests", kind: access}
   - {id: proxy-to-api, source: vite-proxy, target: api, label: "Same-origin proxy", kind: access}
@@ -48,12 +50,13 @@ edges:
   - {id: evaluation-to-audit, source: evaluation, target: audit, label: "Evidence", kind: evidence}
   - {id: router-to-local, source: router, target: local-provider, label: "LOCAL read or fallback", kind: fallback}
   - {id: local-to-data, source: local-provider, target: synthetic-data, label: "Query Parquet", kind: data}
-  - {id: router-to-live, source: router, target: fabric-live, label: "LIVE read (opt-in)", kind: access}
+  - {id: router-to-live, source: router, target: fabric-live, label: "LIVE read first", kind: access}
   - {id: api-to-agents, source: api, target: agents, label: "Ask, evaluate, workflow", kind: reasoning}
   - {id: agents-to-data, source: agents, target: synthetic-data, label: "LOCAL agent queries", kind: data}
-  - {id: agents-to-foundry, source: agents, target: foundry, label: "Responses API (opt-in)", kind: reasoning}
+  - {id: agents-to-foundry, source: agents, target: foundry, label: "Responses SDK, live-first", kind: reasoning}
   - {id: agent-to-config, source: coding-agent, target: mcp-config, label: "Loads", kind: config}
   - {id: config-to-ffia, source: mcp-config, target: ffia-local, label: "Starts over stdio", kind: access}
+  - {id: config-to-fabric-mcp, source: mcp-config, target: fabric-mcp, label: "Real MCP tools first", kind: access}
   - {id: config-to-learn, source: mcp-config, target: learn-mcp, label: "Docs over HTTPS", kind: access}
   - {id: ffia-to-router, source: ffia-local, target: router, label: "Read tools", kind: access}
 traces:

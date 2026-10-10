@@ -16,7 +16,7 @@ reconciliation, throttling and the scoped writer remain **REQUIRES TENANT VALIDA
 
 | Component | Module | Responsibility |
 |---|---|---|
-| Settings | `config/settings.py` | `FFIA_*` environment variables and the git-ignored `.env.local`. No identifiers in code. |
+| Settings | `config/settings.py` | Process `FFIA_*` variables override git-ignored `.env.local`, which overrides git-ignored `.env`. No identifiers in code. |
 | Environment | `config/environment.py` · `config/environments/*.yaml` | `OFFLINE`, `HYBRID` or `LIVE`: which provider each capability prefers, the fallback and the circuit breaker |
 | Customer overlay | `config/overlay.py` · `config/customers/*.yaml` | Aliases, allowed reads and writes, approvals, feature flags and guides. See [customer-overlay.md](../customization/customer-overlay.md) |
 | Policy engine | `policies/engine.py` · `config/policies/*.yaml` | Deterministic write policy and the MCP tool allow-list |

@@ -8,6 +8,7 @@ import { Markdown } from "../../components/Markdown";
 import { PromptBlock } from "../../components/PromptBlock";
 import { QueryState } from "../../components/QueryState";
 import { KnowledgeCheck } from "./KnowledgeCheck";
+import { LearningContract } from "./LearningContract";
 
 function LessonBody({ lesson }: { readonly lesson: Lesson }) {
   const { level, setLevel } = useLevel();
@@ -19,6 +20,15 @@ function LessonBody({ lesson }: { readonly lesson: Lesson }) {
         {lesson.title} <Badge value={lesson.status} kind="status" />
       </h1>
       <p className="lead">{lesson.summary}</p>
+      <p className="meta">
+        Choose a practical or research lens, then select your depth. Research exercises are designs
+        to investigate—not preclaimed results.
+      </p>
+      {lesson.teaching ? (
+        <LearningContract key={lesson.id} brief={lesson.teaching} />
+      ) : (
+        <p className="notice">An instructional brief has not been authored for this lesson.</p>
+      )}
       <nav aria-label="Lesson level" className="level-tabs">
         <ul>
           {LEVELS.map((entry) => (
@@ -36,6 +46,7 @@ function LessonBody({ lesson }: { readonly lesson: Lesson }) {
           ))}
         </ul>
       </nav>
+      <h2>Go deeper at {levelLabel(level)}</h2>
       <section aria-label={`${levelLabel(level)} content`} className="lesson-body">
         {body ? <Markdown>{body.markdown}</Markdown> : <p>This level is not available.</p>}
       </section>
@@ -134,7 +145,7 @@ function LessonBody({ lesson }: { readonly lesson: Lesson }) {
           ))}
           {lesson.related_guides.map((id) => (
             <li key={id}>
-              Guide <Link to={`/guides/${id}`}>{id}</Link>
+              Use case <Link to={`/use-cases/${id}`}>{id}</Link>
             </li>
           ))}
           {lesson.prerequisites.map((id) => (

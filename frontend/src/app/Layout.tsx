@@ -3,14 +3,18 @@ import { LevelSwitcher } from "../components/LevelSwitcher";
 import { StatusBar } from "../components/StatusBar";
 
 const NAV: readonly { readonly to: string; readonly label: string }[] = [
-  { to: "/", label: "Home" },
-  { to: "/architecture", label: "Architecture" },
-  { to: "/patterns", label: "Patterns" },
+  { to: "/", label: "Workshop" },
   { to: "/learn", label: "Learn" },
-  { to: "/labs", label: "Labs" },
-  { to: "/guides", label: "Guides" },
+  { to: "/use-cases", label: "Use Cases" },
+  { to: "/patterns", label: "Patterns" },
+  { to: "/evidence", label: "Evidence" },
+];
+
+const TOOLS: readonly { readonly to: string; readonly label: string }[] = [
+  { to: "/architecture", label: "Architecture" },
+  { to: "/labs", label: "Hands-on labs" },
   { to: "/data", label: "Data" },
-  { to: "/agent", label: "Agent" },
+  { to: "/agent", label: "Agent sandbox" },
   { to: "/bakeoff", label: "Bake-off" },
   { to: "/demo", label: "Demo" },
 ];
@@ -53,6 +57,13 @@ export function Layout() {
           </nav>
         </div>
       </header>
+      <nav aria-label="Workshop tools" className="workshop-tools">
+        {TOOLS.map((item) => (
+          <NavLink key={item.to} to={item.to}>
+            {item.label}
+          </NavLink>
+        ))}
+      </nav>
       <main id="main" tabIndex={-1}>
         <Outlet />
       </main>
