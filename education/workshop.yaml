@@ -390,7 +390,20 @@ use_cases:
       - {title: Foundry reasoning, task: Explain the context and its supported conclusion., capability: "Foundry coordinates tools and reasons over returned context; Copilot helps author and test the integration.", control: Bounded tool use and evaluation., evidence: Observed tool event and baseline-reconciled answer.}
       - {title: Reviewed brief, task: Draft the monthly team explanation., capability: "The workflow produces a reviewable draft, not an automatically delivered business decision.", control: Human review and separately approved delivery., evidence: Synthetic draft and quality checks; scheduling is not claimed as executed.}
       - {title: Proposed data correction, task: Explain an upstream quality issue., capability: "The agent proposes; a steward approves; a scoped Fabric process corrects Silver.", control: Exact-target approval and verification., evidence: Quality diagnostics and reviewed plan; no automatic fix.}
-    production_gaps: [Monthly live scheduling and delivery are not verified., Web grounding needs licensing and boundary review; never send confidential figures in queries., Fresh server-side trace verification remains open., Claude Code is DOCUMENTED ONLY.]
+    production_gaps: [Monthly live scheduling and delivery are not verified., Web grounding needs licensing and boundary review; never send confidential figures in queries., Server-side traces were observed; complete assistant answers and revenue reconciliation remain unverified., Claude Code is DOCUMENTED ONLY.]
+    presenter_path: /talktracks/foundry-fabric-agents-workshop.html
+  - guide_id: dq-01-synthetic-quality-investigation
+    problem: "An engineer needs reproducible quality evidence before trusting analytics, without treating a model's proposed correction as an authorized write."
+    audience: "Data engineers, data stewards and authors extending the accelerator."
+    outcomes: [Reconcile nine quality counts against an independent synthetic baseline., Expose a controlled mismatch and recover without changing committed expectations., Rehearse a notebook proposal with separate approval and audit through shared infrastructure.]
+    lesson_ids: [governed-data-foundations, fabric-mcp-landscape, p08-human-in-the-loop, p16-evaluation-observability, spec-driven-delivery]
+    stages:
+      - {title: Contract before code, task: Define order-line grain and quality categories., capability: Copilot explains the contract and assumptions., control: Independent committed baseline., evidence: Nine named expected categories and explicit exclusions.}
+      - {title: Deterministic evidence, task: Run exact baseline reconciliation and the adverse experiment., capability: Local checks detect defects and reject mismatched expectations., control: Scratch copies and nonzero failure., evidence: LOCAL baseline pass and intentionally failing scratch comparison.}
+      - {title: Optional connected context, task: Inspect scoped item metadata through Fabric MCP., capability: Skills guide the procedure and MCP exposes permitted context., control: Read-only tools and disclosed named fallback., evidence: Actual label or explicit offline-path explanation; metadata is not notebook execution.}
+      - {title: Governed proposal, task: Rehearse notebook creation without running a correction., capability: "Shared API and UI support plan validation, separate approval and audit.", control: Exact target and no LIVE redirection., evidence: SIMULATED verification; self-approval and duplicate execution refused.}
+    questions: ["Which defects could change an aggregate?", "What would falsify this quality claim?", "Who may approve remediation?", "What did the rehearsal actually change?"]
+    production_gaps: [No live correction or notebook execution is certified., Synthetic checks do not establish production scale or access control., Claude Code is DOCUMENTED ONLY.]
     presenter_path: /talktracks/foundry-fabric-agents-workshop.html
 evidence:
   - id: fabric-environment

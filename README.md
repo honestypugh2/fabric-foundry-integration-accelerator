@@ -32,7 +32,13 @@ No Azure account is needed for offline learning. Normal interactive startup rema
 HYBRID; choose OFFLINE explicitly for your first cloud-free workshop.
 
 Use-Case Guides under `guides/`: **HC-01** (Fabric MCP + Power BI medallion lab, healthcare,
-synthetic) and **MFG-01** (Foundry + Fabric sales insights, manufacturing, synthetic).
+synthetic), **MFG-01** (Foundry + Fabric sales insights, manufacturing, synthetic), and
+[**DQ-01**](guides/dq-01-synthetic-quality-investigation/README.md) (quality investigation
+and governed notebook rehearsal; LOCAL/SIMULATED).
+
+To add another scenario, use the [authoring package](guides/_template/README.md),
+[readiness gates](docs/operations/use-case-readiness.md) and
+[verification record](docs/operations/use-case-authoring-verification.md).
 
 Workshop talk tracks (presenter scripts with portal, VS Code, web app and offline paths, generated
 from YAML with `ffia talktracks render`, also linked from the app's Demo page):
@@ -43,7 +49,7 @@ from YAML with `ffia talktracks render`, also linked from the app's Demo page):
   `ffia agents ask|eval|workflow`, and the app's Agent page)
 - Morning setup: [demos/MORNING-RUNBOOK.md](demos/MORNING-RUNBOOK.md)
 
-Both guides also have generated [Copilot](prompts/github-copilot/patterns.md) and
+All guides also have generated [Copilot](prompts/github-copilot/patterns.md) and
 [Claude Code](prompts/claude-code/patterns.md) prompt packs. The recorded bake-off compares
 Claude and GPT models **inside Copilot CLI**, not Copilot versus Claude Code.
 Replay evidence offline at `/bakeoff`; no new cloud operation occurs during replay.

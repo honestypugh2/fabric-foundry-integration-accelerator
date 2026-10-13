@@ -9,8 +9,16 @@ import argparse
 import json
 import sys
 
+from pydantic import ValidationError
+
 from fabric_foundry_accelerator.config.settings import Settings
-from fabric_foundry_accelerator.synthetic.manufacturing import INJECTED, MFG_PROFILES, TEAMS, build
+from fabric_foundry_accelerator.synthetic.manufacturing import (
+    INJECTED,
+    MFG_PROFILES,
+    TEAMS,
+    MfgBaseline,
+    build,
+)
 
 PROFILE = "mfg-sales-v1"
 FIXES: dict[str, str] = {
@@ -30,11 +38,28 @@ LABEL = "LOCAL (synthetic data on this machine; no Fabric or Foundry call)"
 def _cmd_quality(args: argparse.Namespace) -> int:
     settings = Settings()
     result = build(settings.data_root / "raw" / PROFILE, MFG_PROFILES[PROFILE])
+    failures: list[str] = []
+    if args.check:
+        try:
+            baseline = MfgBaseline.model_validate_json(
+                (settings.data_root / "expected" / f"{PROFILE}.json").read_text(encoding="utf-8")
+            )
+        except (OSError, ValidationError) as error:
+            sys.stderr.write(f"LOCAL quality baseline unavailable or invalid: {error}\n")
+            return 2
+        if baseline.profile != PROFILE:
+            failures.append("baseline profile does not match the selected dataset")
+        for name in sorted(set(result.data_quality) | set(baseline.data_quality)):
+            actual = result.data_quality.get(name)
+            expected = baseline.data_quality.get(name)
+            if actual != expected:
+                failures.append(f"{name}: expected {expected}, observed {actual}")
     if args.json:
-        sys.stdout.write(
-            json.dumps({"label": "LOCAL", "data_quality": result.data_quality}, indent=2) + "\n"
-        )
-        return 0
+        payload: dict[str, object] = {"label": "LOCAL", "data_quality": result.data_quality}
+        if args.check:
+            payload.update(baseline_passed=not failures, failures=failures)
+        sys.stdout.write(json.dumps(payload, indent=2) + "\n")
+        return 1 if failures else 0
     sys.stdout.write(f"Data-quality findings, {PROFILE} [{LABEL}]\n\n")
     for name, count in result.data_quality.items():
         sys.stdout.write(
@@ -46,7 +71,11 @@ def _cmd_quality(args: argparse.Namespace) -> int:
         "applies them in Silver. The semantic model then refreshes. The Fabric data agent itself is\n"
         "read-only and never changes data.\n"
     )
-    return 0
+    if args.check:
+        sys.stdout.write(f"Independent quality baseline: {'FAILED' if failures else 'PASSED'}\n")
+        for failure in failures:
+            sys.stderr.write(f"quality baseline: {failure}\n")
+    return 1 if failures else 0
 
 
 def _cmd_brief(args: argparse.Namespace) -> int:
@@ -97,6 +126,7 @@ def register(subparsers: argparse._SubParsersAction[argparse.ArgumentParser]) ->
     sub = mfg.add_subparsers(dest="mfg_command", required=True)
     quality = sub.add_parser("quality", help="data-quality findings and proposed corrections")
     quality.add_argument("--json", action="store_true")
+    quality.add_argument("--check", action="store_true", help="fail on committed baseline mismatch")
     quality.set_defaults(func=_cmd_quality)
     brief = sub.add_parser("brief", help="monthly brief for each business team")
     brief.add_argument("--team", help="team id, for example T-ENC")

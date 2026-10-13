@@ -4,10 +4,12 @@ import argparse
 import sys
 from pathlib import Path
 
+import yaml
+
+from fabric_foundry_accelerator.education.authoring import authoring_errors, authoring_warnings
 from fabric_foundry_accelerator.education.guides import load_guides
 from fabric_foundry_accelerator.education.lessons import (
     EducationReferences,
-    guide_diagram_errors,
     load_education,
 )
 from fabric_foundry_accelerator.patterns.catalog import load_catalog
@@ -16,21 +18,30 @@ from fabric_foundry_accelerator.research.sources import DEFAULT_REGISTRY_PATH, l
 
 def _cmd_check(args: argparse.Namespace) -> int:
     education_root = Path(args.education_root)
-    catalog = load_catalog(education_root)
-    refs = EducationReferences(
-        pattern_ids=frozenset(p.id for p in catalog.patterns),
-        source_ids=frozenset(s.id for s in load_registry(Path(args.sources)).sources),
-        guide_ids=frozenset(load_guides(Path(args.guides_root), catalog)),
-    )
     try:
+        catalog = load_catalog(education_root)
+        guides = load_guides(Path(args.guides_root), catalog)
+        refs = EducationReferences(
+            pattern_ids=frozenset(p.id for p in catalog.patterns),
+            source_ids=frozenset(s.id for s in load_registry(Path(args.sources)).sources),
+            guide_ids=frozenset(guides),
+        )
         library = load_education(education_root, refs)
-    except ValueError as error:
+        errors = authoring_errors(
+            library,
+            guides,
+            repo_root=Path(args.repo_root),
+            guides_root=Path(args.guides_root),
+            config_root=Path(args.config_root),
+        )
+    except (ValueError, OSError, yaml.YAMLError) as error:
         sys.stderr.write(f"education content is invalid:\n{error}\n")
         return 1
-    diagram_errors = guide_diagram_errors(library, load_guides(Path(args.guides_root), catalog))
-    if diagram_errors:
-        sys.stderr.write("guide diagrams are invalid:\n- " + "\n- ".join(diagram_errors) + "\n")
+    if errors:
+        sys.stderr.write("use-case authoring is invalid:\n- " + "\n- ".join(errors) + "\n")
         return 1
+    for warning in authoring_warnings(guides, Path(args.config_root)):
+        sys.stderr.write(f"authoring warning: {warning}\n")
     report = library.completeness_report()
     checks = sum(len(lesson.checks) for lesson in library.lessons)
     sys.stdout.write(
@@ -62,5 +73,7 @@ def register(subparsers: argparse._SubParsersAction[argparse.ArgumentParser]) ->
     check.add_argument("--education-root", default="education")
     check.add_argument("--guides-root", default="guides")
     check.add_argument("--sources", default=str(DEFAULT_REGISTRY_PATH))
+    check.add_argument("--repo-root", default=".")
+    check.add_argument("--config-root", default="config")
     check.add_argument("--min-coverage", type=float, default=0.0)
     check.set_defaults(func=_cmd_check)

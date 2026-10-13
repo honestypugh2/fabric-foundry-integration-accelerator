@@ -77,7 +77,7 @@ def test_patterns_and_guides(client: TestClient) -> None:
     assert ranked[0]["pattern_id"] == "P10"
     assert client.post("/api/v1/patterns/recommend", json={"needs": ["nope"]}).status_code == 422
     assert client.post("/api/v1/patterns/recommend", json={"needs": []}).status_code == 422
-    assert client.get("/api/v1/guides").json()[0]["id"] == GUIDE
+    assert GUIDE in {guide["id"] for guide in client.get("/api/v1/guides").json()}
     assert client.get(f"/api/v1/guides/{GUIDE}").json()["dataset_profile"] == "hc-lab-7file-v1"
     assert client.get(f"/api/v1/guides/{GUIDE}/steps/05-upload-data").json()["writes"] is True
     missing = client.get("/api/v1/guides/nope")

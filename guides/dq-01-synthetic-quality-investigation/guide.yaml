@@ -1,0 +1,166 @@
+id: dq-01-synthetic-quality-investigation
+title: "DQ-01: Investigate synthetic data quality with Copilot"
+industry: Cross-industry
+scenario: Detect quality defects, reconcile an independent baseline and rehearse a governed notebook proposal.
+summary: >-
+  Reuse synthetic manufacturing data to investigate duplicates, invalid relationships, prices,
+  dates and region labels. Copilot helps explain checks and propose a remediation notebook;
+  deterministic checks establish correctness. Rehearse notebook creation with separate approval
+  and audit. Neither a data correction nor a cloud deployment is performed.
+version: 1.0.0
+status: validated-offline
+provenance:
+  derived_from: original
+  sanitized_on: 2026-10-13
+  denylist_ref: config/privacy/denylist.yaml
+patterns: [P08, P10, P16, P19, P20, P21, P22, P23]
+maturity_levels: [L1, L2, L3, L4, L5]
+harnesses: [copilot-vscode, copilot-cli, claude-code]
+operating_rules:
+  - Use synthetic data only; no clinical or real-business conclusions.
+  - Run one step at a time and stop at its checkpoint.
+  - Offline first for this acceptance exercise; the application default remains live-first HYBRID.
+  - Check all nine categories against the committed baseline; never regenerate expected values to hide failure.
+  - A notebook-creation rehearsal is SIMULATED and is not a data correction or notebook run.
+  - Cloud mutations need a separate exact-target approved plan.
+  - Claude Code equivalents are DOCUMENTED ONLY; no cross-harness performance claim.
+tools:
+  - {name: GitHub Copilot, purpose: Explain checks and draft reviewed changes, status: GA, install: Use the repository's configured coding client.}
+  - {name: ffia local CLI and API, purpose: Deterministic quality checks and simulated governance, status: OSS, install: Follow the root locked-dependency setup.}
+  - {name: Fabric MCP, purpose: Optional read-only workspace context, status: OSS, install: Inherit the root fabric-first profile., required: false}
+dataset_profile: mfg-sales-v1
+expected_baseline: data/synthetic/expected/mfg-sales-v1.json
+diagram: mfg-01
+steps:
+  - id: 01-define-contract
+    title: Define the quality contract
+    objective: Explain grain, duplicate-sensitive aggregates and why a model is not a baseline.
+    copilot_prompt: >-
+      Read this guide, the manufacturing profile and its committed expected baseline. Explain the
+      order-line grain, nine quality categories and the separation between explanation and proof.
+      Read the governed-data-foundations lesson at your chosen depth. No cloud calls or edits.
+    claude_code_prompt: >-
+      Read this guide and governed-data-foundations. Explain order-line grain, the nine committed
+      quality categories and why fluent model output does not establish correctness. No cloud calls.
+    skills: [spec-driven-delivery]
+    tool_path: {provider: Local editor, tools: []}
+    writes: false
+    approval_required: false
+    checkpoint: The learner names the baseline, grain and authority boundary.
+    evidence_required: [A written contract names all nine categories and excludes automatic corrections.]
+    not_evidence: [An explanation or checked checkbox is not executed quality validation.]
+    offline_equivalent: Read the existing five-level foundations and research brief.
+    failure_modes: [An ambiguous grain must be clarified before aggregation.]
+    diagram_focus: [sales-sources, dq-checks]
+  - id: 02-reconcile-findings
+    title: Reconcile all quality findings
+    objective: Detect nine categories and compare exact counts with the independent committed baseline.
+    copilot_prompt: >-
+      Run ffia mfg quality --check --json locally. Report the LOCAL label, baseline_passed and
+      nine observed counts. On any mismatch, stop and inspect the check or input; do not rewrite
+      expected values. No Fabric or Foundry call.
+    claude_code_prompt: >-
+      Run ffia mfg quality --check --json and report the nine counts and independent baseline
+      result as LOCAL. Stop on mismatch without regenerating the baseline.
+    tool_path: {provider: Local synthetic DuckDB CLI, tools: [ffia mfg quality --check --json]}
+    writes: false
+    approval_required: false
+    checkpoint: All nine counts match exactly and the command exits zero.
+    evidence_required:
+      - "LOCAL baseline_passed=true with counts 12, 9, 7, 5, 3, 8, 4, 4 and 6 by named category."
+    offline_equivalent: The same deterministic quality reconciliation.
+    offline_command: ffia mfg quality --check --json
+    failure_modes: [Missing raw files or a baseline mismatch blocks the checkpoint.]
+    diagram_focus: [dq-checks, tracing]
+  - id: 03-break-and-recover
+    title: Challenge the baseline in a scratch copy
+    objective: Demonstrate that a nonzero mismatch is detected without changing repository data.
+    copilot_prompt: >-
+      Run the offline authoring regression in tests/offline/test_use_case_authoring.py. Explain
+      its scratch baseline mutation and failed reconciliation. Keep committed data unchanged.
+      State that detecting a controlled discrepancy is not production-scale validation.
+    claude_code_prompt: >-
+      Run tests/offline/test_use_case_authoring.py and explain how a scratch baseline mismatch
+      exits nonzero. Do not edit committed data or claim production validation.
+    tool_path: {provider: Local pytest runner, tools: [pytest tests/offline/test_use_case_authoring.py --no-cov]}
+    writes: false
+    approval_required: false
+    checkpoint: The adverse-case test observes a failed baseline gate; the original baseline still passes.
+    evidence_required: [A passing test records the intentionally failing scratch reconciliation.]
+    offline_equivalent: Network-blocked pytest with isolated synthetic files.
+    offline_command: pytest tests/offline/test_use_case_authoring.py --no-cov
+    failure_modes: [Changing the committed expectation invalidates the experiment.]
+    diagram_focus: [dq-checks, tracing]
+  - id: 04-inspect-connected-option
+    title: Compare optional Fabric MCP context
+    objective: Distinguish live item metadata from locally calculated quality measurements.
+    copilot_prompt: >-
+      For the connected option, first state Microsoft Fabric / fabric-mcp / core_search-catalog.
+      Perform only read-only catalogue inspection against the approved demo scope. If unavailable,
+      report the error and use only ffia-local list_fabric_items as LOCAL. Do not publish identifiers.
+      Metadata cannot prove the nine quality counts. Skip cloud calls for the offline acceptance path.
+    claude_code_prompt: >-
+      Explain the optional Fabric MCP read-only catalogue path and named LOCAL fallback. Do not
+      invoke a cloud tool without confirming the target scope. Metadata is not quality validation.
+    skills: [ffia-governed-fabric-change]
+    tool_path:
+      provider: Microsoft Fabric
+      server: fabric-mcp
+      tools: [core_search-catalog]
+      fallback:
+        server: ffia-local
+        tools: [list_fabric_items]
+        label: LOCAL
+        note: Disclose primary unavailability; this does not satisfy live verification.
+    writes: false
+    approval_required: false
+    checkpoint: The learner separates optional item visibility from deterministic quality evidence.
+    evidence_required: [A scoped read result with its actual label, or an explicit offline-path explanation.]
+    not_evidence: [An existing item is not proof of notebook execution.]
+    offline_equivalent: Explain the primary and fallback using the fabric-mcp-landscape lesson without calling cloud tools.
+    failure_modes: [Unavailable primary tooling cannot silently become a REST or CLI call.]
+    diagram_focus: [lakehouse, dq-checks]
+  - id: 05-rehearse-notebook-proposal
+    title: Rehearse a governed notebook proposal
+    objective: Practice plan validation, separate approval, simulated creation and audit without changing data.
+    copilot_prompt: >-
+      In the offline workshop, draft a create_notebook plan for dq_review_notebook, destination
+      LOCAL. Review the exact target and explain that creation does not execute a correction.
+      Use a separate approver, execute the SIMULATED rehearsal, and inspect verification and audit.
+    claude_code_prompt: >-
+      Explain and rehearse LOCAL create_notebook for dq_review_notebook through the offline API.
+      Require separate approval and inspect SIMULATED verification and audit. Do not run a notebook
+      or correct data.
+    skills: [ffia-governed-fabric-change]
+    tool_path: {provider: Local governed API, tools: [plan, validate, approve, simulate, audit]}
+    writes: true
+    approval_required: true
+    rehearsal:
+      operation: create_notebook
+      item_type: Notebook
+      item_name: dq_review_notebook
+      note: Simulation of notebook creation only; no remediation code runs.
+    checkpoint: SIMULATED verification and audit exist; duplicate execution and self-approval are refused.
+    evidence_required: [The exact plan, separate approval, SIMULATED result and correlated audit records.]
+    not_evidence: [Notebook creation is not a corrected dataset or live notebook run.]
+    offline_equivalent: Use the step's existing shared rehearsal panel.
+    failure_modes: [Self-approval is rejected., Duplicate execution requires a new reviewed plan and cannot repeat the effect.]
+    diagram_focus: [dq-agent, approval, fix-pipeline, tracing]
+  - id: 06-converge
+    title: Verify outcomes and record limits
+    objective: Connect requirements to independent tests and leave live/production claims explicitly open.
+    copilot_prompt: >-
+      Compare this guide's acceptance criteria with tests/offline/test_use_case_authoring.py and
+      the authoring verification record. Explain what Copilot, Skills, MCP, deterministic checks
+      and approval each contributed. Record unavailable live evidence and production gaps.
+    claude_code_prompt: >-
+      Map requirements to observed tests, distinguish LOCAL and SIMULATED outcomes, and list live
+      and production gaps. Keep Claude Code execution DOCUMENTED ONLY unless actually run.
+    tool_path: {provider: Local review, tools: []}
+    writes: false
+    approval_required: false
+    checkpoint: The learner can reproduce the baseline and explain which claims remain unverified.
+    evidence_required: [A requirement-to-test summary with explicit exclusions.]
+    offline_equivalent: Review the existing practical and research teaching lenses.
+    failure_modes: [Passing local tests cannot certify live permissions, scale or publication.]
+    diagram_focus: [approval, tracing]

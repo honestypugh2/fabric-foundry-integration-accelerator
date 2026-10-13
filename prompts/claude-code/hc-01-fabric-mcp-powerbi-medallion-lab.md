@@ -122,7 +122,7 @@ Fallback: LOCAL, ffia-local, inspect_medallion_architecture.
 
 ## 08-bronze-publish-run: Publish and run Bronze on Fabric Spark
 
-Provider: Fabric Data Engineering extension; server: not applicable; tools: fabricWorkspaceInfo, Microsoft Fabric Runtime kernel.
+Provider: Fabric Data Engineering extension; server: not applicable; tools: fabricWorkspaceInfo, fabricPublishNotebook, Microsoft Fabric Runtime kernel.
 
 Skills: spark-cli. Human approval required: yes.
 
@@ -138,7 +138,7 @@ Fallback: SIMULATED, ffia-local, generate_fabric_change_plan. Rehearses publishi
 
 ## 09-silver: Design, draft, publish and run Silver
 
-Provider: Fabric Data Engineering extension; server: not applicable; tools: Microsoft Fabric Runtime kernel.
+Provider: Fabric Data Engineering extension; server: not applicable; tools: fabricPublishNotebook, Microsoft Fabric Runtime kernel.
 
 Skills: e2e-medallion-architecture, spark-cli. Human approval required: yes.
 
@@ -154,7 +154,7 @@ Fallback: SIMULATED, ffia-local, generate_fabric_change_plan, detect_duplicate_r
 
 ## 10-gold: Design, draft, publish and run Gold
 
-Provider: Fabric Data Engineering extension; server: not applicable; tools: Microsoft Fabric Runtime kernel.
+Provider: Fabric Data Engineering extension; server: not applicable; tools: fabricPublishNotebook, Microsoft Fabric Runtime kernel.
 
 Skills: e2e-medallion-architecture, spark-cli. Human approval required: yes.
 
@@ -170,7 +170,7 @@ Fallback: SIMULATED, ffia-local, generate_fabric_change_plan, inspect_medallion_
 
 ## 11-semantic-model: Bootstrap and connect the Direct Lake semantic model
 
-Provider: Power BI Authoring MCP (local); server: powerbi-modeling-mcp; tools: connection, model inspection.
+Provider: Power BI Authoring MCP (local); server: powerbi-modeling-mcp; tools: connection_operations, table_operations, column_operations, relationship_operations.
 
 Skills: semantic-model-authoring. Human approval required: yes.
 
@@ -186,7 +186,7 @@ Fallback: SIMULATED, ffia-local, generate_fabric_change_plan, evaluate_measures.
 
 ## 12-relationships-and-measures: Apply relationships and measures, then reconcile DAX
 
-Provider: Power BI Authoring MCP (local); server: powerbi-modeling-mcp; tools: relationships, measures, DAX query.
+Provider: Power BI Authoring MCP (local); server: powerbi-modeling-mcp; tools: relationship_operations, column_operations, measure_operations, dax_query_operations.
 
 Skills: semantic-model-authoring. Human approval required: yes.
 
@@ -202,7 +202,7 @@ Fallback: SIMULATED, ffia-local, generate_fabric_change_plan, evaluate_against_b
 
 ## 13-model-review: Review the model (read-only)
 
-Provider: Power BI authoring skills + Power BI Authoring MCP; server: powerbi-modeling-mcp; tools: model inspection.
+Provider: Power BI authoring skills + Power BI Authoring MCP; server: powerbi-modeling-mcp; tools: model_operations, table_operations, column_operations, relationship_operations, measure_operations.
 
 Skills: semantic-model-authoring. Human approval required: no.
 

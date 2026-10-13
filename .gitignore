@@ -203,6 +203,13 @@ Thumbs.db
 # Local app runtime (pids/logs) from scripts/app.sh
 .run/
 
+# Fabric Data Engineering extension: generated stubs and private workspace/VFS caches.
+/.stubs/
+/.vfsmeta/
+/.vfscache/
+/.work-folder-info
+/????????-????-????-????-????????????/
+
 # Vendored third-party agent skills: installed by `ffia skills install` from a pinned, hashed
 # release (config/skills/fabric-skills.lock.yaml). Never committed.
 .claude/skills/e2e-medallion-architecture/

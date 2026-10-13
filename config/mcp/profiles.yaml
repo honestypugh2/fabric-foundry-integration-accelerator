@@ -33,10 +33,11 @@ servers:
     transport: stdio
     package: "@microsoft/powerbi-modeling-mcp"
     version: "1.0.0"
-    args: [--start]
+    args: [--start, --require-confirmation]
     description: >-
-      Power BI Modeling (authoring) MCP server (local). It has no read-only switch, so it is used
-      only against local PBIP/TMDL sandbox copies. A person accepts its EULA; configs never do.
+      Power BI Modeling (authoring) MCP server (local). Supports --read-only. Write mode is used
+      only against local PBIP/TMDL sandbox copies, with server confirmation and per-call approval.
+      A person accepts its EULA; configs never do.
 
 # Tools excluded from read-only profiles even when the server marks them read-only.
 never_read_only:
@@ -142,6 +143,18 @@ profiles:
         tools:
           - core_search-catalog
           - core_create-item
+
+  powerbi-modeling-readonly:
+    title: Power BI Modeling MCP — read-only inspection
+    purpose: >-
+      Inspect an explicitly selected synthetic model without enabling authoring. The server
+      enforces --read-only even though grouped tools still advertise write-capable annotations.
+      Starting the server or listing tools is not a model connection or evidence of a DAX run.
+    execution_label: LOCAL
+    requires: [a person accepts the Power BI Modeling MCP EULA, an explicitly selected synthetic model]
+    servers:
+      powerbi-modeling-mcp:
+        read_only: true
 
   powerbi-modeling-sandbox:
     title: Power BI Modeling MCP — local PBIP sandbox

@@ -16,8 +16,22 @@ With explicit approval, a synthetic client span was exported through the pinned 
 OpenTelemetry exporter. An Application Insights query observed two matching synthetic records
 after ingestion delay; successful query verification was recorded in the local audit.
 This verifies **LIVE client telemetry ingestion**, not a new Foundry agent execution.
-F8 remained paused. Server-side `sales-insights-agent` traces still require a new, approved live
-agent run and a query verifying those traces.
+Capacity was paused at that earlier check; resumed read-only readiness on 2026-10-13 observed
+active capacity. This is not current billing or cost evidence.
+
+On 2026-10-13, two explicitly approved Azure MCP Foundry invocations against the existing
+synthetic `sales-insights-agent` version 3 returned HTTP 504. Separately approved,
+resource-scoped Azure Monitor MCP queries observed server-side spans for those questions,
+including Fabric tool calls. This verifies **LIVE server-side telemetry visibility**, not
+successful answers. One trace records a Fabric response reporting an input-length rejection.
+
+Explicitly approved read-only SDK retrieval of existing responses recovered a PREVIEW Fabric
+duplicate-count result of 12, matching the independent LOCAL baseline and private workspace
+binding. The output item's state remains `in_progress` and no final assistant message was
+recovered; revenue retrieval returned 404. A successful span or top-level response status is
+not an end-to-end answer-quality pass. See the
+[dated verification record](../../docs/operations/use-case-authoring-verification.md).
+No monitoring deployment, diagnostic-setting change or agent-version update was performed.
 
 ## Operator walkthrough
 

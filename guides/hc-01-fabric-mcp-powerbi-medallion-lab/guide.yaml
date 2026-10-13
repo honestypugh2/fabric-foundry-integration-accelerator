@@ -231,14 +231,15 @@ steps:
     objective: Publish the reviewed notebook and run it once on remote Fabric Spark.
     copilot_prompt: >-
       The Bronze draft is reviewed. Check the current Fabric Data Engineering workspace with
-      fabricWorkspaceInfo and require <WORKSPACE_ID>. Publish the reviewed notebook as MCP_01_Bronze with
-      a supported operation and name the tool you used. Confirm the cloud notebook ID, its source and its
-      default lakehouse. Then, with the notebook attached to the Microsoft Fabric Runtime kernel, run it
+      fabricWorkspaceInfo and require <WORKSPACE_ID>. After publication approval, use
+      fabricPublishNotebook to publish the reviewed notebook as MCP_01_Bronze and name the tool used.
+      Confirm the cloud notebook ID, its source and its default lakehouse. Stop for separate run approval.
+      After that approval, with the notebook attached to the Microsoft Fabric Runtime kernel, run it
       once and report each table's input and persisted counts. Stop on any failure.
     claude_code_prompt: >-
       In VS Code (Claude harness) or the Fabric portal, publish the reviewed notebook, confirm its cloud ID
       and lakehouse binding, run it once on Fabric Spark, and report per-table counts. Name the provider.
-    tool_path: {provider: Fabric Data Engineering extension, tools: [fabricWorkspaceInfo, Microsoft Fabric Runtime kernel], fallback: {tools: [generate_fabric_change_plan], label: SIMULATED, note: "Rehearses publishing the notebook; the local Bronze build is `ffia data build`."}}
+    tool_path: {provider: Fabric Data Engineering extension, tools: [fabricWorkspaceInfo, fabricPublishNotebook, Microsoft Fabric Runtime kernel], fallback: {tools: [generate_fabric_change_plan], label: SIMULATED, note: "Rehearses publishing the notebook; the local Bronze build is `ffia data build`."}}
     skills: [spark-cli]
     writes: true
     approval_required: true
@@ -264,7 +265,7 @@ steps:
     claude_code_prompt: >-
       Propose Silver rules (types, dates, bands, mappings, nulls, diagnostics) and stop. After approval,
       draft MCP_02_Silver.ipynb; publishing and running is a separate step.
-    tool_path: {provider: Fabric Data Engineering extension, tools: [Microsoft Fabric Runtime kernel], fallback: {tools: [generate_fabric_change_plan, detect_duplicate_records, preview_table], label: SIMULATED, note: "Diagnostics read the local Silver tables; publishing is rehearsed."}}
+    tool_path: {provider: Fabric Data Engineering extension, tools: [fabricPublishNotebook, Microsoft Fabric Runtime kernel], fallback: {tools: [generate_fabric_change_plan, detect_duplicate_records, preview_table], label: SIMULATED, note: "Diagnostics read the local Silver tables; publishing is rehearsed."}}
     skills: [e2e-medallion-architecture, spark-cli]
     writes: true
     approval_required: true
@@ -288,7 +289,7 @@ steps:
     claude_code_prompt: >-
       Propose the Gold grains, readmission and eligibility rule, and key checks; stop for review; then draft
       and separately run MCP_03_Gold with reconciliation totals printed.
-    tool_path: {provider: Fabric Data Engineering extension, tools: [Microsoft Fabric Runtime kernel], fallback: {tools: [generate_fabric_change_plan, inspect_medallion_architecture, evaluate_measures], label: SIMULATED, note: "Reads the local Gold tables; publishing is rehearsed."}}
+    tool_path: {provider: Fabric Data Engineering extension, tools: [fabricPublishNotebook, Microsoft Fabric Runtime kernel], fallback: {tools: [generate_fabric_change_plan, inspect_medallion_architecture, evaluate_measures], label: SIMULATED, note: "Reads the local Gold tables; publishing is rehearsed."}}
     skills: [e2e-medallion-architecture, spark-cli]
     writes: true
     approval_required: true
@@ -312,7 +313,7 @@ steps:
     claude_code_prompt: >-
       Connect to <MODEL_ID> with the Power BI Authoring MCP server and report tables, storage modes and
       relationships. Read-only.
-    tool_path: {provider: Power BI Authoring MCP (local), server: powerbi-modeling-mcp, tools: [connection, model inspection], fallback: {tools: [generate_fabric_change_plan, evaluate_measures], label: SIMULATED, note: "Rehearses the model creation; measures evaluate locally."}}
+    tool_path: {provider: Power BI Authoring MCP (local), server: powerbi-modeling-mcp, tools: [connection_operations, table_operations, column_operations, relationship_operations], fallback: {tools: [generate_fabric_change_plan, evaluate_measures], label: SIMULATED, note: "Rehearses the model creation; measures evaluate locally."}}
     skills: [semantic-model-authoring]
     writes: true
     approval_required: true
@@ -336,7 +337,7 @@ steps:
     claude_code_prompt: >-
       Propose relationships and measures; stop for review; then apply through Power BI Authoring MCP and
       reconcile DAX results with the Gold totals.
-    tool_path: {provider: Power BI Authoring MCP (local), server: powerbi-modeling-mcp, tools: [relationships, measures, DAX query], fallback: {tools: [generate_fabric_change_plan, evaluate_against_baseline], label: SIMULATED, note: "Rehearses the model change; the baseline check runs locally."}}
+    tool_path: {provider: Power BI Authoring MCP (local), server: powerbi-modeling-mcp, tools: [relationship_operations, column_operations, measure_operations, dax_query_operations], fallback: {tools: [generate_fabric_change_plan, evaluate_against_baseline], label: SIMULATED, note: "Rehearses the model change; the baseline check runs locally."}}
     skills: [semantic-model-authoring]
     writes: true
     approval_required: true
@@ -355,7 +356,7 @@ steps:
       relationship ambiguity, grain, date roles, hidden keys, descriptions, synonyms, measure definitions and
       unsupported clinical interpretations. Group findings by severity. Do not change the model.
     claude_code_prompt: Review <MODEL_ID> read-only for best practices and AI readiness; group findings by severity.
-    tool_path: {provider: Power BI authoring skills + Power BI Authoring MCP, server: powerbi-modeling-mcp, tools: [model inspection], fallback: {tools: [evaluate_against_baseline, evaluate_measures], label: LOCAL}}
+    tool_path: {provider: Power BI authoring skills + Power BI Authoring MCP, server: powerbi-modeling-mcp, tools: [model_operations, table_operations, column_operations, relationship_operations, measure_operations], fallback: {tools: [evaluate_against_baseline, evaluate_measures], label: LOCAL}}
     skills: [semantic-model-authoring]
     writes: false
     approval_required: false

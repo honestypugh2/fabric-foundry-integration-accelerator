@@ -239,7 +239,7 @@ def register(subparsers: argparse._SubParsersAction[argparse.ArgumentParser]) ->
     api.add_argument("--host", default="127.0.0.1")
     api.add_argument("--port", type=int, default=8000)
     api.add_argument(
-        "--offline", action="store_true", help="disable cloud providers for both guides"
+        "--offline", action="store_true", help="disable cloud providers for all use cases"
     )
     api.set_defaults(func=_cmd_serve_api)
     serve_sub.add_parser("mcp", help="local educational MCP server over stdio").set_defaults(

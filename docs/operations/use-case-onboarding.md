@@ -6,6 +6,10 @@ files. No onboarding step grants cloud-write authority.
 
 ## Outcome and foundations
 
+Start with [readiness gates](use-case-readiness.md) and the
+[authoring package](../../guides/_template/README.md). Use
+[DQ-01](../../guides/dq-01-synthetic-quality-investigation/README.md) as the asset-reuse example.
+
 1. Define the audience, business problem, measurable outcome and exclusions.
 2. Select the smallest relevant patterns from `education/patterns/catalog.yaml`.
 3. Identify foundational ideas and assumptions. Specify a falsifiable hypothesis, controlled
@@ -28,6 +32,11 @@ files. No onboarding step grants cloud-write authority.
    image in the frontend image component; missing static exports are explicitly disclosed.
 6. Reuse a structured presenter talk track and reference its rendered path from the story.
 
+Keep the root MCP profile unless the use case needs a reviewed narrower allowlist. A guide-scoped
+MCP file is conditional, not a reason to duplicate connections. Rehearsal operations must exist
+in global write policy and be permitted by the selected overlay; the actual plan validator
+enforces the overlay at execution time.
+
 The use-case catalogue and pattern coverage matrix are derived from validated registries, not
 two hard-coded scenario switches. A new story renders through the same overview and runner.
 Historical evidence links do not mark an entire use case live-certified.
@@ -35,13 +44,21 @@ Historical evidence links do not mark an entire use case live-certified.
 ## Validate
 
 ```bash
-ffia education check
-ffia sources render
-ffia schemas export
+ffia prompts render
 make fixtures
+ffia education check --min-coverage 1.0
+ffia prompts check
 ffia diagrams check
 ffia privacy scan
 ```
+
+`education check` validates baseline identity, required guide instructions, workshop references,
+diagram focus/PNG, presenter source/handout, skills, named MCP tools and policy rehearsal types.
+Extension-managed servers without a pinned tool catalogue produce explicit warnings: their
+documented operation names remain a connected-validation gap, not an offline tool-contract pass.
+Use `--repo-root`, `--guides-root`, `--education-root`, `--config-root` and `--sources` for a
+scratch authoring tree. Render sources only after source-registry edits, schemas only after
+contract changes, and diagrams/talk tracks only after their authored content changes.
 
 Run targeted Python, frontend and accessibility tests for the affected contracts and behavior.
 Preview the practical and research lenses and both mobile and desktop layouts. Capture only

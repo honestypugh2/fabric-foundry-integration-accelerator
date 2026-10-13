@@ -40,6 +40,32 @@ def test_committed_profiles_and_project_file_are_valid() -> None:
     assert profiles.profiles["fabric-authoring-gated"].writes
 
 
+def test_powerbi_modes_do_not_auto_accept_eula_or_enable_default_writes() -> None:
+    profiles = load_profiles(CONFIG_ROOT)
+    spec = profiles.servers["powerbi-modeling-mcp"]
+    readonly = profiles.profiles["powerbi-modeling-readonly"]
+    sandbox = profiles.profiles["powerbi-modeling-sandbox"]
+    assert not readonly.writes and not readonly.default
+    assert sandbox.writes and sandbox.approval == "per-call" and not sandbox.default
+    assert launch_args(spec, readonly.servers["powerbi-modeling-mcp"]) == (
+        "npx",
+        [
+            "-y",
+            "@microsoft/powerbi-modeling-mcp@1.0.0",
+            "--start",
+            "--require-confirmation",
+            "--read-only",
+        ],
+    )
+    assert launch_args(spec, sandbox.servers["powerbi-modeling-mcp"]) == (
+        "npx",
+        ["-y", "@microsoft/powerbi-modeling-mcp@1.0.0", "--start", "--require-confirmation"],
+    )
+    assert "powerbi-modeling-mcp" not in profiles.profiles["fabric-first"].servers
+    settings = json.loads((REPO_ROOT / ".vscode" / "settings.json").read_text(encoding="utf-8"))
+    assert settings["args"] == "--start --read-only --require-confirmation"
+
+
 def test_launch_args_pin_and_narrow_the_server() -> None:
     profiles = load_profiles(CONFIG_ROOT)
     usage = profiles.profiles["fabric-docs"].servers["fabric-mcp"]

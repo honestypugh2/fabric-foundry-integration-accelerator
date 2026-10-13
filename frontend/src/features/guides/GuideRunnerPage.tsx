@@ -223,7 +223,7 @@ function GuideView({
         </p>
       )}
       <p className="notice">
-        Both guides share the application runtime shown in the status bar. Normal startup is
+        All use cases share the application runtime shown in the status bar. Normal startup is
         live-first HYBRID: eligible reads use Azure first and disclose any LOCAL fallback. A
         configured provider or a checked checkpoint is not proof of a live operation. Guide-specific
         MCP tools remain mandatory; write rehearsals remain SIMULATED.

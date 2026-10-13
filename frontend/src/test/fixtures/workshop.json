@@ -1548,7 +1548,7 @@
         "production_gaps": [
           "Monthly live scheduling and delivery are not verified.",
           "Web grounding needs licensing and boundary review; never send confidential figures in queries.",
-          "Fresh server-side trace verification remains open.",
+          "Server-side traces were observed; complete assistant answers and revenue reconciliation remain unverified.",
           "Claude Code is DOCUMENTED ONLY."
         ],
         "questions": [
@@ -1593,6 +1593,65 @@
             "evidence": "Quality diagnostics and reviewed plan; no automatic fix.",
             "task": "Explain an upstream quality issue.",
             "title": "Proposed data correction"
+          }
+        ]
+      },
+      {
+        "audience": "Data engineers, data stewards and authors extending the accelerator.",
+        "guide_id": "dq-01-synthetic-quality-investigation",
+        "lesson_ids": [
+          "governed-data-foundations",
+          "fabric-mcp-landscape",
+          "p08-human-in-the-loop",
+          "p16-evaluation-observability",
+          "spec-driven-delivery"
+        ],
+        "outcomes": [
+          "Reconcile nine quality counts against an independent synthetic baseline.",
+          "Expose a controlled mismatch and recover without changing committed expectations.",
+          "Rehearse a notebook proposal with separate approval and audit through shared infrastructure."
+        ],
+        "presenter_path": "/talktracks/foundry-fabric-agents-workshop.html",
+        "problem": "An engineer needs reproducible quality evidence before trusting analytics, without treating a model's proposed correction as an authorized write.",
+        "production_gaps": [
+          "No live correction or notebook execution is certified.",
+          "Synthetic checks do not establish production scale or access control.",
+          "Claude Code is DOCUMENTED ONLY."
+        ],
+        "questions": [
+          "Which defects could change an aggregate?",
+          "What would falsify this quality claim?",
+          "Who may approve remediation?",
+          "What did the rehearsal actually change?"
+        ],
+        "stages": [
+          {
+            "capability": "Copilot explains the contract and assumptions.",
+            "control": "Independent committed baseline.",
+            "evidence": "Nine named expected categories and explicit exclusions.",
+            "task": "Define order-line grain and quality categories.",
+            "title": "Contract before code"
+          },
+          {
+            "capability": "Local checks detect defects and reject mismatched expectations.",
+            "control": "Scratch copies and nonzero failure.",
+            "evidence": "LOCAL baseline pass and intentionally failing scratch comparison.",
+            "task": "Run exact baseline reconciliation and the adverse experiment.",
+            "title": "Deterministic evidence"
+          },
+          {
+            "capability": "Skills guide the procedure and MCP exposes permitted context.",
+            "control": "Read-only tools and disclosed named fallback.",
+            "evidence": "Actual label or explicit offline-path explanation; metadata is not notebook execution.",
+            "task": "Inspect scoped item metadata through Fabric MCP.",
+            "title": "Optional connected context"
+          },
+          {
+            "capability": "Shared API and UI support plan validation, separate approval and audit.",
+            "control": "Exact target and no LIVE redirection.",
+            "evidence": "SIMULATED verification; self-approval and duplicate execution refused.",
+            "task": "Rehearse notebook creation without running a correction.",
+            "title": "Governed proposal"
           }
         ]
       }
@@ -1726,6 +1785,7 @@
         "guide-two-ui"
       ],
       "guide_ids": [
+        "dq-01-synthetic-quality-investigation",
         "hc-01-fabric-mcp-powerbi-medallion-lab",
         "mfg-01-foundry-fabric-sales-insights"
       ],
@@ -1779,6 +1839,7 @@
         "guide-one-ui"
       ],
       "guide_ids": [
+        "dq-01-synthetic-quality-investigation",
         "hc-01-fabric-mcp-powerbi-medallion-lab",
         "mfg-01-foundry-fabric-sales-insights"
       ],
@@ -1891,6 +1952,7 @@
         "foundry-grounded-answer"
       ],
       "guide_ids": [
+        "dq-01-synthetic-quality-investigation",
         "hc-01-fabric-mcp-powerbi-medallion-lab",
         "mfg-01-foundry-fabric-sales-insights"
       ],
@@ -1947,6 +2009,7 @@
         "guide-one-ui"
       ],
       "guide_ids": [
+        "dq-01-synthetic-quality-investigation",
         "hc-01-fabric-mcp-powerbi-medallion-lab"
       ],
       "lab_ids": [
@@ -1970,7 +2033,9 @@
         "agentic-de"
       ],
       "evidence_ids": [],
-      "guide_ids": [],
+      "guide_ids": [
+        "dq-01-synthetic-quality-investigation"
+      ],
       "lab_ids": [
         "lab-copilot-maturity-ladder"
       ],
@@ -1989,7 +2054,9 @@
         "agentic-de"
       ],
       "evidence_ids": [],
-      "guide_ids": [],
+      "guide_ids": [
+        "dq-01-synthetic-quality-investigation"
+      ],
       "lab_ids": [],
       "lesson_ids": [
         "copilot-maturity-ladder",
@@ -2004,7 +2071,9 @@
         "agentic-de"
       ],
       "evidence_ids": [],
-      "guide_ids": [],
+      "guide_ids": [
+        "dq-01-synthetic-quality-investigation"
+      ],
       "lab_ids": [],
       "lesson_ids": [
         "copilot-maturity-ladder",
@@ -2019,7 +2088,9 @@
         "agentic-de"
       ],
       "evidence_ids": [],
-      "guide_ids": [],
+      "guide_ids": [
+        "dq-01-synthetic-quality-investigation"
+      ],
       "lab_ids": [],
       "lesson_ids": [
         "copilot-maturity-ladder",

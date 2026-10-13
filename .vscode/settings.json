@@ -20,6 +20,7 @@
     "frontend"
   ],
   "typescript.tsdk": "frontend/node_modules/typescript/lib",
+  "args": "--start --read-only --require-confirmation",
   "files.exclude": {
     "**/__pycache__": true,
     "**/.pytest_cache": true,
@@ -29,5 +30,14 @@
     "/^az\\s+rest\\b/": false,
     "/^az\\s+fabric\\b/": false,
     "/^fab\\b/": false
+  },
+  "chat.agentSkillsLocations": {
+    ".agents/skills": true,
+    ".github/skills": true,
+    ".claude/skills": true,
+    "~/.agents/skills": true,
+    "~/.copilot/skills": true,
+    "~/.claude/skills": true,
+    "~/.vscode-server/extensions/synapsevscode.synapse-1.26.0/copilot/skills": true
   }
 }

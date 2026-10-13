@@ -61,6 +61,11 @@ cd ~/hc-01-lab/data/raw && sha256sum -c SHA256SUMS
 
 ## Prepare the connected tools
 
+Follow [notebook and Power BI tooling setup](../../docs/operations/notebook-powerbi-tooling.md)
+before publication or model work. The Fabric Notebook MCP server supplies inspection/documentation;
+`fabricPublishNotebook` is a separate VS Code tool and execution uses the remote kernel. Restart
+Power BI read-only, authorize its EULA explicitly, and verify actual client tool exposure.
+
 | Asset | Where | Notes |
 |---|---|---|
 | Guide-scoped agent files | `AGENTS.md`, `CLAUDE.md`, `.mcp.json` in this folder | `.mcp.json` is the rendered `hc01-lab` profile: the real Fabric MCP server with only the tools steps 02–05 name (writes approved per call), plus `ffia-local` as the labeled fallback. Each step in `guide.yaml` names its Fabric Skills (`skills`) and its fallback (`tool_path.fallback`). |

@@ -406,15 +406,41 @@ sources:
     title: Power BI Authoring (Modeling) MCP server
     url: https://learn.microsoft.com/power-bi/developer/mcp/power-bi-authoring-mcp
     publisher: Microsoft Learn
-    retrieved_date: 2026-10-05
+    retrieved_date: 2026-10-13
     technology: Model Context Protocol
     associated_patterns: [P12]
     status: GA
     key_architecture_statement: Local server (GA, npm @microsoft/powerbi-modeling-mcp 1.0.0) and hosted deployment (preview) for semantic model authoring.
     implementation_relevance: Semantic model authoring labs on PBIP/TMDL and Guide HC-01.
-    security_implications: Read/write; back up models first; metadata may appear in chat logs.
-    limitations: Hosted deployment is preview; local deployment reaches Power BI Desktop (Windows) and PBIP files.
+    security_implications: Read/write by default; use explicit read-only startup for inspection, require confirmation for authoring, accept the EULA only with human authorization, and back up models first.
+    limitations: Hosted deployment is preview; Desktop remains Windows-only, while the local MCP package supports Linux ARM64 and PBIP files. Tool discovery is not model access or execution.
     fallback: Reference TMDL and local PBIR validation.
+  - id: powerbi-authoring-mcp-repository
+    title: Power BI Authoring MCP server installation and EULA
+    url: https://github.com/microsoft/powerbi-modeling-mcp
+    publisher: Microsoft
+    retrieved_date: 2026-10-13
+    technology: Power BI Authoring MCP
+    associated_patterns: [P12]
+    status: GA
+    key_architecture_statement: The local server can be installed through a VS Code extension or the npm package, with explicit EULA acceptance before model operations.
+    implementation_relevance: Package 1.0.0 and its Linux ARM64 native binary completed actual MCP discovery; native help verified read-only and require-confirmation flags.
+    security_implications: The installed VS Code extension defaults to write mode and automatic EULA acceptance; the repository overrides startup arguments without accepting the license.
+    limitations: Grouped tool annotations remain write-capable in read-only mode; server discovery does not prove model connection, DAX execution or client tool exposure.
+    fallback: Stop blocked connected operations and use reviewed local model definitions without claiming MCP execution.
+  - id: fabric-vscode-data-engineering
+    title: Get started with the Fabric Data Engineering VS Code extension
+    url: https://learn.microsoft.com/fabric/data-engineering/setup-vs-code-extension
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-13
+    technology: Fabric notebook authoring
+    associated_patterns: [P10, P20]
+    status: GUIDANCE
+    key_architecture_statement: The extension brings notebook authoring and remote Spark execution into VS Code with separate sign-in, workspace selection and local or VFS modes.
+    implementation_relevance: Extension 1.26.0 registers native notebook publication tools and an independently verified notebook MCP server whose 11 tools cover inspection and documentation, not notebook publication or execution.
+    security_implications: Workspace and remote kernel selection must be independently checked; publication and notebook runs require separate approved scope.
+    limitations: Installing the extension does not inject its native tools into every CLI or SDK chat; local Spark is not remote Fabric execution.
+    fallback: Document the client limitation and use the assigned VS Code extension path; offline rehearsal stays LOCAL or SIMULATED.
   - id: mcp-specification
     title: Model Context Protocol specification versioning
     url: https://modelcontextprotocol.io/specification/versioning

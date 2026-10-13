@@ -369,7 +369,7 @@
       "approval_required": true,
       "checkpoint": "Seven Bronze Delta tables exist with persisted counts equal to the baseline.",
       "claude_code_prompt": "In VS Code (Claude harness) or the Fabric portal, publish the reviewed notebook, confirm its cloud ID and lakehouse binding, run it once on Fabric Spark, and report per-table counts. Name the provider.",
-      "copilot_prompt": "The Bronze draft is reviewed. Check the current Fabric Data Engineering workspace with fabricWorkspaceInfo and require <WORKSPACE_ID>. Publish the reviewed notebook as MCP_01_Bronze with a supported operation and name the tool you used. Confirm the cloud notebook ID, its source and its default lakehouse. Then, with the notebook attached to the Microsoft Fabric Runtime kernel, run it once and report each table's input and persisted counts. Stop on any failure.",
+      "copilot_prompt": "The Bronze draft is reviewed. Check the current Fabric Data Engineering workspace with fabricWorkspaceInfo and require <WORKSPACE_ID>. After publication approval, use fabricPublishNotebook to publish the reviewed notebook as MCP_01_Bronze and name the tool used. Confirm the cloud notebook ID, its source and its default lakehouse. Stop for separate run approval. After that approval, with the notebook attached to the Microsoft Fabric Runtime kernel, run it once and report each table's input and persisted counts. Stop on any failure.",
       "diagram_focus": [
         "de-extension",
         "spark",
@@ -415,6 +415,7 @@
         "substitution_allowed": false,
         "tools": [
           "fabricWorkspaceInfo",
+          "fabricPublishNotebook",
           "Microsoft Fabric Runtime kernel"
         ]
       },
@@ -467,6 +468,7 @@
         "server": null,
         "substitution_allowed": false,
         "tools": [
+          "fabricPublishNotebook",
           "Microsoft Fabric Runtime kernel"
         ]
       },
@@ -521,6 +523,7 @@
         "server": null,
         "substitution_allowed": false,
         "tools": [
+          "fabricPublishNotebook",
           "Microsoft Fabric Runtime kernel"
         ]
       },
@@ -570,8 +573,10 @@
         "server": "powerbi-modeling-mcp",
         "substitution_allowed": false,
         "tools": [
-          "connection",
-          "model inspection"
+          "connection_operations",
+          "table_operations",
+          "column_operations",
+          "relationship_operations"
         ]
       },
       "writes": true
@@ -621,9 +626,10 @@
         "server": "powerbi-modeling-mcp",
         "substitution_allowed": false,
         "tools": [
-          "relationships",
-          "measures",
-          "DAX query"
+          "relationship_operations",
+          "column_operations",
+          "measure_operations",
+          "dax_query_operations"
         ]
       },
       "writes": true
@@ -666,7 +672,11 @@
         "server": "powerbi-modeling-mcp",
         "substitution_allowed": false,
         "tools": [
-          "model inspection"
+          "model_operations",
+          "table_operations",
+          "column_operations",
+          "relationship_operations",
+          "measure_operations"
         ]
       },
       "writes": false

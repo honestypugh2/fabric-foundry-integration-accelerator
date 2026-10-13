@@ -9,6 +9,29 @@ const guide = fixtures.guideHc01;
 const GUIDE_URL = `/use-cases/${guide.id}`;
 
 describe("guide runner", () => {
+  it("discovers the real third guide and navigates its shared rehearsal", async () => {
+    mockApi(defaultRoutes);
+    renderApp("/use-cases");
+    await userEvent.click(await screen.findByRole("link", { name: fixtures.guideDq01.title }));
+    expect(
+      await screen.findByRole("heading", { name: "What are we improving?" }),
+    ).toBeInTheDocument();
+    const nav = screen.getByRole("navigation", { name: "Guide steps" });
+    await userEvent.click(
+      within(nav).getByRole("link", { name: /Rehearse a governed notebook proposal/ }),
+    );
+    const panel = await screen.findByRole("region", { name: /Rehearse this write/ });
+    expect(within(panel).getByRole("button", { name: "1. Plan and validate" })).toBeEnabled();
+    expect(screen.getByText("dq_review_notebook")).toBeInTheDocument();
+    expect(
+      await screen.findByRole("region", { name: "Where this step happens" }),
+    ).toBeInTheDocument();
+    await userEvent.click(screen.getByRole("link", { name: /^Next:/ }));
+    expect(
+      await screen.findByRole("heading", { name: "Step 6: Verify outcomes and record limits" }),
+    ).toBeInTheDocument();
+  });
+
   it("lists guides", async () => {
     mockApi(defaultRoutes);
     renderApp("/guides");
@@ -32,7 +55,7 @@ describe("guide runner", () => {
     expect(screen.getByText(step?.copilot_prompt ?? "")).toBeInTheDocument();
     expect(screen.getByText(step?.claude_code_prompt ?? "")).toBeInTheDocument();
     expect(screen.getByText(/does not change anything/)).toBeInTheDocument();
-    expect(screen.getByText(/Both guides share the application runtime/)).toHaveTextContent(
+    expect(screen.getByText(/All use cases share the application runtime/)).toHaveTextContent(
       /write rehearsals remain SIMULATED/,
     );
     const evidence = screen.getByRole("checkbox", { name: step?.evidence_required[0] ?? "" });

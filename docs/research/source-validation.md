@@ -24,6 +24,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Fabric IQ and Data Agents | [Fabric data agent concepts](#fabric-data-agent) | GA | 2026-10-05 |
 | Fabric IQ and Data Agents | [Ontology overview (Fabric IQ)](#fabric-iq-ontology) | PREVIEW | 2026-10-05 |
 | Fabric IQ and Data Agents | [What is Fabric IQ?](#fabric-iq-overview) | PREVIEW | 2026-10-05 |
+| Fabric notebook authoring | [Get started with the Fabric Data Engineering VS Code extension](#fabric-vscode-data-engineering) | GUIDANCE | 2026-10-13 |
 | GitHub CodeQL | [Workflow configuration options for code scanning](#github-codeql-configuration) | GUIDANCE | 2026-10-09 |
 | Microsoft Agent 365 | [Overview of Microsoft Agent 365](#agent-365) | GA | 2026-10-08 |
 | Microsoft Agent Framework | [Microsoft Agent Framework overview](#agent-framework) | GA | 2026-10-08 |
@@ -70,9 +71,10 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Model Context Protocol | [Fabric MCP Server (local) tools reference](#fabric-mcp-local) | GA | 2026-10-05 |
 | Model Context Protocol | [Choose a Microsoft Fabric MCP server](#fabric-mcp-servers-list) | GUIDANCE | 2026-10-05 |
 | Model Context Protocol | [Model Context Protocol specification versioning](#mcp-specification) | GA | 2026-10-05 |
-| Model Context Protocol | [Power BI Authoring (Modeling) MCP server](#powerbi-authoring-mcp) | GA | 2026-10-05 |
+| Model Context Protocol | [Power BI Authoring (Modeling) MCP server](#powerbi-authoring-mcp) | GA | 2026-10-13 |
 | Power BI | [Datasets - Execute Queries In Group (Power BI REST API)](#powerbi-execute-queries) | GA | 2026-10-07 |
 | Power BI | [Create report subscriptions with Copilot summaries](#powerbi-subscription-summaries) | PREVIEW | 2026-10-08 |
+| Power BI Authoring MCP | [Power BI Authoring MCP server installation and EULA](#powerbi-authoring-mcp-repository) | GA | 2026-10-13 |
 | Relational data foundations | [A relational model of data for large shared data banks](#research-relational-model) | GUIDANCE | 2026-10-09 |
 | Retrieval and grounding foundations | [Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks](#research-rag) | GUIDANCE | 2026-10-09 |
 | Spec-driven engineering | [Spec-Driven Development Quickstart](#spec-kit-quickstart) | OSS | 2026-10-09 |
@@ -338,6 +340,27 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Identity-delegated access; same-tenant requirements for Foundry integration. |
 | Limitations | Preview; behavior may change. |
 | Fallback | Local semantic YAML (ontology analog). |
+| Deprecation / replacement | — |
+
+## Fabric notebook authoring
+
+<a id="fabric-vscode-data-engineering"></a>
+
+### Get started with the Fabric Data Engineering VS Code extension
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/fabric/data-engineering/setup-vs-code-extension |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-13 |
+| Last updated | — |
+| Status | GUIDANCE |
+| Associated patterns | P10, P20 |
+| Key architecture statement | The extension brings notebook authoring and remote Spark execution into VS Code with separate sign-in, workspace selection and local or VFS modes. |
+| Implementation relevance | Extension 1.26.0 registers native notebook publication tools and an independently verified notebook MCP server whose 11 tools cover inspection and documentation, not notebook publication or execution. |
+| Security implications | Workspace and remote kernel selection must be independently checked; publication and notebook runs require separate approved scope. |
+| Limitations | Installing the extension does not inject its native tools into every CLI or SDK chat; local Spark is not remote Fabric execution. |
+| Fallback | Document the client limitation and use the assigned VS Code extension path; offline rehearsal stays LOCAL or SIMULATED. |
 | Deprecation / replacement | — |
 
 ## GitHub CodeQL
@@ -1238,14 +1261,14 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 |---|---|
 | URL | https://learn.microsoft.com/power-bi/developer/mcp/power-bi-authoring-mcp |
 | Publisher | Microsoft Learn |
-| Retrieved | 2026-10-05 |
+| Retrieved | 2026-10-13 |
 | Last updated | — |
 | Status | GA |
 | Associated patterns | P12 |
 | Key architecture statement | Local server (GA, npm @microsoft/powerbi-modeling-mcp 1.0.0) and hosted deployment (preview) for semantic model authoring. |
 | Implementation relevance | Semantic model authoring labs on PBIP/TMDL and Guide HC-01. |
-| Security implications | Read/write; back up models first; metadata may appear in chat logs. |
-| Limitations | Hosted deployment is preview; local deployment reaches Power BI Desktop (Windows) and PBIP files. |
+| Security implications | Read/write by default; use explicit read-only startup for inspection, require confirmation for authoring, accept the EULA only with human authorization, and back up models first. |
+| Limitations | Hosted deployment is preview; Desktop remains Windows-only, while the local MCP package supports Linux ARM64 and PBIP files. Tool discovery is not model access or execution. |
 | Fallback | Reference TMDL and local PBIR validation. |
 | Deprecation / replacement | — |
 
@@ -1287,6 +1310,27 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Uses Copilot in Fabric under capacity rules. |
 | Limitations | Preview; standard subscriptions only. |
 | Fallback | Scheduled email subscription without summary (GA). |
+| Deprecation / replacement | — |
+
+## Power BI Authoring MCP
+
+<a id="powerbi-authoring-mcp-repository"></a>
+
+### Power BI Authoring MCP server installation and EULA
+
+| Field | Value |
+|---|---|
+| URL | https://github.com/microsoft/powerbi-modeling-mcp |
+| Publisher | Microsoft |
+| Retrieved | 2026-10-13 |
+| Last updated | — |
+| Status | GA |
+| Associated patterns | P12 |
+| Key architecture statement | The local server can be installed through a VS Code extension or the npm package, with explicit EULA acceptance before model operations. |
+| Implementation relevance | Package 1.0.0 and its Linux ARM64 native binary completed actual MCP discovery; native help verified read-only and require-confirmation flags. |
+| Security implications | The installed VS Code extension defaults to write mode and automatic EULA acceptance; the repository overrides startup arguments without accepting the license. |
+| Limitations | Grouped tool annotations remain write-capable in read-only mode; server discovery does not prove model connection, DAX execution or client tool exposure. |
+| Fallback | Stop blocked connected operations and use reviewed local model definitions without claiming MCP execution. |
 | Deprecation / replacement | — |
 
 ## Relational data foundations

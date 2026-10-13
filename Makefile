@@ -118,7 +118,7 @@ run-mcp: ## Run the local FastMCP educational server (stdio)
 run-frontend: ## Run the frontend dev server
 	cd $(FRONTEND) && npm run dev
 
-run: ## Run both guides live-first with labeled read fallback; API_ARGS=--offline stays offline
+run: ## Run all use cases live-first with labeled read fallback; API_ARGS=--offline stays offline
 	@trap 'kill 0' INT TERM EXIT; \
 	($(ACTIVATE) && ffia serve api $(API_ARGS)) & \
 	(cd $(FRONTEND) && npm run dev) & \

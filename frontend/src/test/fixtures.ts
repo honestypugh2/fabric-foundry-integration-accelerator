@@ -15,6 +15,7 @@ import demoStatus from "./fixtures/demo-status.json";
 import evaluation from "./fixtures/evaluation.json";
 import execution from "./fixtures/execution.json";
 import guideHc01 from "./fixtures/guide-hc01.json";
+import guideDq01 from "./fixtures/guide-dq01.json";
 import guides from "./fixtures/guides.json";
 import labGovernedChange from "./fixtures/lab-governed-change.json";
 import knowledgeSimulated from "./fixtures/knowledge-simulated.json";
@@ -34,6 +35,7 @@ import recommend from "./fixtures/recommend.json";
 import runtimeStatus from "./fixtures/runtime-status.json";
 import signals from "./fixtures/signals.json";
 import viewHc01 from "./fixtures/view-hc01.json";
+import viewMfg01 from "./fixtures/view-mfg01.json";
 import viewReference from "./fixtures/view-reference.json";
 import viewSystemRuntime from "./fixtures/view-system-runtime.json";
 import viewSystem from "./fixtures/view-system.json";
@@ -60,6 +62,7 @@ export const fixtures = {
   evaluation,
   execution,
   guideHc01,
+  guideDq01,
   guides,
   knowledgeSimulated,
   knowledgeUnavailable,
@@ -79,6 +82,7 @@ export const fixtures = {
   runtimeStatus,
   signals,
   viewHc01,
+  viewMfg01,
   viewReference,
   viewSystem,
   viewSystemRuntime,
@@ -110,6 +114,7 @@ export const defaultRoutes: Routes = {
   "POST /api/v1/patterns/recommend": recommend,
   "GET /api/v1/guides": guides,
   "GET /api/v1/guides/hc-01-fabric-mcp-powerbi-medallion-lab": guideHc01,
+  "GET /api/v1/guides/dq-01-synthetic-quality-investigation": guideDq01,
   "GET /api/v1/education/lessons": lessons,
   "GET /api/v1/education/workshop": workshop,
   "GET /api/v1/education/lessons/p08-human-in-the-loop": lessonP08,
@@ -129,6 +134,7 @@ export const defaultRoutes: Routes = {
   "GET /api/v1/education/views/system": viewSystem,
   "GET /api/v1/education/views/system/runtime": viewSystemRuntime,
   "GET /api/v1/education/views/hc-01": viewHc01,
+  "GET /api/v1/education/views/mfg-01": viewMfg01,
   "GET /api/v1/agents/sales-insights-agent": agentProfile,
   "POST /api/v1/agents/ask": agentAnswer,
   "POST /api/v1/agents/evaluate": agentEval,

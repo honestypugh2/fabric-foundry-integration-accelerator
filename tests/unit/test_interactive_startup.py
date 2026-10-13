@@ -59,7 +59,7 @@ def test_unbound_hybrid_serves_both_guides_and_explicit_read_fallback(
         assert status["operating_mode"] == "HYBRID"
         assert "LIVE writes disabled" in status["write_mode"]
         guides = client.get("/api/v1/guides").json()
-        assert len(guides) == 2
+        assert len(guides) == len(container.guides)
         for guide in guides:
             assert client.get(f"/api/v1/guides/{guide['id']}").status_code == 200
         result = client.post("/api/v1/fabric/read", json={"operation": "list_workspaces"}).json()
