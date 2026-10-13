@@ -1,8 +1,29 @@
 # Guide HC-01: Fabric MCP + Power BI medallion lab (healthcare, synthetic)
 
-VS Code + GitHub Copilot agent mode with the local Fabric MCP server, remote Fabric Spark notebooks (Bronze, Silver, Gold), a Direct Lake semantic model edited through Power BI Modeling MCP and authoring skills, DAX reconciliation, and a two-page report. Every step has a Claude Code path and an offline equivalent. Synthetic data only; no clinical rules.
+VS Code + GitHub Copilot agent mode with the locally hosted **real Microsoft Fabric MCP**
+server, remote Fabric Spark notebooks, a Direct Lake semantic model, DAX reconciliation and a
+two-page report. **`ffia-local` is a separate synthetic educational server.** Local process
+location does not mean offline data. Alternate Claude Code prompts remain documented only.
+Synthetic data only; no clinical rules.
 
-Populated in: Phase 2-7.
+## Start this use case
+
+| Question | Answer |
+|---|---|
+| Outcome | Learn how Copilot, reviewed Skills and exact MCP tools improve a governed Fabric engineering workflow |
+| Audience | Data engineers and Power BI model/report authors |
+| Prerequisites | [Root installation](../../README.md#quick-start); for connected work, the exact tools/settings/OS constraints in [guide.yaml](guide.yaml) |
+| Effort | The linked engineering learning journey estimates 90 minutes; installation and the full 16-step live lab take additional environment-dependent time |
+| Offline path | Launch `make run API_ARGS=--offline` from the repo root; open Use Cases → HC-01; build the local reference below |
+| Connected path | Read [readiness](../../docs/operations/fabric-tenant-readiness.md), then step 01 tool setup and step 02's actual MCP call; every write needs approval |
+| First checkpoint | Step `01-set-up-tools`: required tools are callable and seven CSVs match SHA256SUMS; configured manifests alone are not proof |
+| Completion evidence | Follow each step's required evidence and reconcile with the baseline; local files/screenshots do not prove notebook execution or report publication |
+| Production gaps | Full live lab certification, production identity/network/operations and rollback verification remain separate |
+
+Read [scoped instructions](AGENTS.md), then submit one prompt from [guide.yaml](guide.yaml),
+stop at its checkpoint and retain the required evidence. The guide is offline-validated;
+actual connected steps must be verified through their assigned tools. See
+[dated verification](../../docs/operations/phase-verification.md).
 
 ## Architecture
 
@@ -13,7 +34,7 @@ Populated in: Phase 2-7.
 This is the intended workflow, not evidence that tenant writes ran. Claude Code remains
 DOCUMENTED ONLY in the bake-off; its alternate prompts are available for each step.
 
-## Available now (Phase 2)
+## Build and reconcile the local data
 
 | Asset | Where | Notes |
 |---|---|---|
@@ -29,7 +50,7 @@ ffia data export --profile hc-lab-7file-v1 --dest ~/hc-01-lab/data/raw
 cd ~/hc-01-lab/data/raw && sha256sum -c SHA256SUMS
 ```
 
-## Available now (Phase 3)
+## Follow checkpoints and rehearse changes
 
 | Asset | Where | Notes |
 |---|---|---|
@@ -38,7 +59,7 @@ cd ~/hc-01-lab/data/raw && sha256sum -c SHA256SUMS
 | Governed write rehearsal | `POST /api/v1/plans` → `/approvals` → `/fabric/change` with `destination: LOCAL` | SIMULATED. Rehearses the lakehouse, notebook, upload, model and report writes without a tenant. |
 | Baseline check | `POST /api/v1/evaluations/run` or the `evaluate_against_baseline` tool | Compares the measures with `data/synthetic/expected/hc-lab-7file-v1.json` |
 
-## Available now (Phase 5)
+## Prepare the connected tools
 
 | Asset | Where | Notes |
 |---|---|---|

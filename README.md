@@ -17,20 +17,19 @@ environment** for integrating **Microsoft Fabric** and **Microsoft Foundry**. It
 Learn it · See it · Build it · Run it · Break it · Recover it · Inspect it · Evaluate it ·
 Customize it · Productionize it — in one project, with **synthetic data only**.
 
-## Status
+## Start here: choose your outcome
 
-| Phase | Scope | Status |
-|---|---|---|
-| 0 | Research + architecture | ✅ Complete |
-| 1 | Repository foundation: uv/Python, React/TS/Vite, instructions, docs, quality tooling, CI | ✅ Complete |
-| 2 | Offline-first data foundation (synthetic medallion, recovery fixtures, Local Fabric Provider, dataset profiles) | ✅ Complete |
-| 3 | Application control plane (FastAPI, FastMCP, providers, router, circuit breaker, approvals, audit) | ✅ Complete |
-| 4 | Interactive educational application (explorers, learning paths, labs, guides, demo mode) | ✅ Complete |
-| 5 | Fabric integration (live read-only provider, gated writer, MCP profiles, skills, reference notebooks) | Implemented; external Core/IQ MCP integrations are profiles/documentation, not additional in-process adapters. Fresh Guide 1 MCP/Power BI execution requires its assigned tools. |
-| 6 | Foundry integration (agent port, LOCAL + Foundry agents, evaluation, tracing, Agent Framework workflow, Foundry IQ knowledge analog behind a preview flag) | ✅ Complete; dated live eval 5/5, live draft held by review gate; client telemetry ingestion verified, new server-side tracing still requires tenant verification |
-| 7 | GitHub Copilot + Claude Code (skills, prompt packs, bake-off) | ✅ Complete; ten recorded Copilot CLI model runs; Claude Code DOCUMENTED ONLY |
-| 8 | Security, CI/CD and production readiness | ✅ Repository implementation and LOCAL checks complete; CodeQL/release execution and production checklist remain external verification |
-| 9 | Final validation | ✅ LOCAL workshop regression checks passed on 2026-10-09; latest full Python suite 616 passed, frontend suite 99 passed, 30/30 education and zero-cloud offline demo. GitHub and production checks remain separate. |
+| I want to... | First three actions |
+|---|---|
+| Understand the architecture | Read the [repository map](docs/architecture/repository-map.md), choose a [learning depth](docs/education/learning-paths.md), then follow a workshop journey |
+| Try the workshop without cloud access | Follow [Quick start](#quick-start), choose the OFFLINE app launch, then open **Learn** or **Use Cases** |
+| Improve Fabric engineering with Copilot | Open [HC-01](guides/hc-01-fabric-mcp-powerbi-medallion-lab/README.md), check prerequisites, then stop at its first checkpoint |
+| Build agents over Fabric context | Open [MFG-01](guides/mfg-01-foundry-fabric-sales-insights/README.md), explain ownership boundaries, then compare offline answers with the baseline |
+| Add another use case | Define the outcome, follow [onboarding](docs/operations/use-case-onboarding.md), then validate the registry and teaching links |
+| Read or maintain the code | Follow the [code-reading path](docs/architecture/code-reading-path.md), run targeted checks, then use the [release gate](docs/operations/release-validation.md) |
+
+No Azure account is needed for offline learning. Normal interactive startup remains live-first
+HYBRID; choose OFFLINE explicitly for your first cloud-free workshop.
 
 Use-Case Guides under `guides/`: **HC-01** (Fabric MCP + Power BI medallion lab, healthcare,
 synthetic) and **MFG-01** (Foundry + Fabric sales insights, manufacturing, synthetic).
@@ -117,31 +116,47 @@ uv sync --frozen
 # Frontend
 cd frontend && npm ci && cd ..
 
-# Fresh clone only: use .env for Azure, Fabric and Foundry variables.
-# Do not overwrite an existing populated .env. See the environment configuration guide below.
+# First useful success: no Azure setup required
+make demo-offline
+```
+
+**Expected result:** `Release gate: PASSED` and zero cloud operations. Resolve errors before
+connecting providers. Installation needs package-registry access; offline refers to execution.
+
+### Choose one startup path
+
+These are **alternatives, not commands to run in sequence**.
+
+| Path | Start | Expected result / stop |
+|---|---|---|
+| **A. Workshop app (recommended)** | `make run API_ARGS=--offline` | Open http://localhost:5173; expect Workshop and OFFLINE status. Choose Learn or Use Cases at `/use-cases`. Ctrl+C stops this launch. |
+| **B. Headless offline demo** | `make demo-offline` | Ten-act narrative ending in `Release gate: PASSED`; no browser needed |
+| **C. Coding-client MCP** | Follow [MCP profiles](config/mcp/README.md) and the guide's tool setup | The coding client launches approved configured servers. `make run-mcp` starts only synthetic `ffia-local` stdio, not a website or the real Fabric MCP. Ctrl+C stops a manually launched server. |
+
+The app command starts both API (:8000, API reference at http://localhost:8000/docs) and
+frontend (:5173). Do not start `make run-api` before `make run`. Optional local exercises:
+`make data` builds layers; `make recovery-demo` rehearses recovery (SIMULATED).
+
+### Connect deliberately
+
+For a fresh clone only, create private configuration without overwriting an existing file:
+
+```bash
 test -f .env || cp .env.example .env
-
-# Validate everything (lint, types, tests + coverage, privacy scan, build, dependency audit)
-make validate
 ```
 
-Try the offline data path (no cloud access needed):
+Follow [environment configuration](docs/operations/environment-configuration.md), supply
+private bindings and authenticate. Stop the offline app, then run `make run` for live-first
+HYBRID. Inspect each result's provider, label and fallback; configuration is not LIVE proof.
+Leave optional telemetry unconfigured for an entirely local session.
 
-```bash
-make data            # build Bronze/Silver/Gold for every profile and validate against expected baselines
-make recovery-demo   # Open Mirroring snapshot + incremental + restore drill (SIMULATED)
-```
+If ports are occupied, reuse the instance or stop only your owned launch. For remote VS Code,
+forward the frontend port. See [startup troubleshooting](docs/operations/environment-configuration.md#startup-troubleshooting).
 
-Run the control plane live-first; offline demos remain explicitly offline:
+### Maintainer checks
 
-```bash
-make demo-check      # probe Fabric, Foundry, MCP, dataset, API and frontend; recommend a mode
-make demo-offline    # ten-act release gate (must print "Release gate: PASSED")
-make run-api         # live-first HYBRID API on http://127.0.0.1:8000 (OpenAPI at /docs)
-make run-mcp         # local educational MCP server (stdio), also registered in .mcp.json as ffia-local
-make run             # both guides at /guides; live-first HYBRID with labeled LOCAL read fallback
-make run API_ARGS=--offline  # both guides offline; no cloud providers
-```
+`make validate` is the full local quality/release gate, **not a prerequisite to view the app**.
+Run targeted checks first; see [release validation](docs/operations/release-validation.md).
 
 Architecture diagrams (draw.io, Azure Architecture Center style, generated from YAML) are in
 [`docs/architecture`](docs/architecture/README.md) and interactive in the app at `/architecture`.
@@ -207,6 +222,24 @@ Run `make help` for every target.
   APPROVE → EXECUTE → VERIFY → AUDIT.
 - Preview capabilities stay behind feature flags and are never required for the default demo.
   See [`docs/research/ga-preview-matrix.md`](docs/research/ga-preview-matrix.md).
+
+## Implementation history and verification scope
+
+**Implemented, locally verified, live observed and production-ready are different claims.**
+These phase labels describe history, not a learner sequence.
+
+| Phase | Scope | Evidence state |
+|---|---|---|
+| 0-1 | Research, architecture and locked tooling | Implemented; locally verified; sources are dated and workflow execution is separate |
+| 2-3 | Synthetic data and control plane | Locally verified; recovery/write rehearsals SIMULATED |
+| 4 | Educational workshop | Locally verified; teaching coverage is not certification |
+| 5 | Fabric integration | Application adapter and dated live reads; external Core/IQ MCP profiles/documentation; full HC-01 MCP/notebook/Power BI verification separate |
+| 6 | Foundry integration | Dated live evaluation 5/5 and client telemetry ingestion observed; Fabric agent tool PREVIEW; server-side traces and scheduling/delivery remain unverified |
+| 7 | Coding harnesses | Ten Copilot CLI model runs; Claude Code DOCUMENTED ONLY, not a cross-harness bake-off |
+| 8 | Security/release/production | Repository tooling and local checks recorded; GitHub quality/CodeQL DEFERRED; production certification unverified |
+| 9 | Final local validation | 2026-10-09: 616 backend tests, 99 frontend tests, 30/30 teaching coverage, zero-cloud offline demo; not current cloud health |
+
+See [phase verification](docs/operations/phase-verification.md) for exact evidence and gaps.
 
 ## License
 

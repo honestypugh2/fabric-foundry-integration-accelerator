@@ -49,3 +49,17 @@ approval. For existing-agent verification use `make demo-live` instead.
 - Strict LIVE: no local fallback.
 - Writes: live mutation flag remains off by default; no failed live write becomes a local write.
 - Tests and frontend fixture export ignore private dotenv files; opt-in live tests are separate.
+
+## Startup troubleshooting
+
+| Symptom | Check and next action |
+|---|---|
+| Port 8000 or 5173 is occupied | Do not run `make run-api` and then `make run`: the latter starts both processes. Reuse the instance or stop only your owned launch. |
+| Browser cannot connect | Read startup errors and use the Vite-reported URL. In remote VS Code, forward the frontend port and use its forwarded address. |
+| `ffia` is not found | Activate `.venv` in this terminal and confirm the locked install succeeded. |
+| LOCAL when expecting LIVE | Read the fallback reason and readiness findings. HYBRID fallback is disclosed, not live verification. |
+| Partial/invalid binding error | Correct private values without printing them and restart the API. Do not suppress the error or silently force simulation. |
+| MCP does not open a website | `ffia serve mcp` is a stdio local educational server. Coding-client MCP and the browser app are separate surfaces. |
+
+Ctrl+C in the combined app launch terminal stops that launch. It does not pause Fabric
+capacity or Azure resources; those require a separate approved operation.

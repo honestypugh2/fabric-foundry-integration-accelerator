@@ -10,6 +10,7 @@ repository, and the Microsoft guidance it is aligned to.
 | Diagram | What it shows |
 |---|---|
 | [repository-map.md](repository-map.md) | Clickable mapping, actual draw.io PNGs with editable sources, and both-use-case runtime screenshots |
+| [code-reading-path.md](code-reading-path.md) | Contracts-to-tests reading order, a request trace and code-shape decisions |
 | [learning-foundations.md](learning-foundations.md) | Focused concepts connecting data meaning, context, reasoning and independent verification |
 | [integration-paths.md](integration-paths.md) | Fabric MCP-first coding workflow versus application REST/SDK routing |
 | [reference-architecture.md](reference-architecture.md) | Fabric + Foundry reference architecture (context, reasoning, access, authority, evidence) |

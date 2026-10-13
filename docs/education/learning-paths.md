@@ -3,6 +3,15 @@
 Every lesson teaches five levels. The level is chosen once (header or lesson tabs) and applies
 across the architecture explorer, lessons and labs.
 
+## Three different progress systems
+
+- **Executive / L100-L400:** teaching depth appropriate to the audience.
+- **L1-L5 Copilot maturity:** degree of engineering assistance/orchestration, not lesson depth.
+- **Phases 0-9:** implementation history, not a learner sequence or readiness certification.
+
+Start with the [quick start](../../README.md#quick-start) and follow a journey's checkpoints.
+Developers can use the [code-reading path](../architecture/code-reading-path.md).
+
 | Level | Audience | Focus |
 |---|---|---|
 | Executive | Decision makers | Outcome, value, risk, governance, what is GA versus preview |
