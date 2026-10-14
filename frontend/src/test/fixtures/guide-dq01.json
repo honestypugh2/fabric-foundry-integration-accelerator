@@ -255,7 +255,7 @@
       "approval_required": false,
       "checkpoint": "The learner can reproduce the baseline and explain which claims remain unverified.",
       "claude_code_prompt": "Map requirements to observed tests, distinguish LOCAL and SIMULATED outcomes, and list live and production gaps. Keep Claude Code execution DOCUMENTED ONLY unless actually run.",
-      "copilot_prompt": "Compare this guide's acceptance criteria with tests/offline/test_use_case_authoring.py and the authoring verification record. Explain what Copilot, Skills, MCP, deterministic checks and approval each contributed. Record unavailable live evidence and production gaps.",
+      "copilot_prompt": "Compare this guide's acceptance criteria with tests/offline/test_use_case_authoring.py and the authoring verification record. Explain what GitHub Copilot, Skills, MCP, deterministic checks and approval each contributed. Record unavailable live evidence and production gaps.",
       "diagram_focus": [
         "approval",
         "tracing"
@@ -286,9 +286,9 @@
       "writes": false
     }
   ],
-  "summary": "Reuse synthetic manufacturing data to investigate duplicates, invalid relationships, prices, dates and region labels. Copilot helps explain checks and propose a remediation notebook; deterministic checks establish correctness. Rehearse notebook creation with separate approval and audit. Neither a data correction nor a cloud deployment is performed.",
+  "summary": "Reuse synthetic manufacturing data to investigate duplicates, invalid relationships, prices, dates and region labels. GitHub Copilot helps explain checks and propose a remediation notebook; deterministic checks establish correctness. Rehearse notebook creation with separate approval and audit. Neither a data correction nor a cloud deployment is performed.",
   "tenant_settings": [],
-  "title": "DQ-01: Investigate synthetic data quality with Copilot",
+  "title": "DQ-01: Investigate synthetic data quality with GitHub Copilot",
   "tools": [
     {
       "install": "Use the repository's configured coding client.",

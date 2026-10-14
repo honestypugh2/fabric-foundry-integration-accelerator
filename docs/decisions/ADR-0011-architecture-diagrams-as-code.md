@@ -35,7 +35,7 @@ Option 3.
   - Microsoft references (`aligned_to`) and pattern links.
 - **Honest nodes.** Every node states whether it is implemented in this repository, planned (with
   its phase), Microsoft-documented, preview, requires tenant validation, or optional. Nodes can
-  link to the component catalog for Executive–L400 descriptions, and can bind to a runtime
+  link to the component catalog for Executive through L400 descriptions, and can bind to a runtime
   capability.
 - **Shared layout.** `education/layout.py` computes a deterministic layout:
   - cards on a grid;
@@ -62,8 +62,8 @@ Option 3.
 ## Rationale
 
 - **One source:** the app, the draw.io files and the docs cannot disagree.
-- **Familiar conventions:** the Azure Architecture Center layout (icons, numbered workflow,
-  pillar considerations) is recognizable to architects.
+- **Familiar layout:** use Azure Architecture Center icons, numbered workflows and
+  pillar considerations so architects can follow the diagram.
 - **Verified alignment:** each view cites the Microsoft guidance it follows, checked on
   2026-10-07. No single first-party Fabric + Foundry reference architecture exists, and the docs
   say so.

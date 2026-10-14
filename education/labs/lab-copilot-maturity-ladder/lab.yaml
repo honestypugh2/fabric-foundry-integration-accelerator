@@ -1,8 +1,8 @@
 id: lab-copilot-maturity-ladder
-title: "Climb the Copilot maturity ladder (L1 → L5) offline"
+title: "Climb the GitHub Copilot maturity ladder (L1 → L5) offline"
 summary: >-
   Take one Silver-layer task in this repository from L1 Assisted to L5 Governed change with GitHub
-  Copilot (or Claude Code): explain a transform, ground the agent, apply a skill, inspect real
+  GitHub Copilot (or Claude Code): explain a transform, ground the agent, apply a skill, inspect real
   local context through read-only MCP tools, then propose a governed change that only a human can
   approve. Everything runs on synthetic data; results are labeled LOCAL or SIMULATED.
 level: l200
@@ -13,14 +13,14 @@ lessons: [copilot-maturity-ladder, copilot-surfaces]
 prerequisites:
   - "Repository set up: uv venv --python 3.14 .venv, source .venv/bin/activate, uv sync --frozen"
   - "Synthetic data built: ffia data build"
-  - "GitHub Copilot in VS Code agent mode or Copilot CLI (Claude Code optional); the model itself needs network access"
+  - "GitHub Copilot in VS Code agent mode or GitHub Copilot CLI (Claude Code optional); the model itself needs network access"
   - "No Azure sign-in and no Fabric workspace are required"
 steps:
   - stage: LEARN
     title: Know the ladder and the five roles
     instructions: >-
       Read the copilot-maturity-ladder lesson. Keep the mental model in front of you: KNOWLEDGE
-      (Skills, AGENTS.md) says how; EXECUTION (MCP, CLI, Git) does; the HARNESS (Copilot or Claude
+      (Skills, AGENTS.md) says how; EXECUTION (MCP, CLI, Git) does; the HARNESS (GitHub Copilot or Claude
       Code) runs the loop and asks permission; AUTHORITY (identity, roles, policy, human approval)
       decides; EVIDENCE (labels, correlation IDs, plans, audit) proves. Today you climb L1 to L5 on
       one task — adding a data-quality check on silver_encounters. Copy the scorecard columns into
@@ -31,7 +31,7 @@ steps:
   - stage: SEE
     title: L1 Assisted — explain a Silver transform
     instructions: >-
-      Open src/fabric_foundry_accelerator/synthetic/sql/silver/silver_encounters.sql. Ask Copilot to
+      Open src/fabric_foundry_accelerator/synthetic/sql/silver/silver_encounters.sql. Ask GitHub Copilot to
       explain it with no other context: what the typed CTE does, why TRY_CAST and try_strptime are
       used, how length-of-stay bands are built and which data-quality flags exist. Note any claim
       you cannot verify from the file itself — that is the L1 risk, plausible but unverified
@@ -47,7 +47,7 @@ steps:
       microsoft-learn MCP server from .mcp.json for any Fabric claim (for example how a Silver
       transform maps to a Fabric notebook or materialized lake view). The documentation server
       needs network access; offline, ground with AGENTS.md and docs/architecture/ only and say so.
-      Compare the two answers. L3 - installing Skills for Fabric is optional and online (Copilot
+      Compare the two answers. L3 - installing Skills for Fabric is optional and online (GitHub Copilot
       CLI - /plugin marketplace add microsoft/skills-for-fabric, then /plugin install
       fabric-skills@fabric-collection; pin a release tag). Offline, use the repository's own
       procedures instead - docs/architecture/control-plane.md and the guide
@@ -140,18 +140,18 @@ steps:
     instructions: >-
       Read patterns P19 (CLI + Skills + MCP), P20 (repo-first), P21 (cloud agent issue to pull
       request), P22 (parallel migration, preview) and P23 (headless review) in the pattern catalog.
-      Sketch how this lab's task would run at L6 - several Copilot app worktree sessions, or cloud
+      Sketch how this lab's task would run at L6 - several GitHub Copilot app worktree sessions, or cloud
       agent issues created from .github/ISSUE_TEMPLATE/agent-task.yml - and list the controls each
-      needs (sandbox, firewall, read-only MCP, CI gates, budget). The Copilot app is a technical
+      needs (sandbox, firewall, read-only MCP, CI gates, budget). The GitHub Copilot app is a technical
       preview; do not run L6 against any real workspace.
     commands:
       - "curl -s localhost:8000/api/v1/patterns/P22"
     expected: A short design note naming the L6 controls and why the pull request stays the approval point.
     evidence_category: PREVIEW LIMITATION
   - stage: TRY WITH COPILOT
-    title: Run the whole climb in Copilot
+    title: Run the whole climb in GitHub Copilot
     instructions: >-
-      In Copilot CLI (switch to plan mode with Shift+Tab first) or VS Code agent mode, use this
+      In GitHub Copilot CLI (switch to plan mode with Shift+Tab first) or VS Code agent mode, use this
       prompt - "Read AGENTS.md. Using only the ffia-local MCP server, climb from L1 to L5 on
       silver_encounters - explain silver/silver_encounters.sql, inspect the medallion with
       inspect_medallion_architecture, preview silver_encounters (limit 5), evaluate
@@ -166,7 +166,7 @@ steps:
     instructions: >-
       Start Claude Code in this repository with --permission-mode plan so it plans before acting;
       CLAUDE.md imports AGENTS.md and .mcp.json offers the same ffia-local server. Use the same
-      prompt as the Copilot step, word for word. Approve tool calls when prompted. Fill a second
+      prompt as the GitHub Copilot step, word for word. Approve tool calls when prompted. Fill a second
       scorecard row set and compare - same tools, same labels, same stopping point? Differences
       are observations about this run (model, version, prompt), not product claims; the formal
       bake-off is `ffia bakeoff prepare|grade` with the same five tasks for every harness.

@@ -2,10 +2,13 @@
 
 <!-- GENERATED FILE: edit docs/research/sources.yaml, then run `uv run ffia sources render`. -->
 
-Official product documentation overrides older samples. Community content never
-overrides authoritative product documentation. Status values: GA, PREVIEW,
-DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
-(official open-source project without a product lifecycle label).
+Start with official product documentation. Use community samples as supporting material,
+not as a replacement for the product docs. These references explain the design;
+they do not prove a tool ran in this repo.
+
+Status: GA, PREVIEW, DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE
+(architecture guidance), or OSS (official open-source project without a product
+lifecycle label). A missing optional field is shown as Not specified.
 
 ## Summary
 
@@ -103,7 +106,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | More agents mean more tool surfaces and identities to govern. |
 | Limitations | Guidance only. |
 | Fallback | Not applicable. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 ## Azure API Management
 
@@ -116,7 +119,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://learn.microsoft.com/azure/api-management/mcp-server-overview |
 | Publisher | Microsoft Learn |
 | Retrieved | 2026-10-05 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | GA |
 | Associated patterns | P15 |
 | Key architecture statement | APIM can expose REST APIs as governed MCP tools with centralized authentication, rate limiting and logging. |
@@ -124,7 +127,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Central policy enforcement point for tool access. |
 | Limitations | Tools only (no resources or prompts); not supported in APIM workspaces. |
 | Fallback | Local policy simulation. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 ## Azure Logic Apps
 
@@ -145,7 +148,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Connections use managed identity; scope mailbox and Teams permissions. |
 | Limitations | Preview; Standard tier. |
 | Fallback | Azure Functions timer trigger (GA) calling the Foundry SDK. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 ## Azure Monitor
 
@@ -158,7 +161,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://learn.microsoft.com/azure/azure-monitor/app/opentelemetry-enable |
 | Publisher | Microsoft Learn |
 | Retrieved | 2026-10-08 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | GA |
 | Associated patterns | P16 |
 | Key architecture statement | The Azure Monitor OpenTelemetry Distro sends OpenTelemetry traces, metrics and logs to Application Insights using a connection string. |
@@ -166,7 +169,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | The connection string is a secret (local .env only); spans never record question text. |
 | Limitations | The distro pulls beta instrumentation packages; only the span API is used directly. |
 | Fallback | Spans stay in-process (no exporter) when no connection string is set. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 ## Developer experience
 
@@ -179,7 +182,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://code.claude.com/docs/en/memory |
 | Publisher | Anthropic |
 | Retrieved | 2026-10-05 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | GA |
 | Associated patterns | P19, P23 |
 | Key architecture statement | Claude Code reads AGENTS.md only when no CLAUDE.md or CLAUDE.local.md exists; a CLAUDE.md can import it with @AGENTS.md. |
@@ -187,7 +190,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Instruction files are context, not enforced configuration; use permissions and hooks to enforce. |
 | Limitations | Direct AGENTS.md reading requires Claude Code 2.1.277 or later. |
 | Fallback | Not applicable. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="claude-code-skills"></a>
 
@@ -198,15 +201,15 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://code.claude.com/docs/en/skills |
 | Publisher | Anthropic |
 | Retrieved | 2026-10-05 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | GA |
 | Associated patterns | P19 |
 | Key architecture statement | Project skills load from .claude/skills/<name>/SKILL.md; custom commands are merged into skills. |
-| Implementation relevance | .claude/skills is the single skill folder read by both Copilot and Claude Code. |
+| Implementation relevance | .claude/skills is the single skill folder read by both GitHub Copilot and Claude Code. |
 | Security implications | Skills folders with plugin manifests require workspace trust. |
 | Limitations | Claude Code does not load .github/skills or .agents/skills. |
 | Fallback | Not applicable. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="copilot-cli-ga"></a>
 
@@ -225,7 +228,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | --allow-all-tools grants full local access; use scoped --allow-tool rules. |
 | Limitations | Local and cloud sandboxes are preview. |
 | Fallback | Recorded replay transcripts. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="copilot-instructions-support"></a>
 
@@ -236,15 +239,15 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://docs.github.com/en/copilot/reference/custom-instructions-support |
 | Publisher | GitHub Docs |
 | Retrieved | 2026-10-05 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | GA |
 | Associated patterns | P19, P21 |
-| Key architecture statement | Copilot surfaces read copilot-instructions.md, path-specific instructions and AGENTS.md with surface-specific support. |
+| Key architecture statement | GitHub Copilot surfaces read copilot-instructions.md, path-specific instructions and AGENTS.md with surface-specific support. |
 | Implementation relevance | AGENTS.md is the single source of truth; client-specific files stay thin. |
 | Security implications | Instructions are guidance, not enforcement; enforcement lives in policy and permissions. |
 | Limitations | github.com web chat does not read AGENTS.md. |
 | Fallback | Not applicable. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="skills-for-fabric"></a>
 
@@ -259,11 +262,11 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Status | OSS |
 | Associated patterns | P19, P20 |
 | Key architecture statement | Skills provide static procedural knowledge; MCP servers provide live execution; persona agents are experimental. |
-| Implementation relevance | Fabric Skills (microsoft/skills-for-fabric v0.3.18) power maturity level L3 in the Copilot labs. |
+| Implementation relevance | Fabric Skills (microsoft/skills-for-fabric v0.3.18) supply the procedures used at maturity level L3 in the GitHub Copilot labs. |
 | Security implications | Bundled MCP config grants all tools on write-capable servers; use the hardened profile. |
 | Limitations | Pre-1.0 open-source project without a product lifecycle label. |
 | Fallback | Accelerator repo skills derived from public documentation. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="vscode-mcp-servers"></a>
 
@@ -274,11 +277,11 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://code.visualstudio.com/docs/agent-customization/mcp-servers |
 | Publisher | Visual Studio Code documentation |
 | Retrieved | 2026-10-05 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | GA |
 | Associated patterns | P09 |
 | Key architecture statement | Portable workspace .mcp.json (mcpServers) is preferred; .vscode/mcp.json is deprecated for new servers. |
-| Implementation relevance | One root .mcp.json serves VS Code, Copilot CLI and Claude Code. |
+| Implementation relevance | One root .mcp.json serves VS Code, GitHub Copilot CLI and Claude Code. |
 | Security implications | Local MCP servers can run arbitrary code; add only trusted, pinned servers. |
 | Limitations | Agent Host does not forward servers requiring interactive input variables. |
 | Fallback | Not applicable. |
@@ -303,7 +306,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Least-privilege by user identity; responses may leave Fabric's compliance boundary depending on the consuming client. |
 | Limitations | Ontology source is preview; Copilot Studio and M365 Copilot consumption are preview. |
 | Fallback | Local deterministic data agent over semantic YAML with allow-listed queries. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="fabric-iq-ontology"></a>
 
@@ -322,7 +325,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Bindings inherit underlying item permissions. |
 | Limitations | Preview. |
 | Fallback | Local semantic YAML. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="fabric-iq-overview"></a>
 
@@ -341,7 +344,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Identity-delegated access; same-tenant requirements for Foundry integration. |
 | Limitations | Preview; behavior may change. |
 | Fallback | Local semantic YAML (ontology analog). |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 ## Fabric notebook authoring
 
@@ -354,7 +357,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://learn.microsoft.com/fabric/data-engineering/setup-vs-code-extension |
 | Publisher | Microsoft Learn |
 | Retrieved | 2026-10-13 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | GUIDANCE |
 | Associated patterns | P10, P20 |
 | Key architecture statement | The extension brings notebook authoring and remote Spark execution into VS Code with separate sign-in, workspace selection and local or VFS modes. |
@@ -362,7 +365,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Workspace and remote kernel selection must be independently checked; publication and notebook runs require separate approved scope. |
 | Limitations | Installing the extension does not inject its native tools into every CLI or SDK chat; local Spark is not remote Fabric execution. |
 | Fallback | Document the client limitation and use the assigned VS Code extension path; offline rehearsal stays LOCAL or SIMULATED. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 ## GitHub CodeQL
 
@@ -375,7 +378,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://docs.github.com/en/code-security/reference/code-scanning/workflow-configuration-options |
 | Publisher | GitHub Docs |
 | Retrieved | 2026-10-09 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | GUIDANCE |
 | Associated patterns | P08, P09 |
 | Key architecture statement | Advanced code scanning workflows support push, pull request and scheduled analysis with language-specific configuration. |
@@ -383,7 +386,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Scope security-events write to analysis jobs and protect publication through reviewed release artifacts. |
 | Limitations | Workflow configuration is not evidence of a completed scan or zero alerts; repository code-scanning availability and branch protections need operator verification. |
 | Fallback | Local lint, strict types, tests, dependency audits and privacy scan; not equivalent to CodeQL. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 ## GitHub Copilot surfaces
 
@@ -396,15 +399,15 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-on-github |
 | Publisher | GitHub Docs |
 | Retrieved | 2026-10-14 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | GUIDANCE |
 | Associated patterns | P20 |
 | Key architecture statement | GitHub.com supports repository questions, planning and delegated coding work alongside review and automation experiences. |
 | Implementation relevance | Customer and SE field playbooks distinguish GitHub repository workflows from local IDE and CLI work; verify actual surface availability and entitlement before demonstrating. |
 | Security implications | A delegated repository task does not authorize Fabric writes or justify transferring local tenant bindings and credentials into a cloud development environment. |
 | Limitations | Product documentation is not evidence of an executed app or cloud-agent task in this repository; client-specific verification remains deferred. |
-| Fallback | Reviewed local Copilot prompts, offline tests and the documented change/approval workflow. |
-| Deprecation / replacement | — |
+| Fallback | Reviewed local GitHub Copilot prompts, offline tests and the documented change/approval workflow. |
+| Deprecation / replacement | Not specified |
 
 ## Microsoft Agent 365
 
@@ -417,7 +420,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://learn.microsoft.com/microsoft-agent-365/overview |
 | Publisher | Microsoft Learn |
 | Retrieved | 2026-10-08 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | GA |
 | Associated patterns | P14 |
 | Key architecture statement | A governance and security control plane for AI agents: registry, Entra-based access, Purview and Defender integration; generally available since May 1, 2026, licensed per user. |
@@ -425,7 +428,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Central inventory and policy for agents. |
 | Limitations | Per-user licensing; works best with Microsoft 365 E5. |
 | Fallback | Not used in the offline demo. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 ## Microsoft Agent Framework
 
@@ -438,7 +441,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://learn.microsoft.com/agent-framework/overview/ |
 | Publisher | Microsoft Learn |
 | Retrieved | 2026-10-08 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | GA |
 | Associated patterns | P06, P08, P13 |
 | Key architecture statement | Successor to Semantic Kernel and AutoGen with agents, graph workflows, checkpointing, tool approval, MCP client support and OpenTelemetry. |
@@ -446,7 +449,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Tool approval enables human-in-the-loop for high-impact actions. |
 | Limitations | agent-framework-foundry 1.14.1 requires azure-ai-projects<2.8.0 and the pre-release azure-ai-inference 1.0.0b9, so it is not used; agent-framework-azure-ai is a stale release candidate. |
 | Fallback | The same workflow over the deterministic LOCAL agent. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="agent-framework-workflows"></a>
 
@@ -457,7 +460,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://learn.microsoft.com/agent-framework/workflows/ |
 | Publisher | Microsoft Learn |
 | Retrieved | 2026-10-08 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | GA |
 | Associated patterns | P06, P08, P16 |
 | Key architecture statement | Graph workflows of executors and edges, with agents as participants, human-in-the-loop pauses, checkpoints and observability. |
@@ -465,7 +468,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | A workflow orchestrates; it does not authorize. Delivery remains a governed write. |
 | Limitations | Checkpointing and human-in-the-loop pauses are not used yet; approval runs through the change flow. |
 | Fallback | Run the same executors over the LOCAL agent offline. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 ## Microsoft Fabric
 
@@ -486,7 +489,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Rules run under the creator's permissions. |
 | Limitations | Event-driven, not calendar-driven. |
 | Fallback | Local brief only. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="fabric-admin-tenant-settings"></a>
 
@@ -497,7 +500,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://learn.microsoft.com/rest/api/fabric/admin/tenants/list-tenant-settings |
 | Publisher | Microsoft Learn |
 | Retrieved | 2026-10-07 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | GA |
 | Associated patterns | P09 |
 | Key architecture statement | Returns tenant settings (settingName, title, enabled, security groups) in a value array with continuation; requires Tenant.Read.All and a Fabric administrator. |
@@ -505,7 +508,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Admin-only read; non-admins get a SKIPPED readiness check rather than a guess. |
 | Limitations | Setting names are not published as a stable catalog; titles can change. |
 | Fallback | Manual confirmation in the Fabric admin portal. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="fabric-ai-functions"></a>
 
@@ -524,7 +527,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Requires tenant switches for Copilot/Azure OpenAI; prompts and data are not logged per documentation. |
 | Limitations | Requires paid capacity (F2 or higher). |
 | Fallback | Deterministic local enrichment, labeled SIMULATED. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="fabric-create-lakehouse"></a>
 
@@ -543,7 +546,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Contributor role is broader than the single operation; the accelerator narrows it with policy, approval and a bound dev workspace. |
 | Limitations | Display names must be unique per workspace and type; 202 responses must be polled. |
 | Fallback | LOCAL simulated change flow; LIVE requests are refused, never redirected, without a writer. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="fabric-deployment-patterns"></a>
 
@@ -562,7 +565,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Workspace-level isolation is the primary blast-radius control for agentic changes. |
 | Limitations | Guidance only. |
 | Fallback | Not applicable. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="fabric-direct-lake"></a>
 
@@ -581,7 +584,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Direct Lake on SQL falls back to DirectQuery when SQL RLS/OLS/DDM is present; identity mode affects shortcut authorization. |
 | Limitations | Adding multiple tables from the same source table is not supported through the standard UI. |
 | Fallback | Local semantic YAML and PBIP/TMDL reference model. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="fabric-git-integration"></a>
 
@@ -600,7 +603,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | From 2026-12-01 users without read-write item permission lose Git integration access. |
 | Limitations | Cloud-hosted Azure DevOps/GitHub only; per-item-type support varies. |
 | Fallback | Local fabric/workspace definitions and dry-run deployment plans. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="fabric-lakehouse-list-tables"></a>
 
@@ -611,7 +614,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://learn.microsoft.com/rest/api/fabric/lakehouse/tables/list-tables |
 | Publisher | Microsoft Learn |
 | Retrieved | 2026-10-07 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | PREVIEW |
 | Associated patterns | P10 |
 | Key architecture statement | Lists lakehouse tables in a data array with continuationToken pagination; documented as preview and not recommended for production. |
@@ -619,7 +622,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Requires Lakehouse.Read.All or Lakehouse.ReadWrite.All. |
 | Limitations | Preview API; schema-enabled lakehouses are not supported (use the Fabric MCP onelake_list-tables tool). |
 | Fallback | Local lakehouse tables (LOCAL) in HYBRID mode. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="fabric-medallion"></a>
 
@@ -638,7 +641,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Layer separation supports least-privilege access (e.g., analysts read gold only). |
 | Limitations | Guidance, not an enforced product feature. |
 | Fallback | Local medallion pipeline over Parquet/DuckDB. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="fabric-notebook-definition"></a>
 
@@ -657,7 +660,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | A definition is code that runs with the caller's Spark identity; only reviewed, committed definitions are published. |
 | Limitations | The default lakehouse binding lives in notebook metadata; the reference notebooks leave it empty so no IDs are committed. |
 | Fallback | Local rendering and a local Spark 3.5 run of the same notebook code. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="fabric-open-mirroring-format"></a>
 
@@ -676,7 +679,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Mirroring does not propagate source RLS/OLS/dynamic data masking. |
 | Limitations | Schema changes require recreating the table folder; mirroring is not documented as a backup/DR mechanism. |
 | Fallback | Local landing-zone simulation and recovery lab. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="fabric-overview"></a>
 
@@ -695,7 +698,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Tenant, capacity, workspace and item boundaries drive authorization; Entra ID authenticates all access. |
 | Limitations | Requires a Fabric capacity for most workloads; features vary by region and SKU. |
 | Fallback | Local Fabric Educational Provider (synthetic, clearly labeled SIMULATED). |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="fabric-rest-identity"></a>
 
@@ -706,7 +709,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://learn.microsoft.com/rest/api/fabric/articles/identity-support |
 | Publisher | Microsoft Learn |
 | Retrieved | 2026-10-05 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | GA |
 | Associated patterns | P06, P09 |
 | Key architecture statement | Fabric REST APIs accept user, service principal and managed identity tokens, gated by tenant settings and per-API support. |
@@ -714,7 +717,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Service-principal access requires an admin tenant switch; least-privilege workspace roles apply. |
 | Limitations | Per-API identity support varies; long-running operations require polling. |
 | Fallback | Local Fabric provider. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="fabric-runtime-1-3"></a>
 
@@ -733,7 +736,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Notebook code runs with the caller's identity on the workspace capacity. |
 | Limitations | A local Spark run is LOCAL evidence only; Delta, OneLake paths and capacity behavior require tenant validation. |
 | Fallback | Local DuckDB build of the same SQL. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="fabric-trial"></a>
 
@@ -752,7 +755,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Trial capacity is per user; assign a dedicated dev workspace to it. |
 | Limitations | Time-limited; some features and regions differ from paid F SKUs. |
 | Fallback | An F2+ capacity in an Azure subscription of the tenant. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="fabric-waf"></a>
 
@@ -771,7 +774,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Security pillar guidance on identity, network isolation and data protection. |
 | Limitations | Guidance only. |
 | Fallback | Not applicable. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="mlv-data-quality"></a>
 
@@ -790,7 +793,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Rules run in the lakehouse under workspace permissions. |
 | Limitations | Spark SQL only. |
 | Fallback | Local Silver data-quality flags. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="semantic-link-validate"></a>
 
@@ -809,7 +812,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Runs in Fabric notebooks with the user's permissions. |
 | Limitations | Detection only; fixes happen upstream. |
 | Fallback | Local DuckDB data-quality flags (ffia mfg quality). |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 ## Microsoft Fabric and Microsoft Foundry
 
@@ -830,7 +833,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Prefer built-in retrieval before custom MCP servers; govern data products per domain. |
 | Limitations | Conceptual guidance, not a deployable reference architecture. |
 | Fallback | Not applicable. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 ## Microsoft Foundry
 
@@ -843,7 +846,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://learn.microsoft.com/azure/architecture/ai-ml/architecture/baseline-microsoft-foundry-chat |
 | Publisher | Azure Architecture Center |
 | Retrieved | 2026-10-05 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | GUIDANCE |
 | Associated patterns | P14 |
 | Key architecture statement | Private endpoints, App Service front end, Agent Service and monitoring form the production baseline. |
@@ -851,7 +854,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Private networking and identity-based access are primary controls. |
 | Limitations | Guidance only. |
 | Fallback | Not applicable. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="baseline-foundry-landing-zone"></a>
 
@@ -870,7 +873,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Egress and connectivity are owned by the platform team; the workload team owns application resources. |
 | Limitations | Guidance only. |
 | Fallback | Not applicable. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="basic-foundry-chat"></a>
 
@@ -889,7 +892,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | No network isolation or egress control; the article itself defers those to the baseline. |
 | Limitations | Explicitly not for production. |
 | Fallback | Not applicable. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="foundry-agent-faq"></a>
 
@@ -900,7 +903,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://learn.microsoft.com/azure/foundry/agents/faq |
 | Publisher | Microsoft Learn |
 | Retrieved | 2026-10-08 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | GA |
 | Associated patterns | P06 |
 | Key architecture statement | There is no separate Foundry license; Agent Service orchestration is not separately charged; you pay for model tokens and specific tools. |
@@ -908,7 +911,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Cost governance through quotas, budgets and an AI gateway. |
 | Limitations | Tool charges (Bing grounding, file search storage, code interpreter sessions) vary by region. |
 | Fallback | Offline demo costs nothing. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="foundry-agent-identity"></a>
 
@@ -927,7 +930,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Grant agent identities least-privilege RBAC on target resources. |
 | Limitations | Tools such as the Fabric data agent use the end user's identity instead. |
 | Fallback | Local process identity (offline). |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="foundry-agent-service"></a>
 
@@ -938,7 +941,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://learn.microsoft.com/azure/foundry/agents/overview |
 | Publisher | Microsoft Learn |
 | Retrieved | 2026-10-05 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | GA |
 | Associated patterns | P06, P08 |
 | Key architecture statement | Managed platform for prompt agents and hosted agents built on the Responses API, with tool catalogs and toolboxes. |
@@ -946,7 +949,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Agent identity in Entra; MCP tool output must be treated as untrusted input. |
 | Limitations | Several tools (Fabric data agent, Fabric IQ, Browser Automation) are preview. |
 | Fallback | Local Agent Framework runtime with deterministic client. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="foundry-bing-grounding"></a>
 
@@ -965,7 +968,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Queries and the resource key leave the Azure compliance and geo boundary; Bing terms of use and use-and-display requirements apply; the Data Protection Addendum does not apply. |
 | Limitations | Separate Bing resource and per-transaction billing; results must show website and Bing query URLs. |
 | Fallback | Curated public data loaded into Fabric through a reviewed pipeline. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="foundry-evaluators"></a>
 
@@ -976,7 +979,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://learn.microsoft.com/azure/foundry/concepts/built-in-evaluators |
 | Publisher | Microsoft Learn |
 | Retrieved | 2026-10-05 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | GA |
 | Associated patterns | P16 |
 | Key architecture statement | Quality, tool-use, agent-behavior and safety evaluators; several agent evaluators are preview. |
@@ -984,7 +987,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Safety evaluators support responsible AI release gates. |
 | Limitations | Intent resolution and task adherence evaluators are preview. |
 | Fallback | Deterministic local evaluators in CI. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="foundry-fabric-tool"></a>
 
@@ -1003,7 +1006,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | User identity only (no service principal); responses may leave the Fabric compliance boundary. |
 | Limitations | Same tenant; data agent and sources in the same region; one Fabric data agent per Foundry agent. |
 | Fallback | Local data agent simulation; Fabric data agent MCP endpoint as alternative live path. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="foundry-human-in-the-loop"></a>
 
@@ -1022,7 +1025,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Approval is a control, not a replacement for authorization. |
 | Limitations | Preview. |
 | Fallback | Accelerator change flow: plan, approve, execute, verify. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="foundry-iq"></a>
 
@@ -1033,7 +1036,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://learn.microsoft.com/azure/foundry/agents/concepts/what-is-foundry-iq |
 | Publisher | Microsoft Learn |
 | Retrieved | 2026-10-08 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | PREVIEW |
 | Associated patterns | P04 |
 | Key architecture statement | Knowledge bases built on Azure AI Search agentic retrieval over sources such as Blob, SharePoint, OneLake and web, with citations. |
@@ -1041,7 +1044,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | OneLake knowledge source indexes with the search service managed identity, not end-user passthrough. |
 | Limitations | Mixed GA/preview by API version; portal experience preview. |
 | Fallback | Local keyword retrieval over synthetic policy documents with citations (data/synthetic/knowledge). |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="foundry-mcp-governance"></a>
 
@@ -1060,7 +1063,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Gateway policy adds central controls but does not replace authorization in the MCP server or data platform. |
 | Limitations | Preview; applies only to new MCP tools created in the Foundry portal that do not use managed OAuth. |
 | Fallback | Local rate limiting and audit in ffia-local. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="foundry-overview"></a>
 
@@ -1071,7 +1074,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://learn.microsoft.com/azure/foundry/what-is-foundry |
 | Publisher | Microsoft Learn |
 | Retrieved | 2026-10-05 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | GA |
 | Associated patterns | P06 |
 | Key architecture statement | A Foundry resource with child projects unifies models, agents and tools under one RBAC, networking and policy boundary. |
@@ -1098,7 +1101,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Private endpoints and BYO resources keep agent state in the customer's tenant. |
 | Limitations | Bing grounding still leaves the boundary by design. |
 | Fallback | Basic setup for demos. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="foundry-routines"></a>
 
@@ -1117,7 +1120,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Runs under the configured identity; review what it can reach. |
 | Limitations | Status not stated on the page; minimum 5-minute interval. |
 | Fallback | Logic Apps Recurrence trigger (GA). |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="foundry-toolbox"></a>
 
@@ -1136,7 +1139,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Each tool has its own identity and data-handling model; curate tools once and reuse them. |
 | Limitations | Some tools are direct-only (Fabric data agent, SharePoint, Bing). |
 | Fallback | Local MCP tools in ffia-local. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="foundry-web-search"></a>
 
@@ -1155,7 +1158,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Same boundary as Bing grounding; external_web_access can be disabled. |
 | Limitations | Requires Foundry User role; domain restriction needs a toolbox and project connection. |
 | Fallback | Offline: cite a stored, approved public document instead. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 ## Microsoft Purview
 
@@ -1176,7 +1179,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Governance team owns rules and scores. |
 | Limitations | Capability-level status not stated; Iceberg is preview. |
 | Fallback | Local data-quality report. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 ## Model Context Protocol
 
@@ -1197,7 +1200,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Arbitrary T-SQL under the caller's identity; use read-only roles in dev workspaces only. |
 | Limitations | Preview. |
 | Fallback | Local allow-listed queries over DuckDB. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="fabric-iq-mcp"></a>
 
@@ -1216,7 +1219,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Delegated OAuth; caller permissions enforced. |
 | Limitations | Read-only; the client composes DAX. |
 | Fallback | Local semantic YAML measures over DuckDB. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="fabric-mcp-local"></a>
 
@@ -1235,7 +1238,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | OneLake write/delete and pipeline run tools exist; restrict with tool allow-lists. |
 | Limitations | Live tools require Azure CLI/Entra credentials; credential selector behavior is version-specific. |
 | Fallback | Local FastMCP equivalents (SIMULATED). |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="fabric-mcp-servers-list"></a>
 
@@ -1254,7 +1257,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Each server runs with the caller's permissions; several expose write tools. |
 | Limitations | The directory page carries no per-server status column; status comes from each server's page. |
 | Fallback | Local FastMCP educational server. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="mcp-specification"></a>
 
@@ -1265,7 +1268,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://modelcontextprotocol.io/specification/versioning |
 | Publisher | Model Context Protocol project |
 | Retrieved | 2026-10-05 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | GA |
 | Associated patterns | P09 |
 | Key architecture statement | Current specification version 2026-07-28; authorization builds on OAuth 2.1 with servers as resource servers. |
@@ -1273,7 +1276,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | MCP standardizes capability access; it does not grant authorization. |
 | Limitations | Some Microsoft servers do not support dynamic client registration. |
 | Fallback | Not applicable. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="powerbi-authoring-mcp"></a>
 
@@ -1284,7 +1287,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://learn.microsoft.com/power-bi/developer/mcp/power-bi-authoring-mcp |
 | Publisher | Microsoft Learn |
 | Retrieved | 2026-10-13 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | GA |
 | Associated patterns | P12 |
 | Key architecture statement | Local server (GA, npm @microsoft/powerbi-modeling-mcp 1.0.0) and hosted deployment (preview) for semantic model authoring. |
@@ -1292,7 +1295,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Read/write by default; use explicit read-only startup for inspection, require confirmation for authoring, accept the EULA only with human authorization, and back up models first. |
 | Limitations | Hosted deployment is preview; Desktop remains Windows-only, while the local MCP package supports Linux ARM64 and PBIP files. Tool discovery is not model access or execution. |
 | Fallback | Reference TMDL and local PBIR validation. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 ## Power BI
 
@@ -1313,7 +1316,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Respects the caller's permissions and row-level security; read-only. |
 | Limitations | One query and one table per call; at most 100,000 rows or 1,000,000 values; models with live AAS connections unsupported. |
 | Fallback | Local DuckDB measure evaluation (LOCAL). |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="powerbi-subscription-summaries"></a>
 
@@ -1332,7 +1335,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Uses Copilot in Fabric under capacity rules. |
 | Limitations | Preview; standard subscriptions only. |
 | Fallback | Scheduled email subscription without summary (GA). |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 ## Power BI Authoring MCP
 
@@ -1345,7 +1348,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://github.com/microsoft/powerbi-modeling-mcp |
 | Publisher | Microsoft |
 | Retrieved | 2026-10-13 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | GA |
 | Associated patterns | P12 |
 | Key architecture statement | The local server can be installed through a VS Code extension or the npm package, with explicit EULA acceptance before model operations. |
@@ -1353,7 +1356,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | The installed VS Code extension defaults to write mode and automatic EULA acceptance; the repository overrides startup arguments without accepting the license. |
 | Limitations | Grouped tool annotations remain write-capable in read-only mode; server discovery does not prove model connection, DAX execution or client tool exposure. |
 | Fallback | Stop blocked connected operations and use reviewed local model definitions without claiming MCP execution. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 ## Relational data foundations
 
@@ -1366,7 +1369,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://research.ibm.com/publications/a-relational-model-of-data-for-large-shared-data-banks |
 | Publisher | IBM Research / ACM |
 | Retrieved | 2026-10-09 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | GUIDANCE |
 | Associated patterns | P10, P12 |
 | Key architecture statement | Relations and data independence separate a logical data model from physical representation. |
@@ -1374,7 +1377,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Logical abstraction does not replace access control or disclose permitted data automatically. |
 | Limitations | Foundational research, not a Fabric implementation specification or evidence of product lineage. |
 | Fallback | Reproducible synthetic SQL and semantic-model exercises. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 ## Retrieval and grounding foundations
 
@@ -1387,7 +1390,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://arxiv.org/abs/2005.11401 |
 | Publisher | arXiv |
 | Retrieved | 2026-10-09 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | GUIDANCE |
 | Associated patterns | P01, P04, P06 |
 | Key architecture statement | Retrieval combines external non-parametric information with a generative model rather than relying only on information encoded in model weights. |
@@ -1395,7 +1398,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Retrieved content is untrusted input and must not grant permissions or override instructions. |
 | Limitations | Governed structured queries and Fabric data agents are not automatically the original RAG architecture; retrieval can be irrelevant or incomplete. |
 | Fallback | Synthetic retrieved context compared with deterministic reference answers. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 ## Spec-driven engineering
 
@@ -1408,7 +1411,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://github.github.io/spec-kit/quickstart.html |
 | Publisher | GitHub Spec Kit |
 | Retrieved | 2026-10-09 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | OSS |
 | Associated patterns | P20, P25 |
 | Key architecture statement | A specification-led workflow connects constitution, requirements, planning, tasks, implementation and convergence; current skills use the speckit-hyphen invocation form. |
@@ -1416,7 +1419,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Generated instructions must preserve repository policy; requirements and agent implementation do not authorize live writes. |
 | Limitations | Tool integration requires scratch initialization and review before adoption; active feature selection is independent of checking out a Git branch. |
 | Fallback | Use the repository's spec-driven-delivery skill with reviewed requirements and existing test gates, explicitly without claiming Spec Kit CLI execution. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 ## Tool-using agent foundations
 
@@ -1429,15 +1432,15 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://arxiv.org/abs/2210.03629 |
 | Publisher | arXiv |
 | Retrieved | 2026-10-09 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | GUIDANCE |
 | Associated patterns | P06, P08, P09, P19 |
 | Key architecture statement | Interleaving reasoning and environment actions can support task solving with external observations. |
 | Implementation relevance | Teaches the distinction between a proposed action, an actual tool invocation and an observed result. |
 | Security implications | Tool availability is not authority; constrain actions with deterministic validation and approval. |
-| Limitations | Research task results are not a Copilot or Foundry benchmark; tool loops can still make unsafe or incorrect choices. |
+| Limitations | Research task results are not a GitHub Copilot or Foundry benchmark; tool loops can still make unsafe or incorrect choices. |
 | Fallback | Read-only synthetic agent exercises and labeled execution traces. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 ## Toolchain
 
@@ -1450,15 +1453,15 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://github.com/nodejs/Release |
 | Publisher | Node.js project |
 | Retrieved | 2026-10-05 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | GA |
-| Associated patterns | — |
+| Associated patterns | Not specified |
 | Key architecture statement | Node 24 is Active LTS until maintenance on 2026-10-20; Node 26 becomes LTS on 2026-10-28. |
 | Implementation relevance | Frontend and MCP servers target Node 24 now, with Node 26 in the CI matrix. |
 | Security implications | LTS lines receive security releases. |
 | Limitations | Plan the default switch to Node 26 after 2026-10-28. |
 | Fallback | Not applicable. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 <a id="python-lifecycle"></a>
 
@@ -1469,15 +1472,15 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://devguide.python.org/versions/ |
 | Publisher | Python Software Foundation |
 | Retrieved | 2026-10-05 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | GA |
-| Associated patterns | — |
+| Associated patterns | Not specified |
 | Key architecture statement | Python 3.14 is in bugfix support until 2027-10; 3.13 moved to security-only support on 2026-10-01. |
 | Implementation relevance | Project targets Python 3.14 (requires-python >=3.14,<3.15). |
 | Security implications | Bugfix-supported runtime receives timely fixes. |
 | Limitations | Some Fabric tools (fabric-cicd, ms-fabric-cli, fabric-data-agent-sdk) declare Python below 3.14 and run as isolated tools. |
 | Fallback | Python 3.13 validated as an alternative. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |
 
 ## Transformer foundations
 
@@ -1490,7 +1493,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | URL | https://arxiv.org/abs/1706.03762 |
 | Publisher | arXiv |
 | Retrieved | 2026-10-09 |
-| Last updated | — |
+| Last updated | Not specified |
 | Status | GUIDANCE |
 | Associated patterns | P06, P19 |
 | Key architecture statement | The Transformer uses attention mechanisms to model sequence relationships without the recurrent architecture used in earlier sequence models. |
@@ -1498,4 +1501,4 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Fluent output is not evidence of factual accuracy, tool execution or authorization. |
 | Limitations | Original translation experiments do not establish the behavior or performance of today's proprietary models. |
 | Fallback | Conceptual teaching and bounded synthetic prompt experiments; no model training required. |
-| Deprecation / replacement | — |
+| Deprecation / replacement | Not specified |

@@ -35,7 +35,7 @@
       "lab-copilot-maturity-ladder"
     ],
     "status": "GA",
-    "summary": "An honest, evidence-labeled comparison of two generally available agent harnesses for Fabric data engineering. Both read the same repository instructions, skills and MCP configuration in this accelerator; they differ in permission models, enforcement hooks, parallelism, GitHub integration and admin planes. Claude Code is DOCUMENTED ONLY here. The recorded bake-off (`ffia bakeoff`, the app's Bake-off page) compares Claude and GPT models inside Copilot CLI, not Copilot versus Claude Code; these are dated observations, not product claims.",
+    "summary": "An honest, evidence-labeled comparison of two generally available agent harnesses for Fabric data engineering. Both read the same repository instructions, skills and MCP configuration in this accelerator; they differ in permission models, enforcement hooks, parallelism, GitHub integration and admin planes. Claude Code is DOCUMENTED ONLY here. The recorded bake-off (`ffia bakeoff`, the app's Bake-off page) compares Claude and GPT models inside GitHub Copilot CLI, not GitHub Copilot versus Claude Code; these are dated observations, not product claims.",
     "title": "GitHub Copilot and Claude Code for Fabric data engineering"
   },
   {
@@ -158,7 +158,7 @@
       "lab-copilot-maturity-ladder"
     ],
     "status": "MIXED",
-    "summary": "GitHub Copilot reaches data engineers through several surfaces that share one agent runtime \u2014 VS Code agent mode, Copilot CLI, the Copilot app (technical preview), the Copilot cloud agent and the Copilot SDK. Each fits different steps of the Fabric data-engineering lifecycle, and all of them are steered by the same repository instruction files, skills and MCP configuration.",
+    "summary": "GitHub Copilot reaches data engineers through several surfaces that share one agent runtime \u2014 VS Code agent mode, GitHub Copilot CLI, the GitHub Copilot app (technical preview), the GitHub Copilot cloud agent and the GitHub Copilot SDK. Each fits different steps of the Fabric data-engineering lifecycle, and all of them are steered by the same repository instruction files, skills and MCP configuration.",
     "title": "GitHub Copilot surfaces for data engineers"
   },
   {

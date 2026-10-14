@@ -1,14 +1,16 @@
 # Application control plane
 
-The control plane gives the frontend, the coding agents and the demo one governed way to read
-synthetic Fabric context, propose changes, approve them and see evidence. It is offline-first: it
-starts and passes its release gate with no Azure configuration.
+Use the control plane to read synthetic Fabric context, propose changes, get human approval and
+inspect evidence. The frontend, coding agents and demo use the same services. It starts and
+passes its offline release gate with no Azure configuration.
 
 Status: **SIMULATED LOCALLY** by default. An opt-in live Fabric provider and a gated scoped writer
 exist (`FFIA_FABRIC_LIVE=1` plus a git-ignored bindings file; see
 [ADR-0012](../decisions/ADR-0012-live-fabric-integration.md)). Live reads of workspaces and items
 through the router are **VERIFIED LIVE** in a demo tenant (HYBRID mode, no fallback). DAX
-reconciliation, throttling and the scoped writer remain **REQUIRES TENANT VALIDATION**. Foundry agents sit behind the same router (capability
+reconciliation, throttling and the scoped writer remain **REQUIRES TENANT VALIDATION**.
+
+Foundry agents use the same router (capability
 `foundry_agent`): a deterministic LOCAL agent offline, the live Foundry agent only when opted in
 (`FFIA_FOUNDRY_LIVE=1`; see [ADR-0013](../decisions/ADR-0013-foundry-agents-evaluation-tracing.md)).
 

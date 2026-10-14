@@ -5,8 +5,8 @@
 
 ## Context
 
-The interactive educational application is a first-class deliverable: an architecture explorer,
-a pattern explorer, learning paths, labs, guides and demo mode. The brief mandates React,
+The educational app includes an architecture explorer, a pattern explorer, learning paths,
+labs, guides and demo mode. The brief requires React,
 TypeScript and Vite, with no other framework. It also requires strict TypeScript, ESLint,
 formatting, Vitest, React Testing Library, accessibility, and latest stable, non-vulnerable
 packages only.
@@ -63,7 +63,7 @@ ESLint 10.12.0 with typescript-eslint 8.71.1 (`strictTypeChecked`), Prettier 3.9
 ## Education impact
 
 - Learning content is structured data rendered by components, not hard-coded copy.
-- Accessibility and keyboard navigation are part of the teaching quality bar.
+- Test accessibility and keyboard navigation as part of the learning experience.
 
 ## Revisit trigger
 

@@ -57,6 +57,8 @@ def test_duplicate_ids_are_rejected() -> None:
 def test_render_escapes_pipes_and_marks_missing_values() -> None:
     markdown = render_markdown(SourceRegistry(version=1, sources=[_record()]))
     assert "Statement \\| with pipe" in markdown
-    assert "| Last updated | — |" in markdown
+    assert "| Last updated | Not specified |" in markdown
     assert "| Associated patterns | P01 |" in markdown
     assert '<a id="example-source"></a>' in markdown
+    assert "\u2014" not in markdown
+    assert "\u2013" not in markdown

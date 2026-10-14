@@ -1,7 +1,7 @@
 # Resilience: LIVE, HYBRID and OFFLINE
 
-The architecture must stay demonstrable when Fabric, Foundry, the network or a preview feature
-is unavailable. It must do that **without hiding** what actually ran.
+Keep the demo working when Fabric, Foundry, the network or a preview feature is unavailable.
+Always show what actually ran.
 
 ## Operating modes
 
@@ -46,7 +46,7 @@ A write approved for **LIVE** is never executed against the LOCAL simulation. If
 is unavailable, the result is `UNAVAILABLE` and the requester must create a new plan. See
 [ADR-0006](../decisions/ADR-0006-human-approval-and-scoped-writer.md).
 
-## Practicing failure
+## Practice a failure
 
 ```bash
 FFIA_ENVIRONMENT=hybrid FFIA_SIMULATE_FABRIC_OUTAGE=1 ffia demo offline

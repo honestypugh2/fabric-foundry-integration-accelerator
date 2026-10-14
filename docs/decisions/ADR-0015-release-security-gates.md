@@ -30,7 +30,7 @@ responsibilities. SBOMs describe dependencies, not security certification or sig
 
 ## Security impact
 
-Immutable action SHAs, non-persisted checkout credentials and scoped permissions.
+Pin actions to immutable SHAs. Do not persist checkout credentials. Scope permissions.
 Only CodeQL jobs receive security-events write; release jobs cannot publish or deploy.
 
 ## Operations impact

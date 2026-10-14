@@ -1,10 +1,10 @@
 id: dq-01-synthetic-quality-investigation
-title: "DQ-01: Investigate synthetic data quality with Copilot"
+title: "DQ-01: Investigate synthetic data quality with GitHub Copilot"
 industry: Cross-industry
 scenario: Detect quality defects, reconcile an independent baseline and rehearse a governed notebook proposal.
 summary: >-
   Reuse synthetic manufacturing data to investigate duplicates, invalid relationships, prices,
-  dates and region labels. Copilot helps explain checks and propose a remediation notebook;
+  dates and region labels. GitHub Copilot helps explain checks and propose a remediation notebook;
   deterministic checks establish correctness. Rehearse notebook creation with separate approval
   and audit. Neither a data correction nor a cloud deployment is performed.
 version: 1.0.0
@@ -151,7 +151,7 @@ steps:
     objective: Connect requirements to independent tests and leave live/production claims explicitly open.
     copilot_prompt: >-
       Compare this guide's acceptance criteria with tests/offline/test_use_case_authoring.py and
-      the authoring verification record. Explain what Copilot, Skills, MCP, deterministic checks
+      the authoring verification record. Explain what GitHub Copilot, Skills, MCP, deterministic checks
       and approval each contributed. Record unavailable live evidence and production gaps.
     claude_code_prompt: >-
       Map requirements to observed tests, distinguish LOCAL and SIMULATED outcomes, and list live

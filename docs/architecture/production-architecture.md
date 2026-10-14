@@ -1,8 +1,8 @@
 # Production deployment (aligned to the Foundry baseline)
 
 The application tier follows the Azure Architecture Center **baseline Microsoft Foundry chat
-reference architecture**. Microsoft Fabric is added as the governed data platform, and MCP tools
-are governed once, through an API Management-backed gateway.
+reference architecture**. Microsoft Fabric supplies the governed data platform. MCP tools
+use one API Management-backed gateway.
 
 - **Nothing in this view is deployed by this repository.**
 - Every component is documented Microsoft behavior. Validate it in your tenant before relying on
@@ -139,7 +139,7 @@ Solid boxes are implemented here or documented by Microsoft; dashed boxes are pl
 
 <!-- END GENERATED DIAGRAM -->
 
-## Design decisions to carry into production
+## Plan the production controls
 
 | Decision | Baseline guidance | Why it matters here |
 |---|---|---|

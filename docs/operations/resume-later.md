@@ -1,14 +1,13 @@
 # Resume later: connected work and release follow-up
 
-**Operator decision:** share the learning repository now; postpone HC-01 live end-to-end
-completion and Claude Code setup/execution. HC-01 and MFG-01 remain the two featured guides.
-DQ-01 remains a supporting exercise. Nothing is removed because it is deferred.
+**Plan:** share the learning repo now. Complete HC-01 live work and Claude Code setup later.
+HC-01 and MFG-01 stay featured. DQ-01 stays as a supporting exercise.
 
-Review this tracker at the next working session. It is not approval for any cloud operation.
-Refresh service state, exact private bindings and approval windows before resuming; prior
-creation, landing and publication approvals must not be reused for new actions.
+Pick up this list at the next working session. It does not approve a cloud operation.
+Recheck the service, target and approval window before resuming.
+Do not reuse an earlier approval for a new action.
 
-## Priority 1: HC-01 live completion — intentionally deferred
+## Priority 1: finish HC-01 live work later
 
 - [ ] Verify the tool-reported Bronze publication: persisted reviewed code, exact notebook
   identity and default lakehouse binding. Complete the correlated publication receipt/audit.
@@ -35,20 +34,20 @@ the native publication tool reported success. Persisted published code/binding a
 outputs have not yet been independently verified. No HC Delta output, model or report is
 certified as a live outcome.
 
-## Priority 2: Claude Code — instructions now, execution later
+## Priority 2: Claude Code instructions now, execution later
 
 - [ ] Follow the existing client/MCP setup instructions in a private, isolated context.
 - [ ] Verify instruction loading, relevant skill discovery and narrow MCP capability access.
-- [ ] Execute equivalent bounded Copilot and Claude tasks against the same baseline.
+- [ ] Run equivalent bounded GitHub Copilot and Claude Code tasks against the same baseline.
 - [ ] Compare correctness, evidence, approval behavior, recovery and effort with recorded
-  limitations; do not substitute a model comparison inside Copilot CLI.
+  limitations; do not substitute a model comparison inside GitHub Copilot CLI.
 - [ ] Update the documented-only labels only after actual client execution is verified.
 
 The [Claude prompt pack](../../prompts/claude-code/patterns.md),
 [MCP/client setup](../../config/mcp/README.md) and existing guide-specific alternate prompts
 remain available now. No comparative Claude Code run or superiority claim is made.
 
-## Priority 3: other connected demonstrations — deferred
+## Priority 3: finish the connected demonstrations later
 
 - [ ] Diagnose MFG revenue timeout/input-length rejection without accidental duplicate inference.
 - [ ] Approve any new bounded inference explicitly; reconcile revenue/growth and recover
@@ -60,7 +59,7 @@ remain available now. No comparative Claude Code run or superiority claim is mad
 **Boundary:** the recovered PREVIEW duplicate-count tool payload matched 12. This does not
 certify the final assistant answer, all nine live quality categories or service health.
 
-## Priority 4: production acceptance — separate scope
+## Priority 4: agree the production scope
 
 - [ ] Agree whether recurring scheduling/delivery is required and its approval scope.
 - [ ] Verify production identity, permissions, network controls and authoritative write service.
@@ -74,9 +73,22 @@ certify the final assistant answer, all nine live quality categories or service 
 - [ ] Walk the new-use-case authoring path from a clean checkout or disposable environment.
 - [ ] Inspect actual GitHub workflow results for that commit; configured CI is not run evidence.
 
-Commit/push is part of the current sharing pass, approved after LOCAL validation passed.
-If that pass is interrupted, compare the local commit, remote branch and worktree before
-retrying; do not assume the package is either published or unpublished from this tracker alone.
+The first sharing package was committed and pushed as `83117e6`. That commit passed LOCAL
+validation, and the remote branch matched. Check the current local and remote commits before
+releasing another version.
+
+## GitHub-friendly playbooks and hosting
+
+- [ ] Generate Markdown companion pages from the same playbook YAML. These will render
+  directly in GitHub and stay consistent with the downloadable HTML.
+- [ ] Decide whether to publish the static playbooks through GitHub Pages. Review repo
+  visibility, permissions, links and deployment approval before enabling it.
+- [ ] If hosting is approved, add a narrow static-site workflow and verify the actual published
+  pages. Do not deploy the API or include private files in the site.
+- [ ] Set the repo's About website field only after a working site has been verified.
+
+**Use now:** download an HTML file and open it in a browser. GitHub's file view shows source,
+not the rendered page. Hosting remains a later task; nothing was deployed by this edit.
 
 See [sharing scope](shareable-release.md), [current verification](use-case-authoring-verification.md)
 and [release procedure](release-validation.md). Operational receipts, tenant-specific

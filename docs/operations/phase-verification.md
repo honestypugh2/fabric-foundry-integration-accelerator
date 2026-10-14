@@ -1,6 +1,6 @@
 # Phase verification
 
-Reviewed against the original nine-phase proposal, not merely the README checkmarks.
+This record checks the original nine-phase proposal, not just the README checkmarks.
 **Implementation completion is not the same as live certification or production readiness.**
 
 | Phase | Verified repository outcome | Qualification / remaining evidence |
@@ -12,11 +12,11 @@ Reviewed against the original nine-phase proposal, not merely the README checkma
 | 4 Educational app | Workshop navigation, both Use Cases, practical/research lenses, 21 five-level lessons, five labs, 25-pattern teaching coverage and 30/30 architecture coverage | Teaching coverage and learner checkpoints are not implemented-lab or live-certification badges |
 | 5 Fabric integration | Read-only application REST provider, scoped gated writer, MCP profiles/skills/notebooks | Original Core/IQ MCP adapter scope is represented by external profiles/documented patterns, not independent in-process live adapters. Fresh Guide 1 MCP, notebook and Power BI execution is not certified by an application REST read |
 | 6 Foundry integration | Stable SDK, existing-agent adapter, evaluation, Agent Framework workflow, client tracing and connected demo targets | Stable core + SDK substitutes for the originally proposed preview adapter package (ADR-0013). Foundry IQ/OneLake knowledge is a flagged LOCAL analog. Fabric tool is PREVIEW. New server-side traces and cloud evaluation service are not certified here |
-| 7 Copilot and Claude Code | Shared profiles, skills, prompt packs and ten Copilot CLI model recordings | Claude Code remains DOCUMENTED ONLY by user decision; this is not a completed cross-harness bake-off |
+| 7 GitHub Copilot and Claude Code | Shared profiles, skills, prompt packs and ten GitHub Copilot CLI model recordings | Claude Code remains DOCUMENTED ONLY by user decision; this is not a completed cross-harness bake-off |
 | 8 Security/CI/production | Threat model, production checklist, CodeQL/release workflows, SBOM and evaluation gates | GitHub Actions is disabled; GitHub quality/CodeQL/release execution is DEFERRED by user decision. Production checklist is not completed tenant certification |
 | 9 Final validation | Local release gates and bounded current live checks | Not a new publication, full Guide 1 live run, server-trace verification or production sign-off |
 
-## Current connected evidence (2026-10-09)
+## Connected evidence recorded on 2026-10-09
 
 - Fabric application readiness: PASS, including active F8 capacity and bound dev workspace.
   Optional GitHub workspace-sync tenant setting remains a warning; preview switches are not required.
@@ -46,7 +46,7 @@ The connected demo is intentionally bounded to one synthetic question; it does n
 the complete five-case live evaluation, send a monthly brief or modify data.
 Previous five-case live evidence remains dated, not a new run.
 
-## Current LOCAL validation after the workshop redesign
+## LOCAL validation recorded after the workshop redesign
 
 - `ruff format --check src tests`, `ruff check src tests`, `pyright`: PASSED.
 - Latest full `pytest --cov --cov-report=term-missing -q`: 616 PASSED, one opt-in live test skipped;
@@ -79,7 +79,7 @@ replacement was used for an assigned Guide 1 MCP step. Guide screenshots are cap
 local browser automation and are UI/configuration evidence, not publication evidence.
 Power BI publication, hosted/Core/Fabric IQ MCP execution, Azure knowledge indexing,
 server-side agent trace ingestion, GitHub checks and a real Claude Code bake-off remain
-separate verification or explicitly documented scope.
+separate checks with their own documented scope.
 
 See the [repository map](../architecture/repository-map.md),
 [release gates](release-validation.md) and [environment configuration](environment-configuration.md).

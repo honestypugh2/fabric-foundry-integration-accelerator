@@ -1,12 +1,12 @@
 # Learning paths
 
-Every lesson teaches five levels. The level is chosen once (header or lesson tabs) and applies
-across the architecture explorer, lessons and labs.
+Choose a level in the header or lesson tabs. It applies across the architecture explorer,
+lessons and labs. Every lesson teaches all five levels.
 
 ## Three different progress systems
 
 - **Executive / L100-L400:** teaching depth appropriate to the audience.
-- **L1-L5 Copilot maturity:** degree of engineering assistance/orchestration, not lesson depth.
+- **L1-L5 GitHub Copilot maturity:** degree of engineering assistance/orchestration, not lesson depth.
 - **Phases 0-9:** implementation history, not a learner sequence or readiness certification.
 
 Start with the [quick start](../../README.md#quick-start) and follow a journey's checkpoints.
@@ -27,7 +27,7 @@ Developers can use the [code-reading path](../architecture/code-reading-path.md)
 | **Improve Fabric data engineering with GitHub Copilot** (main goal) | `fabric-foundry-boundaries` → `fabric-mcp-landscape` → `fabric-skills` → `copilot-maturity-ladder` → `copilot-surfaces` → `copilot-vs-claude-code` → lab `lab-copilot-maturity-ladder` → Guide HC-01 |
 | Governed agents | `fabric-foundry-boundaries` → `p06-enterprise-agent` → `p08-human-in-the-loop` → `p09-governed-mcp` → labs `lab-governed-change`, `lab-mcp-allow-list` |
 | Data and resilience | `p10-medallion-ai` → `p11-mirroring-ai` → `p16-evaluation-observability` → `p17-resilience` → labs `lab-resilience-break-it`, `lab-open-mirroring-recovery` |
-| Power BI semantic models | `power-bi-agentic-tooling` → Guide HC-01, steps 11–15 |
+| Power BI semantic models | `power-bi-agentic-tooling` → Guide HC-01, steps 11 to 15 |
 
 ## Content model
 

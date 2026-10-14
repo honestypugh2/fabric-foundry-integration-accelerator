@@ -32,7 +32,7 @@ decisions.
 
 ## Rationale
 
-- One place to reason about failure, which is also one place to test.
+- Handle and test provider failures in one place.
 - Labels keep the audience and the audit trail honest.
 - Treating client errors separately stops a typo from looking like an outage.
 

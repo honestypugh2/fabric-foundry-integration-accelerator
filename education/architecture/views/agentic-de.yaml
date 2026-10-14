@@ -15,7 +15,7 @@ doc: agentic-data-engineering
 aligned_to: [copilot-cli-ga, copilot-instructions-support, skills-for-fabric, fabric-mcp-local, fabric-git-integration, claude-code-skills]
 pattern_ids: [P19, P20, P21, P22, P23, P24]
 steps:
-  - {id: l1, label: "L1 Assisted", cue: "Copilot completes and explains PySpark, SQL and DAX in Git-synced Fabric item files. The control is code review."}
+  - {id: l1, label: "L1 Assisted", cue: "GitHub Copilot completes and explains PySpark, SQL and DAX in Git-synced Fabric item files. The control is code review."}
   - {id: l2, label: "L2 Grounded", cue: "Repo instructions and documentation tools ground the agent in real APIs and item formats instead of plausible guesses."}
   - {id: l3, label: "L3 Skilled", cue: "Fabric Skills add Microsoft-authored procedures. Skills act with your permissions, so harden the MCP configuration and use a dev workspace."}
   - {id: l4, label: "L4 Connected", cue: "Read-only access to the real workspace lets the agent validate assumptions. Pin the target and keep it read-only."}
@@ -29,17 +29,17 @@ zones:
   - {id: evidence, label: "EVIDENCE - proof it happened", kind: tenant, col: 4, row: 0, cols: 1, rows: 6}
 nodes:
   - {id: l1-know, label: "Your own expertise", sublabel: "No repo guidance yet", kind: knowledge, state: documented, col: 0, row: 0, step: l1, summary: "At L1 the agent relies on general training and what you type. Plausible but wrong Fabric APIs are the main risk."}
-  - {id: l1-harness, label: "VS Code + Copilot", sublabel: "Completions and chat", kind: harness, state: documented, col: 1, row: 0, step: l1, icon: general/Code, summary: "Inline completions and chat on notebook-content.py, SQL, M and DAX files."}
+  - {id: l1-harness, label: "VS Code + GitHub Copilot", sublabel: "Completions and chat", kind: harness, state: documented, col: 1, row: 0, step: l1, icon: general/Code, summary: "Inline completions and chat on notebook-content.py, SQL, M and DAX files."}
   - {id: l1-exec, label: "Git-synced Fabric items", sublabel: "notebook-content.py, TMDL", kind: knowledge, state: documented, col: 2, row: 0, step: l1, sources: [fabric-git-integration], summary: "Fabric Git integration stores items as files, so they can be edited and reviewed like code."}
   - {id: l1-auth, label: "Code review", sublabel: "You decide", kind: policy, state: documented, col: 3, row: 0, step: l1, summary: "The developer reviews every suggestion before committing."}
   - {id: l1-evidence, label: "The diff", kind: evidence, state: documented, col: 4, row: 0, step: l1, summary: "The commit diff is the only evidence at this level."}
-  - {id: l2-know, label: "AGENTS.md + instructions", sublabel: "Repo rules and commands", kind: knowledge, state: implemented, col: 0, row: 1, step: l2, icon: general/File, repo_path: AGENTS.md, summary: "Repository instructions read by Copilot and Claude Code - conventions, commands, safety and evidence rules."}
-  - {id: l2-harness, label: "Copilot agent mode or CLI", sublabel: "Tools with approvals", kind: harness, state: documented, col: 1, row: 1, step: l2, sources: [copilot-cli-ga], summary: "The agent can call tools, each with an approval prompt or an explicit allow rule."}
+  - {id: l2-know, label: "AGENTS.md + instructions", sublabel: "Repo rules and commands", kind: knowledge, state: implemented, col: 0, row: 1, step: l2, icon: general/File, repo_path: AGENTS.md, summary: "Repository instructions read by GitHub Copilot and Claude Code - conventions, commands, safety and evidence rules."}
+  - {id: l2-harness, label: "GitHub Copilot agent mode or CLI", sublabel: "Tools with approvals", kind: harness, state: documented, col: 1, row: 1, step: l2, sources: [copilot-cli-ga], summary: "The agent can call tools, each with an approval prompt or an explicit allow rule."}
   - {id: l2-exec, label: "Documentation MCP tools", sublabel: "Microsoft Learn, Fabric docs tools", kind: mcp, state: documented, col: 2, row: 1, step: l2, sources: [fabric-mcp-local], summary: "Item definitions, API specifications and best practices without any tenant access."}
   - {id: l2-auth, label: "Pinned tool versions", kind: policy, state: implemented, col: 3, row: 1, step: l2, repo_path: .mcp.json, summary: "External servers are pinned so behavior does not change underneath you."}
   - {id: l2-evidence, label: "Tool-call log", kind: evidence, state: documented, col: 4, row: 1, step: l2, summary: "The harness records which tools were called with which inputs."}
   - {id: l3-know, label: "Fabric Skills", sublabel: "Microsoft-authored procedures", kind: knowledge, state: documented, col: 0, row: 2, step: l3, component: fabric-skills}
-  - {id: l3-harness, label: "Plugins and skills loaded", sublabel: "Copilot CLI or Claude Code", kind: harness, state: documented, col: 1, row: 2, step: l3, sources: [skills-for-fabric, claude-code-skills], summary: "Skills are installed through the plugin marketplace and loaded on demand when a task matches."}
+  - {id: l3-harness, label: "Plugins and skills loaded", sublabel: "GitHub Copilot CLI or Claude Code", kind: harness, state: documented, col: 1, row: 2, step: l3, sources: [skills-for-fabric, claude-code-skills], summary: "Skills are installed through the plugin marketplace and loaded on demand when a task matches."}
   - {id: l3-exec, label: "Skill dry run", sublabel: "Against the local provider", kind: local, state: implemented, col: 2, row: 2, step: l3, component: local-fabric-provider}
   - {id: l3-auth, label: "Hardened MCP overlay", sublabel: "Dev workspace, read-only default", repo_path: config/mcp/profiles.yaml, kind: policy, state: implemented, col: 3, row: 2, step: l3, summary: "MCP profiles as code: read-only defaults with explicit tool allow-lists, a separate opt-in authoring profile with per-call approval, and a check that rejects unpinned servers, write tools in read-only profiles and arbitrary query or data-egress tools."}
   - {id: l3-evidence, label: "Skill named in the audit", kind: evidence, state: planned, phase: 7, col: 4, row: 2, step: l3, summary: "Each call records which skill drove it, so reviewers can trace procedure to outcome."}
@@ -54,7 +54,7 @@ nodes:
   - {id: l5-auth, label: "Approvals and branch protection", sublabel: "Not the requester", kind: policy, state: implemented, col: 3, row: 4, step: l5, component: human-approval}
   - {id: l5-evidence, label: "PR + audit + verification", kind: evidence, state: implemented, col: 4, row: 4, step: l5, component: audit-store}
   - {id: l6-know, label: "Migration playbooks", sublabel: "Repeatable at scale", kind: knowledge, state: planned, phase: 7, col: 0, row: 5, step: l6, summary: "Procedures that many parallel sessions can follow consistently."}
-  - {id: l6-harness, label: "Copilot app and fleets", sublabel: "Worktrees, preview", kind: harness, state: preview, col: 1, row: 5, step: l6, summary: "Parallel sessions in isolated worktrees or the cloud. Technical preview."}
+  - {id: l6-harness, label: "GitHub Copilot app and fleets", sublabel: "Worktrees, preview", kind: harness, state: preview, col: 1, row: 5, step: l6, summary: "Parallel sessions in isolated worktrees or the cloud. Technical preview."}
   - {id: l6-exec, label: "Parallel pull requests", kind: harness, state: preview, col: 2, row: 5, step: l6, summary: "Many small, reviewable changes instead of one large one."}
   - {id: l6-auth, label: "Sandboxes and budgets", sublabel: "Firewall, allow-lists", kind: policy, state: preview, col: 3, row: 5, step: l6, summary: "Limits on what each session can reach and spend."}
   - {id: l6-evidence, label: "Per-session logs", kind: evidence, state: preview, col: 4, row: 5, step: l6, summary: "Every session leaves its own trail and pull request."}
@@ -92,7 +92,7 @@ traces:
     summary: One task - add a Silver table - done at each level, and what each level adds.
     label: PLANNED FLOW
     steps:
-      - {node: l1-harness, say: "L1 - Copilot suggests the PySpark; you check it against what you remember."}
+      - {node: l1-harness, say: "L1 - GitHub Copilot suggests the PySpark; you check it against what you remember."}
       - {node: l2-exec, say: "L2 - documentation tools confirm the correct Delta and notebook patterns."}
       - {node: l3-know, say: "L3 - a Fabric Skill supplies the Microsoft-authored procedure and its gotchas."}
       - {node: l4-exec, say: "L4 - read-only tools check the real Bronze schema and row counts."}

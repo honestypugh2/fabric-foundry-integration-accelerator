@@ -79,7 +79,7 @@ offline path, and the labels already tell the truth.
 > GitHub Copilot? Three ideas to hold onto:
 >
 > - Fabric holds the governed business context.
-> - Agents, Copilot included, turn that context into work.
+> - Agents, GitHub Copilot included, turn that context into work.
 > - MCP gives an agent hands, but it doesn't give it authority. Your Entra identity, your policies
 >   and a human approval give authority.
 >
@@ -100,7 +100,7 @@ Patterns to name (click each):
 | Pattern | One line |
 |---|---|
 | **P09** Governed MCP | Pinned servers, allow-listed tools, approval for writes |
-| **P19** Copilot CLI + Fabric Skills + MCP | The developer-harness pattern for today |
+| **P19** GitHub Copilot CLI + Fabric Skills + MCP | The developer-harness pattern for today |
 | **P10** Medallion + AI | Bronze preserves, Silver conforms, Gold serves; AI works on Gold |
 | **P12** Direct Lake + semantic model + AI | Business definitions live in the model, not the prompt |
 | **P20** Repo-first | Git is the source of truth for Fabric items; agents work through PRs |
@@ -149,7 +149,7 @@ ffia fabric readiness
 `core_search-catalog`. Run it in the second VS Code window (agent mode) with prompt **P-MCP-1**
 from the prompt pack.
 
-> "Copilot called the real Fabric MCP tool and found our workspace. The result is labeled LIVE,
+> "GitHub Copilot called the real Fabric MCP tool and found our workspace. The result is labeled LIVE,
 > and it ran under my identity. If I can't see a workspace, neither can the agent."
 
 **Governance moment.** Use prompt **P-MCP-2**: ask the agent to create a lakehouse while the
@@ -211,19 +211,19 @@ This is the centerpiece. **Screen:** `/architecture/agentic-de`, level **L200**,
 > repository files:
 >
 > - in VS Code as agent mode, which you're watching now;
-> - in the terminal as Copilot CLI, which is GA;
+> - in the terminal as GitHub Copilot CLI, which is GA;
 > - on GitHub as the cloud agent, which takes an issue and opens a pull request;
 > - in pull-request code review;
-> - inside your own apps through the Copilot SDK."
+> - inside your own apps through the GitHub Copilot SDK."
 
 **Show** `AGENTS.md` and `.github/copilot-instructions.md`:
 
-> "This is how we teach Copilot *our* rules: synthetic data only, read-only by default, label
-> every result, never write without approval. Copilot reads these files on every request."
+> "This is how we teach GitHub Copilot *our* rules: synthetic data only, read-only by default, label
+> every result, never write without approval. GitHub Copilot reads these files on every request."
 
 ### What it's doing for data engineering, concretely
 
-| Job | What Copilot does | Where you saw it |
+| Job | What GitHub Copilot does | Where you saw it |
 |---|---|---|
 | Understand | Explains PySpark, Spark SQL and DAX; profiles source files; finds data quirks | Guide step 06 |
 | Author | Drafts notebooks, transforms, measures and tests from a reviewed design | Steps 07–10; compare with `fabric/workspace/*.Notebook` |
@@ -240,7 +240,7 @@ harness, execution, authority and evidence.
 
 | Level | What you add | What it unlocks | Control that keeps it safe |
 |---|---|---|---|
-| **L1 Assisted** | Copilot in the editor; Fabric items synced to Git as files | Explain and complete PySpark, SQL, DAX | Code review of the diff |
+| **L1 Assisted** | GitHub Copilot in the editor; Fabric items synced to Git as files | Explain and complete PySpark, SQL, DAX | Code review of the diff |
 | **L2 Grounded** | `AGENTS.md`, instructions, docs MCP (Microsoft Learn, Fabric MCP docs tools) | Correct APIs and item formats instead of plausible guesses | Pinned docs sources |
 | **L3 Skilled** | Fabric Skills (pinned, curated) and your own repository skills | Microsoft-authored procedures, your conventions | Approval for `az rest`; no wildcard MCP |
 | **L4 Connected** | Read-only Fabric MCP against a dev workspace | The agent checks its assumptions against reality | `--read-only`, allow-list, bound workspace |
@@ -255,7 +255,7 @@ harness, execution, authority and evidence.
 **Screen:** `/labs/lab-copilot-maturity-ladder`. Show the stage list (LEARN → … → PRODUCTION NOTES)
 and the scorecard.
 
-**Copilot moments.** Run these prompts from the pack in the repository window:
+**GitHub Copilot moments.** Run these prompts from the pack in the repository window:
 
 1. **P-COP-1 (L1–L2):** explain the Silver encounters transform and its data-quality flags.
 2. **P-COP-2 (L4, LOCAL):** "inspect the medallion architecture" through `ffia-local`, which returns
@@ -271,7 +271,7 @@ and the scorecard.
 
 > "Business meaning belongs in the semantic model, not in prompts. In this lab:
 >
-> - Copilot connects to the model through **Power BI Modeling MCP** (local server, GA).
+> - GitHub Copilot connects to the model through **Power BI Modeling MCP** (local server, GA).
 > - It uses the `semantic-model-authoring` skill for relationships and measures, and the
 >   `powerbi-report-cli` skill for the report.
 > - Every measure is reconciled with DAX against a governed baseline."
@@ -289,7 +289,7 @@ Use prompt **P-PBI-1** (`ffia-local` → `evaluate_measures` / `evaluate_against
 
 > "This is the end-to-end lab: 16 steps from tools to a published report. Each step has:
 >
-> - a Copilot prompt and a Claude Code prompt;
+> - a GitHub Copilot prompt and a Claude Code prompt;
 > - the exact tool path;
 > - a checkpoint;
 > - the evidence required, and what does *not* count as evidence;
@@ -315,7 +315,7 @@ ls fabric/workspace/
 
 | Decision | Options | Our default and why |
 |---|---|---|
-| Harness | VS Code agent mode · Copilot CLI · cloud agent · Claude Code | VS Code or CLI for interactive work under your identity; cloud agent only with read-only tools and PR review |
+| Harness | VS Code agent mode · GitHub Copilot CLI · cloud agent · Claude Code | VS Code or CLI for interactive work under your identity; cloud agent only with read-only tools and PR review |
 | MCP topology | Direct to servers · through an APIM gateway (P15) | Direct with pinned profiles; add a gateway when many teams share servers |
 | Skills | Upstream plugin install · pinned curated vendor install | Pinned and curated, with approval on `az rest` |
 | How changes land | MCP write tool with approval · scoped writer · Git PR + deployment pipeline | PR and pipeline for production; the approval-gated MCP tool for dev labs only |

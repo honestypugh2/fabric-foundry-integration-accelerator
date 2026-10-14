@@ -24,7 +24,7 @@ checks:
     choices:
       - Branch protection on the main branch
       - A read-only allow-list and a pinned target workspace
-      - A Copilot app subscription
+      - A GitHub Copilot app subscription
       - A larger model
     answer: 1
     explanation: L4 is where real data becomes visible. Read-only tools and a pinned dev workspace limit exposure and stop wrong-tenant mistakes.
@@ -58,7 +58,7 @@ checks:
     explanation: Instructions are context, not enforcement. Tool absence, harness permissions, identity and deterministic policy are what stop actions.
   - id: l400-cloud-agent
     level: l400
-    question: Why should the Copilot cloud agent get only read-only or offline MCP tools?
+    question: Why should the GitHub Copilot cloud agent get only read-only or offline MCP tools?
     choices:
       - Because it cannot use MCP at all
       - Because tools run without per-call approval and its firewall does not restrict MCP server processes

@@ -129,13 +129,13 @@ steps:
     expected: The LIVE execution returns HTTP 409 with redirected_to_local false; the audit shows change:execute labeled UNAVAILABLE with success false; tests pass.
     evidence_category: SIMULATED LOCALLY
   - stage: TRY WITH COPILOT
-    title: Let Copilot propose, and only propose
+    title: Let GitHub Copilot propose, and only propose
     instructions: >-
-      With the `ffia-local` server approved in VS Code agent mode or Copilot CLI, use this prompt:
+      With the `ffia-local` server approved in VS Code agent mode or GitHub Copilot CLI, use this prompt:
       "Using the ffia-local MCP server, call generate_fabric_change_plan to propose creating a
       Lakehouse named bronze_lab_copilot in demo-dev with destination LOCAL. Show the risk,
       validation, rollback and policy reasons. Do not try to approve or execute it; tell me what a
-      human must do next." Check that Copilot names the tool it used and does not claim the item
+      human must do next." Check that GitHub Copilot names the tool it used and does not claim the item
       exists.
     expected: A PROPOSED plan labeled LOCAL and a next step pointing to a human approval through the API.
     evidence_category: SIMULATED LOCALLY

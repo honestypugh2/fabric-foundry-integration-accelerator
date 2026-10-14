@@ -5,9 +5,8 @@
 
 ## Context
 
-The accelerator is presented live, sometimes without a working tenant or network. A demo that
-breaks at the moment it is presented costs credibility. A demo that hides simulation costs
-trust.
+The accelerator is presented live, sometimes without a working tenant or network.
+The offline demo must work and must label every simulated result.
 
 ## Options
 
@@ -53,7 +52,7 @@ are optional. They are never simulated as the real service. `make validate` runs
 
 ## Education impact
 
-- The ten acts follow the Executive story and link to the L100–L400 content.
+- The ten acts follow the Executive story and link to the L100 to L400 content.
 
 ## Revisit trigger
 

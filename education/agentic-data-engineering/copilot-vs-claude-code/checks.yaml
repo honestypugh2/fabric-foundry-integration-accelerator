@@ -25,12 +25,12 @@ checks:
       - .agents/skills/
       - .claude/skills/
     answer: 2
-    explanation: Claude Code loads project skills only from .claude/skills/, and Copilot also reads that folder, so it is the portable location.
+    explanation: Claude Code loads project skills only from .claude/skills/, and GitHub Copilot also reads that folder, so it is the portable location.
   - id: l200-model-harness
     level: l200
     question: Why must a bake-off record the model as well as the harness?
     choices:
-      - Copilot can run Claude models, so differences could come from the model rather than the harness
+      - GitHub Copilot can run Claude models, so differences could come from the model rather than the harness
       - Because models are free
       - Because Claude Code cannot use MCP
     answer: 0
@@ -50,13 +50,13 @@ checks:
     question: Which of these is enforcement rather than guidance?
     choices:
       - A rule written in AGENTS.md
-      - A Claude Code hook that blocks a tool call, or a Copilot deny rule
+      - A Claude Code hook that blocks a tool call, or a GitHub Copilot deny rule
       - A skill description
     answer: 1
     explanation: Instructions and skills shape the model's behavior; hooks and deny rules are enforced by the harness regardless of what the model wants.
   - id: l400-cloud-agent
     level: l400
-    question: What is the main risk of configuring a write-capable MCP server for the Copilot cloud agent?
+    question: What is the main risk of configuring a write-capable MCP server for the GitHub Copilot cloud agent?
     choices:
       - Its tools run without per-call approval and the firewall does not restrict MCP processes
       - The cloud agent cannot open pull requests

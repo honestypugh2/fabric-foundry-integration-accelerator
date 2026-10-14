@@ -41,7 +41,7 @@ entry_points:
   - id: vscode
     name: VS Code (code-first)
     where: "VS Code → demos/foundry-fabric-agents-workshop/code/ · Microsoft Foundry extension · GitHub Copilot agent mode"
-    purpose: "Build the same agent in Python with the Foundry SDK; Copilot explains and edits the code."
+    purpose: "Build the same agent in Python with the Foundry SDK; GitHub Copilot explains and edits the code."
   - id: terminal
     name: Terminal
     where: "VS Code integrated terminal in the repository (source .venv/bin/activate)"

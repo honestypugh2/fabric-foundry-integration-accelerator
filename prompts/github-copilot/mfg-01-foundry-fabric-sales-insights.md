@@ -2,7 +2,7 @@
 
 <!-- Generated from education and guide YAML; run ffia prompts render. -->
 
-Recorded bake-off results describe Copilot CLI only, not every Copilot surface.
+Recorded bake-off results describe GitHub Copilot CLI only, not every GitHub Copilot surface.
 
 Read AGENTS.md first (Claude Code imports it through CLAUDE.md). Use synthetic data only. State the provider, server and tool before cloud calls. Default to read-only; a prompt is not approval for a write. Label execution and fallback honestly.
 

@@ -5,7 +5,7 @@ any cloud call.
 
 | Demo | Status | Covers |
 |---|---|---|
-| [Leveling up Fabric data engineering with GitHub Copilot](fabric-copilot-level-up.md) | Ready offline; live read-only observations are dated, not current-health or end-to-end certification | Reference architecture and patterns, Fabric MCP, Fabric Skills, GitHub Copilot (what it does, L1→L6), Power BI, options |
+| [Leveling up Fabric data engineering with GitHub Copilot](fabric-copilot-level-up.md) | Ready offline; live read-only observations are dated, not current-health or end-to-end certification | Architecture, Fabric MCP, Fabric Skills, GitHub Copilot levels L1 to L6, Power BI and alternatives |
 | [Talk track Q&A](fabric-copilot-level-up-qa.md) | Ready | Anticipated customer questions with labeled answers |
 | [Guide 1 talk track (HTML)](fabric-copilot-level-up/index.html) | Ready | Generated from `fabric-copilot-level-up/talk-track.yaml` |
 | [Guide 2: Foundry + Fabric agent workshop (HTML)](foundry-fabric-agents-workshop/index.html) | Ready offline; live needs the runbook | Foundry capabilities and Fabric, building and orchestrating agents, internal and external data, security and governance, the five customer questions |
@@ -18,6 +18,8 @@ For sharing, start with the [customer](../docs/field-playbooks/customer.html) or
 remain featured; unfinished connected execution and Claude setup are tracked
 [for later](../docs/operations/resume-later.md), not removed.
 
+GitHub displays HTML source. Download the handout and open it in a browser to see the page.
+
 Planned: `open-mirroring-recovery`, `foundry-data-agent`, `fabric-iq` (preview), `evaluation-observability`,
-`copilot-vs-claude-bakeoff`, and `offline-fallback` as stand-alone scripts (Phases 6–7). Their content
+`copilot-vs-claude-bakeoff`, and `offline-fallback` as stand-alone scripts (Phases 6 to 7). Their content
 already exists as lessons and labs.

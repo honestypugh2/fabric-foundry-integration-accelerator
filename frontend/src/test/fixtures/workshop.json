@@ -164,7 +164,7 @@
           ]
         },
         "what": "The L0-L6 ladder adds repository grounding, procedures, connected context and governed change to assisted coding.",
-        "when": "Use the ladder to plan how a Fabric engineering team adopts Copilot on one repeatable task.",
+        "when": "Use the ladder to plan how a Fabric engineering team adopts GitHub Copilot on one repeatable task.",
         "when_not": "Do not interpret a higher rung as permission for autonomous production writes or a guaranteed productivity gain.",
         "why": "Each added capability introduces a new failure mode and therefore needs a control and observable evidence."
       },
@@ -212,7 +212,7 @@
             "Observed elapsed time",
             "Evidence completeness"
           ],
-          "question": "What would make a Copilot and Claude comparison fair and reproducible?",
+          "question": "What would make a GitHub Copilot and Claude comparison fair and reproducible?",
           "sources": [
             "research-react",
             "copilot-cli-ga",
@@ -223,7 +223,7 @@
         "what": "A fair harness comparison holds the task, dataset, constraints and scoring rules constant.",
         "when": "Use the evaluation framework when deciding how a team should use alternative coding harnesses.",
         "when_not": "Do not claim a winner from unrelated demonstrations, different models or documented-only paths.",
-        "why": "A recorded Copilot result and a documented Claude prompt are different evidence categories."
+        "why": "A recorded GitHub Copilot result and a documented Claude prompt are different evidence categories."
       },
       {
         "diagram": "mcp-topology",
@@ -1426,7 +1426,7 @@
           "copilot-maturity-ladder",
           "power-bi-agentic-tooling"
         ],
-        "summary": "Use Copilot to improve a repeatable data task, add Skills and Fabric MCP, then verify the result rather than trusting a convincing answer.",
+        "summary": "Use GitHub Copilot to improve a repeatable data task, add Skills and Fabric MCP, then verify the result rather than trusting a convincing answer.",
         "title": "Level up Fabric engineering"
       },
       {
@@ -1471,7 +1471,7 @@
           "power-bi-agentic-tooling"
         ],
         "outcomes": [
-          "Explain how Copilot adds value at each engineering stage.",
+          "Explain how GitHub Copilot adds value at each engineering stage.",
           "Build and reconcile a synthetic medallion and semantic contract.",
           "Distinguish Skills from MCP execution and retain evidence for every approved operation."
         ],
@@ -1492,11 +1492,11 @@
             "title": "Manual baseline"
           },
           {
-            "capability": "Copilot accelerates authoring and review preparation; the engineer retains judgment.",
+            "capability": "GitHub Copilot accelerates authoring and review preparation; the engineer retains judgment.",
             "control": "Review assumptions and compare outputs.",
             "evidence": "Artifact diff and test results; no invented time saving.",
             "task": "Draft and explain a transformation with tests.",
-            "title": "Copilot assistance"
+            "title": "GitHub Copilot assistance"
           },
           {
             "capability": "Instructions provide the local architecture and quality contract.",
@@ -1520,7 +1520,7 @@
             "title": "Fabric MCP context"
           },
           {
-            "capability": "The assigned tool or extension performs the approved operation; Copilot coordinates.",
+            "capability": "The assigned tool or extension performs the approved operation; GitHub Copilot coordinates.",
             "control": "Duplicate check and exact-target human approval.",
             "evidence": "Counts and DAX against the baseline plus separate execution and publication evidence.",
             "task": "Build and reconcile the intended Fabric artifacts.",
@@ -1574,7 +1574,7 @@
             "title": "Governed Fabric context"
           },
           {
-            "capability": "Foundry coordinates tools and reasons over returned context; Copilot helps author and test the integration.",
+            "capability": "Foundry coordinates tools and reasons over returned context; GitHub Copilot helps author and test the integration.",
             "control": "Bounded tool use and evaluation.",
             "evidence": "Observed tool event and baseline-reconciled answer.",
             "task": "Explain the context and its supported conclusion.",
@@ -1626,7 +1626,7 @@
         ],
         "stages": [
           {
-            "capability": "Copilot explains the contract and assumptions.",
+            "capability": "GitHub Copilot explains the contract and assumptions.",
             "control": "Independent committed baseline.",
             "evidence": "Nine named expected categories and explicit exclusions.",
             "task": "Define order-line grain and quality categories.",
@@ -2024,7 +2024,7 @@
         "power-bi-agentic-tooling",
         "fabric-mcp-landscape"
       ],
-      "name": "Copilot CLI + Fabric Skills + MCP",
+      "name": "GitHub Copilot CLI + Fabric Skills + MCP",
       "pattern_id": "P19"
     },
     {

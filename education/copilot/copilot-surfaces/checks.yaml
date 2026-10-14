@@ -1,7 +1,7 @@
 checks:
   - id: exec-cloud-agent-approval
     level: executive
-    question: Where is the approval point when the Copilot cloud agent works on an issue?
+    question: Where is the approval point when the GitHub Copilot cloud agent works on an issue?
     choices:
       - Each MCP tool call
       - The pull request it opens
@@ -10,14 +10,14 @@ checks:
     explanation: Configured tools run without per-call approval in the cloud agent, so review of the pull request is where a human decides.
   - id: l100-preview
     level: l100
-    question: Which Copilot surface is a technical preview as of October 2026?
+    question: Which GitHub Copilot surface is a technical preview as of October 2026?
     choices:
-      - Copilot CLI
+      - GitHub Copilot CLI
       - VS Code agent mode
-      - The Copilot app
-      - The Copilot cloud agent
+      - The GitHub Copilot app
+      - The GitHub Copilot cloud agent
     answer: 2
-    explanation: The Copilot app, with worktree sessions and Autopilot, is a technical preview; CLI, VS Code agent mode and the cloud agent are generally available.
+    explanation: The GitHub Copilot app, with worktree sessions and Autopilot, is a technical preview; CLI, VS Code agent mode and the cloud agent are generally available.
   - id: l200-lifecycle
     level: l200
     question: Which data-engineering step needs approval?
@@ -31,14 +31,14 @@ checks:
     level: l300
     question: Which surface does not read AGENTS.md?
     choices:
-      - Copilot Chat on GitHub.com
-      - Copilot cloud agent
+      - GitHub Copilot Chat on GitHub.com
+      - GitHub Copilot cloud agent
       - VS Code agent mode
     answer: 0
     explanation: GitHub.com Chat uses copilot-instructions.md and personal or organization instructions; the cloud agent, code review and VS Code read AGENTS.md.
   - id: l300-mcp-file
     level: l300
-    question: Where does the Copilot cloud agent get its MCP server configuration?
+    question: Where does the GitHub Copilot cloud agent get its MCP server configuration?
     choices:
       - The repository's .mcp.json
       - Repository settings, with secrets prefixed COPILOT_MCP_
@@ -51,6 +51,6 @@ checks:
     choices:
       - The cloud agent and code review read instructions from the pull request's head branch, so a PR could change its own review rules
       - Because instruction files contain secrets
-      - Because Copilot refuses to read unprotected files
+      - Because GitHub Copilot refuses to read unprotected files
     answer: 0
     explanation: Reviewing changes to instruction files stops a pull request from weakening the rules it is evaluated against.

@@ -1,5 +1,8 @@
 # Provider registry
 
-Maps capabilities (data, semantics, agent, knowledge, MCP, evaluation, audit) to LIVE/LOCAL/MOCK implementations.
+Map data, semantics, agents, knowledge, MCP, evaluation and audit capabilities to their
+LIVE, LOCAL or MOCK implementations.
 
-Populated in: Phase 3.
+Domain code uses provider ports. The selected adapter supplies the implementation and
+execution label.
+See [provider routing](../../docs/architecture/resilience.md).

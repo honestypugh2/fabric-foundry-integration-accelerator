@@ -1,4 +1,4 @@
-# ADR-0012: Live Fabric integration — read-only provider, gated scoped writer, MCP profiles as code, reference notebooks
+# ADR-0012: Live Fabric integration: read-only provider, gated scoped writer, MCP profiles as code, reference notebooks
 
 - Status: Accepted
 - Date: 2026-10-07
@@ -6,8 +6,8 @@
 
 ## Context
 
-Phase 5 connects the accelerator to a real Fabric tenant without weakening the offline default or
-the authority rules. Four facts shaped it:
+Phase 5 adds a real Fabric connection. It keeps the offline default and authority rules.
+Four facts shaped the decision:
 
 - **The presenter's demo tenant was not Fabric-ready at first.** `ffia fabric readiness`
   found:
@@ -62,7 +62,7 @@ Options 2 and 4.
 - **`ffia fabric readiness`.** Read-only tenant checks, each with a remediation.
 - **MCP profiles as code.** `config/mcp/profiles.yaml` holds five profiles and a pinned tool
   catalog, rendered per client with `ffia mcp render` for VS Code (`servers`), Claude Code
-  (`mcpServers`) and Copilot CLI (`mcpServers`, `type: local`, `tools`). `ffia mcp check` (in
+  (`mcpServers`) and GitHub Copilot CLI (`mcpServers`, `type: local`, `tools`). `ffia mcp check` (in
   validate and CI) requires:
   - exact stable pins;
   - no `--dangerously-*` and no EULA flags;

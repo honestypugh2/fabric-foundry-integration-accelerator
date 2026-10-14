@@ -7,8 +7,8 @@
 
 The baseline accelerator needs a richer healthcare model (facility and payer masters, star
 schema, physical role-playing dates). Use-Case Guide HC-01 needs seven sources whose row counts
-and quirks match its documented baseline. More guides will follow. The core code must not fork
-per guide or customer, and live Fabric runs need something concrete to be compared against.
+and quirks match its documented baseline. More guides will follow. Keep one core implementation
+across guides and customers. Use committed baselines to check live Fabric results.
 
 ## Options
 

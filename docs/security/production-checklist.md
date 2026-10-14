@@ -1,7 +1,7 @@
 # Production checklist
 
 Status: **PRODUCTION RECOMMENDATION / REQUIRES TENANT VALIDATION**.
-Offline CI is necessary but insufficient for a production release. Record evidence and an owner
+Passing offline CI alone is not enough for a production release. Record evidence and an owner
 for every applicable item; an unchecked item is not an implied pass.
 
 ## Identity, access and data
@@ -34,7 +34,8 @@ for every applicable item; an unchecked item is not an implied pass.
 - [ ] Record exact revision, commands/results, environment and exclusions in the release evidence.
 - [ ] Verify both guides, architecture visuals and offline presentation on the presenter device.
 
-Claude Code remains **DOCUMENTED ONLY**. Copilot model runs are not evidence of Claude Code
+Claude Code instructions are available now; execution remains **DOCUMENTED ONLY**.
+GitHub Copilot model runs are not evidence of Claude Code
 behavior. Fabric capacity remains paused until an operator separately approves its use.
 
 See [threat model](threat-model.md) and [release validation](../operations/release-validation.md).

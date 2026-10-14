@@ -1,7 +1,7 @@
 # Fabric Git-format item definitions
 
-Reviewed item definitions in the Fabric Git source format, for repo-first agentic change
-(Pattern 20). The scoped writer creates a notebook item **only** from a definition in this folder.
+These are the reviewed Fabric Git definitions used by Pattern 20.
+The scoped writer creates a notebook item **only** from a definition in this folder.
 
 | Item | Purpose |
 |---|---|
@@ -19,5 +19,5 @@ you open the notebook.
   `scripts/verify_spark_notebooks.py`: all 85 checks pass against the committed baseline.
 - Running them in Fabric **REQUIRES TENANT VALIDATION**.
 
-The HC-01 guide asks learners to draft these notebooks with Copilot or Claude Code; these are the
-reviewed reference versions to compare against, not a replacement for that exercise.
+Draft the notebook with GitHub Copilot or the documented Claude Code prompts, then compare it with
+these references. Do not skip the exercise or treat a reference file as a completed Fabric run.

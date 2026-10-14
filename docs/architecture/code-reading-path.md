@@ -4,7 +4,7 @@
 It does not publish the git-ignored interactive resource or claim cloud execution.
 Start with the [quick start](../../README.md#quick-start) and [graphical map](repository-map.md).
 
-## A vertical reading path
+## Read from contracts to tests
 
 | Order | Read | Question |
 |---|---|---|
@@ -12,7 +12,7 @@ Start with the [quick start](../../README.md#quick-start) and [graphical map](re
 | 2. Local implementation | [LocalFabricProvider](../../src/fabric_foundry_accelerator/providers/fabric/local.py), [pipeline](../../src/fabric_foundry_accelerator/synthetic/pipeline.py) | Does the capability and baseline work without cloud configuration? |
 | 3. Composition | [build_container](../../src/fabric_foundry_accelerator/services/container.py), [settings](../../src/fabric_foundry_accelerator/config/settings.py) | Where are clients, stores, policies and clocks injected? |
 | 4. Routing/authority | [Read router](../../src/fabric_foundry_accelerator/fallback/router.py), [ChangeService](../../src/fabric_foundry_accelerator/services/changes.py) | Which reads may fall back, and why are writes separate? |
-| 5. Transport | [API factory](../../src/fabric_foundry_accelerator/api/app.py), [routes](../../src/fabric_foundry_accelerator/api/routes.py), [local MCP](../../src/fabric_foundry_accelerator/mcp/server.py) | Does the surface validate/delegate rather than duplicate rules? |
+| 5. Transport | [API factory](../../src/fabric_foundry_accelerator/api/app.py), [routes](../../src/fabric_foundry_accelerator/api/routes.py), [local MCP](../../src/fabric_foundry_accelerator/mcp/server.py) | Does each route validate input and call services rather than duplicate rules? |
 | 6. Browser | [Client](../../frontend/src/api/client.ts), [hooks](../../frontend/src/api/hooks.ts), [Evidence page](../../frontend/src/features/workshop/EvidencePage.tsx) | How does unknown JSON become validated data and explicit UI states? |
 | 7. Proof | [Envelope tests](../../tests/unit/test_execution_envelope.py), [router tests](../../tests/unit/test_router.py), [API tests](../../tests/unit/test_api.py) | Which passing and failure cases prove the boundary? |
 
@@ -42,8 +42,8 @@ JSON by annotation alone: use `unknown` and runtime schemas, not `any` or unsafe
 
 ## A small build loop
 
-1. State an outcome and a failing acceptance case.
-2. Define the typed request/result and invariant.
+1. State the outcome and write a failing acceptance test.
+2. Define the typed request/result and the rule it must enforce.
 3. Implement deterministic logic with an injected local/fake adapter.
 4. Prove it offline before adding transport/UI.
 5. Wire one thin surface; update structured teaching and related documentation.

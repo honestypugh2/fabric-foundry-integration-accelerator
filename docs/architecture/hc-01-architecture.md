@@ -1,7 +1,8 @@
 # Guide HC-01 architecture
 
-What each step of Guide HC-01 touches, in the tenant and offline. In the guide runner, each step
-highlights its part of this diagram.
+Follow each HC-01 step through the tenant and offline paths. The guide runner highlights the
+part of the diagram used by each step. Live completion is deferred; the diagram does not prove
+that a step ran.
 
 ## Architecture
 

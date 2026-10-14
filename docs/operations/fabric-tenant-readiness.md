@@ -8,9 +8,10 @@ tenant for the opt-in LIVE paths:
 - reference notebooks;
 - the gated scoped writer.
 
-Every step below is read-only, except the ones marked **(change)**. Do a **(change)** step
-yourself in the portal, as the tenant administrator, after reviewing it. Nothing in this
-repository makes these changes for you.
+Every step below is read-only, except those marked **(change)**. For each change, review the
+plan, check duplicates and obtain explicit approval first. Perform the approved change as the
+tenant administrator, then verify and audit it. Nothing in this repository makes these changes
+for you.
 
 ## 1. Check first
 
@@ -34,7 +35,7 @@ SKIPPED, with a remediation for each check:
 The command fails fast. If `az` opens a browser, or hangs waiting for interactive sign-in, the
 check stops after 30 seconds and asks you to sign in again.
 
-## 2. Activate the account in Fabric — (change)
+## 2. Activate the account in Fabric (change)
 
 `401 UserNotLicensed` can appear even when Power BI plans are assigned. It means the account is
 not active in the Fabric service yet.
@@ -43,7 +44,7 @@ not active in the Fabric service yet.
 2. Accept the Fabric (Free) license if prompted.
 3. Confirm the account has a Fabric (Free), Power BI Pro or Premium Per User license.
 
-## 3. Get capacity — (change)
+## 3. Get capacity (change)
 
 A **Premium Per User** capacity (SKU `PP*`) does not count: it cannot host lakehouses or
 notebooks. Readiness only accepts F, FT (trial) and P SKUs.
@@ -67,7 +68,7 @@ Choose one:
   az rest --method post --url "https://management.azure.com/subscriptions/<SUB>/resourceGroups/<RG>/providers/Microsoft.Fabric/capacities/<NAME>/resume?api-version=2023-11-01"
   ```
 
-## 4. Tenant settings — (change, Fabric administrator)
+## 4. Configure tenant settings (change, Fabric administrator)
 
 The labs rely on these settings. Enable them for the whole tenant, or only for a lab security
 group. Readiness matches each setting by name or by its portal title, because Microsoft does not
@@ -83,7 +84,7 @@ publish a stable catalog of setting names.
 | Copilot and Fabric data agents | Users can use Copilot, AI Agents and other AI experiences powered by Azure OpenAI | No |
 | Ontology (PREVIEW), Power BI MCP endpoints (PREVIEW) | Users can create Ontology (preview) items; Power BI Model Context Protocol server endpoints (preview) | No, reported as informational and left off |
 
-## 5. Dedicated dev workspace — (change)
+## 5. Create a dedicated dev workspace (change)
 
 1. Create a workspace for the labs, for example `ffia-dev`.
 2. Assign it to the trial or F capacity (workspace settings → License info).
@@ -123,9 +124,9 @@ all of these hold:
 - `FFIA_FABRIC_LIVE=1` is set;
 - the bindings file exists.
 
-Every change then still needs a plan, policy approval, approval by a different person, and a live
-duplicate re-check. It is verified and audited afterwards. Run it only against the dev workspace,
-and only after you have reviewed the plan.
+Every change still needs a plan, policy approval, approval by a different person and a live
+duplicate re-check. Verify and audit it afterwards. Run it only against the dev workspace,
+after reviewing and approving the plan.
 
 ## Fabric MCP note
 

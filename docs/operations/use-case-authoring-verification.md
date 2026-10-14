@@ -3,11 +3,22 @@
 Recorded **2026-10-13**. **LOCAL authoring gate: PASSED. Connected gate: PARTIAL.
 Production gate: NOT CERTIFIED.**
 
-This record covers the authoring implementation based on revision `e90b09c` plus the DQ-01
-worktree changes. It is not a tagged release or an actual GitHub workflow result. The
-implementation and this record must be reviewed together before publishing a release.
+This record covers revision `e90b09c` plus the DQ-01 authoring changes in the worktree.
+It is not a tagged release or a GitHub workflow result. Review the implementation and this
+record together before publishing a release.
 
-## Requirements and observed proof
+## Read the checkpoint you need
+
+- **HC-01:** source landing and profiling are verified. Bronze publication is tool-reported,
+  not independently verified. Live end-to-end completion is deferred.
+- **MFG-01/DQ-01:** the offline paths are shareable. Connected evidence is dated and limited;
+  revenue reconciliation and final assistant answers remain unverified.
+- **Claude Code:** instructions are available now. Setup and execution are deferred.
+
+Read the dated checks below for exact scope. See the [resume tracker](resume-later.md) for
+deferred work. Nothing in this record grants approval for a new operation.
+
+## Authoring requirements and recorded results
 
 | Requirement | Evidence | Scope |
 |---|---|---|
@@ -69,7 +80,7 @@ observed, but complete assistant answers and revenue reconciliation remain unver
 
 ### Isolated checkout rehearsal
 
-Materialized tracked HEAD plus the authoring changes into a temporary checkout. No private
+Copied tracked HEAD plus the authoring changes into a temporary checkout. No private
 dotenv or customer binding files were copied. The initial check confirmed missing local tools;
 created and activated a new Python 3.14 virtual environment, then restored `uv.lock` using
 `uv sync --frozen --offline`. Restored frontend dependencies with `npm ci --offline` after the
@@ -113,7 +124,7 @@ After the operator confirmed corrected sign-in, the scoped retry established:
 - Actual **Microsoft Fabric / `fabric-mcp` / `onelake_list-items`** succeeded within that
   workspace and returned the expected manufacturing lakehouse/data-agent items.
 
-Identifiers remain private. These checks certify metadata access and target scope only,
+Identifiers remain private. These checks verify metadata access and target scope only,
 not notebook outputs, agent answer quality, monitoring ingestion or publication.
 
 The operator subsequently installed Fabric Data Engineering 1.26.0 and Power BI Authoring
@@ -139,9 +150,9 @@ next call matched the private dev binding exactly. Actual `fabricListNotebook` r
 entries, and an independent workspace-scoped `fabric-notebook-mcp` `list_artifacts` call
 confirmed zero Notebook items. No publication tool was invoked.
 The reviewed HC-01 reference notebooks also passed `ffia notebooks check` (LOCAL).
-The operator selected completing HC-01 as well as continuing MFG-01/DQ-01. Recommended
-sequencing keeps HC-01 in a separate dedicated lab workspace and retains the existing dev
-workspace for manufacturing. HC-01 step 03 explicitly assigns workspace creation to the
+The operator chose to complete HC-01 and continue MFG-01/DQ-01. Keep HC-01 in a separate
+dedicated lab workspace. Retain the existing dev workspace for manufacturing.
+HC-01 step 03 explicitly assigns workspace creation to the
 operator in the Fabric portal; no automatic workspace creation or alternate transport was used.
 An isolated HC-01 export completed locally, and `sha256sum -c SHA256SUMS` passed for all seven
 synthetic CSVs. The export is source-preparation evidence, not OneLake upload evidence.
@@ -170,7 +181,7 @@ A separate **LIVE / repository SDK readiness path / `ffia fabric readiness --jso
 used process-only HC workspace overrides and the existing private tenant pin. It passed
 sign-in, capacity, exact HC workspace assignment and required tenant-setting checks.
 The GitHub workspace-sync setting remains a warning; preview settings were skipped.
-This GET-only readiness diagnostic is not an MCP invocation or write-authorization result.
+This GET-only readiness check is not an MCP invocation or write authorization.
 Saved manufacturing bindings and the default read-only configuration were not changed.
 
 **LOCAL / `ffia-local` / `generate_fabric_change_plan`**, followed by
@@ -180,7 +191,7 @@ and live mutation is disabled. The existing MCP session also reports no configur
 This blocked plan is not approval or evidence of lakehouse creation. Discovery exposed
 `core_create-item` only on the separately configured `Fabric-MCP` server, not the selected
 read-only `fabric-mcp` server; it was not invoked or silently substituted.
-At that checkpoint, HC authoring context and exact private binding still needed alignment
+At that checkpoint, the HC authoring context still needed to match the exact private binding
 before a new allowed plan and operation-specific human approval. No HC lakehouse, upload,
 publication, run, model or report operation had been performed.
 
@@ -201,10 +212,10 @@ The isolated, reviewed `hc01-lab` Fabric MCP server also initialized through the
 Its actual catalogue matched all seven configured tools, including `core_create-item`.
 An actual **LIVE / configured `fabric-mcp` / `onelake_list-items`** call independently
 matched the private HC workspace ID and empty inventory. No write tool was invoked.
-The verification processes were stopped, and private plan, audit, catalogue and scoped-read
-records were retained. The next boundary was a separately approved, client-mediated Fabric MCP
-lakehouse creation, subsequently completed below; it is not a substitution for the disabled API
-live writer.
+The verification processes were stopped. Private plan, audit, catalogue and scoped-read
+records were retained. The next step required separate approval for client-mediated Fabric MCP
+lakehouse creation. That operation was completed below. It did not substitute for the disabled
+API live writer.
 
 ## HC-01 lakehouse creation and verification: 2026-10-13
 
@@ -250,11 +261,10 @@ at the missing-directory prerequisite, not attempted or redirected to simulation
 The operator approved **only** creating the empty `Files/raw` directory. However, the isolated
 authoring MCP SDK client's pre-flight `Files` read returned a tool error before any directory
 write. Bounded read-only diagnosis through that same configured server recovered HTTP 404
-`HttpRequestException`; omitting optional recursion did not resolve it. The client-context
-discrepancy remains unresolved. No directory-creation receipt exists and
+`HttpRequestException`; omitting optional recursion did not resolve it. The difference between client contexts remains unresolved. No directory-creation receipt exists and
 `onelake_create-directory` has not been invoked. No uploads or readback have occurred.
 
-The next boundary is resolving that context or explicitly approving a different configured
+The next step is to resolve that context or explicitly approve a different configured
 MCP server for the same bounded operation, with fresh exact-target preconditions. No REST/CLI
 substitution or mutation retry is authorized. Content-hash verification after future uploads
 requires separately approved, exact-file MCP readback; the current HC profile does not expose
@@ -507,10 +517,13 @@ The Fabric output item still reports `in_progress`, and no final assistant messa
 recovered. Therefore the result certifies the recovered tool payload's baseline match,
 not a fully verified end-to-end assistant answer. Raw IDs, source URLs and results remain private.
 
-Remaining work: independently verify the tool-reported HC Bronze publication and binding,
-then separately plan and approve run/model/report operations and the Silver/Gold sequence;
-diagnose the revenue timeout/tool limit without duplicate inference, and verify final assistant
-answers.
+Remaining work is deferred:
+
+1. Independently verify the tool-reported HC Bronze publication and binding.
+2. Separately plan and approve run/model/report operations and the Silver/Gold sequence.
+3. Diagnose the revenue timeout/tool limit without duplicate inference.
+4. Verify final assistant answers.
+
 Production controls, schedule/delivery, actual billing and release checks remain uncertified.
 
 ## Interface capture

@@ -1,5 +1,8 @@
 # Policies
 
-Tool allow-lists, write policies (approval required, destination binding, expiry), and fallback policies evaluated server-side before every tool or provider call.
+Use these policies to limit tools, require write approval and control fallback behavior.
+Write approval is tied to a destination and expires.
 
-Populated in: Phase 3.
+The server checks the applicable policy before a tool or provider call.
+MCP access does not grant write authority.
+See [the approval flow](../../docs/architecture/control-plane.md).

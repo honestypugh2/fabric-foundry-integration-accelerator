@@ -17,10 +17,11 @@ Harness = Literal["github-copilot", "claude-code"]
 
 def _header(title: str, harness: Harness) -> list[str]:
     status = (
-        "DOCUMENTED ONLY: no Claude Code runs were recorded. Claude models inside Copilot "
+        "DOCUMENTED ONLY: no Claude Code runs were recorded. Claude models inside GitHub Copilot "
         "are not Claude Code."
         if harness == "claude-code"
-        else "Recorded bake-off results describe Copilot CLI only, not every Copilot surface."
+        else "Recorded bake-off results describe GitHub Copilot CLI only, "
+        "not every GitHub Copilot surface."
     )
     return [
         f"# {title}",

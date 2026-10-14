@@ -5,8 +5,8 @@
 
 ## Context
 
-The backend needs one Python runtime and package manager that every required library
-supports. The goals are reproducible installs, fast environment creation and strict typing.
+Use one Python runtime and package manager supported by every required library.
+Keep installs reproducible, environment creation fast and typing strict.
 The brief requires uv, `pyproject.toml`, a committed `uv.lock`, the newest stable Python that
 every dependency supports, and an activated virtual environment before any install.
 

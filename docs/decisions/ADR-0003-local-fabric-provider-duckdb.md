@@ -5,10 +5,9 @@
 
 ## Context
 
-The architecture must be teachable and demonstrable with no Azure subscription, Fabric
-capacity, tenant or network. Learners still need a realistic analog of a lakehouse, its medallion
-layers, a semantic model and an Open Mirroring landing zone. The brief forbids presenting
-simulation as a real Fabric operation.
+Learners must be able to run the demo without an Azure subscription, Fabric capacity, tenant
+or network. They still need a local analog of a lakehouse, medallion layers, a semantic model
+and an Open Mirroring landing zone. Never present simulation as a real Fabric operation.
 
 ## Options
 
@@ -66,8 +65,7 @@ simulation as a real Fabric operation.
 ## Education impact
 
 - Learners inspect SQL per table, Silver diagnostics, Gold grain checks and baselines.
-- The same baseline can later be compared with a live Fabric run, which gives evidence rather
-  than appearance.
+- Compare a later live Fabric run with the same baseline to check its results.
 
 ## Revisit trigger
 

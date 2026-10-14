@@ -12,7 +12,7 @@ status: MIXED
 pattern_ids: [P19]
 learning_objectives:
   - Explain what a skill is (a SKILL.md knowledge pack) and what it is not (code that runs by itself, or a permission).
-  - Describe how Fabric Skills are installed in Copilot CLI, Claude Code, VS Code and through APM.
+  - Describe how Fabric Skills are installed in GitHub Copilot CLI, Claude Code, VS Code and through APM.
   - Explain that skills drive az rest, SQL, KQL and PySpark under the signed-in user's identity.
   - Identify the risks in the bundled .mcp.json and describe the hardened overlay.
   - Use the KNOWLEDGE / EXECUTION / HARNESS / AUTHORITY / EVIDENCE model to review an agentic Fabric workflow.
@@ -23,11 +23,11 @@ concepts:
   - term: Persona agent
     definition: An experimental agent definition in the Fabric Skills repository (for example FabricDataEngineer) that routes requests to the right skills.
   - term: Plugin marketplace
-    definition: A repository registered with a harness (Copilot CLI, Claude Code) from which skill bundles such as fabric-skills are installed.
+    definition: A repository registered with a harness (GitHub Copilot CLI, Claude Code) from which skill bundles such as fabric-skills are installed.
   - term: Hardened overlay
     definition: The accelerator's replacement for the bundled MCP configuration - dev workspace only, read-only allow-lists by default, authoring in a separate opt-in profile, approvals on.
   - term: Harness
-    definition: The agent loop and permission system that runs the skill - GitHub Copilot CLI, VS Code agent mode, the Copilot cloud agent or Claude Code.
+    definition: The agent loop and permission system that runs the skill - GitHub Copilot CLI, VS Code agent mode, the GitHub Copilot cloud agent or Claude Code.
 evidence:
   - statement: Skills for Fabric is an official Microsoft open-source project that packages Fabric knowledge as skills for coding agents, with MCP servers for live execution.
     category: DOCUMENTED FABRIC BEHAVIOR
@@ -59,7 +59,7 @@ try_it:
     result_label: SIMULATED
 copilot_prompt: >-
   Do not install anything. Explain how the fabric-skills plugin from microsoft/skills-for-fabric
-  would be installed in Copilot CLI, which MCP servers its bundled configuration registers, and
+  would be installed in GitHub Copilot CLI, which MCP servers its bundled configuration registers, and
   which of them can write. Then draft, as a table, a hardened overlay for a dev workspace that
   keeps only read-only tools by default and moves authoring and T-SQL to an opt-in profile.
   Classify each row as KNOWLEDGE, EXECUTION, HARNESS, AUTHORITY or EVIDENCE.

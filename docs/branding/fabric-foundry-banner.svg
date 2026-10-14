@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="title description">
+  <title id="title">Fabric + Foundry Integration Accelerator</title>
+  <desc id="description">Show and tell. Build and learn. Fabric provides governed context, Foundry supports reasoning and action, and GitHub Copilot helps build and verify. Original repository branding with no product logos.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#10283d"/>
+      <stop offset="1" stop-color="#101729"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8ce6c5"/>
+      <stop offset="1" stop-color="#85b6ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="640" fill="url(#background)"/>
+  <path d="M1030 0v640M1130 0v640M1230 0v640M0 120h1280M0 220h1280M0 320h1280M0 420h1280M0 520h1280" stroke="#a7caec" stroke-opacity=".035"/>
+  <circle cx="1140" cy="130" r="180" fill="#2b6495" fill-opacity=".09"/>
+  <circle cx="1200" cy="580" r="240" fill="#48ad96" fill-opacity=".06"/>
+  <rect x="72" y="68" width="54" height="5" rx="2.5" fill="url(#accent)"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="72" y="118" fill="#a9efd7" font-size="18" font-weight="700" letter-spacing="3">SHOW AND TELL. BUILD AND LEARN.</text>
+    <text x="72" y="206" fill="#f3f7fd" font-size="64" font-weight="700">Fabric + Foundry</text>
+    <text x="72" y="279" fill="#f3f7fd" font-size="60" font-weight="700">Integration Accelerator</text>
+    <text x="74" y="332" fill="#c5d3e4" font-size="23">Two use cases. Synthetic data. A practical place to start.</text>
+    <g transform="translate(72 388)">
+      <rect width="368" height="138" rx="18" fill="#172f43" stroke="#3b6270"/>
+      <g transform="translate(24 36)" fill="none" stroke="#8ce6c5" stroke-width="3">
+        <path d="M0 8 30 0l30 8-30 8zM0 23l30 8 30-8M0 38l30 8 30-8"/>
+      </g>
+      <text x="112" y="57" fill="#f3f7fd" font-size="28" font-weight="700">Fabric</text>
+      <text x="112" y="88" fill="#c5d3e4" font-size="17">Governed context</text>
+    </g>
+    <g transform="translate(456 388)">
+      <rect width="368" height="138" rx="18" fill="#192b46" stroke="#415f86"/>
+      <g transform="translate(26 41)" fill="none" stroke="#85b6ff" stroke-width="3">
+        <path d="M6 5h42M6 43h42M6 5l42 38M6 43 48 5"/>
+        <circle cx="6" cy="5" r="6" fill="#192b46"/>
+        <circle cx="48" cy="5" r="6" fill="#192b46"/>
+        <circle cx="6" cy="43" r="6" fill="#192b46"/>
+        <circle cx="48" cy="43" r="6" fill="#192b46"/>
+      </g>
+      <text x="112" y="57" fill="#f3f7fd" font-size="28" font-weight="700">Foundry</text>
+      <text x="112" y="88" fill="#c5d3e4" font-size="17">Reasoning and action</text>
+    </g>
+    <g transform="translate(840 388)">
+      <rect width="368" height="138" rx="18" fill="#262940" stroke="#646181"/>
+      <g transform="translate(23 37)" fill="none" stroke="#d8befb" stroke-width="3" stroke-linejoin="round">
+        <path d="m18 5-15 20 15 20M43 5l15 20-15 20M36 0 25 50"/>
+      </g>
+      <text x="112" y="57" fill="#f3f7fd" font-size="27" font-weight="700">GitHub Copilot</text>
+      <text x="112" y="88" fill="#c5d3e4" font-size="17">Build and verify</text>
+    </g>
+    <text x="74" y="585" fill="#a9efd7" font-size="17" font-weight="700">HC-01: FABRIC ENGINEERING</text>
+    <text x="470" y="585" fill="#a9c9f7" font-size="17" font-weight="700">MFG-01: AGENTS OVER FABRIC</text>
+    <text x="1208" y="585" fill="#c5d3e4" font-size="15" text-anchor="end">Learn. Inspect. Improve.</text>
+  </g>
+</svg>

@@ -1,8 +1,10 @@
 # Architecture documentation
 
-Each diagram doc follows the Azure Architecture Center layout. It contains a draw.io file, a
-Mermaid preview, a numbered workflow, a components table showing what is implemented in this
-repository, and the Microsoft guidance it is aligned to.
+Start with HC-01 to follow the Fabric engineering lab. Use the reference view to explain the
+platform, then the system view to trace this repository.
+
+Each diagram doc follows the Azure Architecture Center layout. It links to a draw.io file and
+includes a Mermaid preview, numbered workflow, implementation table and Microsoft guidance.
 
 - The diagrams are generated from `education/architecture/views/*.yaml` (`make diagrams`).
 - The same diagrams are interactive in the app at `/architecture/<view>`.
@@ -21,7 +23,7 @@ repository, and the Microsoft guidance it is aligned to.
 | [hc-01-architecture.md](hc-01-architecture.md) | Guide HC-01, in the tenant and offline |
 | [live-vs-offline.md](live-vs-offline.md) | LIVE, HYBRID and OFFLINE: reads fall back visibly, writes never do |
 
-| Mechanics | |
+| Implementation | What to read |
 |---|---|
 | [control-plane.md](control-plane.md) | API, local MCP server, governed change flow |
 | [resilience.md](resilience.md) | Router, circuit breaker, fallback configuration |

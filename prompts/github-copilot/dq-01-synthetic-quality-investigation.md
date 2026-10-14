@@ -1,8 +1,8 @@
-# DQ-01: Investigate synthetic data quality with Copilot
+# DQ-01: Investigate synthetic data quality with GitHub Copilot
 
 <!-- Generated from education and guide YAML; run ffia prompts render. -->
 
-Recorded bake-off results describe Copilot CLI only, not every Copilot surface.
+Recorded bake-off results describe GitHub Copilot CLI only, not every GitHub Copilot surface.
 
 Read AGENTS.md first (Claude Code imports it through CLAUDE.md). Use synthetic data only. State the provider, server and tool before cloud calls. Default to read-only; a prompt is not approval for a write. Label execution and fallback honestly.
 
@@ -89,7 +89,7 @@ Provider: Local review; server: not applicable; tools: none.
 Skills: none required. Human approval required: no.
 
 ```text
-Compare this guide's acceptance criteria with tests/offline/test_use_case_authoring.py and the authoring verification record. Explain what Copilot, Skills, MCP, deterministic checks and approval each contributed. Record unavailable live evidence and production gaps.
+Compare this guide's acceptance criteria with tests/offline/test_use_case_authoring.py and the authoring verification record. Explain what GitHub Copilot, Skills, MCP, deterministic checks and approval each contributed. Record unavailable live evidence and production gaps.
 ```
 
 Checkpoint: The learner can reproduce the baseline and explain which claims remain unverified.

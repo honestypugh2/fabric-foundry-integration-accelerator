@@ -36,7 +36,7 @@ for models. Skills supply instructions, not missing execution tools.
    Accept only through an explicitly authorized `accept_eula` call. Do not add acceptance
    arguments or environment variables to shared configuration. Discovery works before
    acceptance; model operations remain gated.
-5. In the VS Code Copilot Agent chat's tool picker, enable the intended extension tools.
+5. In the VS Code GitHub Copilot Agent chat's tool picker, enable the intended extension tools.
    Confirm `fabricPublishNotebook` and `fabricWorkspaceInfo` are actually selectable.
    An existing SDK/CLI conversation can retain an older tool inventory; reconnect or start a
    new session if the tools are still absent. Do not assume extension installation injected
@@ -67,21 +67,21 @@ ffia mcp render powerbi-modeling-sandbox --client vscode
 ffia mcp check
 ```
 
-Rendering prints configuration; it neither merges a user's MCP configuration nor starts a
-server. Merge deliberately without overwriting other servers. The readonly profile enables
+Rendering prints configuration. It does not merge a user's MCP configuration or start a
+server. Review and merge it without overwriting other servers. The readonly profile enables
 inspection, not cloud-write authority. The sandbox profile adds server confirmation and
-per-call approval, but neither automatically routes calls through the accelerator's approval
+per-call approval. Neither profile automatically routes calls through the accelerator's approval
 service. Do not use auto-approval/bypass modes.
 
 The Fabric extension owns its HTTP MCP endpoint and can change its local port. Use its
-server-definition provider rather than committing a machine-specific endpoint. Copilot CLI
+server-definition provider rather than committing a machine-specific endpoint. GitHub Copilot CLI
 and Claude can use Power BI's pinned stdio server, but notebook extension tools and remote
 kernels are not automatically available in those clients. Claude execution remains unverified.
 
 The extension can generate local `.stubs`, `.vfsmeta`, `.vfscache` and GUID-shaped workspace
 folders in the repository root. They are ignored because they contain generated dependencies
 or private workspace metadata. Do not commit their contents or copy them into public evidence.
-The isolation rules preserve the extension's local state; they do not delete it.
+The ignore rules preserve the extension's local state; they do not delete it.
 
 ## Evidence and remaining gates
 

@@ -1,5 +1,8 @@
 # Environment profiles
 
-`offline.yaml`, `hybrid.yaml`, `live.yaml`: provider selection, timeouts, fallback policy. No identifiers; live values come from git-ignored local files or environment variables.
+Choose `offline.yaml`, `hybrid.yaml` or `live.yaml` for provider selection, timeouts and
+fallback rules. Start offline if you do not need cloud access.
 
-Populated in: Phase 3.
+These files contain no real environment identifiers. Supply live values through ignored
+local files or environment variables.
+See [environment setup](../../docs/operations/environment-configuration.md).

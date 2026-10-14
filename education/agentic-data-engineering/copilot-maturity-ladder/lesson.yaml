@@ -18,7 +18,7 @@ learning_objectives:
 prerequisites: [fabric-skills, fabric-mcp-landscape]
 concepts:
   - term: Agent harness
-    definition: The agent loop around a model (planning, tool calls, permissions, sessions). Copilot CLI, VS Code agent mode, the Copilot app, the Copilot cloud agent and Claude Code are harnesses.
+    definition: The agent loop around a model (planning, tool calls, permissions, sessions). GitHub Copilot CLI, VS Code agent mode, the GitHub Copilot app, the GitHub Copilot cloud agent and Claude Code are harnesses.
   - term: Grounding
     definition: Giving the agent authoritative context (repository instructions, documentation tools, schemas) so it stops guessing Fabric APIs and item formats.
   - term: Skill
@@ -33,7 +33,7 @@ evidence:
   - statement: GitHub Copilot CLI is generally available (since 2026-02-25) and supports plan mode, per-tool approval, skills, plugins and MCP servers.
     category: DOCUMENTED BEHAVIOR
     sources: [copilot-cli-ga]
-  - statement: Skills for Fabric is an official open-source collection of Fabric skills and an MCP configuration that targets Copilot CLI, VS Code and Claude Code; it is pre-1.0 (v0.3.18 as of October 2026) and its persona agents are experimental.
+  - statement: Skills for Fabric is an official open-source collection of Fabric skills and an MCP configuration that targets GitHub Copilot CLI, VS Code and Claude Code; it is pre-1.0 (v0.3.18 as of October 2026) and its persona agents are experimental.
     category: DOCUMENTED FABRIC BEHAVIOR
     sources: [skills-for-fabric]
   - statement: The Fabric MCP Server (local) documentation tools return API specifications, item schemas and best practices without a Fabric tenant.
@@ -47,7 +47,7 @@ evidence:
   - statement: The bundled Skills for Fabric MCP configuration enables write-capable servers with all tools allowed; it should be replaced by a hardened, read-only-by-default overlay before use against a real workspace.
     category: PRODUCTION RECOMMENDATION
     sources: [skills-for-fabric]
-  - statement: L6 parallel and autonomous work relies on the Copilot app, which is a technical preview as of October 2026.
+  - statement: L6 parallel and autonomous work relies on the GitHub Copilot app, which is a technical preview as of October 2026.
     category: PREVIEW LIMITATION
   - statement: Scorecard results depend on the model, prompt and task; they are observations for this repository, not product benchmarks.
     category: ASSUMPTION

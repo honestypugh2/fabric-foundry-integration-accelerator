@@ -200,6 +200,9 @@ Thumbs.db
 # Local educational codebase walkthrough and its editable diagrams/PNG exports
 /docs/local/codebase-learning/
 
+# Private maintainer notes, raw validation logs and operational receipts
+/docs/local/maintainer/
+
 # Local app runtime (pids/logs) from scripts/app.sh
 .run/
 

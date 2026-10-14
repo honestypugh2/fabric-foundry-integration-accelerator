@@ -51,8 +51,8 @@ Use option 3 (`services/changes.py`).
 
 ## Trade-offs
 
-- There are more steps than calling a tool directly. The demo shows that the extra friction is
-  the point.
+- Approval adds steps to a direct tool call. The demo shows which unsafe actions those steps
+  block.
 
 ## Security impact
 

@@ -38,6 +38,10 @@ def test_catalog_has_25_patterns_with_valid_sources(catalog: PatternCatalog) -> 
     )
     assert all(p.selection_signals for p in catalog.patterns)
     assert set(SELECTION_SIGNALS) == {s for p in catalog.patterns for s in p.selection_signals}
+    assert (
+        SELECTION_SIGNALS["developer-automation-cli"]
+        == "Developer automation with GitHub Copilot or Claude Code"
+    )
 
 
 def test_recommendations_rank_and_filter(catalog: PatternCatalog) -> None:

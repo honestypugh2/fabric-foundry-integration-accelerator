@@ -1,4 +1,4 @@
-# Authoritative source registry. Edit this file, then run `uv run ffia sources render`.
+# Source registry. Edit this file, then run `ffia sources render` in the activated .venv.
 # Status vocabulary: GA | PREVIEW | DEPRECATED | UNKNOWN/NEEDS VALIDATION | GUIDANCE | OSS
 version: 1
 sources:
@@ -14,7 +14,7 @@ sources:
     implementation_relevance: Customer and SE field playbooks distinguish GitHub repository workflows from local IDE and CLI work; verify actual surface availability and entitlement before demonstrating.
     security_implications: A delegated repository task does not authorize Fabric writes or justify transferring local tenant bindings and credentials into a cloud development environment.
     limitations: Product documentation is not evidence of an executed app or cloud-agent task in this repository; client-specific verification remains deferred.
-    fallback: Reviewed local Copilot prompts, offline tests and the documented change/approval workflow.
+    fallback: Reviewed local GitHub Copilot prompts, offline tests and the documented change/approval workflow.
   - id: research-relational-model
     title: A relational model of data for large shared data banks
     url: https://research.ibm.com/publications/a-relational-model-of-data-for-large-shared-data-banks
@@ -65,7 +65,7 @@ sources:
     key_architecture_statement: Interleaving reasoning and environment actions can support task solving with external observations.
     implementation_relevance: Teaches the distinction between a proposed action, an actual tool invocation and an observed result.
     security_implications: Tool availability is not authority; constrain actions with deterministic validation and approval.
-    limitations: Research task results are not a Copilot or Foundry benchmark; tool loops can still make unsafe or incorrect choices.
+    limitations: Research task results are not a GitHub Copilot or Foundry benchmark; tool loops can still make unsafe or incorrect choices.
     fallback: Read-only synthetic agent exercises and labeled execution traces.
   - id: spec-kit-quickstart
     title: Spec-Driven Development Quickstart
@@ -889,7 +889,7 @@ sources:
     associated_patterns: [P19, P20]
     status: OSS
     key_architecture_statement: Skills provide static procedural knowledge; MCP servers provide live execution; persona agents are experimental.
-    implementation_relevance: Fabric Skills (microsoft/skills-for-fabric v0.3.18) power maturity level L3 in the Copilot labs.
+    implementation_relevance: Fabric Skills (microsoft/skills-for-fabric v0.3.18) supply the procedures used at maturity level L3 in the GitHub Copilot labs.
     security_implications: Bundled MCP config grants all tools on write-capable servers; use the hardened profile.
     limitations: Pre-1.0 open-source project without a product lifecycle label.
     fallback: Accelerator repo skills derived from public documentation.
@@ -915,7 +915,7 @@ sources:
     technology: Developer experience
     associated_patterns: [P19, P21]
     status: GA
-    key_architecture_statement: Copilot surfaces read copilot-instructions.md, path-specific instructions and AGENTS.md with surface-specific support.
+    key_architecture_statement: GitHub Copilot surfaces read copilot-instructions.md, path-specific instructions and AGENTS.md with surface-specific support.
     implementation_relevance: AGENTS.md is the single source of truth; client-specific files stay thin.
     security_implications: Instructions are guidance, not enforcement; enforcement lives in policy and permissions.
     limitations: github.com web chat does not read AGENTS.md.
@@ -929,7 +929,7 @@ sources:
     associated_patterns: [P09]
     status: GA
     key_architecture_statement: Portable workspace .mcp.json (mcpServers) is preferred; .vscode/mcp.json is deprecated for new servers.
-    implementation_relevance: One root .mcp.json serves VS Code, Copilot CLI and Claude Code.
+    implementation_relevance: One root .mcp.json serves VS Code, GitHub Copilot CLI and Claude Code.
     security_implications: Local MCP servers can run arbitrary code; add only trusted, pinned servers.
     limitations: Agent Host does not forward servers requiring interactive input variables.
     fallback: Not applicable.
@@ -956,7 +956,7 @@ sources:
     associated_patterns: [P19]
     status: GA
     key_architecture_statement: Project skills load from .claude/skills/<name>/SKILL.md; custom commands are merged into skills.
-    implementation_relevance: .claude/skills is the single skill folder read by both Copilot and Claude Code.
+    implementation_relevance: .claude/skills is the single skill folder read by both GitHub Copilot and Claude Code.
     security_implications: Skills folders with plugin manifests require workspace trust.
     limitations: Claude Code does not load .github/skills or .agents/skills.
     fallback: Not applicable.

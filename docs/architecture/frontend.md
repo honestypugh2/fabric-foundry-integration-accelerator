@@ -24,8 +24,8 @@ make run          # API on :8000 and the Vite dev server on :5173 (proxying /api
 
 | Route | What it does |
 |---|---|
-| `/` | Outcome-led workshop entry, four learning journeys, business-use-case entry, central lesson and explicitly scoped architecture coverage |
-| `/architecture/:view` | **Architecture Studio**: interactive diagrams (reference, production, system, MCP topology, maturity ladder, HC-01, LIVE/HYBRID/OFFLINE) built layer by layer, request traces with a presenter cue, an inspector that follows the level, a live runtime overlay, a text alternative and draw.io download. `/architecture/components` keeps the per-layer component catalog. |
+| `/` | Start with an outcome, choose one of four learning journeys or a business use case, and inspect what the architecture covers |
+| `/architecture/:view` | **Architecture Studio**: build diagrams layer by layer (reference, production, system, MCP topology, maturity ladder, HC-01, LIVE/HYBRID/OFFLINE). Trace requests, follow presenter cues and inspect each level. Includes a live runtime overlay, text alternative and draw.io download. `/architecture/components` lists components by layer. |
 | `/patterns`, `/patterns/:id` | Search and filter 25 patterns, compare up to three, recommend by need, and inspect computed teaching/lab/use-case/diagram/evidence coverage |
 | `/learn`, `/learn/:id` | Four journeys and 21 lessons; practical and applied-research lenses, Executive-L400 depth, evidence categories, prompts and server-graded checks |
 | `/labs`, `/labs/:id` | Eleven-stage labs with commands and local progress |

@@ -2,7 +2,7 @@
 
 <!-- Generated from education and guide YAML; run ffia prompts render. -->
 
-DOCUMENTED ONLY: no Claude Code runs were recorded. Claude models inside Copilot are not Claude Code.
+DOCUMENTED ONLY: no Claude Code runs were recorded. Claude models inside GitHub Copilot are not Claude Code.
 
 Read AGENTS.md first (Claude Code imports it through CLAUDE.md). Use synthetic data only. State the provider, server and tool before cloud calls. Default to read-only; a prompt is not approval for a write. Label execution and fallback honestly.
 

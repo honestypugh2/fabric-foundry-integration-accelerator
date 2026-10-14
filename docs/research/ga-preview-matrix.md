@@ -1,6 +1,7 @@
-# GA / PREVIEW matrix
+# Product status: GA, preview and items to verify
 
-Verified 2026-10-05. Sources are listed in [`sources.yaml`](sources.yaml), rendered as
+This is the status snapshot from 2026-10-05, not a current service-health check.
+Sources are listed in [`sources.yaml`](sources.yaml), rendered as
 [`source-validation.md`](source-validation.md).
 
 **Policy:** the default demo uses only **GA** capabilities and **LOCAL** equivalents. Every
@@ -11,11 +12,11 @@ PREVIEW item is:
 - simulated offline;
 - never required.
 
-UNKNOWN items are re-validated before each release.
+Recheck UNKNOWN items before a release or a connected demonstration.
 
 | Area | GA | PREVIEW | DEPRECATED | UNKNOWN / NEEDS VALIDATION |
 |---|---|---|---|---|
-| Fabric data | Fabric; OneLake; shortcuts (core); medallion guidance; Lakehouse/Warehouse; Mirroring; **Open Mirroring**; Direct Lake on OneLake and on SQL endpoint; Git integration; deployment pipelines (core); Real-Time Intelligence (core); AI functions; Fabric REST API | S3-compatible shortcuts; schema-aware eventstream; some Git item types; new deployment-pipelines UI | — | OneLake security and OneLake catalog GA dates; role-playing dimensions in Direct Lake; mirroring as backup/DR (not documented — never claimed) |
+| Fabric data | Fabric; OneLake; shortcuts (core); medallion guidance; Lakehouse/Warehouse; Mirroring; **Open Mirroring**; Direct Lake on OneLake and on SQL endpoint; Git integration; deployment pipelines (core); Real-Time Intelligence (core); AI functions; Fabric REST API | S3-compatible shortcuts; schema-aware eventstream; some Git item types; new deployment-pipelines UI | None listed | OneLake security and OneLake catalog GA dates; role-playing dimensions in Direct Lake; mirroring as backup/DR (not documented; not claimed here) |
 | Fabric AI | **Fabric Data Agent**; Fabric IQ MCP | **Fabric IQ**; **ontology**; Ontology MCP; Data Agent in Copilot Studio / Microsoft 365 Copilot | "AI skill" name (renamed to data agent) | Data Agent MCP endpoint status |
 | Fabric MCP | Fabric MCP Server (local) 1.4.0; Power BI Authoring/Modeling MCP (local) 1.0.0; Fabric IQ MCP | Power BI hosted authoring MCP; **Data Warehouse MCP**; Ontology MCP | `.vscode/mcp.json` location (use `.mcp.json`) | Fabric Core MCP Server; Eventhouse, Activator, Operations-agent, RTI and Data Factory MCP |
 | Foundry | Foundry (new); Agent Service; hosted agents; MCP/OpenAPI/function tools; tracing; core evaluators; OneLake knowledge source; AI Gateway | Fabric data agent tool; Fabric IQ tool; Foundry IQ portal and Fabric knowledge sources; intent/task evaluators; AI Red Teaming Agent; azd evaluation; Entra trace ingestion; Browser Automation | Classic agents (retire 2027-03-31); hub-based projects (legacy) | Foundry MCP server status; official Foundry skills repository |

@@ -416,7 +416,7 @@
     "foundry_role": "Not required.",
     "id": "P19",
     "mcp_role": "Fabric MCP servers with hardened allow-lists.",
-    "name": "Copilot CLI + Fabric Skills + MCP",
+    "name": "GitHub Copilot CLI + Fabric Skills + MCP",
     "offline_equivalent": "Skills read locally plus the local MCP server.",
     "preview_dependencies": [],
     "selection_signals": [
@@ -470,7 +470,7 @@
       "copilot-instructions-support"
     ],
     "status": "GA",
-    "summary": "A well-scoped issue becomes a pull request from the Copilot cloud agent with read-only tools.",
+    "summary": "A well-scoped issue becomes a pull request from the GitHub Copilot cloud agent with read-only tools.",
     "when_not_to_use": "Tasks that need live writes or tenant secrets.",
     "when_to_use": "A backlog of well-defined data-engineering tasks."
   },

@@ -1,4 +1,4 @@
-# DQ-01: Investigate synthetic data quality with Copilot
+# DQ-01: Investigate synthetic data quality with GitHub Copilot
 
 **LOCAL / validated offline.** This original proof scenario demonstrates adding a use case
 without a new provider, duplicated dataset or scenario-specific frontend branch.
@@ -40,7 +40,7 @@ Grain, relational cardinality and independent references precede trustworthy ana
 Use this workflow when quality defects could distort a report or agent answer. Do not add an
 agent to replace an exact deterministic check.
 
-Copilot explains and helps author reviewed code. Skills supply procedures. Optional Fabric
+GitHub Copilot explains and helps write reviewed code. Skills supply procedures. Optional Fabric
 MCP supplies permitted workspace context. Deterministic baseline checks supply correctness
 evidence. Human approval governs proposed writes; none of these roles replaces another.
 Claude equivalents are available but remain **DOCUMENTED ONLY**.

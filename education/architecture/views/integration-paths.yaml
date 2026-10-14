@@ -12,7 +12,7 @@ zones:
   - {id: coding, label: Coding workflow - Fabric MCP first, kind: local, col: 0, row: 0, cols: 5, rows: 1}
   - {id: application, label: Application workflow - not Fabric MCP, kind: local, col: 0, row: 2, cols: 5, rows: 1}
 nodes:
-  - {id: harness, label: Copilot / Claude, sublabel: "Instructions and Skills", kind: client, state: documented, col: 0, row: 0, summary: "The coding harness proposes artifacts and invokes the designated tool under review. Claude remains documented-only in the bake-off."}
+  - {id: harness, label: GitHub Copilot / Claude, sublabel: "Instructions and Skills", kind: client, state: documented, col: 0, row: 0, summary: "The coding harness proposes artifacts and invokes the designated tool under review. Claude remains documented-only in the bake-off."}
   - {id: mcp, label: Real Fabric MCP, sublabel: "Pinned narrow tools", kind: mcp, state: documented, col: 1, row: 0, summary: "The Microsoft server can run locally and access live Fabric. Profile configuration does not prove tool execution."}
   - {id: fabric, label: Permitted Fabric read, sublabel: "Caller identity and permissions", kind: fabric, state: tenant-validation, col: 2, row: 0, summary: "An actual tool invocation obtains observed context when available."}
   - {id: fallback, label: Named ffia-local fallback, sublabel: "Disclosed LOCAL read only", kind: local, state: implemented, col: 3, row: 0, summary: "Offer only after reporting primary-tool unavailability. A failed live write stops; a rehearsal is separately SIMULATED."}

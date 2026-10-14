@@ -51,9 +51,9 @@ components:
     status: MIXED
     description:
       executive: AI coding agents that speed up data engineering while every change stays reviewable.
-      l100: Copilot (VS Code, CLI, App, cloud agent) and Claude Code read repo instructions and call MCP tools.
+      l100: GitHub Copilot (VS Code, CLI, App, cloud agent) and Claude Code read repo instructions and call MCP tools.
       l200: Harnesses provide the agent loop and permissions; AGENTS.md, .mcp.json and .claude/skills are shared by both.
-      l300: Copilot CLI and Claude Code both load the root .mcp.json (Microsoft Learn + ffia-local) and AGENTS.md.
+      l300: GitHub Copilot CLI and Claude Code both load the root .mcp.json (Microsoft Learn + ffia-local) and AGENTS.md.
       l400: Harness permissions are not authorization; writes still go through plan, approval and a scoped writer.
     owns: [Agent loop, Tool permissions, Developer workflow]
     does_not_own: [Approval of production changes]
@@ -68,7 +68,7 @@ components:
       executive: Microsoft-authored know-how packaged for agents, so they follow correct Fabric procedures.
       l100: SKILL.md knowledge packs that teach an agent how to do Fabric tasks correctly.
       l200: Skills are knowledge, not execution; they drive REST, SQL, KQL or PySpark under the user's identity.
-      l300: Installed through the Copilot CLI or Claude Code plugin marketplace; repo skills live in .claude/skills.
+      l300: Installed through the GitHub Copilot CLI or Claude Code plugin marketplace; repo skills live in .claude/skills.
       l400: The bundled MCP configuration allows broad tools; teach a hardened, read-only overlay for dev workspaces.
     owns: [Procedures, Routing rules, Gotchas]
     does_not_own: [Permissions, Execution]
@@ -128,7 +128,7 @@ components:
       executive: A safe teaching server that shows the protocol without touching any real system.
       l100: A local MCP server with read-only and plan-only tools over synthetic data.
       l200: Allow-listed from config/policies/tools.yaml; no approve, execute, shell or SQL tools.
-      l300: make run-mcp, or let Copilot or Claude Code start it from .mcp.json.
+      l300: make run-mcp, or let GitHub Copilot or Claude Code start it from .mcp.json.
       l400: Unknown manifest tools fail fast at startup; every call is rate-limited and audited; logs go to stderr.
     owns: [Educational tools]
     does_not_own: [Approval, Execution]

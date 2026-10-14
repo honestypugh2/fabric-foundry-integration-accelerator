@@ -112,9 +112,9 @@
       "commands": [],
       "evidence_category": "SIMULATED LOCALLY",
       "expected": "A PROPOSED plan labeled LOCAL and a next step pointing to a human approval through the API.",
-      "instructions": "With the `ffia-local` server approved in VS Code agent mode or Copilot CLI, use this prompt: \"Using the ffia-local MCP server, call generate_fabric_change_plan to propose creating a Lakehouse named bronze_lab_copilot in demo-dev with destination LOCAL. Show the risk, validation, rollback and policy reasons. Do not try to approve or execute it; tell me what a human must do next.\" Check that Copilot names the tool it used and does not claim the item exists.",
+      "instructions": "With the `ffia-local` server approved in VS Code agent mode or GitHub Copilot CLI, use this prompt: \"Using the ffia-local MCP server, call generate_fabric_change_plan to propose creating a Lakehouse named bronze_lab_copilot in demo-dev with destination LOCAL. Show the risk, validation, rollback and policy reasons. Do not try to approve or execute it; tell me what a human must do next.\" Check that GitHub Copilot names the tool it used and does not claim the item exists.",
       "stage": "TRY WITH COPILOT",
-      "title": "Let Copilot propose, and only propose"
+      "title": "Let GitHub Copilot propose, and only propose"
     },
     {
       "commands": [],

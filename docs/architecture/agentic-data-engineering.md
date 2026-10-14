@@ -1,18 +1,18 @@
-# Leveling up Fabric data engineering with GitHub Copilot
+# Build Fabric data-engineering skills with GitHub Copilot
 
-The maturity ladder from Phase 0, drawn as five columns that fill in one level at a time:
+Use the Phase 0 maturity ladder to add one level at a time. Follow five columns:
 
 - **Knowledge:** how to do it correctly.
 - **Harness:** the agent loop.
-- **Execution:** the hands.
+- **Execution:** the tools that perform the work.
 - **Authority:** who may do it.
 - **Evidence:** proof it happened.
 
-Claude Code follows the same ladder; see the *Copilot vs Claude Code* lesson.
+Claude Code follows the same ladder; see the *GitHub Copilot vs Claude Code* lesson.
 
 ## Architecture
 
-![Copilot maturity ladder across knowledge, harness, execution, authority and evidence, exported by draw.io Desktop](diagrams/agentic-de.png)
+![GitHub Copilot maturity ladder across knowledge, harness, execution, authority and evidence, exported by draw.io Desktop](diagrams/agentic-de.png)
 
 <!-- BEGIN GENERATED DIAGRAM: run `ffia diagrams render`; do not edit by hand -->
 
@@ -32,12 +32,12 @@ flowchart LR
     l6_know["Migration playbooks · planned<br/><small>Repeatable at scale</small>"]
   end
   subgraph harness["HARNESS - the agent loop"]
-    l1_harness["VS Code + Copilot<br/><small>Completions and chat</small>"]
-    l2_harness["Copilot agent mode or CLI<br/><small>Tools with approvals</small>"]
-    l3_harness["Plugins and skills loaded<br/><small>Copilot CLI or Claude Code</small>"]
+    l1_harness["VS Code + GitHub Copilot<br/><small>Completions and chat</small>"]
+    l2_harness["GitHub Copilot agent mode or CLI<br/><small>Tools with approvals</small>"]
+    l3_harness["Plugins and skills loaded<br/><small>GitHub Copilot CLI or Claude Code</small>"]
     l4_harness["Same harness<br/><small>Now connected</small>"]
     l5_harness["Cloud agent pull requests<br/><small>Issue to PR</small>"]
-    l6_harness["Copilot app and fleets · PREVIEW<br/><small>Worktrees, preview</small>"]
+    l6_harness["GitHub Copilot app and fleets · PREVIEW<br/><small>Worktrees, preview</small>"]
   end
   subgraph execution["EXECUTION - the hands"]
     l1_exec["Git-synced Fabric items<br/><small>notebook-content.py, TMDL</small>"]
@@ -106,7 +106,7 @@ Solid boxes are implemented here or documented by Microsoft; dashed boxes are pl
 
 *PLANNED FLOW.* One task - add a Silver table - done at each level, and what each level adds.
 
-1. L1 - Copilot suggests the PySpark; you check it against what you remember.
+1. L1 - GitHub Copilot suggests the PySpark; you check it against what you remember.
 2. L2 - documentation tools confirm the correct Delta and notebook patterns.
 3. L3 - a Fabric Skill supplies the Microsoft-authored procedure and its gotchas.
 4. L4 - read-only tools check the real Bronze schema and row counts.
@@ -118,12 +118,12 @@ Solid boxes are implemented here or documented by Microsoft; dashed boxes are pl
 | Component | Status | Role | In this repository |
 |---|---|---|---|
 | Your own expertise | Microsoft-documented | At L1 the agent relies on general training and what you type. Plausible but wrong Fabric APIs are the main risk. | - |
-| VS Code + Copilot | Microsoft-documented | Inline completions and chat on notebook-content.py, SQL, M and DAX files. | - |
+| VS Code + GitHub Copilot | Microsoft-documented | Inline completions and chat on notebook-content.py, SQL, M and DAX files. | - |
 | Git-synced Fabric items | Microsoft-documented | Fabric Git integration stores items as files, so they can be edited and reviewed like code. | - |
 | Code review | Microsoft-documented | The developer reviews every suggestion before committing. | - |
 | The diff | Microsoft-documented | The commit diff is the only evidence at this level. | - |
-| AGENTS.md + instructions | Implemented in this repository | Repository instructions read by Copilot and Claude Code - conventions, commands, safety and evidence rules. | `AGENTS.md` |
-| Copilot agent mode or CLI | Microsoft-documented | The agent can call tools, each with an approval prompt or an explicit allow rule. | - |
+| AGENTS.md + instructions | Implemented in this repository | Repository instructions read by GitHub Copilot and Claude Code - conventions, commands, safety and evidence rules. | `AGENTS.md` |
+| GitHub Copilot agent mode or CLI | Microsoft-documented | The agent can call tools, each with an approval prompt or an explicit allow rule. | - |
 | Documentation MCP tools | Microsoft-documented | Item definitions, API specifications and best practices without any tenant access. | - |
 | Pinned tool versions | Implemented in this repository | External servers are pinned so behavior does not change underneath you. | `.mcp.json` |
 | Tool-call log | Microsoft-documented | The harness records which tools were called with which inputs. | - |
@@ -143,7 +143,7 @@ Solid boxes are implemented here or documented by Microsoft; dashed boxes are pl
 | Approvals and branch protection | Implemented in this repository | Separation of duties, expiry and destination binding protect the decision. | - |
 | PR + audit + verification | Implemented in this repository | Records share a correlation ID across plan, approval, execution and tool calls. | - |
 | Migration playbooks | Planned (Phase 7) | Procedures that many parallel sessions can follow consistently. | - |
-| Copilot app and fleets | Preview | Parallel sessions in isolated worktrees or the cloud. Technical preview. | - |
+| GitHub Copilot app and fleets | Preview | Parallel sessions in isolated worktrees or the cloud. Technical preview. | - |
 | Parallel pull requests | Preview | Many small, reviewable changes instead of one large one. | - |
 | Sandboxes and budgets | Preview | Limits on what each session can reach and spend. | - |
 | Per-session logs | Preview | Every session leaves its own trail and pull request. | - |

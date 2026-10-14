@@ -4,7 +4,8 @@ Status: **IMPLEMENTED / LOCAL configuration**, used by live providers when enabl
 The root `.env` is the normal home for Azure, Fabric and Foundry variables. It is Git-ignored.
 Do not paste its values into documentation, screenshots, logs or commits.
 
-Precedence: constructor arguments > process environment > `.env.local` > `.env` > defaults.
+Values take precedence in this order: constructor arguments > process environment >
+`.env.local` > `.env` > defaults.
 `.env.local` is optional, not required. The tracked [template](../../.env.example) contains
 switches and variable names only. Existing private YAML bindings remain compatible; explicit
 environment bindings take precedence.
@@ -22,8 +23,8 @@ environment bindings take precedence.
 Named cloud values are held as `SecretStr` in settings. Invalid bindings are rejected without
 echoing their values. The endpoint must match the bound Foundry account and project.
 
-Entra/Azure CLI authentication is used. An API key, client secret or browser credential is
-not required. Sign in to the intended demo tenant privately. Never replace the signed-in
+Use Entra/Azure CLI authentication. No API key, client secret or browser credential is
+required. Sign in to the intended demo tenant privately. Never replace the signed-in
 user with a service principal for the preview Fabric data agent tool.
 
 ## Startup

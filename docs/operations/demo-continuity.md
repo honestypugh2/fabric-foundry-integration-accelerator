@@ -1,6 +1,6 @@
 # Demo continuity
 
-The demo must work in front of an audience whether or not the tenant cooperates.
+Check the offline demo before presenting. It must work even when the tenant is unavailable.
 
 ## Before the session
 
@@ -57,7 +57,7 @@ merge.
 Never describe a LOCAL or SIMULATED result as a Fabric, Foundry, Power BI or MCP operation.
 For Guide HC-01, each step's `offline_equivalent` in `guide.yaml` gives the LOCAL substitute.
 
-## Normal startup and bounded connected checks
+## Start the app or run a bounded connected check
 
 `make run` and `ffia serve api` use live-first HYBRID defaults for both guides. The ignored
 `.env` holds Azure, Fabric and Foundry configuration; `.env.local` and process variables
@@ -70,5 +70,5 @@ Strict LIVE never falls back, and live writes never become simulated writes.
 `make demo-live` performs an application Fabric REST workspace read and checks one synthetic
 question against the existing Foundry agent. `make demo-hybrid` permits labeled read fallback,
 but the agent evaluation still fails on fallback: it cannot certify an unavailable live agent.
-These commands use metered inference, not MCP, do not create Fabric items or send messages,
-and do not replace the ten-act offline release gate.
+These commands use metered inference, not MCP. They do not create Fabric items or send messages.
+They do not replace the ten-act offline release gate.

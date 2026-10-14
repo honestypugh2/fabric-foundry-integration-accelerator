@@ -154,7 +154,7 @@ steps:
   - stage: TRY WITH COPILOT
     title: Run and explain the drill with GitHub Copilot
     instructions: >-
-      In VS Code agent mode or Copilot CLI, with the ffia-local server from .mcp.json, ask -
+      In VS Code agent mode or GitHub Copilot CLI, with the ffia-local server from .mcp.json, ask -
       "Call simulate_recovery_drill on the ffia-local MCP server. Summarize each step with its
       evidence category, explain why the day-5 file created duplicate keys, and why the drill is
       not recoverable without the weekly snapshot. Then call detect_duplicate_records for
@@ -169,7 +169,7 @@ steps:
       SIMULATED LOCALLY, what is DOCUMENTED FABRIC BEHAVIOR, what REQUIRES TENANT VALIDATION and
       what is a PRODUCTION RECOMMENDATION. Propose a snapshot interval and change-file retention
       period that would survive a ten-day outage. Do not edit any file." Compare its answer with
-      the Copilot answer.
+      the GitHub Copilot answer.
     evidence_category: SIMULATED LOCALLY
   - stage: PRODUCTION NOTES
     title: What to do in a real tenant

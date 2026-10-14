@@ -6,14 +6,14 @@ harness that turns intent into correct, reviewable Fabric artifacts and operatio
 by Skills, executed through MCP, CLI and Git, constrained by permissions and policy, and
 evidenced by pull requests and audit records.
 
-Copilot does not grant authority. Entra identity, Fabric roles, policy and human approval do.
+GitHub Copilot does not grant authority. Entra identity, Fabric roles, policy and human approval do.
 
 ## The maturity ladder
 
 | Level | What changes | Value | Control you need |
 |---|---|---|---|
 | L0 Manual | Nothing | Baseline | — |
-| L1 Assisted | Copilot completes and explains code in files | Speed | Code review |
+| L1 Assisted | GitHub Copilot completes and explains code in files | Speed | Code review |
 | L2 Grounded | Instructions plus documentation tools | Correctness | Pinned tool versions |
 | L3 Skilled | Microsoft-authored Fabric Skills | Consistent expert procedures | Hardened MCP overlay, dev workspace |
 | L4 Connected | Read-only access to real workspace context | Real context | Read-only allow-list, pinned target |
@@ -25,10 +25,10 @@ controlled experiments.
 
 ## What is GA and what is not (as of October 2026)
 
-- **GA:** Copilot CLI, VS Code agent mode, Copilot cloud agent, Fabric Git integration, the
+- **GA:** GitHub Copilot CLI, VS Code agent mode, GitHub Copilot cloud agent, Fabric Git integration, the
   Fabric MCP Server (local).
 - **Pre-1.0 open source:** Skills for Fabric (official, MIT); its persona agents are experimental.
-- **Technical preview:** the Copilot app (worktrees, Autopilot) that L6 relies on.
+- **Technical preview:** the GitHub Copilot app (worktrees, Autopilot) that L6 relies on.
 
 ## Decisions for leaders
 

@@ -7,8 +7,8 @@ the synthetic `ffia-local` server. The `fabric-first` profile and repository ins
 guide selection; configuration does not automatically invoke a tool or prove execution.
 
 The application provider router uses Fabric REST and Foundry SDK adapters. Its live evidence
-cannot certify a guide-assigned MCP step. Reads can use disclosed approved fallback; failed
-live writes stop, with any simulated rehearsal planned separately.
+cannot certify a guide-assigned MCP step. Reads can use an approved fallback, but must disclose
+it. Stop failed live writes. Plan any simulated rehearsal separately.
 
 <!-- BEGIN GENERATED DIAGRAM: run `ffia diagrams render`; do not edit by hand -->
 
@@ -20,7 +20,7 @@ live writes stop, with any simulated rehearsal planned separately.
 ```mermaid
 flowchart LR
   subgraph coding["Coding workflow - Fabric MCP first"]
-    harness["Copilot / Claude<br/><small>Instructions and Skills</small>"]
+    harness["GitHub Copilot / Claude<br/><small>Instructions and Skills</small>"]
     mcp["Real Fabric MCP<br/><small>Pinned narrow tools</small>"]
     fabric["Permitted Fabric read · tenant<br/><small>Caller identity and permissions</small>"]
     fallback["Named ffia-local fallback<br/><small>Disclosed LOCAL read only</small>"]
@@ -86,7 +86,7 @@ Solid boxes are implemented here or documented by Microsoft; dashed boxes are pl
 
 | Component | Status | Role | In this repository |
 |---|---|---|---|
-| Copilot / Claude | Microsoft-documented | The coding harness proposes artifacts and invokes the designated tool under review. Claude remains documented-only in the bake-off. | - |
+| GitHub Copilot / Claude | Microsoft-documented | The coding harness proposes artifacts and invokes the designated tool under review. Claude remains documented-only in the bake-off. | - |
 | Real Fabric MCP | Microsoft-documented | The Microsoft server can run locally and access live Fabric. Profile configuration does not prove tool execution. | - |
 | Permitted Fabric read | Requires tenant validation | An actual tool invocation obtains observed context when available. | - |
 | Named ffia-local fallback | Implemented in this repository | Offer only after reporting primary-tool unavailability. A failed live write stops; a rehearsal is separately SIMULATED. | - |

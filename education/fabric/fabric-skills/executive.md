@@ -22,7 +22,7 @@ The result is more **correct** agent work, sooner. It is not more **authorized**
 |---|---|---|
 | Knowledge | How to do it correctly | Fabric Skills, repository instructions |
 | Execution | The hands | MCP servers, Azure CLI, Git |
-| Harness | The agent loop and its permissions | Copilot CLI, VS Code, Claude Code |
+| Harness | The agent loop and its permissions | GitHub Copilot CLI, VS Code, Claude Code |
 | Authority | Who may do it | Entra identity, Fabric roles, policy, approval |
 | Evidence | Proof it happened | Pull requests, audit records, Fabric request IDs |
 

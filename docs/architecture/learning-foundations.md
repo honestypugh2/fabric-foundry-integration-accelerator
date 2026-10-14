@@ -2,7 +2,7 @@
 
 ![Focused data and agent foundations, exported by draw.io Desktop](diagrams/theory-to-tools.png)
 
-Use this focused map before the full architecture. Explain the conceptual role of each box,
+Use this map before the full architecture. Explain what each box does,
 then use the [foundation lessons](../../education/architecture/) and their research lenses to
 test assumptions. This is not a claim of direct product lineage or live execution.
 

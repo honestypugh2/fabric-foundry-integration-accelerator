@@ -23,14 +23,14 @@ export command. These are static architecture illustrations, not proof of cloud 
 | Foundry reasoning | [agents](../../src/fabric_foundry_accelerator/agents/), [evaluation](../../src/fabric_foundry_accelerator/evaluation/) | Existing-agent Responses SDK; PREVIEW Fabric tool; deterministic comparison; draft/review, not automatic delivery |
 | Governed changes | [change service](../../src/fabric_foundry_accelerator/services/changes.py), [policies](../../config/policies/) | PLAN → VALIDATE → APPROVE → EXECUTE → VERIFY → AUDIT. Writes never fall back |
 | Evidence | [audit](../../src/fabric_foundry_accelerator/audit/), [observability](../../src/fabric_foundry_accelerator/observability/), [tests](../../tests/) | Correlation, labels, routing decisions, tests and explicitly enabled telemetry |
-| Coding harnesses | [instructions](../../AGENTS.md), [MCP profiles](../../config/mcp/profiles.yaml), [skills](../../.claude/skills/), [prompts](../../prompts/) | Copilot plans/edits/calls tools; Fabric Skills supply procedures; Fabric MCP supplies actual tools. Claude Code is documented-only |
+| Coding harnesses | [instructions](../../AGENTS.md), [MCP profiles](../../config/mcp/profiles.yaml), [skills](../../.claude/skills/), [prompts](../../prompts/) | GitHub Copilot plans/edits/calls tools; Fabric Skills supply procedures; Fabric MCP supplies actual tools. Claude Code is documented-only |
 | Teaching / release | [education](../../education/), [talk tracks](../../demos/), [workflows](../../.github/workflows/) | Executive through L400, demos and local/CI gates; workflows do not deploy cloud resources |
 
 ## Two separate integration paths
 
 1. **App:** React → FastAPI → provider router → Fabric REST / Foundry SDK.
    HYBRID reads can fall back to synthetic LOCAL providers.
-2. **Guide 1 coding harness:** Copilot + instructions/skills → actual Fabric MCP tools,
+2. **Guide 1 coding harness:** GitHub Copilot + instructions/skills → actual Fabric MCP tools,
    Fabric notebook extension, and Power BI authoring tools. Named `ffia-local` fallback is
    explicitly LOCAL/SIMULATED. App REST results do not prove an MCP tool ran.
 
@@ -38,7 +38,7 @@ export command. These are static architecture illustrations, not proof of cloud 
 
 ![Guide 1, HYBRID runtime](screenshots/guide-1-hybrid.png)
 
-Guide 1: Fabric MCP and Fabric Skills improve the engineering workflow; Copilot proposes,
+Guide 1: Fabric MCP and Fabric Skills improve the engineering workflow; GitHub Copilot proposes,
 authors and invokes the assigned tools under review. The screenshot proves the guide UI is
 running with HYBRID configuration, not that its create/upload/notebook/report steps executed.
 

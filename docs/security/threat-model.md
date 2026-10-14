@@ -53,10 +53,15 @@ An administrator's session is not an appropriate production workload identity.
 
 ## Review and response
 
-Revisit on a new provider/tool, write capability, identity flow, data class or deployment boundary.
-If a leak or unauthorized action is suspected: stop the affected workload, disable its access,
-preserve bounded evidence without copying secrets, involve the security owner, rotate credentials
-and reconcile actual resource state before restarting. Do not erase audit evidence.
+Review this model when a provider/tool, write capability, identity flow, data class or deployment
+boundary changes.
+
+If you suspect a leak or unauthorized action:
+
+1. Stop the affected workload and disable its access.
+2. Preserve the relevant evidence without copying secrets. Do not erase audit evidence.
+3. Involve the security owner and rotate credentials.
+4. Check actual resource state before restarting.
 
 References: registry entries `mcp-specification`, `foundry-mcp-governance`,
 `foundry-agent-identity`, `fabric-rest-identity`, `foundry-fabric-tool`, `fabric-waf`,

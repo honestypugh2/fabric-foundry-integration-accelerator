@@ -28,7 +28,7 @@ SELECTION_SIGNALS: dict[str, str] = {
     "evaluation-and-observability": "Evaluation and tracing as quality gates",
     "resilience-offline": "Fabric or Foundry may be unavailable",
     "multi-customer-reuse": "Reuse for another customer or industry",
-    "developer-automation-cli": "Developer automation with Copilot or Claude Code",
+    "developer-automation-cli": "Developer automation with GitHub Copilot or Claude Code",
     "reviewable-change-ci-cd": "Reviewable, repeatable changes through Git and CI",
     "backlog-automation": "Turning well-scoped issues into pull requests",
     "bulk-migration": "Bulk migration of legacy notebooks or pipelines",

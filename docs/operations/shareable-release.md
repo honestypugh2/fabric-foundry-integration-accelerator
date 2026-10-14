@@ -2,10 +2,10 @@
 
 ## What is ready to share
 
-Share the **reference implementation, structured learning content, offline demonstrations and
-guided build paths**, not a claim that every live or production checkpoint is complete.
+Share the **reference implementation, learning content, offline demos and guided build
+paths**. Do not present unfinished live work as complete.
 
-- **HC-01:** primary Fabric engineering / Copilot / Power BI learning guide. Reviewed
+- **HC-01:** primary Fabric engineering / GitHub Copilot / Power BI learning guide. Reviewed
   notebooks, synthetic data, independent baseline and offline medallion build are available.
   Live source landing was verified; live end-to-end table/model/report acceptance is deferred.
 - **MFG-01:** primary Foundry-over-Fabric agent guide. Offline sales briefs and quality
@@ -13,7 +13,7 @@ guided build paths**, not a claim that every live or production checkpoint is co
   timeouts and final-answer gaps remain unresolved.
 - **DQ-01:** supporting LOCAL/SIMULATED quality investigation and governed-change rehearsal.
 - **Claude Code:** retain setup instructions and alternate prompts. Setup, execution and
-  the Copilot-versus-Claude Code comparison are intentionally deferred.
+  the GitHub Copilot-versus-Claude Code comparison are deferred.
 
 The [resume tracker](resume-later.md) retains the unfinished work. The
 [verification record](use-case-authoring-verification.md) separates actual operations from
@@ -33,9 +33,14 @@ source hyperlinks need network access and any required repository permissions; s
 file does not grant repository access. They do not embed customer source material or private
 environment data.
 
-Open a local HTML file directly in a browser, attach it to a permitted sharing channel, or
-send its repository link. These are documentation assets, not a deployed website. Opening
-either page invokes no Fabric, Azure, Foundry or Power BI operation.
+GitHub shows HTML source, not the rendered page. Download the file, then open it in a
+browser. You can also attach it to an approved sharing channel. A repository link lets
+readers find and download the file; it is not a hosted website.
+Opening either page runs no Fabric, Azure, Foundry or Power BI operation.
+
+Use the Markdown guides for reading directly on GitHub. Markdown companion playbooks and
+optional hosting are in the
+[later tracker](resume-later.md#github-friendly-playbooks-and-hosting). No hosting is enabled.
 
 Content lives in `education/field-playbooks/release.yaml`; the renderer escapes content,
 validates repository asset links and source IDs, and produces both audience pages:
@@ -89,6 +94,19 @@ Existing ignore rules already cover private `.local` bindings, source-private ma
 local documentation, native workspace caches and dependency/build artifacts. Do not hide
 useful public documentation merely because a related live action is unfinished.
 
+### What belongs in the README, public docs and local notes
+
+- **README:** what the repo does, where to start and a short readiness statement.
+- **Public docs:** reproducible validation commands, sanitized result summaries, design
+  decisions and known limitations. Readers need these to judge what they can use.
+- **Local only:** implementation diaries, presenter notes, raw logs, tool responses and
+  tenant-specific receipts. Use ignored `docs/local/maintainer/` for repository-local notes,
+  or keep them outside the repository. Existing `.local` binding rules still apply.
+
+Do not move every verification record out of the public docs. Keep enough evidence to
+support the claims, without exposing environment details or internal working notes.
+Adding a tracked file to `.gitignore` does not remove it from Git history.
+
 ## Release boundary
 
 No live work is required or authorized by this sharing pass. Keep connected previews optional,
@@ -96,7 +114,10 @@ run the applicable existing validation commands and privacy scan, and inspect th
 commit/workflow evidence before declaring a released version. Local validation, committing,
 pushing and observing GitHub workflows are separate outcomes.
 
-### LOCAL validation snapshot: 2026-10-14
+### Prior sharing release: LOCAL validation snapshot, 2026-10-14
+
+These results apply to the sharing release at `83117e6`, before the wording and branding
+updates. They are not validation results for later edits.
 
 | Check | Result |
 |---|---|
@@ -112,3 +133,19 @@ The existing Power BI tool-catalog warnings remain: connected model operations s
 validation when HC-01 resumes. These checks did not execute cloud notebooks, create models,
 publish reports, set up Claude or certify production readiness. GitHub CI results are a
 separate later check, not inferred from the local gate.
+
+### Wording and branding validation: LOCAL
+
+These checks cover the wording changes, explicit GitHub Copilot names and regenerated
+teaching assets. They do not claim a new published release.
+
+| Check | Result |
+|---|---|
+| `make validate` | PASSED: 650 backend tests, 1 opt-in live test skipped, 96% rounded backend coverage; 100 frontend tests, builds, dependency audits and offline demo passed |
+| Frontend coverage | 98.86% statements and 86.58% branches |
+| `ffia privacy scan` within `make validate` | PASSED: 785 files, zero findings |
+| Tracked docs/README prose check | PASSED: 87 Markdown files, no em or en dashes outside technical code |
+| Original branding PNG | Verified 1280 x 640, rendered from the SVG and visually checked for clipping |
+
+The full raw validation log stays local. GitHub workflow results, live HC-01 completion,
+the MFG-01 answer gaps and Claude Code execution remain separate checks.

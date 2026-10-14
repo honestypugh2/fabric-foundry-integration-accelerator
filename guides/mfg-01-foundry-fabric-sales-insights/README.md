@@ -1,8 +1,8 @@
 # Guide MFG-01: Foundry agents + Fabric for sales insights (manufacturing, synthetic)
 
-Foundry agents over governed Fabric sales data: a read-only Fabric data agent, a Foundry agent with
-the Fabric tool, cited public context, monthly team briefs and data-quality triage. Synthetic data
-only; the manufacturer, customers and products are fictional.
+Build and learn how a Foundry agent uses governed Fabric sales data.
+The guide covers read-only data access, public sources, team briefs and quality investigation.
+The manufacturer, customers and products are fictional.
 
 ## Start this use case
 
@@ -19,21 +19,21 @@ only; the manufacturer, customers and products are fictional.
 | Production gaps | Revenue and final-answer reconciliation, scheduling/delivery and production identity/network/operations still require verification; bounded server-side traces have been observed |
 
 Read [scoped instructions](AGENTS.md), then follow [guide.yaml](guide.yaml) one prompt at a
-time. Stop at each checkpoint. The Fabric tool in Foundry is PREVIEW; Claude Code alternate
-prompts are documented, not a comparative run.
+time. Stop at each checkpoint. The Foundry Fabric tool is PREVIEW.
+Claude Code prompts are available as instructions, not as a completed comparison.
 
 ## Find the implementation assets
 
 | Asset | Where |
 |---|---|
-| Guide manifest | `guide.yaml` (7 steps; Copilot and Claude Code prompts, checkpoints, offline equivalents) |
+| Guide manifest | `guide.yaml` (7 steps; GitHub Copilot and Claude Code prompts, checkpoints, offline equivalents) |
 | Architecture | `education/architecture/views/mfg-01.yaml` → app `/architecture/mfg-01` |
 | Data and baseline | `data/synthetic/raw/mfg-sales-v1/`, `data/synthetic/expected/mfg-sales-v1.json` |
 | Offline commands | `ffia mfg brief [--team T-ENC]`, `ffia mfg quality` |
 | Code-first samples | `demos/foundry-fabric-agents-workshop/code/` |
 | Workshop talk track | `demos/foundry-fabric-agents-workshop/index.html` |
 
-Evidence: **dated live observations** on 2026-10-08 in the presenter's demo tenant: steps 02–04 and the
+Evidence: **dated live observations** on 2026-10-08 in the presenter's demo tenant: steps 02 to 04 and the
 duplicate check in step 07. Steps 05 and 06 are offline-validated; running them live requires
 tenant validation.
 These observations do not certify the whole use case or current service health.

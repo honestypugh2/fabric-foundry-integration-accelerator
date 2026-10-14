@@ -24,7 +24,7 @@ validation.
 **Q: Where should we start?**
 Climb L1 → L4 in a dev workspace with one team:
 
-- **L1:** Copilot in the editor, with Fabric items in Git.
+- **L1:** GitHub Copilot in the editor, with Fabric items in Git.
 - **L2:** repository instructions plus documentation MCP.
 - **L3:** pinned skills.
 - **L4:** read-only Fabric MCP.
@@ -129,12 +129,12 @@ approve tool calls and commands. In the demo it explains a transform, reads the 
 through MCP, uses a skill to plan, and proposes a governed change that comes back blocked pending
 approval.
 
-**Q: Which Copilot surfaces matter for data engineers?**
+**Q: Which GitHub Copilot surfaces matter for data engineers?**
 
-- VS Code agent mode and Copilot CLI (GA) for interactive work under your identity.
+- VS Code agent mode and GitHub Copilot CLI (GA) for interactive work under your identity.
 - The cloud agent for well-scoped issues that end in a pull request.
 - Code review on pull requests.
-- The Copilot SDK to embed the agent in your own tools.
+- The GitHub Copilot SDK to embed the agent in your own tools.
 
 Show: `/learn/copilot-surfaces`.
 
@@ -156,7 +156,7 @@ Fabric Git integration connects the two worlds.
 **Q: What do admins need to enable?**
 CHECK. Things to confirm:
 
-- the Copilot plan, and the organization policies that allow MCP servers and agent features;
+- the GitHub Copilot plan, and the organization policies that allow MCP servers and agent features;
 - VS Code settings for tool approval (we commit ours in `.vscode/settings.json`);
 - in Fabric:
   - "Users can create Fabric items";
@@ -175,7 +175,7 @@ GitHub Copilot plan's data terms. CHECK them with your GitHub admin. Our practic
 - never put IDs or secrets in chat;
 - keep regulated data out of prompts.
 
-**Q: Can Copilot write to production?**
+**Q: Can GitHub Copilot write to production?**
 Not in this design:
 
 - Agents work against a dev workspace.
@@ -188,7 +188,7 @@ Not in this design:
 **Q: Where does Power BI fit?**
 Business definitions live in the semantic model:
 
-- Copilot edits the model through Power BI Modeling MCP, with the `semantic-model-authoring` skill.
+- GitHub Copilot edits the model through Power BI Modeling MCP, with the `semantic-model-authoring` skill.
 - It plans and builds reports with the `powerbi-report-cli` skill.
 - DAX checks reconcile every measure with a governed baseline.
 
@@ -228,7 +228,7 @@ back. Show: `/architecture/live-vs-offline`.
 Through Git:
 
 - Fabric Git integration syncs workspace items.
-- Pull requests are reviewed, with Copilot code review as well.
+- Pull requests are reviewed, with GitHub Copilot code review as well.
 - Deployment pipelines promote the changes.
 
 The full promotion flow is the next phase of this accelerator.
@@ -248,6 +248,6 @@ Pay-as-you-go prices as of 2026-10-07:
 
 - **F8 Fabric capacity:** about $1.44 per hour in Central US while running, $0 while paused.
 - **Fabric Skills and the MCP servers:** free open-source packages.
-- **Copilot:** per-seat licensing under your GitHub plan. CHECK.
+- **GitHub Copilot:** per-seat licensing under your GitHub plan. CHECK.
 
 Copilot in Fabric consumes capacity units when it's used.

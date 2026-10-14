@@ -1,5 +1,6 @@
 # Offline tests
 
-Run with no Azure environment variables and network blocked. The offline demo is a release gate.
+Run these tests without Azure configuration and with network access blocked.
+They check that the offline paths do not depend on cloud services.
 
-Populated in: Phase 2-3.
+The offline demo also runs as part of `make validate`.

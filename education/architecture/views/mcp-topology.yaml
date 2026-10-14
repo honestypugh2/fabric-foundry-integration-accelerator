@@ -29,10 +29,10 @@ zones:
   - {id: server-zone, label: "MCP servers", kind: tenant, col: 3, row: 0, cols: 1, rows: 7}
   - {id: target-zone, label: "Fabric and local targets", kind: fabric, col: 4, row: 0, cols: 1, rows: 6}
 nodes:
-  - {id: vscode, label: "VS Code agent mode", sublabel: "GitHub Copilot", kind: harness, state: documented, col: 0, row: 0, icon: general/Code, sources: [vscode-mcp-servers], summary: "Copilot agent mode in VS Code with tool approvals, terminal auto-approve rules, custom agents, skills and MCP servers from .mcp.json."}
-  - {id: copilot-cli, icon: general/Code, label: "Copilot CLI", sublabel: "Terminal agent, GA", kind: harness, state: documented, col: 0, row: 1, sources: [copilot-cli-ga], summary: "Terminal agent with plan mode, tool permissions, skills, plugins, MCP and a headless -p mode."}
-  - {id: copilot-app, icon: general/Code, label: "Copilot app", sublabel: "Worktrees, technical preview", kind: harness, state: preview, col: 0, row: 2, summary: "Desktop app running parallel agent sessions in isolated git worktrees, with Plan and Autopilot modes. Technical preview."}
-  - {id: cloud-agent, icon: general/Code, label: "Copilot cloud agent", sublabel: "Issue to pull request", kind: harness, state: documented, col: 0, row: 3, summary: "Assign an issue and the agent works in a sandbox and opens a pull request. MCP servers come from repository settings; there is no per-call approval, so the pull request is the control."}
+  - {id: vscode, label: "VS Code agent mode", sublabel: "GitHub Copilot", kind: harness, state: documented, col: 0, row: 0, icon: general/Code, sources: [vscode-mcp-servers], summary: "GitHub Copilot agent mode in VS Code with tool approvals, terminal auto-approve rules, custom agents, skills and MCP servers from .mcp.json."}
+  - {id: copilot-cli, icon: general/Code, label: "GitHub Copilot CLI", sublabel: "Terminal agent, GA", kind: harness, state: documented, col: 0, row: 1, sources: [copilot-cli-ga], summary: "Terminal agent with plan mode, tool permissions, skills, plugins, MCP and a headless -p mode."}
+  - {id: copilot-app, icon: general/Code, label: "GitHub Copilot app", sublabel: "Worktrees, technical preview", kind: harness, state: preview, col: 0, row: 2, summary: "Desktop app running parallel agent sessions in isolated git worktrees, with Plan and Autopilot modes. Technical preview."}
+  - {id: cloud-agent, icon: general/Code, label: "GitHub Copilot cloud agent", sublabel: "Issue to pull request", kind: harness, state: documented, col: 0, row: 3, summary: "Assign an issue and the agent works in a sandbox and opens a pull request. MCP servers come from repository settings; there is no per-call approval, so the pull request is the control."}
   - {id: claude-code, icon: general/Code, label: "Claude Code", sublabel: "CLAUDE.md imports AGENTS.md", kind: harness, state: documented, col: 0, row: 4, sources: [claude-code-memory, claude-code-skills], summary: "Anthropic's agentic CLI. In this repository CLAUDE.md imports AGENTS.md and the same .mcp.json and .claude/skills are shared."}
   - {id: agents-md, label: "AGENTS.md and instructions", sublabel: "How to work here", kind: knowledge, state: implemented, col: 1, row: 0, icon: general/File, repo_path: AGENTS.md, sources: [copilot-instructions-support], summary: "The single source of truth for every coding agent - rules, commands, safety and evidence requirements."}
   - {id: skills, label: "Skills", sublabel: "Fabric Skills + repo skills", kind: knowledge, state: documented, col: 1, row: 1, component: fabric-skills}
@@ -84,7 +84,7 @@ traces:
     summary: One data-engineering task, three kinds of question, three different servers.
     label: PLANNED FLOW
     steps:
-      - {node: copilot-cli, say: "An engineer asks Copilot CLI to add a Silver table for encounters."}
+      - {node: copilot-cli, say: "An engineer asks GitHub Copilot CLI to add a Silver table for encounters."}
       - {node: mcp-json, edge: cli-config, say: "The harness loads the shared MCP configuration and repo instructions."}
       - {node: learn-mcp, edge: to-learn, say: "How - documentation tools explain the right notebook and Delta patterns. No tenant needed."}
       - {node: fabric-mcp-local, edge: to-fabric-local, say: "What is - read-only tools list the lakehouse tables with the engineer's permissions."}
@@ -96,7 +96,7 @@ traces:
     label: LOCAL
     demo_act: 3
     steps:
-      - {node: claude-code, say: "Claude Code (or Copilot) uses the same .mcp.json."}
+      - {node: claude-code, say: "Claude Code (or GitHub Copilot) uses the same .mcp.json."}
       - {node: mcp-json, edge: claude-config, say: "It starts ffia-local over stdio."}
       - {node: ffia-local, edge: to-ffia, say: "Read tools inspect the medallion; plan tools propose but never execute."}
       - {node: synthetic, edge: ffia-synthetic, say: "Answers come from synthetic data, labeled LOCAL."}

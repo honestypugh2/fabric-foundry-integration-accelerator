@@ -12,8 +12,8 @@
       "P19",
       "P20"
     ],
-    "summary": "Take one Silver-layer task in this repository from L1 Assisted to L5 Governed change with GitHub Copilot (or Claude Code): explain a transform, ground the agent, apply a skill, inspect real local context through read-only MCP tools, then propose a governed change that only a human can approve. Everything runs on synthetic data; results are labeled LOCAL or SIMULATED.",
-    "title": "Climb the Copilot maturity ladder (L1 \u2192 L5) offline"
+    "summary": "Take one Silver-layer task in this repository from L1 Assisted to L5 Governed change with GitHub GitHub Copilot (or Claude Code): explain a transform, ground the agent, apply a skill, inspect real local context through read-only MCP tools, then propose a governed change that only a human can approve. Everything runs on synthetic data; results are labeled LOCAL or SIMULATED.",
+    "title": "Climb the GitHub Copilot maturity ladder (L1 \u2192 L5) offline"
   },
   {
     "duration_minutes": 30,

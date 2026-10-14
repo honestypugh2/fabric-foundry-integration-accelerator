@@ -1,5 +1,6 @@
 # Contract tests
 
-Fabric REST/MCP/Foundry contract fixtures derived from documentation. No live calls.
+Check Fabric, MCP and Foundry contracts against fixtures based on documented behavior.
+These tests make no live calls.
 
-Populated in: Phase 5-6.
+A passing fixture test is not proof that a cloud operation ran.

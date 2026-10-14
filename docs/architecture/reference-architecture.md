@@ -187,7 +187,7 @@ capacity planning, where the semantic model already defines the business measure
 
 - Conversational questions over curated lakehouse, warehouse or semantic-model data (P01).
 - Agents that must answer only within each user's data permissions (on-behalf-of).
-- AI-assisted data engineering with governed change (P19–P24).
+- AI-assisted data engineering with governed change (P19 to P24).
 
 **When not to use it**
 
@@ -199,7 +199,7 @@ capacity planning, where the semantic model already defines the business measure
 ## Alternatives
 
 - **Direct model call or a single agent with tools.** The Azure Architecture Center's AI agent
-  orchestration guidance recommends the lowest complexity that reliably works. A single agent
+  orchestration guidance recommends the simplest approach that reliably works. A single agent
   with tools is often the right default (P13: multi-domain is not multi-agent).
 - **Copilot in Fabric or a Fabric data agent on its own.** Use these when the built-in experience
   fits. Add Foundry only when you need a custom application, model choice or tools beyond the

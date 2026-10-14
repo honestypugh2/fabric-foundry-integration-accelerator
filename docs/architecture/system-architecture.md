@@ -1,9 +1,9 @@
 # This accelerator at run time
 
-How the parts of this repository fit together when you run them, and which parts are live right
-now. The interactive version includes a **runtime overlay**: each bound box is colored from
-`GET /api/v1/education/views/system/runtime`, so the diagram always reflects the actual mode and
-providers. Boxes for later phases show as not configured. They are never faked.
+Run the app to see how this repository's parts connect. The interactive version includes a
+**runtime overlay**. Each bound box is colored from
+`GET /api/v1/education/views/system/runtime` to show the actual mode and providers.
+Boxes for later phases show as not configured. They are never faked.
 
 ## Architecture
 
@@ -115,7 +115,7 @@ Solid boxes are implemented here or documented by Microsoft; dashed boxes are pl
 | Educational app | Implemented in this repository | React frontend over a FastAPI control plane; routes stay thin and call services; no credentials in the browser. | `frontend/src` |
 | GitHub Copilot / Claude Code | Implemented in this repository | Harnesses provide the agent loop and permissions; AGENTS.md, .mcp.json and .claude/skills are shared by both. | `AGENTS.md` |
 | Vite dev server | Implemented in this repository | Serves the app on port 5173 and forwards /api to the control plane, so the browser holds no API host or credentials. | `frontend/vite.config.ts` |
-| .mcp.json | Implemented in this repository | VS Code, Copilot CLI and documented-only Claude Code share the pinned Fabric MCP server, Microsoft Learn and ffia-local. These external tool paths are separate from the application's REST provider. | `.mcp.json` |
+| .mcp.json | Implemented in this repository | VS Code, GitHub Copilot CLI and documented-only Claude Code share the pinned Fabric MCP server, Microsoft Learn and ffia-local. These external tool paths are separate from the application's REST provider. | `.mcp.json` |
 | FastAPI control plane | Implemented in this repository | The control plane. Routes validate input and call services; errors come back in one problem shape. OpenAPI is exported and the frontend types are generated from it. | `src/fabric_foundry_accelerator/api` |
 | ffia-local MCP server | Implemented in this repository | Allow-listed from config/policies/tools.yaml; no approve, execute, shell or SQL tools. | `src/fabric_foundry_accelerator/mcp/server.py` |
 | Microsoft Learn MCP | Microsoft-documented | The public Microsoft Learn MCP server used for how-to questions. It needs network access but no tenant or credentials. | - |

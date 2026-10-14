@@ -13,7 +13,7 @@ Five facts shaped it:
   Fabric data agent tool (preview) over the synthetic `mfg-sales-v1` lakehouse. Its answers
   matched the baseline when called directly through the SDK during Guide MFG-01 preparation.
 - **Live agent calls are slow and metered.** The first call took about 2.5 minutes; later calls
-  took 30–60 seconds. The Fabric capacity must be running for the tool to answer.
+  took 30 to 60 seconds. The Fabric capacity must be running for the tool to answer.
 - **The default demo must stay offline.** Act 6 of the offline demo was UNAVAILABLE because
   nothing may be simulated as Foundry.
 - **Agent answers carry business numbers.** A fluent answer with a wrong number is worse than no
@@ -144,7 +144,7 @@ What the first live runs exposed, and the fixes:
 - The Azure Monitor distro pulls beta instrumentation packages transitively. The code uses only
   the stable OpenTelemetry API and SDK directly. Revisit when the distro's instrumentations go
   stable.
-- Live drafts run concurrently, but each still takes 30–150 seconds. The talk tracks show one live
+- Live drafts run concurrently, but each still takes 30 to 150 seconds. The talk tracks show one live
   brief and the LOCAL workflow for all teams.
 
 ## Security impact
@@ -169,8 +169,9 @@ What the first live runs exposed, and the fixes:
 
 ## Education impact
 
-Lessons on the enterprise agent (P06), evaluation and observability (P16) and the Fabric/Foundry
-boundary now describe the implemented agent, evaluation, tracing and workflow, with honest labels.
+Use the enterprise-agent (P06), evaluation and observability (P16), and Fabric/Foundry boundary
+lessons to inspect the implemented agent, evaluation, tracing and workflow. Each keeps its
+execution label.
 
 ## Revisit trigger
 

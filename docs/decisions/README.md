@@ -1,6 +1,7 @@
 # Architecture decision records
 
-One ADR per decision. Required sections: Context, Options, Decision, Rationale, Trade-offs,
+Write one ADR per decision. Keep the historical date and evidence scope.
+Required sections: Context, Options, Decision, Rationale, Trade-offs,
 Security impact, Operations impact, Offline impact, Education impact, Revisit trigger,
 Authoritative references.
 
@@ -19,6 +20,5 @@ Authoritative references.
 | [0011](ADR-0011-architecture-diagrams-as-code.md) | Architecture diagrams as code (draw.io, Azure Architecture Center style) |
 | [0012](ADR-0012-live-fabric-integration.md) | Live Fabric integration: read-only provider, gated scoped writer, MCP profiles as code, reference notebooks |
 | [0013](ADR-0013-foundry-agents-evaluation-tracing.md) | Foundry agents behind a provider port, deterministic agent evaluation, opt-in tracing, Agent Framework workflows |
-
 | [0014](ADR-0014-harness-bakeoff-and-prompt-packs.md) | Governed harnesses, generated prompt packs and documented-only Claude Code |
 | [0015](ADR-0015-release-security-gates.md) | Offline evaluation/security gates and human-reviewed release artifacts |

@@ -1,5 +1,4 @@
 # Evaluation tests
 
-Golden and adversarial evaluation suites with thresholds from the customer overlay.
-
-Populated in: Phase 3.
+Check expected answers and adverse cases against the thresholds in the selected overlay.
+Keep the expected baseline independent of the result being tested.

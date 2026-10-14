@@ -1,6 +1,7 @@
 # Open Mirroring recovery
 
-How a mirrored table can be recovered, and when it cannot.
+Run the offline drill to see when a snapshot and retained change files can recover a mirrored
+table, and when missing files prevent recovery.
 
 - Run the drill offline with `ffia recovery run`.
 - The scenario is defined in `data/synthetic/recovery/scenario.yaml`.
@@ -22,7 +23,7 @@ How a mirrored table can be recovered, and when it cannot.
 7. **Recovery.** Restore the day-7 snapshot and replay the retained change files after the
    watermark. Validate row count, keys, ordering and content hash.
 8. **Counterfactual.** Assume the weekly snapshot never ran. With only the day-0 snapshot, the
-   cleanup has already purged sequences 2–4, so the mirror cannot be brought current.
+   cleanup has already purged sequences 2 to 4, so the mirror cannot be brought current.
 
 ## SIMULATED LOCALLY
 

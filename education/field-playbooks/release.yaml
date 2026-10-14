@@ -1,9 +1,9 @@
 version: 1
 as_of: "2026-10-14"
 summary: >-
-  A synthetic, build-and-learn accelerator for Fabric engineering and Foundry agents.
-  Share the guides and offline demonstrations now. Live end-to-end acceptance is a separate,
-  unfinished milestone, not a condition for reading or using the repository offline.
+  Show and tell. Build and learn. Start with the guides and offline demos.
+  Live end-to-end checks are not complete yet. You can still use this repo
+  to learn the patterns, inspect the code and build with synthetic data.
 sources:
   - fabric-mcp-local
   - skills-for-fabric
@@ -22,11 +22,11 @@ playbooks:
     sections:
       - id: orientation
         title: Start with the outcome, not the tool
-        intro: Fabric supplies governed context. Foundry supplies reasoning and orchestration. Copilot helps engineers build and improve the implementation.
+        intro: Fabric provides governed context. Foundry supports reasoning and orchestration. GitHub Copilot helps engineers build and check the implementation.
         cards:
           - title: What this repository is
             label: LOCAL
-            body: A reference implementation, educational web app, pattern catalog and guided workshop. It is not a deployed customer solution or a production certification.
+            body: Use the reference code, learning app, patterns and guides to explain the approach and build through it. This is not a deployed customer solution.
             steps:
               - Synthetic data only; no real patient, customer or employee records.
               - Explore offline without Azure configuration; installation still needs package-registry access.
@@ -46,7 +46,7 @@ playbooks:
         cards:
           - title: "HC-01 | Improve Fabric data engineering"
             label: LOCAL / LIVE PARTIAL
-            body: Use Copilot, Fabric MCP and Fabric Skills to reason about seven synthetic healthcare CSVs, build Bronze/Silver/Gold layers and design a Power BI handoff. All metrics are synthetic analytical demonstrations, not clinical measures or advice.
+            body: Use GitHub Copilot, Fabric MCP and Fabric Skills to inspect seven synthetic healthcare CSVs, build Bronze/Silver/Gold layers and plan the Power BI handoff. The metrics teach analytics. They are not clinical measures or advice.
             steps:
               - "Ready now: guide, reviewed reference notebooks, independent baseline and offline build."
               - "Observed live: lakehouse and seven landed files with hash readbacks; Bronze scaffold independently verified; native tool reported Bronze publication."
@@ -101,10 +101,10 @@ playbooks:
             body: MCP provides scoped access to available tools and context. Skills provide reusable domain procedures. Together they help the coding assistant discover, plan and explain work without becoming the authority for writes.
           - title: GitHub Copilot
             label: DOCUMENTED BEHAVIOR
-            body: In VS Code or CLI, Copilot can explain the repository, draft transformations and tests, and help inspect failures. GitHub.com experiences can assist repository work and reviewed changes. Client availability and permissions must be checked for each environment.
+            body: Use GitHub Copilot in VS Code or CLI to understand the repo, draft transformations, add tests and inspect failures. Check which GitHub.com features and permissions are available before using them.
           - title: Power BI and Claude Code
             label: DOCUMENTED ONLY
-            body: Power BI is the planned semantic-model/report handoff for HC-01, not a published lab outcome yet. Claude Code setup and alternate prompts remain available as instructions; setup and an executed Copilot-versus-Claude comparison are intentionally deferred.
+            body: Power BI is the next model/report step for HC-01, not a published result yet. Claude Code instructions and alternate prompts are available. Setup and a GitHub Copilot versus Claude Code run are planned for later.
       - id: learn
         title: Pick your learning depth
         cards:
@@ -207,7 +207,7 @@ playbooks:
               Explain the next checkpoint, its source grain and independent checks.
               Propose a local change and tests. Do not run cloud tools or alter baselines.
             links:
-              - {title: Copilot prompts, path: prompts/github-copilot/patterns.md}
+              - {title: GitHub Copilot prompts, path: prompts/github-copilot/patterns.md}
               - {title: MCP profiles, path: config/mcp/README.md}
           - title: GitHub.com / app experiences
             label: DOCUMENTED BEHAVIOR
@@ -218,7 +218,7 @@ playbooks:
               - Client-specific end-to-end verification remains a later milestone.
           - title: Claude Code alternative
             label: DOCUMENTED ONLY
-            body: Keep the existing setup instructions and equivalent prompts. Setup and execution are deferred by operator choice. The recorded Claude/GPT comparison inside Copilot CLI is not Copilot-versus-Claude Code evidence.
+            body: Use the setup instructions and equivalent prompts when ready. Setup and execution are deferred. The recorded Claude/GPT runs inside GitHub Copilot CLI are not a GitHub Copilot versus Claude Code comparison.
             links:
               - {title: Claude alternate prompts, path: prompts/claude-code/patterns.md}
               - {title: Client and MCP setup, path: config/mcp/README.md}

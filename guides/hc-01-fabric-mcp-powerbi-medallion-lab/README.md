@@ -1,10 +1,12 @@
 # Guide HC-01: Fabric MCP + Power BI medallion lab (healthcare, synthetic)
 
-VS Code + GitHub Copilot agent mode with the locally hosted **real Microsoft Fabric MCP**
-server, remote Fabric Spark notebooks, a Direct Lake semantic model, DAX reconciliation and a
-two-page report. **`ffia-local` is a separate synthetic educational server.** Local process
-location does not mean offline data. Alternate Claude Code prompts remain documented only.
-Synthetic data only; no clinical rules.
+Learn how to use GitHub Copilot in VS Code with **Microsoft Fabric MCP** and reviewed skills.
+The full build path covers Fabric Spark notebooks, a Direct Lake model, DAX checks and a
+two-page report.
+
+**`ffia-local` is a separate synthetic learning server.** A locally hosted Fabric MCP server
+can still call live services. Claude Code prompts are available as instructions only.
+All data and analytical metrics are synthetic. No clinical advice is provided.
 
 **Share now, complete live later:** this guide, reviewed notebooks and offline reference
 remain available. Live landing is verified; Bronze publication was tool-reported, but its
@@ -17,7 +19,7 @@ See [current evidence](../../docs/operations/use-case-authoring-verification.md)
 
 | Question | Answer |
 |---|---|
-| Outcome | Learn how Copilot, reviewed Skills and exact MCP tools improve a governed Fabric engineering workflow |
+| Outcome | Learn how GitHub Copilot, reviewed Skills and exact MCP tools improve a governed Fabric engineering workflow |
 | Audience | Data engineers and Power BI model/report authors |
 | Prerequisites | [Root installation](../../README.md#quick-start); for connected work, the exact tools/settings/OS constraints in [guide.yaml](guide.yaml) |
 | Effort | The linked engineering learning journey estimates 90 minutes; installation and the full 16-step live lab take additional environment-dependent time |
@@ -27,9 +29,9 @@ See [current evidence](../../docs/operations/use-case-authoring-verification.md)
 | Completion evidence | Follow each step's required evidence and reconcile with the baseline; local files/screenshots do not prove notebook execution or report publication |
 | Production gaps | Full live lab certification, production identity/network/operations and rollback verification remain separate |
 
-Read [scoped instructions](AGENTS.md), then submit one prompt from [guide.yaml](guide.yaml),
-stop at its checkpoint and retain the required evidence. The guide is offline-validated;
-actual connected steps must be verified through their assigned tools. See
+Read [scoped instructions](AGENTS.md), then use one prompt from [guide.yaml](guide.yaml).
+Stop at the checkpoint and keep the required evidence. The offline path is validated.
+Verify connected steps through the tools assigned by the guide. See
 [dated verification](../../docs/operations/phase-verification.md).
 
 ## Architecture
@@ -61,7 +63,7 @@ cd ~/hc-01-lab/data/raw && sha256sum -c SHA256SUMS
 
 | Asset | Where | Notes |
 |---|---|---|
-| Guide manifest | `guide.yaml` | 16 steps. Each one has Copilot and Claude Code prompts, a checkpoint, required evidence, an offline equivalent and, where relevant, "not evidence" warnings. Every write step requires approval. |
+| Guide manifest | `guide.yaml` | 16 steps. Each one has GitHub Copilot and Claude Code prompts, a checkpoint, required evidence, an offline equivalent and, where relevant, "not evidence" warnings. Every write step requires approval. |
 | Step lookup | `GET /api/v1/guides/hc-01-fabric-mcp-powerbi-medallion-lab/steps/{step_id}` or the `get_guide_step` tool on `ffia-local` | Read-only. LOCAL label. |
 | Governed write rehearsal | `POST /api/v1/plans` → `/approvals` → `/fabric/change` with `destination: LOCAL` | SIMULATED. Rehearses the lakehouse, notebook, upload, model and report writes without a tenant. |
 | Baseline check | `POST /api/v1/evaluations/run` or the `evaluate_against_baseline` tool | Compares the measures with `data/synthetic/expected/hc-lab-7file-v1.json` |
@@ -75,7 +77,7 @@ Power BI read-only, authorize its EULA explicitly, and verify actual client tool
 
 | Asset | Where | Notes |
 |---|---|---|
-| Guide-scoped agent files | `AGENTS.md`, `CLAUDE.md`, `.mcp.json` in this folder | `.mcp.json` is the rendered `hc01-lab` profile: the real Fabric MCP server with only the tools steps 02–05 name (writes approved per call), plus `ffia-local` as the labeled fallback. Each step in `guide.yaml` names its Fabric Skills (`skills`) and its fallback (`tool_path.fallback`). |
+| Guide-scoped agent files | `AGENTS.md`, `CLAUDE.md`, `.mcp.json` in this folder | `.mcp.json` is the rendered `hc01-lab` profile: the real Fabric MCP server with only the tools steps 02 to 05 name (writes approved per call), plus `ffia-local` as the labeled fallback. Each step in `guide.yaml` names its Fabric Skills (`skills`) and its fallback (`tool_path.fallback`). |
 | VS Code MCP config | `ffia mcp render hc01-lab --client vscode --output <LAB_PATH>/.vscode/mcp.json` | Checked against the pinned Fabric MCP 1.4.0 tool catalog |
 | Fabric and Power BI skills | `ffia skills install` | `skills-for-fabric` v0.3.18, SHA-256 verified, 4 curated skills; `az rest` needs approval |
 | Reference notebooks | `fabric/workspace/MCP_01_Bronze.Notebook` … `MCP_03_Gold.Notebook` | Fabric Git format; 85/85 checks pass on local Spark 3.5.9 (LOCAL). Running in Fabric requires tenant validation |

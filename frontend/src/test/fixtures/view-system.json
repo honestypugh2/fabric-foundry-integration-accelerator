@@ -834,7 +834,7 @@
         "state": "implemented",
         "step": null,
         "sublabel": "Fabric-first, LOCAL fallback",
-        "summary": "VS Code, Copilot CLI and documented-only Claude Code share the pinned Fabric MCP server, Microsoft Learn and ffia-local. These external tool paths are separate from the application's REST provider.",
+        "summary": "VS Code, GitHub Copilot CLI and documented-only Claude Code share the pinned Fabric MCP server, Microsoft Learn and ffia-local. These external tool paths are separate from the application's REST provider.",
         "width": 1.0
       },
       {

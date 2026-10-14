@@ -1,7 +1,7 @@
 # Use-case readiness gates
 
-**LOCAL acceptance contract.** A guide status describes its bounded verification, not the
-certification of every service it mentions. A reviewed specification is not cloud-write approval.
+**LOCAL acceptance contract.** Check what a guide's status actually covers. It does not certify
+every service the guide mentions. A reviewed specification is not cloud-write approval.
 
 | Gate | Acceptance evidence | Responsible role | Exclusions |
 |---|---|---|---|

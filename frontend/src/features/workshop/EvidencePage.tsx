@@ -156,8 +156,8 @@ export function EvidencePage() {
       <section className="callout">
         <h2>Compare observable outcomes</h2>
         <p>
-          Copilot recordings are measured observations. Claude Code remains DOCUMENTED ONLY, not a
-          scored competitor.
+          GitHub Copilot recordings are measured observations. Claude Code remains DOCUMENTED ONLY,
+          not a scored competitor.
         </p>
         <Link to="/bakeoff">Inspect the bake-off</Link>
         {" · "}

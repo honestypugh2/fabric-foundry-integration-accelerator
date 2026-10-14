@@ -18,10 +18,10 @@ authenticated users, protected audit storage, negative access tests and security
 Git review and CI gate release artifacts on tests, types, privacy, dependency checks and evaluation.
 CodeQL scans and SBOMs provide additional evidence, not a guarantee. Publication is human-reviewed.
 Budget alerts, quotas and a capacity operating schedule reduce exposure; caps do not guarantee
-a maximum bill. Copilot subscriptions, model consumption and Fabric capacity are separate costs.
+a maximum bill. GitHub Copilot subscriptions, model consumption and Fabric capacity are separate costs.
 
 Ask the owner to show actual results, remaining tenant checks and rollback plans before go-live.
-Claude Code is documented-only; recorded Copilot model comparisons do not evaluate that product.
+Claude Code is documented-only; recorded GitHub Copilot model comparisons do not evaluate that product.
 
 ## Three reusable production patterns
 

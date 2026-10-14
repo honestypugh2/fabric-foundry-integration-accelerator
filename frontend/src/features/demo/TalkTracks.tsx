@@ -15,7 +15,7 @@ const TALK_TRACKS: readonly TalkTrackLink[] = [
     guide: "Guide 1",
     title: "Leveling up Fabric data engineering with GitHub Copilot",
     covers:
-      "What GitHub Copilot is doing, Fabric MCP, Fabric Skills, Power BI, Foundry with Copilot, and the L1 → L6 level-up.",
+      "What GitHub Copilot does, Fabric MCP, Fabric Skills, Power BI, Foundry with GitHub Copilot, and levels L1 to L6.",
     view: "agentic-de",
   },
   {

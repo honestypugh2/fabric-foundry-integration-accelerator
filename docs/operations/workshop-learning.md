@@ -1,8 +1,8 @@
 # Workshop learning and applied research
 
-The workshop has two complementary lenses: **Build and verify** answers what, why, when and
-how; **Foundations and research** explains underlying theory, its conceptual connection to
-today's tools and a proposed reproducible experiment. Both work at Executive-L400 depths.
+Choose one of two lenses. **Build and verify** shows what to do, why, when and how.
+**Foundations and research** explains the theory, connects it to today's tools and proposes an
+experiment you can repeat. Both work at Executive-L400 depths.
 
 Authoring lives in [the workshop registry](../../education/workshop.yaml), not React copy.
 Every lesson has an instructional brief. Validation rejects missing briefs, duplicate IDs and
@@ -11,16 +11,16 @@ Every registered use case must have a business-to-build story. All 25 catalogue 
 to five-level teaching; shared lessons explicitly teach their related patterns. This is teaching
 coverage, not a claim that all patterns have implemented labs or live certification.
 
-## Depth without losing breadth
+## Build, inspect and test what you learn
 
 - Begin with relational data, grain, semantic meaning and model/context/tool boundaries.
-- Follow an outcome-led journey into engineering or business-agent implementation.
-- Use level-specific content to increase implementation and systems depth.
-- Use the research lens to inspect mechanisms, alternatives and threats to validity.
+- Choose an engineering or business-agent journey based on the outcome you need.
+- Change the learning level for more implementation and systems detail.
+- Use the research lens to compare mechanisms and alternatives, and check what could invalidate a result.
 - Use the pattern matrix to find linked lessons, labs, use cases, diagrams and evidence;
   absent coverage remains visible rather than turning into a readiness badge.
 
-Conceptual evolution is not a claim that Fabric, Foundry or Copilot implements a cited paper
+Conceptual evolution is not a claim that Fabric, Foundry or GitHub Copilot implements a cited paper
 exactly. Original research results are not current product benchmarks. Local deterministic
 analogs cannot establish language-model performance.
 
@@ -62,7 +62,7 @@ and active capacity can incur costs. An approved LIVE write never redirects to L
 Running the UI, API or Microsoft's Fabric MCP process locally does not make a remote data
 operation offline. `ffia serve mcp` is different: it starts the offline `ffia-local` server.
 
-### Existing deployed-environment evidence
+### Inspect dated deployment evidence
 
 The gallery now separates **deployed-resource checks**, **actual recorded operations** and
 **local interface evidence**. Recorded read-only checks observed the F8 capacity/development

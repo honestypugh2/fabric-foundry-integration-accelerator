@@ -35,7 +35,7 @@ journeys:
     lesson_ids: [governed-data-foundations, agent-research-foundations, fabric-foundry-boundaries, p16-evaluation-observability]
   - id: engineer
     title: "Level up Fabric engineering"
-    summary: "Use Copilot to improve a repeatable data task, add Skills and Fabric MCP, then verify the result rather than trusting a convincing answer."
+    summary: "Use GitHub Copilot to improve a repeatable data task, add Skills and Fabric MCP, then verify the result rather than trusting a convincing answer."
     duration_minutes: 90
     lesson_ids: [governed-data-foundations, copilot-surfaces, fabric-skills, fabric-mcp-landscape, copilot-maturity-ladder, power-bi-agentic-tooling]
   - id: agent
@@ -102,7 +102,7 @@ briefs:
   - lesson_id: copilot-maturity-ladder
     what: "The L0-L6 ladder adds repository grounding, procedures, connected context and governed change to assisted coding."
     why: "Each added capability introduces a new failure mode and therefore needs a control and observable evidence."
-    when: "Use the ladder to plan how a Fabric engineering team adopts Copilot on one repeatable task."
+    when: "Use the ladder to plan how a Fabric engineering team adopts GitHub Copilot on one repeatable task."
     when_not: "Do not interpret a higher rung as permission for autonomous production writes or a guaranteed productivity gain."
     how: [Choose one Silver transformation task., Compare manual and assisted artifacts against the same baseline., Add Skills and read-only MCP context., Measure correctness and review work before considering governed writes.]
     expected_result: "A before/after scorecard names the added capability, control, test result and actual tool provenance."
@@ -126,14 +126,14 @@ briefs:
       sources: [research-react, copilot-cli-ga, skills-for-fabric, fabric-mcp-local]
   - lesson_id: copilot-vs-claude-code
     what: "A fair harness comparison holds the task, dataset, constraints and scoring rules constant."
-    why: "A recorded Copilot result and a documented Claude prompt are different evidence categories."
+    why: "A recorded GitHub Copilot result and a documented Claude prompt are different evidence categories."
     when: "Use the evaluation framework when deciding how a team should use alternative coding harnesses."
     when_not: "Do not claim a winner from unrelated demonstrations, different models or documented-only paths."
     how: [Inspect the recorded bake-off., Identify missing comparable runs., Define an identical task and scorecard before any new evaluation.]
     expected_result: "The comparison explicitly separates measured observations from documented capabilities."
     failure_and_recovery: "If a harness cannot run, mark it documented-only or unavailable rather than fabricating a score."
     diagram: agentic-de
-    research: {<<: *engineering-research, question: "What would make a Copilot and Claude comparison fair and reproducible?"}
+    research: {<<: *engineering-research, question: "What would make a GitHub Copilot and Claude comparison fair and reproducible?"}
   - lesson_id: copilot-surfaces
     what: "VS Code, CLI, App and cloud-agent surfaces offer different interaction, review and execution environments."
     why: "Selecting a surface changes context availability, approval handling and where artifacts are reviewed."
@@ -362,15 +362,15 @@ use_cases:
   - guide_id: hc-01-fabric-mcp-powerbi-medallion-lab
     problem: "An engineer needs to turn seven imperfect synthetic extracts into trusted analytics without confusing generated code with correct, authorized Fabric execution."
     audience: "Data engineers, analytics engineers and workshop facilitators."
-    outcomes: [Explain how Copilot adds value at each engineering stage., Build and reconcile a synthetic medallion and semantic contract., Distinguish Skills from MCP execution and retain evidence for every approved operation.]
+    outcomes: [Explain how GitHub Copilot adds value at each engineering stage., Build and reconcile a synthetic medallion and semantic contract., Distinguish Skills from MCP execution and retain evidence for every approved operation.]
     lesson_ids: [governed-data-foundations, copilot-surfaces, fabric-skills, fabric-mcp-landscape, copilot-maturity-ladder, power-bi-agentic-tooling]
     stages:
       - {title: Manual baseline, task: Inspect a Silver transformation and its expected counts., capability: "Understand the grain, quality rules and reference result before asking an agent.", control: Independent deterministic baseline., evidence: Reference SQL and expected measures.}
-      - {title: Copilot assistance, task: Draft and explain a transformation with tests., capability: "Copilot accelerates authoring and review preparation; the engineer retains judgment.", control: Review assumptions and compare outputs., evidence: Artifact diff and test results; no invented time saving.}
+      - {title: GitHub Copilot assistance, task: Draft and explain a transformation with tests., capability: "GitHub Copilot accelerates authoring and review preparation; the engineer retains judgment.", control: Review assumptions and compare outputs., evidence: Artifact diff and test results; no invented time saving.}
       - {title: Repository grounding, task: Apply shared conventions and boundaries., capability: "Instructions provide the local architecture and quality contract.", control: Strict types and deterministic validation., evidence: Relevant checks and recorded reviewer corrections.}
       - {title: Fabric Skills, task: Follow the medallion or Spark procedure., capability: "Skills provide repeatable domain guidance, not permission or automatic execution.", control: Curated pinned procedures and separate proposed actions., evidence: Reviewed artifact and named procedure.}
       - {title: Fabric MCP context, task: Inspect the assigned workspace context., capability: "The real Fabric MCP tool supplies observed metadata rather than guessed schemas.", control: Narrow read tools and disclosed named fallback., evidence: Actual invocation and result label; REST results are not MCP proof.}
-      - {title: Governed execution, task: Build and reconcile the intended Fabric artifacts., capability: "The assigned tool or extension performs the approved operation; Copilot coordinates.", control: Duplicate check and exact-target human approval., evidence: Counts and DAX against the baseline plus separate execution and publication evidence.}
+      - {title: Governed execution, task: Build and reconcile the intended Fabric artifacts., capability: "The assigned tool or extension performs the approved operation; GitHub Copilot coordinates.", control: Duplicate check and exact-target human approval., evidence: Counts and DAX against the baseline plus separate execution and publication evidence.}
     production_gaps: [Fresh complete Guide 1 MCP and Power BI publication evidence remains separate., Claude Code is DOCUMENTED ONLY in the bake-off., Production identity and deployment gates are not certified by this prototype.]
     presenter_path: /talktracks/fabric-copilot-level-up.html
   - guide_id: mfg-01-foundry-fabric-sales-insights
@@ -387,7 +387,7 @@ use_cases:
     stages:
       - {title: Business question, task: Choose one bounded sales question., capability: "The analyst defines the population and decision, not just a vague request for insights.", control: Agreed measure and independent baseline., evidence: Question and expected synthetic answer.}
       - {title: Governed Fabric context, task: Obtain permitted structured context., capability: "Fabric owns the data meaning and access; its data agent is read-only.", control: Identity and data permissions., evidence: Actual context result and execution label.}
-      - {title: Foundry reasoning, task: Explain the context and its supported conclusion., capability: "Foundry coordinates tools and reasons over returned context; Copilot helps author and test the integration.", control: Bounded tool use and evaluation., evidence: Observed tool event and baseline-reconciled answer.}
+      - {title: Foundry reasoning, task: Explain the context and its supported conclusion., capability: "Foundry coordinates tools and reasons over returned context; GitHub Copilot helps author and test the integration.", control: Bounded tool use and evaluation., evidence: Observed tool event and baseline-reconciled answer.}
       - {title: Reviewed brief, task: Draft the monthly team explanation., capability: "The workflow produces a reviewable draft, not an automatically delivered business decision.", control: Human review and separately approved delivery., evidence: Synthetic draft and quality checks; scheduling is not claimed as executed.}
       - {title: Proposed data correction, task: Explain an upstream quality issue., capability: "The agent proposes; a steward approves; a scoped Fabric process corrects Silver.", control: Exact-target approval and verification., evidence: Quality diagnostics and reviewed plan; no automatic fix.}
     production_gaps: [Monthly live scheduling and delivery are not verified., Web grounding needs licensing and boundary review; never send confidential figures in queries., Server-side traces were observed; complete assistant answers and revenue reconciliation remain unverified., Claude Code is DOCUMENTED ONLY.]
@@ -398,7 +398,7 @@ use_cases:
     outcomes: [Reconcile nine quality counts against an independent synthetic baseline., Expose a controlled mismatch and recover without changing committed expectations., Rehearse a notebook proposal with separate approval and audit through shared infrastructure.]
     lesson_ids: [governed-data-foundations, fabric-mcp-landscape, p08-human-in-the-loop, p16-evaluation-observability, spec-driven-delivery]
     stages:
-      - {title: Contract before code, task: Define order-line grain and quality categories., capability: Copilot explains the contract and assumptions., control: Independent committed baseline., evidence: Nine named expected categories and explicit exclusions.}
+      - {title: Contract before code, task: Define order-line grain and quality categories., capability: GitHub Copilot explains the contract and assumptions., control: Independent committed baseline., evidence: Nine named expected categories and explicit exclusions.}
       - {title: Deterministic evidence, task: Run exact baseline reconciliation and the adverse experiment., capability: Local checks detect defects and reject mismatched expectations., control: Scratch copies and nonzero failure., evidence: LOCAL baseline pass and intentionally failing scratch comparison.}
       - {title: Optional connected context, task: Inspect scoped item metadata through Fabric MCP., capability: Skills guide the procedure and MCP exposes permitted context., control: Read-only tools and disclosed named fallback., evidence: Actual label or explicit offline-path explanation; metadata is not notebook execution.}
       - {title: Governed proposal, task: Rehearse notebook creation without running a correction., capability: "Shared API and UI support plan validation, separate approval and audit.", control: Exact target and no LIVE redirection., evidence: SIMULATED verification; self-approval and duplicate execution refused.}

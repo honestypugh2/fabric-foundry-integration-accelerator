@@ -1,5 +1,7 @@
 # Infrastructure (reference only)
 
-`bicep/` holds reference modules for production discussion. Nothing here is deployed by CI or by the demo scripts.
+Use the reference modules in `bicep/` for production planning.
+The [observability setup](observability/README.md) explains monitoring resources and evidence.
 
-Populated in: Phase 8.
+CI and demo scripts do not deploy this infrastructure. Any live deployment needs a plan,
+an exact target, human approval, verification and an audit.

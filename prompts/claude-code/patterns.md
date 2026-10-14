@@ -2,7 +2,7 @@
 
 <!-- Generated from education and guide YAML; run ffia prompts render. -->
 
-DOCUMENTED ONLY: no Claude Code runs were recorded. Claude models inside Copilot are not Claude Code.
+DOCUMENTED ONLY: no Claude Code runs were recorded. Claude models inside GitHub Copilot are not Claude Code.
 
 Read AGENTS.md first (Claude Code imports it through CLAUDE.md). Use synthetic data only. State the provider, server and tool before cloud calls. Default to read-only; a prompt is not approval for a write. Label execution and fallback honestly.
 
@@ -186,14 +186,14 @@ Source: [catalog](../../education/patterns/catalog.yaml).
 Read the catalog entry for P18: Customer overlay. Explain this scenario: Configuration controls industry, domains, tools, policy, thresholds and learning modules. Trace Fabric's role (Workspace aliases only.), Foundry's role (Project aliases only.), and MCP's role (Tool allow-lists.). Identify the authority boundary: Overlay owners; real identifiers stay in git-ignored files. Plan the offline demonstration: Example overlay with synthetic data. Name any preview dependencies and propose the smallest validation check. Do not edit files, call cloud tools, or claim an operation ran.
 ```
 
-## P19: Copilot CLI + Fabric Skills + MCP
+## P19: GitHub Copilot CLI + Fabric Skills + MCP
 
 Status: MIXED. Offline equivalent: Skills read locally plus the local MCP server.
 
 Source: [catalog](../../education/patterns/catalog.yaml).
 
 ```text
-Read the catalog entry for P19: Copilot CLI + Fabric Skills + MCP. Explain this scenario: A terminal agent follows Microsoft-authored Fabric skills and calls Fabric MCP or REST. Trace Fabric's role (Target workspace (dev).), Foundry's role (Not required.), and MCP's role (Fabric MCP servers with hardened allow-lists.). Identify the authority boundary: The developer's identity and workspace role. Plan the offline demonstration: Skills read locally plus the local MCP server. Name any preview dependencies and propose the smallest validation check. Do not edit files, call cloud tools, or claim an operation ran.
+Read the catalog entry for P19: GitHub Copilot CLI + Fabric Skills + MCP. Explain this scenario: A terminal agent follows Microsoft-authored Fabric skills and calls Fabric MCP or REST. Trace Fabric's role (Target workspace (dev).), Foundry's role (Not required.), and MCP's role (Fabric MCP servers with hardened allow-lists.). Identify the authority boundary: The developer's identity and workspace role. Plan the offline demonstration: Skills read locally plus the local MCP server. Name any preview dependencies and propose the smallest validation check. Do not edit files, call cloud tools, or claim an operation ran.
 ```
 
 ## P20: Repo-first (Git as source of truth)
@@ -213,7 +213,7 @@ Status: GA. Offline equivalent: Issue template and recorded replay.
 Source: [catalog](../../education/patterns/catalog.yaml).
 
 ```text
-Read the catalog entry for P21: Cloud agent issue to pull request. Explain this scenario: A well-scoped issue becomes a pull request from the Copilot cloud agent with read-only tools. Trace Fabric's role (Item definitions in Git.), Foundry's role (Not required.), and MCP's role (Read-only servers only (no per-call approval in the cloud agent).). Identify the authority boundary: Pull-request reviewers. Plan the offline demonstration: Issue template and recorded replay. Name any preview dependencies and propose the smallest validation check. Do not edit files, call cloud tools, or claim an operation ran.
+Read the catalog entry for P21: Cloud agent issue to pull request. Explain this scenario: A well-scoped issue becomes a pull request from the GitHub Copilot cloud agent with read-only tools. Trace Fabric's role (Item definitions in Git.), Foundry's role (Not required.), and MCP's role (Read-only servers only (no per-call approval in the cloud agent).). Identify the authority boundary: Pull-request reviewers. Plan the offline demonstration: Issue template and recorded replay. Name any preview dependencies and propose the smallest validation check. Do not edit files, call cloud tools, or claim an operation ran.
 ```
 
 ## P22: Parallel agentic migration

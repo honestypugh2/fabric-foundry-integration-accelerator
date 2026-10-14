@@ -109,10 +109,10 @@ export function BakeoffPage() {
     <>
       <h1>Bake-off: same tasks, every harness</h1>
       <p>
-        GitHub Copilot with different models (including Claude models inside Copilot) runs the same
-        five data-engineering tasks. Claude Code is documented with the same prompts and sandbox,
-        and its runs appear here only when someone records them. Results are dated observations on
-        this repository&apos;s synthetic tasks, not product claims.
+        GitHub Copilot with different models (including Claude models inside GitHub Copilot) runs
+        the same five data-engineering tasks. Claude Code is documented with the same prompts and
+        sandbox, and its runs appear here only when someone records them. Results are dated
+        observations on this repository&apos;s synthetic tasks, not product claims.
       </p>
       <PromptBlock title="How to run a task" text={HOW_TO_RUN} />
       <QueryState label="the scorecard" {...card}>

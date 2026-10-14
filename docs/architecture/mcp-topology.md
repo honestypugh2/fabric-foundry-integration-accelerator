@@ -1,7 +1,7 @@
 # MCP topology for Fabric data engineering
 
-Which harness reaches which MCP server, for which job, under whose identity. Every harness reads
-the same `AGENTS.md`, skills and `.mcp.json`. Each job uses the narrowest server:
+Choose the harness, MCP server and identity for the job. Every harness reads
+the same `AGENTS.md`, skills and `.mcp.json`. Use the narrowest server:
 
 - documentation tools for *how*;
 - read-only tools for *what is*;
@@ -22,9 +22,9 @@ the same `AGENTS.md`, skills and `.mcp.json`. Each job uses the narrowest server
 flowchart LR
   subgraph harness_zone["Agent harnesses"]
     vscode["VS Code agent mode<br/><small>GitHub Copilot</small>"]
-    copilot_cli["Copilot CLI<br/><small>Terminal agent, GA</small>"]
-    copilot_app["Copilot app · PREVIEW<br/><small>Worktrees, technical preview</small>"]
-    cloud_agent["Copilot cloud agent<br/><small>Issue to pull request</small>"]
+    copilot_cli["GitHub Copilot CLI<br/><small>Terminal agent, GA</small>"]
+    copilot_app["GitHub Copilot app · PREVIEW<br/><small>Worktrees, technical preview</small>"]
+    cloud_agent["GitHub Copilot cloud agent<br/><small>Issue to pull request</small>"]
     claude_code["Claude Code<br/><small>CLAUDE.md imports AGENTS.md</small>"]
   end
   subgraph knowledge_zone["Shared knowledge and configuration"]
@@ -94,7 +94,7 @@ Solid boxes are implemented here or documented by Microsoft; dashed boxes are pl
 
 *PLANNED FLOW.* One data-engineering task, three kinds of question, three different servers.
 
-1. An engineer asks Copilot CLI to add a Silver table for encounters.
+1. An engineer asks GitHub Copilot CLI to add a Silver table for encounters.
 2. The harness loads the shared MCP configuration and repo instructions.
 3. How - documentation tools explain the right notebook and Delta patterns. No tenant needed.
 4. What is - read-only tools list the lakehouse tables with the engineer's permissions.
@@ -105,7 +105,7 @@ Solid boxes are implemented here or documented by Microsoft; dashed boxes are pl
 
 *LOCAL.* The same questions answered against synthetic data with no tenant. Offline demo act 3.
 
-1. Claude Code (or Copilot) uses the same .mcp.json.
+1. Claude Code (or GitHub Copilot) uses the same .mcp.json.
 2. It starts ffia-local over stdio.
 3. Read tools inspect the medallion; plan tools propose but never execute.
 4. Answers come from synthetic data, labeled LOCAL.
@@ -114,10 +114,10 @@ Solid boxes are implemented here or documented by Microsoft; dashed boxes are pl
 
 | Component | Status | Role | In this repository |
 |---|---|---|---|
-| VS Code agent mode | Microsoft-documented | Copilot agent mode in VS Code with tool approvals, terminal auto-approve rules, custom agents, skills and MCP servers from .mcp.json. | - |
-| Copilot CLI | Microsoft-documented | Terminal agent with plan mode, tool permissions, skills, plugins, MCP and a headless -p mode. | - |
-| Copilot app | Preview | Desktop app running parallel agent sessions in isolated git worktrees, with Plan and Autopilot modes. Technical preview. | - |
-| Copilot cloud agent | Microsoft-documented | Assign an issue and the agent works in a sandbox and opens a pull request. MCP servers come from repository settings; there is no per-call approval, so the pull request is the control. | - |
+| VS Code agent mode | Microsoft-documented | GitHub Copilot agent mode in VS Code with tool approvals, terminal auto-approve rules, custom agents, skills and MCP servers from .mcp.json. | - |
+| GitHub Copilot CLI | Microsoft-documented | Terminal agent with plan mode, tool permissions, skills, plugins, MCP and a headless -p mode. | - |
+| GitHub Copilot app | Preview | Desktop app running parallel agent sessions in isolated git worktrees, with Plan and Autopilot modes. Technical preview. | - |
+| GitHub Copilot cloud agent | Microsoft-documented | Assign an issue and the agent works in a sandbox and opens a pull request. MCP servers come from repository settings; there is no per-call approval, so the pull request is the control. | - |
 | Claude Code | Microsoft-documented | Anthropic's agentic CLI. In this repository CLAUDE.md imports AGENTS.md and the same .mcp.json and .claude/skills are shared. | - |
 | AGENTS.md and instructions | Implemented in this repository | The single source of truth for every coding agent - rules, commands, safety and evidence requirements. | `AGENTS.md` |
 | Skills | Microsoft-documented | Skills are knowledge, not execution; they drive REST, SQL, KQL or PySpark under the user's identity. | - |
@@ -151,7 +151,7 @@ Solid boxes are implemented here or documented by Microsoft; dashed boxes are pl
 
 <!-- END GENERATED DIAGRAM -->
 
-## Notes
+## Check hosting, authority and status
 
 - **Hosting is not processing location.** The Fabric MCP servers list separates *remote*
   servers (hosted by Microsoft) from *local* servers (run by you). Local servers can still reach

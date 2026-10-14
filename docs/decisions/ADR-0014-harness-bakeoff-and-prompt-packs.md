@@ -5,8 +5,8 @@
 
 ## Context
 
-Both guides must explain Copilot, Fabric MCP/Skills and Claude Code alternatives without
-confusing model choice with the assistant harness. Recorded runs exist only for Copilot CLI.
+Both guides must explain GitHub Copilot, Fabric MCP/Skills and Claude Code alternatives without
+confusing model choice with the assistant harness. Recorded runs exist only for GitHub Copilot CLI.
 
 ## Options
 
@@ -21,13 +21,13 @@ render/check flows. Label Claude Code **DOCUMENTED ONLY** until actual runs are 
 
 ## Rationale
 
-One source prevents presentation/prompt drift. Same task wording, revision and permissions make
-recorded observations reproducible without implying that one model result measures a product.
+Generate presentations and prompts from one source to keep them consistent. Record task wording,
+revision and permissions so a run can be repeated. One model result does not measure a product.
 
 ## Trade-offs
 
 Single-run timing is illustrative, not statistically meaningful. Catalog planning prompts are
-not implemented live integrations. Other Copilot entry points remain distinct from CLI runs.
+not implemented live integrations. Other GitHub Copilot entry points remain distinct from CLI runs.
 
 ## Security impact
 
@@ -46,7 +46,7 @@ All packs and replay viewers work without cloud access.
 ## Education impact
 
 Both guides expose prompts, skills, checkpoints, authority and labeled fallback.
-Teach what Copilot does, what MCP exposes and what policy/identity authorize.
+Teach what GitHub Copilot does, what MCP exposes and what policy/identity authorize.
 
 ## Revisit trigger
 

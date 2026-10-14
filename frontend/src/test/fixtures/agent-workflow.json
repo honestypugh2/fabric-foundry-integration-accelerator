@@ -4,7 +4,7 @@
   "drafts": [
     {
       "answer": "**Enclosures**, September 2026: booked revenue $88,207.09 (+55.8% vs last month, +58.5% vs last year), 143.1% of target, gross margin 31.6%. Top growing product: P-ENC-012. Synthetic demonstration data.",
-      "correlation_id": "512a2da968fa4310ad2a265608b769b4",
+      "correlation_id": "af1ff60741004e3c8d799c495e923f90",
       "expected": [
         "88207.09",
         "143.1 or 43.1"
@@ -22,7 +22,7 @@
     },
     {
       "answer": "**Hardware & Fabrication**, September 2026: booked revenue $288,994.48 (+3.5% vs last month, +72.7% vs last year), 106.6% of target, gross margin 20.9%. Top growing product: P-FAB-009. Synthetic demonstration data.",
-      "correlation_id": "73a46eff6654479fb62992fe76308081",
+      "correlation_id": "ff598015f41a40448806e69f8d711601",
       "expected": [
         "288994.48",
         "106.6 or 6.6"
@@ -40,7 +40,7 @@
     },
     {
       "answer": "**Key Accounts**, September 2026: booked revenue $76,765.17 (+39.7% vs last month, +206.8% vs last year), 117.6% of target, gross margin 18.8%. Top growing product: P-FAB-004. Synthetic demonstration data.",
-      "correlation_id": "e3b48cc770dc4a9c9651b1acd8e030d5",
+      "correlation_id": "643ced3f01fc4809b8e1b8c514bfb0b0",
       "expected": [
         "76765.17",
         "117.6 or 17.6"
@@ -58,7 +58,7 @@
     },
     {
       "answer": "**Structural & Metals**, September 2026: booked revenue $132,524.66 (+24.1% vs last month, +21.9% vs last year), 108.6% of target, gross margin 27.9%. Top growing product: P-STR-004. Synthetic demonstration data.",
-      "correlation_id": "d627a05d59b546978cd9bf4370d3354d",
+      "correlation_id": "4051bce6b8514de2a9bfe0ab7eab90e4",
       "expected": [
         "132524.66",
         "108.6 or 8.6"
@@ -83,7 +83,7 @@
   "max_concurrency": 4,
   "observation_month": "2026-09-01",
   "ready": 4,
-  "run_id": "e2396ed6215b48d09539569b46f69f2c",
+  "run_id": "4187bea0626a4e2b9fda7d2e5490c058",
   "steps": [
     "select: choose the business teams for this run",
     "draft: one executor per team asks the agent for its brief (fan-out; concurrency-limited)",

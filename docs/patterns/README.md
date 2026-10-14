@@ -1,5 +1,6 @@
 # Pattern documentation
 
-pattern-catalog (Patterns 1-24) and selection-guide.
+Use the pattern-catalog (Patterns 1-24) and selection-guide to choose a pattern for the task.
+Inspect its teaching content, evidence limits and approval rules before building.
 
-Populated in: Phase 4.
+Added in Phase 4. Structured pattern content lives under `education/patterns/`.

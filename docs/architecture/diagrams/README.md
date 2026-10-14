@@ -11,7 +11,7 @@ was verified against the release's SHA-256 manifest. It is not a runtime depende
 | Fabric + Foundry reference | [reference.png](reference.png) | [reference.drawio](reference.drawio) |
 | Production recommendation, not deployed | [production.png](production.png) | [production.drawio](production.drawio) |
 | MCP topology | [mcp-topology.png](mcp-topology.png) | [mcp-topology.drawio](mcp-topology.drawio) |
-| Copilot maturity ladder | [agentic-de.png](agentic-de.png) | [agentic-de.drawio](agentic-de.drawio) |
+| GitHub Copilot maturity ladder | [agentic-de.png](agentic-de.png) | [agentic-de.drawio](agentic-de.drawio) |
 | Fabric engineering use case | [hc-01.png](hc-01.png) | [hc-01.drawio](hc-01.drawio) |
 | Foundry sales-insights use case | [mfg-01.png](mfg-01.png) | [mfg-01.drawio](mfg-01.drawio) |
 | Live-first and offline routing | [live-vs-offline.png](live-vs-offline.png) | [live-vs-offline.drawio](live-vs-offline.drawio) |

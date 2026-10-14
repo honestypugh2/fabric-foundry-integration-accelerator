@@ -1,121 +1,112 @@
 # Fabric Foundry Integration Accelerator
 
-A reusable, customer-neutral **reference implementation, pattern catalog, workshop and demo
-environment** for integrating **Microsoft Fabric** and **Microsoft Foundry**. It covers:
+![Fabric and Foundry Integration Accelerator. Show and tell. Build and learn.](docs/branding/fabric-foundry-banner.svg)
 
-- **Fabric:** Fabric MCP, Fabric Skills, Fabric IQ, Fabric Data Agents
-- **Agents and AI coding tools:** Microsoft Agent Framework, GitHub Copilot, Claude Code
-- **Data engineering:** medallion architecture, Open Mirroring recovery
-- **Governance and evidence:** human-in-the-loop actions, evaluation and observability
+**Show and tell. Build and learn.**
 
-> **Fabric provides governed business context. Foundry turns that context into reasoning,
-> orchestration, evaluation, and action. MCP standardizes access to capabilities. Enterprise
-> identity and policy determine authority. Deterministic validation and human oversight
-> constrain high-impact actions. Observability and evaluation provide evidence. Offline
-> resilience ensures the architecture can always be demonstrated and taught.**
+Use this repo to learn how **Microsoft Fabric**, **Microsoft Foundry** and **GitHub Copilot**
+work together. Start with synthetic data, run a local demo, inspect the results, then build
+through a guide. You do not need an Azure account for the offline path.
 
-Learn it · See it · Build it · Run it · Break it · Recover it · Inspect it · Evaluate it ·
-Customize it · Productionize it — in one project, with **synthetic data only**.
+| Fabric | Foundry | GitHub Copilot |
+|---|---|---|
+| Provides governed data and business context | Uses that context for reasoning, orchestration, evaluation and action | Helps engineers understand the repo, write code, add tests and inspect failures |
+
+**Keep the roles clear:** MCP provides tool access. Skills provide procedures. Neither grants
+authority. Identity, policy and human approval control live changes.
+
+**Synthetic data only.** This is a learning repo and reference implementation, not a complete
+production deployment. Preview features are optional.
+
+**[Quick start](#quick-start)** · **[Use cases](#choose-a-use-case)** ·
+**[Workshop](#build-and-learn-workshop)** · **[Repo map](#repository-map)** ·
+**[What is left](docs/operations/resume-later.md)**
+
+## Choose a use case
+
+| Guide | What you will build and learn | What is ready |
+|---|---|---|
+| [HC-01: Fabric engineering with GitHub Copilot](guides/hc-01-fabric-mcp-powerbi-medallion-lab/README.md) | Fabric MCP, Fabric Skills, Bronze/Silver/Gold notebooks and a planned Power BI handoff | Guide, reviewed notebooks and offline build. Live landing verified. Live completion is deferred. |
+| [MFG-01: Foundry agents over Fabric](guides/mfg-01-foundry-fabric-sales-insights/README.md) | Sales insights, team briefs and reviewed quality proposals over synthetic manufacturing data | Offline briefs and quality checks. Connected evidence is dated and limited; answer and delivery gaps remain. |
+| [DQ-01: Supporting quality exercise](guides/dq-01-synthetic-quality-investigation/README.md) | Exact quality checks and a governed notebook proposal | LOCAL checks and a SIMULATED change rehearsal. No cloud correction runs. |
+
+HC-01 and MFG-01 are the two featured guides. Both stay in the repo.
+Claude Code instructions and alternate prompts are available now; setup and execution come
+later. Neither guide is fully live or production-certified.
+
+## Get ready to share or present
+
+| Audience | Start here |
+|---|---|
+| Customer or business team | [Customer field playbook](docs/field-playbooks/customer.html): value, tool roles and the two use cases |
+| SE, developer or presenter | [SE/developer field playbook](docs/field-playbooks/se-developer.html): setup, build paths, checks and approval boundaries |
+| New contributor | [Use-case onboarding](docs/operations/use-case-onboarding.md), [template](guides/_template/README.md) and [readiness checks](docs/operations/use-case-readiness.md) |
+
+> **Opening HTML on GitHub:** GitHub shows the file source, not the rendered page.
+> Download the HTML file and open it in a browser. A Markdown version and optional static
+> hosting are tracked [for later](docs/operations/resume-later.md#github-friendly-playbooks-and-hosting).
+
+Presenter handouts: [Fabric engineering](demos/fabric-copilot-level-up/index.html) and
+[Foundry agents](demos/foundry-fabric-agents-workshop/index.html). These are generated from
+their YAML sources and are also available from the app's Demo page.
+Use the [morning runbook](demos/MORNING-RUNBOOK.md) to prepare.
+
+See [sharing scope](docs/operations/shareable-release.md) for what belongs in the public repo
+and [current evidence](docs/operations/use-case-authoring-verification.md) for what actually ran.
 
 ## Start here: choose your outcome
 
-### Share or get ready quickly
-
-- [Customer field playbook](docs/field-playbooks/customer.html): business value, tool roles,
-  the two featured use cases and a safe first demonstration.
-- [SE/developer field playbook](docs/field-playbooks/se-developer.html): setup, implementation
-  map, assistant/MCP boundaries, checks and new-use-case onboarding.
-- [Sharing scope and HTML inventory](docs/operations/shareable-release.md): what belongs in
-  the repository versus private local storage.
-- [Resume-later tracker](docs/operations/resume-later.md): unfinished connected work.
-
-**Sharing scope:** HC-01 and MFG-01 remain the two featured guides; DQ-01 is a supporting
-exercise. The guides, reviewed implementation and offline demonstrations are shareable now.
-HC-01 live end-to-end completion and Claude Code setup/execution are intentionally deferred.
-MFG connected observations are dated and limited; neither guide is fully live/production
-certified. Claude instructions stay available, without claiming an executed comparison.
-
-| I want to... | First three actions |
+| I want to... | First step |
 |---|---|
-| Understand the architecture | Read the [repository map](docs/architecture/repository-map.md), choose a [learning depth](docs/education/learning-paths.md), then follow a workshop journey |
-| Try the workshop without cloud access | Follow [Quick start](#quick-start), choose the OFFLINE app launch, then open **Learn** or **Use Cases** |
-| Improve Fabric engineering with Copilot | Open [HC-01](guides/hc-01-fabric-mcp-powerbi-medallion-lab/README.md), check prerequisites, then stop at its first checkpoint |
-| Build agents over Fabric context | Open [MFG-01](guides/mfg-01-foundry-fabric-sales-insights/README.md), explain ownership boundaries, then compare offline answers with the baseline |
-| Add another use case | Define the outcome, follow [onboarding](docs/operations/use-case-onboarding.md), then validate the registry and teaching links |
-| Read or maintain the code | Follow the [code-reading path](docs/architecture/code-reading-path.md), run targeted checks, then use the [release gate](docs/operations/release-validation.md) |
-
-No Azure account is needed for offline learning. Normal interactive startup remains live-first
-HYBRID; choose OFFLINE explicitly for your first cloud-free workshop.
-
-Use-Case Guides under `guides/`: **HC-01** (Fabric MCP + Power BI medallion lab, healthcare,
-synthetic), **MFG-01** (Foundry + Fabric sales insights, manufacturing, synthetic), and
-[**DQ-01**](guides/dq-01-synthetic-quality-investigation/README.md) (quality investigation
-and governed notebook rehearsal; LOCAL/SIMULATED).
-
-To add another scenario, use the [authoring package](guides/_template/README.md),
-[readiness gates](docs/operations/use-case-readiness.md) and
-[verification record](docs/operations/use-case-authoring-verification.md).
-
-Workshop talk tracks (presenter scripts with portal, VS Code, web app and offline paths, generated
-from YAML with `ffia talktracks render`, also linked from the app's Demo page):
-
-- **Guide 1:** [Leveling up Fabric data engineering with GitHub Copilot](demos/fabric-copilot-level-up/index.html)
-- **Guide 2:** [Foundry + Fabric agent workshop](demos/foundry-fabric-agents-workshop/index.html)
-  (manufacturing, synthetic; offline commands `ffia mfg brief`, `ffia mfg quality`,
-  `ffia agents ask|eval|workflow`, and the app's Agent page)
-- Morning setup: [demos/MORNING-RUNBOOK.md](demos/MORNING-RUNBOOK.md)
-
-All guides also have generated [Copilot](prompts/github-copilot/patterns.md) and
-[Claude Code](prompts/claude-code/patterns.md) prompt packs. The recorded bake-off compares
-Claude and GPT models **inside Copilot CLI**, not Copilot versus Claude Code.
-Replay evidence offline at `/bakeoff`; no new cloud operation occurs during replay.
-
-See [security and threat model](docs/security/README.md),
-[release validation](docs/operations/release-validation.md) and
-[observability evidence](infra/observability/README.md). The education completeness gate covers
-all 30 questions across Executive and L100-L400. See the
-[phase verification and current live evidence](docs/operations/phase-verification.md).
-Capacity activation starts billing and remains an explicit human operation.
+| Understand the architecture | Read the [repo map](docs/architecture/repository-map.md) and choose a [learning level](docs/education/learning-paths.md) |
+| Try it without cloud access | Follow [Quick start](#quick-start), launch OFFLINE and open **Learn** or **Use Cases** |
+| Build through a guide | Choose [HC-01](guides/hc-01-fabric-mcp-powerbi-medallion-lab/README.md) or [MFG-01](guides/mfg-01-foundry-fabric-sales-insights/README.md), then stop at each checkpoint |
+| Add a use case | Follow [onboarding](docs/operations/use-case-onboarding.md) and reuse the existing registries and checks |
+| Read or maintain the code | Follow the [code-reading path](docs/architecture/code-reading-path.md), then run the [release checks](docs/operations/release-validation.md) |
 
 ## Build-and-learn workshop
 
-The app's primary navigation is **Workshop, Learn, Use Cases, Patterns and Evidence**.
-Architecture, labs, data exploration, the agent sandbox and recorded bake-off remain available
-as workshop tools. `/use-cases` is canonical; existing `/guides` deep links still work.
+Open **Workshop, Learn, Use Cases, Patterns and Evidence** in the app.
+Use `/use-cases` for the guides; existing `/guides` links still work.
+Architecture, labs, data exploration, the agent sandbox and recorded comparisons are also available.
 
-- **Breadth:** four outcome-led journeys and 25 patterns, all linked to five-level teaching.
-- **Depth:** 21 lessons, Executive through L400, with 130 knowledge checks and five labs.
-- **Practice:** what, why, when, when not, implementation, expected results and recovery.
-- **Applied research:** fundamentals, conceptual evolution, falsifiable hypotheses, controlled
-  experiments, independent baselines, metrics, sources and limitations. Experiments are proposed
-  studies, not fabricated findings or productivity claims.
-- **Use cases:** a visible business-to-build progression explains how Copilot, repository
-  grounding, Fabric Skills and Fabric MCP improve engineering, and how Fabric context supports
-  Foundry sales reasoning and reviewed proposals.
-- **Evidence:** OFFLINE/HYBRID/LIVE options, existing Azure/Fabric resource checks, actual recorded
-  operations and downloadable public verification records disclose their exact scope.
-  Local interface images are separate from cloud-operation evidence.
-  The coverage matrix exposes missing labs and recorded evidence; teaching is not live certification.
+- **Learn:** four journeys, 25 patterns and 21 lessons across Executive and L100-L400.
+- **Build:** five labs, 130 knowledge checks and guide checkpoints.
+- **Inspect:** source data, transformations, expected results, failure modes and recovery.
+- **Test ideas:** compare a clear hypothesis against an independent baseline. Proposed
+  experiments are not recorded findings or productivity claims.
+- **Check evidence:** distinguish a local result, a simulation, a preview and a live operation.
+  Missing labs and live checks stay visible.
+
+Use the generated [GitHub Copilot](prompts/github-copilot/patterns.md) or
+[Claude Code](prompts/claude-code/patterns.md) prompt packs.
+The recorded comparison uses Claude and GPT models **inside GitHub Copilot CLI**.
+It is not a GitHub Copilot versus Claude Code comparison.
+Replay it at `/bakeoff` without a new cloud call.
 
 ### App preview
 
-Captured from the running app on **2026-10-09**. These are **LOCAL interface captures**
-of synthetic workshop content. The HYBRID status bar shows configuration, not proof of a
-new Fabric, Foundry or MCP operation.
+Captured on **2026-10-09**. These are **LOCAL screenshots** of synthetic workshop content.
+The HYBRID status bar shows configuration, not proof of a live operation.
 
-![Current workshop entry and outcome-led learning journeys](docs/architecture/screenshots/app-current-workshop.png)
+<details>
+<summary>See the workshop and evidence screens</summary>
 
-![Current Evidence page with local, live-first and strict-live choices](docs/architecture/screenshots/app-current-evidence.png)
+![Workshop entry and learning journeys](docs/architecture/screenshots/app-current-workshop.png)
+
+![Evidence page with local, live-first and strict-live choices](docs/architecture/screenshots/app-current-evidence.png)
 
 See the [current Learn page image](docs/architecture/screenshots/app-current-learn.png)
 and the [documented screenshot gallery](docs/operations/workshop-learning.md#current-app-captures).
+
+</details>
 
 See [workshop learning and research](docs/operations/workshop-learning.md),
 [reusable use-case onboarding](docs/operations/use-case-onboarding.md),
 [the two integration paths](docs/architecture/integration-paths.md) and
 [actual draw.io PNG exports](docs/architecture/diagrams/README.md).
-Spec-driven delivery is optional: the repository Skill and P25 explain when to use it;
-upstream Spec Kit is not installed or required for the default demo.
+Spec-driven delivery is optional. The repo skill and P25 explain when to use it.
+Spec Kit is not installed or required for the default demo.
 
 ## Quick start
 
@@ -203,7 +194,7 @@ Run `make help` for every target.
 | `frontend/` | React + TypeScript + Vite educational application |
 | `config/` | Customer overlays, environments, MCP profiles, policies, providers, privacy denylist |
 | `data/synthetic/` | Synthetic data: raw → bronze → silver → gold → semantic → recovery |
-| `education/`, `docs/`, `demos/`, `prompts/` | Learning content, documentation, demos, Copilot and Claude Code prompt packs |
+| `education/`, `docs/`, `demos/`, `prompts/` | Learning content, documentation, demos, GitHub Copilot and Claude Code prompt packs |
 | `guides/` | Customer-neutral Use-Case Guides |
 | `notebooks/`, `powerbi/`, `fabric/workspace/` | Fabric notebooks, PBIP/TMDL, Fabric Git-format items |
 | `docs/research/` | `sources.yaml` → `source-validation.md`, GA/preview matrix |
@@ -215,14 +206,14 @@ Run `make help` for every target.
 - [`CLAUDE.md`](CLAUDE.md) imports it for Claude Code.
 - [`.github/copilot-instructions.md`](.github/copilot-instructions.md) summarizes it for GitHub
   Copilot.
-- The root [`.mcp.json`](.mcp.json) is the portable MCP configuration shared by VS Code, Copilot
+- The root [`.mcp.json`](.mcp.json) is the portable MCP configuration shared by VS Code, GitHub Copilot
   CLI and Claude Code, rendered from the default profile `fabric-first` in
   [`config/mcp/profiles.yaml`](config/mcp/profiles.yaml). It starts the **real Fabric MCP server**
   (`@microsoft/fabric-mcp` 1.4.0, read-only, metadata only; LIVE once you `az login` to your demo
   tenant), Microsoft Learn, and the local educational server **`ffia-local` as the labeled
   fallback** when Fabric MCP is unavailable. Fabric Skills install with `ffia skills install`.
 - [`config/harness/policy.yaml`](config/harness/policy.yaml) is one permission policy rendered
-  for Claude Code (`.claude/settings.json`, with an enforced `ffia harness guard` hook), Copilot CLI
+  for Claude Code (`.claude/settings.json`, with an enforced `ffia harness guard` hook), GitHub Copilot CLI
   (`--allow-tool`/`--deny-tool`) and VS Code (`chat.tools.terminal.autoApprove`). Opt-in Fabric MCP and Power BI Modeling
   MCP profiles are rendered per client with `ffia mcp render <profile> --client vscode|claude|copilot-cli`.
 
@@ -245,23 +236,18 @@ Run `make help` for every target.
 - Preview capabilities stay behind feature flags and are never required for the default demo.
   See [`docs/research/ga-preview-matrix.md`](docs/research/ga-preview-matrix.md).
 
-## Implementation history and verification scope
+## Readiness
 
-**Implemented, locally verified, live observed and production-ready are different claims.**
-These phase labels describe history, not a learner sequence.
+- **Ready to build and learn:** HC-01 and MFG-01 guides, synthetic data and offline demos.
+- **Still to complete:** HC-01 live end-to-end acceptance and the remaining MFG-01 connected
+  answer checks.
+- **Instructions only:** Claude Code setup and the cross-harness comparison.
 
-| Phase | Scope | Evidence state |
-|---|---|---|
-| 0-1 | Research, architecture and locked tooling | Implemented; locally verified; sources are dated and workflow execution is separate |
-| 2-3 | Synthetic data and control plane | Locally verified; recovery/write rehearsals SIMULATED |
-| 4 | Educational workshop | Locally verified; teaching coverage is not certification |
-| 5 | Fabric integration | Application adapter and dated live reads; external Core/IQ MCP profiles/documentation; full HC-01 MCP/notebook/Power BI verification separate |
-| 6 | Foundry integration | Dated live evaluation 5/5 and client telemetry ingestion observed; Fabric agent tool PREVIEW; server-side traces and scheduling/delivery remain unverified |
-| 7 | Coding harnesses | Ten Copilot CLI model runs; Claude Code DOCUMENTED ONLY, not a cross-harness bake-off |
-| 8 | Security/release/production | Repository tooling and local checks recorded; GitHub quality/CodeQL DEFERRED; production certification unverified |
-| 9 | Final local validation | 2026-10-09: 616 backend tests, 99 frontend tests, 30/30 teaching coverage, zero-cloud offline demo; not current cloud health |
-
-See [phase verification](docs/operations/phase-verification.md) for exact evidence and gaps.
+Offline validation does not prove current cloud health or production readiness.
+See the [sharing scope and validation summary](docs/operations/shareable-release.md),
+[known gaps](docs/operations/use-case-readiness.md) and
+[later tracker](docs/operations/resume-later.md). Detailed implementation history is not
+the learning path.
 
 ## License
 

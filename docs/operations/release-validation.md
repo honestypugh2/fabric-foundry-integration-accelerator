@@ -14,8 +14,8 @@ The workflows never deploy Azure/Fabric resources or publish a package automatic
 | Static security | CodeQL Python and JavaScript/TypeScript, security-extended queries, push/PR/weekly/manual |
 | Release | Reuses quality and CodeQL; only then builds Python/frontend artifacts, CycloneDX SBOMs and SHA-256 checksums |
 
-The existing [quality workflow](../../.github/workflows/quality.yml) owns docs and offline-demo
-gates; separate duplicate workflows are unnecessary.
+The existing [quality workflow](../../.github/workflows/quality.yml) runs docs and offline-demo
+gates. Do not duplicate them in separate workflows.
 [CodeQL](../../.github/workflows/codeql.yml) needs GitHub code-scanning availability.
 Successful analysis/upload does not mean zero alerts: enable branch code-scanning protection
 and review alerts before publication.
@@ -43,8 +43,8 @@ inventory avoids npm production-only filtering omitting shared runtime/peer pack
 `make sbom` validates both CycloneDX schemas and checks every exact runtime manifest pin.
 The verifier canonicalizes npm's GitHub SCP-style VCS references to SSH URIs, preserving
 other metadata; npm otherwise emits references rejected by the strict CycloneDX schema.
-Neither is a security attestation: review scanner findings and license obligations independently. Keep generated
-SBOMs/builds ignored locally; the release workflow uploads only builds, SBOMs and checksums,
+Neither SBOM certifies security. Review scanner findings and license obligations independently.
+Keep generated SBOMs/builds ignored locally. The release workflow uploads only builds, SBOMs and checksums,
 never bindings, runtime traces, audit files or private source material.
 
 ## Publishing checklist

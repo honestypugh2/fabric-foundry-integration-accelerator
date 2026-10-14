@@ -10,17 +10,17 @@ tools apply everywhere.
 | Surface | Where it runs | Best for | Status (October 2026) |
 |---|---|---|---|
 | VS Code agent mode | Developer's editor | Writing and reviewing notebooks, SQL, TMDL | GA |
-| Copilot CLI | Developer's terminal | Exploration, triage, scripted checks | GA since 2026-02-25 |
-| Copilot app | Desktop, parallel worktrees | Parallel migrations and refactors | Technical preview |
-| Copilot cloud agent | GitHub Actions sandbox | Issue → pull request for well-scoped tasks | GA |
-| Copilot SDK | Your own application | Embedded data-engineering assistants | GA |
+| GitHub Copilot CLI | Developer's terminal | Exploration, triage, scripted checks | GA since 2026-02-25 |
+| GitHub Copilot app | Desktop, parallel worktrees | Parallel migrations and refactors | Technical preview |
+| GitHub Copilot cloud agent | GitHub Actions sandbox | Issue → pull request for well-scoped tasks | GA |
+| GitHub Copilot SDK | Your own application | Embedded data-engineering assistants | GA |
 
 ## Risk and governance
 
 - Local surfaces act as **the developer**, with per-tool approval prompts.
 - The cloud agent works **without per-call approval**; the pull request is its approval point, so
   it should only have read-only or offline tools.
-- The Copilot app's Autopilot mode removes the human gate; keep it in sandboxed experiments.
+- The GitHub Copilot app's Autopilot mode removes the human gate; keep it in sandboxed experiments.
 - An organization MCP allow-list limits which tool servers any surface can use.
 
 None of these surfaces grants authority over Fabric. Identity, workspace roles, policy and human
@@ -36,5 +36,5 @@ fair comparison between tools possible.
 
 1. Which surfaces are approved for which teams and data.
 2. Whether the cloud agent may work on data-engineering repositories, and with which tools.
-3. When preview surfaces (the Copilot app, sandboxes) may move from experiment to standard
+3. When preview surfaces (the GitHub Copilot app, sandboxes) may move from experiment to standard
    practice.

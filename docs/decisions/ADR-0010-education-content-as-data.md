@@ -6,8 +6,8 @@
 ## Context
 
 The accelerator teaches Executive, L100, L200, L300 and L400 audiences, and future Use-Case
-Guides will add content. Content hard-coded in React would drift, could not be validated, and
-could not be reused by agents or other surfaces.
+Guides will add content. Keep it outside React so it can be validated and reused by agents and
+other interfaces without duplicating copy.
 
 ## Options
 

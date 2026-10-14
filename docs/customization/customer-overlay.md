@@ -1,7 +1,7 @@
 # Customer overlays and Use-Case Guide intake
 
-The baseline accelerator is customer-neutral. Overlays and Use-Case Guides **add** to the
-baseline; they never change it.
+Keep the baseline customer-neutral. Use overlays and Use-Case Guides to **add** a scenario,
+not change baseline behavior.
 
 ## Customer overlay (`config/customers/<alias>.yaml`)
 
@@ -48,8 +48,8 @@ Guides live in `guides/<industry-code>-<nn>-<slug>/` and are validated by `UseCa
 2. **Sanitize.** Rewrite the guide in your own words.
    - Remove customer names, abbreviations, people, document titles, URLs, domains, tenant,
      workspace or capacity identifiers, and source-system names.
-   - Add new identifying terms to the hashed denylist (`ffia privacy add-terms`, which reads terms from stdin), never in
-     plain text.
+   - Add new identifying terms to the hashed denylist with `ffia privacy add-terms`.
+     It reads terms from stdin. Never store them in plain text.
 3. **Map.**
    - Link each step to catalog patterns (`education/patterns/catalog.yaml`) and maturity
      levels.

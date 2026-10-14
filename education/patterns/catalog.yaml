@@ -273,7 +273,7 @@ patterns:
     selection_signals: [multi-customer-reuse]
     sources: [fabric-deployment-patterns]
   - id: P19
-    name: Copilot CLI + Fabric Skills + MCP
+    name: GitHub Copilot CLI + Fabric Skills + MCP
     summary: A terminal agent follows Microsoft-authored Fabric skills and calls Fabric MCP or REST.
     status: MIXED
     preview_dependencies: []
@@ -304,7 +304,7 @@ patterns:
     sources: [fabric-git-integration]
   - id: P21
     name: Cloud agent issue to pull request
-    summary: A well-scoped issue becomes a pull request from the Copilot cloud agent with read-only tools.
+    summary: A well-scoped issue becomes a pull request from the GitHub Copilot cloud agent with read-only tools.
     status: GA
     preview_dependencies: []
     default_demo_path: DOCUMENTATION

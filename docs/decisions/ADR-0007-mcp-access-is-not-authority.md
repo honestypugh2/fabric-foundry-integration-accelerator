@@ -5,9 +5,8 @@
 
 ## Context
 
-Learners need to see a real MCP protocol exchange offline. MCP servers also tempt teams to
-expose broad tools, such as shell, SQL or REST proxies, and to treat "the tool exists" as
-permission.
+Learners need to see a real MCP protocol exchange offline. Broad shell, SQL or REST-proxy tools
+create risks. A tool's existence does not grant permission to use it.
 
 ## Options
 
@@ -26,7 +25,7 @@ Use option 3.
   REST-proxy tool exists.
 - Each call is rate limited and audited, and returns an execution envelope labeled `LOCAL` or
   `SIMULATED`.
-- `.mcp.json` registers it as `ffia-local` (stdio) next to Microsoft Learn. VS Code, Copilot CLI
+- `.mcp.json` registers it as `ffia-local` (stdio) next to Microsoft Learn. VS Code, GitHub Copilot CLI
   and Claude Code share that file.
 
 ## Rationale

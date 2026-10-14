@@ -97,7 +97,7 @@ describe("workshop journeys and applied research", () => {
     mockApi(defaultRoutes);
     renderApp(`/guides/${fixtures.guideHc01.id}`);
     await screen.findByRole("heading", { name: "What are we improving?" });
-    expect(screen.getByRole("heading", { name: "Copilot assistance" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "GitHub Copilot assistance" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Fabric Skills" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Fabric MCP context" })).toBeInTheDocument();
     const steps = screen.getByRole("navigation", { name: "Guide steps" });

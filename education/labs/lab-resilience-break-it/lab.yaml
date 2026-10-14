@@ -134,7 +134,7 @@ steps:
   - stage: TRY WITH COPILOT
     title: Ask GitHub Copilot to explain the route decisions
     instructions: >-
-      In VS Code or Copilot CLI, ask - "Read config/environments/hybrid.yaml and
+      In VS Code or GitHub Copilot CLI, ask - "Read config/environments/hybrid.yaml and
       src/fabric_foundry_accelerator/fallback/router.py. For four consecutive read_table requests with
       FFIA_SIMULATE_FABRIC_OUTAGE=1 in hybrid mode, list the attempts per request, the breaker state
       after each and the fallback_reason of the fourth. Then explain why POST /api/v1/fabric/change is

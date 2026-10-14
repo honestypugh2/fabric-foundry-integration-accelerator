@@ -37,7 +37,7 @@ steps:
       `tools/call` to `inspect_medallion_architecture`. Note the label and the sentence saying no
       Fabric MCP server was called. Then start the server the way an editor would with
       `make run-mcp`: it speaks MCP over stdio and waits silently for a client (logs go to stderr).
-      Stop it with Ctrl+C. `.mcp.json` registers the same command for VS Code, Copilot CLI and
+      Stop it with Ctrl+C. `.mcp.json` registers the same command for VS Code, GitHub Copilot CLI and
       Claude Code.
     commands:
       - ffia demo offline
@@ -52,7 +52,7 @@ steps:
       `ffia serve mcp` over stdio exactly like an editor does. MCP stdio clients start servers
       with a minimal environment, so the script forwards your `FFIA_*` variables explicitly in
       the server's `env` block. List the tools and their read-only hints. Alternatively, open the
-      repository in VS Code, Copilot CLI or Claude Code, approve the `ffia-local` project server
+      repository in VS Code, GitHub Copilot CLI or Claude Code, approve the `ffia-local` project server
       after reviewing `.mcp.json`, and ask the agent to list its tools.
     commands:
       - |-
@@ -168,14 +168,14 @@ steps:
     expected: All MCP server tests pass offline.
     evidence_category: SIMULATED LOCALLY
   - stage: TRY WITH COPILOT
-    title: Ask Copilot to explore the allow-list
+    title: Ask GitHub Copilot to explore the allow-list
     instructions: >-
-      In VS Code agent mode or Copilot CLI, with the `ffia-local` server approved, use this prompt:
+      In VS Code agent mode or GitHub Copilot CLI, with the `ffia-local` server approved, use this prompt:
       "Using the ffia-local MCP server, list every tool and its read-only hint. Try to find a tool
       that approves or executes a change or runs SQL and explain why none exists. Call
-      get_runtime_status and then get_audit_record with its correlation_id." Check that Copilot
+      get_runtime_status and then get_audit_record with its correlation_id." Check that GitHub Copilot
       names the server and tools it actually called and does not claim any Fabric operation ran.
-    expected: Copilot reports LOCAL results, finds no execute tool and shows the audit record.
+    expected: GitHub Copilot reports LOCAL results, finds no execute tool and shows the audit record.
     evidence_category: SIMULATED LOCALLY
   - stage: TRY WITH CLAUDE CODE
     title: Ask Claude Code to review the governance code

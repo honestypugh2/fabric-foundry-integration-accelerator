@@ -82,7 +82,7 @@ def load_registry(path: Path = DEFAULT_REGISTRY_PATH) -> SourceRegistry:
 
 def _cell(value: object) -> str:
     text = "" if value is None else str(value)
-    return text.replace("|", "\\|").replace("\n", " ").strip() or "—"
+    return text.replace("|", "\\|").replace("\n", " ").strip() or "Not specified"
 
 
 _FIELDS: tuple[tuple[str, str], ...] = (
@@ -113,10 +113,13 @@ def render_markdown(registry: SourceRegistry) -> str:
         "<!-- GENERATED FILE: edit docs/research/sources.yaml, then run "
         "`uv run ffia sources render`. -->",
         "",
-        "Official product documentation overrides older samples. Community content never",
-        "overrides authoritative product documentation. Status values: GA, PREVIEW,",
-        "DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS",
-        "(official open-source project without a product lifecycle label).",
+        "Start with official product documentation. Use community samples as supporting material,",
+        "not as a replacement for the product docs. These references explain the design;",
+        "they do not prove a tool ran in this repo.",
+        "",
+        "Status: GA, PREVIEW, DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE",
+        "(architecture guidance), or OSS (official open-source project without a product",
+        "lifecycle label). A missing optional field is shown as Not specified.",
         "",
         "## Summary",
         "",

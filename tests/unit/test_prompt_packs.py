@@ -30,6 +30,15 @@ def test_packs_cover_every_pattern_and_guide(make_settings: Callable[..., Settin
     ):
         root = Path("prompts") / harness
         patterns = outputs[root / "patterns.md"]
+        expected_status = (
+            "Claude models inside GitHub Copilot are not Claude Code."
+            if harness == "claude-code"
+            else "Recorded bake-off results describe GitHub Copilot CLI only, "
+            "not every GitHub Copilot surface."
+        )
+        assert all(
+            expected_status in content for path, content in outputs.items() if path.parent == root
+        )
         for pattern in catalog.patterns:
             assert f"## {pattern.id}: {pattern.name}" in patterns
         for path in (settings.education_root / "patterns").glob("*/lesson.yaml"):

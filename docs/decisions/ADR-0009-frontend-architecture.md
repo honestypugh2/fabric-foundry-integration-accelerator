@@ -54,7 +54,7 @@ retyped field fails `npm run typecheck`.
 
 - The generator must grow when new JSON Schema constructs appear. It raises
   `UnsupportedSchemaError` so this is never silent.
-- Views are projections, so the UI ignores fields it does not use.
+- Each view selects the fields it needs. The UI ignores the rest.
 
 ## Security impact
 
