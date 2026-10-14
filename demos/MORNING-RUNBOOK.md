@@ -46,7 +46,13 @@ Each step is a cloud write. Plan, approve, execute, verify, audit.
 | B6 | Foundry project connection to the data agent (workspace ID + artifact ID) | Foundry portal → Management → Connected resources → Microsoft Fabric | Connection listed |
 | B7 | Create `sales-insights-agent` | `python demos/foundry-fabric-agents-workshop/code/fabric_sales_agent.py` | Answer names Enclosures as the fastest grower |
 
-**Status 2026-10-08: B1–B7 completed and verified live** (Enclosures +55.78% and 12 duplicate lines, matching the baseline). Warm up the agent 10 minutes before: the first call took about 2.5 minutes.
+**Historical observation, 2026-10-08:** B1–B7 were reported completed and verified live
+(Enclosures +55.78% and 12 duplicate lines, matching the baseline). This is not a current
+service-health guarantee. Later bounded invocations timed out; the recovered duplicate
+tool payload matched 12, but revenue and final assistant answers remain unresolved.
+See the [current verification](../docs/operations/use-case-authoring-verification.md).
+Any new warm-up inference requires an explicitly approved bounded scope; do not automatically
+repeat a timed-out call. The historical first call took about 2.5 minutes.
 
 **One-command check (read-only):** `ffia foundry readiness` verifies the Foundry resource, project, model deployment, data-plane access, `sales-insights-agent` and the Fabric connection. It reads the `foundry:` section of the git-ignored bindings file. Expect "Foundry ready for agent demos: YES".
 
@@ -63,8 +69,8 @@ mode: the Foundry portal tour, the code walkthrough labeled REQUIRES TENANT VALI
 
 ## After the meetings
 
-- Pause the F capacity.
-- Optional: delete the Foundry resource. A deployed model has no idle cost, but delete it if you
-  won't reuse it.
+- Review cost and ownership, then separately approve any capacity pause.
+- Optional: separately plan and approve deletion of unused Foundry resources. Do not treat
+  the end of a workshop as permission to delete resources or assume no ongoing charges.
 - Nothing is committed with identifiers. Keep IDs in `config/customers/*.local.yaml` and
   environment variables only.

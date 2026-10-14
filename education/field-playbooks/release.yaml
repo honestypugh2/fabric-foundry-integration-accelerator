@@ -1,0 +1,273 @@
+version: 1
+as_of: "2026-10-14"
+summary: >-
+  A synthetic, build-and-learn accelerator for Fabric engineering and Foundry agents.
+  Share the guides and offline demonstrations now. Live end-to-end acceptance is a separate,
+  unfinished milestone, not a condition for reading or using the repository offline.
+sources:
+  - fabric-mcp-local
+  - skills-for-fabric
+  - copilot-cli-ga
+  - github-copilot-on-github
+  - foundry-fabric-tool
+  - fabric-direct-lake
+  - powerbi-authoring-mcp
+  - claude-code-memory
+playbooks:
+  - id: customer
+    audience: Customer and business stakeholder
+    title: From governed data to useful AI
+    subtitle: Two practical stories. One safe place to learn.
+    promise: Understand the value, see a synthetic demonstration, and choose a bounded next step.
+    sections:
+      - id: orientation
+        title: Start with the outcome, not the tool
+        intro: Fabric supplies governed context. Foundry supplies reasoning and orchestration. Copilot helps engineers build and improve the implementation.
+        cards:
+          - title: What this repository is
+            label: LOCAL
+            body: A reference implementation, educational web app, pattern catalog and guided workshop. It is not a deployed customer solution or a production certification.
+            steps:
+              - Synthetic data only; no real patient, customer or employee records.
+              - Explore offline without Azure configuration; installation still needs package-registry access.
+              - Claims are labeled LIVE, LOCAL, SIMULATED, PREVIEW or not verified.
+            links:
+              - {title: Repository overview and installation, path: README.md}
+          - title: The authority boundary
+            label: GUIDANCE
+            body: Models propose. Deterministic checks validate. Policy constrains. Humans approve. Only an authorized service performs authoritative writes.
+            steps:
+              - MCP exposes capabilities; it does not grant permissions.
+              - Skills teach procedures; they do not authorize cloud changes.
+              - A successful-looking answer is not proof that a tool ran or numbers are correct.
+      - id: use-cases
+        title: Choose one of the two featured use cases
+        intro: Both guides stay in the repository. Their learning paths are shareable; their live acceptance boundaries differ.
+        cards:
+          - title: "HC-01 | Improve Fabric data engineering"
+            label: LOCAL / LIVE PARTIAL
+            body: Use Copilot, Fabric MCP and Fabric Skills to reason about seven synthetic healthcare CSVs, build Bronze/Silver/Gold layers and design a Power BI handoff. All metrics are synthetic analytical demonstrations, not clinical measures or advice.
+            steps:
+              - "Ready now: guide, reviewed reference notebooks, independent baseline and offline build."
+              - "Observed live: lakehouse and seven landed files with hash readbacks; Bronze scaffold independently verified; native tool reported Bronze publication."
+              - "Not complete: persisted Bronze publication/binding verification, remote runs, live Delta outputs, semantic model and report."
+            links:
+              - {title: Read the HC-01 guide, path: guides/hc-01-fabric-mcp-powerbi-medallion-lab/README.md}
+              - {title: Fabric engineering presenter handout, path: demos/fabric-copilot-level-up/index.html}
+          - title: "MFG-01 | Reason over governed sales context"
+            label: LOCAL / PREVIEW
+            body: >-
+              Explore Foundry agents over synthetic Fabric sales data: sales insights, team briefs and
+              reviewed quality proposals. The Foundry Fabric data-agent tool is PREVIEW and not
+              required for the default offline demo.
+            steps:
+              - "Ready now: deterministic offline briefs, quality checks, baseline and guided agent architecture."
+              - Historical live observations are dated; later invocation timeouts remain unresolved.
+              - A recovered duplicate-count tool payload matched 12; final assistant answers, revenue and delivery are not currently certified.
+            links:
+              - {title: Read the MFG-01 guide, path: guides/mfg-01-foundry-fabric-sales-insights/README.md}
+              - {title: Agent workshop presenter handout, path: demos/foundry-fabric-agents-workshop/index.html}
+          - title: "Supporting exercise | DQ-01"
+            label: LOCAL / SIMULATED
+            body: Investigate nine exact manufacturing quality categories and rehearse a governed notebook proposal. This reuses the MFG dataset; it does not correct data or run a cloud notebook.
+            links:
+              - {title: Try DQ-01, path: guides/dq-01-synthetic-quality-investigation/README.md}
+      - id: see-it
+        title: Get to the first useful demonstration
+        intro: Ask an SE or developer to install the locked dependencies using the root README, then choose one explicit offline path.
+        cards:
+          - title: Explore the workshop
+            label: LOCAL
+            body: Launch the app in OFFLINE mode, open Use Cases, choose HC-01 or MFG-01, and follow the checkpoint prompts. No tenant access is needed for this path.
+            command: make run API_ARGS=--offline
+            steps:
+              - Open the local address printed by Vite, normally http://localhost:5173.
+              - Use Learn for explanations; Patterns for alternatives; Evidence for limitations.
+              - Stop the launch with Ctrl+C. Do not interpret configuration badges as live execution evidence.
+          - title: Show a reproducible result
+            label: LOCAL
+            body: From the installed, activated Python environment, compare an offline brief and exact quality results with committed references.
+            command: |
+              ffia mfg brief
+              ffia mfg quality --check --json
+            steps:
+              - Review the baseline pass, not just fluent wording.
+              - No cloud agent inference, subscription or scheduled delivery occurs.
+      - id: tools
+        title: What each tool adds
+        cards:
+          - title: Fabric MCP and Fabric Skills
+            label: DOCUMENTED BEHAVIOR
+            body: MCP provides scoped access to available tools and context. Skills provide reusable domain procedures. Together they help the coding assistant discover, plan and explain work without becoming the authority for writes.
+          - title: GitHub Copilot
+            label: DOCUMENTED BEHAVIOR
+            body: In VS Code or CLI, Copilot can explain the repository, draft transformations and tests, and help inspect failures. GitHub.com experiences can assist repository work and reviewed changes. Client availability and permissions must be checked for each environment.
+          - title: Power BI and Claude Code
+            label: DOCUMENTED ONLY
+            body: Power BI is the planned semantic-model/report handoff for HC-01, not a published lab outcome yet. Claude Code setup and alternate prompts remain available as instructions; setup and an executed Copilot-versus-Claude comparison are intentionally deferred.
+      - id: learn
+        title: Pick your learning depth
+        cards:
+          - {title: Executive, label: LEARN, body: "Explain business value, risk, ownership and the difference between a demonstration and a production commitment."}
+          - {title: L100, label: LEARN, body: "Identify Fabric, Foundry, MCP, skills and coding-assistant roles."}
+          - {title: L200, label: SEE, body: "Walk through a guide and inspect a labeled offline result."}
+          - {title: L300, label: BUILD, body: "Follow reviewed transformations, quality checks, semantic contracts and approval boundaries."}
+          - {title: L400, label: GO DEEPER, body: "Examine provider ports, policy, identity, evaluation, recovery and production trade-offs."}
+      - id: next
+        title: Agree the next step
+        cards:
+          - title: A bounded customer conversation
+            label: GUIDANCE
+            body: Choose one outcome, identify its authoritative data and actions, define an independent acceptance baseline, and agree which checks must be live. Do not bring customer source material or identifiers into this repository.
+            links:
+              - {title: SE / developer playbook, path: docs/field-playbooks/se-developer.html}
+              - {title: Current sharing scope, path: docs/operations/shareable-release.md}
+              - {title: Deferred work tracker, path: docs/operations/resume-later.md}
+  - id: se-developer
+    audience: SE, developer and technical presenter
+    title: Ready to explain. Ready to build.
+    subtitle: Your Fabric + Foundry field guide
+    promise: Prepare a safe demonstration, understand the implementation, and extend a use case without overstating what ran.
+    sections:
+      - id: orientation
+        title: Know the architecture and the release boundary
+        cards:
+          - title: The mental model
+            label: GUIDANCE
+            body: Fabric is governed context; Foundry is reasoning, orchestration, evaluation and action. Provider ports isolate domain logic. MCP is capability access, not authority. Entra identity, policy and human review control live writes.
+            links:
+              - {title: Repository map, path: docs/architecture/repository-map.md}
+              - {title: Code-reading path, path: docs/architecture/code-reading-path.md}
+          - title: What we can share now
+            label: LOCAL / LIVE PARTIAL
+            body: HC-01 and MFG-01 are the primary learning guides; DQ-01 is a supporting offline investigation. The offline implementation is validated. HC live end-to-end completion, Claude execution and production certification are deferred.
+            links:
+              - {title: Sharing scope and content placement, path: docs/operations/shareable-release.md}
+              - {title: Evidence and limitations, path: docs/operations/use-case-authoring-verification.md}
+      - id: setup
+        title: Set up once, then choose a path
+        intro: Python 3.14, uv, Node 24 LTS, Git and GNU Make. Use the existing lockfiles; no new cloud provisioning or extension installation is required for the offline demonstration.
+        cards:
+          - title: Install from the repository root
+            label: LOCAL
+            body: Activate the virtual environment before installing Python dependencies. Package downloads need network access; subsequent offline demonstrations do not require Azure configuration.
+            command: |
+              uv venv --python 3.14 .venv
+              source .venv/bin/activate
+              uv sync --frozen
+              cd frontend && npm ci && cd ..
+              make demo-offline
+            steps:
+              - Expect Release gate PASSED and zero cloud operations.
+              - Resolve local errors before connecting providers.
+              - On a later terminal session, activate the existing .venv; do not recreate it unnecessarily.
+          - title: Launch or present
+            label: LOCAL
+            body: Choose the app, terminal demonstration or standalone presenter handouts. Normal interactive startup is live-first HYBRID; explicitly use --offline for a cloud-free workshop.
+            command: make run API_ARGS=--offline
+            links:
+              - {title: Customer playbook, path: docs/field-playbooks/customer.html}
+              - {title: HC presenter handout, path: demos/fabric-copilot-level-up/index.html}
+              - {title: MFG presenter handout, path: demos/foundry-fabric-agents-workshop/index.html}
+      - id: use-cases
+        title: Explain and demonstrate the two use cases
+        cards:
+          - title: "HC-01 | Engineering before analytics"
+            label: LOCAL / LIVE PARTIAL
+            body: Inspect seven-source grain and schema, reviewed CSV parsing, row-preserving Silver SQL, Gold keys and reconciliations, and the planned Direct Lake handoff. The offline build targets 24 tables and 58 baseline checks.
+            command: ffia data build --profile hc-lab-7file-v1
+            steps:
+              - Observed live landing and hash readbacks do not imply Delta tables exist.
+              - Bronze publication was tool-reported; persisted content/binding and runtime outputs still need verification.
+              - Leave remote execution, model and report work for the deferred sequence.
+            links:
+              - {title: HC guide and checkpoints, path: guides/hc-01-fabric-mcp-powerbi-medallion-lab/README.md}
+              - {title: Reviewed Fabric notebook definitions, path: fabric/workspace/README.md}
+          - title: "MFG-01 | Grounded reasoning, reviewed action"
+            label: LOCAL / PREVIEW
+            body: Start with the deterministic sales brief and quality checks. Explain the agent, tools, citation sources and approval workflow separately from computation correctness.
+            command: |
+              ffia mfg brief
+              ffia mfg quality --check --json
+            steps:
+              - Foundry Fabric data-agent tooling is PREVIEW, optional and not part of the default offline requirement.
+              - Dated live observations are not current-health certification; later revenue/final-answer gaps remain open.
+              - No delivery, data correction or new agent inference is authorized by opening a guide.
+            links:
+              - {title: MFG guide and checkpoints, path: guides/mfg-01-foundry-fabric-sales-insights/README.md}
+              - {title: DQ supporting investigation, path: guides/dq-01-synthetic-quality-investigation/README.md}
+      - id: assistants
+        title: Level up the coding assistant deliberately
+        cards:
+          - title: GitHub Copilot in VS Code / CLI
+            label: DOCUMENTED BEHAVIOR
+            body: Ground the assistant in AGENTS.md, scoped instructions, the reviewed source and independent tests. Add relevant skills for procedure and the narrowest MCP profile for permitted context. Keep model-generated changes reviewable.
+            command: |
+              Read AGENTS.md and the selected guide's scoped instructions.
+              Explain the next checkpoint, its source grain and independent checks.
+              Propose a local change and tests. Do not run cloud tools or alter baselines.
+            links:
+              - {title: Copilot prompts, path: prompts/github-copilot/patterns.md}
+              - {title: MCP profiles, path: config/mcp/README.md}
+          - title: GitHub.com / app experiences
+            label: DOCUMENTED BEHAVIOR
+            body: GitHub Copilot can help explore repositories, plan changes and delegate coding tasks in GitHub workflows. Verify the actual supported surface and account entitlement. Treat branches, pull requests, tests and human review as the change path, not authority for Fabric writes.
+            steps:
+              - Do not transfer local tenant bindings, caches or credentials to a cloud coding task.
+              - A configured workflow or available tool is not proof of an executed task.
+              - Client-specific end-to-end verification remains a later milestone.
+          - title: Claude Code alternative
+            label: DOCUMENTED ONLY
+            body: Keep the existing setup instructions and equivalent prompts. Setup and execution are deferred by operator choice. The recorded Claude/GPT comparison inside Copilot CLI is not Copilot-versus-Claude Code evidence.
+            links:
+              - {title: Claude alternate prompts, path: prompts/claude-code/patterns.md}
+              - {title: Client and MCP setup, path: config/mcp/README.md}
+              - {title: Deferred comparison tracker, path: docs/operations/resume-later.md}
+          - title: Skills, MCP and Power BI
+            label: GUIDANCE
+            body: Fabric Skills are procedural grounding; Fabric MCP is scoped capability access. The native extension owns this lab's notebook publication/runtime path. Power BI authoring tools handle model/report work under their own connection and approval boundaries.
+            links:
+              - {title: Notebook and Power BI tooling boundaries, path: docs/operations/notebook-powerbi-tooling.md}
+      - id: delivery
+        title: Build, verify, then extend
+        cards:
+          - title: The learning loop
+            label: LEARN
+            body: LEARN → SEE → BUILD → INSPECT → BREAK IT → RECOVER → VERIFY → GO DEEPER → TRY WITH COPILOT → TRY WITH CLAUDE CODE → PRODUCTION NOTES. Claude remains an instructional alternative until its execution is resumed.
+            steps:
+              - Executive / L100 explain outcomes and tool roles.
+              - L200 demonstrates a labeled guide checkpoint.
+              - L300 inspects code, grains, tests and evidence.
+              - L400 reviews identity, providers, policy, evaluation, failure modes and production controls.
+          - title: Add a use case without a fork
+            label: LOCAL
+            body: Define outcome, audience, authoritative sources, grain, independent acceptance checks and a safe offline equivalent. Reuse provider ports and teaching patterns; register the guide and validate every linked surface.
+            links:
+              - {title: New-use-case onboarding, path: docs/operations/use-case-onboarding.md}
+              - {title: Authoring template, path: guides/_template/README.md}
+              - {title: Readiness gates, path: docs/operations/use-case-readiness.md}
+          - title: Cloud boundary
+            label: GUIDANCE
+            body: PLAN → VALIDATE → APPROVE → EXECUTE → VERIFY → AUDIT. Refresh target/readiness, check duplicates, approve the exact operation, independently verify outputs and retain a private audit. A LIVE failure never silently becomes a LOCAL write.
+            steps:
+              - Keep real identifiers in ignored private bindings, not source or screenshots.
+              - Publication, runtime execution, model changes and report publication are separate approvals.
+              - Never regenerate the independent baseline merely to get green.
+      - id: release
+        title: Make the sharing claim precise
+        cards:
+          - title: Release checks
+            label: LOCAL
+            body: Validate generated playbooks and the release's offline paths. Run the existing full release gate when code changes warrant it. A clean scan is a deterministic check, not a guarantee that every sentence has received human editorial review.
+            command: |
+              make playbooks-check
+              ffia privacy scan
+              make validate
+            links:
+              - {title: Release validation procedure, path: docs/operations/release-validation.md}
+              - {title: Sharing scope and HTML inventory, path: docs/operations/shareable-release.md}
+          - title: Resume later without losing the thread
+            label: DEFERRED
+            body: HC live completion, Claude setup/comparison, connected MFG answer checks, client-specific proof, production controls and release workflow evidence remain tracked. Deferral does not remove the guides or implemented offline assets.
+            links:
+              - {title: Persistent resume tracker, path: docs/operations/resume-later.md}

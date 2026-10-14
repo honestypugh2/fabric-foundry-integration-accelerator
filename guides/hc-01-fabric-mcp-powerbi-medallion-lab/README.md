@@ -6,6 +6,13 @@ two-page report. **`ffia-local` is a separate synthetic educational server.** Lo
 location does not mean offline data. Alternate Claude Code prompts remain documented only.
 Synthetic data only; no clinical rules.
 
+**Share now, complete live later:** this guide, reviewed notebooks and offline reference
+remain available. Live landing is verified; Bronze publication was tool-reported, but its
+persisted content/binding, remote runs and model/report acceptance remain unfinished.
+Claude setup/execution is also deferred; alternate instructions stay available.
+See [current evidence](../../docs/operations/use-case-authoring-verification.md) and the
+[resume tracker](../../docs/operations/resume-later.md). No guide assets are removed.
+
 ## Start this use case
 
 | Question | Answer |

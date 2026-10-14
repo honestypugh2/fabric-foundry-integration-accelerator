@@ -156,10 +156,292 @@ Extension activation generated local dependency stubs and private workspace/VFS 
 Root-scoped ignore rules now isolate them without deleting state or excluding public source
 files. The subsequent privacy scan passed: 776 files, zero findings.
 
+## HC-01 dedicated workspace verification: 2026-10-13
+
+After the operator reported manual creation and VS Code selection of `ffia-hc01-lab`,
+actual **LIVE / Microsoft Fabric / Fabric Data Engineering extension / `fabricWorkspaceInfo`**
+selected that workspace. **LIVE / Microsoft Fabric / `fabric-mcp` / `core_search-catalog`**
+returned an exact workspace match. The catalogue also returned unrelated manufacturing entries;
+only the exact HC workspace name and ID match was used as target evidence.
+An exact-ID **`fabric-mcp` / `onelake_list-items`** read returned an empty item list and no
+continuation. The assistant did not perform workspace creation.
+
+A separate **LIVE / repository SDK readiness path / `ffia fabric readiness --json`** check
+used process-only HC workspace overrides and the existing private tenant pin. It passed
+sign-in, capacity, exact HC workspace assignment and required tenant-setting checks.
+The GitHub workspace-sync setting remains a warning; preview settings were skipped.
+This GET-only readiness diagnostic is not an MCP invocation or write-authorization result.
+Saved manufacturing bindings and the default read-only configuration were not changed.
+
+**LOCAL / `ffia-local` / `generate_fabric_change_plan`**, followed by
+**`validate_change_plan`**, proposed only an empty `healthcare_lakehouse` in alias `hc01-lab`,
+destination LIVE. Both returned **BLOCKED**: the alias is undeclared in the active overlay
+and live mutation is disabled. The existing MCP session also reports no configured live writer.
+This blocked plan is not approval or evidence of lakehouse creation. Discovery exposed
+`core_create-item` only on the separately configured `Fabric-MCP` server, not the selected
+read-only `fabric-mcp` server; it was not invoked or silently substituted.
+At that checkpoint, HC authoring context and exact private binding still needed alignment
+before a new allowed plan and operation-specific human approval. No HC lakehouse, upload,
+publication, run, model or report operation had been performed.
+
+The operator subsequently approved **configuration and planning only** in the isolated HC lab.
+Its private binding contains only `hc01-lab`, and its derived overlay permits only
+`create_lakehouse`. Hash comparison verified unchanged root environment files, MCP configuration
+and manufacturing bindings. The local MCP server initialized and its plan/validation tools
+recognized the HC alias, but correctly retained the unconditional LIVE-mutation block imposed
+by `ffia serve mcp`. That safeguard was not modified or bypassed.
+
+The existing API control plane was then exercised locally through its in-process HTTP client:
+an HC-only LIVE-destination lakehouse plan was proposed and revalidated, with human approval
+still required. Upload and manufacturing-alias plans were rejected. No API approval or
+execution was performed; its live writer remains disabled. This is **LOCAL API planning**,
+not a LIVE API execution or an MCP planning success.
+
+The isolated, reviewed `hc01-lab` Fabric MCP server also initialized through the MCP SDK.
+Its actual catalogue matched all seven configured tools, including `core_create-item`.
+An actual **LIVE / configured `fabric-mcp` / `onelake_list-items`** call independently
+matched the private HC workspace ID and empty inventory. No write tool was invoked.
+The verification processes were stopped, and private plan, audit, catalogue and scoped-read
+records were retained. The next boundary was a separately approved, client-mediated Fabric MCP
+lakehouse creation, subsequently completed below; it is not a substitution for the disabled API
+live writer.
+
+## HC-01 lakehouse creation and verification: 2026-10-13
+
+The operator separately approved **one** empty `healthcare_lakehouse` creation in the verified
+HC workspace through the isolated MCP context. The requester and human approver were distinct.
+The client-side approval record is destination-bound and uses the repository's approval-window
+rule; it is not an API approval or execution claim.
+
+After another exact-target empty-inventory check, **LIVE / Microsoft Fabric / isolated
+`fabric-mcp` via MCP SDK / `core_create-item`** was invoked once and returned status 200.
+Pre-flight client errors occurred before any create call and were corrected; the write itself
+was not retried. The saved creation response contains the expected workspace, name, type and
+new lakehouse ID.
+
+Independent **LIVE / `fabric-notebook-mcp` / `list_artifacts`** returned exactly one matching
+Lakehouse. Its ID matched the create response. A separate read-only **`fabric-mcp` /
+`onelake_list-items`** confirmed the same persisted item in the HC workspace.
+**`onelake_list-files`** found zero entries in `Files`; **`onelake_list-tables`** with namespace
+`dbo` found zero tables and no continuation. Metadata reports `schemaEnabled=false` and
+successful managed SQL endpoint provisioning. The successful `dbo` table-API listing does not
+change that schema-enabled flag.
+
+Private request/approval, receipt, response, verification and correlated audit records were
+retained. Saved root/manufacturing configuration remained unchanged. This certifies **HC-01
+step 04 only**: one empty lakehouse. No files were uploaded, notebooks published or run, semantic
+models created, reports published, capacity changed or new agent inference attempted.
+Rollback remains a separate approval to delete the empty, unused lakehouse.
+
+## HC-01 source-landing preparation: 2026-10-13
+
+All seven exported synthetic CSV hashes were rechecked against `SHA256SUMS`; parsed source
+counts matched the seven expected counts. The files total 1,068,733 bytes.
+The actual upload-tool catalogue confirms `local-file-path` and boolean `overwrite` controls.
+A separate LOCAL upload-planning context permits only `upload_files` against `hc01-lab`;
+lakehouse creation and manufacturing-alias plans were rejected. Existing root and earlier HC
+configuration remained unchanged.
+
+**LIVE attempt / chat read-only `fabric-mcp` / `onelake_list-files`** for `Files/raw` returned
+404 with "the specified path does not exist." The parent `Files` read returned 200 and an empty
+list. The lakehouse's exact ID/name/type was independently reconfirmed. Uploads were stopped
+at the missing-directory prerequisite, not attempted or redirected to simulation.
+
+The operator approved **only** creating the empty `Files/raw` directory. However, the isolated
+authoring MCP SDK client's pre-flight `Files` read returned a tool error before any directory
+write. Bounded read-only diagnosis through that same configured server recovered HTTP 404
+`HttpRequestException`; omitting optional recursion did not resolve it. The client-context
+discrepancy remains unresolved. No directory-creation receipt exists and
+`onelake_create-directory` has not been invoked. No uploads or readback have occurred.
+
+The next boundary is resolving that context or explicitly approving a different configured
+MCP server for the same bounded operation, with fresh exact-target preconditions. No REST/CLI
+substitution or mutation retry is authorized. Content-hash verification after future uploads
+requires separately approved, exact-file MCP readback; the current HC profile does not expose
+`onelake_download-file`. Equal sizes alone will not be reported as content integrity.
+
+### Approved alternate-server check: 2026-10-13
+
+The operator explicitly approved changing to the separately configured `Fabric-MCP` server
+for the directory-only operation, subject to fresh target and folder checks. Through that
+server, `onelake_list-items` returned HTTP 404 `WorkspaceNotFound` (`isRetriable: false`), and
+`onelake_list-files` for the parent `Files` returned HTTP 404. No write was attempted.
+
+A fresh diagnostic `onelake_list-items` through the chat read-only `fabric-mcp` server also
+returned `WorkspaceNotFound`; its earlier successful inventory is therefore historical,
+not a current precondition. Independently, the Fabric Data Engineering extension still
+selected the exact HC workspace, and `fabric-notebook-mcp` / `list_artifacts` returned exactly
+one matching lakehouse with the previously verified ID. This is metadata evidence, not a
+substitute for the failed write-context gate or evidence of a newly created directory.
+
+**UNAVAILABLE at that checkpoint / source landing:** workspace access in the affected Fabric MCP contexts needed
+verification and repair. The root cause is not established. No directory invocation, CSV
+upload, readback, resource recreation or REST/CLI substitution occurred. The approval change
+and bounded diagnostics are recorded privately. After reconnection, revalidate the exact
+target and duplicates, and renew approval explicitly if expired before any directory write.
+
+### Recovered access and verified landing: 2026-10-13
+
+Fresh read-only checks through both `fabric-mcp` and `Fabric-MCP` returned status 200 for
+the exact HC workspace and lakehouse; the parent `Files` directory was empty.
+Independent `fabric-notebook-mcp` metadata still matched the original lakehouse.
+Access was observed to work again; no credential repair or root cause is claimed.
+All seven source hashes were revalidated. The expired directory approval was explicitly
+renewed, and **LIVE / Microsoft Fabric / `Fabric-MCP` / `onelake_create-directory`** was
+invoked once for `Files/raw`. It returned status 200. Independent read-only
+`fabric-mcp` / `onelake_list-files` confirmed the `raw` directory and its empty contents.
+
+The isolated LOCAL API control plane then proposed and revalidated a bounded LIVE-destination
+`upload_files` plan. A separate explicit human approval covered exactly seven uploads with
+overwrite disabled and seven exact-file readbacks through the separately configured
+`Fabric-MCP` server. It did not extend the root read-only profile or authorize other data reads.
+Each **`onelake_upload-file`** call returned status 201; no upload was retried.
+Independent **`fabric-mcp` / `onelake_list-files`** returned exactly the seven expected CSVs
+under `Files/raw`, totaling 1,068,733 bytes. Each **`Fabric-MCP` / `onelake_download-file`**
+returned status 200 and saved the approved file to the private session readback folder.
+
+Local comparison of those actual remote readbacks with the pre-upload manifest passed
+SHA-256, byte-size and CSV-aware row-count checks for every file:
+
+| Synthetic source | Parsed rows | Content verification |
+|---|---:|---|
+| patients.csv | 200 | SHA-256 matched |
+| encounters.csv | 1,025 | SHA-256 matched |
+| conditions.csv | 428 | SHA-256 matched |
+| claims.csv | 1,025 | SHA-256 matched |
+| vitals.csv | 4,299 | SHA-256 matched |
+| medications.csv | 643 | SHA-256 matched |
+| clinical_notes.csv | 150 | SHA-256 matched |
+
+This verifies **HC-01 step 05 LIVE source landing and content integrity**, not merely transfer
+length. Private approvals, manifest, readbacks, verification receipt and correlated audit
+records were retained. No source correction, table creation, notebook publication/run, model,
+report or capacity change was performed. Rollback deletion still requires separate approval.
+The next guide checkpoint is step 06: local source profiling before notebook authoring.
+
+### Fabric portal display confirmation: 2026-10-13
+
+The operator's portal screenshot showed the SQL analytics endpoint with no user tables,
+not the lakehouse Files explorer. A fresh **LIVE / Microsoft Fabric / read-only `fabric-mcp`
+/ `onelake_list-files`** check still returned all seven uploaded CSVs under `Files/raw`.
+After selecting **Go to lake mode** and expanding **Files → raw**, the operator explicitly
+confirmed that all seven files were visible. This is operator-reported portal confirmation,
+not an assistant browser screenshot or a notebook-execution claim. The assistant browser
+tool was unavailable because its Chrome executable was missing.
+
+No data or resource repair was needed. Raw CSV landing does not create Delta tables, and
+the empty SQL user-table view is expected until separately approved table-building work runs.
+No notebook, table creation, reload operation or resource recreation was performed to resolve
+this display question.
+
+## HC-01 source profile: 2026-10-13
+
+**LOCAL / Python CSV-aware parser**, over the same seven source files already reconciled to
+LIVE Fabric readbacks, completed step 06 without cloud calls or source edits. Parsed row
+counts and five diagnostic counts matched the independent committed baseline. The private
+structured profile records every column, candidate key, blank/duplicate key count and
+patient/encounter reference check. Column contracts are defined in the
+[synthetic generator](../../src/fabric_foundry_accelerator/synthetic/generator.py).
+
+| Source | Rows | Validated candidate key | Blank keys | Excess duplicate keys |
+|---|---:|---|---:|---:|
+| patients | 200 | patient_id | 0 | 0 |
+| encounters | 1,025 | encounter_id | 0 | 0 |
+| conditions | 428 | condition_id | 0 | 0 |
+| claims | 1,025 | claim_id | 0 | 0 |
+| vitals | 4,299 | vital_id | 0 | 0 |
+| medications | 643 | medication_id | 0 | 0 |
+| clinical_notes | 150 | note_id | 0 | 0 |
+
+All nonblank patient and encounter references resolved to their parent keys; no
+patient/encounter ownership mismatch was found. These are observed synthetic-data
+relationships, not production constraints inferred from names alone.
+Every encounter has exactly one claim in this dataset.
+
+```mermaid
+erDiagram
+    patients ||--o{ encounters : patient_id
+    patients ||--o{ conditions : patient_id
+    patients ||--o{ claims : patient_id
+    patients ||--o{ vitals : patient_id
+    patients ||--o{ medications : patient_id
+    patients ||--o{ clinical_notes : patient_id
+    encounters ||--|| claims : encounter_id
+    encounters ||--o{ vitals : encounter_id
+    encounters ||--o{ medications : encounter_id
+    encounters ||--o{ clinical_notes : encounter_id
+```
+
+- All 428 condition `encounter_id` values are blank. Conditions form a patient-level
+  problem list; an encounter relationship must not be fabricated.
+- All 1,025 discharge dates were nonblank and parsed as ISO dates. None preceded admission.
+- Four recorded length-of-stay values differ from the date-derived durations, matching the
+  intentional baseline. Bronze must preserve them; later cleaning needs explicit rules.
+- Exactly 56 notes contain the literal two-character sequence `\n`; none contains an actual
+  newline. Do not silently convert or discard that source text during ingestion.
+
+Source profiling completed before the step 07 notebook drafting checkpoint below. No claim
+is made that tables, a Power BI model/report or the full connected workshop are complete.
+
+## HC-01 native Bronze scaffold and LOCAL draft: 2026-10-13
+
+Actual **LIVE / Microsoft Fabric / Fabric Data Engineering extension /
+`fabricWorkspaceInfo` and `fabricListNotebook`** confirmed the selected HC target and no
+existing notebooks. Independent **LIVE / `fabric-notebook-mcp` / `list_artifacts`** also
+returned zero notebooks; `get_lakehouse_detail` matched the private lakehouse and reported
+successful SQL endpoint provisioning.
+
+The operator separately approved one empty `MCP_01_Bronze` scaffold through the native
+`fabricCreateNotebook` tool, with no publication or execution authorization. One invocation
+reported successful creation and issued the VS Code open-folder notification. An independent
+`list_artifacts` read returned exactly one Notebook with the expected name and description;
+its identity matched the native download's artifact path. This certifies scaffold creation,
+not publication of the reviewed code.
+
+The downloaded copy was then populated **LOCAL**, using the existing notebook generator:
+
+- Four cells: explanation, parameters/counts, validation/write helpers, ingestion driver.
+- Cell sources match the reviewed `MCP_01_Bronze.Notebook` reference. The reference intentionally
+  reads CSV columns as strings rather than enabling schema inference, preserving raw values
+  before Silver applies explicit types.
+- Seven relative `Files/raw` reads use headers, multiline parsing, double-quote escaping and
+  fail-fast CSV parsing. Source counts are checked before each table write; persisted Delta
+  tables are read back. Source values and grains are retained with lineage columns.
+- Private default-lakehouse dependency and PySpark metadata were added only to the ignored
+  native download. No real identifiers were added to public notebook definitions.
+- Official nbformat-v4 schema validation, Python syntax checks, exact-source comparison,
+  source-line-ending checks and local file readback passed using existing dependencies.
+- VS Code `getNotebookSummary` returned four cells and confirmed none had executed.
+
+The native download is covered by the repository's private workspace-cache ignore rule.
+Client-mediated approval, creation, independent verification and LOCAL drafting audit records
+are retained privately; these are not API approval/execution records.
+
+**Checkpoint boundary:** Bronze drafting is complete. Publication requires a separate plan
+bound to the exact local bytes and existing notebook identity, then explicit approval through
+the native extension. Publication must stop at the tool's checkpoint; its result, persisted
+content and binding still require verification before a separately approved remote runtime
+run. No Bronze Delta output, Silver/Gold execution, semantic model or report is certified here.
+
+### Native Bronze publication checkpoint
+
+After exact-byte publication planning, a fresh native workspace/item check and separate
+operator approval, **LIVE / Microsoft Fabric / Fabric Data Engineering extension /
+`fabricPublishNotebook`** was invoked once for `MCP_01_Bronze`. The tool reported successful
+publication. The required native publication checkpoint stopped further automatic actions.
+This is a tool-reported outcome, not independent verification of persisted code or binding.
+Publication approval and the planned scope were retained privately before invocation;
+the correlated result receipt and independent verification still need completion.
+
+The operator subsequently deferred HC-01 live end-to-end completion and Claude Code
+setup/execution to a later session. Guides, reference notebooks, offline paths and Claude
+instructions remain available and shareable. See the [resume tracker](resume-later.md).
+
 ## Resume boundary
 
-1. Native notebook tools are now exposed and the selected workspace matches the private dev
-   binding. Confirm which use case and exact target the next publication plan covers; the
+1. Native notebook tools are exposed; the latest selected HC workspace matches the independent
+   catalogue and verified lakehouse/source inventory. Use the isolated authoring context and exact
+   private binding for HC planning. Confirm the exact target each publication plan covers; the
    reviewed HC-01 notebooks consume seven healthcare CSVs, not the manufacturing dataset.
    Restart Power BI read-only without automatic EULA acceptance;
    this operator has explicitly authorized acceptance, which was executed and verified.
@@ -175,10 +457,14 @@ files. The subsequent privacy scan passed: 776 files, zero findings.
    below. Scheduling/delivery still needs separate use-case-specific approval and verification.
 6. Complete applicable production controls and actual release checks before certification.
 
-No resource deployment, data mutation, capacity change, notebook run, publication, schedule, GitHub workflow
-dispatch or Claude Code bake-off was performed. Capacity/readiness was refreshed; billing
-and actual cost totals were not queried.
-GitHub execution remains deferred. Full connected and production gates remain open.
+The assistant's HC cloud mutations are limited to the approved lakehouse, raw directory,
+seven synthetic source uploads, one native Bronze notebook scaffold and the separately
+approved tool-reported Bronze publication above.
+No data correction, capacity change, notebook run, schedule, GitHub
+workflow dispatch or Claude Code bake-off was performed. Capacity/readiness was refreshed;
+billing and actual cost totals were not queried.
+Checkpoint `85e320a` was committed and pushed, but GitHub workflow verification remains
+deferred. Full connected and production gates remain open.
 
 ## MFG-01/DQ-01: approved invocation and monitoring checks
 
@@ -221,9 +507,10 @@ The Fabric output item still reports `in_progress`, and no final assistant messa
 recovered. Therefore the result certifies the recovered tool payload's baseline match,
 not a fully verified end-to-end assistant answer. Raw IDs, source URLs and results remain private.
 
-Remaining work: establish the HC dedicated lab workspace through its assigned portal step,
-plan and approve HC lakehouse/upload/publication/run/model/report operations, diagnose the
-revenue timeout/tool limit without duplicate inference, and verify final assistant answers.
+Remaining work: independently verify the tool-reported HC Bronze publication and binding,
+then separately plan and approve run/model/report operations and the Silver/Gold sequence;
+diagnose the revenue timeout/tool limit without duplicate inference, and verify final assistant
+answers.
 Production controls, schedule/delivery, actual billing and release checks remain uncertified.
 
 ## Interface capture

@@ -16,7 +16,7 @@ only; the manufacturer, customers and products are fictional.
 | Connected path | Configure [private bindings](../../docs/operations/environment-configuration.md), inspect readiness, then follow the guide's portal/code-first steps with separate write approval |
 | First checkpoint | Step `01-explore-architecture`: explain Fabric's read-only context, Foundry reasoning and human authority without cloud calls |
 | Completion evidence | Baseline-reconciled answers, citations, review gates and per-step evidence; a draft is not scheduled/delivered |
-| Production gaps | Server-side traces, scheduling/delivery and production identity/network/operations still require verification |
+| Production gaps | Revenue and final-answer reconciliation, scheduling/delivery and production identity/network/operations still require verification; bounded server-side traces have been observed |
 
 Read [scoped instructions](AGENTS.md), then follow [guide.yaml](guide.yaml) one prompt at a
 time. Stop at each checkpoint. The Fabric tool in Foundry is PREVIEW; Claude Code alternate
@@ -38,6 +38,11 @@ duplicate check in step 07. Steps 05 and 06 are offline-validated; running them 
 tenant validation.
 These observations do not certify the whole use case or current service health.
 See [phase verification](../../docs/operations/phase-verification.md).
+Later bounded invocations timed out; a recovered PREVIEW duplicate-count tool payload matched
+12, but no final assistant answer was verified. This limits the current sharing claim to the
+offline implementation and dated connected observations. See the
+[current verification record](../../docs/operations/use-case-authoring-verification.md) and
+[resume-later tracker](../../docs/operations/resume-later.md).
 
 ## Architecture
 

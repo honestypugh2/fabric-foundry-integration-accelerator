@@ -26,6 +26,7 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Fabric IQ and Data Agents | [What is Fabric IQ?](#fabric-iq-overview) | PREVIEW | 2026-10-05 |
 | Fabric notebook authoring | [Get started with the Fabric Data Engineering VS Code extension](#fabric-vscode-data-engineering) | GUIDANCE | 2026-10-13 |
 | GitHub CodeQL | [Workflow configuration options for code scanning](#github-codeql-configuration) | GUIDANCE | 2026-10-09 |
+| GitHub Copilot surfaces | [GitHub Copilot on GitHub.com](#github-copilot-on-github) | GUIDANCE | 2026-10-14 |
 | Microsoft Agent 365 | [Overview of Microsoft Agent 365](#agent-365) | GA | 2026-10-08 |
 | Microsoft Agent Framework | [Microsoft Agent Framework overview](#agent-framework) | GA | 2026-10-08 |
 | Microsoft Agent Framework | [Microsoft Agent Framework workflow capabilities](#agent-framework-workflows) | GA | 2026-10-08 |
@@ -382,6 +383,27 @@ DEPRECATED, UNKNOWN/NEEDS VALIDATION, GUIDANCE (architecture guidance), OSS
 | Security implications | Scope security-events write to analysis jobs and protect publication through reviewed release artifacts. |
 | Limitations | Workflow configuration is not evidence of a completed scan or zero alerts; repository code-scanning availability and branch protections need operator verification. |
 | Fallback | Local lint, strict types, tests, dependency audits and privacy scan; not equivalent to CodeQL. |
+| Deprecation / replacement | — |
+
+## GitHub Copilot surfaces
+
+<a id="github-copilot-on-github"></a>
+
+### GitHub Copilot on GitHub.com
+
+| Field | Value |
+|---|---|
+| URL | https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-on-github |
+| Publisher | GitHub Docs |
+| Retrieved | 2026-10-14 |
+| Last updated | — |
+| Status | GUIDANCE |
+| Associated patterns | P20 |
+| Key architecture statement | GitHub.com supports repository questions, planning and delegated coding work alongside review and automation experiences. |
+| Implementation relevance | Customer and SE field playbooks distinguish GitHub repository workflows from local IDE and CLI work; verify actual surface availability and entitlement before demonstrating. |
+| Security implications | A delegated repository task does not authorize Fabric writes or justify transferring local tenant bindings and credentials into a cloud development environment. |
+| Limitations | Product documentation is not evidence of an executed app or cloud-agent task in this repository; client-specific verification remains deferred. |
+| Fallback | Reviewed local Copilot prompts, offline tests and the documented change/approval workflow. |
 | Deprecation / replacement | — |
 
 ## Microsoft Agent 365

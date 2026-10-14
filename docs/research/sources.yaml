@@ -2,6 +2,19 @@
 # Status vocabulary: GA | PREVIEW | DEPRECATED | UNKNOWN/NEEDS VALIDATION | GUIDANCE | OSS
 version: 1
 sources:
+  - id: github-copilot-on-github
+    title: GitHub Copilot on GitHub.com
+    url: https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-on-github
+    publisher: GitHub Docs
+    retrieved_date: 2026-10-14
+    technology: GitHub Copilot surfaces
+    associated_patterns: [P20]
+    status: GUIDANCE
+    key_architecture_statement: GitHub.com supports repository questions, planning and delegated coding work alongside review and automation experiences.
+    implementation_relevance: Customer and SE field playbooks distinguish GitHub repository workflows from local IDE and CLI work; verify actual surface availability and entitlement before demonstrating.
+    security_implications: A delegated repository task does not authorize Fabric writes or justify transferring local tenant bindings and credentials into a cloud development environment.
+    limitations: Product documentation is not evidence of an executed app or cloud-agent task in this repository; client-specific verification remains deferred.
+    fallback: Reviewed local Copilot prompts, offline tests and the documented change/approval workflow.
   - id: research-relational-model
     title: A relational model of data for large shared data banks
     url: https://research.ibm.com/publications/a-relational-model-of-data-for-large-shared-data-banks

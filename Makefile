@@ -16,7 +16,7 @@ endef
 
 .PHONY: help setup setup-backend setup-frontend format lint typecheck test test-cov \
 	security sbom privacy-scan sources schemas diagrams education-check fixtures build validate clean data data-check recovery-demo \
-	run-api run-mcp run-frontend run demo-check demo-prep demo demo-live demo-hybrid demo-offline
+	run-api run-mcp run-frontend run demo-check demo-prep demo demo-live demo-hybrid demo-offline playbooks playbooks-check
 
 help: ## Show available targets
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  %-16s %s\n", $$1, $$2}'
@@ -60,6 +60,12 @@ privacy-scan: ## Scan for customer identifiers, GUIDs, secrets and e-mail addres
 sources: ## Re-render docs/research/source-validation.md from sources.yaml
 	$(ACTIVATE) && ffia sources render
 
+playbooks: ## Render standalone customer and SE/developer HTML from structured education
+	$(ACTIVATE) && python -m fabric_foundry_accelerator.education.field_playbooks
+
+playbooks-check: ## Check the two field playbooks, source references and repository links
+	$(ACTIVATE) && python -m fabric_foundry_accelerator.education.field_playbooks --check
+
 schemas: ## Re-export JSON Schemas, OpenAPI and the frontend API types
 	$(ACTIVATE) && ffia schemas export
 
@@ -97,7 +103,7 @@ build: ## Build Python distribution and frontend bundle
 	$(ACTIVATE) && uv build
 	cd $(FRONTEND) && npm run build
 
-validate: lint typecheck test-cov data-check privacy-scan build security sbom ## Full local validation (CI equivalent)
+validate: lint typecheck test-cov data-check privacy-scan build security sbom playbooks-check ## Full local validation (CI equivalent)
 	$(ACTIVATE) && ffia sources check && ffia schemas check && ffia education check --min-coverage 1.0 && ffia diagrams check && ffia mcp check && ffia notebooks check && ffia skills check && ffia talktracks check && ffia prompts check && ffia bakeoff check && ffia harness check && FFIA_ENVIRONMENT=offline FFIA_FABRIC_LIVE=0 FFIA_FOUNDRY_LIVE=0 ffia agents eval --suite sales-insights-agent && ffia demo offline >/dev/null && echo "offline demo: PASSED"
 	@echo "validate: all checks passed"
 

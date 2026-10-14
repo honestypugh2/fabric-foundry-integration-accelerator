@@ -19,6 +19,22 @@ Customize it · Productionize it — in one project, with **synthetic data only*
 
 ## Start here: choose your outcome
 
+### Share or get ready quickly
+
+- [Customer field playbook](docs/field-playbooks/customer.html): business value, tool roles,
+  the two featured use cases and a safe first demonstration.
+- [SE/developer field playbook](docs/field-playbooks/se-developer.html): setup, implementation
+  map, assistant/MCP boundaries, checks and new-use-case onboarding.
+- [Sharing scope and HTML inventory](docs/operations/shareable-release.md): what belongs in
+  the repository versus private local storage.
+- [Resume-later tracker](docs/operations/resume-later.md): unfinished connected work.
+
+**Sharing scope:** HC-01 and MFG-01 remain the two featured guides; DQ-01 is a supporting
+exercise. The guides, reviewed implementation and offline demonstrations are shareable now.
+HC-01 live end-to-end completion and Claude Code setup/execution are intentionally deferred.
+MFG connected observations are dated and limited; neither guide is fully live/production
+certified. Claude instructions stay available, without claiming an executed comparison.
+
 | I want to... | First three actions |
 |---|---|
 | Understand the architecture | Read the [repository map](docs/architecture/repository-map.md), choose a [learning depth](docs/education/learning-paths.md), then follow a workshop journey |
