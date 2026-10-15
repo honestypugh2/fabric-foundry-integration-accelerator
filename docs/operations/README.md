@@ -13,7 +13,7 @@ Start with the [root quick start](../../README.md#quick-start); choose one start
 | Inspect verification | [Phase verification](phase-verification.md) | Dated local/live evidence and remaining gaps |
 | Validate a release | [Release validation](release-validation.md) | Local gates, separately from deferred GitHub runs |
 | Add a scenario | [Use-case onboarding](use-case-onboarding.md) | Registry-driven extension without an app fork |
-| Assess authoring readiness | [Readiness gates](use-case-readiness.md) and [verification](use-case-authoring-verification.md) | Tested extension contract, separate from live/production certification |
+| Assess authoring readiness | [Readiness gates](use-case-readiness.md) | Extension acceptance contract, separate from live/production certification |
 
 See [use cases](../../guides/README.md), [code-reading path](../architecture/code-reading-path.md)
 and [observability evidence](../../infra/observability/README.md).

@@ -122,7 +122,6 @@ playbooks:
             links:
               - {title: SE / developer playbook, path: docs/field-playbooks/se-developer.html}
               - {title: Current sharing scope, path: docs/operations/shareable-release.md}
-              - {title: Deferred work tracker, path: docs/operations/resume-later.md}
   - id: se-developer
     audience: SE, developer and technical presenter
     title: Ready to explain. Ready to build.
@@ -143,7 +142,7 @@ playbooks:
             body: HC-01 and MFG-01 are the primary learning guides; DQ-01 is a supporting offline investigation. The offline implementation is validated. HC live end-to-end completion, Claude execution and production certification are deferred.
             links:
               - {title: Sharing scope and content placement, path: docs/operations/shareable-release.md}
-              - {title: Evidence and limitations, path: docs/operations/use-case-authoring-verification.md}
+              - {title: Readiness gates, path: docs/operations/use-case-readiness.md}
       - id: setup
         title: Set up once, then choose a path
         intro: Python 3.14, uv, Node 24 LTS, Git and GNU Make. Use the existing lockfiles; no new cloud provisioning or extension installation is required for the offline demonstration.
@@ -222,7 +221,6 @@ playbooks:
             links:
               - {title: Claude alternate prompts, path: prompts/claude-code/patterns.md}
               - {title: Client and MCP setup, path: config/mcp/README.md}
-              - {title: Deferred comparison tracker, path: docs/operations/resume-later.md}
           - title: Skills, MCP and Power BI
             label: GUIDANCE
             body: Fabric Skills are procedural grounding; Fabric MCP is scoped capability access. The native extension owns this lab's notebook publication/runtime path. Power BI authoring tools handle model/report work under their own connection and approval boundaries.
@@ -266,8 +264,8 @@ playbooks:
             links:
               - {title: Release validation procedure, path: docs/operations/release-validation.md}
               - {title: Sharing scope and HTML inventory, path: docs/operations/shareable-release.md}
-          - title: Resume later without losing the thread
-            label: DEFERRED
-            body: HC live completion, Claude setup/comparison, connected MFG answer checks, client-specific proof, production controls and release workflow evidence remain tracked. Deferral does not remove the guides or implemented offline assets.
+          - title: Keep operational records private
+            label: GUIDANCE
+            body: Keep session progress, personal backlogs, run receipts and environment-specific verification in ignored local storage. Share reusable code, tests, synthetic baselines and technical guidance, not a presenter's activity history.
             links:
-              - {title: Persistent resume tracker, path: docs/operations/resume-later.md}
+              - {title: Repository content boundaries, path: docs/operations/shareable-release.md}

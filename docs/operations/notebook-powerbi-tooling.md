@@ -127,6 +127,6 @@ generated stubs/private workspace caches that the scan flagged. After adding roo
 rules and independently checking that public source files remain included, the final scan checked
 776 files with zero findings. Generated local state was preserved, not deleted.
 
-Full connected evidence is tracked in [authoring verification](use-case-authoring-verification.md).
+Keep environment-specific execution evidence in ignored local storage.
 See sources `powerbi-authoring-mcp`, `powerbi-authoring-mcp-repository` and
 `fabric-vscode-data-engineering` in the [source registry](../research/sources.yaml).

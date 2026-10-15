@@ -15,8 +15,7 @@ Prepare with `make demo-prep`. Prompts are in [`../prompts/github-copilot/fabric
 
 For sharing, start with the [customer](../docs/field-playbooks/customer.html) or
 [SE/developer](../docs/field-playbooks/se-developer.html) field playbook. HC-01 and MFG-01
-remain featured; unfinished connected execution and Claude setup are tracked
-[for later](../docs/operations/resume-later.md), not removed.
+are the featured use cases.
 
 GitHub displays HTML source. Download the handout and open it in a browser to see the page.
 

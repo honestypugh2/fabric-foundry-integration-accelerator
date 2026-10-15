@@ -8,12 +8,9 @@ two-page report.
 can still call live services. Claude Code prompts are available as instructions only.
 All data and analytical metrics are synthetic. No clinical advice is provided.
 
-**Share now, complete live later:** this guide, reviewed notebooks and offline reference
-remain available. Live landing is verified; Bronze publication was tool-reported, but its
-persisted content/binding, remote runs and model/report acceptance remain unfinished.
-Claude setup/execution is also deferred; alternate instructions stay available.
-See [current evidence](../../docs/operations/use-case-authoring-verification.md) and the
-[resume tracker](../../docs/operations/resume-later.md). No guide assets are removed.
+The guide includes reviewed notebooks, an offline reference build and independent synthetic
+baselines. Verify each connected step in your own environment; the guide is not certification
+of a tenant deployment. Keep execution receipts and session progress in ignored local storage.
 
 ## Start this use case
 

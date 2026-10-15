@@ -29,8 +29,7 @@ Explicitly approved read-only SDK retrieval of existing responses recovered a PR
 duplicate-count result of 12, matching the independent LOCAL baseline and private workspace
 binding. The output item's state remains `in_progress` and no final assistant message was
 recovered; revenue retrieval returned 404. A successful span or top-level response status is
-not an end-to-end answer-quality pass. See the
-[dated verification record](../../docs/operations/use-case-authoring-verification.md).
+not an end-to-end answer-quality pass.
 No monitoring deployment, diagnostic-setting change or agent-version update was performed.
 
 ## Operator walkthrough

@@ -22,4 +22,3 @@ A checked box does not prove a live operation ran.
 
 To add a scenario, follow [onboarding](../docs/operations/use-case-onboarding.md).
 Claude Code alternate prompts are documented, not a completed comparative run.
-HC-01 live completion and Claude setup are [tracked for later](../docs/operations/resume-later.md).

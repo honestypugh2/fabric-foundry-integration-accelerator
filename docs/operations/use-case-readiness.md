@@ -25,7 +25,7 @@ every service the guide mentions. A reviewed specification is not cloud-write ap
 10. Record exact commands/results, revision and unresolved live/production gates.
 
 The proof scenario is [DQ-01](../../guides/dq-01-synthetic-quality-investigation/README.md).
-Requirements map to tests in the [authoring verification record](use-case-authoring-verification.md).
+Requirements are exercised by the [offline authoring tests](../../tests/offline/test_use_case_authoring.py).
 For delivery, follow [onboarding](use-case-onboarding.md), then the
 [release gates](release-validation.md). Connected and production work follows its own approval
 boundary and the [production checklist](../security/production-checklist.md).

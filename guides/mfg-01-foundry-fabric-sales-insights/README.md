@@ -40,9 +40,7 @@ These observations do not certify the whole use case or current service health.
 See [phase verification](../../docs/operations/phase-verification.md).
 Later bounded invocations timed out; a recovered PREVIEW duplicate-count tool payload matched
 12, but no final assistant answer was verified. This limits the current sharing claim to the
-offline implementation and dated connected observations. See the
-[current verification record](../../docs/operations/use-case-authoring-verification.md) and
-[resume-later tracker](../../docs/operations/resume-later.md).
+offline implementation and dated connected observations.
 
 ## Architecture
 

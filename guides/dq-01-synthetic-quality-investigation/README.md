@@ -68,8 +68,7 @@ The rehearsal creates only a SIMULATED notebook record. No correction runs; sour
 stays unchanged. A real correction requires a separately approved exact-target plan,
 independent verification and rollback.
 
-See [readiness gates](../../docs/operations/use-case-readiness.md) and
-[verification](../../docs/operations/use-case-authoring-verification.md).
+See [readiness gates](../../docs/operations/use-case-readiness.md).
 
 ![DQ-01 LOCAL workshop interface](../../docs/architecture/screenshots/app-dq01-local.png)
 

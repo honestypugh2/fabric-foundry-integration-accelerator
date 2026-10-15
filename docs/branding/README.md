@@ -33,5 +33,3 @@ Suggested topics: `microsoft-fabric`, `microsoft-foundry`, `github-copilot`,
 `synthetic-data`, `offline-demo`.
 
 Leave the website field blank until a hosted page is ready.
-The [later tracker](../operations/resume-later.md#github-friendly-playbooks-and-hosting)
-covers Markdown companion pages and optional GitHub Pages hosting.

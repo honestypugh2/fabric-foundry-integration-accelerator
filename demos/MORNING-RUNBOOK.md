@@ -50,7 +50,6 @@ Each step is a cloud write. Plan, approve, execute, verify, audit.
 (Enclosures +55.78% and 12 duplicate lines, matching the baseline). This is not a current
 service-health guarantee. Later bounded invocations timed out; the recovered duplicate
 tool payload matched 12, but revenue and final assistant answers remain unresolved.
-See the [current verification](../docs/operations/use-case-authoring-verification.md).
 Any new warm-up inference requires an explicitly approved bounded scope; do not automatically
 repeat a timed-out call. The historical first call took about 2.5 minutes.
 

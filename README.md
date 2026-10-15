@@ -19,8 +19,7 @@ authority. Identity, policy and human approval control live changes.
 production deployment. Preview features are optional.
 
 **[Quick start](#quick-start)** · **[Use cases](#choose-a-use-case)** ·
-**[Workshop](#build-and-learn-workshop)** · **[Repo map](#repository-map)** ·
-**[What is left](docs/operations/resume-later.md)**
+**[Workshop](#build-and-learn-workshop)** · **[Repo map](#repository-map)**
 
 ## Choose a use case
 
@@ -43,16 +42,14 @@ later. Neither guide is fully live or production-certified.
 | New contributor | [Use-case onboarding](docs/operations/use-case-onboarding.md), [template](guides/_template/README.md) and [readiness checks](docs/operations/use-case-readiness.md) |
 
 > **Opening HTML on GitHub:** GitHub shows the file source, not the rendered page.
-> Download the HTML file and open it in a browser. A Markdown version and optional static
-> hosting are tracked [for later](docs/operations/resume-later.md#github-friendly-playbooks-and-hosting).
+> Download the HTML file and open it in a browser.
 
 Presenter handouts: [Fabric engineering](demos/fabric-copilot-level-up/index.html) and
 [Foundry agents](demos/foundry-fabric-agents-workshop/index.html). These are generated from
 their YAML sources and are also available from the app's Demo page.
 Use the [morning runbook](demos/MORNING-RUNBOOK.md) to prepare.
 
-See [sharing scope](docs/operations/shareable-release.md) for what belongs in the public repo
-and [current evidence](docs/operations/use-case-authoring-verification.md) for what actually ran.
+See [sharing scope](docs/operations/shareable-release.md) for what belongs in the public repo.
 
 ## Start here: choose your outcome
 
@@ -244,10 +241,8 @@ Run `make help` for every target.
 - **Instructions only:** Claude Code setup and the cross-harness comparison.
 
 Offline validation does not prove current cloud health or production readiness.
-See the [sharing scope and validation summary](docs/operations/shareable-release.md),
-[known gaps](docs/operations/use-case-readiness.md) and
-[later tracker](docs/operations/resume-later.md). Detailed implementation history is not
-the learning path.
+See the [sharing scope](docs/operations/shareable-release.md) and
+[readiness gates](docs/operations/use-case-readiness.md).
 
 ## License
 
