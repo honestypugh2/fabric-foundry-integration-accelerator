@@ -17,6 +17,40 @@ operations:
     expected_impact: Adds executable code bound to a lakehouse. Nothing runs until separately approved.
     validation: [Reviewed notebook definition is attached, Default lakehouse binding is confirmed]
     rollback: Delete the notebook item.
+  - name: inspect_notebook_runtime
+    item_types: [Notebook]
+    risk: medium
+    reversible: false
+    expected_impact: >-
+      Runs one reviewed read-only diagnostic cell on an existing notebook's selected Fabric
+      Runtime. May start billable Spark compute. Does not publish code or write tables.
+    validation:
+      - Exact existing notebook and private workspace/lakehouse binding confirmed
+      - Diagnostic source reviewed; no table writes, ingestion, publication or arbitrary code
+      - Microsoft Fabric Runtime selected; local Python is not a live substitute
+      - Active session and recent execution checked to avoid duplicate diagnostics
+      - Separate human approval for this diagnostic only
+    rollback: >-
+      Stop further execution and retain the diagnostic evidence. Compute already consumed
+      cannot be reversed; stopping a shared session requires separate approval.
+  - name: run_notebook
+    item_types: [Notebook]
+    risk: high
+    reversible: false
+    expected_impact: >-
+      Executes one reviewed existing notebook once on Fabric Runtime. May consume capacity
+      and create or overwrite its explicitly reviewed output tables. Does not publish code.
+    validation:
+      - Exact notebook identity, reviewed source hash and private lakehouse binding confirmed
+      - Active capacity and remote Fabric Runtime independently verified
+      - Recent and active runs checked; monitor an existing run rather than submit a duplicate
+      - Output tables and overwrite impact inventoried against the independent baseline
+      - Separate human approval for this exact notebook run and output scope
+      - Persisted outputs independently reconciled before downstream steps
+    rollback: >-
+      Stop downstream execution on failure and preserve partial-output evidence. There is no
+      automatic rollback across tables. Restore or delete outputs only with separate approval
+      and verified prior snapshots; compute already consumed cannot be reversed.
   - name: upload_files
     item_types: [Lakehouse]
     risk: medium
@@ -62,4 +96,5 @@ destinations:
       Requires FFIA_ALLOW_LIVE_MUTATION=1 and human approval. Execution also needs the scoped live
       writer (create_lakehouse and create_notebook only; FFIA_FABRIC_LIVE=1 and a bound workspace).
       Without it an approved LIVE change returns UNAVAILABLE. An approved LIVE change is never
-      redirected to LOCAL.
+      redirected to LOCAL. Runtime inspection and notebook runs are planning operations only
+      until a supporting authorized executor is available; defining them grants no run authority.

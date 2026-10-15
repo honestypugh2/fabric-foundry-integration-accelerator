@@ -220,3 +220,7 @@ Thumbs.db
 .claude/skills/semantic-model-authoring/
 .claude/skills/powerbi-report-cli/
 .claude/common/
+
+
+# Other files
+*_ALL.html

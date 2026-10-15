@@ -134,6 +134,81 @@ def test_policy_allows_local_and_gated_live() -> None:
     assert _decide(destination="LIVE", allow_live_mutation=True)[0]
 
 
+@pytest.mark.parametrize("operation", ["inspect_notebook_runtime", "run_notebook"])
+def test_notebook_execution_policy_is_explicitly_opt_in(operation: str) -> None:
+    policy = load_write_policy(CONFIG_ROOT)
+    definition = policy.operation(operation)
+    assert definition is not None
+    assert definition.item_types == ("Notebook",)
+    assert definition.risk == ("high" if operation == "run_notebook" else "medium")
+    assert not definition.reversible
+    overlay = load_overlay(CONFIG_ROOT, "example-healthcare")
+    allowed, reasons = _decide(
+        operation=operation,
+        item_type="Notebook",
+        destination="LIVE",
+        allowed_writes=overlay.allowed_writes,
+        allow_live_mutation=True,
+    )
+    assert not allowed
+    assert any("not in the overlay" in reason for reason in reasons)
+    assert not any("Unknown operation" in reason for reason in reasons)
+    assert _decide(
+        operation=operation,
+        item_type="Notebook",
+        destination="LIVE",
+        allowed_writes=(operation,),
+        allow_live_mutation=True,
+    )[0]
+    assert not _decide(
+        operation=operation,
+        item_type="Notebook",
+        destination="LIVE",
+        allowed_writes=(operation,),
+    )[0]
+    assert not _decide(
+        operation=operation,
+        item_type="Lakehouse",
+        allowed_writes=(operation,),
+    )[0]
+
+
+@pytest.mark.parametrize("operation", ["inspect_notebook_runtime", "run_notebook"])
+async def test_notebook_execution_planning_does_not_enable_live_execution(operation: str) -> None:
+    overlay = load_overlay(CONFIG_ROOT, "example-healthcare")
+    fields = overlay.model_dump()
+    fields["allowed_writes"] = [*overlay.allowed_writes, operation]
+    fields["required_approvals"] = [
+        *fields["required_approvals"],
+        {"operation": operation, "approvers": 1, "reason": "One reviewed notebook operation."},
+    ]
+    audit = InMemoryAuditStore()
+    service = ChangeService(
+        policy=load_write_policy(CONFIG_ROOT),
+        overlay=CustomerOverlay.model_validate(fields),
+        audit=audit,
+        mode=OperatingMode.OFFLINE,
+        allow_live_mutation=True,
+    )
+    plan = service.plan(_request(operation, "Notebook", destination="LIVE"))
+    assert plan.status is ChangeStatus.PROPOSED
+    assert plan.approval_required and plan.policy_allowed
+    assert not plan.precondition.passed
+    assert plan.precondition.category is EvidenceCategory.REQUIRES_TENANT_VALIDATION
+    with pytest.raises(ApprovalError, match="separation of duties"):
+        _approve(service, plan.change_id, approver="alice")
+    approval_id = _approve(service, plan.change_id)
+    with pytest.raises(LiveWriteUnavailableError, match="NOT redirected"):
+        await service.execute(
+            ExecuteRequest(change_id=plan.change_id, approval_id=approval_id, executed_by="writer")
+        )
+    assert not service.workspace.items()
+    assert service.get_plan(plan.change_id).status is ChangeStatus.APPROVED
+    last = audit.for_correlation(plan.correlation_id)[-1]
+    assert last.execution_label is ExecutionLabel.UNAVAILABLE
+    assert not last.success
+
+
 def test_tool_manifest_has_no_approval_or_execution_tools() -> None:
     manifest = load_tool_manifest(CONFIG_ROOT)
     names = set(manifest.enabled())
