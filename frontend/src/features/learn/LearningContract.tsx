@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { LearningBrief } from "../../api/contracts";
 import { useWorkshop } from "../../api/hooks";
-import { ArchitectureImage } from "../../components/ArchitectureImage";
+import { ArchitectureExplorer } from "../../components/ArchitectureExplorer";
 import { QueryState } from "../../components/QueryState";
 
 function Research({ brief }: { readonly brief: LearningBrief }) {
@@ -145,7 +145,7 @@ export function LearningContract({ brief }: { readonly brief: LearningBrief }) {
             <p>{brief.failure_and_recovery}</p>
           </div>
           {brief.diagram ? (
-            <ArchitectureImage
+            <ArchitectureExplorer
               viewId={brief.diagram}
               title={`Architecture for ${brief.lesson_id}`}
             />

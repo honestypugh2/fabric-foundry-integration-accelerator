@@ -7,7 +7,7 @@ Always show what actually ran.
 
 | Mode | Fabric data | Writes | Typical use |
 |---|---|---|---|
-| `OFFLINE` | Local Fabric Educational Provider (DuckDB over synthetic Parquet) | LOCAL simulated workspace only | Laptops, workshops, CI and the release gate |
+| `OFFLINE` | Offline synthetic data (DuckDB/Parquet), not a Fabric service | LOCAL simulated workspace only | Laptops, workshops, CI and the release gate |
 | `HYBRID` | LIVE when healthy; reads fall back to LOCAL data in `HYBRID` mode, with `fallback_used` and a reason | Never fall back | Live demos with a safety net |
 | `LIVE` | LIVE only. Failures surface as `UNAVAILABLE`. | Need `FFIA_ALLOW_LIVE_MUTATION=1`, approval and an authorized writer | Tenant validation |
 

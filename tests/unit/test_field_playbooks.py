@@ -20,6 +20,7 @@ class PageInspection(HTMLParser):
         self.remote_resources: list[str] = []
         self.scripts = 0
         self.headings = 0
+        self.embedded: list[str] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         attributes = dict(attrs)
@@ -35,6 +36,10 @@ class PageInspection(HTMLParser):
             self.scripts += 1
         if tag == "h1":
             self.headings += 1
+        if tag == "iframe":
+            self.embedded.append(attributes.get("srcdoc") or "")
+            assert attributes.get("src") is None
+            assert "allow-scripts" in (attributes.get("sandbox") or "")
 
 
 def test_current_release_has_both_audiences_and_honest_boundaries() -> None:
@@ -148,6 +153,16 @@ def test_render_check_detects_missing_and_stale_pages(
         return release, sources
 
     monkeypatch.setattr(playbooks, "load_release", load_content)
+    handouts = {
+        tmp_path / "demos" / folder / "index.html": "<html><body>Embedded demo</body></html>"
+        for folder in ("fabric-copilot-level-up", "foundry-fabric-agents-workshop")
+    }
+
+    def render_handouts(_settings: playbooks.Settings) -> tuple[dict[Path, str], list[str]]:
+        return handouts, []
+
+    monkeypatch.setattr(playbooks, "rendered", render_handouts)
+    monkeypatch.setattr(playbooks, "render_library", render_library_stub)
     args = ["--root", str(tmp_path)]
     assert playbooks.main([*args, "--check"]) == 1
     assert "missing or stale" in capsys.readouterr().err
@@ -161,3 +176,70 @@ def test_render_check_detects_missing_and_stale_pages(
 
 def test_committed_html_matches_structured_source() -> None:
     assert playbooks.main(["--root", str(ROOT), "--check"]) == 0
+
+
+def test_bundles_embed_both_complete_handouts_and_audience_pages() -> None:
+    release, sources = playbooks.load_release(ROOT)
+    handouts, errors = playbooks.rendered(
+        playbooks.Settings(
+            education_root=ROOT / "education",
+            demos_root=ROOT / "demos",
+            guides_root=ROOT / "guides",
+            sources_path=ROOT / "docs/research/sources.yaml",
+            frontend_root=ROOT / "frontend",
+        )
+    )
+    assert not errors
+    for page in release.playbooks:
+        html = (ROOT / "docs/field-playbooks" / f"{page.id}.html").read_text()
+        inspection = PageInspection()
+        inspection.feed(html)
+        assert len(inspection.embedded) == 5
+        assert inspection.scripts == 1
+        assert f'data-audience="{page.id}"' in html
+        for audience in release.playbooks:
+            assert playbooks.render_playbook(release, audience, sources) in inspection.embedded
+        for folder in ("fabric-copilot-level-up", "foundry-fabric-agents-workshop"):
+            assert handouts[ROOT / "demos" / folder / "index.html"] in inspection.embedded
+        library = inspection.embedded[-1]
+        assert library.count('data-explorer="') == 10
+        assert "Trace steps and text alternative" in library
+        assert 'type="search"' in html
+        assert "fetch(" not in html
+        assert "localStorage" not in html
+        assert "online reference, new tab" in html
+
+
+def test_bundle_escapes_nested_html_attributes() -> None:
+    html = playbooks.render_bundle(
+        {"customer": ('A "quoted" <title>', '<html><body title="nested">Example</body></html>')},
+        audience="customer",
+    )
+    inspection = PageInspection()
+    inspection.feed(html)
+    assert inspection.embedded == ['<html><body title="nested">Example</body></html>']
+    assert "A &quot;quoted&quot; &lt;title&gt;" in html
+
+
+def test_invalid_handout_references_fail_without_outputs(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    release, sources = playbooks.load_release(ROOT)
+
+    def load_content(
+        _root: Path,
+    ) -> tuple[playbooks.PlaybookRelease, dict[str, playbooks.SourceLink]]:
+        return release, sources
+
+    def render_handouts(_settings: playbooks.Settings) -> tuple[dict[Path, str], list[str]]:
+        return {}, ["Missing demo source"]
+
+    monkeypatch.setattr(playbooks, "load_release", load_content)
+    monkeypatch.setattr(playbooks, "rendered", render_handouts)
+    assert playbooks.main(["--root", str(tmp_path)]) == 1
+    assert "Missing demo source" in capsys.readouterr().err
+    assert not (tmp_path / "docs/field-playbooks").exists()
+
+
+def render_library_stub(_root: Path, _style: str) -> str:
+    return "<html><body>Architecture library</body></html>"

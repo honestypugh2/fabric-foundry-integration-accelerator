@@ -57,8 +57,12 @@ def test_svg_and_html_are_self_contained() -> None:
     assert len(workflow(view)) == len(view.traces[0].steps)
     page = (DEMOS / "foundry-fabric-agents-workshop" / "index.html").read_text(encoding="utf-8")
     assert (
-        "<script" not in page and "<svg" in page and "Can we see a demo of Foundry + Fabric" in page
+        "data-explorer=" in page
+        and "<svg" in page
+        and "Can we see a demo of Foundry + Fabric" in page
     )
+    assert "data-start" in page and "data-node=" in page and "data-hop=" in page
+    assert "<script src=" not in page and "<img" not in page
     assert (
         REPO_ROOT / "frontend" / "public" / "talktracks" / "foundry-fabric-agents-workshop.html"
     ).read_text(encoding="utf-8") == page

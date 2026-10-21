@@ -33,7 +33,7 @@
         "executive": "AI coding agents that speed up data engineering while every change stays reviewable.",
         "l100": "GitHub Copilot (VS Code, CLI, App, cloud agent) and Claude Code read repo instructions and call MCP tools.",
         "l200": "Harnesses provide the agent loop and permissions; AGENTS.md, .mcp.json and .claude/skills are shared by both.",
-        "l300": "GitHub Copilot CLI and Claude Code both load the root .mcp.json (Microsoft Learn + ffia-local) and AGENTS.md.",
+        "l300": "GitHub Copilot CLI and Claude Code load the root .mcp.json (Fabric MCP, Microsoft Learn and ffia-local fallback) and AGENTS.md; client execution must be verified separately.",
         "l400": "Harness permissions are not authorization; writes still go through plan, approval and a scoped writer."
       },
       "does_not_own": [
@@ -77,7 +77,7 @@
       "id": "fabric-skills",
       "layer": "experience",
       "name": "Fabric Skills",
-      "offline_equivalent": "Skill procedures rehearsed against the Local Fabric Educational Provider.",
+      "offline_equivalent": "Skill procedures rehearsed against offline synthetic data (DuckDB/Parquet), not Fabric.",
       "owns": [
         "Procedures",
         "Routing rules",
@@ -156,9 +156,9 @@
     {
       "description": {
         "executive": "A standard way for agents to reach Fabric capabilities; it does not decide who may do what.",
-        "l100": "Several MCP servers expose Fabric docs, OneLake, items, SQL, DAX and authoring tools to agents.",
-        "l200": "Pick the narrowest server; they run with the caller's Fabric permissions; status differs by server.",
-        "l300": "Pinned profiles live in config/mcp/profiles.yaml; offline (Microsoft Learn + ffia-local) is the default, fabric-docs and fabric-readonly are read-only, and authoring is a separate opt-in profile.",
+        "l100": "Coding assistants use Fabric MCP tools to reach real Fabric; this is separate from the app's REST data connection and its offline synthetic-data fallback.",
+        "l200": "Server location is not data location. Microsoft's locally launched stdio server calls remote Fabric under the caller's permissions; hosted HTTP MCP servers are distinct integrations.",
+        "l300": "Pinned profiles live in config/mcp/profiles.yaml; the root uses fabric-first (Fabric MCP, Microsoft Learn and ffia-local fallback). The app uses its own REST adapter, not this MCP connection.",
         "l400": "Do not conflate servers; pin versions; read-only allow-lists by default; writes go through the change flow."
       },
       "does_not_own": [
@@ -184,6 +184,34 @@
         "powerbi-authoring-mcp"
       ],
       "status": "MIXED"
+    },
+    {
+      "description": {
+        "executive": "The app's own connection to real Fabric, separate from coding-assistant MCP tools.",
+        "l100": "React calls the backend; the backend uses Fabric REST APIs. The browser holds no cloud credentials.",
+        "l200": "In HYBRID mode eligible reads try Fabric first and can fall back to disclosed synthetic data. Strict LIVE never falls back.",
+        "l300": "FabricLiveProvider implements FabricProvider using Fabric REST and Power BI executeQueries; RoutedFabricProvider applies fallback policy.",
+        "l400": "Configuration is not proof of a call. Inspect the execution envelope, actual provider, label and fallback reason. REST execution is not MCP evidence."
+      },
+      "does_not_own": [
+        "Coding-assistant MCP sessions",
+        "Offline data",
+        "Authorization"
+      ],
+      "id": "fabric-app-api",
+      "layer": "access",
+      "name": "Fabric cloud access (app REST adapter)",
+      "offline_equivalent": "Offline synthetic data (DuckDB/Parquet), explicitly labeled LOCAL.",
+      "owns": [
+        "Application cloud reads"
+      ],
+      "pattern_ids": [
+        "P17"
+      ],
+      "sources": [
+        "fabric-rest-identity"
+      ],
+      "status": "GA"
     },
     {
       "description": {
@@ -254,7 +282,7 @@
       "id": "onelake-medallion",
       "layer": "context",
       "name": "OneLake medallion lakehouse",
-      "offline_equivalent": "DuckDB over Parquet in the Local Fabric Educational Provider.",
+      "offline_equivalent": "Offline synthetic data queried with DuckDB over Parquet; no Fabric call.",
       "owns": [
         "Governed data",
         "Data quality"
@@ -556,7 +584,7 @@
     {
       "description": {
         "executive": "The demo and the platform degrade gracefully and say so.",
-        "l100": "When a live service fails, reads use a labeled local copy.",
+        "l100": "In HYBRID mode eligible reads can use labeled synthetic data when the live service fails; this is not a copy of tenant data.",
         "l200": "Timeouts, retries and a circuit breaker per capability; writes never fall back.",
         "l300": "FFIA_ENVIRONMENT=hybrid FFIA_SIMULATE_FABRIC_OUTAGE=1 shows the fallback.",
         "l400": "Client errors never trigger fallback; breaker states CLOSED, OPEN, HALF_OPEN."
@@ -579,18 +607,18 @@
     },
     {
       "description": {
-        "executive": "Lets the architecture be taught anywhere, honestly labeled as local.",
-        "l100": "A local copy of the medallion data that works without the cloud.",
-        "l200": "Read-only, allow-listed operations over synthetic Parquet; never presented as Fabric.",
-        "l300": "DuckDB over Parquet built by ffia data build.",
-        "l400": "Envelopes reject non-cloud labels that claim a cloud operation."
+        "executive": "Teaching data for offline learning and eligible read fallback, not a Fabric service.",
+        "l100": "Generated synthetic data on your workstation. It is not your Fabric workspace or your Fabric MCP connection.",
+        "l200": "Read-only operations over synthetic Parquet; LOCAL results make no cloud call. It does not replace or disconnect Fabric MCP.",
+        "l300": "LocalFabricProvider is the internal adapter class implementing FabricProvider using DuckDB over Parquet built by ffia data build.",
+        "l400": "Availability does not prove fallback was used. Inspect each result's selected provider and fallback reason; non-cloud labels cannot claim a cloud operation."
       },
       "does_not_own": [
         "Cloud claims"
       ],
       "id": "local-fabric-provider",
       "layer": "resilience",
-      "name": "Local Fabric Educational Provider",
+      "name": "Offline synthetic data (DuckDB/Parquet)",
       "offline_equivalent": "It is the offline equivalent.",
       "owns": [
         "Offline reads"
@@ -745,6 +773,13 @@
       "label": "Reads go through the router",
       "source": "learner-app",
       "target": "provider-router"
+    },
+    {
+      "id": "router-to-fabric-api",
+      "kind": "access",
+      "label": "App LIVE reads via REST (not MCP)",
+      "source": "provider-router",
+      "target": "fabric-app-api"
     },
     {
       "id": "router-to-local",

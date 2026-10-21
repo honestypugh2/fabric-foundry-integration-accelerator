@@ -5,8 +5,23 @@
 **Show and tell. Build and learn.**
 
 Use this repo to learn how **Microsoft Fabric**, **Microsoft Foundry** and **GitHub Copilot**
-work together. Start with synthetic data, run a local demo, inspect the results, then build
-through a guide. You do not need an Azure account for the offline path.
+work together. It is a reference implementation and a guided learning app—not a deployed
+customer solution. Choose one workflow, build it with synthetic data, and verify the result.
+You do not need an Azure account for the offline path.
+
+**Why use it?** Improve repeatable Fabric data-engineering work with coding assistants,
+then learn how governed data supports grounded agents. Understand each tool's responsibility
+before connecting it to a live service.
+
+**How to start:** follow [Quick start](#quick-start), open **Start here**, choose a **Use Case**,
+and work through one checkpoint at a time. Use **Hands-on labs** for focused practice and
+**Architecture** to inspect components and trace the flow.
+
+**Development showcase, not production deployment.** Normal app startup is LIVE-first
+HYBRID in your configured development environment, with disclosed LOCAL read fallback.
+Browse the searchable use-case catalog, inspect a workshop's overview and prerequisites,
+then select **Start workshop**. See [Microsoft tooling and workshop alignment](docs/operations/tooling-and-workshop-alignment.md)
+for supported integrations, deliberate exclusions and the workshop references behind this flow.
 
 | Fabric | Foundry | GitHub Copilot |
 |---|---|---|
@@ -41,12 +56,16 @@ later. Neither guide is fully live or production-certified.
 | SE, developer or presenter | [SE/developer field playbook](docs/field-playbooks/se-developer.html): setup, build paths, checks and approval boundaries |
 | New contributor | [Use-case onboarding](docs/operations/use-case-onboarding.md), [template](guides/_template/README.md) and [readiness checks](docs/operations/use-case-readiness.md) |
 
-> **Opening HTML on GitHub:** GitHub shows the file source, not the rendered page.
-> Download the HTML file and open it in a browser.
+> **Portable delivery:** share either audience HTML file as an attachment, then open it
+> directly in a browser. Each contains both playbooks and both complete demo handouts,
+> with offline navigation, search and an interactive explorer for all architecture views.
+> No second HTML download or local server is needed.
+> Optional online source/code references are labeled and open in a new tab.
 
 Presenter handouts: [Fabric engineering](demos/fabric-copilot-level-up/index.html) and
 [Foundry agents](demos/foundry-fabric-agents-workshop/index.html). These are generated from
-their YAML sources and are also available from the app's Demo page.
+their YAML sources. They are separate presentation documents aligned with the app's use cases
+and architecture—not screens or scripts inside the React learning workspace.
 Use the [morning runbook](demos/MORNING-RUNBOOK.md) to prepare.
 
 See [sharing scope](docs/operations/shareable-release.md) for what belongs in the public repo.
@@ -63,9 +82,21 @@ See [sharing scope](docs/operations/shareable-release.md) for what belongs in th
 
 ## Build-and-learn workshop
 
-Open **Workshop, Learn, Use Cases, Patterns and Evidence** in the app.
+Follow **Start here → Use Cases → Hands-on labs → Architecture → Evidence** in the app.
 Use `/use-cases` for the guides; existing `/guides` links still work.
-Architecture, labs, data exploration, the agent sandbox and recorded comparisons are also available.
+Open **Explore** for concepts, patterns, data, the agent sandbox, recorded comparisons and
+offline verification. These advanced tools do not compete with the primary build path.
+
+**Do not confuse the connections:** coding assistants use **Fabric MCP tools** to reach
+remote Fabric, even when the MCP process runs on the workstation. The **app's backend uses
+Fabric REST**, a separate connection. **Offline synthetic data (DuckDB/Parquet)** is teaching
+data and an eligible LOCAL read fallback, not a Fabric server. A fallback being available
+does not mean it was used. See [connection boundaries](docs/operations/workshop-learning.md#three-connections-not-one).
+
+Labs show one stage at a time with an outline, previous/next controls and browser-local
+progress. Architecture diagrams are selectable SVGs, not screenshots: click a component
+for its responsibilities and connections, drill into a neighbor, or step through a request
+trace. Traces explain the design; they do not perform live operations.
 
 - **Learn:** four journeys, 25 patterns and 21 lessons across Executive and L100-L400.
 - **Build:** five labs, 130 knowledge checks and guide checkpoints.

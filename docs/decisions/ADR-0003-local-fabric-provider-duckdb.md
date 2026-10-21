@@ -1,4 +1,4 @@
-# ADR-0003: Local Fabric Educational Provider on DuckDB
+# ADR-0003: Offline synthetic data adapter on DuckDB
 
 - Status: Accepted
 - Date: 2026-10-07
@@ -18,7 +18,10 @@ and an Open Mirroring landing zone. Never present simulation as a real Fabric op
 
 ## Decision
 
-- The **Local Fabric Educational Provider** uses **DuckDB 1.5.6** over Parquet.
+- The **Offline synthetic data (DuckDB/Parquet)** adapter uses **DuckDB 1.5.6** over Parquet.
+- Its internal class remains `LocalFabricProvider` because it implements `FabricProvider`.
+  It is not a Fabric service or MCP server. The app's live REST adapter and the coding
+  assistant's Fabric MCP connection are separate paths.
 - Medallion logic is one SQL file per output table under
   `src/fabric_foundry_accelerator/synthetic/sql/`.
 - It implements the async `FabricProvider` port (read-only).

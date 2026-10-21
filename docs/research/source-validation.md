@@ -22,12 +22,14 @@ lifecycle label). A missing optional field is shown as Not specified.
 | Developer experience | [Extend Claude with skills](#claude-code-skills) | GA | 2026-10-05 |
 | Developer experience | [GitHub Copilot CLI is now generally available](#copilot-cli-ga) | GA | 2026-10-05 |
 | Developer experience | [Support for different types of custom instructions](#copilot-instructions-support) | GA | 2026-10-05 |
-| Developer experience | [Skills for Fabric overview](#skills-for-fabric) | OSS | 2026-10-05 |
+| Developer experience | [Skills for Fabric overview](#skills-for-fabric) | OSS | 2026-10-21 |
+| Developer experience | [Install Skills for Fabric](#skills-for-fabric-install) | GUIDANCE | 2026-10-21 |
 | Developer experience | [Add and manage MCP servers in VS Code](#vscode-mcp-servers) | GA | 2026-10-05 |
 | Fabric IQ and Data Agents | [Fabric data agent concepts](#fabric-data-agent) | GA | 2026-10-05 |
 | Fabric IQ and Data Agents | [Ontology overview (Fabric IQ)](#fabric-iq-ontology) | PREVIEW | 2026-10-05 |
 | Fabric IQ and Data Agents | [What is Fabric IQ?](#fabric-iq-overview) | PREVIEW | 2026-10-05 |
-| Fabric notebook authoring | [Get started with the Fabric Data Engineering VS Code extension](#fabric-vscode-data-engineering) | GUIDANCE | 2026-10-13 |
+| Fabric notebook authoring | [Get started with the Fabric Data Engineering VS Code extension](#fabric-vscode-data-engineering) | GUIDANCE | 2026-10-21 |
+| Fabric workspace development | [Microsoft Fabric extensions for Visual Studio Code](#fabric-vscode-workspace) | GUIDANCE | 2026-10-21 |
 | GitHub CodeQL | [Workflow configuration options for code scanning](#github-codeql-configuration) | GUIDANCE | 2026-10-09 |
 | GitHub Copilot surfaces | [GitHub Copilot on GitHub.com](#github-copilot-on-github) | GUIDANCE | 2026-10-14 |
 | Microsoft Agent 365 | [Overview of Microsoft Agent 365](#agent-365) | GA | 2026-10-08 |
@@ -70,12 +72,12 @@ lifecycle label). A missing optional field is shown as Not specified.
 | Microsoft Foundry | [What is Toolbox in Microsoft Foundry?](#foundry-toolbox) | GA | 2026-10-08 |
 | Microsoft Foundry | [Use web search tool in Foundry Agent Service](#foundry-web-search) | GA | 2026-10-08 |
 | Microsoft Purview | [Data quality supported sources (Microsoft Purview Unified Catalog)](#purview-data-quality) | UNKNOWN/NEEDS VALIDATION | 2026-10-08 |
-| Model Context Protocol | [Fabric Data Warehouse MCP server (Preview)](#fabric-dw-mcp) | PREVIEW | 2026-10-05 |
+| Model Context Protocol | [Fabric Data Warehouse MCP server (Preview)](#fabric-dw-mcp) | PREVIEW | 2026-10-21 |
 | Model Context Protocol | [Get started with Fabric IQ MCP](#fabric-iq-mcp) | GA | 2026-10-05 |
 | Model Context Protocol | [Fabric MCP Server (local) tools reference](#fabric-mcp-local) | GA | 2026-10-05 |
 | Model Context Protocol | [Choose a Microsoft Fabric MCP server](#fabric-mcp-servers-list) | GUIDANCE | 2026-10-05 |
 | Model Context Protocol | [Model Context Protocol specification versioning](#mcp-specification) | GA | 2026-10-05 |
-| Model Context Protocol | [Power BI Authoring (Modeling) MCP server](#powerbi-authoring-mcp) | GA | 2026-10-13 |
+| Model Context Protocol | [Power BI Authoring (Modeling) MCP server](#powerbi-authoring-mcp) | GA | 2026-10-21 |
 | Power BI | [Datasets - Execute Queries In Group (Power BI REST API)](#powerbi-execute-queries) | GA | 2026-10-07 |
 | Power BI | [Create report subscriptions with Copilot summaries](#powerbi-subscription-summaries) | PREVIEW | 2026-10-08 |
 | Power BI Authoring MCP | [Power BI Authoring MCP server installation and EULA](#powerbi-authoring-mcp-repository) | GA | 2026-10-13 |
@@ -86,6 +88,11 @@ lifecycle label). A missing optional field is shown as Not specified.
 | Toolchain | [Node.js release schedule](#node-release-schedule) | GA | 2026-10-05 |
 | Toolchain | [Status of Python versions](#python-lifecycle) | GA | 2026-10-05 |
 | Transformer foundations | [Attention Is All You Need](#research-transformers) | GUIDANCE | 2026-10-09 |
+| Workshop experience design | [Microsoft AI Solution Accelerators](#accelerator-gallery) | GUIDANCE | 2026-10-21 |
+| Workshop experience design | [Microsoft Fabric Workshops and Readiness](#workshop-fabric-readiness) | GUIDANCE | 2026-10-21 |
+| Workshop experience design | [Healthcare Models and Agents Workshop](#workshop-healthcare-modules) | GUIDANCE | 2026-10-21 |
+| Workshop experience design | [AI Agents for IT Ops](#workshop-itops-paths) | GUIDANCE | 2026-10-21 |
+| Workshop experience design | [OpenAI Workshop](#workshop-openai) | GUIDANCE | 2026-10-21 |
 
 ## AI agents
 
@@ -257,15 +264,34 @@ lifecycle label). A missing optional field is shown as Not specified.
 |---|---|
 | URL | https://learn.microsoft.com/fabric/fundamentals/skills-for-fabric-overview |
 | Publisher | Microsoft Learn |
-| Retrieved | 2026-10-05 |
-| Last updated | 2026-06-29 |
+| Retrieved | 2026-10-21 |
+| Last updated | Not specified |
 | Status | OSS |
 | Associated patterns | P19, P20 |
 | Key architecture statement | Skills provide static procedural knowledge; MCP servers provide live execution; persona agents are experimental. |
 | Implementation relevance | Fabric Skills (microsoft/skills-for-fabric v0.3.18) supply the procedures used at maturity level L3 in the GitHub Copilot labs. |
 | Security implications | Bundled MCP config grants all tools on write-capable servers; use the hardened profile. |
-| Limitations | Pre-1.0 open-source project without a product lifecycle label. |
+| Limitations | Static instructions do not execute tools or render finished Power BI reports by themselves; client availability and actual execution need separate verification. |
 | Fallback | Accelerator repo skills derived from public documentation. |
+| Deprecation / replacement | Not specified |
+
+<a id="skills-for-fabric-install"></a>
+
+### Install Skills for Fabric
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/fabric/fundamentals/skills-for-fabric-install |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-21 |
+| Last updated | Not specified |
+| Status | GUIDANCE |
+| Associated patterns | P19, P20 |
+| Key architecture statement | Fabric skills and powerbi-authoring are separate marketplace plugins for GitHub Copilot CLI and Claude Code; install both for full upstream coverage. |
+| Implementation relevance | Compare upstream plugin setup with the accelerator's hash-pinned four-skill install and curated MCP profiles; explain that these are alternative install paths. |
+| Security implications | Review bundled server configuration and avoid duplicate Power BI authoring registrations; plugin installation is not workspace authority. |
+| Limitations | The repository intentionally does not install the entire upstream marketplace or automatically follow its updates. |
+| Fallback | ffia skills install uses the reviewed archive lock; verify with ffia skills status. |
 | Deprecation / replacement | Not specified |
 
 <a id="vscode-mcp-servers"></a>
@@ -356,7 +382,7 @@ lifecycle label). A missing optional field is shown as Not specified.
 |---|---|
 | URL | https://learn.microsoft.com/fabric/data-engineering/setup-vs-code-extension |
 | Publisher | Microsoft Learn |
-| Retrieved | 2026-10-13 |
+| Retrieved | 2026-10-21 |
 | Last updated | Not specified |
 | Status | GUIDANCE |
 | Associated patterns | P10, P20 |
@@ -365,6 +391,27 @@ lifecycle label). A missing optional field is shown as Not specified.
 | Security implications | Workspace and remote kernel selection must be independently checked; publication and notebook runs require separate approved scope. |
 | Limitations | Installing the extension does not inject its native tools into every CLI or SDK chat; local Spark is not remote Fabric execution. |
 | Fallback | Document the client limitation and use the assigned VS Code extension path; offline rehearsal stays LOCAL or SIMULATED. |
+| Deprecation / replacement | Not specified |
+
+## Fabric workspace development
+
+<a id="fabric-vscode-workspace"></a>
+
+### Microsoft Fabric extensions for Visual Studio Code
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/fabric/data-engineering/set-up-fabric-vs-code-extension |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-21 |
+| Last updated | Not specified |
+| Status | GUIDANCE |
+| Associated patterns | P09, P20 |
+| Key architecture statement | The core Microsoft Fabric extension manages workspace items and integrates with Fabric MCP and GitHub Copilot Chat. |
+| Implementation relevance | Distinguish core workspace management from the Data Engineering extension's notebooks, Spark and local or VFS modes. |
+| Security implications | Sign-in, tool exposure and exact workspace must be verified; extension installation grants no approval. |
+| Limitations | Documentation describes capabilities, not evidence that the tools ran in a particular client. |
+| Fallback | Reviewed source definitions and local metadata exercises. |
 | Deprecation / replacement | Not specified |
 
 ## GitHub CodeQL
@@ -697,7 +744,7 @@ lifecycle label). A missing optional field is shown as Not specified.
 | Implementation relevance | Fabric is the governed-context layer of the reference architecture. |
 | Security implications | Tenant, capacity, workspace and item boundaries drive authorization; Entra ID authenticates all access. |
 | Limitations | Requires a Fabric capacity for most workloads; features vary by region and SKU. |
-| Fallback | Local Fabric Educational Provider (synthetic, clearly labeled SIMULATED). |
+| Fallback | Offline synthetic-data reads (LOCAL); write rehearsals are SIMULATED. Neither performs a Fabric operation. |
 | Deprecation / replacement | Not specified |
 
 <a id="fabric-rest-identity"></a>
@@ -716,7 +763,7 @@ lifecycle label). A missing optional field is shown as Not specified.
 | Implementation relevance | Live Fabric provider uses a thin typed httpx client over the GA REST API (no GA Python SDK exists). |
 | Security implications | Service-principal access requires an admin tenant switch; least-privilege workspace roles apply. |
 | Limitations | Per-API identity support varies; long-running operations require polling. |
-| Fallback | Local Fabric provider. |
+| Fallback | Offline synthetic data (DuckDB/Parquet, LOCAL), not a Fabric service or MCP connection. |
 | Deprecation / replacement | Not specified |
 
 <a id="fabric-runtime-1-3"></a>
@@ -1191,14 +1238,14 @@ lifecycle label). A missing optional field is shown as Not specified.
 |---|---|
 | URL | https://learn.microsoft.com/fabric/data-warehouse/data-warehouse-mcp-server |
 | Publisher | Microsoft Learn |
-| Retrieved | 2026-10-05 |
-| Last updated | 2026-06-16 |
+| Retrieved | 2026-10-21 |
+| Last updated | Not specified |
 | Status | PREVIEW |
 | Associated patterns | P09 |
-| Key architecture statement | Remote server exposing a single T-SQL execution tool against a warehouse or SQL analytics endpoint. |
+| Key architecture statement | Hosted preview server exposes executeSQL against a Warehouse or SQL analytics endpoint, using either a global endpoint or an item-scoped endpoint. |
 | Implementation relevance | Teaching contrast for governed MCP; excluded from default agent configuration. |
 | Security implications | Arbitrary T-SQL under the caller's identity; use read-only roles in dev workspaces only. |
-| Limitations | Preview. |
+| Limitations | No separate metadata discovery tools; metadata inspection also uses executeSQL. Not configured by the accelerator and not an implicit replacement for an assigned Fabric MCP tool. |
 | Fallback | Local allow-listed queries over DuckDB. |
 | Deprecation / replacement | Not specified |
 
@@ -1286,14 +1333,14 @@ lifecycle label). A missing optional field is shown as Not specified.
 |---|---|
 | URL | https://learn.microsoft.com/power-bi/developer/mcp/power-bi-authoring-mcp |
 | Publisher | Microsoft Learn |
-| Retrieved | 2026-10-13 |
+| Retrieved | 2026-10-21 |
 | Last updated | Not specified |
 | Status | GA |
 | Associated patterns | P12 |
-| Key architecture statement | Local server (GA, npm @microsoft/powerbi-modeling-mcp 1.0.0) and hosted deployment (preview) for semantic model authoring. |
+| Key architecture statement | Local deployment is GA; hosted authoring is PREVIEW and recommended by Microsoft when supported. Both author semantic models; local deployment also reaches Desktop and PBIP/TMDL files. |
 | Implementation relevance | Semantic model authoring labs on PBIP/TMDL and Guide HC-01. |
 | Security implications | Read/write by default; use explicit read-only startup for inspection, require confirmation for authoring, accept the EULA only with human authorization, and back up models first. |
-| Limitations | Hosted deployment is preview; Desktop remains Windows-only, while the local MCP package supports Linux ARM64 and PBIP files. Tool discovery is not model access or execution. |
+| Limitations | Hosted deployment requires its tenant setting and model permissions. Register one authoring deployment at a time to avoid overlapping tools. Desktop remains Windows-only; tool discovery is not model access or execution. |
 | Fallback | Reference TMDL and local PBIR validation. |
 | Deprecation / replacement | Not specified |
 
@@ -1501,4 +1548,101 @@ lifecycle label). A missing optional field is shown as Not specified.
 | Security implications | Fluent output is not evidence of factual accuracy, tool execution or authorization. |
 | Limitations | Original translation experiments do not establish the behavior or performance of today's proprietary models. |
 | Fallback | Conceptual teaching and bounded synthetic prompt experiments; no model training required. |
+| Deprecation / replacement | Not specified |
+
+## Workshop experience design
+
+<a id="accelerator-gallery"></a>
+
+### Microsoft AI Solution Accelerators
+
+| Field | Value |
+|---|---|
+| URL | https://accelerators.ms/ |
+| Publisher | Microsoft |
+| Retrieved | 2026-10-21 |
+| Last updated | Not specified |
+| Status | GUIDANCE |
+| Associated patterns | P19, P20 |
+| Key architecture statement | The rendered gallery provides search, product and industry filters, consistent cards and a browse-first entry point. |
+| Implementation relevance | Use original styling and registry-backed search and industry filters in the accelerator catalog. |
+| Security implications | External reference navigation is not a tenant operation and must not receive private bindings. |
+| Limitations | A design precedent, not an endorsement, copied implementation or runtime dependency. |
+| Fallback | The local catalog remains usable without external sites. |
+| Deprecation / replacement | Not specified |
+
+<a id="workshop-fabric-readiness"></a>
+
+### Microsoft Fabric Workshops and Readiness
+
+| Field | Value |
+|---|---|
+| URL | https://microsoft.github.io/Fabric_Workshops/ |
+| Publisher | Microsoft |
+| Retrieved | 2026-10-21 |
+| Last updated | Not specified |
+| Status | GUIDANCE |
+| Associated patterns | P10, P19 |
+| Key architecture statement | Numbered getting-started and environment modules lead into a choose-your-lab curriculum. |
+| Implementation relevance | Separate workshop overview and setup from the focused numbered module reader. |
+| Security implications | Readiness and resource creation are distinct; setup instructions do not authorize creation. |
+| Limitations | Documentation workshop reference, not proof of an accelerator tenant run. |
+| Fallback | Local modules and synthetic exercises. |
+| Deprecation / replacement | Not specified |
+
+<a id="workshop-healthcare-modules"></a>
+
+### Healthcare Models and Agents Workshop
+
+| Field | Value |
+|---|---|
+| URL | https://github.com/microsoft/healthcare-models-and-agents-workshop |
+| Publisher | Microsoft |
+| Retrieved | 2026-10-21 |
+| Last updated | Not specified |
+| Status | GUIDANCE |
+| Associated patterns | P06, P19 |
+| Key architecture statement | A chapter-based workshop pairs setup guidance with exercises and consistent learner artifacts. |
+| Implementation relevance | Present prerequisites before a deliberate Start workshop action and show a numbered progress outline. |
+| Security implications | This accelerator uses synthetic data and supplies no clinical recommendations. |
+| Limitations | Reference learning structure only; no model behavior or healthcare claims are imported. |
+| Fallback | Local synthetic checkpoints and reference baselines. |
+| Deprecation / replacement | Not specified |
+
+<a id="workshop-itops-paths"></a>
+
+### AI Agents for IT Ops
+
+| Field | Value |
+|---|---|
+| URL | https://github.com/microsoft/AIAgentsforITOps |
+| Publisher | Microsoft |
+| Retrieved | 2026-10-21 |
+| Last updated | Not specified |
+| Status | GUIDANCE |
+| Associated patterns | P06, P19 |
+| Key architecture statement | A choose-your-workshop-path entry compares alternatives with consistent audience and architecture descriptions. |
+| Implementation relevance | Use consistent outcome cards rather than competing tool-first entry points. |
+| Security implications | Alternative architectures have separate prerequisites and authority boundaries. |
+| Limitations | AKS and hosted-agent infrastructure are not required by this development accelerator. |
+| Fallback | Registered synthetic use cases and local practice. |
+| Deprecation / replacement | Not specified |
+
+<a id="workshop-openai"></a>
+
+### OpenAI Workshop
+
+| Field | Value |
+|---|---|
+| URL | https://github.com/microsoft/OpenAIWorkshop |
+| Publisher | Microsoft |
+| Retrieved | 2026-10-21 |
+| Last updated | Not specified |
+| Status | GUIDANCE |
+| Associated patterns | P06, P19 |
+| Key architecture statement | Quick links connect setup, scenarios, architecture and implementation through a numbered getting-started sequence. |
+| Implementation relevance | Add clear workshop entry actions and within-module Tools, Build, Verify and LOCAL fallback navigation. |
+| Security implications | Reference deployment choices are not automatic deployment instructions for this repository. |
+| Limitations | Reuse information architecture, not code, artwork or environment assumptions. |
+| Fallback | Self-contained local guide reader. |
 | Deprecation / replacement | Not specified |

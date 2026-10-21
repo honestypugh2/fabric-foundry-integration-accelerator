@@ -145,7 +145,7 @@ Solid boxes are implemented here or documented by Microsoft; dashed boxes are pl
 | Foundry IQ knowledge | Preview | Knowledge bases that ground the agent in documents with citations, including files in OneLake. Some experiences are in preview. | - |
 | Agent Framework | Microsoft-documented | Runs locally or against Foundry; supports workflows, tools and human-in-the-loop steps. | - |
 | API Management | Optional | Adds authentication, rate limits, logging and policies in front of MCP servers and model endpoints. | - |
-| Fabric MCP servers | Microsoft-documented | Pick the narrowest server; they run with the caller's Fabric permissions; status differs by server. | - |
+| Fabric MCP servers | Microsoft-documented | Server location is not data location. Microsoft's locally launched stdio server calls remote Fabric under the caller's permissions; hosted HTTP MCP servers are distinct integrations. | - |
 | Fabric IQ ontology | Preview | Gives many consumers one model of the business without copying data. | - |
 | Fabric data agent | Microsoft-documented | Uses the end user's identity; Fabric permissions decide what is visible. | - |
 | Semantic model | Microsoft-documented | Direct Lake reads Gold Delta tables; measures are the governed definitions agents should reuse. | - |

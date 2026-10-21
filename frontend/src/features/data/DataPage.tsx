@@ -186,8 +186,10 @@ export function DataPage() {
     <>
       <h1>Medallion data explorer</h1>
       <p>
-        Read-only, allow-listed reads through the provider router. Offline, results come from the
-        Local Fabric Educational Provider and are labeled LOCAL. They are not Fabric operations.
+        The app requests read-only data through its backend: Fabric REST reads first in HYBRID mode,
+        with disclosed offline synthetic-data fallback when permitted. LOCAL results use
+        DuckDB/Parquet, not Fabric. This is separate from the coding assistant's Fabric MCP
+        connection; each result identifies the source actually used.
       </p>
       <QueryState label="lakehouses" {...lakehouses}>
         {(items) => {

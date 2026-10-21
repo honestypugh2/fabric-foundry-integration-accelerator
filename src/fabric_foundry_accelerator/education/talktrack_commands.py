@@ -4,9 +4,12 @@ import argparse
 import sys
 from pathlib import Path
 
+import yaml
+
 from fabric_foundry_accelerator.config.settings import Settings
 from fabric_foundry_accelerator.education.diagrams import load_views
 from fabric_foundry_accelerator.education.guides import load_guides
+from fabric_foundry_accelerator.education.lessons import ArchitectureMap
 from fabric_foundry_accelerator.education.talktracks import (
     HTML_FILE,
     TalkTrack,
@@ -29,13 +32,20 @@ def rendered(settings: Settings) -> tuple[dict[Path, str], list[str]]:
     outputs: dict[Path, str] = {}
     errors: list[str] = []
     tracks: dict[str, TalkTrack] = load_talk_tracks(settings.demos_root)
+    components = ArchitectureMap.model_validate(
+        yaml.safe_load(
+            (settings.education_root / "architecture/explorer.yaml").read_text(encoding="utf-8")
+        )
+    ).components
     for track in tracks.values():
         found = reference_errors(
             track, views=views, patterns=patterns, source_ids=frozenset(titles), guide_ids=guides
         )
         errors += found
         if not found:
-            page = render_html(track, views=views, patterns=patterns, source_titles=titles)
+            page = render_html(
+                track, views=views, patterns=patterns, source_titles=titles, components=components
+            )
             outputs[settings.demos_root / track.id / HTML_FILE] = page
             # The web app serves the same handout at /talktracks/<id>.html (Vite public folder).
             outputs[settings.frontend_root / "public" / "talktracks" / f"{track.id}.html"] = page

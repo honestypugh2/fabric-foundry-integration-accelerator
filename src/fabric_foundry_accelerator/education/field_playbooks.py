@@ -9,6 +9,11 @@ from typing import Literal, Self
 import yaml
 from pydantic import BaseModel, ConfigDict, Field, HttpUrl, model_validator
 
+from fabric_foundry_accelerator.config.settings import Settings
+from fabric_foundry_accelerator.education.interactive_architecture import render_library
+from fabric_foundry_accelerator.education.playbook_bundle import render_bundle
+from fabric_foundry_accelerator.education.talktrack_commands import rendered
+
 REPOSITORY = "https://github.com/honestypugh2/fabric-foundry-integration-accelerator/blob/main/"
 SLUG = r"^[a-z0-9]+(?:-[a-z0-9]+)*$"
 
@@ -198,8 +203,9 @@ def render_playbook(
 Follow the repository's dated verification records for actual outcomes.</p>
 <ul class="sources">{bibliography}</ul></section></main>
 <footer class="wrap"><p>Synthetic data only. No cloud action occurs when opening this page.
-These original playbooks have no external fonts, scripts, analytics or images.
-Repository and source links need network access and any required repository permissions.</p>
+These original playbook pages have no external fonts, scripts, analytics or images.
+In the offline field guide, both audience pages and full workshop handouts are embedded.
+Optional repository and source references need network access and any required permissions.</p>
 <p>Generated from education/field-playbooks/release.yaml. Edit the structured source,
 then run make playbooks. HC-01 and MFG-01 remain featured; deferred work is not removed.</p></footer>
 </body></html>
@@ -243,10 +249,39 @@ def main(argv: list[str] | None = None) -> int:
     )
     args = parser.parse_args(argv)
     release, sources = load_release(args.root)
+    handouts, errors = rendered(
+        Settings(
+            education_root=args.root / "education",
+            demos_root=args.root / "demos",
+            guides_root=args.root / "guides",
+            sources_path=args.root / "docs/research/sources.yaml",
+            frontend_root=args.root / "frontend",
+        )
+    )
+    if errors:
+        for error in errors:
+            sys.stderr.write(f"playbooks: {error}\n")
+        return 1
+    documents = {
+        page.id: (
+            "Customer playbook" if page.id == "customer" else "SE / developer playbook",
+            render_playbook(release, page, sources),
+        )
+        for page in release.playbooks
+    }
+    for key, folder, title in (
+        ("fabric-engineering", "fabric-copilot-level-up", "Fabric engineering workshop"),
+        ("foundry-agents", "foundry-fabric-agents-workshop", "Foundry agents workshop"),
+    ):
+        documents[key] = (title, handouts[args.root / "demos" / folder / "index.html"])
+    documents["architecture-library"] = (
+        "Architecture explorer",
+        render_library(args.root, STYLE),
+    )
     stale = False
     for page in release.playbooks:
         path = args.root / "docs/field-playbooks" / f"{page.id}.html"
-        content = render_playbook(release, page, sources)
+        content = render_bundle(documents, audience=page.id)
         if args.check:
             if not path.exists() or path.read_text(encoding="utf-8") != content:
                 sys.stderr.write(f"{path} is missing or stale; run make playbooks\n")

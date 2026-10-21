@@ -10,7 +10,7 @@
 *{box-sizing:border-box}
 html{scroll-padding-top:4.5rem}
 
-body{margin:0;font:16px/1.55 "Segoe UI",system-ui,-apple-system,sans-serif;color:var(--fg);background:var(--bg)}
+body{margin:0;font:16px/1.55 "Segoe UI",system-ui,-apple-system,sans-serif;color:var(--fg);background:var(--bg);overflow-wrap:anywhere}
 
 a{color:var(--accent)}
 code,pre{font-family:"Cascadia Code",ui-monospace,Consolas,monospace;font-size:.88em}
@@ -46,7 +46,7 @@ h1{font-size:2.2rem;line-height:1.15;margin:.35rem 0 .5rem}
 h2{font-size:1.5rem;margin:2.5rem 0 .75rem;padding-top:.5rem}
 h3{font-size:1.1rem;margin:1.25rem 0 .5rem}
 
-.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(16rem,1fr))}
+.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(min(100%,16rem),1fr))}
 
 .card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem}
 
@@ -58,6 +58,7 @@ h3{font-size:1.1rem;margin:1.25rem 0 .5rem}
 .entry .where{font-family:ui-monospace,monospace;font-size:.82rem;word-break:break-all}
 
 table{border-collapse:collapse;width:100%;font-size:.95rem}
+@media(max-width:650px){table{display:block;overflow-x:auto}}
 th,td{border-bottom:1px solid var(--border);padding:.5rem .6rem;text-align:left;vertical-align:top}
 
 th{background:var(--surface)}
@@ -134,4 +135,3 @@ details.qa{break-inside:avoid}
 details.qa .ans{display:block}
 .step{break-inside:avoid}
 }
-

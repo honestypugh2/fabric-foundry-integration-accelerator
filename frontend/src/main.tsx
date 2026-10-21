@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router";
 import { App } from "./app/App";
 import { LevelProvider } from "./app/LevelProvider";
 import "./styles.css";
+import "./workspace.css";
 
 const container = document.getElementById("root");
 if (container === null) {

@@ -1,4 +1,4 @@
-"""Local Fabric Educational Provider.
+"""Offline synthetic data adapter (DuckDB/Parquet), not a Fabric MCP server.
 
 A realistic *educational analog* of a Fabric workspace, lakehouse and semantic model, backed
 by synthetic Parquet files and DuckDB. It is not a Fabric emulator. Every result is labeled
@@ -37,7 +37,7 @@ from fabric_foundry_accelerator.synthetic.paths import semantic_model_path
 from fabric_foundry_accelerator.synthetic.profiles import PROFILES
 from fabric_foundry_accelerator.synthetic.sqlutil import quote_ident
 
-PROVIDER_NAME = "Local Fabric Educational Provider"
+PROVIDER_NAME = "Offline synthetic data (DuckDB/Parquet)"
 WORKSPACE_ID = "local-ws-synthetic"
 SIMULATION_NOTICE = (
     "LOCAL educational analog over synthetic Parquet data. No Microsoft Fabric, OneLake or "
@@ -58,7 +58,11 @@ def _json_scalar(value: object) -> JsonScalar:
 
 
 class LocalFabricProvider:
-    """Read-only local implementation of the ``FabricProvider`` port."""
+    """Offline data adapter implementing ``FabricProvider``; no Fabric connection.
+
+    The class name identifies the shared provider interface, not a locally running Fabric
+    service. User-facing results name the synthetic data source explicitly.
+    """
 
     def __init__(
         self,

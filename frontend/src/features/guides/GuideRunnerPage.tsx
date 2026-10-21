@@ -6,8 +6,7 @@ import { usePageTitle } from "../../app/usePageTitle";
 import { Badge } from "../../components/Badge";
 import { PromptBlock } from "../../components/PromptBlock";
 import { QueryState } from "../../components/QueryState";
-import { DiagramCanvas } from "../architecture/DiagramCanvas";
-import { useView } from "../../api/hooks";
+import { ArchitectureStudio } from "../architecture/ArchitectureStudio";
 import { ChangeRehearsal } from "./ChangeRehearsal";
 import { UseCaseOverview } from "./UseCaseOverview";
 
@@ -20,32 +19,14 @@ function StepDiagram({
   readonly focus: readonly string[];
   readonly stepTitle: string;
 }) {
-  const view = useView(viewId);
-  const names = new Map((view.data?.view.nodes ?? []).map((n) => [n.id, n.label]));
   return (
     <section aria-labelledby="step-diagram-heading" className="guide-diagram">
       <h3 id="step-diagram-heading">Where this step happens</h3>
-      <QueryState label="the guide diagram" {...view}>
-        {(rendered) => (
-          <>
-            <div className="studio__canvas">
-              <DiagramCanvas
-                rendered={rendered}
-                upto={null}
-                selected={null}
-                onSelect={() => undefined}
-                focus={focus}
-                interactive={false}
-                label={`Guide diagram for ${stepTitle}`}
-              />
-            </div>
-            <p>
-              Highlighted: {focus.map((id) => names.get(id) ?? id).join(", ")}.{" "}
-              <Link to={`/architecture/${viewId}`}>Open the full interactive diagram</Link>
-            </p>
-          </>
-        )}
-      </QueryState>
+      <p>
+        {stepTitle}: inspect {focus.join(", ")}. Select nodes for responsibilities and follow the
+        trace to understand the flow.
+      </p>
+      <ArchitectureStudio viewId={viewId} />
     </section>
   );
 }
@@ -74,6 +55,13 @@ function StepView({ guide, step }: { readonly guide: Guide; readonly step: Guide
         )}
         {step.requires_windows ? <li>Needs a Windows workstation for the live path.</li> : null}
       </ul>
+
+      <nav className="module-jumps" aria-label="On this step">
+        <a href="#tool-heading">Tools</a>
+        <a href="#prompts-heading">Build</a>
+        <a href="#checkpoint-heading">Verify</a>
+        <a href="#offline-heading">LOCAL fallback</a>
+      </nav>
 
       <section aria-labelledby="tool-heading">
         <h3 id="tool-heading">Provider, server and tool</h3>
@@ -210,11 +198,52 @@ function GuideView({
   readonly stepId: string | undefined;
 }) {
   const steps = useLocalProgress(`guide.${guide.id}.steps`);
-  const step = guide.steps.find((s) => s.id === stepId) ?? guide.steps[0];
+  const step = guide.steps.find((s) => s.id === stepId);
+  const first = guide.steps[0];
+  const completed = guide.steps.filter((item) => steps.done.includes(item.id)).length;
   return (
     <>
+      <nav className="breadcrumbs" aria-label="Breadcrumb">
+        <Link to="/use-cases">Use Cases</Link>
+        <span aria-hidden="true">/</span>
+        {stepId ? (
+          <Link to={`/use-cases/${guide.id}`}>Workshop overview</Link>
+        ) : (
+          <span>Workshop overview</span>
+        )}
+        {stepId ? (
+          <>
+            <span aria-hidden="true">/</span>
+            <span>Build</span>
+          </>
+        ) : null}
+      </nav>
+      <p className="eyebrow">
+        Development workshop · {guide.steps.length} checkpoints · synthetic data
+      </p>
       <h1>{guide.title}</h1>
       <p className="lead">{guide.summary}</p>
+      {!stepId ? (
+        <div className="workshop-launch">
+          <div>
+            <strong>Start with the outcome. Leave with a working demonstration.</strong>
+            <p>Read the setup requirements, explore the modules, then start the guided build.</p>
+          </div>
+          {first ? (
+            <Link className="button-link" to={`/use-cases/${guide.id}/${first.id}`}>
+              Start workshop
+            </Link>
+          ) : null}
+        </div>
+      ) : null}
+      {!stepId ? (
+        <nav className="module-jumps" aria-label="Workshop sections">
+          <a href="#outcome-heading">Outcome</a>
+          <a href="#workshop-prerequisites">Prerequisites</a>
+          {guide.diagram ? <a href="#workshop-architecture">Architecture</a> : null}
+          <a href="#workshop-modules">Modules</a>
+        </nav>
+      ) : null}
       {!stepId ? (
         <UseCaseOverview guide={guide} />
       ) : (
@@ -247,8 +276,8 @@ function GuideView({
           ))}
         </ul>
       </details>
-      <details>
-        <summary>Tools ({guide.tools.length})</summary>
+      <details id="workshop-prerequisites" open={!stepId}>
+        <summary>Tools and prerequisites ({guide.tools.length})</summary>
         <div className="table-scroll" tabIndex={0} role="region" aria-label="Guide tools">
           <table>
             <caption className="visually-hidden">Tools the guide needs</caption>
@@ -280,15 +309,25 @@ function GuideView({
         </div>
       </details>
       <div className="runner">
-        <nav aria-label="Guide steps" className="runner__steps">
+        <nav id="workshop-modules" aria-label="Guide steps" className="runner__steps">
+          <h2>{stepId ? "Workshop modules" : "Your build path"}</h2>
+          <progress
+            value={completed}
+            max={Math.max(guide.steps.length, 1)}
+            aria-label="Workshop checklist progress"
+          />
+          <p className="meta">Browser checklist only—not execution evidence.</p>
           <ol>
-            {guide.steps.map((s) => (
+            {guide.steps.map((s, index) => (
               <li key={s.id}>
                 <Link
                   to={`/use-cases/${guide.id}/${s.id}`}
                   aria-current={s.id === step?.id ? "step" : undefined}
                 >
-                  {s.title}
+                  <span className="module-number" aria-hidden="true">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span>{s.title}</span>
                 </Link>
                 {s.writes ? <span className="runner__flag"> (write)</span> : null}
                 <label className="runner__done">
@@ -305,10 +344,31 @@ function GuideView({
             ))}
           </ol>
           <p role="status">
-            {steps.done.length} of {guide.steps.length} steps done
+            {completed} of {guide.steps.length} steps done
           </p>
         </nav>
-        {step ? <StepView guide={guide} step={step} /> : null}
+        {step ? (
+          <StepView key={step.id} guide={guide} step={step} />
+        ) : stepId ? (
+          <section className="notice" role="alert">
+            <h2>Step not found</h2>
+            <p>
+              Choose a module from the workshop outline. No other step has been selected for you.
+            </p>
+          </section>
+        ) : (
+          <section className="workshop-next">
+            <h2>Ready to build?</h2>
+            <p>
+              Use the numbered modules to work through tools, prompts and evidence. Each step
+              explains its LIVE path and LOCAL equivalent. A live write never becomes a simulated
+              write automatically.
+            </p>
+            {first ? (
+              <Link to={`/use-cases/${guide.id}/${first.id}`}>Open the first module →</Link>
+            ) : null}
+          </section>
+        )}
       </div>
     </>
   );

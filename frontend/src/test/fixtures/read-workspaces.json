@@ -20,9 +20,9 @@
   "fallback_reason": null,
   "fallback_used": false,
   "operating_mode": "OFFLINE",
-  "requested_provider": "Local Fabric Educational Provider",
-  "selected_provider": "Local Fabric Educational Provider",
+  "requested_provider": "Offline synthetic data (DuckDB/Parquet)",
+  "selected_provider": "Offline synthetic data (DuckDB/Parquet)",
   "simulation_notice": "LOCAL educational analog over synthetic Parquet data. No Microsoft Fabric, OneLake or Power BI operation was performed.",
   "teaching_objective": "Discover where governed data lives before reading it.",
-  "timestamp": "2026-10-14T02:55:52.128553Z"
+  "timestamp": "2026-10-21T16:15:47.733593Z"
 }
