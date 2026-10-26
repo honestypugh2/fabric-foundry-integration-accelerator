@@ -69,6 +69,46 @@ def test_core_model_uses_physical_role_playing_dates(data_root: Path) -> None:
     assert all(r.active for r in model.relationships)
 
 
+@pytest.mark.parametrize("profile_id", sorted(PROFILES))
+@pytest.mark.parametrize(
+    ("measure_name", "column_name", "predicate_value"),
+    [
+        ("high_risk_patient_count", "risk_category", '"High"'),
+        ("diabetes_prevalence", "has_diabetes", "TRUE ()"),
+        ("hypertension_prevalence", "has_hypertension", "TRUE ()"),
+        ("heart_failure_prevalence", "has_heart_failure", "TRUE ()"),
+        ("copd_prevalence", "has_copd", "TRUE ()"),
+        ("ckd_prevalence", "has_ckd", "TRUE ()"),
+    ],
+)
+def test_population_dax_intersects_classification_slicers(
+    data_root: Path, profile_id: str, measure_name: str, column_name: str, predicate_value: str
+) -> None:
+    model = load_semantic_model(semantic_model_path(data_root, profile_id))
+    measure = model.measure(measure_name)
+    numerator = (
+        "CALCULATE ( [Patient Count], "
+        f"KEEPFILTERS ( dim_patient[{column_name}] = {predicate_value} ) )"
+    )
+    expected = (
+        numerator
+        if measure_name == "high_risk_patient_count"
+        else f"DIVIDE ( {numerator}, [Patient Count] )"
+    )
+    assert measure.home_table == "dim_patient"
+    assert measure.dax == expected
+
+
+@pytest.mark.parametrize("profile_id", sorted(PROFILES))
+def test_high_risk_percentage_uses_the_context_preserving_count(
+    data_root: Path, profile_id: str
+) -> None:
+    model = load_semantic_model(semantic_model_path(data_root, profile_id))
+    assert model.measure("high_risk_patient_pct").dax == (
+        "DIVIDE ( [High Risk Patient Count], [Patient Count] )"
+    )
+
+
 def test_measure_lookup_and_unknown_measure(data_root: Path) -> None:
     model = load_semantic_model(semantic_model_path(data_root, "hc-lab-7file-v1"))
     assert model.measure("denial_rate").format == "percent"

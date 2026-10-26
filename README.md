@@ -4,6 +4,16 @@
 
 **Show and tell. Build and learn.**
 
+> **Not for production.** This repository is a solution accelerator, reference
+> implementation, and learning/demo environment using synthetic data. It is not a
+> production-ready deployment and must not be deployed as-is for production.
+> Before adapting these patterns to a production workload, follow Microsoft's
+> [Azure Well-Architected Framework](https://learn.microsoft.com/azure/well-architected/)
+> and [Well-Architected guidance for Microsoft Fabric](https://learn.microsoft.com/azure/well-architected/microsoft-fabric/overview).
+> Assess reliability, security, cost optimization, operational excellence, and
+> performance efficiency for your own workload. Demo results are not production
+> readiness, security, compliance, or availability certification.
+
 Use this repo to learn how **Microsoft Fabric**, **Microsoft Foundry** and **GitHub Copilot**
 work together. It is a reference implementation and a guided learning app—not a deployed
 customer solution. Choose one workflow, build it with synthetic data, and verify the result.
@@ -40,13 +50,14 @@ production deployment. Preview features are optional.
 
 | Guide | What you will build and learn | What is ready |
 |---|---|---|
-| [HC-01: Fabric engineering with GitHub Copilot](guides/hc-01-fabric-mcp-powerbi-medallion-lab/README.md) | Fabric MCP, Fabric Skills, Bronze/Silver/Gold notebooks and a planned Power BI handoff | Guide, reviewed notebooks and offline build. Live landing verified. Live completion is deferred. |
-| [MFG-01: Foundry agents over Fabric](guides/mfg-01-foundry-fabric-sales-insights/README.md) | Sales insights, team briefs and reviewed quality proposals over synthetic manufacturing data | Offline briefs and quality checks. Connected evidence is dated and limited; answer and delivery gaps remain. |
+| [HC-01: Fabric engineering with GitHub Copilot](guides/hc-01-fabric-mcp-powerbi-medallion-lab/README.md) | Fabric MCP, Fabric Skills, Bronze/Silver/Gold notebooks and a planned Power BI handoff | Guide, reviewed notebooks and offline build. Demo steps confirmed complete by the user; report review/publication deferred. |
+| [MFG-01: Foundry agents over Fabric](guides/mfg-01-foundry-fabric-sales-insights/README.md) | Sales insights, team briefs and reviewed quality proposals over synthetic manufacturing data | Offline briefs and quality checks. Demo answer checks confirmed complete by the user; not production certification. |
 | [DQ-01: Supporting quality exercise](guides/dq-01-synthetic-quality-investigation/README.md) | Exact quality checks and a governed notebook proposal | LOCAL checks and a SIMULATED change rehearsal. No cloud correction runs. |
 
 HC-01 and MFG-01 are the two featured guides. Both stay in the repo.
 Claude Code instructions and alternate prompts are available now; setup and execution come
-later. Neither guide is fully live or production-certified.
+later. These guides do not certify a production deployment. See the
+[learning-repo completion scope and deferred work](docs/operations/delivery-backlog.md).
 
 ## Get ready to share or present
 

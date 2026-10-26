@@ -18,6 +18,7 @@ lifecycle label). A missing optional field is shown as Not specified.
 | Azure API Management | [Overview of MCP servers in Azure API Management](#apim-mcp) | GA | 2026-10-05 |
 | Azure Logic Apps | [Automate Microsoft Foundry agents with workflows in Azure Logic Apps](#logic-apps-foundry-agents) | PREVIEW | 2026-10-08 |
 | Azure Monitor | [Enable OpenTelemetry in Application Insights (Azure Monitor OpenTelemetry Distro)](#azure-monitor-opentelemetry) | GA | 2026-10-08 |
+| Azure architecture | [Azure Well-Architected Framework](#azure-waf) | GUIDANCE | 2026-10-26 |
 | Developer experience | [How Claude remembers your project (CLAUDE.md and AGENTS.md)](#claude-code-memory) | GA | 2026-10-05 |
 | Developer experience | [Extend Claude with skills](#claude-code-skills) | GA | 2026-10-05 |
 | Developer experience | [GitHub Copilot CLI is now generally available](#copilot-cli-ga) | GA | 2026-10-05 |
@@ -50,7 +51,7 @@ lifecycle label). A missing optional field is shown as Not specified.
 | Microsoft Fabric | [Fabric REST API identity support](#fabric-rest-identity) | GA | 2026-10-05 |
 | Microsoft Fabric | [Runtime 1.3 in Fabric](#fabric-runtime-1-3) | GA | 2026-10-07 |
 | Microsoft Fabric | [Fabric trial capacity](#fabric-trial) | GA | 2026-10-07 |
-| Microsoft Fabric | [Azure Well-Architected Framework service guide for Microsoft Fabric](#fabric-waf) | GUIDANCE | 2026-10-05 |
+| Microsoft Fabric | [Azure Well-Architected Framework service guide for Microsoft Fabric](#fabric-waf) | GUIDANCE | 2026-10-26 |
 | Microsoft Fabric | [Data quality in materialized lake views](#mlv-data-quality) | GA | 2026-10-08 |
 | Microsoft Fabric | [Detect, explore and validate functional dependencies in your data](#semantic-link-validate) | GA | 2026-10-08 |
 | Microsoft Fabric and Microsoft Foundry | [Data architecture for AI agents across your organization](#caf-agent-data-architecture) | GUIDANCE | 2026-10-07 |
@@ -81,6 +82,7 @@ lifecycle label). A missing optional field is shown as Not specified.
 | Power BI | [Datasets - Execute Queries In Group (Power BI REST API)](#powerbi-execute-queries) | GA | 2026-10-07 |
 | Power BI | [Create report subscriptions with Copilot summaries](#powerbi-subscription-summaries) | PREVIEW | 2026-10-08 |
 | Power BI Authoring MCP | [Power BI Authoring MCP server installation and EULA](#powerbi-authoring-mcp-repository) | GA | 2026-10-13 |
+| Power BI DAX | [KEEPFILTERS function (DAX)](#dax-keepfilters) | GUIDANCE | 2026-10-26 |
 | Relational data foundations | [A relational model of data for large shared data banks](#research-relational-model) | GUIDANCE | 2026-10-09 |
 | Retrieval and grounding foundations | [Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks](#research-rag) | GUIDANCE | 2026-10-09 |
 | Spec-driven engineering | [Spec-Driven Development Quickstart](#spec-kit-quickstart) | OSS | 2026-10-09 |
@@ -176,6 +178,27 @@ lifecycle label). A missing optional field is shown as Not specified.
 | Security implications | The connection string is a secret (local .env only); spans never record question text. |
 | Limitations | The distro pulls beta instrumentation packages; only the span API is used directly. |
 | Fallback | Spans stay in-process (no exporter) when no connection string is set. |
+| Deprecation / replacement | Not specified |
+
+## Azure architecture
+
+<a id="azure-waf"></a>
+
+### Azure Well-Architected Framework
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/azure/well-architected/ |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-26 |
+| Last updated | 2026-09-11 |
+| Status | GUIDANCE |
+| Associated patterns | P06, P14 |
+| Key architecture statement | Quality-driven architectural guidance covers reliability, security, cost optimization, operational excellence and performance efficiency. |
+| Implementation relevance | The main README directs production adaptations to Microsoft's framework rather than treating this learning accelerator as production-ready. |
+| Security implications | Workload-specific security assessment and controls remain required; a synthetic demo does not certify security or compliance. |
+| Limitations | Guidance does not certify this repository or an adapted deployment. |
+| Fallback | Keep the accelerator scoped to synthetic learning and demonstration. |
 | Deprecation / replacement | Not specified |
 
 ## Developer experience
@@ -812,12 +835,12 @@ lifecycle label). A missing optional field is shown as Not specified.
 |---|---|
 | URL | https://learn.microsoft.com/azure/well-architected/microsoft-fabric/overview |
 | Publisher | Microsoft Learn (Well-Architected Framework) |
-| Retrieved | 2026-10-05 |
+| Retrieved | 2026-10-26 |
 | Last updated | 2026-05-13 |
 | Status | GUIDANCE |
 | Associated patterns | P06, P14 |
 | Key architecture statement | Pillar guidance (reliability, security, cost, operations, performance) for Fabric workloads. |
-| Implementation relevance | Production-readiness notes in every pattern map to these pillars. |
+| Implementation relevance | Production-readiness notes map to these pillars; the main README links this workload-specific guidance for production adaptations of the learning accelerator. |
 | Security implications | Security pillar guidance on identity, network isolation and data protection. |
 | Limitations | Guidance only. |
 | Fallback | Not applicable. |
@@ -1403,6 +1426,27 @@ lifecycle label). A missing optional field is shown as Not specified.
 | Security implications | The installed VS Code extension defaults to write mode and automatic EULA acceptance; the repository overrides startup arguments without accepting the license. |
 | Limitations | Grouped tool annotations remain write-capable in read-only mode; server discovery does not prove model connection, DAX execution or client tool exposure. |
 | Fallback | Stop blocked connected operations and use reviewed local model definitions without claiming MCP execution. |
+| Deprecation / replacement | Not specified |
+
+## Power BI DAX
+
+<a id="dax-keepfilters"></a>
+
+### KEEPFILTERS function (DAX)
+
+| Field | Value |
+|---|---|
+| URL | https://learn.microsoft.com/en-us/dax/keepfilters-function-dax |
+| Publisher | Microsoft Learn |
+| Retrieved | 2026-10-26 |
+| Last updated | Not specified |
+| Status | GUIDANCE |
+| Associated patterns | P12 |
+| Key architecture statement | KEEPFILTERS intersects CALCULATE predicates with existing filters on the same columns instead of replacing those filters. |
+| Implementation relevance | Population classification measures preserve patient-attribute slicers in both synthetic semantic-model contracts without changing their unfiltered baselines. |
+| Security implications | Filter-context semantics do not grant access or replace identity, authorization or row-level security. |
+| Limitations | Offline contract tests do not execute DAX; query-scoped validation does not persist a model update. LIVE changes require separate approval and readback verification. |
+| Fallback | Validate the reference expression contracts and SQL baselines offline, explicitly labeled LOCAL. |
 | Deprecation / replacement | Not specified |
 
 ## Relational data foundations

@@ -3,6 +3,10 @@
 This record checks the original nine-phase proposal, not just the README checkmarks.
 **Implementation completion is not the same as live certification or production readiness.**
 
+For the current completion scope, report-rendering deferral, and ordered remaining
+work, see the [delivery backlog and next steps](delivery-backlog.md). The dated
+validation records below are historical evidence, not a current all-green result.
+
 | Phase | Verified repository outcome | Qualification / remaining evidence |
 |---|---|---|
 | 0 Research and architecture | Source registry, architecture views and decision records | Sources and preview availability are dated; revalidate before production |

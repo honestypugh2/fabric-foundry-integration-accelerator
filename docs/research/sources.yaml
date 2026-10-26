@@ -2,6 +2,33 @@
 # Status vocabulary: GA | PREVIEW | DEPRECATED | UNKNOWN/NEEDS VALIDATION | GUIDANCE | OSS
 version: 1
 sources:
+  - id: azure-waf
+    title: Azure Well-Architected Framework
+    url: https://learn.microsoft.com/azure/well-architected/
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-26
+    last_updated_date: 2026-09-11
+    technology: Azure architecture
+    associated_patterns: [P06, P14]
+    status: GUIDANCE
+    key_architecture_statement: Quality-driven architectural guidance covers reliability, security, cost optimization, operational excellence and performance efficiency.
+    implementation_relevance: The main README directs production adaptations to Microsoft's framework rather than treating this learning accelerator as production-ready.
+    security_implications: Workload-specific security assessment and controls remain required; a synthetic demo does not certify security or compliance.
+    limitations: Guidance does not certify this repository or an adapted deployment.
+    fallback: Keep the accelerator scoped to synthetic learning and demonstration.
+  - id: dax-keepfilters
+    title: KEEPFILTERS function (DAX)
+    url: https://learn.microsoft.com/en-us/dax/keepfilters-function-dax
+    publisher: Microsoft Learn
+    retrieved_date: 2026-10-26
+    technology: Power BI DAX
+    associated_patterns: [P12]
+    status: GUIDANCE
+    key_architecture_statement: KEEPFILTERS intersects CALCULATE predicates with existing filters on the same columns instead of replacing those filters.
+    implementation_relevance: Population classification measures preserve patient-attribute slicers in both synthetic semantic-model contracts without changing their unfiltered baselines.
+    security_implications: Filter-context semantics do not grant access or replace identity, authorization or row-level security.
+    limitations: Offline contract tests do not execute DAX; query-scoped validation does not persist a model update. LIVE changes require separate approval and readback verification.
+    fallback: Validate the reference expression contracts and SQL baselines offline, explicitly labeled LOCAL.
   - id: github-copilot-on-github
     title: GitHub Copilot on GitHub.com
     url: https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-on-github
@@ -126,13 +153,13 @@ sources:
     title: Azure Well-Architected Framework service guide for Microsoft Fabric
     url: https://learn.microsoft.com/azure/well-architected/microsoft-fabric/overview
     publisher: Microsoft Learn (Well-Architected Framework)
-    retrieved_date: 2026-10-05
+    retrieved_date: 2026-10-26
     last_updated_date: 2026-05-13
     technology: Microsoft Fabric
     associated_patterns: [P06, P14]
     status: GUIDANCE
     key_architecture_statement: Pillar guidance (reliability, security, cost, operations, performance) for Fabric workloads.
-    implementation_relevance: Production-readiness notes in every pattern map to these pillars.
+    implementation_relevance: Production-readiness notes map to these pillars; the main README links this workload-specific guidance for production adaptations of the learning accelerator.
     security_implications: Security pillar guidance on identity, network isolation and data protection.
     limitations: Guidance only.
     fallback: Not applicable.
