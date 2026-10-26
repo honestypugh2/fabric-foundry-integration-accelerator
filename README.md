@@ -1,6 +1,6 @@
 # Fabric Foundry Integration Accelerator
 
-![Fabric and Foundry Integration Accelerator. Show and tell. Build and learn.](docs/branding/fabric-foundry-banner.svg)
+![Fabric and Foundry Integration Accelerator. Show and tell. Build and learn.](docs/branding/fabric-foundry-social.png)
 
 **Show and tell. Build and learn.**
 

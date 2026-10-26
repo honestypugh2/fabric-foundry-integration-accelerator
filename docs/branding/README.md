@@ -4,14 +4,15 @@ Use this original image for the README, presentations or a repo preview.
 It uses simple shapes and text, not Microsoft or GitHub product logos.
 It does not imply endorsement or a completed live deployment.
 
-![Fabric + Foundry Integration Accelerator](fabric-foundry-banner.svg)
+![Fabric + Foundry Integration Accelerator](fabric-foundry-social.png)
 
 | File | Use |
 |---|---|
-| [SVG banner](fabric-foundry-banner.svg) | README and scalable presentation artwork |
-| [PNG social preview](fabric-foundry-social.png) | GitHub repository social preview and slide images |
+| [SVG banner](fabric-foundry-banner.svg) | Editable source and scalable presentation artwork |
+| [PNG banner and social preview](fabric-foundry-social.png) | README, GitHub repository social preview and slide images |
 
 Both images are 1280 x 640. The SVG has no scripts, external images, fonts or tracking.
+README previews use the PNG for compatibility with renderers that cannot display SVG.
 Edit the SVG source to change the artwork. Keep the wording and two use-case labels
 consistent with the root README.
 
