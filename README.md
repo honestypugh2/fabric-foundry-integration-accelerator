@@ -40,8 +40,7 @@ for supported integrations, deliberate exclusions and the workshop references be
 **Keep the roles clear:** MCP provides tool access. Skills provide procedures. Neither grants
 authority. Identity, policy and human approval control live changes.
 
-**Synthetic data only.** This is a learning repo and reference implementation, not a complete
-production deployment. Preview features are optional.
+**Synthetic data only.** Preview features are optional.
 
 **[Quick start](#quick-start)** · **[Use cases](#choose-a-use-case)** ·
 **[Workshop](#build-and-learn-workshop)** ·
@@ -53,13 +52,13 @@ production deployment. Preview features are optional.
 
 | Guide | What you will build and learn | What is ready |
 |---|---|---|
-| [HC-01: Fabric engineering with GitHub Copilot](guides/hc-01-fabric-mcp-powerbi-medallion-lab/README.md) | Fabric MCP, Fabric Skills, Bronze/Silver/Gold notebooks and a planned Power BI handoff | Guide, reviewed notebooks and offline build. Demo steps confirmed complete by the user; report review/publication deferred. |
-| [MFG-01: Foundry agents over Fabric](guides/mfg-01-foundry-fabric-sales-insights/README.md) | Sales insights, team briefs and reviewed quality proposals over synthetic manufacturing data | Offline briefs and quality checks. Demo answer checks confirmed complete by the user; not production certification. |
+| [HC-01: Fabric engineering with GitHub Copilot](guides/hc-01-fabric-mcp-powerbi-medallion-lab/README.md) | Fabric MCP, Fabric Skills, Bronze/Silver/Gold notebooks and a planned Power BI handoff | Guide, reviewed notebooks, synthetic baselines and reproducible offline build. Report rendering/review and publication remain deferred. |
+| [MFG-01: Foundry agents over Fabric](guides/mfg-01-foundry-fabric-sales-insights/README.md) | Sales insights, team briefs and reviewed quality proposals over synthetic manufacturing data | Reproducible offline briefs, quality checks and deterministic agent evaluation. Connected use requires your own configuration. |
 | [DQ-01: Supporting quality exercise](guides/dq-01-synthetic-quality-investigation/README.md) | Exact quality checks and a governed notebook proposal | LOCAL checks and a SIMULATED change rehearsal. No cloud correction runs. |
 
 HC-01 and MFG-01 are the two featured guides. Both stay in the repo.
-Claude Code instructions and alternate prompts are available now; setup and execution come
-later. These guides do not certify a production deployment. See the
+Claude Code instructions and alternate prompts are available; live Claude demonstrations
+and a cross-client bake-off are outside this delivery scope. See the
 [learning-repo completion scope and deferred work](docs/operations/delivery-backlog.md).
 
 ## Get ready to share or present
@@ -162,6 +161,13 @@ Prerequisites:
 | Git | any recent | |
 | GNU Make | any recent | |
 
+**Supported development shell:** Bash on Linux or macOS; on Windows use WSL2
+with the repository and Python/Node tools installed inside the Linux environment.
+The Make targets use POSIX process supervision and are not native PowerShell commands.
+The local checks recorded here ran on Linux; macOS/WSL setup is documented, not
+independently certified. Power BI Desktop is a separate Windows-only optional tool,
+not a requirement for the offline app.
+
 For a fresh clone, start here:
 
 ```bash
@@ -198,7 +204,9 @@ These are **alternatives, not commands to run in sequence**.
 | **C. Coding-client MCP** | Follow [MCP profiles](config/mcp/README.md) and the guide's tool setup | The coding client launches approved configured servers. `make run-mcp` starts only synthetic `ffia-local` stdio, not a website or the real Fabric MCP. Ctrl+C stops a manually launched server. |
 
 The app command starts both API (:8000, API reference at http://localhost:8000/docs) and
-frontend (:5173). Do not start `make run-api` before `make run`. Optional local exercises:
+frontend (:5173). If either server exits, the launcher stops its owned server processes
+and returns a failure; Ctrl+C also stops both. Do not start `make run-api` before
+`make run`. Optional local exercises:
 `make data` builds layers; `make recovery-demo` rehearses recovery (SIMULATED).
 
 ### Connect deliberately
@@ -260,6 +268,9 @@ levels. A learner checkpoint or recorded result is not production certification.
 This table covers the tracked top-level directories. Start with the **Read first**
 column instead of treating generated files as the source of truth.
 
+<details>
+<summary>Reference: directory purposes and root files</summary>
+
 | Directory | What it is used for | Read first |
 |---|---|---|
 | [src/](src/) | Installable Python package: CLI, services, provider adapters, synthetic pipeline and teaching-content loaders | [Module map](#module-map), then [cli.py](src/fabric_foundry_accelerator/cli.py) |
@@ -299,7 +310,12 @@ Local directories such as `.venv/`, `node_modules/`, `frontend/dist/`, `dist/` a
 Never copy private environment files, tenant exports or runtime receipts into a
 new public clone.
 
+</details>
+
 ## Module map
+
+<details>
+<summary>Reference: Python modules, React modules and request traces</summary>
 
 ### Python: where responsibilities live
 
@@ -368,6 +384,8 @@ of the browser. The coding assistant's separate path is **instructions + skills
 → configured Fabric MCP tool → permitted Fabric operation**; it does not travel
 through the React API just because the app is open.
 
+</details>
+
 ## Reproduce and build from scratch
 
 ### Reproduce this checked-in codebase
@@ -402,6 +420,21 @@ Python/frontend outputs, use `make build`. Validation may access package and
 vulnerability feeds even though the default demo/tests need no cloud credentials.
 See the [release checks](docs/operations/release-validation.md) for what each gate
 does; running a build is not deploying it.
+
+### Delivery contract: clone or complete source bundle
+
+The supported accelerator is the **complete repository**, run from its root.
+The Python wheel/source distribution contains the Python package, not the
+configuration, education, guides and synthetic datasets needed to run the app.
+It is not a standalone demo installer. Likewise, the frontend bundle requires a
+running API and appropriate hosting/proxy configuration.
+
+Maintainers can run `make source-bundle-check` to archive **committed HEAD** as
+`dist/ffia-source.tar.gz` and smoke-test its offline demo in a temporary directory.
+The release workflow includes this source bundle alongside component builds.
+Extract it, enter `ffia-source/`, then follow [Quick start](#quick-start).
+It includes tracked sources only, not private environment files, dependencies or
+local edits. Commit intended changes before producing a delivery bundle.
 
 ### Rebuild the design incrementally
 
@@ -479,11 +512,11 @@ clone, generated diagram or installed MCP server as proof of a cloud operation.
 ## Readiness
 
 - **Ready to build and learn:** HC-01 and MFG-01 guides, synthetic data and offline demos.
-- **Learning-repo scope:** the user confirmed the operational demo steps complete;
-  they are not recurring production-certification gates.
+- **Delivery model:** clone or complete source bundle; run from the repository root.
 - **Deferred:** Power BI report rendering/review and publication; see the
   [completion scope and backlog](docs/operations/delivery-backlog.md).
-- **Instructions only:** Claude Code setup and the cross-harness comparison.
+- **Instructions only:** Claude Code alternatives; live demonstrations and the
+  cross-harness comparison are outside this delivery scope.
 
 Offline validation does not prove current cloud health or production readiness.
 See the [sharing scope](docs/operations/shareable-release.md) and

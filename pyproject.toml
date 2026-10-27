@@ -84,6 +84,8 @@ ignore = [
 # Fault injector methods must match the FabricProvider port signature but ignore their inputs.
 "src/fabric_foundry_accelerator/providers/fabric/outage.py" = ["ARG002"]
 "src/fabric_foundry_accelerator/providers/fabric/live.py" = ["ARG002"]
+# Standalone Spark CLI reports progress to stdout; it has a separate optional runtime.
+"scripts/verify_spark_notebooks.py" = ["T201"]
 
 [tool.ruff.lint.pycodestyle]
 # The formatter targets 100 columns; long human-readable messages may run to 120.

@@ -1,22 +1,4 @@
-/* Task-first learning workspace. Shared tokens preserve light and dark execution views. */
-:root {
-  --color-bg: #f4f7fb;
-  --color-surface: #ffffff;
-  --color-border: #d9e2ed;
-  --color-fg: #182b42;
-  --color-muted: #50627a;
-  --color-accent: #075e64;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: #0e1826;
-    --color-surface: #172638;
-    --color-border: #374c63;
-    --color-fg: #edf3fa;
-    --color-muted: #b6c6d8;
-    --color-accent: #83e1cf;
-  }
-}
+/* Task-first layout. Shared light/dark theme tokens are owned by styles.css. */
 * {
   box-sizing: border-box;
 }

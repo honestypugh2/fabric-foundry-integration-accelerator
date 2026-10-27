@@ -45,7 +45,7 @@ jobs:
       - name: Install from lockfiles
         run: uv sync --frozen && npm ci --prefix frontend
       - name: Build distributions and SBOMs
-        run: make build sbom
+        run: make build sbom source-bundle-check
       - name: Package frontend and checksum artifacts
         run: |
           tar -czf dist/frontend.tar.gz -C frontend/dist .

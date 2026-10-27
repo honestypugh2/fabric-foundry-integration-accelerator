@@ -3,6 +3,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router";
 import { App } from "./app/App";
+import { ErrorBoundary } from "./app/ErrorBoundary";
 import { LevelProvider } from "./app/LevelProvider";
 import "./styles.css";
 import "./workspace.css";
@@ -22,9 +23,11 @@ createRoot(container).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <LevelProvider>
-          <App />
-        </LevelProvider>
+        <ErrorBoundary>
+          <LevelProvider>
+            <App />
+          </LevelProvider>
+        </ErrorBoundary>
       </BrowserRouter>
     </QueryClientProvider>
   </StrictMode>,

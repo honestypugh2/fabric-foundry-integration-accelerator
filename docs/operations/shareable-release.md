@@ -7,16 +7,35 @@ paths**. Do not present unfinished live work as complete.
 
 - **HC-01:** primary Fabric engineering / GitHub Copilot / Power BI learning guide. Reviewed
   notebooks, synthetic data, independent baseline and offline medallion build are available.
-  Live source landing was verified; live end-to-end table/model/report acceptance is deferred.
+  The learning-repo operational scope is closed. Power BI report rendering/review
+  and publication remain deferred; no published report is promised.
 - **MFG-01:** primary Foundry-over-Fabric agent guide. Offline sales briefs and quality
-  results are reproducible. Connected observations are dated and limited; later revenue
-  timeouts and final-answer gaps remain unresolved.
+  results and deterministic evaluation are reproducible. The demo answer-gap work is
+  closed for this learning handoff; connected use requires the reader's own configuration.
+  Historical observations are not current tenant-health checks.
 - **DQ-01:** supporting LOCAL/SIMULATED quality investigation and governed-change rehearsal.
 - **Claude Code:** retain setup instructions and alternate prompts. Setup, execution and
-  the GitHub Copilot-versus-Claude Code comparison are deferred.
+  live demonstrations and the GitHub Copilot-versus-Claude Code comparison are out of scope.
 
 Keep personal backlogs, session progress and environment-specific verification records
 in ignored local storage, not in the project's tracked documentation.
+
+Use the [README readiness summary](../../README.md#readiness) for the public capability
+boundary. The [scope record](delivery-backlog.md) explains the closed operational work
+and deferred report work; it does not require readers to repeat presenter verification.
+
+## Runnable delivery
+
+Use a full clone or `dist/ffia-source.tar.gz` produced by `make source-bundle-check`.
+Extract the bundle, enter `ffia-source/`, and follow the README setup from that root.
+The archive contains committed sources, configuration, guides, education and synthetic
+inputs. Dependencies still need restoration from lockfiles.
+
+The Python wheel/source distribution and frontend bundle are component builds, not a
+self-contained accelerator installer. Installing only the wheel omits the repository
+content required by the demo. No private bindings, environment files or runtime evidence
+belong in a delivery archive. The source-bundle smoke test runs the offline demo after
+extraction outside the original checkout; it does not validate cloud connectivity.
 
 ## Audience entry points
 
