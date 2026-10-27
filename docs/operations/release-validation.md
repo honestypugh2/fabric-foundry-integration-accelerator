@@ -1,6 +1,7 @@
 # Release validation
 
-Status: **DOCUMENTED BEHAVIOR** for CI; run results are separate evidence.
+Status: **DOCUMENTED BEHAVIOR** for retained CI definitions; hosted execution is disabled
+by repository-owner decision. Run results are separate evidence.
 The workflows never deploy Azure/Fabric resources or publish a package automatically.
 
 ## Gates
@@ -23,12 +24,37 @@ and review alerts before publication.
 They have no package/release publishing or cloud deployment authority. Artifacts expire after
 14 days; a human reviews them and publishes a release separately.
 
-**Hosted CI prerequisite:** GitHub Actions must be enabled in the repository settings.
-An active workflow definition is not a successful execution. Check the `quality` run for
-the exact revision before claiming hosted validation; local results are separate evidence.
-On 2026-10-26 Actions was found disabled and enabled with explicit owner approval.
-The permissions API readback confirmed `enabled: true`. That administration result
-does not prove a quality run passed; inspect the run for the delivered revision.
+## Repository automation policy
+
+GitHub Actions is **disabled** after the explicitly approved, one-time validation of the
+readability cleanup and dependency updates. The repository permissions API confirmed
+`enabled: false`. Keep the workflow definitions for optional future use; enabling hosted
+execution again requires owner approval. Routine verification uses the local commands below.
+
+Dependabot version-update configuration has been removed. Automated security-update PRs
+are also disabled (`enabled: false`); existing security-alert settings were not changed.
+Dependency maintenance is manual: review stable compatible versions, update exact pins and
+lockfiles, then run tests and dependency audits. Historical bot-authored commits remain;
+no contributor history was rewritten or account-wide app installation changed.
+
+An active workflow definition is not a successful execution. Before claiming hosted
+validation, inspect the run for the exact revision; local results are separate evidence.
+
+## Verified hosted code revision
+
+The merged code revision `b28d27e6192f9e29b84d631617a9ff1181a314b2` passed
+[quality](https://github.com/honestypugh2/fabric-foundry-integration-accelerator/actions/runs/40433719773)
+and [CodeQL](https://github.com/honestypugh2/fabric-foundry-integration-accelerator/actions/runs/40433719805)
+before Actions was disabled:
+
+- Python: 692 tests passed, one opt-in live test skipped; coverage exceeded 96%.
+- Frontend: 110 tests passed on Node 24 and 26; builds, lint and strict types passed.
+- Dependency audits, privacy scan, content checks and the source-bundle offline demo passed.
+- Both CodeQL language analyses passed; this does not certify zero security alerts.
+
+The subsequent automation-policy change only removes Dependabot configuration and updates
+this document. It is validated locally, not by a new hosted run. No cloud deployment or
+report publication is implied.
 
 ## Local verification
 
@@ -104,6 +130,8 @@ actionlint -shellcheck= .github/workflows/quality.yml .github/workflows/codeql.y
 ```
 
 ShellCheck was disabled for this syntax check. This is not an actual GitHub workflow run or
-CodeQL analysis. The first GitHub quality/CodeQL/release executions, production checklist and
-new server-side Foundry trace verification remain outstanding. No new deployment, capacity
-resume, package publication or cloud write was performed during final LOCAL validation.
+CodeQL analysis. At that historical checkpoint, the first GitHub quality/CodeQL/release
+executions, production checklist and new server-side Foundry trace verification were
+outstanding. The later quality/CodeQL evidence is recorded above; it does not complete the
+other deferred items. No new deployment, capacity resume, package publication or cloud write
+was performed during that LOCAL validation.
