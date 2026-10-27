@@ -13,12 +13,20 @@ make run          # API on :8000 and the Vite dev server on :5173 (proxying /api
 |---|---|
 | `api/client.ts` | The single API client. Distinguishes `ApiError`, `ControlPlaneUnreachableError` and `ContractError`. |
 | `api/generated.ts` | **Generated** from `schemas/openapi.json` by `ffia schemas export`. Do not edit. |
-| `api/contracts.ts` | Zod views of each response, with compile-time `contractChecks` against the generated types |
+| `api/contracts.ts` | Stable re-export entry for existing consumers |
+| `api/contracts/` | Feature-scoped Zod schemas/types; shared vocabularies in `common.ts`, compile-time generated-type drift checks in `drift.ts` |
 | `api/hooks.ts` | TanStack Query hooks, one per endpoint |
 | `app/` | Routes (lazy-loaded pages), layout, learning-level context, page titles, local progress |
 | `components/` | Status bar, level switcher, badges, provenance, query states, sanitized Markdown, copyable prompts |
 | `features/` | `home`, `architecture`, `patterns`, `learn`, `labs`, `guides`, `workshop`, `data`, `agents`, `bakeoff`, `demo` |
 | `test/` | Fetch mock, fixtures exported from the real API, render helper |
+| `styles.css`, `workspace.css` | Shared tokens/primitives and task-first layout respectively; superseded exact-selector declarations are removed rather than layered as legacy overrides |
+
+Contract files follow the HTTP capability boundaries: runtime, patterns, guides,
+changes, Fabric payloads, education, architecture, agents, knowledge and recorded
+bake-off data. Import through `api/contracts.ts` unless implementing a contract module.
+Keep common vocabularies in one place; never edit generated types to resolve drift.
+Error boundaries preserve an explicit recovery state when rendering or lazy imports fail.
 
 ## Pages
 

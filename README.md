@@ -48,6 +48,101 @@ authority. Identity, policy and human approval control live changes.
 **[Directory map](#repository-map)** · **[Module map](#module-map)** ·
 **[Reproduce and rebuild](#reproduce-and-build-from-scratch)**
 
+## Quick start
+
+Prerequisites:
+
+| Tool | Version | Notes |
+|---|---|---|
+| uv | 0.12.23 | Python package manager |
+| Python | 3.14 | `uv python install 3.14` |
+| Node.js | 24 LTS | Node 26 also tested |
+| Git | any recent | |
+| GNU Make | any recent | |
+
+**Supported development shell:** Bash on Linux or macOS; on Windows use WSL2
+with the repository and Python/Node tools installed inside the Linux environment.
+The Make targets use POSIX process supervision and are not native PowerShell commands.
+The local checks recorded here ran on Linux; macOS/WSL setup is documented, not
+independently certified. Power BI Desktop is a separate Windows-only optional tool,
+not a requirement for the offline app.
+
+For a fresh clone, start here:
+
+```bash
+git clone https://github.com/honestypugh2/fabric-foundry-integration-accelerator.git
+cd fabric-foundry-integration-accelerator
+```
+
+Then restore the checked-in dependency versions:
+
+```bash
+# Backend: always create and activate the virtual environment before installing
+uv venv --python 3.14 .venv
+source .venv/bin/activate
+uv sync --frozen
+
+# Frontend
+cd frontend && npm ci && cd ..
+
+# First useful success: no Azure setup required
+make demo-offline
+```
+
+**Expected result:** `Release gate: PASSED` and zero cloud operations. Resolve errors before
+connecting providers. Installation needs package-registry access; offline refers to execution.
+
+### Choose one startup path
+
+These are **alternatives, not commands to run in sequence**.
+
+| Path | Start | Expected result / stop |
+|---|---|---|
+| **A. Workshop app (recommended)** | `make run API_ARGS=--offline` | Open http://localhost:5173; expect Workshop and OFFLINE status. Choose Learn or Use Cases at `/use-cases`. Ctrl+C stops this launch. |
+| **B. Headless offline demo** | `make demo-offline` | Ten-act narrative ending in `Release gate: PASSED`; no browser needed |
+| **C. Coding-client MCP** | Follow [MCP profiles](config/mcp/README.md) and the guide's tool setup | The coding client launches approved configured servers. `make run-mcp` starts only synthetic `ffia-local` stdio, not a website or the real Fabric MCP. Ctrl+C stops a manually launched server. |
+
+The app command starts both API (:8000, API reference at http://localhost:8000/docs) and
+frontend (:5173). If either server exits, the launcher stops its owned server processes
+and returns a failure; Ctrl+C also stops both. Do not start `make run-api` before
+`make run`. Optional local exercises:
+`make data` builds layers; `make recovery-demo` rehearses recovery (SIMULATED).
+
+### Connect deliberately
+
+For a fresh clone only, create private configuration without overwriting an existing file:
+
+```bash
+test -f .env || cp .env.example .env
+```
+
+Follow [environment configuration](docs/operations/environment-configuration.md), supply
+private bindings and authenticate. Stop the offline app, then run `make run` for live-first
+HYBRID. Inspect each result's provider, label and fallback; configuration is not LIVE proof.
+Leave optional telemetry unconfigured for an entirely local session.
+
+If ports are occupied, reuse the instance or stop only your owned launch. For remote VS Code,
+forward the frontend port. See [startup troubleshooting](docs/operations/environment-configuration.md#startup-troubleshooting).
+
+### Maintainer checks
+
+`make validate` is the full local quality/release gate, **not a prerequisite to view the app**.
+Run targeted checks first; see [release validation](docs/operations/release-validation.md).
+
+Architecture diagrams (draw.io, Azure Architecture Center style, generated from YAML) are in
+[`docs/architecture`](docs/architecture/README.md) and interactive in the app at `/architecture`.
+Start with the [graphical repository map and guide screenshots](docs/architecture/repository-map.md)
+and [environment configuration](docs/operations/environment-configuration.md).
+
+See [control plane](docs/architecture/control-plane.md), [frontend](docs/architecture/frontend.md),
+[resilience](docs/architecture/resilience.md), [demo continuity](docs/operations/demo-continuity.md)
+and [learning paths](docs/education/learning-paths.md).
+
+`make demo-live` and `make demo-hybrid` now run a bounded application Fabric read and one
+synthetic Foundry question. They incur model usage, never create Fabric items, and do not
+substitute for Guide 1's assigned MCP tools. A fallback cannot pass the live evaluation gate.
+Run `make help` for every target.
+
 ## Choose a use case
 
 | Guide | What you will build and learn | What is ready |
@@ -149,101 +244,6 @@ See [workshop learning and research](docs/operations/workshop-learning.md),
 Spec-driven delivery is optional. The repo skill and P25 explain when to use it.
 Spec Kit is not installed or required for the default demo.
 
-## Quick start
-
-Prerequisites:
-
-| Tool | Version | Notes |
-|---|---|---|
-| uv | 0.12.23 | Python package manager |
-| Python | 3.14 | `uv python install 3.14` |
-| Node.js | 24 LTS | Node 26 also tested |
-| Git | any recent | |
-| GNU Make | any recent | |
-
-**Supported development shell:** Bash on Linux or macOS; on Windows use WSL2
-with the repository and Python/Node tools installed inside the Linux environment.
-The Make targets use POSIX process supervision and are not native PowerShell commands.
-The local checks recorded here ran on Linux; macOS/WSL setup is documented, not
-independently certified. Power BI Desktop is a separate Windows-only optional tool,
-not a requirement for the offline app.
-
-For a fresh clone, start here:
-
-```bash
-git clone https://github.com/honestypugh2/fabric-foundry-integration-accelerator.git
-cd fabric-foundry-integration-accelerator
-```
-
-Then restore the checked-in dependency versions:
-
-```bash
-# Backend: always create and activate the virtual environment before installing
-uv venv --python 3.14 .venv
-source .venv/bin/activate
-uv sync --frozen
-
-# Frontend
-cd frontend && npm ci && cd ..
-
-# First useful success: no Azure setup required
-make demo-offline
-```
-
-**Expected result:** `Release gate: PASSED` and zero cloud operations. Resolve errors before
-connecting providers. Installation needs package-registry access; offline refers to execution.
-
-### Choose one startup path
-
-These are **alternatives, not commands to run in sequence**.
-
-| Path | Start | Expected result / stop |
-|---|---|---|
-| **A. Workshop app (recommended)** | `make run API_ARGS=--offline` | Open http://localhost:5173; expect Workshop and OFFLINE status. Choose Learn or Use Cases at `/use-cases`. Ctrl+C stops this launch. |
-| **B. Headless offline demo** | `make demo-offline` | Ten-act narrative ending in `Release gate: PASSED`; no browser needed |
-| **C. Coding-client MCP** | Follow [MCP profiles](config/mcp/README.md) and the guide's tool setup | The coding client launches approved configured servers. `make run-mcp` starts only synthetic `ffia-local` stdio, not a website or the real Fabric MCP. Ctrl+C stops a manually launched server. |
-
-The app command starts both API (:8000, API reference at http://localhost:8000/docs) and
-frontend (:5173). If either server exits, the launcher stops its owned server processes
-and returns a failure; Ctrl+C also stops both. Do not start `make run-api` before
-`make run`. Optional local exercises:
-`make data` builds layers; `make recovery-demo` rehearses recovery (SIMULATED).
-
-### Connect deliberately
-
-For a fresh clone only, create private configuration without overwriting an existing file:
-
-```bash
-test -f .env || cp .env.example .env
-```
-
-Follow [environment configuration](docs/operations/environment-configuration.md), supply
-private bindings and authenticate. Stop the offline app, then run `make run` for live-first
-HYBRID. Inspect each result's provider, label and fallback; configuration is not LIVE proof.
-Leave optional telemetry unconfigured for an entirely local session.
-
-If ports are occupied, reuse the instance or stop only your owned launch. For remote VS Code,
-forward the frontend port. See [startup troubleshooting](docs/operations/environment-configuration.md#startup-troubleshooting).
-
-### Maintainer checks
-
-`make validate` is the full local quality/release gate, **not a prerequisite to view the app**.
-Run targeted checks first; see [release validation](docs/operations/release-validation.md).
-
-Architecture diagrams (draw.io, Azure Architecture Center style, generated from YAML) are in
-[`docs/architecture`](docs/architecture/README.md) and interactive in the app at `/architecture`.
-Start with the [graphical repository map and guide screenshots](docs/architecture/repository-map.md)
-and [environment configuration](docs/operations/environment-configuration.md).
-
-See [control plane](docs/architecture/control-plane.md), [frontend](docs/architecture/frontend.md),
-[resilience](docs/architecture/resilience.md), [demo continuity](docs/operations/demo-continuity.md)
-and [learning paths](docs/education/learning-paths.md).
-
-`make demo-live` and `make demo-hybrid` now run a bounded application Fabric read and one
-synthetic Foundry question. They incur model usage, never create Fabric items, and do not
-substitute for Guide 1's assigned MCP tools. A fallback cannot pass the live evaluation gate.
-Run `make help` for every target.
-
 ## Read and follow the repository
 
 **Do not read every file in directory order.** Follow one outcome, then trace one
@@ -333,7 +333,7 @@ All paths in this table are under
 | [approvals/](src/fabric_foundry_accelerator/approvals/) | Expiring, destination-bound approval records and checks |
 | [audit/](src/fabric_foundry_accelerator/audit/) | Correlated operation evidence and in-memory/JSONL stores |
 | [services/](src/fabric_foundry_accelerator/services/) | Use-case orchestration, runtime status, education and changes; [container.py](src/fabric_foundry_accelerator/services/container.py) composes settings, ports and implementations |
-| [api/](src/fabric_foundry_accelerator/api/) | FastAPI routes, application factory and TypeScript contract export; routes validate and delegate rather than implement business rules |
+| [api/](src/fabric_foundry_accelerator/api/) | FastAPI application factory, shared dependencies and TypeScript export; [routers/](src/fabric_foundry_accelerator/api/routers/) groups thin HTTP adapters by feature |
 | [mcp/](src/fabric_foundry_accelerator/mcp/) | Safe, allow-listed `ffia-local` tools and client-profile rendering; not the real Microsoft Fabric MCP server |
 | [agents/](src/fabric_foundry_accelerator/agents/) | Agent protocol, deterministic local sales agent, existing-agent Foundry SDK adapter and Agent Framework workflows |
 | [evaluation/](src/fabric_foundry_accelerator/evaluation/) | Deterministic baseline and agent-answer checks; a fluent model answer alone does not pass |
@@ -347,7 +347,6 @@ All paths in this table are under
 | [harness/](src/fabric_foundry_accelerator/harness/) | Rendered coding-client permissions and the command guard |
 | [skills/](src/fabric_foundry_accelerator/skills/) | Curated skill catalog, pins, installation and consistency checks |
 | [bakeoff/](src/fabric_foundry_accelerator/bakeoff/) | Task definitions, recorded runs/replays and deterministic grading; reading a replay is not a new client comparison |
-| [auth/](src/fabric_foundry_accelerator/auth/), [clients/](src/fabric_foundry_accelerator/clients/), [tools/](src/fabric_foundry_accelerator/tools/) | Reserved extension namespaces, currently package markers rather than complete shared implementations. Current Fabric REST/auth implementations are in [providers/fabric/](src/fabric_foundry_accelerator/providers/fabric/); the Foundry adapter is in [agents/](src/fabric_foundry_accelerator/agents/). |
 | [cli.py](src/fabric_foundry_accelerator/cli.py), [sbom.py](src/fabric_foundry_accelerator/sbom.py) | CLI entry point/command registration and generated dependency-inventory validation |
 
 ### React: how the browser reaches the backend
@@ -357,7 +356,7 @@ All paths in this table are under
 | [src/main.tsx](frontend/src/main.tsx) | React, router and query-client initialization |
 | [src/app/](frontend/src/app/) | Routes, shared layout, learning level and browser-local progress |
 | [src/features/](frontend/src/features/) | Home/workshop, guides, labs, learning, architecture, patterns, data, agent, demo and recorded-comparison screens |
-| [src/api/](frontend/src/api/) | HTTP client, runtime-validated response contracts, generated API types and query/mutation hooks |
+| [src/api/](frontend/src/api/) | HTTP client, feature-scoped [runtime contracts](frontend/src/api/contracts/), generated API types and query/mutation hooks; `contracts.ts` remains the stable import entry |
 | [src/components/](frontend/src/components/) | Reusable accessible UI, error/loading states, provenance badges and safe Markdown |
 | [src/content/](frontend/src/content/) | Small shared presentation content; structured lessons and guide content remain in the root content directories |
 | [src/test/](frontend/src/test/) | Test setup, rendering helpers and API-derived fixtures |
