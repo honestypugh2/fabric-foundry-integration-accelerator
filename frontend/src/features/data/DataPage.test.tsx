@@ -10,6 +10,7 @@ describe("data explorer", () => {
     const { calls } = mockApi(defaultRoutes);
     renderApp("/data");
     const tables = await screen.findByRole("table", { name: "Tables by medallion layer" });
+    expect(screen.getByText(/LOCAL results use DuckDB\/Parquet, not Fabric/)).toBeVisible();
     expect(within(tables).getAllByRole("row")).toHaveLength(fixtures.readTables.data.length + 1);
     expect(
       screen.getAllByText(fixtures.readTables.selected_provider, { exact: false }).length,

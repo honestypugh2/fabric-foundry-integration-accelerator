@@ -8,6 +8,32 @@ import { renderApp } from "../test/render";
 import { LEVEL_STORAGE_KEY } from "./levelContext";
 
 describe("app shell", () => {
+  it("opens Explore and navigates to the selected tool", async () => {
+    mockApi(defaultRoutes);
+    renderApp("/");
+    const summary = screen.getByText("Explore", { exact: true });
+    expect(summary.closest("details")).not.toHaveAttribute("open");
+    await userEvent.click(summary);
+    expect(summary.closest("details")).toHaveAttribute("open");
+    const tools = screen.getByRole("navigation", { name: "Explore tools" });
+    expect(
+      within(tools)
+        .getAllByRole("link")
+        .map((link) => [link.textContent, link.getAttribute("href")]),
+    ).toEqual([
+      ["Learn the concepts", "/learn"],
+      ["Pattern library", "/patterns"],
+      ["Data", "/data"],
+      ["Agent sandbox", "/agent"],
+      ["Bake-off", "/bakeoff"],
+      ["Offline verification", "/demo"],
+    ]);
+    await userEvent.click(within(tools).getByRole("link", { name: "Learn the concepts" }));
+    expect(
+      await screen.findByRole("heading", { name: "Understand the foundations" }),
+    ).toBeInTheDocument();
+  });
+
   it("renders the central lesson, start links and completeness coverage", async () => {
     mockApi(defaultRoutes);
     renderApp("/");
@@ -42,9 +68,9 @@ describe("app shell", () => {
     expect(within(status).getByText("Learning level").nextSibling).toHaveTextContent("L100");
     for (const label of [
       "Operating mode",
-      "Data provider",
+      "App data access",
       "Agent provider",
-      "MCP",
+      "App MCP tools",
       "Identity",
       "Write mode",
       "Learning level",
@@ -53,6 +79,12 @@ describe("app shell", () => {
       expect(within(status).getByText(label)).toBeVisible();
     }
     expect(within(status).getByText("Write mode").closest("details")).toBeNull();
+    await userEvent.click(
+      within(status).getByText(
+        "Configuration, not execution · inspect full state and evidence limits",
+      ),
+    );
+    expect(within(status).getByText(/not the coding assistant's MCP connection/)).toBeVisible();
   });
 
   it("lists enabled preview features", async () => {

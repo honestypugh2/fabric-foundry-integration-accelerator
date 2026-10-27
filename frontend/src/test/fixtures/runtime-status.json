@@ -5,10 +5,10 @@
     "core-healthcare-v1",
     "hc-lab-7file-v1"
   ],
-  "data_provider": "Local Fabric Educational Provider (LOCAL)",
+  "data_provider": "Offline synthetic data (DuckDB/Parquet) (LOCAL; no cloud call)",
   "environment": "offline",
   "identity": "Local process (no cloud identity in use)",
-  "mcp": "Local server ready: 17 allow-listed tools",
+  "mcp": "ffia-local: 17 allow-listed repository tools configured. The coding assistant's Fabric MCP connection is separate and not checked by this API.",
   "operating_mode": "OFFLINE",
   "overlay": "example-healthcare",
   "preview_features": [],
@@ -17,8 +17,8 @@
       "capability": "fabric_data",
       "configured": true,
       "kind": "LOCAL",
-      "name": "Local Fabric Educational Provider",
-      "note": "Synthetic lakehouses built: core-healthcare-v1, hc-lab-7file-v1",
+      "name": "Offline synthetic data (DuckDB/Parquet)",
+      "note": "Offline teaching data, not a Fabric service or MCP connection. Synthetic lakehouses built: core-healthcare-v1, hc-lab-7file-v1",
       "ready": true
     },
     {

@@ -8,7 +8,8 @@ from pydantic import TypeAdapter
 
 from fabric_foundry_accelerator.agents.port import AgentAnswer
 from fabric_foundry_accelerator.agents.workflows import MonthlyInsightsRun
-from fabric_foundry_accelerator.api.routes import RenderedView, SelectionSignal, ViewSummary
+from fabric_foundry_accelerator.api.routers.education import RenderedView, ViewSummary
+from fabric_foundry_accelerator.api.routers.patterns import SelectionSignal
 from fabric_foundry_accelerator.audit.store import AuditRecord
 from fabric_foundry_accelerator.bakeoff.runs import Scorecard
 from fabric_foundry_accelerator.bakeoff.tasks import TaskSet

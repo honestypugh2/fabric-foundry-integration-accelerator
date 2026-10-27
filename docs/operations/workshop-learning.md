@@ -1,5 +1,44 @@
 # Workshop learning and applied research
 
+## A task-first learning workspace
+
+Start with **Start here** to understand what the project is, why to use it and how to begin.
+Choose **Use Cases** for an end-to-end workflow or **Hands-on labs** for a focused exercise.
+The primary navigation keeps **Architecture** and **Evidence** close to the work; **Explore**
+holds the concept library, patterns, data, agent sandbox, comparisons and offline verification.
+
+The home page connects **Discover → Understand → Build → Verify**. The use-case catalog
+supports search across titles, descriptions and tools, plus industry and tool/service filters; query parameters
+preserve these choices in shared links. Cards come from registered guides, not fixed scenario
+branches.
+
+Each workshop has a separate **overview** with outcome, architecture, visible tools and
+prerequisites, and an explicit **Start workshop** action. Opening the overview no longer opens
+module one underneath it. Modules have a numbered checklist outline, breadcrumb, previous/next
+links and section navigation for tools, prompts, verification and LOCAL fallback. An unknown
+module URL reports an error instead of silently selecting a different module.
+
+This is a development showcase, not a production deployment. LIVE means an actual operation
+in the presenter's approved development environment; LOCAL remains the disclosed fallback for
+eligible reads. See [reference and integration alignment](tooling-and-workshop-alignment.md)
+for the Microsoft workshop precedents and the supported versus unverified tool boundaries.
+
+Labs display one stage at a time. Use the stage outline or previous/next buttons; the selected
+stage is encoded in `?stage=…` so a link or reload preserves your place. Completion marks are
+browser-local learning notes, not tool execution evidence.
+
+Every architecture surface in the app uses the same interactive studio, including lesson,
+use-case and guide-step diagrams. Select vector nodes with a mouse or Tab/Enter, read their
+level-specific description, ownership, offline equivalent, repository path and sources, then
+drill into a connected neighbor. A request trace shows its summary, current node/connection,
+step explanation and notes. The expandable trace outline can jump to any hop.
+
+**Presenter talk tracks are separate HTML deliverables.** They share structured architecture
+and use-case sources with the app but are not embedded in its navigation or learning pages.
+The two audience bundles and standalone talk tracks embed interactive SVG explorers;
+the audience bundles also include all ten architecture views. Their trace buttons illustrate
+the design offline and never invoke cloud tools.
+
 Choose one of two lenses. **Build and verify** shows what to do, why, when and how.
 **Foundations and research** explains the theory, connects it to today's tools and proposes an
 experiment you can repeat. Both work at Executive-L400 depths.
@@ -46,6 +85,25 @@ The coding harness uses Fabric MCP first with the named `ffia-local` fallback. T
 uses Fabric REST / Foundry SDK through its router. REST evidence is not MCP proof.
 The `/evidence` gallery records dates, providers, operations, limitations and synthetic UI
 images; configured providers and learner checkboxes are not verification.
+
+### Three connections, not one
+
+| Reader-facing name | What it actually does | What it does not mean |
+|---|---|---|
+| **Fabric MCP tools** | The coding assistant calls Microsoft's Fabric MCP tools under the signed-in identity. The root configuration launches a stdio process on the workstation; its tenant operations target remote Fabric. Hosted HTTP MCP integrations are separate servers. | A local MCP process does not make a Fabric operation LOCAL. Configuration alone does not prove connection or execution. |
+| **Fabric cloud (app REST)** | The React app calls the backend, whose REST adapter accesses Fabric with server-side credentials. HYBRID tries eligible LIVE reads first; strict LIVE does not fall back. | The app is not borrowing the coding assistant's MCP connection. A successful app REST call is not MCP proof. |
+| **Offline synthetic data (DuckDB/Parquet)** | Independent generated teaching data supports OFFLINE reads and permitted HYBRID read fallback, explicitly labeled LOCAL. | This is not a Fabric service, tenant-data cache or MCP server. Its availability does not mean fallback was used or Fabric disconnected. |
+
+The old display name **Local Fabric provider** described an implementation interface but
+suggested a locally running Fabric service. User-facing copy now names the actual synthetic
+data source. The internal `LocalFabricProvider` class, `local-fabric-provider` component ID
+and `fabric-local` runtime key remain stable for imports and diagram links.
+
+The status bar's **App data access** and **App MCP tools** fields describe only the backend's
+configuration. The latter names the repository's `ffia-local` tool catalog; it does not probe
+the assistant's external Fabric MCP session. Result envelopes identify which source actually
+answered, including any fallback reason. The architecture's available offline source is marked
+READY, not ACTIVE merely because data exists.
 
 ### Local and connected execution choices
 

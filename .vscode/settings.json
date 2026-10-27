@@ -30,5 +30,8 @@
     "/^az\\s+rest\\b/": false,
     "/^az\\s+fabric\\b/": false,
     "/^fab\\b/": false
+  },
+  "chat.agentSkillsLocations": {
+    ".claude/skills": true
   }
 }

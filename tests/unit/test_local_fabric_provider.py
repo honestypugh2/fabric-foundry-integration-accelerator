@@ -37,6 +37,7 @@ async def test_every_result_is_labeled_local_with_no_cloud_operation(
         assert envelope.cloud_operation_performed is False
         assert envelope.simulation_notice and "No Microsoft Fabric" in envelope.simulation_notice
         assert envelope.equivalent_fabric_service
+        assert envelope.selected_provider == "Offline synthetic data (DuckDB/Parquet)"
         assert envelope.evidence[0].category.value == "SIMULATED LOCALLY"
 
 
@@ -98,7 +99,7 @@ async def test_measures_match_committed_baseline(provider: FabricProvider, data_
 async def test_semantic_model_is_returned(provider: FabricProvider) -> None:
     model = (await provider.get_semantic_model(HC_MODEL)).data
     assert model.profile == "hc-lab-7file-v1"
-    assert provider.name == "Local Fabric Educational Provider"
+    assert provider.name == "Offline synthetic data (DuckDB/Parquet)"
 
 
 def test_local_provider_refuses_live_mode(data_root: Path) -> None:

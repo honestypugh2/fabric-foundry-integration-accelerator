@@ -16,7 +16,7 @@
     },
     {
       "binding": "mcp",
-      "detail": "Local server ready: 17 allow-listed tools; each harness starts it over stdio.",
+      "detail": "ffia-local: 17 allow-listed repository tools configured. The coding assistant's Fabric MCP connection is separate and not checked by this API. Start ffia-local through the harness over stdio.",
       "label": "LOCAL",
       "node": "ffia-local",
       "status": "READY"
@@ -58,10 +58,10 @@
     },
     {
       "binding": "fabric-local",
-      "detail": "Primary provider; profiles: core-healthcare-v1, hc-lab-7file-v1.",
+      "detail": "Offline source: synthetic data, not Fabric or MCP. Availability is not evidence of use. Profiles: core-healthcare-v1, hc-lab-7file-v1.",
       "label": "LOCAL",
       "node": "local-provider",
-      "status": "ACTIVE"
+      "status": "READY"
     },
     {
       "binding": "agents",

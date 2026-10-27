@@ -12,7 +12,7 @@ The workflows never deploy Azure/Fabric resources or publish a package automatic
 | Evaluation | `ffia agents eval --suite sales-insights-agent`: 100% of five baseline cases; expected grounding and out-of-scope refusal; fallbacks fail |
 | Privacy/dependencies | Privacy scan; pip-audit fails on any reported vulnerability; npm audit fails on HIGH/CRITICAL |
 | Static security | CodeQL Python and JavaScript/TypeScript, security-extended queries, push/PR/weekly/manual |
-| Release | Reuses quality and CodeQL; only then builds Python/frontend artifacts, CycloneDX SBOMs and SHA-256 checksums |
+| Release | Reuses quality and CodeQL; only then builds Python/frontend artifacts, a complete committed-source bundle, CycloneDX SBOMs and SHA-256 checksums |
 
 The existing [quality workflow](../../.github/workflows/quality.yml) runs docs and offline-demo
 gates. Do not duplicate them in separate workflows.
@@ -23,6 +23,13 @@ and review alerts before publication.
 They have no package/release publishing or cloud deployment authority. Artifacts expire after
 14 days; a human reviews them and publishes a release separately.
 
+**Hosted CI prerequisite:** GitHub Actions must be enabled in the repository settings.
+An active workflow definition is not a successful execution. Check the `quality` run for
+the exact revision before claiming hosted validation; local results are separate evidence.
+On 2026-10-26 Actions was found disabled and enabled with explicit owner approval.
+The permissions API readback confirmed `enabled: true`. That administration result
+does not prove a quality run passed; inspect the run for the delivered revision.
+
 ## Local verification
 
 Activate the existing virtual environment; restore dependencies only if missing:
@@ -31,11 +38,20 @@ Activate the existing virtual environment; restore dependencies only if missing:
 source .venv/bin/activate
 make validate
 make sbom
+make source-bundle-check
 ```
 
 For a fresh environment, use the setup in `AGENTS.md`. Live credentials are not required.
 The evaluation gate explicitly selects offline providers. CI has no Azure configuration.
 Default offline tests reject live execution; tenant tests remain opt-in.
+
+The supported runnable delivery is a clone or the complete `dist/ffia-source.tar.gz`,
+not the wheel alone. The source bundle is made from committed HEAD, excludes private
+and untracked files, and is extracted into a temporary directory for an offline-demo
+smoke test using the current installed Python dependencies. This verifies shipped
+content, not a cold-machine dependency installation. Both quality and release workflows
+run this check. Python package distributions and frontend outputs remain component
+builds that depend on repository content or a configured API respectively.
 
 `sbom/python.cdx.json` describes the installed Python environment (including developer tools).
 `sbom/frontend.cdx.json` describes frontend runtime and developer dependencies. The full

@@ -486,7 +486,9 @@ def test_runtime_overlay_never_claims_unconfigured_services(
         overlay["foundry"].status == "NOT CONFIGURED"
         and overlay["fabric-live"].status == "NOT CONFIGURED"
     )
-    assert overlay["local-provider"].status == "ACTIVE" and overlay["api"].status == "ACTIVE"
+    assert overlay["local-provider"].status == "READY" and overlay["api"].status == "ACTIVE"
+    assert "Availability is not evidence of use" in overlay["local-provider"].detail
+    assert "Fabric MCP connection is separate" in overlay["ffia-local"].detail
     assert overlay["agents"].status == "ACTIVE"
     assert "LOCAL agent answers offline" in overlay["agents"].detail
     outage = make_container(environment="hybrid", simulate_fabric_outage=True)
@@ -495,7 +497,19 @@ def test_runtime_overlay_never_claims_unconfigured_services(
         for n in view_runtime(outage, outage.education.library.view("live-vs-offline")).nodes
     }
     assert degraded["live"].status == "DEGRADED" and degraded["live"].label == "FAULT-INJECTION"
-    assert "Approved fallback" in degraded["local"].detail
+    assert "Available read fallback" in degraded["local"].detail
+
+
+def test_runtime_overlay_does_not_offer_local_fallback_in_strict_live(
+    make_container: Callable[..., Container],
+) -> None:
+    container = make_container(environment="live", simulate_fabric_outage=True)
+    overlay = {
+        n.node: n for n in view_runtime(container, container.education.library.view("system")).nodes
+    }
+    assert overlay["local-provider"].status == "READY"
+    assert "not eligible in strict LIVE" in overlay["local-provider"].detail
+    assert "Available read fallback" not in overlay["local-provider"].detail
 
 
 async def test_runtime_overlay_reports_open_breaker(

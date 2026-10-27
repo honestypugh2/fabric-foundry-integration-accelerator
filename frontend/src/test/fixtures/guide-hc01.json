@@ -116,7 +116,7 @@
       ],
       "objective": "Prove the Fabric MCP server reaches the intended tenant before any write.",
       "offline_command": "curl -s -X POST localhost:8000/api/v1/fabric/read -H 'content-type: application/json' -d '{\"operation\":\"list_workspaces\"}'",
-      "offline_equivalent": "List workspaces from the Local Fabric Provider (labeled LOCAL).",
+      "offline_equivalent": "List synthetic workspace metadata from offline teaching data (LOCAL); this does not call Fabric.",
       "rehearsal": null,
       "requires_windows": false,
       "skills": [],

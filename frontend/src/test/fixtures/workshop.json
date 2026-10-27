@@ -1456,7 +1456,7 @@
         "title": "Investigate, specify and verify"
       }
     ],
-    "summary": "Understand the foundations. Build a bounded use case. Inspect the evidence. Learn why it works, where it fails and what production still requires.",
+    "summary": "Explore the possibilities of Fabric, Foundry and coding assistants. Build a use case in your development environment, learn how it works, and show the evidence. LIVE first, with explicit LOCAL fallback.",
     "title": "Build trustworthy data and agent workflows",
     "use_cases": [
       {

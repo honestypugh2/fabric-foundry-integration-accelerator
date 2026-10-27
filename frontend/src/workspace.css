@@ -1,0 +1,616 @@
+/* Task-first layout. Shared light/dark theme tokens are owned by styles.css. */
+* {
+  box-sizing: border-box;
+}
+body {
+  padding-bottom: 0;
+  overflow-wrap: anywhere;
+}
+main {
+  max-width: 92rem;
+  padding: 2rem clamp(1rem, 4vw, 3rem) 4rem;
+  min-height: 70vh;
+}
+.app-header {
+  position: relative;
+  box-shadow: 0 4px 22px #142a4410;
+  background: var(--color-surface);
+}
+.app-header__inner {
+  max-width: 92rem;
+}
+.brand__mark {
+  border-radius: 12px;
+  background: #075e64;
+  color: white;
+}
+.brand__name {
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+.brand__tagline {
+  font-size: 0.75rem;
+}
+.app-nav ul {
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  overflow: visible;
+}
+.app-nav li {
+  flex-shrink: 0;
+}
+.app-nav a {
+  border-radius: 8px;
+  padding: 0.65rem 1rem;
+}
+.app-nav a[aria-current="page"] {
+  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  color: var(--color-accent);
+}
+.explore-menu {
+  margin-left: auto;
+  position: relative;
+}
+.explore-menu summary {
+  cursor: pointer;
+  padding: 0.65rem 1rem;
+  font-weight: 650;
+  white-space: nowrap;
+}
+.explore-menu nav {
+  position: absolute;
+  right: 0;
+  z-index: 10;
+  min-width: 15rem;
+  padding: 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-surface);
+  box-shadow: 0 16px 40px #0002;
+}
+.explore-menu nav a {
+  display: block;
+}
+.workshop-hero {
+  margin-top: 0;
+  box-shadow: 0 16px 60px #142a4408;
+}
+.workshop-hero h1 {
+  max-width: 20ch;
+  font-size: clamp(2.25rem, 4vw, 4rem);
+}
+.hero-loop {
+  gap: 0.75rem;
+}
+.hero-loop li {
+  background: var(--color-bg);
+  border: 0;
+  padding: 1.25rem;
+}
+.hero-loop small {
+  font-size: 0.85rem;
+}
+.hero-loop span {
+  font-size: 1rem;
+}
+.start-paths > h2 {
+  font-size: 2rem;
+  letter-spacing: -0.035em;
+}
+.start-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.75rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px #142a4406;
+}
+.start-paths .cards {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+}
+.start-card .button-link {
+  align-self: flex-start;
+  margin-top: auto;
+}
+.start-card h3 {
+  font-size: 1.35rem;
+  line-height: 1.3;
+}
+.path-number {
+  color: var(--color-accent);
+  font-size: 0.85rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+}
+.learning-library {
+  margin-block: 2rem;
+  padding: 1.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+.learning-library > summary {
+  font-weight: 650;
+  cursor: pointer;
+}
+.cards {
+  gap: 1.25rem;
+}
+.card {
+  background: var(--color-surface);
+  border-radius: 14px;
+}
+.button-link {
+  color: white;
+  background: #075e64;
+}
+.status-bar {
+  position: static;
+  border-top: 1px solid var(--color-border);
+  padding: 1rem clamp(1rem, 4vw, 3rem);
+  background: var(--color-surface);
+}
+.status-bar dl {
+  max-width: 86rem;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem 1.5rem;
+}
+.status-bar dd {
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+.status-bar__item {
+  display: grid;
+  align-content: start;
+  gap: 0.25rem;
+}
+.status-bar dt {
+  white-space: nowrap;
+}
+.status-bar details {
+  max-width: 86rem;
+  margin: 1rem auto 0;
+}
+.lab-workspace {
+  display: grid;
+  grid-template-columns: 17rem minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+  margin-block: 2rem;
+}
+.lab-outline {
+  position: sticky;
+  top: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: var(--color-surface);
+  padding: 0.5rem;
+}
+.lab-outline ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.lab-outline li + li {
+  margin-top: 0.25rem;
+}
+.lab-outline button {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  padding: 0.8rem;
+  border-radius: 8px;
+  color: var(--color-muted);
+}
+.lab-outline button[aria-current="step"] {
+  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  color: var(--color-accent);
+  font-weight: 700;
+}
+.lab-outline small {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 400;
+  margin-top: 0.2rem;
+}
+.stage-index {
+  flex: 0 0 2ch;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.8rem;
+}
+.stage--focused {
+  margin: 0;
+  padding: clamp(1rem, 3vw, 2.25rem);
+  border-radius: 16px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  min-width: 0;
+}
+.stage--focused > h2 {
+  margin-top: 0.5rem;
+  font-size: 1.8rem;
+}
+.stage-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid var(--color-border);
+  padding-top: 1.5rem;
+  margin-top: 2rem;
+}
+.architecture-explorer {
+  margin-block: 2rem;
+}
+.view-tabs ul {
+  gap: 0.5rem;
+}
+.view-tabs a {
+  display: block;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-surface);
+  text-decoration: none;
+}
+.view-tabs a[aria-current="page"] {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 10%, var(--color-surface));
+}
+.studio {
+  padding: clamp(1rem, 2vw, 2rem);
+  border-radius: 16px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  min-width: 0;
+}
+.studio__body {
+  grid-template-columns: minmax(0, 1fr) minmax(16rem, 21rem);
+  gap: 1rem;
+}
+.studio__canvas {
+  background: var(--color-bg);
+  border-radius: 12px;
+}
+.inspector {
+  position: static;
+  border-radius: 12px;
+  background: var(--color-bg);
+  max-height: 46rem;
+  overflow: auto;
+}
+.inspector .definition-list > div {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.25rem;
+  padding-block: 0.5rem;
+}
+.studio__cue {
+  border-left: 4px solid var(--color-accent);
+  background: var(--color-bg);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+}
+.trace-outline {
+  margin-block: 1rem;
+}
+.connection-link {
+  font: inherit;
+  padding: 0.2rem 0.4rem;
+  color: var(--color-accent);
+  background: transparent;
+  text-align: left;
+}
+.workshop-hero {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background:
+    radial-gradient(
+      ellipse at top left,
+      color-mix(in srgb, var(--color-accent) 12%, transparent),
+      transparent 65%
+    ),
+    var(--color-surface);
+}
+.workshop-flow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: -1rem 0 3rem;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--color-surface);
+}
+.workshop-flow a {
+  display: grid;
+  gap: 0.5rem;
+  padding: 1.4rem;
+  color: var(--color-fg);
+  text-decoration: none;
+  border-inline-start: 1px solid var(--color-border);
+}
+.workshop-flow a:first-child {
+  border-inline-start: 0;
+}
+.workshop-flow span {
+  color: var(--color-accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.workshop-flow a:hover,
+.accelerator-card:hover {
+  background: color-mix(in srgb, var(--color-accent) 5%, var(--color-surface));
+}
+.catalog-filters {
+  display: flex;
+  align-items: end;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1.25rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  border-radius: 14px;
+}
+.catalog-filters label {
+  display: grid;
+  gap: 0.5rem;
+  flex: 1 1 14rem;
+  font-weight: 650;
+}
+.catalog-filters input,
+.catalog-filters select {
+  width: 100%;
+  min-width: 0;
+  min-height: 2.75rem;
+  font: inherit;
+  color: var(--color-fg);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 0.65rem;
+}
+.accelerator-catalog {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr));
+}
+.accelerator-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.75rem;
+  border-top: 4px solid var(--color-accent);
+}
+.accelerator-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.accelerator-card .text-link {
+  margin-top: auto;
+}
+.technology-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0;
+  list-style: none;
+}
+.catalog-requirements summary {
+  cursor: pointer;
+  color: var(--color-accent);
+  font-weight: 650;
+}
+.technology-tags li {
+  font-size: 0.75rem;
+  background: var(--color-bg);
+  color: var(--color-muted);
+  padding: 0.35rem 0.6rem;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+}
+.breadcrumbs,
+.module-jumps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  margin-block: 1rem;
+}
+.workshop-launch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+  margin-block: 2rem;
+}
+.workshop-launch .button-link {
+  flex-shrink: 0;
+}
+.workshop-launch p {
+  margin-bottom: 0;
+}
+.runner {
+  grid-template-columns: minmax(16rem, 21rem) minmax(0, 1fr);
+  gap: 1.5rem;
+  margin-block: 2rem;
+}
+.runner__steps {
+  position: sticky;
+  top: 1rem;
+  max-height: calc(100vh - 2rem);
+  overflow: auto;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: var(--color-surface);
+}
+.runner__steps h2 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+.runner__steps progress {
+  width: 100%;
+  accent-color: var(--color-accent);
+}
+.runner__steps ol {
+  padding: 0;
+  list-style: none;
+}
+.runner__steps li {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--color-border);
+  padding-block: 0.4rem;
+}
+.runner__steps li > a {
+  display: flex;
+  align-items: baseline;
+  gap: 0.65rem;
+  flex: 1;
+  padding: 0.65rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: var(--color-fg);
+  text-decoration: none;
+}
+.runner__steps a[aria-current="step"] {
+  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  color: var(--color-accent);
+}
+.module-number {
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-muted);
+  flex: 0 0 2ch;
+}
+.runner__flag {
+  font-size: 0.65rem;
+}
+.runner__done {
+  margin-inline-start: 0;
+}
+.runner > .step,
+.workshop-next {
+  min-width: 0;
+  padding: clamp(1rem, 2vw, 2rem);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+.step > h2 {
+  margin-top: 0;
+}
+.step section {
+  scroll-margin-top: 1rem;
+}
+.module-jumps {
+  border-block: 1px solid var(--color-border);
+  padding-block: 1rem;
+}
+.module-jumps a {
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  background: var(--color-bg);
+  text-decoration: none;
+}
+@media (max-width: 900px) {
+  .runner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .runner__steps {
+    position: static;
+    max-height: 22rem;
+  }
+}
+@media (max-width: 650px) {
+  .workshop-flow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .workshop-flow a {
+    border-bottom: 1px solid var(--color-border);
+    padding: 1rem;
+  }
+  .workshop-launch {
+    align-items: start;
+    flex-direction: column;
+  }
+}
+.trace-outline li {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+}
+.trace-outline button[aria-current="step"] {
+  border-color: var(--color-accent);
+  font-weight: 750;
+}
+.studio__controls {
+  gap: 1rem;
+}
+@media (max-width: 1050px) {
+  .studio__body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .inspector {
+    max-height: none;
+  }
+}
+@media (max-width: 750px) {
+  main {
+    padding-top: 1rem;
+  }
+  .app-header__top {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .brand__name {
+    font-size: 0.95rem;
+  }
+  .app-nav ul {
+    flex-wrap: wrap;
+  }
+  .app-nav a {
+    padding: 0.5rem 0.6rem;
+  }
+  .explore-menu {
+    margin-left: 0;
+  }
+  .explore-menu nav {
+    right: auto;
+    left: 0;
+  }
+  .workshop-hero {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .hero-loop {
+    grid-template-columns: 1fr 1fr;
+  }
+  .lab-workspace {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+  .lab-outline {
+    position: static;
+  }
+  .lab-outline ol {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .lab-outline small {
+    display: none;
+  }
+  .status-bar dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

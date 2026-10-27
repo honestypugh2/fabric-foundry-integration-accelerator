@@ -10,11 +10,18 @@ export function LabsPage() {
   const labs = useLabs();
   return (
     <>
-      <h1>Labs</h1>
-      <p>
-        Every lab follows the same eleven stages: learn, see, build, inspect, break it, recover,
-        verify, go deeper, try with GitHub Copilot, try with Claude Code, and production notes.
-      </p>
+      <div className="page-intro">
+        <p className="eyebrow">Practice one skill at a time</p>
+        <h1>Hands-on labs</h1>
+        <p className="lead">
+          Choose an exercise, work through one focused stage, and check the expected result before
+          moving on.
+        </p>
+        <p>
+          Each lab includes a failure-and-recovery exercise and equivalent assistant prompts.
+          Progress stays in your browser; it never certifies live execution.
+        </p>
+      </div>
       <QueryState label="labs" {...labs}>
         {(all) => (
           <ul className="cards">

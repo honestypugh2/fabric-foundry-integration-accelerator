@@ -38,7 +38,7 @@ Call the Fabric MCP core_search-catalog tool directly with search text <WORKSPAC
 
 Checkpoint: The known workspace ID appears in the actual MCP response and a workspace-scoped call succeeds.
 
-Offline equivalent: List workspaces from the Local Fabric Provider (labeled LOCAL).
+Offline equivalent: List synthetic workspace metadata from offline teaching data (LOCAL); this does not call Fabric.
 
 Fallback: LOCAL, ffia-local, list_fabric_workspaces, list_fabric_items. LOCAL offline; LIVE through the router when FFIA_FABRIC_LIVE=1 in hybrid.
 

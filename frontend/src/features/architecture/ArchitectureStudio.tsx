@@ -13,9 +13,10 @@ interface Inspection {
   readonly nodeId: string;
   readonly components: ReadonlyMap<string, ArchitectureComponent>;
   readonly runtime: NodeRuntime | undefined;
+  readonly onSelect: (node: string) => void;
 }
 
-function Inspector({ rendered, nodeId, components, runtime }: Inspection) {
+function Inspector({ rendered, nodeId, components, runtime, onSelect }: Inspection) {
   const { level } = useLevel();
   const node = rendered.view.nodes.find((n) => n.id === nodeId);
   if (node === undefined) {
@@ -31,11 +32,17 @@ function Inspector({ rendered, nodeId, components, runtime }: Inspection) {
         <Badge value={stateText(node.state, node.phase)} kind="state" />{" "}
         {component ? <Badge value={component.status} kind="status" /> : null}
       </p>
+      <h4>What it is and why it matters</h4>
       <p>
         <span className="visually-hidden">At {levelLabel(level)}: </span>
         {component ? component.description[level] : node.summary}
       </p>
-      {component && node.summary ? <p className="meta">{node.summary}</p> : null}
+      {component && node.summary ? (
+        <>
+          <h4>Role in this workflow</h4>
+          <p>{node.summary}</p>
+        </>
+      ) : null}
       {runtime ? (
         <p className="inspector__runtime">
           <strong>Now:</strong> <Badge value={runtime.status} kind="runtime" /> {runtime.detail}
@@ -71,8 +78,17 @@ function Inspector({ rendered, nodeId, components, runtime }: Inspection) {
             {links.map((edge) => (
               <li key={edge.id}>
                 {edge.source === node.id ? "To " : "From "}
-                {names.get(edge.source === node.id ? edge.target : edge.source)}
+                <button
+                  type="button"
+                  className="connection-link"
+                  onClick={() => {
+                    onSelect(edge.source === node.id ? edge.target : edge.source);
+                  }}
+                >
+                  {names.get(edge.source === node.id ? edge.target : edge.source)}
+                </button>
                 {edge.label ? `: ${edge.label}` : ""}
+                {` (${edge.kind}${edge.planned ? ", planned" : ""})`}
               </li>
             ))}
           </ul>
@@ -101,7 +117,8 @@ function Studio({ rendered }: { readonly rendered: RenderedView }) {
   const [hop, setHop] = useState(-1);
   const [showRuntime, setShowRuntime] = useState(hasRuntime);
   const [showStates, setShowStates] = useState(true);
-  const [fit, setFit] = useState(false);
+  const [fit, setFit] = useState(true);
+  const headingId = useId();
   const runtimeQuery = useViewRuntime(view.id, showRuntime && hasRuntime);
   const runtime = useMemo(
     () => new Map((runtimeQuery.data?.nodes ?? []).map((n) => [n.node, n])),
@@ -152,9 +169,25 @@ function Studio({ rendered }: { readonly rendered: RenderedView }) {
   };
 
   return (
-    <section aria-labelledby="view-heading" className="studio">
-      <h2 id="view-heading">{view.title}</h2>
+    <section aria-labelledby={headingId} className="studio">
+      <h2 id={headingId}>{view.title}</h2>
       <p className="lead">{view.summary}</p>
+      {architecture.isError ? (
+        <p role="alert" className="notice">
+          Component descriptions could not be loaded. Diagram-specific summaries remain available;
+          retry the page for full ownership and learning-depth detail.
+        </p>
+      ) : null}
+      {showRuntime && runtimeQuery.isError ? (
+        <p role="alert" className="notice">
+          Runtime state could not be loaded. The diagram is a design view, not evidence of current
+          service health.
+        </p>
+      ) : null}
+      <p className="notice">
+        Explore the design, not a recorded execution. Click any node or use Tab and Enter for
+        details. Start a trace to follow the data, access and approval boundaries one hop at a time.
+      </p>
 
       <div className="studio__controls">
         {view.steps.length > 0 ? (
@@ -284,6 +317,11 @@ function Studio({ rendered }: { readonly rendered: RenderedView }) {
       </div>
 
       <div className="studio__cue" role="status" aria-live="polite">
+        {trace ? (
+          <p>
+            <strong>{trace.title}:</strong> {trace.summary}
+          </p>
+        ) : null}
         {trace && current ? (
           <p>
             <Badge value={trace.label} /> {trace.title} · step {hop + 1} of {trace.steps.length}
@@ -296,10 +334,49 @@ function Studio({ rendered }: { readonly rendered: RenderedView }) {
           </p>
         ) : null}
         <p>
-          <strong>Presenter cue:</strong> {cue}
+          <strong>Step explanation:</strong> {cue}
         </p>
+        {current ? (
+          <p className="meta">
+            Active node: {view.nodes.find((node) => node.id === current.node)?.label}.{" "}
+            {current.edge
+              ? `Connection: ${view.edges.find((edge) => edge.id === current.edge)?.label ?? current.edge}.`
+              : "This is the entry point."}{" "}
+            The trace label describes the learning path, not proof of a new operation.
+          </p>
+        ) : null}
       </div>
+      {trace ? (
+        <details className="trace-outline">
+          <summary>Explore all {trace.steps.length} trace steps</summary>
+          <ol>
+            {trace.steps.map((step, index) => (
+              <li key={`${step.node}-${String(index)}`}>
+                <button
+                  type="button"
+                  aria-current={hop === index ? "step" : undefined}
+                  onClick={() => {
+                    setUpto(null);
+                    setHop(index);
+                    setSelected(step.node);
+                  }}
+                >
+                  {view.nodes.find((node) => node.id === step.node)?.label}
+                </button>
+                <p>{step.say}</p>
+                {step.note ? <p className="meta">{step.note}</p> : null}
+              </li>
+            ))}
+          </ol>
+        </details>
+      ) : (
+        <p className="notice">No request trace has been authored for this view.</p>
+      )}
 
+      <p className="meta">
+        Start with the full picture, then choose a build layer or select a component for details.
+        Turn off Fit to width to scroll through the diagram at its readable drawing size.
+      </p>
       <div className="studio__body">
         <div className="studio__canvas" ref={canvasRef}>
           <DiagramCanvas
@@ -321,7 +398,11 @@ function Studio({ rendered }: { readonly rendered: RenderedView }) {
               rendered={rendered}
               nodeId={selected}
               components={components}
-              runtime={runtime.get(selected)}
+              runtime={showRuntime ? runtime.get(selected) : undefined}
+              onSelect={(node) => {
+                setHop(-1);
+                setSelected(node);
+              }}
             />
           ) : (
             <p>

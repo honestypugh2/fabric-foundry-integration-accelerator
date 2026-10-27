@@ -33,14 +33,14 @@ flowchart LR
     policies["Policies and overlay<br/><small>config/</small>"]
     content["Learning content<br/><small>education/ and guides/</small>"]
     audit["Audit log<br/><small>data/runtime/audit.jsonl</small>"]
-    local_provider["Local Fabric provider<br/><small>DuckDB over Parquet</small>"]
+    local_provider["Offline synthetic data<br/><small>DuckDB/Parquet; not Fabric</small>"]
     synthetic_data["Synthetic medallion data<br/><small>data/synthetic</small>"]
     agents["Agent service<br/><small>Router, LOCAL agent, eval, workflow</small>"]
     fabric_mcp["Fabric MCP server · tenant<br/><small>Guide 1 tool path</small>"]
   end
   subgraph cloud["Microsoft cloud (live-first app)"]
     foundry["Foundry Agent Service · tenant<br/><small>SDK, existing agent, live-first</small>"]
-    fabric_live["Fabric application provider · tenant<br/><small>REST reads, live-first</small>"]
+    fabric_live["Fabric cloud (app REST) · tenant<br/><small>LIVE reads; separate from MCP</small>"]
   end
   web_app -->|/api requests| vite_proxy
   vite_proxy -->|Same-origin proxy| api
@@ -126,11 +126,11 @@ Solid boxes are implemented here or documented by Microsoft; dashed boxes are pl
 | Policies and overlay | Implemented in this repository | Policy files define operations, risk and rollback; overlays can narrow but not remove approval. | `config/policies` |
 | Learning content | Implemented in this repository | Lessons, labs, architecture views, the pattern catalog and Use-Case Guides as validated YAML and Markdown. | `education` |
 | Audit log | Implemented in this repository | Records share a correlation ID across plan, approval, execution and tool calls. | `src/fabric_foundry_accelerator/audit/store.py` |
-| Local Fabric provider | Implemented in this repository | Read-only, allow-listed operations over synthetic Parquet; never presented as Fabric. | `src/fabric_foundry_accelerator/providers/fabric/local.py` |
+| Offline synthetic data | Implemented in this repository | Read-only operations over synthetic Parquet; LOCAL results make no cloud call. It does not replace or disconnect Fabric MCP. | `src/fabric_foundry_accelerator/providers/fabric/local.py` |
 | Synthetic medallion data | Implemented in this repository | Generated synthetic CSVs, built Bronze, Silver and Gold Parquet, semantic model contracts and expected baselines. No real data. | `data/synthetic` |
 | Agent service | Implemented in this repository | Asks the sales agent through the provider router: the deterministic LOCAL agent offline, the live Foundry agent when opted in. Also runs the agent evaluation suite and the Agent Framework monthly-insights workflow (drafts only; nothing is sent). | `src/fabric_foundry_accelerator/agents` |
 | Foundry Agent Service | Requires tenant validation | Owns reasoning and orchestration; consumes Fabric context; never performs authoritative writes directly. | `src/fabric_foundry_accelerator/agents/foundry.py` |
-| Fabric application provider | Requires tenant validation | Pick the narrowest server; they run with the caller's Fabric permissions; status differs by server. | `src/fabric_foundry_accelerator/providers/fabric/live.py` |
+| Fabric cloud (app REST) | Requires tenant validation | In HYBRID mode eligible reads try Fabric first and can fall back to disclosed synthetic data. Strict LIVE never falls back. | `src/fabric_foundry_accelerator/providers/fabric/live.py` |
 | Fabric MCP server | Requires tenant validation | The coding harness calls the actual pinned Fabric MCP tools. If unavailable, announce it and use only the guide's named ffia-local read fallback or SIMULATED write rehearsal. The application REST provider is not MCP evidence. | `config/mcp/profiles.yaml` |
 
 ### Aligned to

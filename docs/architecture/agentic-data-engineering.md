@@ -129,12 +129,12 @@ Solid boxes are implemented here or documented by Microsoft; dashed boxes are pl
 | Tool-call log | Microsoft-documented | The harness records which tools were called with which inputs. | - |
 | Fabric Skills | Microsoft-documented | Skills are knowledge, not execution; they drive REST, SQL, KQL or PySpark under the user's identity. | - |
 | Plugins and skills loaded | Microsoft-documented | Skills are installed through the plugin marketplace and loaded on demand when a task matches. | - |
-| Skill dry run | Implemented in this repository | Read-only, allow-listed operations over synthetic Parquet; never presented as Fabric. | - |
+| Skill dry run | Implemented in this repository | Read-only operations over synthetic Parquet; LOCAL results make no cloud call. It does not replace or disconnect Fabric MCP. | - |
 | Hardened MCP overlay | Implemented in this repository | MCP profiles as code: read-only defaults with explicit tool allow-lists, a separate opt-in authoring profile with per-call approval, and a check that rejects unpinned servers, write tools in read-only profiles and arbitrary query or data-egress tools. | `config/mcp/profiles.yaml` |
 | Skill named in the audit | Planned (Phase 7) | Each call records which skill drove it, so reviewers can trace procedure to outcome. | - |
 | Workspace context | Requires tenant validation | What the agent learns by inspecting the actual workspace. Must be validated in your tenant. | - |
 | Same harness | Microsoft-documented | The same agent, now with read-only access to a real workspace. | - |
-| Read-only Fabric MCP | Requires tenant validation | Pick the narrowest server; they run with the caller's Fabric permissions; status differs by server. | `config/mcp/profiles.yaml` |
+| Read-only Fabric MCP | Requires tenant validation | Server location is not data location. Microsoft's locally launched stdio server calls remote Fabric under the caller's permissions; hosted HTTP MCP servers are distinct integrations. | `config/mcp/profiles.yaml` |
 | Read-only allow-list | Requires tenant validation | Only read tools are allowed, and the workspace and tenant are pinned so the agent cannot wander. | `config/mcp/profiles.yaml` |
 | Correlation and request IDs | Implemented in this repository | Records share a correlation ID across plan, approval, execution and tool calls. | - |
 | Change templates | Implemented in this repository | Policy defines each operation's risk, validation and rollback, so every plan is complete. | `config/policies/writes.yaml` |

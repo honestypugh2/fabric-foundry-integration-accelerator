@@ -42,9 +42,9 @@ jobs:
       - name: Install locked dependencies
         run: uv sync --frozen
       - name: Ruff lint
-        run: ruff check src tests
+        run: ruff check src tests scripts
       - name: Ruff format
-        run: ruff format --check src tests
+        run: ruff format --check src tests scripts
       - name: Pyright (strict)
         run: pyright
       - name: Pytest with coverage (>= 85%)
@@ -79,6 +79,8 @@ jobs:
         run: ffia agents eval --suite sales-insights-agent
       - name: Build distribution
         run: uv build
+      - name: Smoke-test committed source bundle outside the checkout
+        run: make source-bundle-check
 
   frontend:
     name: frontend (Node ${{ matrix.node }})

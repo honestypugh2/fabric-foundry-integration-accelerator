@@ -4,28 +4,36 @@ Decide the mode **30 minutes before** each meeting. The offline path always work
 needs the steps below. Every live step names its provider and tool, and the cloud changes in
 section B need the presenter's explicit approval before they run.
 
+This is a development showcase, not a production deployment. Reuse the existing demo resources;
+check current readiness before considering any creation. The app is LIVE-first HYBRID with
+explicit LOCAL read fallback. A failed LIVE write stops rather than becoming a simulation.
+
 ## 0. Both guides, always (5 minutes)
 
 ```bash
 cd fabric-foundry-integration-accelerator && source .venv/bin/activate
 make demo-prep          # clears the dev-server cache, runs every offline check
 ffia skills status      # four pinned skills (run `ffia skills install` if missing)
-make run                # .env-backed, live-first HYBRID app → Demo → Workshop talk tracks
+make run                # .env-backed, live-first HYBRID app → Start here → Use Cases
 # For an entirely offline presentation: make run API_ARGS=--offline
 ```
 
-Open the handouts from the app's **Demo** page, or directly:
+Open the presentation handouts separately from the React learning app:
 
 Configure the ignored root `.env` using [environment configuration](../docs/operations/environment-configuration.md).
 It holds the Azure, Fabric and Foundry variables; `.env.local` is an optional override.
 Never open either private environment file on a shared screen.
 
-- Guide 1: `demos/fabric-copilot-level-up/index.html`
-- Guide 2: `demos/foundry-fabric-agents-workshop/index.html`
+- Guide 1: [Fabric engineering handout](fabric-copilot-level-up/index.html)
+- Guide 2: [Foundry agents handout](foundry-fabric-agents-workshop/index.html)
+- Complete portable bundles: [customer](../docs/field-playbooks/customer.html) and
+  [SE/developer](../docs/field-playbooks/se-developer.html)
 
 ## A. Live read-only Fabric (Guide 1 live MCP segment), 5 minutes, no approval needed for reads
 
-1. Resume the F capacity. Provider: Azure Resource Manager. Tool: `az rest POST .../capacities/<name>/resume`. This starts billing (an F8 in Central US is about $1.44/hour); pause it after the meeting.
+1. Check the current capacity state. If paused, separately plan and approve a resume before
+   using the assigned Azure tool. Resuming starts billing; review current rates rather than
+   relying on a historical estimate.
 2. `az login --tenant <DEMO_TENANT_ID>`, then `ffia fabric readiness`. Expect "Fabric ready for live labs: YES".
 3. `mkdir -p ~/hc-01-lab/.vscode && ffia mcp render fabric-readonly --client vscode --output ~/hc-01-lab/.vscode/mcp.json`. Open `~/hc-01-lab` in a second VS Code window, then MCP: List Servers → start.
 
@@ -34,7 +42,10 @@ P-MCP-3.
 
 ## B. Live Foundry + Fabric (Guide 2 live demo, Guide 1 Foundry segment), about 25 to 35 minutes, **needs approval**
 
-Each step is a cloud write. Plan, approve, execute, verify, audit.
+First inspect and reuse the existing resource, deployment, role, lakehouse, data agent and
+connection. The table is a provisioning reference, **not a daily rerun checklist**.
+Create only a missing resource through a separately approved plan: validate, approve,
+execute, verify and audit. Actual inference also needs its bounded scope and cost understood.
 
 | # | Change | Provider / tool | Verify |
 |---|---|---|---|

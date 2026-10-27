@@ -3,20 +3,20 @@ import { LevelSwitcher } from "../components/LevelSwitcher";
 import { StatusBar } from "../components/StatusBar";
 
 const NAV: readonly { readonly to: string; readonly label: string }[] = [
-  { to: "/", label: "Workshop" },
-  { to: "/learn", label: "Learn" },
+  { to: "/", label: "Start here" },
   { to: "/use-cases", label: "Use Cases" },
-  { to: "/patterns", label: "Patterns" },
+  { to: "/labs", label: "Hands-on labs" },
+  { to: "/architecture", label: "Architecture" },
   { to: "/evidence", label: "Evidence" },
 ];
 
 const TOOLS: readonly { readonly to: string; readonly label: string }[] = [
-  { to: "/architecture", label: "Architecture" },
-  { to: "/labs", label: "Hands-on labs" },
+  { to: "/learn", label: "Learn the concepts" },
+  { to: "/patterns", label: "Pattern library" },
   { to: "/data", label: "Data" },
   { to: "/agent", label: "Agent sandbox" },
   { to: "/bakeoff", label: "Bake-off" },
-  { to: "/demo", label: "Demo" },
+  { to: "/demo", label: "Offline verification" },
 ];
 
 export function Layout() {
@@ -39,7 +39,9 @@ export function Layout() {
               </span>
               <span className="brand__text">
                 <span className="brand__name">Fabric Foundry Integration Accelerator</span>
-                <span className="brand__tagline">Reference architecture · Patterns · Workshop</span>
+                <span className="brand__tagline">
+                  Understand the roles. Build a workflow. Verify the result.
+                </span>
               </span>
             </NavLink>
             <LevelSwitcher />
@@ -53,17 +55,22 @@ export function Layout() {
                   </NavLink>
                 </li>
               ))}
+              <li className="explore-menu">
+                <details>
+                  <summary>Explore</summary>
+                  <nav aria-label="Explore tools">
+                    {TOOLS.map((item) => (
+                      <NavLink key={item.to} to={item.to}>
+                        {item.label}
+                      </NavLink>
+                    ))}
+                  </nav>
+                </details>
+              </li>
             </ul>
           </nav>
         </div>
       </header>
-      <nav aria-label="Workshop tools" className="workshop-tools">
-        {TOOLS.map((item) => (
-          <NavLink key={item.to} to={item.to}>
-            {item.label}
-          </NavLink>
-        ))}
-      </nav>
       <main id="main" tabIndex={-1}>
         <Outlet />
       </main>

@@ -1,4 +1,4 @@
-import { screen } from "@testing-library/react";
+import { screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import axe from "axe-core";
 import { defaultRoutes, fixtures } from "../../test/fixtures";
@@ -23,7 +23,11 @@ describe("labs", () => {
       await screen.findByRole("heading", { level: 1, name: startsWith(lab.title) }),
     ).toBeInTheDocument();
     const stages = screen.getAllByRole("checkbox", { name: /^Mark .* done$/ });
-    expect(stages).toHaveLength(11);
+    expect(stages).toHaveLength(1);
+    expect(
+      within(screen.getByRole("navigation", { name: "Lab stages" })).getAllByRole("button"),
+    ).toHaveLength(11);
+    await userEvent.click(screen.getByRole("button", { name: /05 BREAK IT/ }));
     await userEvent.click(screen.getByRole("checkbox", { name: "Mark BREAK IT done" }));
     expect(screen.getByText(/1 of 11 stages done/)).toBeInTheDocument();
     expect(window.localStorage.getItem("ffia.progress.lab.lab-governed-change")).toBe(
@@ -31,6 +35,16 @@ describe("labs", () => {
     );
     await userEvent.click(screen.getByRole("checkbox", { name: "Mark BREAK IT done" }));
     expect(screen.getByText(/0 of 11 stages done/)).toBeInTheDocument();
+  });
+
+  it("opens a deep-linked stage and navigates without discarding progress", async () => {
+    mockApi(defaultRoutes);
+    renderApp("/labs/lab-governed-change?stage=VERIFY");
+    expect(await screen.findByRole("region", { name: "Stage 7: VERIFY" })).toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", { name: "Next stage" }));
+    expect(screen.getByRole("region", { name: "Stage 8: GO DEEPER" })).toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", { name: "Previous stage" }));
+    expect(screen.getByRole("region", { name: "Stage 7: VERIFY" })).toBeInTheDocument();
   });
 
   it("shows prerequisites, expected results and evidence categories", async () => {

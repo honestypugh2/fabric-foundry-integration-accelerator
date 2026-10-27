@@ -13,9 +13,9 @@ export function StatusBar() {
   const items: StatusItem[] = status.data
     ? [
         { label: "Operating mode", value: status.data.operating_mode },
-        { label: "Data provider", value: status.data.data_provider },
+        { label: "App data access", value: status.data.data_provider },
         { label: "Agent provider", value: status.data.agent_provider },
-        { label: "MCP", value: status.data.mcp },
+        { label: "App MCP tools", value: status.data.mcp },
         { label: "Identity", value: status.data.identity },
         { label: "Write mode", value: status.data.write_mode },
         {
@@ -54,6 +54,11 @@ export function StatusBar() {
         <p className="meta">
           Configuration is not execution evidence. Inspect each result's label and fallback reason;
           live writes never redirect.
+        </p>
+        <p className="meta">
+          The app accesses Fabric through its backend REST adapter, not the coding assistant's MCP
+          connection. Fabric MCP tools can call real Fabric even when the MCP process runs on your
+          workstation. Offline synthetic data is a separate LOCAL source, not a Fabric server.
         </p>
         {status.data?.providers.map((provider) => (
           <p className="meta" key={`${provider.capability}:${provider.name}:${provider.kind}`}>

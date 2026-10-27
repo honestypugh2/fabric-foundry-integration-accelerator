@@ -59,7 +59,10 @@ def provider_statuses(container: Container) -> tuple[ProviderStatus, ...]:
             kind="LOCAL",
             configured=True,
             ready=bool(built),
-            note=f"Synthetic lakehouses built: {', '.join(built) or 'none'}",
+            note=(
+                "Offline teaching data, not a Fabric service or MCP connection. "
+                f"Synthetic lakehouses built: {', '.join(built) or 'none'}"
+            ),
         )
     ]
     if live is not None:
@@ -130,16 +133,25 @@ def runtime_status(container: Container) -> RuntimeStatus:
         environment=container.environment.name,
         overlay=container.overlay.alias,
         data_provider=(
-            "Local Fabric Educational Provider (LOCAL)"
+            f"{container.local_fabric.name} (LOCAL; no cloud call)"
             if container.fabric.live is None
-            else f"Router: {container.fabric.live.name} with LOCAL fallback per policy"
+            else f"{container.fabric.live.name}; "
+            + (
+                "LIVE-first reads with disclosed synthetic-data fallback (LOCAL)"
+                if container.mode is OperatingMode.HYBRID
+                else "strict LIVE; no LOCAL fallback"
+            )
         ),
         agent_provider=(
             f"{container.agents.local.name} (LOCAL)"
             if container.agents.live is None
             else f"Router: {container.agents.live.name} with LOCAL fallback per policy"
         ),
-        mcp=f"Local server ready: {len(container.tool_manifest.enabled())} allow-listed tools",
+        mcp=(
+            f"ffia-local: {len(container.tool_manifest.enabled())} allow-listed repository tools "
+            "configured. The coding assistant's Fabric MCP connection is separate and not "
+            "checked by this API."
+        ),
         identity=(
             "Azure CLI user, delegated, pinned to the bound tenant (configured, not probed here)"
             if container.bindings is not None

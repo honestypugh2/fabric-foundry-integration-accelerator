@@ -1,4 +1,4 @@
-import type { KeyboardEvent } from "react";
+import { useId, type KeyboardEvent } from "react";
 import type { NodeRuntime, RenderedView } from "../../api/contracts";
 import { stateText, visibleAt, wrap } from "./diagramText";
 
@@ -22,8 +22,6 @@ interface DiagramCanvasProps {
   readonly label: string;
 }
 
-const ARROW_ID = "ffia-arrow";
-
 /**
  * Renders an architecture view from the shared backend layout (the same geometry as the draw.io
  * files). Nodes are keyboard-focusable buttons; everything else is presentational.
@@ -42,6 +40,7 @@ export function DiagramCanvas({
   fit = true,
   label,
 }: DiagramCanvasProps) {
+  const arrowId = useId();
   const { view, layout } = rendered;
   const order = view.steps.map((s) => s.id);
   const shownNodes = view.nodes.filter((n) => visibleAt(n.step, order, upto));
@@ -68,7 +67,7 @@ export function DiagramCanvas({
     >
       <defs>
         <marker
-          id={ARROW_ID}
+          id={arrowId}
           viewBox="0 0 10 10"
           refX="9"
           refY="5"
@@ -118,7 +117,7 @@ export function DiagramCanvas({
           ].join(" ");
           return (
             <g key={edge.id} className={classes}>
-              <path d={d} markerEnd={`url(#${ARROW_ID})`} />
+              <path d={d} markerEnd={`url(#${arrowId})`} />
               {edge.label ? (
                 <text
                   x={path.label_at[0]}

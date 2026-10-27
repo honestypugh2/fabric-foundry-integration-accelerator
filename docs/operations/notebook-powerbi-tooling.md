@@ -6,6 +6,10 @@ None proves notebook execution, a semantic-model change or report publication.
 
 ## Which component does what?
 
+For current Microsoft documentation, the two Skills plugin installation paths, hosted versus
+local authoring choices and deliberate exclusions, see
+[tooling and workshop alignment](tooling-and-workshop-alignment.md).
+
 | Component | Observed capability | Execution boundary |
 |---|---|---|
 | Fabric MCP 1.4.0 (`fabric-mcp`) | The root profile exposes eight documentation/metadata tools | Read-only default; HC-01 opt-in tools handle lakehouse creation and upload |
@@ -20,6 +24,11 @@ Power BI Authoring MCP operates on semantic models, not report visuals. Use the
 for models. Skills supply instructions, not missing execution tools.
 
 ## Activate safely in VS Code
+
+Shared skill discovery uses the repository-relative `.claude/skills` folder. Keep personal
+skill locations in user settings, not workspace settings. Do not add paths into a versioned
+extension installation: extension upgrades and remote hosts change those paths. Extension
+capabilities still need the separate availability checks below.
 
 1. Install the recommended Fabric Data Engineering, Jupyter and Power BI Authoring extensions
    in the extension host for the open repository. With WSL/remote development, a Windows-side

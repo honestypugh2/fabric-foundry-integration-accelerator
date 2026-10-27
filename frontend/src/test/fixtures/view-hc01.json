@@ -422,7 +422,7 @@
       }
     ],
     "columns": 7,
-    "cue": "Follow the guide left to right. Every write - lakehouse, upload, notebooks, model, report - is proposed first and applied only after approval. The bottom row is the offline equivalent of each step, so the lab can be rehearsed with no tenant.",
+    "cue": "Follow the guide left to right. Every write - lakehouse, upload, notebooks, model, report - is proposed first and applied only after approval. The bottom row is the offline equivalent of each step, so the lab can be rehearsed with no tenant. Offline synthetic data is not Fabric or an MCP server. A locally launched Fabric MCP process can still perform LIVE cloud calls.",
     "doc": "hc-01-architecture",
     "edges": [
       {
@@ -606,7 +606,7 @@
         "icon": null,
         "id": "fabric-mcp",
         "kind": "mcp",
-        "label": "Fabric MCP Server (local)",
+        "label": "Fabric MCP tools",
         "phase": null,
         "repo_path": null,
         "row": 1.0,
@@ -616,8 +616,8 @@
         ],
         "state": "documented",
         "step": "tools",
-        "sublabel": "onelake_*, core_create-item",
-        "summary": "The local Fabric MCP server. The guide requires calling its tools directly - no substitution with REST or CLI.",
+        "sublabel": "Local process -> remote Fabric",
+        "summary": "Microsoft's Fabric MCP process runs on the workstation and calls real remote Fabric under the signed-in identity. It is not the offline synthetic-data adapter. The guide requires its tools directly - no substitution with REST or CLI.",
         "width": 1.0
       },
       {
@@ -844,7 +844,7 @@
         "icon": null,
         "id": "offline-provider",
         "kind": "local",
-        "label": "Local Fabric provider",
+        "label": "Offline synthetic data",
         "phase": null,
         "repo_path": null,
         "row": 4.0,
@@ -852,7 +852,7 @@
         "sources": [],
         "state": "implemented",
         "step": null,
-        "sublabel": "ffia data build",
+        "sublabel": "DuckDB/Parquet; not Fabric",
         "summary": "",
         "width": 1.0
       },
@@ -970,7 +970,7 @@
         "label": "6 \u00b7 Report and validation"
       }
     ],
-    "summary": "GitHub Copilot in VS Code (or Claude Code) uses the local Fabric MCP server to create a lakehouse and land seven synthetic CSVs; reviewed notebooks build Bronze, Silver and Gold on Fabric Spark; a Direct Lake semantic model is edited with Power BI Authoring MCP; DAX checks reconcile with the Gold baseline; a two-page report is published after review.",
+    "summary": "GitHub Copilot in VS Code (or Claude Code) uses Fabric MCP tools against remote Fabric to create a lakehouse and land seven synthetic CSVs; reviewed notebooks build Bronze, Silver and Gold on Fabric Spark; a Direct Lake semantic model is edited with Power BI Authoring MCP; DAX checks reconcile with the Gold baseline; a two-page report is published after review.",
     "title": "HC-01: Fabric MCP + Power BI medallion lab",
     "traces": [
       {

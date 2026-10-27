@@ -17,7 +17,7 @@
       "label": "LOCAL",
       "passed": true,
       "required": true,
-      "summary": "Mode OFFLINE; data provider: Local Fabric Educational Provider (LOCAL).",
+      "summary": "Mode OFFLINE; data provider: Offline synthetic data (DuckDB/Parquet) (LOCAL; no cloud call).",
       "title": "Why: Fabric is context, Foundry is reasoning, MCP is access, identity is authority"
     },
     {

@@ -40,8 +40,14 @@ def test_release_requires_quality_and_codeql_and_only_uploads_artifacts() -> Non
         "ffia prompts check",
         "ffia harness check",
         "ffia education check --min-coverage 1.0",
+        "make source-bundle-check",
     ):
         assert gate in commands
+    assert "ruff check src tests scripts" in commands
+    release_commands = "\n".join(
+        step.get("run", "") for step in workflow["jobs"]["artifacts"]["steps"]
+    )
+    assert "source-bundle-check" in release_commands
     codeql = yaml.safe_load((ROOT / ".github/workflows/codeql.yml").read_text())
     assert set(codeql["jobs"]["analyze"]["strategy"]["matrix"]["language"]) == {
         "python",

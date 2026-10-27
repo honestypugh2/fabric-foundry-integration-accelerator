@@ -21,7 +21,7 @@ flowchart LR
     copilot["VS Code + GitHub Copilot<br/><small>Agent mode</small>"]
     claude["Claude Code<br/><small>Alternate path for every step</small>"]
     lab_data["Lab folder<br/><small>7 synthetic CSVs + SHA256SUMS</small>"]
-    fabric_mcp["Fabric MCP Server (local)<br/><small>onelake_*, core_create-item</small>"]
+    fabric_mcp["Fabric MCP tools<br/><small>Local process -> remote Fabric</small>"]
     de_extension["Fabric Data Engineering extension<br/><small>Publish and run notebooks</small>"]
     pbi_mcp["Power BI Authoring MCP + skills<br/><small>Relationships, measures, DAX</small>"]
   end
@@ -38,7 +38,7 @@ flowchart LR
     approval["Approval gate<br/><small>Every write step</small>"]
   end
   subgraph offline["Offline equivalent (this repo)"]
-    offline_provider["Local Fabric provider<br/><small>ffia data build</small>"]
+    offline_provider["Offline synthetic data<br/><small>DuckDB/Parquet; not Fabric</small>"]
     offline_rehearsal["Guide runner rehearsal<br/><small>Plan, approve, execute (SIMULATED)</small>"]
     offline_medallion["Local Bronze, Silver, Gold<br/><small>SQL per table</small>"]
     offline_eval["Baseline evaluation<br/><small>23 measures</small>"]
@@ -101,7 +101,7 @@ Solid boxes are implemented here or documented by Microsoft; dashed boxes are pl
 | VS Code + GitHub Copilot | Microsoft-documented | Harnesses provide the agent loop and permissions; AGENTS.md, .mcp.json and .claude/skills are shared by both. | - |
 | Claude Code | Microsoft-documented | Every HC-01 step has an equivalent Claude Code prompt using the same MCP servers and instructions. | - |
 | Lab folder | Implemented in this repository | ffia data export copies the hc-lab-7file-v1 profile and checksums into a separate lab folder. | `data/synthetic` |
-| Fabric MCP Server (local) | Microsoft-documented | The local Fabric MCP server. The guide requires calling its tools directly - no substitution with REST or CLI. | - |
+| Fabric MCP tools | Microsoft-documented | Microsoft's Fabric MCP process runs on the workstation and calls real remote Fabric under the signed-in identity. It is not the offline synthetic-data adapter. The guide requires its tools directly - no substitution with REST or CLI. | - |
 | Fabric Data Engineering extension | Microsoft-documented | VS Code extension used to publish reviewed notebooks and run them on the Microsoft Fabric Runtime kernel. | - |
 | Power BI Authoring MCP + skills | Microsoft-documented | Edits the semantic model and runs DAX checks. Write-capable - changes are proposed, reviewed and applied after approval. | - |
 | Lab workspace | Requires tenant validation | A dedicated dev workspace for the lab. Its ID stays in local notes only. | - |
@@ -114,7 +114,7 @@ Solid boxes are implemented here or documented by Microsoft; dashed boxes are pl
 | DAX reconciliation | Requires tenant validation | Every measure is checked against the expected values in data/synthetic/expected - evidence, not appearance. | - |
 | Two-page report | Requires tenant validation | An executive overview and a population page bound to the validated model. A local PBIR file is not publication. | - |
 | Approval gate | Implemented in this repository | Separation of duties, expiry and destination binding protect the decision. | - |
-| Local Fabric provider | Implemented in this repository | Read-only, allow-listed operations over synthetic Parquet; never presented as Fabric. | - |
+| Offline synthetic data | Implemented in this repository | Read-only operations over synthetic Parquet; LOCAL results make no cloud call. It does not replace or disconnect Fabric MCP. | - |
 | Guide runner rehearsal | Implemented in this repository | The guide runner rehearses each write step against the simulated workspace with the real policy and approval rules. | `frontend/src/features/guides` |
 | Local Bronze, Silver, Gold | Implemented in this repository | The same medallion built locally with DuckDB, one SQL file per output table. | `src/fabric_foundry_accelerator/synthetic/sql` |
 | Baseline evaluation | Implemented in this repository | Deterministic baselines for data; model-graded evaluators for language quality. | - |

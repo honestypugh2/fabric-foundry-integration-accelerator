@@ -26,7 +26,7 @@ Foundry agents use the same router (capability
 | Change service | `services/changes.py` | PLAN → VALIDATE → APPROVE → EXECUTE → VERIFY → AUDIT for every write |
 | Audit store | `audit/store.py` | Redacted, append-only records with correlation IDs (JSONL or in-memory) |
 | Container | `services/container.py` | Wires the components together through dependency injection. No global clients. |
-| REST API | `api/app.py` · `api/routes.py` | FastAPI. Thin routes that call the services. |
+| REST API | `api/app.py` · `api/routes.py` · `api/routers/` | FastAPI. The route entry composes feature routers; each adapter calls services. Shared dependency injection lives in `api/dependencies.py`. |
 | Local MCP server | `mcp/server.py` · `config/policies/tools.yaml` | FastMCP. Allow-listed, rate-limited and audited tools. |
 | Demo | `services/demo.py` | `ffia demo check` and the ten-act offline release gate |
 | Education | `education/lessons.py` · `services/education.py` | Validated lessons, labs, architecture map and completeness gate |
@@ -35,6 +35,12 @@ Foundry agents use the same router (capability
 
 The OpenAPI document is committed as `schemas/openapi.json`. The frontend's TypeScript contract
 types are generated from it (`ffia schemas export`). See [frontend.md](frontend.md).
+
+Feature routers separate runtime/health, patterns/guides, Fabric reads, agents/knowledge,
+recorded bake-off data, changes/approvals, operations, and education. Request/result
+contracts remain next to their owning adapter or domain module. Routers share dependency
+aliases, not feature-to-feature imports. This organization does not change endpoint
+paths, operation IDs, response shapes or the application's REST/SDK boundary.
 
 | Area | Paths |
 |---|---|

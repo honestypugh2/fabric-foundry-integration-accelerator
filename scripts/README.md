@@ -12,3 +12,8 @@ JAVA_HOME=<jdk-17> <python-with-pyspark-3.5.9> scripts/verify_spark_notebooks.py
 
 Its result is LOCAL evidence that the notebook code and SQL run on Spark 3.5. It is not evidence
 that anything ran in Fabric.
+
+`make lint` and CI include scripts in Ruff lint/format checks. The standalone verifier
+has an explicit `T201` exception for CLI progress output. Strict project type checking
+covers `src/` and `tests/`; this optional Spark script uses a separate PySpark runtime
+and is not part of that type-check environment.
