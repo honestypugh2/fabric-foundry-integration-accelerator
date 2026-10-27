@@ -182,7 +182,7 @@
     {
       "category": "SIMULATED LOCALLY",
       "reference": null,
-      "statement": "Observed values came from the Local Fabric Provider."
+      "statement": "Observed values came from offline synthetic data (DuckDB/Parquet), not Fabric."
     }
   ],
   "execution_label": "LOCAL",
@@ -193,5 +193,5 @@
   "selected_provider": "Baseline Evaluator",
   "simulation_notice": "Evaluation computed locally from committed expected results.",
   "teaching_objective": "Prove numbers, not appearance: compare every measure with the expected baseline.",
-  "timestamp": "2026-10-14T02:55:52.327820Z"
+  "timestamp": "2026-10-21T16:15:48.058100Z"
 }

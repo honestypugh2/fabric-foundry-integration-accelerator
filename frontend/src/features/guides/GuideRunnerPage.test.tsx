@@ -71,20 +71,16 @@ describe("guide runner", () => {
     renderApp(`${GUIDE_URL}/04-create-lakehouse`);
     const section = await screen.findByRole("region", { name: "Where this step happens" });
     expect(
-      await within(section).findByText(
-        /Highlighted: Fabric MCP Server \(local\), healthcare_lakehouse, Approval gate\./,
-      ),
+      await within(section).findByRole("group", { name: /diagram\. Select a component/ }),
     ).toBeInTheDocument();
-    expect(
-      within(section).getByRole("link", { name: "Open the full interactive diagram" }),
-    ).toHaveAttribute("href", "/architecture/hc-01");
+    expect(within(section).getByRole("button", { name: "▶ Trace a request" })).toBeEnabled();
   });
 
   it("tracks completed steps and copies prompts", async () => {
     mockApi(defaultRoutes);
     const writeText = vi.fn(() => Promise.resolve());
     Object.defineProperty(navigator, "clipboard", { value: { writeText }, configurable: true });
-    renderApp(GUIDE_URL);
+    renderApp(`${GUIDE_URL}/${guide.steps[0]?.id ?? ""}`);
     await screen.findByRole("heading", { level: 2, name: /^Step 1:/ });
     const nav = screen.getByRole("navigation", { name: "Guide steps" });
     await userEvent.click(
@@ -104,9 +100,72 @@ describe("guide runner", () => {
       value: { writeText: () => Promise.reject(new Error("denied")) },
       configurable: true,
     });
-    renderApp(GUIDE_URL);
+    renderApp(`${GUIDE_URL}/${guide.steps[0]?.id ?? ""}`);
     await userEvent.click(await screen.findByRole("button", { name: "Copy claude code prompt" }));
     expect(await screen.findByText(/Copy failed/)).toBeInTheDocument();
+  });
+
+  it("separates the overview and prerequisites from the first build module", async () => {
+    mockApi(defaultRoutes);
+    renderApp(GUIDE_URL);
+    const start = await screen.findByRole("link", { name: "Start workshop" });
+    expect(start).toHaveAttribute("href", `${GUIDE_URL}/${guide.steps[0]?.id ?? ""}`);
+    expect(screen.queryByRole("heading", { name: /^Step 1:/ })).not.toBeInTheDocument();
+    expect(
+      screen
+        .getByText(`Tools and prerequisites (${String(guide.tools.length)})`)
+        .closest("details"),
+    ).toHaveAttribute("open");
+    expect(
+      screen.getByRole("progressbar", { name: "Workshop checklist progress" }),
+    ).toHaveAttribute("value", "0");
+    await userEvent.click(start);
+    expect(await screen.findByRole("heading", { name: /^Step 1:/ })).toBeInTheDocument();
+    expect(screen.getByRole("navigation", { name: "On this step" })).toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: "Start workshop" })).not.toBeInTheDocument();
+  });
+
+  it("reports an unknown step instead of silently opening the first module", async () => {
+    mockApi(defaultRoutes);
+    renderApp(`${GUIDE_URL}/missing-step`);
+    expect(await screen.findByRole("alert")).toHaveTextContent("Step not found");
+    expect(screen.queryByRole("heading", { name: /^Step 1:/ })).not.toBeInTheDocument();
+  });
+
+  it("filters the catalog by tool and industry, supports clearing and discloses no results", async () => {
+    mockApi(defaultRoutes);
+    renderApp("/use-cases");
+    const search = await screen.findByRole("searchbox", { name: "Search use cases" });
+    await userEvent.type(search, "nonsense-no-match");
+    expect(screen.getByText(/No use cases match/)).toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", { name: "Clear filters" }));
+    expect(search).toHaveValue("");
+    const requiredTool = guide.tools.find((tool) => tool.required);
+    if (!requiredTool) throw new Error("Expected a required tool");
+    await userEvent.type(search, requiredTool.name);
+    await userEvent.selectOptions(
+      screen.getByRole("combobox", { name: "Tool or service" }),
+      requiredTool.name,
+    );
+    expect(screen.getByRole("link", { name: guide.title })).toBeInTheDocument();
+    await userEvent.selectOptions(
+      screen.getByRole("combobox", { name: "Industry" }),
+      guide.industry,
+    );
+    expect(screen.getByRole("link", { name: guide.title })).toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", { name: "Clear filters" }));
+    expect(screen.getByRole("combobox", { name: "Industry" })).toHaveValue("");
+    expect(screen.getByRole("combobox", { name: "Tool or service" })).toHaveValue("");
+    expect(screen.getByRole("link", { name: fixtures.guideDq01.title })).toBeInTheDocument();
+  });
+
+  it("restores shared catalog filters from the URL", async () => {
+    mockApi(defaultRoutes);
+    renderApp("/use-cases?q=nonsense-no-match");
+    expect(await screen.findByRole("searchbox", { name: "Search use cases" })).toHaveValue(
+      "nonsense-no-match",
+    );
+    expect(screen.getByText(/No use cases match/)).toBeInTheDocument();
   });
 
   it("rehearses a governed write: plan, approve, execute, audit", async () => {

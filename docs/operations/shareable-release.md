@@ -7,16 +7,35 @@ paths**. Do not present unfinished live work as complete.
 
 - **HC-01:** primary Fabric engineering / GitHub Copilot / Power BI learning guide. Reviewed
   notebooks, synthetic data, independent baseline and offline medallion build are available.
-  Live source landing was verified; live end-to-end table/model/report acceptance is deferred.
+  The learning-repo operational scope is closed. Power BI report rendering/review
+  and publication remain deferred; no published report is promised.
 - **MFG-01:** primary Foundry-over-Fabric agent guide. Offline sales briefs and quality
-  results are reproducible. Connected observations are dated and limited; later revenue
-  timeouts and final-answer gaps remain unresolved.
+  results and deterministic evaluation are reproducible. The demo answer-gap work is
+  closed for this learning handoff; connected use requires the reader's own configuration.
+  Historical observations are not current tenant-health checks.
 - **DQ-01:** supporting LOCAL/SIMULATED quality investigation and governed-change rehearsal.
 - **Claude Code:** retain setup instructions and alternate prompts. Setup, execution and
-  the GitHub Copilot-versus-Claude Code comparison are deferred.
+  live demonstrations and the GitHub Copilot-versus-Claude Code comparison are out of scope.
 
 Keep personal backlogs, session progress and environment-specific verification records
 in ignored local storage, not in the project's tracked documentation.
+
+Use the [README readiness summary](../../README.md#readiness) for the public capability
+boundary. The [scope record](delivery-backlog.md) explains the closed operational work
+and deferred report work; it does not require readers to repeat presenter verification.
+
+## Runnable delivery
+
+Use a full clone or `dist/ffia-source.tar.gz` produced by `make source-bundle-check`.
+Extract the bundle, enter `ffia-source/`, and follow the README setup from that root.
+The archive contains committed sources, configuration, guides, education and synthetic
+inputs. Dependencies still need restoration from lockfiles.
+
+The Python wheel/source distribution and frontend bundle are component builds, not a
+self-contained accelerator installer. Installing only the wheel omits the repository
+content required by the demo. No private bindings, environment files or runtime evidence
+belong in a delivery archive. The source-bundle smoke test runs the offline demo after
+extraction outside the original checkout; it does not validate cloud connectivity.
 
 ## Audience entry points
 
@@ -26,22 +45,30 @@ in ignored local storage, not in the project's tracked documentation.
 | SE / developer / presenter | [SE/developer playbook](../field-playbooks/se-developer.html) | Install locked dependencies; run `make demo-offline`; choose an explicit OFFLINE app launch |
 | Contributor adding a use case | [Use-case onboarding](use-case-onboarding.md) | Use the existing template, independent checks and registry/readiness gates |
 
-Both HTML playbooks are **original, self-contained, script-free** documents. They need no
-external font, image, analytics service or app server to display. Their repository and
-source hyperlinks need network access and any required repository permissions; sharing a
-file does not grant repository access. They do not embed customer source material or private
-environment data.
+Each audience HTML file is a **complete offline bundle** containing both audience playbooks
+and the full Fabric engineering and Foundry agents workshop handouts, including diagrams,
+prompts, commands and Q&A, plus an architecture library for every canonical view. Diagrams
+are selectable SVGs with component drilldowns, learning-depth selection, build layers and
+hop-by-hop request traces—not images. The customer edition starts on the customer page; the SE/developer
+edition starts on its technical page. Navigation and cross-document search use a small
+embedded script, with no CDN, analytics, network request, local storage or app server.
+With JavaScript disabled, all five documents are displayed with textual component and trace
+alternatives, but without search, switching or diagram interaction.
 
-GitHub shows HTML source, not the rendered page. Download the file, then open it in a
-browser. You can also attach it to an approved sharing channel. A repository link lets
-readers find and download the file; it is not a hosted website.
-Opening either page runs no Fabric, Azure, Foundry or Power BI operation.
+**Share either HTML file directly as an attachment.** Save it anywhere and open it in a
+browser; do not distribute a set of folders or require readers to download another HTML.
+Embedded handout and audience links stay inside the file. Optional online implementation
+and product references are labeled and open separately; they require network access and any
+repository permissions. This is documentation, not an embedded copy of the React app or live
+services. Opening either file runs no Fabric, Azure, Foundry or Power BI operation.
+Talk tracks remain presentation documents separate from the React learning workspace.
 
 Use the Markdown guides for reading directly on GitHub. Hosting requires separate setup
 and approval; a checked-in HTML file is not a deployed website.
 
-Content lives in `education/field-playbooks/release.yaml`; the renderer escapes content,
-validates repository asset links and source IDs, and produces both audience pages:
+Content lives in `education/field-playbooks/release.yaml` and the two demo `talk-track.yaml`
+sources. The renderer validates references and renders the complete handouts directly from
+those sources, rather than bundling potentially stale generated HTML:
 
 ```bash
 make playbooks
@@ -72,15 +99,25 @@ Product documentation is not tenant execution evidence.
 | `frontend/index.html` | Keep tracked | Required Vite application entry |
 | `demos/fabric-copilot-level-up/index.html` | Keep tracked | Standalone generated HC engineering presenter handout |
 | `demos/foundry-fabric-agents-workshop/index.html` | Keep tracked | Standalone generated MFG agent presenter handout |
-| `frontend/public/talktracks/fabric-copilot-level-up.html` | Keep tracked | Generated app-served copy of the HC handout |
-| `frontend/public/talktracks/foundry-fabric-agents-workshop.html` | Keep tracked | Generated app-served copy of the MFG handout |
-| `docs/field-playbooks/customer.html` | Keep tracked | New business/customer orientation |
-| `docs/field-playbooks/se-developer.html` | Keep tracked | New technical preparation and build path |
+| `frontend/public/talktracks/fabric-copilot-level-up.html` | Keep tracked | Standalone HC handout at the existing compatibility URL |
+| `frontend/public/talktracks/foundry-fabric-agents-workshop.html` | Keep tracked | Standalone MFG handout at the existing compatibility URL |
+| `docs/field-playbooks/customer.html` | Keep tracked | Complete offline bundle, customer-first |
+| `docs/field-playbooks/se-developer.html` | Keep tracked | Complete offline bundle, technical-first |
 
-The talk-track pairs are intentional byte-identical publication/deployment copies. Edit
-their YAML sources and use `ffia talktracks render`; deleting an app copy breaks its handout
-route. Private HTML walkthroughs under ignored local documentation folders are not part of
+The talk-track pairs are intentional byte-identical publication/deployment copies. The React
+workspace does not embed a presenter talk track. Existing standalone URLs and authoring checks
+still use the public copies. Edit their YAML sources and use `ffia talktracks render`;
+deleting a public copy breaks that compatibility URL and the authoring contract.
+Private HTML walkthroughs under ignored local documentation folders are not part of
 this release and need not be promoted.
+
+**Recommendation:** use the two audience bundles as the primary shareable deliverables.
+Keep `frontend/index.html`: it is the Vite app entry point, not a handout.
+Keep the demo `index.html` files for now because existing documentation and standalone
+handout workflows link to them; keep the public copies for compatibility and authoring checks.
+If reducing generated files later, migrate every link and app route and update the talk-track
+renderer/drift tests in one change before deleting the demo outputs. Keep their structured
+YAML and the audience-bundle renderer regardless; the bundles need no checked-in demo HTML.
 
 Existing ignore rules already cover private `.local` bindings, source-private material,
 local documentation, native workspace caches and dependency/build artifacts. Do not hide

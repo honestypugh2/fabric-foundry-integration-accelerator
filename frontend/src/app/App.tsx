@@ -3,6 +3,7 @@ import { Navigate, Route, Routes, useLocation } from "react-router";
 import { HomePage } from "../features/home/HomePage";
 import { Layout } from "./Layout";
 import { NotFoundPage } from "./NotFoundPage";
+import { ErrorBoundary } from "./ErrorBoundary";
 
 // Feature pages load on demand so the first paint stays small.
 const ArchitecturePage = lazy(() =>
@@ -65,15 +66,17 @@ function LegacyGuideRedirect() {
 
 function Page({ children }: { readonly children: ReactNode }) {
   return (
-    <Suspense
-      fallback={
-        <p className="loading" role="status">
-          Loading page…
-        </p>
-      }
-    >
-      {children}
-    </Suspense>
+    <ErrorBoundary>
+      <Suspense
+        fallback={
+          <p className="loading" role="status">
+            Loading page…
+          </p>
+        }
+      >
+        {children}
+      </Suspense>
+    </ErrorBoundary>
   );
 }
 

@@ -37,7 +37,7 @@ flowchart LR
   end
   subgraph server_zone["MCP servers"]
     learn_mcp["Microsoft Learn MCP<br/><small>How - documentation</small>"]
-    fabric_mcp_local["Fabric MCP Server (local)<br/><small>Docs, OneLake, core items</small>"]
+    fabric_mcp_local["Fabric MCP tools<br/><small>Local process -> remote Fabric</small>"]
     fabric_iq_mcp["Fabric IQ MCP<br/><small>What is - read-only DAX</small>"]
     dw_mcp["Data Warehouse MCP · PREVIEW<br/><small>Arbitrary T-SQL - preview</small>"]
     pbi_mcp["Power BI Authoring MCP<br/><small>Change it - sandbox PBIP</small>"]
@@ -124,7 +124,7 @@ Solid boxes are implemented here or documented by Microsoft; dashed boxes are pl
 | .mcp.json | Implemented in this repository | The project MCP configuration, rendered from config/mcp/profiles.yaml (default profile fabric-first: the real Fabric MCP server with read-only metadata tools, Microsoft Learn, and ffia-local as the labeled fallback). Other Fabric MCP profiles are rendered per client with `ffia mcp render`; `ffia mcp check` keeps them pinned and least-privilege. | `.mcp.json` |
 | API Management | Optional | Adds authentication, rate limits, logging and policies in front of MCP servers and model endpoints. | - |
 | Microsoft Learn MCP | Microsoft-documented | Public documentation search and fetch. Answers how questions without any tenant access. | - |
-| Fabric MCP Server (local) | Microsoft-documented | Local server with documentation and item-definition tools that work without a tenant, plus OneLake and core item tools that run with your Fabric permissions. Some tools can write. | - |
+| Fabric MCP tools | Microsoft-documented | Microsoft's stdio MCP process runs on the workstation. Docs tools need no tenant; OneLake and core tools call real remote Fabric with your permissions. This is not the offline synthetic-data fallback. Hosted HTTP MCP servers are separate integrations. Some tools can write. | - |
 | Fabric IQ MCP | Microsoft-documented | Remote, read-only server for querying semantic models. Good for what is questions in a live workspace. | - |
 | Data Warehouse MCP | Preview | Remote server that runs T-SQL against a warehouse or SQL endpoint. Preview, and broad by design - off by default, read-only labs against a dev workspace only. | - |
 | Power BI Authoring MCP | Microsoft-documented | Local server for authoring semantic models (TMDL, relationships, measures, DAX queries). Write-capable, so use it on a reviewed copy and publish through approval. | - |
@@ -134,7 +134,7 @@ Solid boxes are implemented here or documented by Microsoft; dashed boxes are pl
 | Semantic models | Microsoft-documented | Direct Lake reads Gold Delta tables; measures are the governed definitions agents should reuse. | - |
 | Warehouse or SQL endpoint | Microsoft-documented | Fabric Data Warehouse or a lakehouse SQL analytics endpoint. | - |
 | PBIP / TMDL in Git | Planned (Phase 7) | Power BI project files under version control, so model changes are diffs that can be reviewed before publication. | - |
-| Synthetic local data | Implemented in this repository | Read-only, allow-listed operations over synthetic Parquet; never presented as Fabric. | - |
+| Synthetic local data | Implemented in this repository | Read-only operations over synthetic Parquet; LOCAL results make no cloud call. It does not replace or disconnect Fabric MCP. | - |
 | Entra ID | Microsoft-documented | User, approver and writer are different identities; agents act on behalf of users or as scoped identities. | - |
 | Approved change flow | Implemented in this repository | Separation of duties, expiry and destination binding protect the decision. | - |
 

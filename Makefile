@@ -15,7 +15,7 @@ define pending
 endef
 
 .PHONY: help setup setup-backend setup-frontend format lint typecheck test test-cov \
-	security sbom privacy-scan sources schemas diagrams education-check fixtures build validate clean data data-check recovery-demo \
+	security sbom privacy-scan sources schemas diagrams education-check fixtures build source-bundle source-bundle-check validate clean data data-check recovery-demo \
 	run-api run-mcp run-frontend run demo-check demo-prep demo demo-live demo-hybrid demo-offline playbooks playbooks-check
 
 help: ## Show available targets
@@ -35,11 +35,11 @@ setup-frontend: ## Clean-install locked frontend dependencies
 
 # ---------------------------------------------------------------- quality
 format: ## Format Python and frontend code
-	$(ACTIVATE) && ruff format src tests && ruff check --fix src tests
+	$(ACTIVATE) && ruff format src tests scripts && ruff check --fix src tests scripts
 	cd $(FRONTEND) && npm run format
 
 lint: ## Lint Python and frontend code
-	$(ACTIVATE) && ruff check src tests && ruff format --check src tests
+	$(ACTIVATE) && ruff check src tests scripts && ruff format --check src tests scripts
 	cd $(FRONTEND) && npm run format:check && npm run lint
 
 typecheck: ## Pyright strict + TypeScript strict
@@ -103,6 +103,18 @@ build: ## Build Python distribution and frontend bundle
 	$(ACTIVATE) && uv build
 	cd $(FRONTEND) && npm run build
 
+source-bundle: ## Archive the committed revision with the content needed to run the accelerator
+	mkdir -p dist
+	git archive --format=tar --prefix=ffia-source/ HEAD | gzip > dist/ffia-source.tar.gz
+
+source-bundle-check: source-bundle ## Smoke-test the committed source bundle outside this checkout
+	@work=$$(mktemp -d); trap 'rm -rf "$$work"' EXIT; \
+	tar -xzf dist/ffia-source.tar.gz -C "$$work"; \
+	cd "$$work/ffia-source"; \
+	PYTHONPATH=src FFIA_ENVIRONMENT=offline FFIA_FABRIC_LIVE=0 FFIA_FOUNDRY_LIVE=0 \
+	FFIA_ALLOW_LIVE_MUTATION=0 FFIA_APPLICATIONINSIGHTS_CONNECTION_STRING='' \
+	$(abspath $(VENV))/bin/python -m fabric_foundry_accelerator.cli demo offline --work-dir "$$work/runtime"
+
 validate: lint typecheck test-cov data-check privacy-scan build security sbom playbooks-check ## Full local validation (CI equivalent)
 	$(ACTIVATE) && ffia sources check && ffia schemas check && ffia education check --min-coverage 1.0 && ffia diagrams check && ffia mcp check && ffia notebooks check && ffia skills check && ffia talktracks check && ffia prompts check && ffia bakeoff check && ffia harness check && FFIA_ENVIRONMENT=offline FFIA_FABRIC_LIVE=0 FFIA_FOUNDRY_LIVE=0 ffia agents eval --suite sales-insights-agent && ffia demo offline >/dev/null && echo "offline demo: PASSED"
 	@echo "validate: all checks passed"
@@ -125,10 +137,7 @@ run-frontend: ## Run the frontend dev server
 	cd $(FRONTEND) && npm run dev
 
 run: ## Run all use cases live-first with labeled read fallback; API_ARGS=--offline stays offline
-	@trap 'kill 0' INT TERM EXIT; \
-	($(ACTIVATE) && ffia serve api $(API_ARGS)) & \
-	(cd $(FRONTEND) && npm run dev) & \
-	wait
+	$(ACTIVATE) && python -m fabric_foundry_accelerator.services.devserver $(API_ARGS)
 
 # ---------------------------------------------------------------- demo (later phases)
 demo-check: ## Probe Fabric, Foundry, MCP, local dataset, API and frontend; recommend a mode

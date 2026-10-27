@@ -24,6 +24,10 @@ Thank you for improving the Fabric Foundry Integration Accelerator.
 
 ## Workflow
 
+Use Bash on Linux/macOS, or WSL2 on Windows. Keep the clone and tool installations inside
+WSL rather than mixing Windows executables with Linux virtual environments. Native
+PowerShell startup is not supported by these Make targets.
+
 ```bash
 uv venv --python 3.14 .venv && source .venv/bin/activate && uv sync --frozen
 cd frontend && npm ci && cd ..
@@ -32,6 +36,10 @@ make validate
 
 - Add or update tests with every behavior change. Backend and frontend coverage must stay at or
   above 85%.
+- For one change, run the affected tests first, then `make lint typecheck`. Use
+  `make validate` for the full maintainer gate, not as the first step for every edit.
+- Deliver a complete clone or run `make source-bundle-check` after committing intended
+  changes. The wheel alone does not include runtime teaching/configuration/data assets.
 - Record significant decisions as ADRs in `docs/decisions/` using the template sections listed in
   that folder's README.
 - When you rely on a new authoritative source, add it to `docs/research/sources.yaml` and run

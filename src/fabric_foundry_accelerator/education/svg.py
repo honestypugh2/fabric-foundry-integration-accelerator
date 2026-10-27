@@ -36,16 +36,18 @@ def _wrap(text: str, width: int) -> list[str]:
     return lines
 
 
-def render_svg(view: DiagramView, *, title_id: str | None = None) -> str:
+def render_svg(view: DiagramView, *, title_id: str | None = None, interactive: bool = False) -> str:
     """Return an accessible SVG for the full view (all build steps visible)."""
     layout = compute_layout(view)
     width, height = layout.width, layout.height
     label_id = title_id or f"svg-{view.id}-title"
+    arrow_id = f"{label_id}-arrow"
     parts: list[str] = [
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width:g} {height:g}" '
-        f'role="img" aria-labelledby="{label_id}" class="arch-svg" font-family="{_FONT}">',
+        f'role="{"group" if interactive else "img"}" aria-labelledby="{label_id}" '
+        f'class="arch-svg" font-family="{_FONT}">',
         f'<title id="{label_id}">{escape(view.title)}</title>',
-        '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" '
+        f'<defs><marker id="{arrow_id}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" '
         'markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" '
         'fill="context-stroke"/></marker></defs>',
         f'<rect x="0" y="0" width="{width:g}" height="{height:g}" fill="#FFFFFF"/>',
@@ -57,10 +59,10 @@ def render_svg(view: DiagramView, *, title_id: str | None = None) -> str:
         stroke = ZONE_STROKE[zone.kind]
         dash = "6 4" if zone.kind in ("optional", "offline") else "8 4"
         parts.append(
-            f'<rect x="{box.x:g}" y="{box.y:g}" width="{box.w:g}" height="{box.h:g}" rx="8" '
+            f'<g data-zone="{zone.id}"><rect x="{box.x:g}" y="{box.y:g}" width="{box.w:g}" height="{box.h:g}" rx="8" '
             f'fill="none" stroke="{stroke}" stroke-dasharray="{dash}"/>'
             f'<text x="{box.x + 10:g}" y="{box.y + 17:g}" font-size="11" font-weight="700" '
-            f'fill="{stroke}">{escape(zone.label)}</text>'
+            f'fill="{stroke}">{escape(zone.label)}</text></g>'
         )
     for edge in view.edges:
         path = layout.edges[edge.id]
@@ -68,8 +70,9 @@ def render_svg(view: DiagramView, *, title_id: str | None = None) -> str:
         dash = ' stroke-dasharray="5 4"' if edge.planned or edge.kind == "fallback" else ""
         points = " ".join(f"{x:g},{y:g}" for x, y in path.points)
         parts.append(
-            f'<polyline points="{points}" fill="none" stroke="{stroke}" stroke-width="1.4"'
-            f'{dash} marker-end="url(#arrow)"/>'
+            f'<g data-connection="{edge.id}"><polyline data-edge="{edge.id}" points="{points}" '
+            f'fill="none" stroke="{stroke}" stroke-width="1.4"'
+            f'{dash} marker-end="url(#{arrow_id})"/>'
         )
         if edge.label:
             lx, ly = path.label_at
@@ -79,12 +82,19 @@ def render_svg(view: DiagramView, *, title_id: str | None = None) -> str:
                 f'rx="3" fill="#FFFFFF"/><text x="{lx:g}" y="{ly + 3:g}" font-size="9.5" '
                 f'text-anchor="middle" fill="#3B3B45">{escape(edge.label)}</text>'
             )
+        parts.append("</g>")
     for node in view.nodes:
         box = layout.nodes[node.id]
         fill, stroke = KIND_STYLE[node.kind]
         dash = ' stroke-dasharray="5 3"' if node.state in ("planned", "preview", "optional") else ""
+        interaction = (
+            f' data-node="{node.id}" role="button" tabindex="0" aria-pressed="false"'
+            f' aria-label="{escape(node.label, {chr(34): "&quot;"})}"'
+            if interactive
+            else ""
+        )
         parts.append(
-            f'<g><rect x="{box.x:g}" y="{box.y:g}" width="{box.w:g}" height="{box.h:g}" rx="7" '
+            f'<g{interaction}><rect x="{box.x:g}" y="{box.y:g}" width="{box.w:g}" height="{box.h:g}" rx="7" '
             f'fill="{fill}" stroke="{stroke}" stroke-width="1.3"{dash}/>'
         )
         lines = _wrap(node.label, 26)[:2]

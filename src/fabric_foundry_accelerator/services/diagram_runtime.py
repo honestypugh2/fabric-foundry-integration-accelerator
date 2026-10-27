@@ -72,14 +72,25 @@ def _api(_: Container, status: RuntimeStatus) -> Overlay:
 
 
 def _mcp(_: Container, status: RuntimeStatus) -> Overlay:
-    return "READY", "LOCAL", f"{status.mcp}; each harness starts it over stdio."
+    return "READY", "LOCAL", f"{status.mcp} Start ffia-local through the harness over stdio."
 
 
 def _fabric_local(container: Container, status: RuntimeStatus) -> Overlay:
     if not status.built_profiles:
         return "UNAVAILABLE", "LOCAL", "No synthetic lakehouse is built. Run make data."
-    role = "Primary" if container.fabric.live is None else "Approved fallback"
-    return "ACTIVE", "LOCAL", f"{role} provider; profiles: {', '.join(status.built_profiles)}."
+    role = (
+        "Offline source (not eligible in strict LIVE)"
+        if container.mode is OperatingMode.LIVE
+        else "Offline source"
+        if container.fabric.live is None
+        else "Available read fallback (subject to policy)"
+    )
+    return (
+        "READY",
+        "LOCAL",
+        f"{role}: synthetic data, not Fabric or MCP. Availability is not evidence of use. "
+        f"Profiles: {', '.join(status.built_profiles)}.",
+    )
 
 
 def _agents(container: Container, __: RuntimeStatus) -> Overlay:

@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import type { Guide } from "../../api/contracts";
 import { useWorkshop } from "../../api/hooks";
-import { ArchitectureImage } from "../../components/ArchitectureImage";
+import { ArchitectureExplorer } from "../../components/ArchitectureExplorer";
 import { QueryState } from "../../components/QueryState";
 
 export function UseCaseOverview({ guide }: { readonly guide: Guide }) {
@@ -73,13 +73,15 @@ export function UseCaseOverview({ guide }: { readonly guide: Guide }) {
               </section>
             ) : null}
             {guide.diagram ? (
-              <ArchitectureImage
-                viewId={guide.diagram}
-                title={`Intended architecture for ${guide.title}`}
-              />
+              <div id="workshop-architecture">
+                <ArchitectureExplorer
+                  viewId={guide.diagram}
+                  title={`Intended architecture for ${guide.title}`}
+                />
+              </div>
             ) : null}
             <details>
-              <summary>Prototype boundaries and production gaps</summary>
+              <summary>Demo boundaries and optional production considerations</summary>
               <ul>
                 {story.production_gaps.map((item) => (
                   <li key={item}>{item}</li>
@@ -87,9 +89,6 @@ export function UseCaseOverview({ guide }: { readonly guide: Guide }) {
               </ul>
             </details>
             <p className="hero-actions">
-              <a href={story.presenter_path} target="_blank" rel="noreferrer">
-                Open presenter talk track
-              </a>
               <Link to="/evidence">Inspect recorded evidence</Link>
             </p>
           </section>

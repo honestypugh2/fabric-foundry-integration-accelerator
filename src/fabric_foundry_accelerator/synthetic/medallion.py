@@ -1,6 +1,6 @@
 """Local medallion pipeline: raw CSV -> Bronze -> Silver -> Gold Parquet, using DuckDB.
 
-This is the *Local Fabric Educational Provider* data path. It is not a Fabric emulator: it
+This is the offline synthetic-data adapter's data path. It is not a Fabric emulator: it
 reproduces the medallion logic so the architecture can be taught and demonstrated offline.
 The Fabric equivalent is a Lakehouse with Delta tables built by Spark notebooks.
 """

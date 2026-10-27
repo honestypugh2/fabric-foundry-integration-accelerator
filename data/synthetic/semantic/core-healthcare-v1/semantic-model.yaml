@@ -283,7 +283,7 @@ measures:
   definition: dim_patient rows where risk_category = "High".
   format: integer
   sql: SELECT count(*) FROM dim_patient WHERE risk_category = 'High'
-  dax: CALCULATE ( [Patient Count], dim_patient[risk_category] = "High" )
+  dax: CALCULATE ( [Patient Count], KEEPFILTERS ( dim_patient[risk_category] = "High" ) )
   synthetic_demonstration: true
 - name: high_risk_patient_pct
   display_name: High Risk Patient %
@@ -302,7 +302,7 @@ measures:
   definition: Distinct flagged patients divided by Patient Count.
   format: percent
   sql: SELECT count(*) FILTER (WHERE has_diabetes) / nullif(count(*), 0) FROM dim_patient
-  dax: DIVIDE ( CALCULATE ( [Patient Count], dim_patient[has_diabetes] = TRUE () ), [Patient Count] )
+  dax: DIVIDE ( CALCULATE ( [Patient Count], KEEPFILTERS ( dim_patient[has_diabetes] = TRUE () ) ), [Patient Count] )
   synthetic_demonstration: true
 - name: hypertension_prevalence
   display_name: Hypertension Prevalence
@@ -311,7 +311,7 @@ measures:
   definition: Distinct flagged patients divided by Patient Count.
   format: percent
   sql: SELECT count(*) FILTER (WHERE has_hypertension) / nullif(count(*), 0) FROM dim_patient
-  dax: DIVIDE ( CALCULATE ( [Patient Count], dim_patient[has_hypertension] = TRUE () ), [Patient Count] )
+  dax: DIVIDE ( CALCULATE ( [Patient Count], KEEPFILTERS ( dim_patient[has_hypertension] = TRUE () ) ), [Patient Count] )
   synthetic_demonstration: true
 - name: heart_failure_prevalence
   display_name: Heart Failure Prevalence
@@ -320,7 +320,7 @@ measures:
   definition: Distinct flagged patients divided by Patient Count.
   format: percent
   sql: SELECT count(*) FILTER (WHERE has_heart_failure) / nullif(count(*), 0) FROM dim_patient
-  dax: DIVIDE ( CALCULATE ( [Patient Count], dim_patient[has_heart_failure] = TRUE () ), [Patient Count] )
+  dax: DIVIDE ( CALCULATE ( [Patient Count], KEEPFILTERS ( dim_patient[has_heart_failure] = TRUE () ) ), [Patient Count] )
   synthetic_demonstration: true
 - name: copd_prevalence
   display_name: COPD Prevalence
@@ -329,7 +329,7 @@ measures:
   definition: Distinct flagged patients divided by Patient Count.
   format: percent
   sql: SELECT count(*) FILTER (WHERE has_copd) / nullif(count(*), 0) FROM dim_patient
-  dax: DIVIDE ( CALCULATE ( [Patient Count], dim_patient[has_copd] = TRUE () ), [Patient Count] )
+  dax: DIVIDE ( CALCULATE ( [Patient Count], KEEPFILTERS ( dim_patient[has_copd] = TRUE () ) ), [Patient Count] )
   synthetic_demonstration: true
 - name: ckd_prevalence
   display_name: CKD Prevalence
@@ -338,7 +338,7 @@ measures:
   definition: Distinct flagged patients divided by Patient Count.
   format: percent
   sql: SELECT count(*) FILTER (WHERE has_ckd) / nullif(count(*), 0) FROM dim_patient
-  dax: DIVIDE ( CALCULATE ( [Patient Count], dim_patient[has_ckd] = TRUE () ), [Patient Count] )
+  dax: DIVIDE ( CALCULATE ( [Patient Count], KEEPFILTERS ( dim_patient[has_ckd] = TRUE () ) ), [Patient Count] )
   synthetic_demonstration: true
 excluded_measures:
 - name: bed_occupancy_rate

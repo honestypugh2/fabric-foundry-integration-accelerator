@@ -26,7 +26,7 @@
       "P08",
       "P16"
     ],
-    "summary": "GitHub Copilot in VS Code (or Claude Code) uses the local Fabric MCP server to create a lakehouse and land seven synthetic CSVs; reviewed notebooks build Bronze, Silver and Gold on Fabric Spark; a Direct Lake semantic model is edited with Power BI Authoring MCP; DAX checks reconcile with the Gold baseline; a two-page report is published after review.",
+    "summary": "GitHub Copilot in VS Code (or Claude Code) uses Fabric MCP tools against remote Fabric to create a lakehouse and land seven synthetic CSVs; reviewed notebooks build Bronze, Silver and Gold on Fabric Spark; a Direct Lake semantic model is edited with Power BI Authoring MCP; DAX checks reconcile with the Gold baseline; a two-page report is published after review.",
     "title": "HC-01: Fabric MCP + Power BI medallion lab"
   },
   {

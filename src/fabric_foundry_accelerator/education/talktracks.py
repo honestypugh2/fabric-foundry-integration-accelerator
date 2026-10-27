@@ -6,9 +6,9 @@ architectures, patterns, and timed parts made of steps. Each step has where to g
 what to show, a checkpoint, an honest result label and a fallback. It also carries anticipated
 questions with labeled answers.
 
-``render_html`` writes one file with no scripts and no external assets. Architecture diagrams are
-embedded as SVG generated from the same view YAML as the app and the draw.io files, so the handout
-cannot drift from the architecture.
+``render_html`` writes one file with embedded styles, interaction code and no external assets.
+Architecture explorers use the same view YAML as the app and draw.io files, including selectable
+SVG nodes, component responsibilities and request traces.
 """
 
 import html
@@ -21,7 +21,12 @@ import yaml
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from fabric_foundry_accelerator.education.diagrams import DiagramView
-from fabric_foundry_accelerator.education.svg import render_svg, workflow
+from fabric_foundry_accelerator.education.interactive_architecture import (
+    explorer_assets,
+    render_explorer,
+)
+from fabric_foundry_accelerator.education.lessons import ArchitectureComponent
+from fabric_foundry_accelerator.education.svg import workflow
 from fabric_foundry_accelerator.patterns.catalog import ArchitecturePattern
 
 ResultLabel = Literal[
@@ -343,15 +348,18 @@ def _timing(track: TalkTrack) -> list[str]:
     return out
 
 
-def _architecture(track: TalkTrack, views: dict[str, DiagramView]) -> list[str]:
+def _architecture(
+    track: TalkTrack,
+    views: dict[str, DiagramView],
+    components: tuple[ArchitectureComponent, ...],
+) -> list[str]:
     if not track.architecture:
         return []
     out = ['<h2 id="architecture">Reference architectures</h2>']
     for ref in track.architecture:
         view = views[ref.view]
-        svg = render_svg(view, title_id=f"svg-{track.id}-{view.id}")
         out.append(
-            f'<figure><div class="arch-wrap">{svg}</div><figcaption><strong>'
+            f"<figure>{render_explorer(view, components)}<figcaption><strong>"
             f"{html.escape(view.title)}.</strong> {_inline(ref.caption)}</figcaption>"
         )
         steps = workflow(view)
@@ -483,6 +491,7 @@ def render_html(
     views: dict[str, DiagramView],
     patterns: dict[str, ArchitecturePattern],
     source_titles: dict[str, tuple[str, str]],
+    components: tuple[ArchitectureComponent, ...] = (),
 ) -> str:
     """Render the talk track as one self-contained HTML document."""
     out = [
@@ -490,13 +499,13 @@ def render_html(
         '<html lang="en"><head><meta charset="utf-8">',
         '<meta name="viewport" content="width=device-width, initial-scale=1">',
         f"<title>{html.escape(track.title)}</title>",
-        f"<style>{_css()}</style></head><body>",
+        f"<style>{_css()}</style>{explorer_assets()}</head><body>",
         _nav(track),
         '<main class="wrap">',
         *_hero(track),
         *_overview(track),
         *_timing(track),
-        *_architecture(track, views),
+        *_architecture(track, views, components),
         *_patterns(track, patterns),
         *_parts(track),
         *_qa(track, source_titles),

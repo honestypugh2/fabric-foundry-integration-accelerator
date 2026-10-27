@@ -25,9 +25,9 @@ flowchart LR
     caller["Caller<br/><small>App, MCP tool or demo</small>"]
     router["Provider router<br/><small>Per-capability policy</small>"]
     breaker["Circuit breaker<br/><small>CLOSED, OPEN, HALF_OPEN</small>"]
-    live["LIVE Fabric provider · tenant<br/><small>Timeout + bounded retries</small>"]
+    live["Fabric cloud (app REST) · tenant<br/><small>Timeout + bounded retries</small>"]
     fallback_policy["Fallback policy<br/><small>config/environments</small>"]
-    local["Local Fabric provider<br/><small>Approved equivalent</small>"]
+    local["Offline synthetic data<br/><small>Eligible read fallback; not Fabric</small>"]
     envelope["Labeled result<br/><small>LIVE / LOCAL in HYBRID mode / UNAVAILABLE</small>"]
     audit["Audit and route decisions"]
   end
@@ -88,9 +88,9 @@ Solid boxes are implemented here or documented by Microsoft; dashed boxes are pl
 | Caller | Implemented in this repository | Any consumer of the control plane - the web app, an ffia-local tool or the offline demo. | - |
 | Provider router | Implemented in this repository | Timeouts, retries and a circuit breaker per capability; writes never fall back. | `src/fabric_foundry_accelerator/fallback/router.py` |
 | Circuit breaker | Implemented in this repository | Opens after three consecutive failures and skips the live call; after the reset timeout one trial call decides whether it closes again. | `src/fabric_foundry_accelerator/fallback/circuit_breaker.py` |
-| LIVE Fabric provider | Requires tenant validation | Pick the narrowest server; they run with the caller's Fabric permissions; status differs by server. | `src/fabric_foundry_accelerator/providers/fabric/live.py` |
+| Fabric cloud (app REST) | Requires tenant validation | In HYBRID mode eligible reads try Fabric first and can fall back to disclosed synthetic data. Strict LIVE never falls back. | `src/fabric_foundry_accelerator/providers/fabric/live.py` |
 | Fallback policy | Implemented in this repository | Which capabilities may fall back in each environment. Unknown resources and invalid requests are client errors and never fall back. | `config/policies/fallback.yaml` |
-| Local Fabric provider | Implemented in this repository | Read-only, allow-listed operations over synthetic Parquet; never presented as Fabric. | - |
+| Offline synthetic data | Implemented in this repository | Read-only operations over synthetic Parquet; LOCAL results make no cloud call. It does not replace or disconnect Fabric MCP. | - |
 | Labeled result | Implemented in this repository | Every result is an execution envelope with a label, the requested and selected provider, fallback_used and the reason. Non-cloud labels cannot claim a cloud operation. | `src/fabric_foundry_accelerator/models/execution.py` |
 | Audit and route decisions | Implemented in this repository | Records share a correlation ID across plan, approval, execution and tool calls. | - |
 | Approved LIVE write | Implemented in this repository | Separation of duties, expiry and destination binding protect the decision. | - |

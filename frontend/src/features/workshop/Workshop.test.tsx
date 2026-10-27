@@ -1,8 +1,6 @@
-import { render, screen, waitFor, within } from "@testing-library/react";
+import { screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { MemoryRouter } from "react-router";
 import axe from "axe-core";
-import { ArchitectureImage } from "../../components/ArchitectureImage";
 import { defaultRoutes, fixtures } from "../../test/fixtures";
 import { mockApi, problem } from "../../test/mockApi";
 import { renderApp } from "../../test/render";
@@ -12,12 +10,19 @@ describe("workshop journeys and applied research", () => {
     mockApi(defaultRoutes);
     renderApp("/");
     await screen.findByRole("heading", { name: fixtures.workshop.content.title });
+    expect(screen.getByRole("navigation", { name: "Workshop flow" })).toBeInTheDocument();
+    expect(
+      await screen.findByRole("heading", { name: fixtures.guideHc01.title }),
+    ).toBeInTheDocument();
     expect(
       within(screen.getByRole("navigation", { name: "Primary" }))
         .getAllByRole("link")
+        .filter((item) => !item.closest(".explore-menu"))
         .map((item) => item.textContent),
-    ).toEqual(["Workshop", "Learn", "Use Cases", "Patterns", "Evidence"]);
-    expect(screen.getByRole("navigation", { name: "Workshop tools" })).toBeInTheDocument();
+    ).toEqual(["Start here", "Use Cases", "Hands-on labs", "Architecture", "Evidence"]);
+    await userEvent.click(screen.getByText("Explore", { exact: true }));
+    expect(screen.getByRole("navigation", { name: "Explore tools" })).toBeInTheDocument();
+    await userEvent.click(screen.getByText("Prefer to learn the concepts first?"));
     expect(screen.getAllByRole("link", { name: /Start this path/ })).toHaveLength(
       fixtures.workshop.content.journeys.length,
     );
@@ -242,42 +247,16 @@ describe("workshop journeys and applied research", () => {
     expect(within(table).getAllByText("Not authored")).toHaveLength(fixtures.patterns.length);
   });
 
-  it("keeps an unknown diagram explicit and the known export accessible", () => {
-    const view = render(
-      <MemoryRouter>
-        <ArchitectureImage viewId="missing" title="Missing view" />
-      </MemoryRouter>,
-    );
-    expect(screen.getByText("No static export is available for this view.")).toBeInTheDocument();
-    view.unmount();
-    render(
-      <MemoryRouter>
-        <ArchitectureImage viewId="hc-01" title="Engineering architecture" />
-      </MemoryRouter>,
-    );
-    expect(screen.getByRole("img", { name: "Engineering architecture" })).toHaveAttribute(
-      "src",
-      expect.stringContaining("hc-01.png"),
-    );
+  it("embeds an interactive architecture in the use case rather than an image", async () => {
+    mockApi(defaultRoutes);
+    renderApp(`/use-cases/${fixtures.guideHc01.id}`);
+    const diagrams = await screen.findAllByRole("group", { name: /diagram\. Select a component/ });
+    const diagram = diagrams[0];
+    if (!diagram) throw new Error("Expected an interactive architecture");
+    expect(within(diagram).getAllByRole("button").length).toBeGreaterThan(0);
+    expect(screen.queryAllByRole("img")).toHaveLength(0);
+    expect(screen.queryByText("Open presenter talk track")).not.toBeInTheDocument();
   });
-
-  it.each(["theory-to-tools", "integration-paths"])(
-    "renders the focused %s PNG rather than a missing-export message",
-    (viewId) => {
-      render(
-        <MemoryRouter>
-          <ArchitectureImage viewId={viewId} title="Focused teaching diagram" />
-        </MemoryRouter>,
-      );
-      expect(screen.getByRole("img", { name: "Focused teaching diagram" })).toHaveAttribute(
-        "src",
-        expect.stringContaining(`${viewId}.png`),
-      );
-      expect(
-        screen.queryByText("No static export is available for this view."),
-      ).not.toBeInTheDocument();
-    },
-  );
 
   it("has no detectable accessibility violations in the research lens", async () => {
     mockApi(defaultRoutes);

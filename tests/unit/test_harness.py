@@ -37,6 +37,12 @@ def test_committed_settings_match_the_repo_profile() -> None:
         POLICY.profile("nope")
 
 
+def test_workspace_skill_discovery_uses_only_the_portable_project_folder() -> None:
+    settings = json.loads((REPO_ROOT / ".vscode" / "settings.json").read_text(encoding="utf-8"))
+    assert settings["chat.agentSkillsLocations"] == {".claude/skills": True}
+    assert (REPO_ROOT / ".claude" / "skills").is_dir()
+
+
 def test_bakeoff_profile_renders_identically_for_every_model() -> None:
     args = render_copilot_cli(POLICY.profile("bakeoff"))
     pairs = list(zip(args[::2], args[1::2], strict=True))

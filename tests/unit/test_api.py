@@ -5,6 +5,7 @@ from fastapi.testclient import TestClient
 
 from fabric_foundry_accelerator.api.app import CORRELATION_HEADER, create_app
 from fabric_foundry_accelerator.services.container import Container
+from fabric_foundry_accelerator.services.runtime import runtime_status
 
 LAKEHOUSE = "local-lh-hc-lab-7file-v1"
 MODEL = "local-sm-hc-lab-7file-v1"
@@ -57,6 +58,12 @@ def test_runtime_providers_capabilities_profiles(client: TestClient) -> None:
     status = client.get("/api/v1/runtime/status").json()
     assert status["operating_mode"] == "OFFLINE" and status["preview_features"] == []
     assert "LIVE writes disabled" in status["write_mode"]
+    assert status["data_provider"] == (
+        "Offline synthetic data (DuckDB/Parquet) (LOCAL; no cloud call)"
+    )
+    assert "ffia-local:" in status["mcp"]
+    assert "Fabric MCP connection is separate" in status["mcp"]
+    assert "not checked by this API" in status["mcp"]
     kinds = {p["kind"] for p in client.get("/api/v1/runtime/providers").json()}
     assert {"LOCAL", "NOT AVAILABLE"} <= kinds
     assert {c["name"] for c in client.get("/api/v1/capabilities").json()} >= {
@@ -65,6 +72,24 @@ def test_runtime_providers_capabilities_profiles(client: TestClient) -> None:
         "mcp",
     }
     assert client.get("/api/v1/profiles").json() == ["core-healthcare-v1", "hc-lab-7file-v1"]
+
+
+@pytest.mark.parametrize("environment", ["hybrid", "live"])
+def test_app_connection_status_distinguishes_modes_and_external_mcp(
+    make_container: Callable[..., Container], environment: str
+) -> None:
+    container = make_container(environment=environment, simulate_fabric_outage=True)
+    status = runtime_status(container)
+    assert "Fabric REST API (simulated outage)" in status.data_provider
+    if environment == "hybrid":
+        assert (
+            "LIVE-first reads with disclosed synthetic-data fallback (LOCAL)"
+            in status.data_provider
+        )
+    else:
+        assert "strict LIVE; no LOCAL fallback" in status.data_provider
+    assert "not checked by this API" in status.mcp
+    assert status.recent_route_decisions == ()
 
 
 def test_patterns_and_guides(client: TestClient) -> None:

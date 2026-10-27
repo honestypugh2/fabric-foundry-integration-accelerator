@@ -3,7 +3,6 @@ import { useDemoStatus, useRunDemo } from "../../api/hooks";
 import { usePageTitle } from "../../app/usePageTitle";
 import { Badge } from "../../components/Badge";
 import { QueryState } from "../../components/QueryState";
-import { TalkTracks } from "./TalkTracks";
 
 export function DemoPage() {
   usePageTitle("Demo");
@@ -11,8 +10,11 @@ export function DemoPage() {
   const run = useRunDemo();
   return (
     <>
-      <h1>Demo mode</h1>
-      <TalkTracks />
+      <h1>Offline verification</h1>
+      <p className="lead">
+        Check the learning environment and run the bounded offline acceptance workflow. Presenter
+        scripts are separate HTML deliverables, not part of this workspace.
+      </p>
       <section aria-labelledby="readiness-heading">
         <h2 id="readiness-heading">Readiness</h2>
         <QueryState label="demo readiness" {...status}>

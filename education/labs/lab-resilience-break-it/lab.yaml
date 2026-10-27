@@ -42,15 +42,15 @@ steps:
   - stage: BUILD
     title: Start the control plane in OFFLINE mode and take a baseline read
     instructions: >-
-      In terminal A start the API with the default (offline) environment. In terminal B list the
+      In terminal A explicitly start the API in offline mode (normal interactive startup is HYBRID). In terminal B list the
       providers and read three rows of gold_alos, supplying your own correlation ID so you can find
       the audit record later. Keep terminal A running.
     commands:
-      - "ffia serve api   # terminal A"
+      - "ffia serve api --offline   # terminal A"
       - curl -s localhost:8000/api/v1/runtime/providers | python -m json.tool
       - "curl -s -X POST localhost:8000/api/v1/fabric/read -H 'Content-Type: application/json' -H 'X-Correlation-ID: 0123456789abcdef0123456789abcdef' -d '{\"operation\": \"read_table\", \"lakehouse_id\": \"local-lh-hc-lab-7file-v1\", \"table\": \"gold_alos\", \"limit\": 3}' | python -m json.tool"
     expected: >-
-      The Local Fabric Educational Provider is ready; the live Fabric provider is NOT AVAILABLE. The
+      Offline synthetic data (DuckDB/Parquet) is ready; the app's live Fabric REST adapter is NOT AVAILABLE. The
       read returns operating_mode OFFLINE, execution_label LOCAL, fallback_used false and
       cloud_operation_performed false.
     evidence_category: SIMULATED LOCALLY

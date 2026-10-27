@@ -156,7 +156,7 @@ class EvaluationService:
                 if source == "local-provider"
                 else EvidenceCategory.REQUIRES_TENANT_VALIDATION,
                 statement=(
-                    "Observed values came from the Local Fabric Provider."
+                    "Observed values came from offline synthetic data (DuckDB/Parquet), not Fabric."
                     if source == "local-provider"
                     else (
                         f"Observed values were supplied by the caller and labeled {label}; "
