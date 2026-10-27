@@ -81,7 +81,7 @@ uv sync --frozen            # install exactly what uv.lock specifies
   - maintenance status
   - known HIGH/CRITICAL vulnerabilities (none allowed)
 - Add Python packages with `uv add <pkg>==<version>` inside the activated venv. Add npm packages with `npm install --save-exact`.
-- Documented exception: TypeScript is pinned to 6.0.3 because `typescript-eslint` 8.71.x supports `<6.1.0`.
+- Documented exception: TypeScript is pinned to 6.0.3 because `typescript-eslint` 8.72.x supports `<6.1.0`.
 
 ## 5. Code conventions
 
